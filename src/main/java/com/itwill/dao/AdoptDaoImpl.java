@@ -1,5 +1,5 @@
 package com.itwill.dao;
 
-public class AdoptDaoImpl {
+public class AdoptDaoImpl implements AdoptDao{
 
 }
