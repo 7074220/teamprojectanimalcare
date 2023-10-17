@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,7 +33,7 @@ public class ReviewBoard {
 	private Long boardStar;
 	
 	@Builder.Default
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER) //이게 원투원 맞나?????????
 	@JoinColumn(name = "user_id")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();

@@ -9,15 +9,18 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
+@Data
 public class MyPet {
 	
 	@Id
@@ -28,7 +31,8 @@ public class MyPet {
 	@Column(nullable = false)
 	private LocalDateTime mypetBirthday;
 	@Column(nullable = false)
-	@OneToOne(mappedBy = "userinfo")
+	
+	@ManyToOne
 	private String userId;
 
 	

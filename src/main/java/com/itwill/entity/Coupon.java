@@ -25,6 +25,7 @@ public class Coupon {
 	 private String couponDiscount;
 	 private String couponExpirationDate;
 	 private String couponPayday;
+	 
 	 @OneToOne
 	 private Userinfo userinfo = new Userinfo();
 }
