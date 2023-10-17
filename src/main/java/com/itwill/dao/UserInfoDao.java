@@ -1,5 +1,6 @@
 package com.itwill.dao;
 
+
 import java.util.List;
 
 import com.itwill.entity.Userinfo;
@@ -17,4 +18,5 @@ public interface UserInfoDao {
 	public Userinfo findById(String userId);
 	
 	
+
 }

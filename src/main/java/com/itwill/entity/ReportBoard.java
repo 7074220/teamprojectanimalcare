@@ -1,4 +1,5 @@
 package com.itwill.entity;
+
 import java.time.LocalDateTime;
 
 import jakarta.annotation.Generated;
@@ -36,4 +37,7 @@ public class ReportBoard {
 	
 	@OneToOne(mappedBy = "userinfo")
 	private String userId;
+
+
+
 }

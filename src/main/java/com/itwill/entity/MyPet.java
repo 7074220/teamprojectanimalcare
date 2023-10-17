@@ -1,6 +1,7 @@
 package com.itwill.entity;
 
 
+
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -28,4 +29,5 @@ public class MyPet {
 	private String userId;
 
 	
+
 }
