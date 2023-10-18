@@ -18,13 +18,14 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	@Override
 	public Userinfo CreateUser(Userinfo userinfo) {
 		userinfoRepository.save(userinfo);
-		
 		return userinfo;
 	}
 	
 	@Override
 	public void DeleteUser(String userId) {
-		userinfoRepository.deleteById(userId);
+		if(userinfoRepository.findById(userId).isPresent()) {
+			userinfoRepository.deleteById(userId);
+		}
 	}
 	
 	@Override
@@ -34,8 +35,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	
 	@Override
 	public Userinfo findById(String userId) {
-		
-		return null;
+		return userinfoRepository.findById(userId).get();
 	}
 	
 	@Override
@@ -43,7 +43,23 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		return userinfoRepository.save(userinfo);
 	}
 	
+	@Override
+	public Integer countByUserId(String userId) {
+		return userinfoRepository.countByUserId(userId);
+	}
+	
+	// 이메일로 아이디찾기
+	@Override
+	public Userinfo findByUserEmail(String userEmail) {
+		return userinfoRepository.findByUserEmail(userEmail);
+	}
+	
+	// 아이디,폰번호로 비밀번호찾기
+	@Override
+	public Userinfo findByUserPassword(String userId, String userPhoneNumber) {
+		return userinfoRepository.findByUserPassword(userId, userPhoneNumber);
+	}
 	
 	
-
+	
 }

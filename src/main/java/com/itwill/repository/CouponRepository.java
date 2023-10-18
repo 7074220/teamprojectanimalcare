@@ -2,8 +2,8 @@ package com.itwill.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.itwill.entity.Userinfo;
+import com.itwill.entity.Coupon;
 
-public interface CouponRepository extends JpaRepository<Userinfo, String>{
+public interface CouponRepository extends JpaRepository<Coupon, Long>{
 	
 }
