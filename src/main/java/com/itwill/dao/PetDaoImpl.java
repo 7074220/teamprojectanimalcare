@@ -31,7 +31,7 @@ public class PetDaoImpl implements PetDao {
 	public void petDelete(Long petNo) throws Exception {
 		Optional<Pet> selectedPetOptional = petRepository.findById(petNo);
 		if(selectedPetOptional.isEmpty()) {
-			throw new Exception("존재하지않는제품입니다.");
+			throw new Exception("존재하지 않습니다.");
 		}
 		petRepository.delete(selectedPetOptional.get());
 	}
@@ -53,7 +53,7 @@ public class PetDaoImpl implements PetDao {
 			pet1.setPetCenter(pet.getPetCenter());
 			updatePet=petRepository.save(pet1);
 		}else {
-			throw new Exception("존재하지않는제품입니다.");
+			throw new Exception("존재하지않습니다.");
 		}
 		return updatePet;
 	}

@@ -40,10 +40,5 @@ public class Pet {
 	 private String petCharacter;
 	 private String petCenter;
 	 
-	 
-	 @Builder.Default
-	 @OneToOne(mappedBy = "pet")
-	 @ToString.Exclude
-	 private Adopt adopt = new Adopt();
 
 }
