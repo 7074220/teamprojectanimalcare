@@ -26,13 +26,13 @@ public class OrderItem {
 	private Long oiNo;
 	private Integer oiQty;
 	
-	@OneToMany
+	@ManyToOne
 	@Builder.Default
 	private Orders orders = new Orders();
 	
 	@OneToOne
 	@Builder.Default
-	private  Product product =new Product();
+	private Product product =new Product();
 	
 	@OneToOne
 	@Builder.Default

@@ -33,7 +33,7 @@ public class ReviewBoard {
 	private Long boardStar;
 	
 	@Builder.Default
-	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER) //이게 원투원 맞나?????????
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();

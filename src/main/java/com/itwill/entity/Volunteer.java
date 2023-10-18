@@ -37,7 +37,7 @@ public class Volunteer {
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	@ToString.Exclude
-	private Volunteer volunteer = new Volunteer();
+	private Userinfo userinfo = new Userinfo();
 	
 	
 }

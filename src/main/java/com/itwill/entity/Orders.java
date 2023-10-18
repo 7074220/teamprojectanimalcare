@@ -31,6 +31,7 @@ public class Orders {
 	private String orderDesc;
 	
 	@ManyToOne()
+	@Builder.Default
 	private Userinfo userinfo = new Userinfo();
 	
 	@OneToMany
