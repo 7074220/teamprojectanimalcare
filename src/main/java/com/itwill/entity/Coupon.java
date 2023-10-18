@@ -1,5 +1,7 @@
 package com.itwill.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +13,7 @@ import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -18,6 +21,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
+@EqualsAndHashCode
 public class Coupon {
      @Id
      @SequenceGenerator(name = "coupon_id_seq",sequenceName = "coupon_id_seq",allocationSize = 1,initialValue = 1)
@@ -27,6 +31,7 @@ public class Coupon {
 	 private String couponName;
 	 private String couponDiscount;
 	 private String couponExpirationDate;
+	 @CreationTimestamp
 	 private String couponPayday;
 	 
 	 @ManyToOne(cascade = CascadeType.PERSIST)

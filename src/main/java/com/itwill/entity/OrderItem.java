@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -14,6 +15,7 @@ import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -21,6 +23,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class OrderItem {
 
 	@Id
@@ -31,14 +34,17 @@ public class OrderItem {
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@Builder.Default
+	@JoinColumn(name = "order_no")
 	private Orders orders = new Orders();
 	
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@Builder.Default
+	@JoinColumn(name = "product_no")
 	private Product product =new Product();
 	
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@Builder.Default
+	@JoinColumn(name = "orderStatus_no")
 	private OrderStatus orderStatus = new OrderStatus();
 	
 

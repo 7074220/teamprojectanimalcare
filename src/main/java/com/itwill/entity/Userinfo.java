@@ -1,44 +1,40 @@
 package com.itwill.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 @Data
 @Builder
 public class Userinfo {
 	
 	@Id
 	private String userId;
-	@Column(nullable = false)
 	private String userPassword;
-	
 	private Integer userPoint;
-	@Column(nullable = false)
-	private Integer userGender;
-	@Column(nullable = false)
+	private String userGender;
 	private String userAddress;
-	@Column(nullable = false)
-	private Integer userPhoneNumber;
-	@Column(nullable = false)
+	private String userPhoneNumber;
 	private String userEmail;
-	@Column(nullable = false)
 	private String userResidentNumber;
-	@Column(nullable = false)
-	private String userResisterDate;
+	@CreationTimestamp
+	private LocalDateTime userResisterDate;
 	
 	@OneToMany(cascade = CascadeType.PERSIST)
 	@Builder.Default
@@ -50,6 +46,26 @@ public class Userinfo {
 	
 	@OneToMany(cascade = CascadeType.PERSIST)
 	@Builder.Default
-	List<Product> products = new ArrayList<Product>();
+	List<Cart> carts = new ArrayList<Cart>(); 
+	
+	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST)
+	@Builder.Default
+	List<Orders> orders = new ArrayList<Orders>();
+	
+	@OneToMany(cascade = CascadeType.PERSIST)
+	@Builder.Default
+	List<ReportBoard> reportBoards = new ArrayList<ReportBoard>();
+	
+	@OneToMany(cascade = CascadeType.PERSIST)
+	@Builder.Default
+	List<ReviewBoard> reviewBoards = new ArrayList<ReviewBoard>();
+	
+	@OneToMany(cascade = CascadeType.PERSIST)
+	@Builder.Default
+	List<Visit> visits = new ArrayList<Visit>();
+	
+	@OneToMany(cascade = CascadeType.PERSIST)
+	@Builder.Default
+	List<Volunteer> volunteers = new ArrayList<Volunteer>(); 
 	
 }

@@ -2,6 +2,8 @@ package com.itwill.entity;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -14,6 +16,7 @@ import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -22,6 +25,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class Visit {
 
 	@Id
@@ -30,11 +34,10 @@ public class Visit {
 	private Long visitNo;//PK
 
 	private Long visitTime;
-
+	
 	private LocalDate visitDate;
 
 	private String visitCenter;
-	
 	
 	@Builder.Default
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)

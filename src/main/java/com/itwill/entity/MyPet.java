@@ -16,6 +16,7 @@ import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
@@ -23,17 +24,15 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Data
+@EqualsAndHashCode
 public class MyPet {
 	
 	@Id
 	@SequenceGenerator(name = "mypet_no_seq",sequenceName = "mypet_no_seq",allocationSize = 1,initialValue = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "mypet_no_seq")
 	private Long mypetNo;
-	@Column(nullable = false)
 	private String mypetName;
-	@Column(nullable = false)
 	private LocalDateTime mypetBirthday;
-	@Column(nullable = false)
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@Builder.Default

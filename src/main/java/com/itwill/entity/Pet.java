@@ -18,12 +18,15 @@ import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@EqualsAndHashCode
 public class Pet {
 	@SequenceGenerator(name = "pet_pet_no_seq",sequenceName = "pet_pet_no_seq",initialValue = 1,allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "pet_pet_no_seq")
@@ -31,15 +34,10 @@ public class Pet {
 	 private Long petNo;
 	 private String petLocal;
 	 private String petType;
-	 private String  petgender;
+	 private String petgender;
 	 private LocalDate  petRegisterDate;
 	 private String petFindPlace;
 	 private String petCharacter;
 	 private String petCenter;
-	 
-	 @ManyToOne(cascade = CascadeType.PERSIST)
-	 @ToStringExclude
-	 @JoinColumn()
-	 private Adopt adopt = new Adopt();
 
 }

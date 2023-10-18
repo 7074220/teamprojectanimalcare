@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,6 +21,7 @@ import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -27,6 +30,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @Builder
+@EqualsAndHashCode
 @ToString(callSuper = true)
 public class Adopt {
 
@@ -35,15 +39,9 @@ public class Adopt {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "adopt_no_seq")
 	private Long adoptNo; // pk
 	private Long adoptTime;
+	@CreationTimestamp
 	private LocalDate adoptDate;
-	
-	/*
-	 * 1:1
-	 */
-	@Builder.Default
-	@OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
-	@ToString.Exclude
-	List<AdoptItem> adoptItems = new ArrayList<AdoptItem>();
+	private String status;
 	
 	/*
 	 * N:1
@@ -53,4 +51,9 @@ public class Adopt {
 	@JoinColumn(name = "user_id")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
+	
+	@Builder.Default
+	@OneToOne
+	@JoinColumn(name = "pet_no")
+	private Pet pet = new Pet();
 }
