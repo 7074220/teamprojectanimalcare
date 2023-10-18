@@ -11,9 +11,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -25,17 +27,17 @@ import lombok.ToString;
 public class ReviewBoard {
 
 	@Id
+	@SequenceGenerator(name = "board_no_seq", sequenceName = "board_no_seq", allocationSize = 1, initialValue = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long boardNo; // PK
 	private String boardTitle;
 	private String boardContent;
 	private Date boardDate;
 	private Long boardStar;
-	
+
 	@Builder.Default
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
 }
-
