@@ -1,10 +1,11 @@
-package com.example.demo;
+package com.itwill;
+
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TeamprojectAnimalcareApplicationTests {
+public class TeamprojectAnimalcareApplicationTests {
 
 	@Test
 	void contextLoads() {

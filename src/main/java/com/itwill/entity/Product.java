@@ -33,9 +33,9 @@ public class Product {
 	private String productName;
 	private Integer productPrice;
 	private String productCategory;
-	private Integer productAmount;	// 내가 선택한 수량
+	private Integer productAmount;	
 	private String productImage;
 	private Integer productStarAvg;
-	
+
 
 }

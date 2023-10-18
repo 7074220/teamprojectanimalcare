@@ -7,20 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.itwill.TeamprojectAnimalcareApplicationTests;
 import com.itwill.entity.Userinfo;
 import com.itwill.repository.UserinfoRepository;
 
-class UserInfoDaoImplTest {
+class UserInfoDaoImplTest extends TeamprojectAnimalcareApplicationTests{
 	
 	@Autowired
-	UserInfoDaoImpl userInfoDaoImpl;
+	UserInfoDao userinfoDao;
 	
 	@Transactional
 	@Rollback(false)
 	@Test
 	void test1() {
 		Userinfo userinfo = Userinfo.builder().userId("장").build();
-		userInfoDaoImpl.CreateUser(userinfo);
+		userinfoDao.CreateUser(userinfo);
 	}
 
 }
