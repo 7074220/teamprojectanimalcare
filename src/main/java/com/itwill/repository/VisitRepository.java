@@ -8,4 +8,5 @@ import com.itwill.entity.Visit;
 public interface VisitRepository extends JpaRepository<Visit, Long>{
 	
 		
+
 }

@@ -1,6 +1,4 @@
 package com.itwill.entity;
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,7 +37,8 @@ public class Product {
 	private String productImage;
 	private Integer productStarAvg;
 	
-	@ManyToOne()
+	@OneToOne
 	@ToStringExclude
 	private OrderItem orderItems = new OrderItem();
+
 }
