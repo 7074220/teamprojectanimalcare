@@ -32,7 +32,7 @@ public class Userinfo {
 	private String userPhoneNumber;
 	private String userEmail;
 	private String userResidentNumber;
-	@CreationTimestamp
+	//@CreationTimestamp
 	private LocalDateTime userResisterDate;
 	
 	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST)

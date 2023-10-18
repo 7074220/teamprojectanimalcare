@@ -20,6 +20,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Builder
@@ -35,12 +36,12 @@ public class Cart {
 	private Integer cartQty;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@ToStringExclude
+	@ToString.Exclude
 	@JoinColumn(name = "user_id")
 	private Userinfo userinfo = new Userinfo();
 	
 	@OneToOne(cascade = CascadeType.PERSIST)
-	@ToStringExclude
+	@ToString.Exclude
 	@Builder.Default
 	@JoinColumn(name = "product_no")
 	private Product product = new Product();

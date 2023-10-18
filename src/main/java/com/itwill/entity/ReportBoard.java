@@ -14,6 +14,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
@@ -22,12 +23,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
+@Data
 public class ReportBoard {
     
 	@Id
 	@SequenceGenerator(name = "BOARD_NO_SEQ", sequenceName = "BOARD_NO_SEQ", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BOARD_NO_SEQ")
-	private Integer boardNo;
+	private Long boardNo;
 	private String boardTitle;
 	private LocalDateTime boardResisterDate;
 	private String boardContent;
