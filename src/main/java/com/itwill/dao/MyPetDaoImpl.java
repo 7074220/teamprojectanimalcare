@@ -22,7 +22,9 @@ public class MyPetDaoImpl implements MyPetDao{
 
    @Override
    public void DeletePet(Long mypetNo) {
-      myPetRepository.deleteById(mypetNo);
+	   if(myPetRepository.findById(mypetNo).isPresent()) {
+		   myPetRepository.deleteById(mypetNo);
+		}
    }
 
    @Override

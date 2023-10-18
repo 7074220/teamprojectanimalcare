@@ -18,13 +18,14 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	@Override
 	public Userinfo CreateUser(Userinfo userinfo) {
 		userinfoRepository.save(userinfo);
-		
 		return userinfo;
 	}
 	
 	@Override
 	public void DeleteUser(String userId) {
-		userinfoRepository.deleteById(userId);
+		if(userinfoRepository.findById(userId).isPresent()) {
+			userinfoRepository.deleteById(userId);
+		}
 	}
 	
 	@Override
