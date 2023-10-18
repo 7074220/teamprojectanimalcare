@@ -17,6 +17,10 @@ public interface UserInfoDao {
 	
 	public Userinfo findById(String userId);
 	
-	public Integer CountById(String userId);
+	public Integer countByUserId(String userId);
 
+	public Userinfo findByUserEmail(String userEmail);
+	
+	public Userinfo findByUserPassword(String userId , String userPhoneNumber);
+	
 }

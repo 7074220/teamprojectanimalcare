@@ -33,6 +33,7 @@ public class MyPet {
 	private Long mypetNo;
 	private String mypetName;
 	private LocalDateTime mypetBirthday;
+	private String mypetKind; //고양이인지 강아지인지 구별
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@Builder.Default
