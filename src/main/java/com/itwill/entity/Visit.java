@@ -36,7 +36,6 @@ public class Visit {
 	
 	private LocalDate visitDate;
 
-	private String visitCenter;
 	
 	@Builder.Default
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)

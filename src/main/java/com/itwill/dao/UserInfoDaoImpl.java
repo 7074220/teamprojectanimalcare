@@ -34,8 +34,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	
 	@Override
 	public Userinfo findById(String userId) {
-		
-		return null;
+		return userinfoRepository.findById(userId).get();
 	}
 	
 	@Override
@@ -43,7 +42,10 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		return userinfoRepository.save(userinfo);
 	}
 	
-	
-	
+	@Override
+	public Integer CountById(String userId) {
+		
+		return null;
+	}
 
 }

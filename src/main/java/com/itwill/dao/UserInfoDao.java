@@ -17,6 +17,6 @@ public interface UserInfoDao {
 	
 	public Userinfo findById(String userId);
 	
-	
+	public Integer CountById(String userId);
 
 }
