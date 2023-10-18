@@ -4,23 +4,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.itwill.entity.Userinfo;
-import com.itwill.repository.UserinfoRepository;
+import com.itwill.TeamprojectAnimalcareApplicationTest;
 
-class UserInfoDaoImplTest {
+class UserInfoDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	
 	@Autowired
-	UserInfoDaoImpl userInfoDaoImpl;
+	UserInfoDao userInfoDao;
 	
-	@Transactional
-	@Rollback(false)
 	@Test
-	void test1() {
-		Userinfo userinfo = Userinfo.builder().userId("장").build();
-		userInfoDaoImpl.CreateUser(userinfo);
+	void test() {
+		userInfoDao.findById("장");
 	}
 
 }
