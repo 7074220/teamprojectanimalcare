@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,20 +29,26 @@ import lombok.ToString;
 public class Visit {
 
 	@Id
-	@SequenceGenerator(name = "visit_no_seq",sequenceName = "visit_no_seq",allocationSize = 1,initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "visit_no_seq")
-	private Long visitNo;//PK
+	@SequenceGenerator(name = "visit_no_seq", sequenceName = "visit_no_seq", allocationSize = 1, initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "visit_no_seq")
+	private Long visitNo;// PK
 
 	private Long visitTime;
-	
+
 	private LocalDate visitDate;
 
-	
+	private String visitstatus;
+
 	@Builder.Default
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_Id")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
-			
+
+	@Builder.Default
+	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@JoinColumn(name = "center_no")
+	@ToString.Exclude
+	private Center center = new Center();
 
 }

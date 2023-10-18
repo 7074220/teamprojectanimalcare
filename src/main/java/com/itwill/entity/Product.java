@@ -36,6 +36,6 @@ public class Product {
 	private Integer productAmount;	
 	private String productImage;
 	private Integer productStarAvg;
-	
+
 
 }
