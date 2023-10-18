@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.entity.Userinfo;
 import com.itwill.repository.UserinfoRepository;
@@ -33,17 +34,18 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	
 	@Override
 	public Userinfo findById(String userId) {
-		
-		return null;
+		return userinfoRepository.findById(userId).get();
 	}
 	
 	@Override
-	public Userinfo UpdateUser() {
+	public Userinfo UpdateUser(Userinfo userinfo) {
+		return userinfoRepository.save(userinfo);
+	}
+	
+	@Override
+	public Integer CountById(String userId) {
 		
 		return null;
 	}
-	
-	
-	
 
 }

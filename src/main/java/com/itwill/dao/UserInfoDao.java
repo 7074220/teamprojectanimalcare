@@ -11,12 +11,12 @@ public interface UserInfoDao {
 	
 	public void DeleteUser(String userId);
 	
-	public Userinfo UpdateUser();
+	public Userinfo UpdateUser(Userinfo userinfo);
 	
 	public List<Userinfo> findAll();
 	
 	public Userinfo findById(String userId);
 	
-	
+	public Integer CountById(String userId);
 
 }
