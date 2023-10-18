@@ -1,5 +1,10 @@
 package com.itwill.dao;
 
-public class ReportBoardDao {
+import com.itwill.entity.ReportBoard;
 
+public interface ReportBoardDao {
+	
+	public ReportBoard Create(ReportBoard reportBoard);
+	
+	
 }
