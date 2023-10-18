@@ -21,7 +21,9 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTests {
 				.productName("츄르")
 				.productPrice(3000)
 				.productCategory("간식")
-				.productImage("")
+				.productImage("cat.jpg")
 				.build();
+		Product savedProduct1 = productRepository.save(product1);
+		System.out.println(savedProduct1);
 	}
 }
