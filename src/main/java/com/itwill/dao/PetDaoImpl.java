@@ -3,12 +3,17 @@ package com.itwill.dao;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.itwill.entity.Pet;
 import com.itwill.repository.PetRepository;
 
+@Repository
 public class PetDaoImpl implements PetDao {
-
+	@Autowired
 	PetRepository petRepository;
+	
 	@Override
 	public Pet petFindById(Long petNo) {
 		Pet pet = petRepository.findById(petNo).get();	
@@ -59,10 +64,9 @@ public class PetDaoImpl implements PetDao {
 	}
 
 	//최신등록순 정렬
-	@Override
-	public List<Pet> findAllByNo(Long petNo) {
-		List<Pet> petList = petRepository.findAllByOrderByPetNoDesc(petNo);
-		return petList;
-	}
+	/*
+	 * @Override public List<Pet> findAllByNo(Long petNo) { List<Pet> petList =
+	 * petRepository.findAllByOrderByPetNoDesc(petNo); return petList; }
+	 */
 
 }
