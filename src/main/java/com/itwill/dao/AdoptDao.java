@@ -6,14 +6,14 @@ import com.itwill.entity.Adopt;
 
 public interface AdoptDao {
 	
-	Adopt insertAdopt(Adopt adopt);
+	public Adopt insertAdopt(Adopt adopt);
 
-	Adopt selectAdopt(Long no);
+	public Adopt selectAdopt(Long no);
 
-	Adopt updateAdopt(Adopt adopt) throws Exception;
+	public Adopt updateAdopt(Adopt adopt) throws Exception;
 
-	void deleteAdopt(Long no) throws Exception;
+	public void deleteAdopt(Long no) throws Exception;
 
-	List<Adopt> selectList();
+	public List<Adopt> selectList();
 
 }
