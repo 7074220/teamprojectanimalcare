@@ -20,7 +20,7 @@ public class ProductDaoImpl implements ProductDao {
 		Product savedProduct = productRepository.save(product);
 		return savedProduct;
 	}
-
+/*
 	// 관리자 ~
 	@Override
 	public Product updateProduct(Product updateProduct) throws Exception {
@@ -56,7 +56,8 @@ public class ProductDaoImpl implements ProductDao {
 	public List<Product> findAll() {
 		return productRepository.findAll();
 	}
-
+*/
+	/*
 	@Override
 	public List<Product> findByProductNameLike(String productName) {
 		return productRepository.findByProductNameLike(productName);
@@ -81,5 +82,5 @@ public class ProductDaoImpl implements ProductDao {
 	public List<Product> findByProductOrderByProductNoDesc(Integer productNo) {
 		return productRepository.findByProductOrderByProductNoDesc(productNo);
 	}
-
+*/
 }
