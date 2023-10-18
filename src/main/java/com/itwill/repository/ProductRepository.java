@@ -24,5 +24,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 	List<Product> findByProductOrderByProductStarAvgDesc(Integer productStarAvg);
 	
 	// 최신번호순 정렬
-	List<Product> findByProductOrderByProductNoDesc(Integer productNo);
+	List<Product> findByProductOrderByProductNoDesc(Integer productNo);  //long으로 바꿔야함?
 }

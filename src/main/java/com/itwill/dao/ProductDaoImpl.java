@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.itwill.entity.Product;
 import com.itwill.repository.ProductRepository;
 
+@Repository
 public class ProductDaoImpl implements ProductDao {
 
 	@Autowired

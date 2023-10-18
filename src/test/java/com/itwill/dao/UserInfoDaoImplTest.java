@@ -9,12 +9,11 @@ import com.itwill.TeamprojectAnimalcareApplicationTest;
 
 class UserInfoDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	
-	@Autowired
-	UserInfoDao userInfoDao;
+	UserInfoDaoImpl userInfoDaoImpl = new UserInfoDaoImpl();
 	
 	@Test
 	void test() {
-		userInfoDao.findById("장");
+		userInfoDaoImpl.findById("장");
 	}
 
 }
