@@ -5,26 +5,32 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 
-import com.itwill.entity.Center;
 import com.itwill.entity.Userinfo;
 import com.itwill.entity.Visit;
 
+import jakarta.transaction.Transactional;
+
+@SpringBootTest
 class VisitDaoTest {
+	@Autowired
+	VisitDao visitDao;
 
+	@Transactional
+	@Rollback(false)
 	@Test
-	void test() {
-		VisitDao visitDao = new VisitDaoImpl();
-		Visit visit = new Visit();
-		visit.setVisitNo(1L);
-		visit.setVisitDate(LocalDate.now());
-		visit.setCenter(new Center()); // Center 객체 생성 필요
-		visit.setVisitstatus("예약완료");
-		visit.setVisitTime(12345L);
-		visit.setUserinfo(new Userinfo()); // Userinfo 객체 생성 필요
-
+	void insetVisit() {
+		Visit visit = Visit.builder()
+				.visitNo(1L)
+				.visitDate(LocalDate.now())
+				.visitstatus("준비중")
+				.visitTime(5L)
+				.userinfo(null)
+				.build();
 		visitDao.createVisit(visit);
 
-	
 	}
 }

@@ -46,7 +46,7 @@ public class VisitServiceImpl implements VisitService {
 			Visit findVisit = optionalVisit.get();
 
 			findVisit.setVisitDate(visit.getVisitDate());
-			//findVisit.setVisitstatus(visit.getVisitstatus());
+			findVisit.setVisitstatus(visit.getVisitstatus());
 			findVisit.setVisitTime(visit.getVisitTime());
 			return findVisit;
 		} else {

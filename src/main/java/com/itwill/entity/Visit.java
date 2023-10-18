@@ -46,12 +46,9 @@ public class Visit {
 	private Userinfo userinfo = new Userinfo();
 
 	@Builder.Default
-
 	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-
-	@ToString.Exclude
-
 	@JoinColumn(name = "center_no")
+	@ToString.Exclude
 	private Center center = new Center();
 
 }
