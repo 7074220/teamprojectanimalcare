@@ -52,6 +52,10 @@
               <height>-1</height>
               <width>-1</width>
 <<<<<<< HEAD
+              <x>1036</x>
+              <y>202</y>
+=======
+<<<<<<< HEAD
 <<<<<<< HEAD
               <x>1091</x>
               <y>178</y>
@@ -62,6 +66,7 @@
 =======
               <x>1054</x>
               <y>166</y>
+>>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 >>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
             </constraint>
             <sourceConnections>
@@ -300,11 +305,16 @@
               <height>-1</height>
               <width>-1</width>
 <<<<<<< HEAD
+              <x>781</x>
+              <y>618</y>
+=======
+<<<<<<< HEAD
               <x>675</x>
               <y>538</y>
 =======
               <x>914</x>
               <y>458</y>
+>>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 >>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
             </constraint>
             <sourceConnections>
@@ -334,11 +344,16 @@
                     <height>-1</height>
                     <width>-1</width>
 <<<<<<< HEAD
+                    <x>353</x>
+                    <y>678</y>
+=======
+<<<<<<< HEAD
                     <x>376</x>
                     <y>729</y>
 =======
                     <x>624</x>
                     <y>668</y>
+>>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 >>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
                   </constraint>
                   <sourceConnections/>
@@ -366,8 +381,13 @@
                         <constraint>
                           <height>-1</height>
                           <width>-1</width>
+<<<<<<< HEAD
+                          <x>465</x>
+                          <y>502</y>
+=======
                           <x>642</x>
                           <y>524</y>
+>>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
                         </constraint>
                         <sourceConnections>
                           <net.java.amateras.db.visual.model.ForeignKeyModel>
@@ -548,10 +568,15 @@
                                 <width>-1</width>
 <<<<<<< HEAD
                                 <x>101</x>
+                                <y>638</y>
+=======
+<<<<<<< HEAD
+                                <x>101</x>
                                 <y>650</y>
 =======
                                 <x>389</x>
                                 <y>539</y>
+>>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 >>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
                               </constraint>
                               <sourceConnections/>
@@ -933,11 +958,16 @@
               <height>-1</height>
               <width>-1</width>
 <<<<<<< HEAD
+              <x>784</x>
+              <y>383</y>
+=======
+<<<<<<< HEAD
               <x>775</x>
               <y>339</y>
 =======
               <x>365</x>
               <y>333</y>
+>>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 >>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
             </constraint>
             <sourceConnections>
@@ -965,8 +995,13 @@
                   <constraint>
                     <height>-1</height>
                     <width>-1</width>
+<<<<<<< HEAD
+                    <x>1017</x>
+                    <y>605</y>
+=======
                     <x>105</x>
                     <y>265</y>
+>>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
                   </constraint>
                   <sourceConnections>
                     <net.java.amateras.db.visual.model.ForeignKeyModel>
@@ -1979,11 +2014,16 @@
             <constraint>
               <height>-1</height>
               <width>-1</width>
+<<<<<<< HEAD
+              <x>1039</x>
+              <y>373</y>
+=======
               <x>962</x>
               <y>292</y>
 =======
               <x>1123</x>
               <y>307</y>
+>>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 >>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
             </constraint>
             <sourceConnections>
@@ -2108,8 +2148,13 @@
             <constraint>
               <height>-1</height>
               <width>-1</width>
+<<<<<<< HEAD
+              <x>92</x>
+              <y>318</y>
+=======
               <x>151</x>
               <y>476</y>
+>>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
             </constraint>
             <sourceConnections>
               <net.java.amateras.db.visual.model.ForeignKeyModel reference="../../.."/>
