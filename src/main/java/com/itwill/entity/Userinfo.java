@@ -1,9 +1,13 @@
 package com.itwill.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,6 +39,16 @@ public class Userinfo {
 	@Column(nullable = false)
 	private String userResisterDate;
 	
-
+	@OneToMany
+	@Builder.Default
+	List<Coupon> coupons = new ArrayList<Coupon>();
+	
+	@OneToMany
+	@Builder.Default
+	List<MyPet> myPets = new ArrayList<MyPet>();
+	
+	@OneToMany
+	@Builder.Default
+	List<Product> products = new ArrayList<Product>();
 	
 }
