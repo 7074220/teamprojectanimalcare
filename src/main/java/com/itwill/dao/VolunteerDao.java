@@ -1,6 +1,19 @@
 package com.itwill.dao;
 
-public interface VolunteerDao {
+import java.util.List;
 
+import com.itwill.entity.Volunteer;
+
+public interface VolunteerDao {
+	
+	public Volunteer insertVolunteer(Volunteer volunteer);
+	
+	public Volunteer selectVolunteer(Long no);
+	
+	public Volunteer updateVolunteer(Volunteer volunteer) throws Exception;
+	
+	public void deleteVolunteer(Long no) throws Exception;
+	
+	public List<Volunteer> findAll();	
 	
 }
