@@ -1,5 +1,22 @@
 package com.itwill.dao;
 
-public class UserInfoDao {
+
+import java.util.List;
+
+import com.itwill.entity.Userinfo;
+
+public interface UserInfoDao {
+	
+	public Userinfo CreateUser(Userinfo userinfo);
+	
+	public void DeleteUser(String userId);
+	
+	public Userinfo UpdateUser(Userinfo userinfo);
+	
+	public List<Userinfo> findAll();
+	
+	public Userinfo findById(String userId);
+	
+	public Integer CountById(String userId);
 
 }
