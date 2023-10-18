@@ -47,6 +47,7 @@ public class AdoptServiceImpl implements AdoptService{
 	public List<Adopt> adopts() {
 		List<Adopt> adoptList=adoptDao.selectList();
 		return adoptList;
+		
 	}
 
 }
