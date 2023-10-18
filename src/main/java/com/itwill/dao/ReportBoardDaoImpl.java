@@ -12,8 +12,27 @@ public class ReportBoardDaoImpl implements ReportBoardDao{
 	
 	@Override
 	public ReportBoard Create(ReportBoard reportBoard) {
-		
-		return null;
+		return reportBoardRepository.save(reportBoard);
+	}
+	
+	@Override
+	public void deleteById(Long reportBoard_no) {
+		if(reportBoardRepository.findById(reportBoard_no).isPresent()) {
+			reportBoardRepository.deleteById(reportBoard_no);
+		}	
+	}
+	
+	@Override
+	public ReportBoard update(ReportBoard reportBoard) {
+		if(reportBoardRepository.findById(reportBoard.getBoardNo()).isPresent()) {
+			reportBoardRepository.save(reportBoard);
+		}
+		return reportBoard;
+	}
+	
+	@Override
+	public ReportBoard findByUserId(String userid) {
+		return reportBoardRepository.findByUserId(userid);
 	}
 	
 }

@@ -20,7 +20,9 @@ public class CouponDaoImpl implements CouponDao{
 	// 쿠폰 만료일 자동삭제 구현해야함
 	@Override
 	public void DelteById(Long couponId) {
-		couponRepository.deleteById(couponId);
+		if(couponRepository.findById(couponId).isPresent()) {
+			couponRepository.deleteById(couponId);
+		}
 	}
 	
 	@Override
