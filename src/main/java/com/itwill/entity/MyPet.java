@@ -25,7 +25,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Data
-@EqualsAndHashCode
 public class MyPet {
 	
 	@Id

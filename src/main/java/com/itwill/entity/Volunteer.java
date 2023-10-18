@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,7 +25,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-@EqualsAndHashCode
+@Entity
 public class Volunteer {
 	
 	@Id

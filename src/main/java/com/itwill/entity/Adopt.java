@@ -30,7 +30,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @Builder
-@EqualsAndHashCode
 @ToString(callSuper = true)
 public class Adopt {
 

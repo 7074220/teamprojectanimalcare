@@ -22,7 +22,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-@EqualsAndHashCode
 public class ReportBoard {
     
 	@Id

@@ -24,10 +24,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
 public class Product {
 
-	
 	@Id
 	@SequenceGenerator(name = "product_product_no_seq",sequenceName = "product_product_no_seq",initialValue = 1,allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "product_product_no_seq")
@@ -39,8 +37,5 @@ public class Product {
 	private String productImage;
 	private Integer productStarAvg;
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
-	@ToStringExclude
-	private OrderItem orderItems = new OrderItem();
 
 }
