@@ -1,12 +1,11 @@
+package com.itwill;
 
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-@EnableJpaAuditing
 @SpringBootTest
-class TeamprojectAnimalcareApplicationTests {
+public class TeamprojectAnimalcareApplicationTests {
 
 	@Test
 	void contextLoads() {
