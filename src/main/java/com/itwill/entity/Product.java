@@ -37,5 +37,8 @@ public class Product {
 	private String productImage;
 	private Integer productStarAvg;
 	
+	@OneToOne(mappedBy = "product" )
+	
+	private OrderItem orderItem = new OrderItem();
 
 }

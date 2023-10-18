@@ -20,6 +20,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Builder
@@ -38,5 +39,11 @@ public class Pet {
 	 private String petFindPlace;
 	 private String petCharacter;
 	 private String petCenter;
+	 
+	 
+	 @Builder.Default
+	 @OneToOne(mappedBy = "pet")
+	 @ToString.Exclude
+	 private Adopt adopt = new Adopt();
 
 }
