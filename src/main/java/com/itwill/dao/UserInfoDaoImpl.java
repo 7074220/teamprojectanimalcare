@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.entity.Userinfo;
 import com.itwill.repository.UserinfoRepository;
@@ -38,9 +39,8 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	}
 	
 	@Override
-	public Userinfo UpdateUser() {
-		
-		return null;
+	public Userinfo UpdateUser(Userinfo userinfo) {
+		return userinfoRepository.save(userinfo);
 	}
 	
 	

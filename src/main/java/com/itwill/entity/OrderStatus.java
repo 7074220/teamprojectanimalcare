@@ -1,5 +1,6 @@
 package com.itwill.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,6 +10,7 @@ import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -25,6 +27,6 @@ public class OrderStatus {
 	private String orderStatusImage;
 	private String orderStatusDesc;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private OrderItem orderItem;
 }
