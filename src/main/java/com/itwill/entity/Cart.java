@@ -37,6 +37,7 @@ public class Cart {
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@ToStringExclude
+	@JoinColumn(name = "user_id")
 	private Userinfo userinfo = new Userinfo();
 	
 	@OneToOne(cascade = CascadeType.PERSIST)

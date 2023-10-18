@@ -40,6 +40,7 @@ public class ReviewBoard {
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	@ToString.Exclude
+	@JoinColumn(name = "user_id")
 	private Userinfo userinfo = new Userinfo();
 }
 

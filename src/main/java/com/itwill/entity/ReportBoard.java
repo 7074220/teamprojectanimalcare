@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
@@ -39,8 +40,9 @@ public class ReportBoard {
 	private String boardName;
 	private Integer boardPhone;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.PERSIST) // ManyToOne 확실한가?
 	@Builder.Default
+	@JoinColumn(name = "user_id")
 	private Userinfo userinfo = new Userinfo();
 
 
