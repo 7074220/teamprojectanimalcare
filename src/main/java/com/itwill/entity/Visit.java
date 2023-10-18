@@ -31,7 +31,6 @@ public class Visit {
 
 	private LocalDate visitDate;
 
-	private String visitCenter;
 	
 	
 	@Builder.Default

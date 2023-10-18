@@ -28,9 +28,8 @@ public class Volunteer {
 	
 	private Long volunteerTime;
 	
-	private LocalDate volunteerDate;
-	
-	private String volunteerCenter;
+	private LocalDate volunteerDate;	
+
 	
 	
 	@Builder.Default
