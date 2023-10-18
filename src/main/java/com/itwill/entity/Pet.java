@@ -1,5 +1,7 @@
 package com.itwill.entity;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringExclude;
 
@@ -10,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,7 +35,6 @@ public class Pet {
 	 private String petFindPlace;
 	 private String petCharacter;
 	 private String petCenter;
-	 
 	 
 	 @ManyToOne
 	 @ToStringExclude

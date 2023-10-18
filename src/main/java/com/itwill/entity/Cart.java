@@ -6,6 +6,10 @@ import java.util.List;
 import org.apache.commons.lang3.builder.ToStringExclude;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
@@ -19,18 +23,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cart {
-
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long cartNo;
 	private Integer cartQty;
 	
-	@OneToOne
+	@ManyToOne
 	@ToStringExclude
 	private Userinfo userinfo = new Userinfo();
 	
 	
-	@OneToMany(mappedBy = "cart")
+	@OneToOne(mappedBy = "cart")
 	@ToStringExclude
-	
-	private List<Product> products = new ArrayList<>();
+	@Builder.Default
+	private Product product = new Product();
 
 }
