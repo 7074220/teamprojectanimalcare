@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,7 +24,8 @@ import lombok.ToString;
 public class Volunteer {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	//@SequenceGenerator(name = "volunteer_no_seq",sequenceName = "volunteer_no_seq",allocationSize = 1,initialValue = 1)
+	//@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "volunteer_no_seq")
 	private Long volunteerNo; // PK
 	
 	private Long volunteerTime;

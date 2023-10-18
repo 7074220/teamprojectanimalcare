@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringExclude;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -36,9 +37,9 @@ public class Pet {
 	 private String petCharacter;
 	 private String petCenter;
 	 
-	 @ManyToOne
+	 @ManyToOne(cascade = CascadeType.PERSIST)
 	 @ToStringExclude
-	 @JoinColumn(name = "pet_no")
+	 @JoinColumn()
 	 private Adopt adopt = new Adopt();
 
 }

@@ -3,6 +3,7 @@ package com.itwill.entity;
 import java.time.LocalDateTime;
 
 import jakarta.annotation.Generated;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -36,7 +37,7 @@ public class ReportBoard {
 	private String boardName;
 	private Integer boardPhone;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@Builder.Default
 	private Userinfo userinfo = new Userinfo();
 

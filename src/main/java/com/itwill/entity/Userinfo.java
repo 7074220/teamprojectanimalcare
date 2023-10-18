@@ -3,6 +3,7 @@ package com.itwill.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,15 +40,15 @@ public class Userinfo {
 	@Column(nullable = false)
 	private String userResisterDate;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@Builder.Default
 	List<Coupon> coupons = new ArrayList<Coupon>();
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@Builder.Default
 	List<MyPet> myPets = new ArrayList<MyPet>();
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@Builder.Default
 	List<Product> products = new ArrayList<Product>();
 	

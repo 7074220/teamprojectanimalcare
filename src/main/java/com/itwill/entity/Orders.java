@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,11 +31,11 @@ public class Orders {
 	private String orderAddress;
 	private String orderDesc;
 	
-	@ManyToOne()
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@Builder.Default
 	private Userinfo userinfo = new Userinfo();
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@Builder.Default
 	private List<OrderItem> orderItems = new ArrayList<OrderItem>();
 

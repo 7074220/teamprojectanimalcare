@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,6 +26,7 @@ import lombok.ToString;
 public class ReviewBoard {
 
 	@Id
+	@SequenceGenerator(name = "board_no_seq",sequenceName = "board_no_seq",allocationSize = 1,initialValue = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long boardNo; // PK
 	private String boardTitle;

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringExclude;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -37,7 +38,7 @@ public class Product {
 	private String productImage;
 	private Integer productStarAvg;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@ToStringExclude
 	private OrderItem orderItems = new OrderItem();
 
