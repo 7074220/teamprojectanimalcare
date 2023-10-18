@@ -1,5 +1,46 @@
 package com.itwill.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Center {
+	
+	@Id
+	
+	private Long centerNo;
+	private	String centerName;
+	private Long centerPhoneNumber;
+	private String centerLocal;
+	private String centerOpenCloseTime;
+	
+	@OneToMany(mappedBy = "center",cascade = CascadeType.PERSIST)
+	@Builder.Default
+	List<Visit> visits = new ArrayList<Visit>();
+	
+	@OneToMany(mappedBy = "center",cascade = CascadeType.PERSIST)
+	@Builder.Default
+	List<Volunteer> volunteers = new ArrayList<Volunteer>();
+
+	@OneToMany(mappedBy = "center",cascade = CascadeType.PERSIST)
+	@Builder.Default
+	List<Pet> pets = new ArrayList<Pet>();
 
 }
+
+

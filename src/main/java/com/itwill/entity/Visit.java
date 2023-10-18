@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -43,5 +44,10 @@ public class Visit {
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
 			
+	@Builder.Default
+	@OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@ToString.Exclude
+	@JoinColumn(name = "center_no")
+	private Center center = new Center();
 
 }
