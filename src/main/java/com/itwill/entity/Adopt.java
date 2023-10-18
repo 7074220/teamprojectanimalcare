@@ -54,6 +54,7 @@ public class Adopt {
 	
 	@Builder.Default
 	@OneToOne
+	@ToString.Exclude
 	@JoinColumn(name = "pet_no")
 	private Pet pet = new Pet();
 }
