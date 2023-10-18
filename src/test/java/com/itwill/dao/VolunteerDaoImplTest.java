@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import com.itwill.entity.Volunteer;
+
 class VolunteerDaoImplTest {
 
 	@Test
@@ -16,7 +18,7 @@ class VolunteerDaoImplTest {
 	@Test
 	@Disabled
 	void testInsertVolunteer() {
-		
+		Volunteer volunteer = Volunteer.builder().build();
 	}
 
 	@Test

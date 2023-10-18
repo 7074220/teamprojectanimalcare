@@ -9,7 +9,7 @@ import com.itwill.entity.Product;
 public interface ProductDao {
 
 	Product insertProduct(Product product);
-
+/*
 	Product updateProduct(Product updateProduct) throws Exception;
 	
 	Product findByProductNo(Long no);
@@ -34,7 +34,7 @@ public interface ProductDao {
 	// 최신번호순 정렬
 	List<Product> findByProductOrderByProductNoDesc(Integer productNo);
 
-	
+	*/
 	
 }
 
