@@ -33,7 +33,8 @@ public class MyPet {
 	@Column(nullable = false)
 	
 	@ManyToOne
-	private String userId;
+	@Builder.Default
+	private Userinfo userinfo = new Userinfo();
 
 	
 

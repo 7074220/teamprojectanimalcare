@@ -1,5 +1,7 @@
 package com.itwill.entity;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringExclude;
 
@@ -34,8 +36,7 @@ public class Pet {
 	 private String petCharacter;
 	 private String petCenter;
 	 
-	 
-	 @OneToOne
+	 @ManyToOne
 	 @ToStringExclude
 	 @JoinColumn(name = "pet_no")
 	 private Adopt adopt = new Adopt();

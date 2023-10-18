@@ -26,6 +26,6 @@ public class Coupon {
 	 private String couponExpirationDate;
 	 private String couponPayday;
 	 
-	 @OneToOne
+	 @ManyToOne()
 	 private Userinfo userinfo = new Userinfo();
 }

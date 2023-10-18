@@ -37,7 +37,8 @@ public class ReportBoard {
 	private Integer boardPhone;
 	
 	@ManyToOne
-	private String userId;
+	@Builder.Default
+	private Userinfo userinfo = new Userinfo();
 
 
 

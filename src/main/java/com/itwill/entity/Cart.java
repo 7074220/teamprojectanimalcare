@@ -33,8 +33,9 @@ public class Cart {
 	private Userinfo userinfo = new Userinfo();
 	
 	
-	@OneToMany(mappedBy = "cart")
+	@OneToOne(mappedBy = "cart")
 	@ToStringExclude
-	private List<Product> products = new ArrayList<>();
+	@Builder.Default
+	private Product product = new Product();
 
 }

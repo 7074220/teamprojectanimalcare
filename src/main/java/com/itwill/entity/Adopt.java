@@ -42,8 +42,6 @@ public class Adopt {
 	@ToString.Exclude
 	private Pet pet = new Pet();
 	
-	
-	
 	/*
 	 * N:1
 	 */

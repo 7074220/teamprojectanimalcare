@@ -26,12 +26,16 @@ public class OrderItem {
 	private Long oiNo;
 	private Integer oiQty;
 	
-	@ManyToOne
-	private List<Orders> orders = new ArrayList<>();
+	@OneToMany
+	@Builder.Default
+	private Orders orders = new Orders();
 	
 	@OneToOne
+	@Builder.Default
 	private  Product product =new Product();
+	
 	@OneToOne
+	@Builder.Default
 	private OrderStatus orderStatus = new OrderStatus();
 	
 
