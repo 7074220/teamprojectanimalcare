@@ -1,6 +1,19 @@
 package com.itwill.dao;
 
-public interface AdoptDao {
+import java.util.List;
 
+import com.itwill.entity.Adopt;
+
+public interface AdoptDao {
 	
+	public Adopt insertAdopt(Adopt adopt);
+
+	public Adopt selectAdopt(Long no);
+
+	public Adopt updateAdopt(Adopt adopt) throws Exception;
+
+	public void deleteAdopt(Long no) throws Exception;
+
+	public List<Adopt> selectList();
+
 }

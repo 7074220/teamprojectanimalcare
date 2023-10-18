@@ -39,7 +39,7 @@ public class Adopt {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "adopt_no_seq")
 	private Long adoptNo; // pk
 	private Long adoptTime;
-	@CreationTimestamp
+	
 	private LocalDate adoptDate;
 	private String status;
 	
