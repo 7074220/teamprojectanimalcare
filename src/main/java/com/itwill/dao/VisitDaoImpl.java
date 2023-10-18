@@ -20,8 +20,7 @@ public class VisitDaoImpl implements VisitDao {
 
 	@Override
 	public Visit selectVisit(Long visitNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return visitRepository.findById(visitNo).get();
 	}
 
 
