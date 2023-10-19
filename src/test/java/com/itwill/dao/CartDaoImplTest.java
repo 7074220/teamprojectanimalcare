@@ -27,14 +27,19 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Rollback(false)
 	//@Disabled
 	void insertCartTest() {
-		
 		Cart cart = Cart.builder()
 				.cartQty(1)
 				.userinfo(userInfoDao.findById("전아현"))
 				.product(productDao.findByProductNo(1L))
 				.build();
-		
 		cartDao.insertCart(cart);
 	}
 	
+	@Test
+	@Disabled
+	void updateCartTest() {
+				
+				
+				
+	}	
 }
