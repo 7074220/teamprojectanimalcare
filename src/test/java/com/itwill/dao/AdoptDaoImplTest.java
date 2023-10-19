@@ -21,11 +21,16 @@ class AdoptDaoImplTest {
 	@Autowired
 	AdoptDao adoptDao;
 	
+	
+	
+	
 	@Test
 	@Transactional
 	@Rollback(false)
 	//@Disabled
 	void test() {
+		
+		
 		Adopt adopt = Adopt.builder()
 							.adoptNo(1L)
 							.adoptDate(LocalDate.now())
