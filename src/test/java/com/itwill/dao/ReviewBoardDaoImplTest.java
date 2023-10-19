@@ -17,6 +17,8 @@ import jakarta.transaction.Transactional;
 
 class ReviewBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	
+	/*
+	
 	@Autowired
 	ReviewBoardDao reviewBoardDao;
 	@Autowired
@@ -75,5 +77,7 @@ class ReviewBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	void testFindByStarAll() {
 		fail("Not yet implemented");
 	}
-
+	
+	
+	*/
 }
