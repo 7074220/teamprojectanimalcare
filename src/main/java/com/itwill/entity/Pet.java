@@ -39,6 +39,8 @@ public class Pet {
 	 private String petFindPlace;
 	 private String petCharacter;
 	 
+	 
+	 
 	 @ManyToOne
 	 @JoinColumn(name = "center_no")
 	 private Center center;

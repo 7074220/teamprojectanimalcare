@@ -1,4 +1,4 @@
-package com.itwill.dao;
+package com.itwill.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,37 +10,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.itwill.TeamprojectAnimalcareApplication;
 import com.itwill.TeamprojectAnimalcareApplicationTest;
-
 import com.itwill.entity.Product;
 import com.itwill.repository.ProductRepository;
 
-class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
+class ProductServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 
 	@Autowired
-	ProductDao productDao;
-	
+	ProductService productService;
 	
 	@Test
-	@Disabled
+	//@Disabled
 	void insertProductTest() {
 		Product product1 = Product.builder()
-				.productName("츄르_멸치맛")
+				.productName("츄르_치즈맛")
 				.productPrice(3000)
 				.productCategory("간식")
 				.productImage("cat.jpg")
 				.productStarAvg(3)
 				.productQty(2)
 				.build();
-		Product savedProduct1 = productDao.insertProduct(product1);
+		Product savedProduct1 = productService.insertProduct(product1);
 		System.out.println(savedProduct1);
 	}
 	
 	@Test
 	@Disabled
 	void findByProductNo() {
-		Product findProduct = productDao.findByProductNo(2L);
+		Product findProduct = productService.findByProductNo(2L);
 		System.out.println(findProduct);
 	}
 	
@@ -49,7 +46,7 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Transactional
 	@Rollback(value = false)
 	void updateProduct() {
-		Product findProduct = productDao.findByProductNo(1L);
+		Product findProduct = productService.findByProductNo(1L);
 		findProduct.setProductName("츄르_닭고기맛");
 		System.out.println(findProduct);
 	}
@@ -59,14 +56,14 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Transactional
 	@Rollback(value = false)
 	void deleteProduct() throws Exception {
-		productDao.deleteProduct(4L);
+		productService.deleteProduct(4L);
 	}
 	
 	@Test
 	@Disabled
 	// 일부 단어 입력으로 제품 검색
 	void findByContainsTest() {
-		List<Product> findProduct = productDao.findByContains("닭");
+		List<Product> findProduct = productService.findByContains("닭");
 		System.out.println(findProduct);
 	}
 	
@@ -74,7 +71,7 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Disabled
 	// 높은 가격순 정렬
 	void findAllByOrderByProductPriceDesc() {
-		List<Product> products = productDao.findAllByOrderByProductPriceDesc();
+		List<Product> products = productService.findAllByOrderByProductPriceDesc();
 		System.out.println(products);
 	}
 	
@@ -82,7 +79,7 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Disabled
 	// 낮은 가격순 정렬
 	void findAllByOrderByProductPriceAsc() {
-		List<Product> products = productDao.findAllByOrderByProductPriceAsc();
+		List<Product> products = productService.findAllByOrderByProductPriceAsc();
 		System.out.println(products);
 	}
 	
@@ -90,7 +87,7 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Disabled
 	// 평점높은순 정렬
 	void findAllByOrderByProductStarAvgDesc() {
-		List<Product> products = productDao.findAllByOrderByProductStarAvgDesc();
+		List<Product> products = productService.findAllByOrderByProductStarAvgDesc();
 		System.out.println(products);
 	}
 	
@@ -98,7 +95,7 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Disabled
 	// 최신번호순 정렬
 	void findAllByOrderByProductNoDesc() {
-		List<Product> products = productDao.findAllByOrderByProductNoDesc();
+		List<Product> products = productService.findAllByOrderByProductNoDesc();
 		System.out.println(products);
 	}
 	
@@ -106,8 +103,7 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Disabled
 	// 낮은번호순 정렬
 	void findAllByOrderByProductNoAsc() {
-		List<Product> products = productDao.findAllByOrderByProductNoAsc();
+		List<Product> products = productService.findAllByOrderByProductNoAsc();
 		System.out.println(products);
 	}
-
 }
