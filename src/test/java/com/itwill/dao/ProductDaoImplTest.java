@@ -45,7 +45,7 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	}
 	
 	@Test
-	@Disabled
+	//@Disabled
 	@Transactional
 	@Rollback(value = false)
 	void updateProduct() {
