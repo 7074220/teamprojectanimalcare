@@ -22,6 +22,7 @@ public interface ProductDao {
 	List<Product> findByContains(String productName);
 
 	// 높은 가격순 정렬
+	//List<Product> findByProductPriceDesc();
 	List<Product> findAllByOrderByProductPriceDesc();
 
 	// 낮은 가격순 정렬
