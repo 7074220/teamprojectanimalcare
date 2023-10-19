@@ -52,10 +52,6 @@ public class Center {
 	@Builder.Default
 	List<Pet> pets = new ArrayList<Pet>();
 	
-	@ManyToOne
-	 @JoinColumn(name = "local_no")
-	@Builder.Default
-	private  Local local = new Local();   
 
 }
 
