@@ -39,17 +39,14 @@ public class Center {
 	private String centerOpenCloseTime;
 
 	@OneToMany(mappedBy = "center", cascade = CascadeType.PERSIST)
-
 	@Builder.Default
 	List<Visit> visits = new ArrayList<Visit>();
 
 	@OneToMany(mappedBy = "center", cascade = CascadeType.PERSIST)
-
 	@Builder.Default
 	List<Volunteer> volunteers = new ArrayList<Volunteer>();
 
 	@OneToMany(mappedBy = "center", cascade = CascadeType.PERSIST)
-
 	@Builder.Default
 	List<Pet> pets = new ArrayList<Pet>();
 

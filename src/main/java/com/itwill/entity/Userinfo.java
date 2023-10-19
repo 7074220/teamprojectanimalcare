@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -32,7 +33,7 @@ public class Userinfo {
 	private String userPhoneNumber;
 	private String userEmail;
 	private String userResidentNumber;
-	//@CreationTimestamp
+	@CreationTimestamp
 	private LocalDateTime userResisterDate;
 	
 	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST)

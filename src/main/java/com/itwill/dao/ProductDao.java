@@ -8,33 +8,36 @@ import com.itwill.entity.Product;
 
 public interface ProductDao {
 
+	// 상품등록 (관리자 모드)
 	Product insertProduct(Product product);
-/*
+	
+	// 상품정보 수정 (관리자 모드)
 	Product updateProduct(Product updateProduct) throws Exception;
 	
 	Product findByProductNo(Long no);
-	
+	/*
 	void deleteProduct(Long no) throws Exception;
 
-	// 전체 상품 출력
-	List<Product> findAll();
-	
+	*/
 	// 일부 단어 입력으로 제품 검색
-	List<Product> findByProductNameLike(String productName);
+	List<Product> findByContains(String productName);
 
 	// 높은 가격순 정렬
-	List<Product> findByProductOrderByProductPriceDesc(Integer productPrice);
+	List<Product> findAllByOrderByProductPriceDesc();
 
 	// 낮은 가격순 정렬
-	List<Product> findByProductOrderByProductPriceAsc(Integer productPrice);
+	List<Product> findAllByOrderByProductPriceAsc();
 
-	// 평점순 정렬
-	List<Product> findByProductOrderByProductStarAvgDesc(Integer productStarAvg);
+	// 평점높은순 정렬
+	List<Product> findAllByOrderByProductStarAvgDesc();
 
 	// 최신번호순 정렬
-	List<Product> findByProductOrderByProductNoDesc(Integer productNo);
+	List<Product> findAllByOrderByProductNoDesc();
+	
+	// 낮은번호순 정렬
+	List<Product> findAllByOrderByProductNoAsc();
 
-	*/
+	
 	
 }
 

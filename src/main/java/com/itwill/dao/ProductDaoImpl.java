@@ -20,7 +20,7 @@ public class ProductDaoImpl implements ProductDao {
 		Product savedProduct = productRepository.save(product);
 		return savedProduct;
 	}
-/*
+
 	// 관리자 ~
 	@Override
 	public Product updateProduct(Product updateProduct) throws Exception {
@@ -42,7 +42,7 @@ public class ProductDaoImpl implements ProductDao {
 		Product selectedProduct = productRepository.findById(no).get();
 		return selectedProduct;
 	}
-
+	/*
 	@Override
 	public void deleteProduct(Long no) throws Exception {
 		Optional<Product> selectedProdcuOptional = productRepository.findById(no);
@@ -52,35 +52,41 @@ public class ProductDaoImpl implements ProductDao {
 		productRepository.delete(selectedProdcuOptional.get());
 	}
 
-	@Override
-	public List<Product> findAll() {
-		return productRepository.findAll();
-	}
+	
 */
-	/*
+	// 일부 단어 입력으로 제품 검색
 	@Override
-	public List<Product> findByProductNameLike(String productName) {
-		return productRepository.findByProductNameLike(productName);
+	public List<Product> findByContains(String productName) { 
+		return productRepository.findByContains(productName);
 	}
 
+	// 높은 가격순 정렬
 	@Override
-	public List<Product> findByProductOrderByProductPriceDesc(Integer productPrice) {
-		return productRepository.findByProductOrderByProductPriceDesc(productPrice);
+	public List<Product> findAllByOrderByProductPriceDesc() {
+		return productRepository.findAllByOrderByProductPriceDesc();
 	}
 
+	// 낮은 가격순 정렬
 	@Override
-	public List<Product> findByProductOrderByProductPriceAsc(Integer productPrice) {
-		return productRepository.findByProductOrderByProductPriceAsc(productPrice);
+	public List<Product> findAllByOrderByProductPriceAsc () {
+		return productRepository.findAllByOrderByProductPriceAsc();
 	}
 
+	// 평점높은순 정렬
 	@Override
-	public List<Product> findByProductOrderByProductStarAvgDesc(Integer productStarAvg) {
-		return productRepository.findByProductOrderByProductStarAvgDesc(productStarAvg);
+	public List<Product> findAllByOrderByProductStarAvgDesc() {
+		return productRepository.findAllByOrderByProductStarAvgDesc();
 	}
 
+	// 최신번호순 정렬
 	@Override
-	public List<Product> findByProductOrderByProductNoDesc(Integer productNo) {
-		return productRepository.findByProductOrderByProductNoDesc(productNo);
+	public List<Product> findAllByOrderByProductNoDesc() {
+		return productRepository.findAllByOrderByProductNoDesc();
 	}
-*/
+
+	// 낮은번호순 정렬
+	@Override
+	public List<Product> findAllByOrderByProductNoAsc() {
+		return productRepository.findAllByOrderByProductNoAsc();
+	}
 }
