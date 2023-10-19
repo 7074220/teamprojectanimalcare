@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,13 +38,13 @@ public class Orders {
 	private String orderAddress;
 	private String orderDesc;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	@Builder.Default
 	@JoinColumn(name = "user_id")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
 	
-	@OneToMany(mappedBy = "orders",cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "orders",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	@Builder.Default
 	private List<OrderItem> orderItems = new ArrayList<OrderItem>();
 
