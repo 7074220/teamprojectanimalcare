@@ -44,29 +44,18 @@ public class PetDaoImpl implements PetDao {
 	
 
 	@Override
-	public Pet petUpdate(Pet pet)throws Exception {
-		Optional<Pet> selectedPetOptional = petRepository.findById(pet.getPetNo());
-		Pet updatePet=null;
-		if(selectedPetOptional.isEmpty()) {
-			Pet pet1 = selectedPetOptional.get();
-			pet1.setPetLocal(pet.getPetLocal());
-			pet1.setPetType(pet.getPetType());
-			pet1.setPetgender(pet.getPetgender());
-			pet1.setPetRegisterDate(pet.getPetRegisterDate());
-			pet1.setPetFindPlace(pet.getPetFindPlace());
-			pet1.setPetCharacter(pet.getPetCharacter());
-			pet1.setCenter(pet.getCenter());
-			updatePet=petRepository.save(pet1);
-		}else {
-			throw new Exception("존재하지않습니다.");
-		}
-		return updatePet;
+	public Pet petUpdate(Pet updatepet)throws Exception {
+		return petRepository.save(updatepet);
 	}
 
 	//최신등록순 정렬
-	/*
-	 * @Override public List<Pet> findAllByNo(Long petNo) { List<Pet> petList =
-	 * petRepository.findAllByOrderByPetNoDesc(petNo); return petList; }
-	 */
+	@Override
+	public List<Pet> findAllByOrderBypetNoDesc() {
+		List<Pet> petList = petRepository.findAllByOrderByPetNoDesc();
+		return petList;
+	}
+
+	
+	
 
 }
