@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.itwill.dao.UserInfoDao;
 import com.itwill.entity.Userinfo;
 import com.itwill.exception.ExistedUserException;
+import com.itwill.exception.PasswordMismatchException;
+import com.itwill.exception.UserNotFoundException;
 
 @Service
 public class UserInfoServiceImpl implements UserInfoService{
@@ -26,43 +28,56 @@ public class UserInfoServiceImpl implements UserInfoService{
 			throw exception;
 		}
 		// 가입성공
-		return user;
+		return userInfoDao.CreateUser(user);
 	}
-	
+	/*
+	 * 회원수정
+	 */
 	@Override
 	public Userinfo update(Userinfo user) throws Exception {
-
-		return null;
+		return userInfoDao.UpdateUser(user);
 	}
-	
+	/*
+	 * 회원탈퇴
+	 */
 	@Override
-	public int remove(String userId) throws Exception {
-
-		return 0;
+	public void remove(String userId) throws Exception {
+		userInfoDao.DeleteUser(userId);
 	}
 	
+	// 상세보기
 	@Override
 	public Userinfo findUser(String userId) throws Exception {
-
-		return null;
+		return userInfoDao.findById(userId);
 	}
 	
+	// 전체회원리스트
 	@Override
 	public List<Userinfo> findUserList() throws Exception {
-
-		return null;
-	}
-	
-	@Override
-	public boolean isDuplicateId(String userId) throws Exception {
-
-		return false;
+		return userInfoDao.findAll();
 	}
 	
 	@Override
 	public Userinfo login(String userId, String password) throws Exception {
-
-		return null;
+		Userinfo userinfo = userInfoDao.findById(userId);
+		Userinfo fUser= Userinfo.builder().userId(userId).userPassword(password).build();
+		
+		if(userinfo == null) {
+			UserNotFoundException exception = 
+					new UserNotFoundException(userId+" 는 존재하지않는 아이디입니다.");
+			exception.setData(fUser);
+			throw exception;
+		}
+		String userPassword = userinfo.getUserPassword();
+		if(password.equals(userPassword)) {
+			//패쓰워드불일치
+			PasswordMismatchException exception=
+				new PasswordMismatchException("패쓰워드가 일치하지않습니다.");
+			exception.setData(fUser);
+			throw exception;
+		}
+		
+		return userinfo;
 	}
 	
 }

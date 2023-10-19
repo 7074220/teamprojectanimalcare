@@ -8,12 +8,12 @@ public interface AdoptDao {
 	
 	public Adopt insertAdopt(Adopt adopt);
 
-	public Adopt selectAdopt(Long no);
+	public Adopt findByNoAdopt(Long no);
 
 	public Adopt updateAdopt(Adopt adopt) throws Exception;
 
 	public void deleteAdopt(Long no) throws Exception;
 
-	public List<Adopt> selectList();
+	public List<Adopt> findAdoptList();
 
 }

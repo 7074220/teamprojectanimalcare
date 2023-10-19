@@ -1,16 +1,23 @@
 package com.itwill.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import java.util.List;
 
-import com.itwill.dao.VolunteerDao;
+import org.springframework.transaction.annotation.Transactional;
 
-@Service
-public class VolunteerService {
-	
-	@Autowired
-	private VolunteerDao volunteerDao;
-	
-	
+import com.itwill.entity.Volunteer;
 
+@Transactional
+public interface VolunteerService {
+	
+	Volunteer insertVolunteer(Volunteer volunteer);
+	
+	Volunteer updateVolunteer(Volunteer volunteer) throws Exception;
+	
+	Volunteer findById(Long no);
+
+	void deleteVolunteer(Long no) throws Exception;
+	
+	List<Volunteer> selectAllVolunteers();
+	
+	
 }

@@ -38,16 +38,11 @@ public interface UserInfoService {
 	/*
 	 * 회원탈퇴
 	 */
-	int remove(String userId) throws Exception;
+	void remove(String userId) throws Exception;
 
 	/*
 	 * 전체회원리스트
 	 */
 	List<Userinfo> findUserList() throws Exception;
-
-	/*
-	 * 아이디중복체크
-	 */
-	boolean isDuplicateId(String userId) throws Exception;
 	
 }
