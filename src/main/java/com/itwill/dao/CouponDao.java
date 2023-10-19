@@ -11,10 +11,11 @@ public interface CouponDao {
 	
 	public void DelteById(Long couponId);
 	
-	public void customDeleteExpiredCoupons(LocalDateTime date);
+	public void autoDeleteExpiredCoupons(LocalDateTime couponExpirationDate);
 	
 	public List<Coupon> findAll();
 	
 	public Coupon findById(Long couponId);
 	
 }
+
