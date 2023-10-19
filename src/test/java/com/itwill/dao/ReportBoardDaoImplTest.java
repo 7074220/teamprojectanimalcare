@@ -2,6 +2,7 @@ package com.itwill.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -22,8 +23,9 @@ class ReportBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	@Transactional
 	@Rollback(false)
+	@Disabled
 	void test() {
-		Userinfo userinfo = userInfoDao.findById("김");
+		Userinfo userinfo = userInfoDao.findById("김창섭");
 		ReportBoard reportBoard = ReportBoard.builder()
 									.boardNo(null)
 									.boardContent("내용")
@@ -37,14 +39,16 @@ class ReportBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 									.boardStep(1)
 									.boardTitle("제목")
 									.userinfo(userinfo)
-									.build();
-
-									
-
-								
-									
+									.build();	
 		reportBoardDao.Create(reportBoard);
 		
+	}
+	@Test
+	@Transactional
+	@Rollback(false)
+	//@Disabled
+	void test2() {
+		System.out.println(reportBoardDao.findAllByLikeUserId("섭"));
 	}
 
 }

@@ -20,6 +20,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 
 @AllArgsConstructor
@@ -48,6 +49,7 @@ public class ReportBoard {
 	@ManyToOne(cascade = CascadeType.PERSIST) // ManyToOne 확실한가?
 	@JoinColumn(name = "user_id")
 	@Builder.Default
+	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
 
 

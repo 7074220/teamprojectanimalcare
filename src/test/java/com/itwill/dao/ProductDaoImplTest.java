@@ -50,7 +50,7 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Rollback(value = false)
 	void updateProduct() {
 		Product findProduct = productDao.findByProductNo(1L);
-		findProduct.setProductName("츄르_새우맛");
+		findProduct.setProductName("츄르_멸치맛");
 		System.out.println(findProduct);
 	}
 	
@@ -102,7 +102,7 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	}
 	
 	@Test
-	//@Disabled
+	@Disabled
 	// 낮은번호순 정렬
 	void findAllByOrderByProductNoAsc() {
 		List<Product> products = productDao.findAllByOrderByProductNoAsc();
