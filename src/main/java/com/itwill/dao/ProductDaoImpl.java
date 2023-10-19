@@ -59,7 +59,7 @@ public class ProductDaoImpl implements ProductDao {
 */
 	
 	@Override
-	public List<Product> findByContains(String productName) {
+	public List<Product> findByContains(String productName) { 
 		return productRepository.findByContains(productName);
 	}
 
