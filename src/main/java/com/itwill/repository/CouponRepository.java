@@ -11,7 +11,7 @@ import com.itwill.entity.Coupon;
 public interface CouponRepository extends JpaRepository<Coupon, Long> {
 
 	
-	  //쿠폰만료일이 되면 자동소멸 되는 기능
+
 	  
 	  @Query(value="select * from coupon where ?1 < TRUNC(sysdate)",nativeQuery =
 	  true ) List<Coupon> findByExpirationDateBefore(LocalDateTime
@@ -21,3 +21,8 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 	//void deleteByExpirationDateBefore(LocalDateTime date);
 
 }
+
+	 //List<Coupon> findByExpirationDateBefore(LocalDateTime date);
+	 
+
+
