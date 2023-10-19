@@ -16,5 +16,5 @@ public interface AdoptService {
 
 	void deleteAdopt(Long no) throws Exception;
 
-	List<Adopt> findAllAdopts(String userId);
+	List<Adopt> findAllAdopts();
 }
