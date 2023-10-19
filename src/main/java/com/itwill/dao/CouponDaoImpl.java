@@ -4,10 +4,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.itwill.entity.Coupon;
 import com.itwill.repository.CouponRepository;
 
+@Repository
 public class CouponDaoImpl implements CouponDao{
 	
 	@Autowired
@@ -37,13 +39,11 @@ public class CouponDaoImpl implements CouponDao{
 		return couponRepository.findAll();
 	}
 
-	//쿠폰만료일자 자동삭제 기능 구현. 
+	// 만료된 쿠폰찾기 
 	 @Override
 	  public void autoDeleteExpiredCoupons(LocalDateTime couponExpirationDate) {
 		  couponRepository.findByExpirationDateBefore(couponExpirationDate);
 		  
 	  }
-	  
-	  
 	
 }
