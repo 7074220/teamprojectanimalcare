@@ -38,9 +38,9 @@ public class CouponDaoImpl implements CouponDao{
 	}
 
 	
-	  @Override public void customDeleteExpiredCoupons(LocalDateTime date) {
-	 
-	  
-	  }
+	@Override
+	public void customDeleteExpiredCoupons(LocalDateTime date) {
+
+	}
 	
 }
