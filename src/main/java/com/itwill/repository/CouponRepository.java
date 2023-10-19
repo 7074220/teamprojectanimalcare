@@ -10,5 +10,6 @@ import com.itwill.entity.Coupon;
 
 public interface CouponRepository extends JpaRepository<Coupon, Long>{
 	
-	 List<Coupon> findByExpirationDateBefore(LocalDateTime date);
+	 //List<Coupon> findByExpirationDateBefore(LocalDateTime date);
+	 
 }
