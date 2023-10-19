@@ -13,57 +13,43 @@ import com.itwill.repository.VolunteerRepository;
 public class VolunteerDaoImpl implements VolunteerDao{
 	@Autowired
 	VolunteerRepository volunteerRepository;
-	
-	@Override
-	public List<Volunteer> selectAll() {		
-		return volunteerRepository.findAll();
-	}
-	
+
 	@Override
 	public Volunteer insertVolunteer(Volunteer volunteer) {
 		Volunteer savedVolunteer = volunteerRepository.save(volunteer);
 		return savedVolunteer;
 	}
-	
-	
+
 	@Override
-	public Volunteer selectVolunteer(Long no) {
-		Volunteer selectVolunteer = volunteerRepository.findById(no).get();
-		return selectVolunteer;
+	public Volunteer findByVolunteerNo(Long volunteerNo) {
+		return volunteerRepository.findById(volunteerNo).get();
 	}
-	
-	
+
 	@Override
 	public Volunteer updateVolunteer(Volunteer updateVolunteer) throws Exception {
 		Optional<Volunteer> findVolunteerOptional = volunteerRepository.findById(updateVolunteer.getVolunteerNo());
-		Volunteer updatedVolunteer = null;
+		
 		if(findVolunteerOptional.isPresent()) {
 			Volunteer volunteer = findVolunteerOptional.get();
-			updateVolunteer = volunteerRepository.save(volunteer);
+			return volunteerRepository.save(volunteer);
+			
 		} else {
 			throw new Exception("존재안함" + updateVolunteer.getVolunteerNo());
 		}
 		
-		return updatedVolunteer;
-	}
-
-	@Override
-	public void deleteVolunteer(Long no) throws Exception {
-		Optional<Volunteer> selectedVolunteerOptional = volunteerRepository.findById(no);
-		
-		volunteerRepository.delete(selectedVolunteerOptional.get());
 		
 	}
 
 	@Override
-	public Volunteer findById(Long no) {
+	public void deleteVolunteer(Long volunteerNo) {
+		volunteerRepository.deleteById(volunteerNo);
 		
-		return volunteerRepository.findById(no).get();
 	}
 
-	
-	
-	 
-	
+	@Override
+	public List<Volunteer> findAllVolunteer() {
+		return volunteerRepository.findAll();
+	}
+
 	
 }

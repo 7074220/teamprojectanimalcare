@@ -8,14 +8,16 @@ public interface VolunteerDao {
 
 	public Volunteer insertVolunteer(Volunteer volunteer);
 
-	public Volunteer selectVolunteer(Long no);
+	public Volunteer findByVolunteerNo(Long volunteerNo);
 
 	public Volunteer updateVolunteer(Volunteer volunteer) throws Exception;
 	
-	public void deleteVolunteer(Long no) throws Exception;
+	public void deleteVolunteer(Long no);
 	
-	public List<Volunteer> selectAll();	
+	public List<Volunteer> findAllVolunteer();	
 	
-	public Volunteer findById(Long no);
+	//public Volunteer selectVolunteer(Long no);
+	
+	
 	
 }
