@@ -22,20 +22,20 @@ public interface ProductDao {
 	// 일부 단어 입력으로 제품 검색
 	List<Product> findByContains(String productName);
 
-	/*
+	
 	// 높은 가격순 정렬
-	List<Product> findByProductOrderByProductPriceDesc(Integer productPrice);
+	List<Product> findByProductPriceDesc();
 
 	// 낮은 가격순 정렬
-	List<Product> findByProductOrderByProductPriceAsc(Integer productPrice);
+	//List<Product> findByProductOrderByProductPriceAsc(Integer productPrice);
 
 	// 평점순 정렬
-	List<Product> findByProductOrderByProductStarAvgDesc(Integer productStarAvg);
+	//List<Product> findByProductOrderByProductStarAvgDesc(Integer productStarAvg);
 
 	// 최신번호순 정렬
-	List<Product> findByProductOrderByProductNoDesc(Integer productNo);
+	//List<Product> findByProductOrderByProductNoDesc(Integer productNo);
 
-	*/
+	
 	
 }
 

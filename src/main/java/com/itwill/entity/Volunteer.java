@@ -45,7 +45,7 @@ public class Volunteer {
 	/*
 	 * 1 : 1
 	 */
-	@OneToOne(mappedBy = "volunteer", cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@Builder.Default
 	@JoinColumn(name = "center_no")
 	@ToString.Exclude

@@ -23,10 +23,10 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTests {
 	@Disabled
 	void insertProductTest() {
 		Product product1 = Product.builder()
-				.productName("고양이밥")
+				.productName("츄르")
 				.productPrice(3000)
 				.productCategory("간식")
-				.productAmount(1)
+				.productAmount(3)
 				.productImage("cat.jpg")
 				.build();
 		Product savedProduct1 = productDao.insertProduct(product1);
@@ -35,9 +35,15 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTests {
 	
 	
 	@Test
-	//@Disabled
+	@Disabled
 	void findByContainsTest() {
 		List<Product> findProduct = productDao.findByContains("츄");
+	}
+	
+	@Test
+	//@Disabled
+	void findByProductPriceDesc() {
+		List<Product> findProduct = productDao.findByProductPriceDesc();
 		System.out.println(findProduct);
 	}
 }
