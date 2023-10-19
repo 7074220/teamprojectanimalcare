@@ -26,11 +26,12 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Disabled
 	void insertProductTest() {
 		Product product1 = Product.builder()
-				.productName("츄르_멸치맛")
+				.productName("츄르_참치맛")
 				.productPrice(3000)
 				.productCategory("간식")
 				.productImage("cat.jpg")
-				.productStarAvg(1)
+				.productStarAvg(3)
+				.productQty(2)
 				.build();
 		Product savedProduct1 = productDao.insertProduct(product1);
 		System.out.println(savedProduct1);
@@ -92,4 +93,12 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 		System.out.println(products);
 	}
 	
+	@Test
+	//@Disabled
+	// 낮은번호순 정렬
+	void findAllByOrderByProductNoAsc() {
+		List<Product> products = productDao.findAllByOrderByProductNoAsc();
+		System.out.println(products);
+	}
+
 }

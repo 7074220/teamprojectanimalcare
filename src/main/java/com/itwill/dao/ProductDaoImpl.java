@@ -52,10 +52,7 @@ public class ProductDaoImpl implements ProductDao {
 		productRepository.delete(selectedProdcuOptional.get());
 	}
 
-	@Override
-	public List<Product> findAll() {
-		return productRepository.findAll();
-	}
+	
 */
 	// 일부 단어 입력으로 제품 검색
 	@Override
@@ -87,4 +84,9 @@ public class ProductDaoImpl implements ProductDao {
 		return productRepository.findAllByOrderByProductNoDesc();
 	}
 
+	// 낮은번호순 정렬
+	@Override
+	public List<Product> findAllByOrderByProductNoAsc() {
+		return productRepository.findAllByOrderByProductNoAsc();
+	}
 }
