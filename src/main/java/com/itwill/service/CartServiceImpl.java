@@ -1,5 +1,5 @@
 package com.itwill.service;
 
-public interface CartService {
+public class CartServiceImpl {
 
 }

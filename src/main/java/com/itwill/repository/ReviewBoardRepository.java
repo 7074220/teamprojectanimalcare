@@ -14,9 +14,8 @@ public interface ReviewBoardRepository extends JpaRepository<ReviewBoard, Long>{
 	public ReviewBoard findByUserId(String userId);
 	
 	//select * from review_board b join userinfo u on b.user_id = u.user_id ORDER by board_star desc;
-	@Query(value = "select * from review_board b join userinfo u on b.user_id = u.user_id ORDER by board_star desc", 
-			nativeQuery = true)
-	public List<ReviewBoard> findByStarUserId(Long star);
+	//@Query(value = "", nativeQuery = true)
+	//public List<ReviewBoard> findByStarUserId(Long star);
 	
 	
 }

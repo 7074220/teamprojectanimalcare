@@ -8,7 +8,7 @@ import com.itwill.entity.Cart;
 public interface CartRepository extends JpaRepository<Cart, Long> {
 
 	// 카트에 담기
-	//int insertCart(Cart cart);
+	//Cart insertCart(Cart cart);
 
 	// 카트에 담긴 상품수량 변경
 	//int update_qty(Cart cart);
