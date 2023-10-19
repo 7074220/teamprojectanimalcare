@@ -13,7 +13,7 @@ import com.itwill.repository.ProductRepository;
 public class ProductDaoImpl implements ProductDao {
 
 	@Autowired
-	ProductRepository productRepository;
+	private ProductRepository productRepository;
 
 	@Override
 	public Product insertProduct(Product product) {
