@@ -32,6 +32,7 @@ public class Volunteer {
 	private Long volunteerNo; // PK
 	private Long volunteerTime;
 	private LocalDate volunteerDate;
+	private String volunteerStatus;
 	
 	/*
 	 * N : 1
@@ -43,7 +44,7 @@ public class Volunteer {
 	private Userinfo userinfo = new Userinfo();
 	
 	/*
-	 * 1 : 1
+	 * N : 1
 	 */
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@Builder.Default
