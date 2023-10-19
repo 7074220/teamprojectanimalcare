@@ -7,6 +7,7 @@ import org.apache.commons.lang3.builder.ToStringExclude;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -40,9 +41,9 @@ public class Pet {
 	 private String petCharacter;
 	 
 	 
-	 
-	 @ManyToOne
+	 @ManyToOne(cascade = CascadeType.PERSIST ,fetch = FetchType.LAZY)
 	 @JoinColumn(name = "center_no")
+	 @ToString.Exclude
 	 private Center center;
 	 
 
