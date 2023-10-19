@@ -26,7 +26,7 @@ class MyPetDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	//@Disabled
 	void test() {
-		/*
+		
 		Userinfo userinfo = userInfoDao.findById("박태환");
 		MyPet myPet = MyPet.builder()
 							.mypetNo(null)
@@ -37,10 +37,10 @@ class MyPetDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 							.build();
 		
 		myPetDao.CreatePet(myPet);
-		*/
-		/*
-		Userinfo userinfo = userInfoDao.findById("전성기");
-		MyPet myPet = MyPet.builder()
+		
+		
+		userinfo = userInfoDao.findById("전아현");
+		myPet = MyPet.builder()
 					.mypetNo(null)
 					.mypetName("율무")
 					.mypetKind("강아지")
@@ -49,9 +49,9 @@ class MyPetDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 					.build();
 		
 		myPetDao.CreatePet(myPet);
-		*/
-		Userinfo userinfo = userInfoDao.findById("김창섭");
-		MyPet myPet = MyPet.builder()
+		
+		userinfo = userInfoDao.findById("김창섭");
+		myPet = MyPet.builder()
 					.mypetNo(null)
 					.mypetName("나비")
 					.mypetKind("고양이")
