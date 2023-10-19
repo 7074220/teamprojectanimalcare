@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,25 +18,39 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@ToString
-@Entity
+@ToString(callSuper = true)
 public class Volunteer {
-
+ 
 	@Id
 	@SequenceGenerator(name = "volunteer_no_seq",sequenceName ="volunteer_no_seq",allocationSize = 1,initialValue = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "volunteer_no_seq")
 	private Long volunteerNo; // PK
 	private Long volunteerTime;
 	private LocalDate volunteerDate;
-
+	
+	/*
+	 * N : 1
+	 */
 	@Builder.Default
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
+	
+	/*
+	 * 1 : 1
+	 */
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@Builder.Default
+	@JoinColumn(name = "center_no")
+	@ToString.Exclude
+	private Center center = new Center();
+	
+	
 
 }

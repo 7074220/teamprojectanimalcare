@@ -19,7 +19,7 @@ class UserInfoDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	
 	@Disabled
 	void test1() {
-		Userinfo userinfo = Userinfo.builder().userId("장").build();
+		Userinfo userinfo = Userinfo.builder().userId("와").build();
 		userinfoDao.CreateUser(userinfo);
 	}
 	@Test

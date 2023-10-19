@@ -12,11 +12,12 @@ import com.itwill.entity.Userinfo;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
 	// 일부 단어 입력으로 제품 검색
-	
-	//List<Product> findByProductNameLike(String productName);
+	@Query(value = "select * from product where product_name like '%'||?1||'%'", nativeQuery = true)
+	List<Product> findByContains(String productName);
 	
 	// 높은 가격순 정렬
-	//List<Product> findByProductOrderByProductPriceDesc(Integer productPrice);
+	@Query(value = "select * from product order by product_price desc", nativeQuery = true)
+	List<Product> findByProductPriceDesc();
 	
 	// 낮은 가격순 정렬
 	//List<Product> findByProductOrderByProductPriceAsc(Integer productPrice);
