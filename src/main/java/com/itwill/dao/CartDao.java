@@ -23,14 +23,17 @@ public interface CartDao {
 	// 카트에서 선택한 상품만 삭제
 	void deleteById(Long no) throws Exception;
 	
-	/*
 	// 카트에 담긴 모든 상품 합계 금액
-	int totalPrice(Cart cart);
+	Cart cartTotalPrice(String userId);
 	
+	// 카트에서 내가 선택한 상품의 합계 금액
+	
+	
+	/*
 	// 카트에 중복제품이 있으면 합산되어 담기도록
 	int productWithKindByUserId(Cart cart);
-
+*/
 	// 카트에 담긴 모든 상품 출력
 	List<Cart> findAll();
-	*/
+	
 }

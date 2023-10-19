@@ -23,6 +23,10 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
 	@Query(value = "delete from cart where user_id=?1", nativeQuery = true)
 	void deleteByUserId(String userId);
 	
+	// 카트에 담긴 모든 상품 합계 금액
+	@Query(value = "select SUM(p.product_price) from cart c join product p on c.product_no = p.product_no where c.user_id=?1", nativeQuery = true)
+	Cart cartTotalPrice(String userId);
+	
 	// 카트에 중복제품이 있으면 합산되어 담기도록
 	// select count(*) from product p join (select count(*) from cart c join userInfo u on c.u_id=u.u_id where u.u_id=#{u_id}) j on p.p_size=#{product.p_size} and p.p_no=#{product.p_no}
 	//@Query(value = "")

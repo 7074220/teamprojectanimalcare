@@ -44,25 +44,21 @@ public class CartDaoImpl implements CartDao{
 		cartRepository.deleteById(no);
 	}
 
-	
-/*
 	@Override
-	public int totalPrice(Cart cart) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Cart cartTotalPrice(String userId) {
+		return cartRepository.cartTotalPrice(userId);
 	}
-
+/*
 	@Override
 	public int productWithKindByUserId(Cart cart) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+*/
 	@Override
 	public List<Cart> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return cartRepository.findAll();
 	}
-	*/
+	
 	
 }
