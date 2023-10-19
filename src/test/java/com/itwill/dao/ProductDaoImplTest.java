@@ -43,8 +43,8 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	
 	@Test
 	//@Disabled
-	void findByProductPriceDesc() {
-		List<Product> findProduct = productDao.findByProductPriceDesc();
-		System.out.println(findProduct);
+	void findAllByOrderByProductPriceDesc() {
+		List<Product> products = productDao.findAllByOrderByProductPriceDesc();
+		System.out.println(products);
 	}
 }

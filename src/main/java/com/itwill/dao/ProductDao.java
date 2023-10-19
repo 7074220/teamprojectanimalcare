@@ -24,7 +24,7 @@ public interface ProductDao {
 
 	
 	// 높은 가격순 정렬
-	List<Product> findByProductPriceDesc();
+	List<Product> findAllByOrderByProductPriceDesc();
 
 	// 낮은 가격순 정렬
 	//List<Product> findByProductOrderByProductPriceAsc(Integer productPrice);
