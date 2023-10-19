@@ -40,7 +40,7 @@ public class ReportBoard {
 	private Integer boardStep;
 	private Integer boardDepth;
 	private String boardName;
-	private Integer boardPhone;
+	private String boardPhone;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST) // ManyToOne 확실한가?
 	@JoinColumn(name = "user_id")
