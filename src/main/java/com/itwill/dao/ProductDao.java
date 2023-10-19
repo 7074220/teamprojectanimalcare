@@ -10,16 +10,14 @@ public interface ProductDao {
 
 	// 상품등록 (관리자 모드)
 	Product insertProduct(Product product);
-/*
+	
 	// 상품정보 수정 (관리자 모드)
 	Product updateProduct(Product updateProduct) throws Exception;
 	
-	
 	Product findByProductNo(Long no);
-	
+	/*
 	void deleteProduct(Long no) throws Exception;
 
-	
 	*/
 	// 일부 단어 입력으로 제품 검색
 	List<Product> findByContains(String productName);

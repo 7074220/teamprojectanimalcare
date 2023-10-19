@@ -21,8 +21,8 @@ public class VolunteerDaoImpl implements VolunteerDao{
 	
 	@Override
 	public Volunteer insertVolunteer(Volunteer volunteer) {
-		volunteerRepository.save(volunteer);
-		return volunteer;
+		Volunteer savedVolunteer = volunteerRepository.save(volunteer);
+		return savedVolunteer;
 	}
 
 	@Override
