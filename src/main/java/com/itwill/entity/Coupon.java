@@ -2,6 +2,7 @@ package com.itwill.entity;
 
 import java.time.LocalDateTime;
 
+import org.apache.commons.lang3.builder.ToStringExclude;
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.CascadeType;
@@ -18,6 +19,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @AllArgsConstructor
@@ -41,5 +43,6 @@ public class Coupon {
 	 @ManyToOne(cascade = CascadeType.PERSIST)
 	 @Builder.Default
 	 @JoinColumn(name = "user_id")
+	 @ToString.Exclude
 	 private Userinfo userinfo = new Userinfo();
 }

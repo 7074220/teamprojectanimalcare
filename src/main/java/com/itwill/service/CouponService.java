@@ -14,9 +14,9 @@ import com.itwill.entity.Coupon;
 public interface CouponService {
 	
 	// 쿠폰지급
-	public Coupon Create();
+	public Coupon Create(Coupon coupon);
 	// 쿠폰삭제
-	public void Delete();
+	public void Delete(Long couponId);
 	// 쿠폰 리스트
 	public List<Coupon> findAll();
 	// 쿠폰 찾기

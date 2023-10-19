@@ -34,14 +34,27 @@ public class ReportBoardDaoImpl implements ReportBoardDao{
 		return reportBoard;
 	}
 	
+	//사용자가 쓴 글 목록
 	@Override
-	public ReportBoard findByUserId(String userid) {
-		return reportBoardRepository.findByUserId(userid);
+	public List<ReportBoard> findByUserId(String userId) {
+		return reportBoardRepository.findByUserId(userId);
 	}
 	
+	//like 검색 기능 
 	@Override
 	public List<ReportBoard> findAllByLikeUserId(String userId) {
 		return reportBoardRepository.findAllByLikeUserId(userId);
+	}
+
+	//게시판 상세보기
+	@Override
+	public ReportBoard findByBoardNo(Long reportNo) {
+		return reportBoardRepository.findById(reportNo).get();
+	}
+	
+	@Override
+	public Integer countReadCount(Long boardNo) {
+		return reportBoardRepository.countReadCount(boardNo);
 	}
 	
 }

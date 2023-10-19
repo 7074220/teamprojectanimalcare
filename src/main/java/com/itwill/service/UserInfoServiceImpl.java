@@ -3,7 +3,9 @@ package com.itwill.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.dao.UserInfoDao;
 import com.itwill.entity.Userinfo;
@@ -11,6 +13,7 @@ import com.itwill.exception.ExistedUserException;
 import com.itwill.exception.PasswordMismatchException;
 import com.itwill.exception.UserNotFoundException;
 
+@Transactional
 @Service
 public class UserInfoServiceImpl implements UserInfoService{
 	
@@ -69,7 +72,7 @@ public class UserInfoServiceImpl implements UserInfoService{
 			throw exception;
 		}
 		String userPassword = userinfo.getUserPassword();
-		if(password.equals(userPassword)) {
+		if(!userPassword.equals(password)) {
 			//패쓰워드불일치
 			PasswordMismatchException exception=
 				new PasswordMismatchException("패쓰워드가 일치하지않습니다.");

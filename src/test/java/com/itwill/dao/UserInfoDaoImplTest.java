@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.TeamprojectAnimalcareApplicationTest;
 import com.itwill.entity.Userinfo;
@@ -18,6 +20,8 @@ class UserInfoDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	UserInfoDao userinfoDao;
 	
 	@Test
+	@Transactional
+	@Rollback(false)
 	@Disabled
 	void test1() {
 		Userinfo userinfo = Userinfo.builder().userId("와").build();
