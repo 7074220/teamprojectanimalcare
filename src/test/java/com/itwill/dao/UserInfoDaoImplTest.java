@@ -31,12 +31,12 @@ class UserInfoDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	}
 	
 	@Test
-	@Disabled
+	//@Disabled
 	void test3() {
 		System.out.println(userinfoDao.findAll());
 	}
 	@Test
-	@Disabled
+	//@Disabled
 	void test4() {
 		System.out.println(userinfoDao.findById("김"));
 	}
