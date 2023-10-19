@@ -8,11 +8,13 @@ public interface CenterDao {
 
 	Center createCenter(Center center);
 	
-	Center selectCenter(Long centerNo);
+	Center findByCenterNo(Long centerNo);
 	
 	Center updateCenter(Center center);
 	
 	void deleteCenter(Long centerNo);
 	
-	List<Center> selectAllCenters();
+	List<Center> findAllCenters();
+	//센터이름검색
+	List<Center> findByContains(String centerName);
 }

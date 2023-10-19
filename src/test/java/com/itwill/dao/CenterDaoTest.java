@@ -2,6 +2,9 @@ package com.itwill.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,7 +22,8 @@ class CenterDaoTest {
 	@Transactional
 	@Rollback(false)
 	@Test
-	void insetVisit() {
+	//@Disabled
+	void insetCenter() {
 
 
 		Center center = Center.builder()
@@ -31,5 +35,31 @@ class CenterDaoTest {
 				.build();
 		centerDao.createCenter(center);
 	}
-
+	
+	@Test
+	@Disabled
+	void  selectCenter() {
+		Center selectCenter = centerDao.findByCenterNo(1L);
+		System.out.println(selectCenter);
+	}
+	
+	@Test
+	@Disabled
+	void deleteCenter() {
+		centerDao.deleteCenter(1L);
+	}
+	@Test
+	@Disabled
+	void updateCenter() {
+		Center findCenter =  centerDao.findByCenterNo(1L);
+		findCenter.setCenterName("일이삼보호소");
+		System.out.println(findCenter);
+	}
+	
+	@Test
+	@Disabled
+	void findByContainsTest() {
+		List<Center> findCenter = centerDao.findByContains("이");
+		System.out.println(findCenter);
+	}
 }

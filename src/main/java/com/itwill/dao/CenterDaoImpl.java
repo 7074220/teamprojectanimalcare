@@ -22,7 +22,7 @@ public class CenterDaoImpl implements CenterDao{
 	}
 
 	@Override
-	public Center selectCenter(Long centerNo) {
+	public Center findByCenterNo(Long centerNo) {
 		return centerRepositoty.findById(centerNo).get();
 	}
 
@@ -37,8 +37,14 @@ public class CenterDaoImpl implements CenterDao{
 	}
 
 	@Override
-	public List<Center> selectAllCenters() {
+	public List<Center> findAllCenters() {
 		return centerRepositoty.findAll();
+	}
+
+	@Override
+	public List<Center> findByContains(String centerName) {
+	
+		return centerRepositoty.findByContains(centerName);
 	}
 
 

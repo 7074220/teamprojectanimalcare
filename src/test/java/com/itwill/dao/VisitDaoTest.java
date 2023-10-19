@@ -27,7 +27,7 @@ class VisitDaoTest {
 	@Rollback(false)
 	@Test
 	void insetVisit() {
-		Userinfo userinfo = userInfoDao.findById("김창섭");	
+		userInfoDao.findById("김창섭");	
 
 		Visit visit = Visit.builder()
 				.visitNo(null)
@@ -37,6 +37,7 @@ class VisitDaoTest {
 			
 				.build();
 		visitDao.createVisit(visit);
+	
 
 	}
 }
