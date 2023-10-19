@@ -2,8 +2,6 @@ package com.itwill.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.LocalDate;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,32 +9,27 @@ import org.springframework.test.annotation.Rollback;
 
 import com.itwill.entity.Center;
 import com.itwill.entity.Userinfo;
-import com.itwill.entity.Visit;
 
 import jakarta.transaction.Transactional;
-
 @SpringBootTest
-class VisitDaoTest {
+class CenterDaoTest {
 	@Autowired
-	VisitDao visitDao;
-	@Autowired
-	UserInfoDao userInfoDao;
-	@Autowired 
 	CenterDao centerDao;
+
 	@Transactional
 	@Rollback(false)
 	@Test
 	void insetVisit() {
-		Userinfo userinfo = userInfoDao.findById("김창섭");	
 
-		Visit visit = Visit.builder()
-				.visitNo(null)
-				.visitDate(LocalDate.now())
-				.visitstatus("접수완료")
-				.visitTime(7L)
-			
+
+		Center center = Center.builder()
+				.centerNo(null)
+				.centerName("가나다보호소")
+				.centerPhoneNumber("010-1234-1234")
+				.centerOpenCloseTime("09:00~17:00")
+				.centerLocal("경상도")
 				.build();
-		visitDao.createVisit(visit);
-
+		centerDao.createCenter(center);
 	}
+
 }
