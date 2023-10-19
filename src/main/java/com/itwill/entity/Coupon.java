@@ -1,5 +1,7 @@
 package com.itwill.entity;
 
+import java.time.LocalDateTime;
+
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.CascadeType;
@@ -30,9 +32,11 @@ public class Coupon {
      
 	 private String couponName;
 	 private String couponDiscount;
-	 private String couponExpirationDate;
+	 
+	 private LocalDateTime couponExpirationDate;
+	 
 	 @CreationTimestamp
-	 private String couponPayday;
+	 private LocalDateTime couponPayday;
 	 
 	 @ManyToOne(cascade = CascadeType.PERSIST)
 	 @Builder.Default
