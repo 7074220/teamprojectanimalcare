@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Orders {
+public class Order {
 	@Id
 	@SequenceGenerator(name = "orders_order_no_seq",sequenceName = "orders_order_no_seq",initialValue = 1,allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "orders_order_no_seq")
