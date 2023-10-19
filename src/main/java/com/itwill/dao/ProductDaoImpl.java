@@ -57,30 +57,34 @@ public class ProductDaoImpl implements ProductDao {
 		return productRepository.findAll();
 	}
 */
-	
+	// 일부 단어 입력으로 제품 검색
 	@Override
 	public List<Product> findByContains(String productName) { 
 		return productRepository.findByContains(productName);
 	}
 
+	// 높은 가격순 정렬
 	@Override
 	public List<Product> findAllByOrderByProductPriceDesc() {
 		return productRepository.findAllByOrderByProductPriceDesc();
 	}
-/*
+
+	// 낮은 가격순 정렬
 	@Override
-	public List<Product> findByProductOrderByProductPriceAsc(Integer productPrice) {
-		return productRepository.findByProductOrderByProductPriceAsc(productPrice);
+	public List<Product> findAllByOrderByProductPriceAsc () {
+		return productRepository.findAllByOrderByProductPriceAsc();
 	}
 
+	// 평점높은순 정렬
 	@Override
-	public List<Product> findByProductOrderByProductStarAvgDesc(Integer productStarAvg) {
-		return productRepository.findByProductOrderByProductStarAvgDesc(productStarAvg);
+	public List<Product> findAllByOrderByProductStarAvgDesc() {
+		return productRepository.findAllByOrderByProductStarAvgDesc();
 	}
 
+	// 최신번호순 정렬
 	@Override
-	public List<Product> findByProductOrderByProductNoDesc(Integer productNo) {
-		return productRepository.findByProductOrderByProductNoDesc(productNo);
+	public List<Product> findAllByOrderByProductNoDesc() {
+		return productRepository.findAllByOrderByProductNoDesc();
 	}
-*/
+
 }
