@@ -9,11 +9,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.itwill.TeamprojectAnimalcareApplication;
-import com.itwill.TeamprojectAnimalcareApplicationTests;
+import com.itwill.TeamprojectAnimalcareApplicationTest;
+
 import com.itwill.entity.Product;
 import com.itwill.repository.ProductRepository;
 
-class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTests {
+class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 
 	@Autowired
 	ProductDao productDao;
@@ -42,8 +43,8 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTests {
 	
 	@Test
 	//@Disabled
-	void findByProductPriceDesc() {
-		List<Product> findProduct = productDao.findByProductPriceDesc();
-		System.out.println(findProduct);
+	void findAllByOrderByProductPriceDesc() {
+		List<Product> products = productDao.findAllByOrderByProductPriceDesc();
+		System.out.println(products);
 	}
 }

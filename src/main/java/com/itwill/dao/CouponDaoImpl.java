@@ -8,6 +8,7 @@ import com.itwill.entity.Coupon;
 import com.itwill.repository.CouponRepository;
 
 public class CouponDaoImpl implements CouponDao{
+	
 	@Autowired
 	CouponRepository couponRepository;
 	
