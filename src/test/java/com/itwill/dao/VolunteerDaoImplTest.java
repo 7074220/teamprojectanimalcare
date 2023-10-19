@@ -93,10 +93,10 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	
 
 	@Test
-	//@Disabled
-	void testDeleteVolunteer() {
-		fail("Not yet implemented");
-	
+	@Disabled
+	void testDeleteVolunteer() throws Exception {
+		volunteerDao.deleteVolunteer(1L);
+		
 	}
 
 }
