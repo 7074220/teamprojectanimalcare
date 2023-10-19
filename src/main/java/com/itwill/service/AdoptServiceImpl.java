@@ -16,7 +16,7 @@ public class AdoptServiceImpl implements AdoptService{
 
 	@Override
 	public Adopt getAdopt(Long no) {                  
-		Adopt findAdopt=adoptDao.selectAdopt(no);
+		Adopt findAdopt=adoptDao.findByNoAdopt(no);
 		return findAdopt;
 	}
 
@@ -45,7 +45,7 @@ public class AdoptServiceImpl implements AdoptService{
 
 	@Override
 	public List<Adopt> adopts() {
-		List<Adopt> adoptList=adoptDao.selectList();
+		List<Adopt> adoptList=adoptDao.findAdoptList();
 		return adoptList;
 		
 	}
