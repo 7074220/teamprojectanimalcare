@@ -7,6 +7,8 @@ import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.TeamprojectAnimalcareApplication;
 import com.itwill.TeamprojectAnimalcareApplicationTest;
@@ -21,19 +23,36 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	
 	
 	@Test
-	//@Disabled
+	@Disabled
 	void insertProductTest() {
 		Product product1 = Product.builder()
-				.productName("츄르_멸치맛")
+				.productName("츄르_참치맛")
 				.productPrice(3000)
 				.productCategory("간식")
 				.productImage("cat.jpg")
-				.productStarAvg(1)
+				.productStarAvg(3)
+				.productQty(2)
 				.build();
 		Product savedProduct1 = productDao.insertProduct(product1);
 		System.out.println(savedProduct1);
 	}
 	
+	@Test
+	@Disabled
+	void findByProductNo() {
+		Product findProduct = productDao.findByProductNo(1L);
+		System.out.println(findProduct);
+	}
+	
+	@Test
+	//@Disabled
+	@Transactional
+	@Rollback(value = false)
+	void updateProduct() {
+		Product findProduct = productDao.findByProductNo(1L);
+		findProduct.setProductName("츄르_멸치맛");
+		System.out.println(findProduct);
+	}
 	
 	@Test
 	@Disabled
@@ -73,4 +92,13 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 		List<Product> products = productDao.findAllByOrderByProductNoDesc();
 		System.out.println(products);
 	}
+	
+	@Test
+	@Disabled
+	// 낮은번호순 정렬
+	void findAllByOrderByProductNoAsc() {
+		List<Product> products = productDao.findAllByOrderByProductNoAsc();
+		System.out.println(products);
+	}
+
 }

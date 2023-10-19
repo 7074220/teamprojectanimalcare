@@ -1,6 +1,6 @@
 package com.itwill.dao;
 
-public class CartDao {
+public interface CartDao {
 
 
 }

@@ -27,4 +27,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 	
 	// 최신번호순 정렬
 	List<Product> findAllByOrderByProductNoDesc();
+	
+	// 낮은번호순 정렬
+	List<Product> findAllByOrderByProductNoAsc();
 }
