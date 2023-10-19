@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.itwill.TeamprojectAnimalcareApplicationTest;
 import com.itwill.entity.Adopt;
 import com.itwill.entity.Center;
 import com.itwill.entity.Pet;
@@ -18,7 +19,7 @@ import com.itwill.entity.Userinfo;
 
 
 @SpringBootTest
-class AdoptDaoImplTest {
+class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 
 	@Autowired
 	AdoptDao adoptDao;
@@ -26,20 +27,44 @@ class AdoptDaoImplTest {
 	PetDao petDao;
 	@Autowired
 	UserInfoDao userInfoDao;
-
+	@Autowired
+	CenterDao centerDao;
 	
 	@Test
 	@Transactional
 	@Rollback(false)
-	//@Disabled
+	@Disabled
 	void insertTest() {
 		
 		Userinfo userinfo1 = userInfoDao.findById("박태환");
 		Userinfo userinfo2 = userInfoDao.findById("전아현");
 		
 		
-		Pet pet1 = petDao.petFindById(1L);
-		Pet pet2 = petDao.petFindById(2L);
+		//Pet pet1 = petDao.petFindById(1L);
+		//Pet pet2 = petDao.petFindById(2L);
+		
+		Pet pet1 = Pet.builder()
+				.petType("포메")
+				.petCharacter("귀여움")
+				.petFindPlace("서울")
+				.petgender("여")
+				.petLocal("인천")
+				.petRegisterDate(LocalDate.now())
+				.center(centerDao.selectCenter(1L))
+				.build();
+		petDao.petInsert(pet1);
+		
+		Pet pet2 = Pet.builder()
+				.petType("푸들")
+				.petCharacter("사나움")
+				.petFindPlace("부산")
+				.petgender("남")
+				.petLocal("광주")
+				.petRegisterDate(LocalDate.now())
+				.center(centerDao.selectCenter(2L))
+				.build();
+		petDao.petInsert(pet2);
+		
 		
 		
 		
@@ -57,7 +82,7 @@ class AdoptDaoImplTest {
 				.adoptTime(10L)
 				.pet(pet2)
 				.status("입양완료")
-				.userinfo(userinfo1)
+				.userinfo(userinfo2)
 				.build();
 		adoptDao.insertAdopt(adopt2);
 		
@@ -87,7 +112,7 @@ class AdoptDaoImplTest {
 	@Rollback(false)
 	@Disabled
 	void findById() {
-		System.out.println(adoptDao.findByNoAdopt(5L));
+		System.out.println(adoptDao.findByNoAdopt(6L));
 	}
 	
 	@Test
@@ -95,13 +120,19 @@ class AdoptDaoImplTest {
 	@Rollback(false)
 	@Disabled
 	void updateTest() throws Exception{
-		Adopt adopt=adoptDao.findByNoAdopt(5L);
+		Adopt adopt=adoptDao.findByNoAdopt(6L);
 		//adopt.setAdoptTime(12L);
-		adopt.setStatus("입양중");
+		adopt.setStatus("입양신청");
 		adoptDao.updateAdopt(adopt);
 		
 	}
 	
-	
+	@Test
+	@Transactional
+	@Rollback(false)
+	//@Disabled
+	void selectByUserId() {
+		System.out.println(adoptDao.findAdoptListByUserId("전아현"));
+	}
 	
 }
