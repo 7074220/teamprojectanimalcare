@@ -1,6 +1,7 @@
 package com.itwill.dao;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import com.itwill.TeamprojectAnimalcareApplicationTest;
 import com.itwill.entity.Cart;
 import com.itwill.entity.Product;
 import com.itwill.entity.Userinfo;
+
 
 class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	
@@ -38,7 +40,7 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Transactional
 	@Rollback(false)
 	@Disabled
-	void findByCartNo() {
+	void findByCartNoTest() {
 		Cart findCart = cartDao.findByCartNo(1L);
 		System.out.println(findCart);
 	}
@@ -74,14 +76,30 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Test
 	@Disabled
 	// 강사님께 여쭤보기 ORA-01002 : fetch out of sequence
-	void deleteByUserId(){
+	void deleteByUserIdTest(){
 		cartDao.deleteByUserId("전아현");
 	}
 	
 	@Test
 	@Disabled
-	void deleteById() throws Exception{
+	void deleteByIdTest() throws Exception{
 		cartDao.deleteById(10l);
+	}
+	
+	@Test
+	@Disabled
+	@Transactional
+	@Rollback(false)
+	void findAllTest() {
+		List<Cart> carts = cartDao.findAll();
+		System.out.println(carts);
+	}
+	
+	@Test
+	//@Disabled
+	void cartTotalPriceTest() {
+		Cart totalPrice = cartDao.cartTotalPrice("전아현");
+		System.out.println(totalPrice);
 	}
 	
 }
