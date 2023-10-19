@@ -7,6 +7,8 @@ import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.TeamprojectAnimalcareApplication;
 import com.itwill.TeamprojectAnimalcareApplicationTest;
@@ -33,6 +35,31 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 				.build();
 		Product savedProduct1 = productDao.insertProduct(product1);
 		System.out.println(savedProduct1);
+	}
+	
+	@Test
+	@Disabled
+	void findByProductNo() {
+		Product findProduct = productDao.findByProductNo(1L);
+		System.out.println(findProduct);
+	}
+	
+	@Test
+	@Disabled
+	@Transactional
+	@Rollback(value = false)
+	void updateProduct() {
+		Product findProduct = productDao.findByProductNo(1L);
+		findProduct.setProductName("츄르_멸치맛");
+		System.out.println(findProduct);
+	}
+	
+	@Test
+	//@Disabled
+	@Transactional
+	@Rollback(value = true)
+	void deleteProduct() throws Exception {
+		productDao.deleteProduct(3L);
 	}
 	
 	@Test
@@ -75,10 +102,11 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	}
 	
 	@Test
-	//@Disabled
+	@Disabled
 	// 낮은번호순 정렬
 	void findAllByOrderByProductNoAsc() {
 		List<Product> products = productDao.findAllByOrderByProductNoAsc();
 		System.out.println(products);
 	}
+
 }
