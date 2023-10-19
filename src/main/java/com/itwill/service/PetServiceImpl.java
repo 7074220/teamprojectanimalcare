@@ -38,7 +38,7 @@ private PetDao petDao;
 	
 	Optional<Pet> petOptional = Optional.of(petDao.petFindById(petNo));
 	if(petOptional.isEmpty()) {
-		throw new Exception("존재하지 않는 제품입니다.");
+		throw new Exception("존재하지 않는 동물입니다.");
 	
 		}
 	petDao.petDelete(petNo);
@@ -59,6 +59,8 @@ private PetDao petDao;
 			pet1.setCenter(pet.getCenter());
 			
 			updatedPet=petDao.petUpdate(pet1);
+		}else {
+			throw new Exception("존재하지 않는 동물입니다.");
 		}
 		return updatedPet;
 	}
