@@ -29,7 +29,7 @@ class ReportBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 									.boardDepth(0)
 									.boardGroupNo(1)
 									.boardName("")
-									.boardPhone(1111)
+									.boardPhone("1111")
 									.boardReadCount(0)
 									.boardResisterDate(null)
 									.boardStep(1)
