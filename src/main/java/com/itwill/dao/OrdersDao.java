@@ -1,5 +1,5 @@
 package com.itwill.dao;
 
-public interface OrderDao {
+public interface OrdersDao {
 
 }
