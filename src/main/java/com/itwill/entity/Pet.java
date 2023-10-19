@@ -45,5 +45,9 @@ public class Pet {
 	 @JoinColumn(name = "center_no")
 	 private Center center;
 	 
+	 @ManyToOne
+	 @JoinColumn(name = "local_no")
+	 private Local local;
+	 
 
 }
