@@ -30,12 +30,8 @@ public class Volunteer {
 	@SequenceGenerator(name = "volunteer_no_seq",sequenceName ="volunteer_no_seq",allocationSize = 1,initialValue = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "volunteer_no_seq")
 	private Long volunteerNo; // PK
-	
 	private Long volunteerTime;
-	
 	private LocalDate volunteerDate;
-	
-	private String volunteerStatus;
 	
 	/*
 	 * N : 1
@@ -49,12 +45,11 @@ public class Volunteer {
 	/*
 	 * 1 : 1
 	 */
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@Builder.Default
-	@OneToOne(mappedBy = "volunteer", cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "center_no")
 	@ToString.Exclude
 	private Center center = new Center();
-	
 	
 	
 
