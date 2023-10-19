@@ -40,7 +40,6 @@ public class Pet {
 	 private String petFindPlace;
 	 private String petCharacter;
 	 
-	 
 	 @ManyToOne(cascade = CascadeType.PERSIST ,fetch = FetchType.LAZY)
 	 @JoinColumn(name = "center_no")
 	 @ToString.Exclude
