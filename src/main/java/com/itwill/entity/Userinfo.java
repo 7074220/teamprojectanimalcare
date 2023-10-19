@@ -16,6 +16,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @AllArgsConstructor
@@ -46,6 +47,7 @@ public class Userinfo {
 	
 	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST)
 	@Builder.Default
+	@ToString.Exclude
 	List<Cart> carts = new ArrayList<Cart>(); 
 	
 	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST)
