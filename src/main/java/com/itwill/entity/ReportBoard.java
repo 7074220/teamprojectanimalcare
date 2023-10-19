@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import jakarta.annotation.Generated;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -42,9 +43,8 @@ public class ReportBoard {
 	private Integer boardPhone;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST) // ManyToOne 확실한가?
-	@Builder.Default
 	@JoinColumn(name = "user_id")
-	private Userinfo userinfo = new Userinfo();
+	private Userinfo userinfo;
 
 
 
