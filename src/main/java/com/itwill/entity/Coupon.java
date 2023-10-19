@@ -31,7 +31,7 @@ public class Coupon {
 	 private Long couponId;
      
 	 private String couponName;
-	 private String couponDiscount;
+	 private Integer couponDiscount;
 	 
 	 private LocalDateTime couponExpirationDate;
 	 
