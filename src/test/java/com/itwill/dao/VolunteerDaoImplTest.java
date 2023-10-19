@@ -2,29 +2,32 @@ package com.itwill.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 
+import com.itwill.entity.Userinfo;
 import com.itwill.entity.Volunteer;
-import com.itwill.repository.CenterRepositoty;
-import com.itwill.repository.UserinfoRepository;
 import com.itwill.repository.VolunteerRepository;
 
 import jakarta.transaction.Transactional;
-import lombok.Data;
 
 class VolunteerDaoImplTest {
 	
 	@Autowired
+	VolunteerDao volunteerDao;
+	@Autowired
 	VolunteerRepository volunteerRepository;
 	@Autowired
-	UserinfoRepository userinfoRepository;
+	UserInfoDao userInfoDao;
 	@Autowired
-	CenterRepositoty centerRepositoty;
+	CenterDao centerDao;
+	
 
 	@Test
 	@Disabled
@@ -37,16 +40,25 @@ class VolunteerDaoImplTest {
 	@Transactional
 	@Rollback(false)
 	void testInsertVolunteer() {
+		
+		/*
+		 * Userinfo userinfo = Userinfo.builder() .userId("최") .userPassword("8888")
+		 * .userPoint(8888) .userGender("여") .userAddress("부산")
+		 * .userPhoneNumber("8888-8888") .userEmail("888a") .userResidentNumber("8888")
+		 * .userResisterDate(LocalDateTime.now()) .build();
+		 */
+		
 		Volunteer volunteer = Volunteer.builder()
-								.volunteerNo(1L)
-								.volunteerTime(11L)
 								.volunteerDate(LocalDate.now())
-								.userinfo(null)
+								.volunteerNo(4L)
+								.volunteerTime(15L)
+								//.userinfo(userinfo)
 								.build();
 		
 		// System.out.println(volunteer);
 		
-		// volunteerRepository.save(volunteer);
+		volunteerDao.insertVolunteer(volunteer);
+		
 		
 	}
 
