@@ -31,14 +31,14 @@ class VisitDaoTest {
 	@Transactional
 	@Rollback(false)
 	@Test
-	//@Disabled
+	@Disabled
 	void insetVisit() {
 		Visit visit = Visit.builder()
-				.visitNo(null)
+			
 				.visitDate(LocalDate.now())
 				.visitstatus("접수완료")
 				.visitTime(7L)
-				.userinfo(userInfoDao.findById("김창섭"))
+				.userinfo(userInfoDao.findById("박태환"))
 				.center(centerDao.findByCenterNo(2L))
 				.build();
 		visitDao.createVisit(visit);
@@ -64,19 +64,20 @@ class VisitDaoTest {
 	@Rollback(value = false)
 	@Disabled
 	void updateVisit() {
-		Visit findVisit = visitDao.findByVisitNo(1L);
-		findVisit.setVisitstatus("승인완료");
+		Visit findVisit = visitDao.findByVisitNo(2L);
+		findVisit.setVisitstatus("대기중");
 		System.out.println(findVisit);
 	}
 	
-//	@Test
-//	@Transactional
-//	@Rollback(value = false)
-//	@Disabled
-//	void findByUserUserId() {
-//		 List<Userinfo> userinfos = userInfoDao.findByUserUserId("아무개");
-//	System.out.println(userinfos);
-//	}
+	@Test
+	@Transactional
+	@Rollback(value = false)
+	//@Disabled
+	void findVisitsByUserId() {
+		List<Visit> selectVisit = visitDao.getVisitsByUserId("박태환");
+		System.out.println(selectVisit);
+	}
+
 }
 
 

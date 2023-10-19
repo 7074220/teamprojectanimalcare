@@ -31,7 +31,7 @@ class CenterDaoTest {
 				.centerName("가나다보호소")
 				.centerPhoneNumber("010-1234-1234")
 				.centerOpenCloseTime("09:00~17:00")
-				.centerLocal("경상도")
+				.centerLocal("서울")
 				.build();
 		centerDao.createCenter(center);
 	}

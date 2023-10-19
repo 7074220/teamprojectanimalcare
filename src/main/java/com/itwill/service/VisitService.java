@@ -16,4 +16,7 @@ public interface VisitService {
     //견학 리스트 삭제
     List<Visit> selectAllVisits();
     //견학 리스트 출력
+    
+    List<Visit> getVisitsByUserId(String userId);
+	//userid로 visit리스트 검색
 }
