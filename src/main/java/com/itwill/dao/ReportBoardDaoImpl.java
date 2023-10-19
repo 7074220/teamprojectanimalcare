@@ -1,10 +1,12 @@
 package com.itwill.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.itwill.entity.ReportBoard;
 import com.itwill.repository.ReportBoardRepository;
 
+@Repository
 public class ReportBoardDaoImpl implements ReportBoardDao{
 	
 	@Autowired

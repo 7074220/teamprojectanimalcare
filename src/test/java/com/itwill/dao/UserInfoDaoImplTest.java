@@ -17,6 +17,7 @@ class UserInfoDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Autowired
 	UserInfoDao userinfoDao;
 	
+	@Test
 	@Disabled
 	void test1() {
 		Userinfo userinfo = Userinfo.builder().userId("와").build();
@@ -54,7 +55,7 @@ class UserInfoDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		
 	}
 	@Test
-	//@Disabled
+	@Disabled
 	void test7() {
 		
 		System.out.println(userinfoDao.findByUserEmail("222a"));

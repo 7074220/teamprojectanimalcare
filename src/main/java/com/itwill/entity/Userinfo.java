@@ -36,35 +36,35 @@ public class Userinfo {
 	//@CreationTimestamp
 	private LocalDateTime userResisterDate;
 	
-	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST,fetch =FetchType.EAGER)
+	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST)
 	@Builder.Default
 	List<Coupon> coupons = new ArrayList<Coupon>();
 	
-	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST,fetch =FetchType.EAGER)
+	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST)
 	@Builder.Default
 	List<MyPet> myPets = new ArrayList<MyPet>();
 	
-	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST,fetch =FetchType.EAGER)
+	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST)
 	@Builder.Default
 	List<Cart> carts = new ArrayList<Cart>(); 
 	
-	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST,fetch =FetchType.EAGER)
+	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST)
 	@Builder.Default
 	List<Orders> orders = new ArrayList<Orders>();
 	
-	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST,fetch =FetchType.EAGER)
+	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST)
 	@Builder.Default
 	List<ReportBoard> reportBoards = new ArrayList<ReportBoard>();
 	
-	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST,fetch =FetchType.EAGER)
+	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST)
 	@Builder.Default
 	List<ReviewBoard> reviewBoards = new ArrayList<ReviewBoard>();
 	
-	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST,fetch =FetchType.EAGER)
+	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST)
 	@Builder.Default
 	List<Visit> visits = new ArrayList<Visit>();
 	
-	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST,fetch =FetchType.EAGER)
+	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST)
 	@Builder.Default
 	List<Volunteer> volunteers = new ArrayList<Volunteer>(); 
 	
