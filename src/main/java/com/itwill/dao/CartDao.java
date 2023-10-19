@@ -10,10 +10,11 @@ public interface CartDao {
 	// 카트에 담기
 	Cart insertCart(Cart cart);
 	
-	/*
-	// 카트에 담긴 상품수량 변경 
-	int update_qty(Cart cart) throws Exception;
 	
+	// 카트에 담긴 상품수량 변경 
+	Cart update_qty(Cart updateQty) throws Exception;
+	
+	/*
 	// 카트에 담긴 상품 삭제
 	void deleteCart(Cart cart) throws Exception;
 	

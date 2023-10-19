@@ -35,29 +35,33 @@ class AdoptDaoImplTest {
 	void insertTest() {
 		
 		Userinfo userinfo1 = userInfoDao.findById("박태환");
-		Pet pet = Pet.builder()
-				.petNo(null)
-				.petLocal("서울")
-				.petType("포메")
-				.petgender("여")
-				.petCharacter("귀여움")
-				.petFindPlace("서울")
-				.petRegisterDate(LocalDate.now())
-				.center(null)
-				.build();
-		petDao.petInsert(pet);
+		Userinfo userinfo2 = userInfoDao.findById("전아현");
+		
+		
+		Pet pet1 = petDao.petFindById(1L);
+		Pet pet2 = petDao.petFindById(2L);
 		
 		
 		
-		Adopt adopt = Adopt.builder() 
-							.adoptNo(1L)
+		Adopt adopt1 = Adopt.builder() 
 							.adoptDate(LocalDate.now())
 							.adoptTime(11L)
-							.pet(pet)
-							.status("입양완료")
+							.pet(pet1)
+							.status("입양중")
 							.userinfo(userinfo1)
 							.build();
-		adoptDao.insertAdopt(adopt);
+		adoptDao.insertAdopt(adopt1);
+		
+		Adopt adopt2 = Adopt.builder() 
+				.adoptDate(LocalDate.now())
+				.adoptTime(10L)
+				.pet(pet2)
+				.status("입양완료")
+				.userinfo(userinfo1)
+				.build();
+		adoptDao.insertAdopt(adopt2);
+		
+		
 		
 	}
 	
@@ -65,8 +69,8 @@ class AdoptDaoImplTest {
 	@Transactional
 	@Rollback(false)
 	@Disabled
-	void deleteTest() {
-		
+	void deleteTest() throws Exception{
+		adoptDao.deleteAdopt(6L);
 	}
 	
 	@Test
@@ -74,7 +78,7 @@ class AdoptDaoImplTest {
 	@Rollback(false)
 	@Disabled
 	void findAll() {
-		
+		System.out.println(adoptDao.findAdoptList());
 	}
 	
 	
@@ -83,14 +87,18 @@ class AdoptDaoImplTest {
 	@Rollback(false)
 	@Disabled
 	void findById() {
-		
+		System.out.println(adoptDao.findByNoAdopt(5L));
 	}
 	
 	@Test
 	@Transactional
 	@Rollback(false)
 	@Disabled
-	void updateTest() {
+	void updateTest() throws Exception{
+		Adopt adopt=adoptDao.findByNoAdopt(5L);
+		//adopt.setAdoptTime(12L);
+		adopt.setStatus("입양중");
+		adoptDao.updateAdopt(adopt);
 		
 	}
 	

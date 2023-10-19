@@ -34,11 +34,8 @@ public class PetDaoImpl implements PetDao {
 
 	@Override
 	public void petDelete(Long petNo) throws Exception {
-		Optional<Pet> selectedPetOptional = petRepository.findById(petNo);
-		if(selectedPetOptional.isEmpty()) {
-			throw new Exception("존재하지 않습니다.");
-		}
-		petRepository.delete(selectedPetOptional.get());
+		
+		petRepository.deleteById(petNo);
 	}
 		
 	
