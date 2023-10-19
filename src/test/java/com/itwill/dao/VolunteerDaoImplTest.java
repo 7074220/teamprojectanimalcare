@@ -79,7 +79,7 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	
 	
 	@Test
-	//@Disabled
+	@Disabled
 	void selectAll() {
 		System.out.println(volunteerDao.selectAll());
 	}
@@ -88,12 +88,12 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	@Disabled
 	void testSelectVolunteer() {
-		
+		System.out.println(volunteerDao.selectVolunteer(7L));
 	}
 	
 
 	@Test
-	@Disabled
+	//@Disabled
 	void testDeleteVolunteer() {
 		fail("Not yet implemented");
 	
