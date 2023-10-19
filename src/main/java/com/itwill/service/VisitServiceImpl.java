@@ -15,7 +15,7 @@ public class VisitServiceImpl implements VisitService {
 
     @Autowired
     private VisitDao visitDao;
-   // VisitRepository
+    VisitRepository visitRepository;
 
     @Override
     public Visit createVisit(Visit visit) {
@@ -49,7 +49,7 @@ public class VisitServiceImpl implements VisitService {
 
 	@Override
 	public List<Visit> getVisitsByUserId(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return visitRepository.findByUserinfoUserId(userId);
 	}
 }

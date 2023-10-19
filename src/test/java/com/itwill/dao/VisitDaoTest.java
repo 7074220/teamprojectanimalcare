@@ -31,7 +31,7 @@ class VisitDaoTest {
 	@Transactional
 	@Rollback(false)
 	@Test
-	@Disabled
+	//@Disabled
 	void insetVisit() {
 		Visit visit = Visit.builder()
 			
@@ -72,7 +72,7 @@ class VisitDaoTest {
 	@Test
 	@Transactional
 	@Rollback(value = false)
-	//@Disabled
+	@Disabled
 	void findVisitsByUserId() {
 		List<Visit> selectVisit = visitDao.getVisitsByUserId("박태환");
 		System.out.println(selectVisit);

@@ -28,7 +28,7 @@ class CenterDaoTest {
 
 		Center center = Center.builder()
 				.centerNo(null)
-				.centerName("가나다보호소")
+				.centerName("아이티보호소")
 				.centerPhoneNumber("010-1234-1234")
 				.centerOpenCloseTime("09:00~17:00")
 				.centerLocal("서울")
