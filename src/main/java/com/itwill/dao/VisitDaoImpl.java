@@ -41,4 +41,9 @@ public class VisitDaoImpl implements VisitDao {
 		return visitRepository.save(visit);
 	}
 
+//	@Override
+//	public List<Visit> findByUserUserId(Long userId) {
+//	    return visitRepository.findByUserUserId(userId);
+//	}
+
 }

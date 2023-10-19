@@ -1,53 +1,50 @@
-package com.itwill.dao;
+package com.itwill.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
+import com.itwill.entity.Cart;
 import com.itwill.entity.Center;
 import com.itwill.repository.CartRepository;
-import com.itwill.repository.CenterRepositoty;
 
-@Repository
-public class CenterDaoImpl implements CenterDao{
-	
-	@Autowired
-	CenterRepositoty centerRepositoty;
-	
+public class CenterServiceImpl implements CenterService {
+
 	@Override
 	public Center createCenter(Center center) {
-		centerRepositoty.save(center);
-		return center;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public Center findByCenterNo(Long centerNo) {
-		return centerRepositoty.findById(centerNo).get();
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public Center updateCenter(Center center) {
-		return centerRepositoty.save(center);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public void deleteCenter(Long centerNo) {
-		centerRepositoty.deleteById(centerNo);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public List<Center> findAllCenters() {
-		return centerRepositoty.findAll();
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public List<Center> findByName(String centerName) {
-	
-		return centerRepositoty.findByContains(centerName);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	
-
-	
 }

@@ -2,53 +2,82 @@ package com.itwill.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.TeamprojectAnimalcareApplicationTest;
-import com.itwill.entity.ReportBoard;
+import com.itwill.entity.ReviewBoard;
 import com.itwill.entity.Userinfo;
 
-class ReportBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
+import jakarta.transaction.Transactional;
 
-	@Autowired
-	ReportBoardDao reportBoardDao;
+class ReviewBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	
+	/*
+	
+	@Autowired
+	ReviewBoardDao reviewBoardDao;
 	@Autowired
 	UserInfoDao userInfoDao;
-	
+
 	@Test
+	//@Disabled
 	@Transactional
 	@Rollback(false)
-	@Disabled
-	void test() {
-		Userinfo userinfo = userInfoDao.findById("김창섭");
-		ReportBoard reportBoard = ReportBoard.builder()
-									.boardNo(null)
-									.boardContent("내용")
-									.boardDate(null)
-									.boardDepth(0)
-									.boardGroupNo(1)
-									.boardName("")
-									.boardPhone("1111")
-									.boardReadCount(0)
-									.boardResisterDate(null)
-									.boardStep(1)
-									.boardTitle("제목")
-									.userinfo(userinfo)
-									.build();	
-		reportBoardDao.Create(reportBoard);
+	void testCreate() {
+		Userinfo userinfo = userInfoDao.findById("전아현");
+		
+		ReviewBoard reviewBoard = ReviewBoard.builder()
+								.boardNo(8L)
+								.boardTitle("이것은 타이틀")
+								.boardContent("이것은 내용")
+								.boardDate(LocalDate.now())
+								.boardStar(2L)
+								.userinfo(userinfo)
+								.build();
+
+		reviewBoardDao.create(reviewBoard);
 		
 	}
+	
+	
+	
+	
+	
 	@Test
-	@Transactional
-	@Rollback(false)
-	//@Disabled
-	void test2() {
-		System.out.println(reportBoardDao.findAllByLikeUserId("섭"));
+	@Disabled
+	void testUpdate() {
+		fail("Not yet implemented");
 	}
 
+	@Test
+	@Disabled
+	void testDeleteById() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	@Disabled
+	void testFindByUserId() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	@Disabled
+	void testFindAll() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	@Disabled
+	void testFindByStarAll() {
+		fail("Not yet implemented");
+	}
+	
+	
+	*/
 }

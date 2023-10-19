@@ -17,5 +17,5 @@ public interface CenterDao {
 	
 	List<Center> findAllCenters();
 	//센터이름검색
-	List<Center> findByContains(String centerName);
+	List<Center> findByName(String centerName);
 }

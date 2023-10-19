@@ -22,7 +22,7 @@ class CenterDaoTest {
 	@Transactional
 	@Rollback(false)
 	@Test
-	@Disabled
+	//@Disabled
 	void insetCenter() {
 
 
@@ -64,9 +64,9 @@ class CenterDaoTest {
 	@Test
 	@Transactional
 	@Rollback(value = false)
-	//@Disabled
+	@Disabled
 	void findByContainsTest() {
-		List<Center> findCenter = centerDao.findByContains("이");
+		List<Center> findCenter = centerDao.findByName("이");
 		System.out.println(findCenter);
 	}
 }

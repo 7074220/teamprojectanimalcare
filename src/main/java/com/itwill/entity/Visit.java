@@ -47,7 +47,7 @@ public class Visit {
 
 	@Builder.Default
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-	@JoinColumn(name = "center_name")
+	@JoinColumn(name = "center_no")
 	@ToString.Exclude
 	private Center center = new Center();
 	 public String getCenterName() {
