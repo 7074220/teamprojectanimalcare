@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.entity.Adopt;
 import com.itwill.entity.Pet;
+import com.itwill.entity.Userinfo;
 
 
 @SpringBootTest
@@ -20,6 +21,10 @@ class AdoptDaoImplTest {
 
 	@Autowired
 	AdoptDao adoptDao;
+	@Autowired
+	PetDao petDao;
+	@Autowired
+	UserInfoDao userInfoDao;
 	
 	
 	
@@ -30,6 +35,8 @@ class AdoptDaoImplTest {
 	//@Disabled
 	void test() {
 		
+		//Userinfo userinfo = userInfoDao.findById("와");
+		//Pet pet = petDao.petFindById(1L);
 		
 		Adopt adopt = Adopt.builder()
 							.adoptNo(1L)
@@ -37,7 +44,7 @@ class AdoptDaoImplTest {
 							.adoptTime(11L)
 							.pet(null)
 							.status("입양완료")
-							.userinfo(null)	
+							.userinfo(null)
 							.build();
 		adoptDao.insertAdopt(adopt);
 		
