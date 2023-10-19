@@ -19,6 +19,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Builder
@@ -39,6 +40,7 @@ public class Orders {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@Builder.Default
 	@JoinColumn(name = "user_id")
+	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
 	
 	@OneToMany(mappedBy = "orders",cascade = CascadeType.PERSIST)
