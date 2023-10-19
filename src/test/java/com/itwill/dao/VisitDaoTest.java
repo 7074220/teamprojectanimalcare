@@ -23,12 +23,14 @@ class VisitDaoTest {
 	@Rollback(false)
 	@Test
 	void insetVisit() {
+		
 		Visit visit = Visit.builder()
 				.visitNo(1L)
 				.visitDate(LocalDate.now())
 				.visitstatus("준비중")
 				.visitTime(5L)
-				.userinfo(null)
+				//.userinfo(null)
+				//.center(11)
 				.build();
 		visitDao.createVisit(visit);
 
