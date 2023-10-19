@@ -31,7 +31,7 @@ class AdoptDaoImplTest {
 	@Test
 	@Transactional
 	@Rollback(false)
-	@Disabled
+	//@Disabled
 	void insertTest() {
 		
 		Userinfo userinfo1 = userInfoDao.findById("박태환");
@@ -57,7 +57,7 @@ class AdoptDaoImplTest {
 				.adoptTime(10L)
 				.pet(pet2)
 				.status("입양완료")
-				.userinfo(userinfo2)
+				.userinfo(userinfo1)
 				.build();
 		adoptDao.insertAdopt(adopt2);
 		

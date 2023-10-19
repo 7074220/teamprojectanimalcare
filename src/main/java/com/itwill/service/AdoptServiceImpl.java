@@ -15,13 +15,13 @@ public class AdoptServiceImpl implements AdoptService{
 	private AdoptDao adoptDao;
 
 	@Override
-	public Adopt getAdopt(Long no) {                  
+	public Adopt findByNoAdopt(Long no) {                  
 		Adopt findAdopt=adoptDao.findByNoAdopt(no);
 		return findAdopt;
 	}
 
 	@Override
-	public Adopt saveAdopt(Adopt adopt) {             
+	public Adopt insertAdopt(Adopt adopt) {             
 		Adopt insertAdopt=adoptDao.insertAdopt(adopt);
 		return insertAdopt;
 	}
@@ -44,7 +44,7 @@ public class AdoptServiceImpl implements AdoptService{
 	}
 
 	@Override
-	public List<Adopt> adopts() {
+	public List<Adopt> findAllAdopts(String userId) {
 		List<Adopt> adoptList=adoptDao.findAdoptList();
 		return adoptList;
 		
