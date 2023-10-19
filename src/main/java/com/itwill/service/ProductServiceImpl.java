@@ -1,40 +1,53 @@
-package com.itwill.dao;
+package com.itwill.service;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.itwill.entity.Product;
 import com.itwill.repository.ProductRepository;
 
-@Repository
-public class ProductDaoImpl implements ProductDao {
+@Service
+public class ProductServiceImpl implements ProductService {
 
 	@Autowired
-	ProductRepository productRepository;
+	private ProductRepository productRepository;
 
 	@Override
 	public Product insertProduct(Product product) {
-		Product savedProduct = productRepository.save(product);
-		return savedProduct;
+		return productRepository.save(product);
 	}
 
-	// 관리자 ~
 	@Override
 	public Product updateProduct(Product updateProduct) throws Exception {
-		return productRepository.save(updateProduct);
+		Optional<Product> findProductOptional = productRepository.findById(updateProduct.getProductNo());
+		Product updatedProduct = null;
+		if (findProductOptional.isPresent()) {
+			Product product = findProductOptional.get();
+			product.setProductName(updateProduct.getProductName());
+			product.setProductPrice(updateProduct.getProductPrice());
+			product.setProductImage(updateProduct.getProductImage());
+		} else {
+			throw new Exception("존재하지 않는 제품입니다.");
+		}
+		return updatedProduct;
 	}
 
 	@Override
 	public Product findByProductNo(Long no) {
-		return productRepository.findById(no).get();
+		Product selectedProduct = productRepository.findById(no).get();
+		return selectedProduct;
 	}
 	
 	@Override
 	public void deleteProduct(Long no) throws Exception {
-		productRepository.deleteById(no);
+		Optional<Product> selectedProdcuOptional = productRepository.findById(no);
+		if (selectedProdcuOptional.isEmpty()) {
+			throw new Exception("존재하지 않는 제품입니다.");
+		}
+		productRepository.delete(selectedProdcuOptional.get());
 	}
 
 	// 일부 단어 입력으로 제품 검색
@@ -72,4 +85,6 @@ public class ProductDaoImpl implements ProductDao {
 	public List<Product> findAllByOrderByProductNoAsc() {
 		return productRepository.findAllByOrderByProductNoAsc();
 	}
+	
+	
 }
