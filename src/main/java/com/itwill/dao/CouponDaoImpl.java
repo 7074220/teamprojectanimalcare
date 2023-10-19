@@ -1,5 +1,6 @@
 package com.itwill.dao;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,11 @@ public class CouponDaoImpl implements CouponDao{
 	public List<Coupon> findAll() {
 		return couponRepository.findAll();
 	}
+
+	
+	  @Override public void customDeleteExpiredCoupons(LocalDateTime date) {
+	 
+	  
+	  }
 	
 }

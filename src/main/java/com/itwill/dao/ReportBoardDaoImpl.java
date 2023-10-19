@@ -1,5 +1,7 @@
 package com.itwill.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -35,6 +37,11 @@ public class ReportBoardDaoImpl implements ReportBoardDao{
 	@Override
 	public ReportBoard findByUserId(String userid) {
 		return reportBoardRepository.findByUserId(userid);
+	}
+	
+	@Override
+	public List<ReportBoard> findAllByLikeUserId(String userId) {
+		return reportBoardRepository.findAllByLikeUserId(userId);
 	}
 	
 }

@@ -20,7 +20,7 @@ public class ProductDaoImpl implements ProductDao {
 		Product savedProduct = productRepository.save(product);
 		return savedProduct;
 	}
-/*
+
 	// 관리자 ~
 	@Override
 	public Product updateProduct(Product updateProduct) throws Exception {
@@ -42,7 +42,7 @@ public class ProductDaoImpl implements ProductDao {
 		Product selectedProduct = productRepository.findById(no).get();
 		return selectedProduct;
 	}
-
+	
 	@Override
 	public void deleteProduct(Long no) throws Exception {
 		Optional<Product> selectedProdcuOptional = productRepository.findById(no);
@@ -52,11 +52,6 @@ public class ProductDaoImpl implements ProductDao {
 		productRepository.delete(selectedProdcuOptional.get());
 	}
 
-	@Override
-	public List<Product> findAll() {
-		return productRepository.findAll();
-	}
-*/
 	// 일부 단어 입력으로 제품 검색
 	@Override
 	public List<Product> findByContains(String productName) { 
@@ -87,4 +82,9 @@ public class ProductDaoImpl implements ProductDao {
 		return productRepository.findAllByOrderByProductNoDesc();
 	}
 
+	// 낮은번호순 정렬
+	@Override
+	public List<Product> findAllByOrderByProductNoAsc() {
+		return productRepository.findAllByOrderByProductNoAsc();
+	}
 }
