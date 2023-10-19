@@ -42,4 +42,10 @@ public class ReviewBoardDaoImpl implements ReviewBoardDao{
 		return reviewBoardRepository.findAll();
 	}
 
+	@Override
+	public List<ReviewBoard> findByStarAll(Long star) {
+		return null;
+	}
+
+	
 }

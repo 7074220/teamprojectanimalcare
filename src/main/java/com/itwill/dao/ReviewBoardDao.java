@@ -16,4 +16,5 @@ public interface ReviewBoardDao {
 
 	public List<ReviewBoard> findAll();
 
+	public List<ReviewBoard> findByStarAll(Long star);
 }
