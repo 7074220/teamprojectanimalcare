@@ -10,17 +10,9 @@ import com.itwill.entity.Coupon;
 
 public interface CouponRepository extends JpaRepository<Coupon, Long> {
 
-	
-
-	  
-	  @Query(value="select * from coupon where ?1 < TRUNC(sysdate)",nativeQuery =
-	  true ) List<Coupon> findByExpirationDateBefore(LocalDateTime
-	  couponExpirationDate);
-	  
-	 
-	//void deleteByExpirationDateBefore(LocalDateTime date);
+  @Query(value="select * from coupon where ?1 < TRUNC(sysdate)",nativeQuery = true ) 
+  List<Coupon> findByExpirationDateBefore(LocalDateTime couponExpirationDate);
 
 }
 
-	 //List<Coupon> findByExpirationDateBefore(LocalDateTime date);
 	 
