@@ -20,10 +20,14 @@ public class CartDaoImpl implements CartDao{
 		return savedCart;
 	}
 
-	
 	@Override
 	public Cart update_qty(Cart updateQty) throws Exception {
 		return cartRepository.save(updateQty);
+	}
+	
+	@Override
+	public Cart findByCartNo(Long no) {
+		return cartRepository.findById(no).get();
 	}
 /*
 	@Override

@@ -38,8 +38,15 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Test
 	@Disabled
 	void updateCartTest() {
-				
-				
-				
-	}	
+		Cart findCart = cartDao.findByCartNo(1L);
+		findCart.setCartQty(50);
+		System.out.println(findCart);
+	}
+	
+	@Test
+	//@Disabled
+	void findByCartNo() {
+		Cart findCart = cartDao.findByCartNo(1L);
+		System.out.println(findCart);
+	}
 }
