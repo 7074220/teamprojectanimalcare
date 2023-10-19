@@ -33,6 +33,7 @@ public class Product {
 	private String productName;
 	private Integer productPrice;
 	private String productCategory;
+	private Integer productQty;	
 	private String productImage;
 
 	private Integer productStarAvg;
