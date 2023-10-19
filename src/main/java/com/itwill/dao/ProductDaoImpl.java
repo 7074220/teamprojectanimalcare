@@ -20,7 +20,7 @@ public class ProductDaoImpl implements ProductDao {
 		Product savedProduct = productRepository.save(product);
 		return savedProduct;
 	}
-/*
+
 	// 관리자 ~
 	@Override
 	public Product updateProduct(Product updateProduct) throws Exception {
@@ -42,7 +42,7 @@ public class ProductDaoImpl implements ProductDao {
 		Product selectedProduct = productRepository.findById(no).get();
 		return selectedProduct;
 	}
-
+	/*
 	@Override
 	public void deleteProduct(Long no) throws Exception {
 		Optional<Product> selectedProdcuOptional = productRepository.findById(no);

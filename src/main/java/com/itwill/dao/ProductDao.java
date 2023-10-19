@@ -9,11 +9,11 @@ import com.itwill.entity.Product;
 public interface ProductDao {
 
 	Product insertProduct(Product product);
-/*
+
 	Product updateProduct(Product updateProduct) throws Exception;
 	
 	Product findByProductNo(Long no);
-	
+	/*
 	void deleteProduct(Long no) throws Exception;
 
 	// 전체 상품 출력
