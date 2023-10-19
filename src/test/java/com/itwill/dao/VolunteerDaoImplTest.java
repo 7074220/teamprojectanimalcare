@@ -25,10 +25,10 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	UserInfoDao userInfoDao;
 
 	@Test
-	//@Disabled
+	@Disabled
 	@Transactional
 	@Rollback(false)
-	void testInsertVolunteer() {
+	void testInsertVolunteer() { // 정보 등록
 		
 		//Userinfo userinfo = Userinfo.builder().userId("박태환").build();
 		
@@ -65,32 +65,38 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		
 	}
 	
-	
-	
-		@Test
-		@Disabled
-		void testFindAll() {
-			fail("Not yet implemented");
-		}
-
-
-		@Test
-		@Disabled
-		void testSelectVolunteer() {
-			fail("Not yet implemented");
-		}
-
-		@Test
-		@Disabled
-		void testUpdateVolunteer() {
-			fail("Not yet implemented");
-		}
-
-		@Test
-		@Disabled
-		void testDeleteVolunteer() {
-			fail("Not yet implemented");
+	@Test
+	@Disabled
+	@Transactional
+	@Rollback(false)
+	void testUpdatVolunteer() { // 정보 수정
+		Volunteer volunteer = volunteerDao.findById(7L);
+		volunteer.setVolunteerTime(00L);
+		volunteer.setVolunteerDate(LocalDate.now());
+		volunteer.setVolunteerStatus("수정테스트");
 		
-		}
+	}
+	
+	
+	@Test
+	//@Disabled
+	void selectAll() {
+		System.out.println(volunteerDao.selectAll());
+	}
+
+
+	@Test
+	@Disabled
+	void testSelectVolunteer() {
+		
+	}
+	
+
+	@Test
+	@Disabled
+	void testDeleteVolunteer() {
+		fail("Not yet implemented");
+	
+	}
 
 }

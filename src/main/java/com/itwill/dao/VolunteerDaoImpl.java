@@ -15,7 +15,7 @@ public class VolunteerDaoImpl implements VolunteerDao{
 	VolunteerRepository volunteerRepository;
 	
 	@Override
-	public List<Volunteer> findAll() {		
+	public List<Volunteer> selectAll() {		
 		return volunteerRepository.findAll();
 	}
 	
@@ -24,13 +24,15 @@ public class VolunteerDaoImpl implements VolunteerDao{
 		Volunteer savedVolunteer = volunteerRepository.save(volunteer);
 		return savedVolunteer;
 	}
-
+	
+	
 	@Override
 	public Volunteer selectVolunteer(Long no) {
 		Volunteer selectVolunteer = volunteerRepository.findById(no).get();
 		return selectVolunteer;
 	}
-
+	
+	
 	@Override
 	public Volunteer updateVolunteer(Volunteer updateVolunteer) throws Exception {
 		Optional<Volunteer> findVolunteerOptional = volunteerRepository.findById(updateVolunteer.getVolunteerNo());
@@ -51,6 +53,12 @@ public class VolunteerDaoImpl implements VolunteerDao{
 		
 		volunteerRepository.delete(selectedVolunteerOptional.get());
 		
+	}
+
+	@Override
+	public Volunteer findById(Long no) {
+		
+		return volunteerRepository.findById(no).get();
 	}
 
 	
