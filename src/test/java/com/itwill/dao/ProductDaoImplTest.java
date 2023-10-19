@@ -21,15 +21,14 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	
 	
 	@Test
-	@Disabled
+	//@Disabled
 	void insertProductTest() {
 		Product product1 = Product.builder()
 				.productName("츄르_멸치맛")
 				.productPrice(3000)
 				.productCategory("간식")
-				.productAmount(2)
 				.productImage("cat.jpg")
-				.productStarAvg(2)
+				.productStarAvg(1)
 				.build();
 		Product savedProduct1 = productDao.insertProduct(product1);
 		System.out.println(savedProduct1);
