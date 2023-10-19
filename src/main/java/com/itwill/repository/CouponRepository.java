@@ -13,6 +13,7 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
   @Query(value="select * from coupon where ?1 < TRUNC(sysdate)",nativeQuery = true ) 
   List<Coupon> findByExpirationDateBefore(LocalDateTime couponExpirationDate);
 
+  
 }
 
 	 
