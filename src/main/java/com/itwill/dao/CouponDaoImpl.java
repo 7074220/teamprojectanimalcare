@@ -4,10 +4,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.itwill.entity.Coupon;
 import com.itwill.repository.CouponRepository;
 
+@Repository
 public class CouponDaoImpl implements CouponDao{
 	
 	@Autowired

@@ -31,7 +31,7 @@ class AdoptDaoImplTest {
 	@Test
 	@Transactional
 	@Rollback(false)
-	@Disabled
+	//@Disabled
 	void insertTest() {
 		
 		Userinfo userinfo1 = userInfoDao.findById("박태환");
@@ -64,6 +64,7 @@ class AdoptDaoImplTest {
 	@Test
 	@Transactional
 	@Rollback(false)
+	@Disabled
 	void deleteTest() {
 		
 	}
@@ -71,6 +72,7 @@ class AdoptDaoImplTest {
 	@Test
 	@Transactional
 	@Rollback(false)
+	@Disabled
 	void findAll() {
 		
 	}
@@ -79,6 +81,7 @@ class AdoptDaoImplTest {
 	@Test
 	@Transactional
 	@Rollback(false)
+	@Disabled
 	void findById() {
 		
 	}
@@ -86,6 +89,7 @@ class AdoptDaoImplTest {
 	@Test
 	@Transactional
 	@Rollback(false)
+	@Disabled
 	void updateTest() {
 		
 	}
