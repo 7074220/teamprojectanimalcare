@@ -2,6 +2,8 @@ package com.itwill.entity;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.annotation.Generated;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -32,6 +34,7 @@ public class ReportBoard {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BOARD_NO_SEQ")
 	private Long boardNo;
 	private String boardTitle;
+	@CreationTimestamp
 	private LocalDateTime boardResisterDate;
 	private String boardContent;
 	private LocalDateTime boardDate;
@@ -44,8 +47,9 @@ public class ReportBoard {
 	
 	@ManyToOne(cascade = CascadeType.PERSIST) // ManyToOne 확실한가?
 	@JoinColumn(name = "user_id")
-	private Userinfo userinfo;
-    
+	@Builder.Default
+	private Userinfo userinfo = new Userinfo();
+
 
 
 }

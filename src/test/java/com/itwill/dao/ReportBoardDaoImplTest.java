@@ -20,6 +20,8 @@ class ReportBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	UserInfoDao userInfoDao;
 	
 	@Test
+	@Transactional
+	@Rollback(false)
 	void test() {
 		Userinfo userinfo = userInfoDao.findById("김");
 		ReportBoard reportBoard = ReportBoard.builder()
@@ -36,6 +38,10 @@ class ReportBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 									.boardTitle("제목")
 									.userinfo(userinfo)
 									.build();
+
+									
+
+								
 									
 		reportBoardDao.Create(reportBoard);
 		
