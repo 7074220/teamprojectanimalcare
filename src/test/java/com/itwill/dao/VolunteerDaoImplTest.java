@@ -9,34 +9,36 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.itwill.TeamprojectAnimalcareApplicationTest;
+import com.itwill.entity.Center;
 import com.itwill.entity.Userinfo;
 import com.itwill.entity.Volunteer;
-import com.itwill.repository.VolunteerRepository;
 
-import jakarta.transaction.Transactional;
 
-class VolunteerDaoImplTest {
+class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 
 	@Autowired
 	VolunteerDao volunteerDao;
-	@Autowired
-	VolunteerRepository volunteerRepository;
 	@Autowired
 	UserInfoDao userInfoDao;
 	@Autowired
 	CenterDao centerDao;
 
+	/*
 	@Test
 	@Disabled
 	void testFindAll() {
 		fail("Not yet implemented");
 	}
-
+	*/
+	
 	@Test
-	// @Disabled
+	//@Disabled
 	@Transactional
 	@Rollback(false)
+	
 	void testInsertVolunteer() {
 
 		/*
@@ -46,21 +48,38 @@ class VolunteerDaoImplTest {
 							.userPhoneNumber("8888-8888") .userEmail("888a") .userResidentNumber("8888")
 							.userResisterDate(LocalDateTime.now()) .build();
 		 */
-
+		
+		Userinfo userinfo = userInfoDao.findById("김");
+		
+		Center center = Center.builder()
+							  .centerNo(88L)
+							  .centerName("안녕보호소")
+							  .centerPhoneNumber("000-1111-2222")
+							  .centerLocal("서울시 강남구")
+							  .centerOpenCloseTime("24시")
+							  .build();
+		
 		Volunteer volunteer = Volunteer.builder()
 									   .volunteerDate(LocalDate.now())
 									   .volunteerNo(4L)
 									   .volunteerTime(15L)
 									   .volunteerStatus("입양완료")
-									   //.userinfo(userinfo)
+									   .userinfo(userinfo)
+									   .center(center)
 									   .build();
 
-		// System.out.println(volunteer);
-
-		volunteerDao.insertVolunteer(volunteer);
+		Volunteer savedVolunteer1 = volunteerDao.insertVolunteer(volunteer);
+		System.out.println(savedVolunteer1);
+		
+		/*
+		 * volunteer.setCenter(center); volunteer.setUserinfo(userinfo);
+		 * 
+		 * volunteerDao.insertVolunteer(savedVolunteer1);
+		 */
 
 	}
 
+	/*
 	@Test
 	@Disabled
 	void testSelectVolunteer() {
@@ -78,5 +97,5 @@ class VolunteerDaoImplTest {
 	void testDeleteVolunteer() {
 		fail("Not yet implemented");
 	}
-
+	*/
 }
