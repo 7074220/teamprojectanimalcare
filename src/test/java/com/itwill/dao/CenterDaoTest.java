@@ -22,7 +22,7 @@ class CenterDaoTest {
 	@Transactional
 	@Rollback(false)
 	@Test
-	//@Disabled
+	@Disabled
 	void insetCenter() {
 
 
@@ -38,26 +38,33 @@ class CenterDaoTest {
 	
 	@Test
 	@Disabled
+	@Transactional
 	void  selectCenter() {
-		Center selectCenter = centerDao.findByCenterNo(1L);
+		Center selectCenter = centerDao.findByCenterNo(11L);
 		System.out.println(selectCenter);
 	}
 	
 	@Test
+	@Transactional
+	@Rollback(value = false)
 	@Disabled
-	void deleteCenter() {
+	void deleteCenter()throws Exception {
 		centerDao.deleteCenter(1L);
 	}
 	@Test
+	@Transactional
+	@Rollback(value = false)
 	@Disabled
 	void updateCenter() {
-		Center findCenter =  centerDao.findByCenterNo(1L);
+		Center findCenter =  centerDao.findByCenterNo(2L);
 		findCenter.setCenterName("일이삼보호소");
 		System.out.println(findCenter);
 	}
 	
 	@Test
-	@Disabled
+	@Transactional
+	@Rollback(value = false)
+	//@Disabled
 	void findByContainsTest() {
 		List<Center> findCenter = centerDao.findByContains("이");
 		System.out.println(findCenter);

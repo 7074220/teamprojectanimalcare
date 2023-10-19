@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,25 +20,38 @@ import jakarta.transaction.Transactional;
 class VisitDaoTest {
 	@Autowired
 	VisitDao visitDao;
+
 	@Autowired
 	UserInfoDao userInfoDao;
-	@Autowired 
+
+	@Autowired
 	CenterDao centerDao;
+
 	@Transactional
 	@Rollback(false)
 	@Test
+	//@Disabled
 	void insetVisit() {
-		userInfoDao.findById("김창섭");	
-
 		Visit visit = Visit.builder()
 				.visitNo(null)
 				.visitDate(LocalDate.now())
 				.visitstatus("접수완료")
 				.visitTime(7L)
-			
+				.userinfo(userInfoDao.findById("김창섭"))
+				.center(centerDao.findByCenterNo(2L))
 				.build();
 		visitDao.createVisit(visit);
-	
-
 	}
+	
+	@Test
+	@Transactional
+	@Disabled
+	void selectVisit() {
+		Visit selectVisit = visitDao.findByVisitNo(2L);
+		System.out.println(selectVisit);
+	}
+	
 }
+
+
+

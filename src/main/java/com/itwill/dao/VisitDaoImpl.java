@@ -20,7 +20,7 @@ public class VisitDaoImpl implements VisitDao {
 	}
 
 	@Override
-	public Visit selectVisit(Long visitNo) {
+	public Visit findByVisitNo(Long visitNo) {
 		return visitRepository.findById(visitNo).get();
 	}
 
