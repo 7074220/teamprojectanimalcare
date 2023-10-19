@@ -45,13 +45,21 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	}
 	
 	@Test
-	//@Disabled
+	@Disabled
 	@Transactional
 	@Rollback(value = false)
 	void updateProduct() {
 		Product findProduct = productDao.findByProductNo(1L);
 		findProduct.setProductName("츄르_새우맛");
 		System.out.println(findProduct);
+	}
+	
+	@Test
+	//@Disabled
+	@Transactional
+	@Rollback(value = true)
+	void deleteProduct() throws Exception {
+		productDao.deleteProduct(3L);
 	}
 	
 	@Test
