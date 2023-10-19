@@ -12,7 +12,7 @@ import com.itwill.repository.CartRepository;
 public class CartDaoImpl implements CartDao{
 
 	@Autowired
-	CartRepository cartRepository;
+	private CartRepository cartRepository;
 
 	@Override
 	public Cart insertCart(Cart cart) {
@@ -20,13 +20,12 @@ public class CartDaoImpl implements CartDao{
 		return savedCart;
 	}
 
-	/*
+	
 	@Override
-	public int update_qty(Cart cart) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public Cart update_qty(Cart updateQty) throws Exception {
+		return cartRepository.save(updateQty);
 	}
-
+/*
 	@Override
 	public void deleteCart(Cart cart) throws Exception {
 		// TODO Auto-generated method stub

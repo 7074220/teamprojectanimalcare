@@ -29,6 +29,7 @@ public class ProductServiceImpl implements ProductService {
 			product.setProductName(updateProduct.getProductName());
 			product.setProductPrice(updateProduct.getProductPrice());
 			product.setProductImage(updateProduct.getProductImage());
+			updatedProduct = productRepository.save(updateProduct);
 		} else {
 			throw new Exception("존재하지 않는 제품입니다.");
 		}
