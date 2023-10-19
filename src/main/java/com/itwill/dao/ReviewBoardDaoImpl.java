@@ -3,10 +3,12 @@ package com.itwill.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.itwill.entity.ReviewBoard;
 import com.itwill.repository.ReviewBoardRepository;
 
+@Repository
 public class ReviewBoardDaoImpl implements ReviewBoardDao{
 	@Autowired
 	ReviewBoardRepository reviewBoardRepository;
@@ -41,11 +43,11 @@ public class ReviewBoardDaoImpl implements ReviewBoardDao{
 	public List<ReviewBoard> findAll() {
 		return reviewBoardRepository.findAll();
 	}
-
+	/*
 	@Override
 	public List<ReviewBoard> findByStarAll(Long star) {
 		return reviewBoardRepository.findByStarUserId(star);
 	}
-
+	*/
 	
 }

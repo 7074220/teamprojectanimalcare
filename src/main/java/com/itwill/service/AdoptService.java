@@ -8,13 +8,13 @@ import com.itwill.entity.Adopt;
 
 public interface AdoptService {
 	
-	Adopt getAdopt(Long no);
+	Adopt findByNoAdopt(Long no);
 
-	Adopt saveAdopt(Adopt adopt);
+	Adopt insertAdopt(Adopt adopt);
 
 	Adopt updateAdopt(Adopt adopt) throws Exception;
 
 	void deleteAdopt(Long no) throws Exception;
 
-	List<Adopt> adopts();
+	List<Adopt> findAllAdopts(String userId);
 }

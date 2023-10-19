@@ -1,6 +1,6 @@
 package com.itwill.entity;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -24,6 +24,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(callSuper = true)
 public class ReviewBoard {
 
 	@Id
@@ -32,7 +33,7 @@ public class ReviewBoard {
 	private Long boardNo; // PK
 	private String boardTitle;
 	private String boardContent;
-	private Date boardDate;
+	private LocalDate boardDate;
 	private Long boardStar;
 
 	@Builder.Default
