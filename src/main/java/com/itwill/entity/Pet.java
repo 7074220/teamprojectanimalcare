@@ -38,7 +38,10 @@ public class Pet {
 	 private LocalDate  petRegisterDate;
 	 private String petFindPlace;
 	 private String petCharacter;
-	 private String petCenter;
+	 
+	 @ManyToOne
+	 @JoinColumn(name = "center_no")
+	 private Center center;
 	 
 
 }

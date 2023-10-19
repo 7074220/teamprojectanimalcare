@@ -9,11 +9,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.itwill.TeamprojectAnimalcareApplication;
-import com.itwill.TeamprojectAnimalcareApplicationTests;
+import com.itwill.TeamprojectAnimalcareApplicationTest;
+
 import com.itwill.entity.Product;
 import com.itwill.repository.ProductRepository;
 
-class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTests {
+class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 
 	@Autowired
 	ProductDao productDao;
@@ -23,11 +24,12 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTests {
 	@Disabled
 	void insertProductTest() {
 		Product product1 = Product.builder()
-				.productName("고양이밥")
+				.productName("츄르_멸치맛")
 				.productPrice(3000)
 				.productCategory("간식")
-				.productAmount(1)
+				.productAmount(2)
 				.productImage("cat.jpg")
+				.productStarAvg(2)
 				.build();
 		Product savedProduct1 = productDao.insertProduct(product1);
 		System.out.println(savedProduct1);
@@ -35,9 +37,41 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTests {
 	
 	
 	@Test
-	//@Disabled
+	@Disabled
+	// 일부 단어 입력으로 제품 검색
 	void findByContainsTest() {
 		List<Product> findProduct = productDao.findByContains("츄");
-		System.out.println(findProduct);
+	}
+	
+	@Test
+	@Disabled
+	// 높은 가격순 정렬
+	void findAllByOrderByProductPriceDesc() {
+		List<Product> products = productDao.findAllByOrderByProductPriceDesc();
+		System.out.println(products);
+	}
+	
+	@Test
+	@Disabled
+	// 낮은 가격순 정렬
+	void findAllByOrderByProductPriceAsc() {
+		List<Product> products = productDao.findAllByOrderByProductPriceAsc();
+		System.out.println(products);
+	}
+	
+	@Test
+	@Disabled
+	// 평점높은순 정렬
+	void findAllByOrderByProductStarAvgDesc() {
+		List<Product> products = productDao.findAllByOrderByProductStarAvgDesc();
+		System.out.println(products);
+	}
+	
+	@Test
+	@Disabled
+	// 최신번호순 정렬
+	void findAllByOrderByProductNoDesc() {
+		List<Product> products = productDao.findAllByOrderByProductNoDesc();
+		System.out.println(products);
 	}
 }

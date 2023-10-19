@@ -55,7 +55,7 @@ public class PetDaoImpl implements PetDao {
 			pet1.setPetRegisterDate(pet.getPetRegisterDate());
 			pet1.setPetFindPlace(pet.getPetFindPlace());
 			pet1.setPetCharacter(pet.getPetCharacter());
-			pet1.setPetCenter(pet.getPetCenter());
+			pet1.setCenter(pet.getCenter());
 			updatePet=petRepository.save(pet1);
 		}else {
 			throw new Exception("존재하지않습니다.");
