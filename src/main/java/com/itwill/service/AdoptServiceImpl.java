@@ -44,7 +44,7 @@ public class AdoptServiceImpl implements AdoptService{
 	}
 
 	@Override
-	public List<Adopt> findAllAdopts(String userId) {
+	public List<Adopt> findAllAdopts() {
 		List<Adopt> adoptList=adoptDao.findAdoptList();
 		return adoptList;
 		

@@ -50,5 +50,8 @@ public class Visit {
 	@JoinColumn(name = "center_no")
 	@ToString.Exclude
 	private Center center = new Center();
+	 public String getCenterName() {
+	        return center.getCenterName();
+	    }
 
 }
