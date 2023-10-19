@@ -28,13 +28,11 @@ class AdoptDaoImplTest {
 	UserInfoDao userInfoDao;
 
 	
-	
-	
 	@Test
 	@Transactional
 	@Rollback(false)
-	//@Disabled
-	void test() {
+	@Disabled
+	void insertTest() {
 		
 		Userinfo userinfo1 = userInfoDao.findById("박태환");
 		Pet pet = Pet.builder()
@@ -62,5 +60,36 @@ class AdoptDaoImplTest {
 		adoptDao.insertAdopt(adopt);
 		
 	}
-
+	
+	@Test
+	@Transactional
+	@Rollback(false)
+	void deleteTest() {
+		
+	}
+	
+	@Test
+	@Transactional
+	@Rollback(false)
+	void findAll() {
+		
+	}
+	
+	
+	@Test
+	@Transactional
+	@Rollback(false)
+	void findById() {
+		
+	}
+	
+	@Test
+	@Transactional
+	@Rollback(false)
+	void updateTest() {
+		
+	}
+	
+	
+	
 }
