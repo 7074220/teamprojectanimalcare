@@ -18,20 +18,20 @@ public class CouponServiceImpl implements CouponService{
 	CouponDao couponDao;
 	
 	@Override
-	public Coupon Create() {
-		return  couponDao.Create(null);
+	public Coupon Create(Coupon coupon) {
+		return  couponDao.Create(coupon);
 		
 	}
 	
 	@Override
-	public void Delete() {
-		
+	public void Delete(Long couponId) {
+		couponDao.DelteById(couponId);
 		
 	}
 	
 	@Override
 	public List<Coupon> findAll() {
-		return null;
+		return couponDao.findAll();
 	}
 	@Override
 	public Coupon findById(Long couponId) {

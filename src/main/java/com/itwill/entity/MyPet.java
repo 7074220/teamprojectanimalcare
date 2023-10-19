@@ -19,6 +19,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -38,6 +39,7 @@ public class MyPet {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@Builder.Default
 	@JoinColumn(name = "user_id")
+	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
 
 	
