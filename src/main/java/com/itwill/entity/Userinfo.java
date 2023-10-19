@@ -49,6 +49,7 @@ public class Userinfo {
 	
 	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	@Builder.Default
+	@ToString.Exclude
 	List<Cart> carts = new ArrayList<Cart>(); 
 	
 	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)

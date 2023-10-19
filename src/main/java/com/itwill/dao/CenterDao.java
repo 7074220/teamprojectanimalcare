@@ -1,6 +1,7 @@
 package com.itwill.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.itwill.entity.Center;
 
@@ -8,11 +9,13 @@ public interface CenterDao {
 
 	Center createCenter(Center center);
 	
-	Center selectCenter(Long centerNo);
-	
+	Center findByCenterNo(Long centerNo);
+
 	Center updateCenter(Center center);
 	
 	void deleteCenter(Long centerNo);
 	
-	List<Center> selectAllCenters();
+	List<Center> findAllCenters();
+	//센터이름검색
+	List<Center> findByName(String centerName);
 }

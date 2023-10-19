@@ -7,9 +7,11 @@ public interface CartService {
 	// 카트에 담기
 	Cart insertCart(Cart cart);
 	
-	
 	// 카트에 담긴 상품수량 변경 
 	Cart update_qty(Cart updateQty) throws Exception;
+	
+	// 카트에 담긴 상품 선택
+	Cart findByCartNo(Long no);
 	
 	/*
 	// 카트에 담긴 상품 삭제

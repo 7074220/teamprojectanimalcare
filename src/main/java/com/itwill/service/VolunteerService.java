@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.entity.Volunteer;
 
-@Transactional
 public interface VolunteerService {
 	
 	Volunteer insertVolunteer(Volunteer volunteer);

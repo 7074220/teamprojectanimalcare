@@ -30,4 +30,11 @@ public class CartServiceImpl implements CartService {
 		}
 		return updatedCart;
 	}
+	
+	@Override
+	public Cart findByCartNo(Long no) {
+		Cart findCart = cartRepository.findById(1L).get();
+		
+		return findCart;
+	}
 }
