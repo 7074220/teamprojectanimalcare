@@ -31,13 +31,17 @@ class ReportBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 									.boardDepth(0)
 									.boardGroupNo(1)
 									.boardName("")
-									.boardPhone("")
+									.boardPhone("1111")
 									.boardReadCount(0)
 									.boardResisterDate(null)
 									.boardStep(1)
 									.boardTitle("제목")
 									.userinfo(userinfo)
 									.build();
+
+									
+
+								
 									
 		reportBoardDao.Create(reportBoard);
 		
