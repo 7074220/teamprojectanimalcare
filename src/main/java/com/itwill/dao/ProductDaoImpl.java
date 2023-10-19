@@ -62,12 +62,12 @@ public class ProductDaoImpl implements ProductDao {
 	public List<Product> findByContains(String productName) {
 		return productRepository.findByContains(productName);
 	}
-/*
-	@Override
-	public List<Product> findByProductOrderByProductPriceDesc(Integer productPrice) {
-		return productRepository.findByProductOrderByProductPriceDesc(productPrice);
-	}
 
+	@Override
+	public List<Product> findAllByOrderByProductPriceDesc() {
+		return productRepository.findAllByOrderByProductPriceDesc();
+	}
+/*
 	@Override
 	public List<Product> findByProductOrderByProductPriceAsc(Integer productPrice) {
 		return productRepository.findByProductOrderByProductPriceAsc(productPrice);

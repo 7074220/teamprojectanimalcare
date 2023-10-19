@@ -16,8 +16,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 	List<Product> findByContains(String productName);
 	
 	// 높은 가격순 정렬
-	@Query(value = "select * from product order by product_price desc", nativeQuery = true)
-	List<Product> findByProductPriceDesc();
+	//@Query(value = "select * from product order by product_price desc", nativeQuery = true)
+	List<Product> findAllByOrderByProductPriceDesc();
 	
 	// 낮은 가격순 정렬
 	//List<Product> findByProductOrderByProductPriceAsc(Integer productPrice);
