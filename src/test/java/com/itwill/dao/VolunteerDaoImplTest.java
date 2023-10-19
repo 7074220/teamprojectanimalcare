@@ -32,7 +32,8 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		
 		//Userinfo userinfo = Userinfo.builder().userId("박태환").build();
 		
-		Userinfo userinfo = userInfoDao.findById("박태환");
+		Userinfo userinfo1 = userInfoDao.findById("박태환");
+		Userinfo userinfo2 = userInfoDao.findById("전아현");
 		
 		Center center = Center.builder()
 							  .centerNo(11L)
@@ -44,19 +45,19 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		
 		Volunteer volunteer1 = Volunteer.builder()
 									   .volunteerDate(LocalDate.now())
-									   .volunteerNo(05L)
+									   .volunteerNo(2L)
 									   .volunteerTime(11L)
-									   .volunteerStatus("봉사접수중")
-									   .userinfo(userinfo)
+									   .volunteerStatus("봉사접수중t")
+									   .userinfo(userinfo1)
 									   .center(center)
 									   .build();
 		
 		Volunteer volunteer2 = Volunteer.builder()
 				   					   .volunteerDate(LocalDate.now())
-				   					   .volunteerNo(06L)
+				   					   .volunteerNo(3L)
 				   					   .volunteerTime(13L)
-				   					   .volunteerStatus("심사중")
-				   					   .userinfo(userinfo)
+				   					   .volunteerStatus("심사중t")
+				   					   .userinfo(userinfo2)
 				   					   .center(center)
 				   					   .build();
 		
@@ -70,10 +71,10 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(false)
 	void testUpdatVolunteer() { // 정보 수정
-		Volunteer volunteer = volunteerDao.findById(7L);
+		Volunteer volunteer = volunteerDao.findById(1L);
 		volunteer.setVolunteerTime(00L);
 		volunteer.setVolunteerDate(LocalDate.now());
-		volunteer.setVolunteerStatus("수정테스트");
+		volunteer.setVolunteerStatus("리셋테스트");
 		
 	}
 	

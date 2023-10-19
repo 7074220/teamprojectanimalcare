@@ -13,7 +13,7 @@ public class CartDaoImpl implements CartDao{
 
 	@Autowired
 	private CartRepository cartRepository;
-
+	
 	@Override
 	public Cart insertCart(Cart cart) {
 		Cart savedCart = cartRepository.save(cart);
@@ -25,13 +25,27 @@ public class CartDaoImpl implements CartDao{
 	public Cart update_qty(Cart updateQty) throws Exception {
 		return cartRepository.save(updateQty);
 	}
-/*
+	
+	
 	@Override
-	public void deleteCart(Cart cart) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public Cart findByCartNo(Long no) {
+		return cartRepository.findById(no).get();
 	}
 
+
+	@Override
+	public void deleteByUserId(String userId)  {
+		cartRepository.deleteByUserId(userId);
+	}
+
+
+	@Override
+	public void deleteById(Long no) throws Exception {
+		cartRepository.deleteById(no);
+	}
+
+	
+/*
 	@Override
 	public int totalPrice(Cart cart) {
 		// TODO Auto-generated method stub

@@ -52,4 +52,12 @@ public class AdoptDaoImpl implements AdoptDao{
 		return adoptRepository.findAll();
 	}
 
+	
+	@Override
+	public List<Adopt> findAdoptListByUserId(String userId) {
+		List<Adopt> adoptList=adoptRepository.findAdoptListByUserId(userId);
+		return adoptList;
+	
+	}
+	
 }

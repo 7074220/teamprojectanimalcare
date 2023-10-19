@@ -14,10 +14,16 @@ public interface CartDao {
 	// 카트에 담긴 상품수량 변경 
 	Cart update_qty(Cart updateQty) throws Exception;
 	
-	/*
-	// 카트에 담긴 상품 삭제
-	void deleteCart(Cart cart) throws Exception;
+	// 카트에 담긴 상품 선택
+	Cart findByCartNo(Long no);
 	
+	// 카트에 담긴 상품 전체삭제
+	void deleteByUserId(String userId);
+	
+	// 카트에서 선택한 상품만 삭제
+	void deleteById(Long no) throws Exception;
+	
+	/*
 	// 카트에 담긴 모든 상품 합계 금액
 	int totalPrice(Cart cart);
 	
