@@ -20,10 +20,10 @@ class ProductServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 	ProductService productService;
 	
 	@Test
-	//@Disabled
+	@Disabled
 	void insertProductTest() {
 		Product product1 = Product.builder()
-				.productName("츄르_치즈맛")
+				.productName("츄르_육포맛")
 				.productPrice(3000)
 				.productCategory("간식")
 				.productImage("cat.jpg")

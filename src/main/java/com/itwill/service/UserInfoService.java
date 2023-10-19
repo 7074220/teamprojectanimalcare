@@ -1,5 +1,53 @@
 package com.itwill.service;
 
-public class UserInfoService {
+import java.util.List;
 
+import com.itwill.entity.Userinfo;
+
+public interface UserInfoService {
+	
+	/*
+	 * 회원가입
+	 */
+	/**************1.반환값사용*******************/
+	Userinfo create(Userinfo user) throws Exception;
+	/*********************************************/
+
+	/*
+	 * 회원로그인
+	 * 
+	 * 0:아이디존재안함
+	 * 1:패쓰워드 불일치
+	 * 2:로그인성공
+	 */
+	Userinfo login(String userId, String password) throws Exception;
+	/*
+	 * 회원로그아웃
+	 */
+
+	/*
+	 * 회원상세보기
+	 */
+	Userinfo findUser(String userId) throws Exception;
+
+	/*
+	 * 회원수정
+	 */
+	Userinfo update(Userinfo user) throws Exception;
+
+	/*
+	 * 회원탈퇴
+	 */
+	int remove(String userId) throws Exception;
+
+	/*
+	 * 전체회원리스트
+	 */
+	List<Userinfo> findUserList() throws Exception;
+
+	/*
+	 * 아이디중복체크
+	 */
+	boolean isDuplicateId(String userId) throws Exception;
+	
 }

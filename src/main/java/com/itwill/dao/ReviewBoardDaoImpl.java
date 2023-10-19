@@ -44,7 +44,7 @@ public class ReviewBoardDaoImpl implements ReviewBoardDao{
 
 	@Override
 	public List<ReviewBoard> findByStarAll(Long star) {
-		return null;
+		return reviewBoardRepository.findByStarUserId(star);
 	}
 
 	

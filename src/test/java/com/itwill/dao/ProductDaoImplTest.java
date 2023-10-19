@@ -23,7 +23,7 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	
 	
 	@Test
-	@Disabled
+	//@Disabled
 	void insertProductTest() {
 		Product product1 = Product.builder()
 				.productName("츄르_멸치맛")

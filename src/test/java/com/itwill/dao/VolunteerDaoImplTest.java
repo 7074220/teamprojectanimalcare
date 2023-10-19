@@ -39,23 +39,23 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 							  .centerName("안녕보호소")
 							  .centerPhoneNumber("010-1111-1111")
 							  .centerLocal("서울시")
-							  .centerOpenCloseTime("1시")
+							  .centerOpenCloseTime("09:00 ~ 21:00")
 							  .build();
 		
 		Volunteer volunteer1 = Volunteer.builder()
 									   .volunteerDate(LocalDate.now())
-									   .volunteerNo(4L)
-									   .volunteerTime(15L)
-									   .volunteerStatus("방문신청완료")
+									   .volunteerNo(05L)
+									   .volunteerTime(11L)
+									   .volunteerStatus("봉사접수중")
 									   .userinfo(userinfo)
 									   .center(center)
 									   .build();
 		
 		Volunteer volunteer2 = Volunteer.builder()
 				   					   .volunteerDate(LocalDate.now())
-				   					   .volunteerNo(5L)
-				   					   .volunteerTime(18L)
-				   					   .volunteerStatus("방문신청접수")
+				   					   .volunteerNo(06L)
+				   					   .volunteerTime(13L)
+				   					   .volunteerStatus("심사중")
 				   					   .userinfo(userinfo)
 				   					   .center(center)
 				   					   .build();
