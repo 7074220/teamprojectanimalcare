@@ -20,7 +20,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Order
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -35,7 +35,7 @@ public class OrderItem {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@Builder.Default
 	@JoinColumn(name = "order_no")
-	private Order orders = new Orders();
+	private Orders orders = new Orders();
 	
 	@OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@Builder.Default

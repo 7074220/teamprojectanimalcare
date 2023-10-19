@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Order
+@Builder
 public class Userinfo {
 	
 	@Id
@@ -50,7 +50,7 @@ public class Userinfo {
 	
 	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST)
 	@Builder.Default
-	List<Order> orders = new ArrayList<Orders>();
+	List<Orders> orders = new ArrayList<Orders>();
 	
 	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST)
 	@Builder.Default
