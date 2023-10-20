@@ -17,13 +17,13 @@ public interface ReviewBoardDao {
 	public List<ReviewBoard> findAll();
 
 	//public List<ReviewBoard> findByStarAll(Long star); // 선택한 평점과 관련된 리뷰나오기
-
+	/*
 	public List<ReviewBoard> findByUserinfoUserId(String userId); // 선택된 userId 리뷰 리스트만 나오기
 	
 	public List<ReviewBoard> findAllByOrderByboardStarDesc(); // 높은 평점순 정렬
 	
 	public List<ReviewBoard> findAllByOrderByboardStarAsc(); // 낮은 평점순 정렬
-	
+	*/
 	
 
 }
