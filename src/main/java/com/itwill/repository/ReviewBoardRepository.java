@@ -12,6 +12,10 @@ public interface ReviewBoardRepository extends JpaRepository<ReviewBoard, Long> 
 	@Query(value = "select * from review_board join userinfo u on u.user_id = ?1", nativeQuery = true)
 	public ReviewBoard findByUserId(String userId);
 
+	public List<ReviewBoard> findAllByOrderByBoardStarDesc(); // 높은 평점순 정렬
+
+	public List<ReviewBoard> findAllByOrderByBoardStarAsc(); // 낮은 평점순 정렬
+
 	List<ReviewBoard> getReviewBoardByProductNo(Long productNo);
 	// productNo로 reviewboard 리스트 검색
 
@@ -19,5 +23,7 @@ public interface ReviewBoardRepository extends JpaRepository<ReviewBoard, Long> 
 	// by board_star desc;
 	// @Query(value = "", nativeQuery = true)
 	// public List<ReviewBoard> findByStarUserId(Long star);
+	// public List<ReviewBoard> findAllByUserIdUserinfo(String userId); // 선택된
+	// userId 리뷰 리스트만 나오기
 
 }

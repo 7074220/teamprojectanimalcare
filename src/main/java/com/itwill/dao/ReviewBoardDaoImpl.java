@@ -50,10 +50,30 @@ public class ReviewBoardDaoImpl implements ReviewBoardDao{
 	}
 	*/
 
+
 	@Override
 	public List<ReviewBoard> getReviewBoardByProductNo(Long productNo) {
 		// productNo로 reviewboard 리스트 검색
 		return reviewBoardRepository.getReviewBoardByProductNo(productNo);
+	}
+
+	// userId로 리뷰 리스트 나오기
+	/*
+	@Override
+	public List<ReviewBoard> findAllByUserIdUserinfo(String userId) {
+		return reviewBoardRepository.findAllById(userId);
+	}
+	*/
+	// 높은평점순 정렬
+	@Override
+	public List<ReviewBoard> findAllByOrderByBoardStarDesc() {
+		return reviewBoardRepository.findAllByOrderByBoardStarDesc();
+	}
+	// 낮은평점순 정렬
+	@Override
+	public List<ReviewBoard> findAllByOrderByBoardStarAsc() {
+		return reviewBoardRepository.findAllByOrderByBoardStarAsc();
+
 	}
 	
 }

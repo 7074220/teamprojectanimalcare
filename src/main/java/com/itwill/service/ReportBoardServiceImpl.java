@@ -10,6 +10,7 @@ import com.itwill.dao.ReportBoardDao;
 import com.itwill.entity.ReportBoard;
 
 @Service
+@Transactional
 public class ReportBoardServiceImpl implements ReportBoardService{
 
 	@Autowired
