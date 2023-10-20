@@ -11,14 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.itwill.entity.Center;
-import com.itwill.entity.Userinfo;
 import com.itwill.entity.Visit;
 
 import jakarta.transaction.Transactional;
-
 @SpringBootTest
-class VisitDaoTest {
+class VisitDaoImplTest {
+
 	@Autowired
 	VisitDao visitDao;
 
@@ -39,7 +37,7 @@ class VisitDaoTest {
 				.visitstatus("접수완료")
 				.visitTime(7L)
 				.userinfo(userInfoDao.findById("박태환"))
-				.center(centerDao.findByCenterNo(2L))
+				.center(centerDao.findByCenterNo(4L))
 				.build();
 		visitDao.createVisit(visit);
 	}

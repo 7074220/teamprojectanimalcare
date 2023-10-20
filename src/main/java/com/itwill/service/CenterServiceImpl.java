@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.itwill.dao.CenterDao;
 import com.itwill.entity.Cart;
 import com.itwill.entity.Center;
 import com.itwill.repository.CartRepository;
-
+@Service
 public class CenterServiceImpl implements CenterService {
 	private final CenterDao centerDao;
 	@Autowired
