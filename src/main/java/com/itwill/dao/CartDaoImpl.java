@@ -34,20 +34,20 @@ public class CartDaoImpl implements CartDao{
 
 
 	@Override
+	// 카트에 담긴 상품 전체삭제
 	public void deleteByUserId(String userId)  {
 		cartRepository.deleteByUserId(userId);
 	}
 
 
 	@Override
+	// 카트에서 선택한 상품만 삭제
 	public void deleteById(Long no) throws Exception {
 		cartRepository.deleteById(no);
 	}
 
-	@Override
-	public Cart cartTotalPrice(String userId) {
-		return cartRepository.cartTotalPrice(userId);
-	}
+	
+	
 /*
 	@Override
 	public int productWithKindByUserId(Cart cart) {
@@ -59,6 +59,34 @@ public class CartDaoImpl implements CartDao{
 	public List<Cart> findAll() {
 		return cartRepository.findAll();
 	}
-	
+
+
+	@Override
+	// 카트에 담긴 모든 상품 출력 (아이디 별)
+	public List<Cart> findAllCartByUserId(String userId) {
+		return cartRepository.findAllCartByUserId(userId);
+	}
+
+
+	@Override
+	// 카트에 담긴 모든 상품 합계 금액
+	public Integer cartTotalPrice(String userId) {
+		List<Cart> cartList = cartRepository.findAllCartByUserId(userId);
+		Integer total = 0;
+		for (Cart cart : cartList) {
+			total = total + cart.getProduct().getProductPrice()*cart.getCartQty();
+		}
+		return total;
+	}
+
+
+	@Override
+	public Integer cartSelectTotalPrice(Long no) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
 	
 }
