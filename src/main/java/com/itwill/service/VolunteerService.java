@@ -8,15 +8,16 @@ import com.itwill.entity.Volunteer;
 
 public interface VolunteerService {
 	
+	Volunteer findByVolunteerNo(Long no); // 봉사 목록 찾기
+	
 	Volunteer insertVolunteer(Volunteer volunteer);
 	
 	Volunteer updateVolunteer(Volunteer volunteer) throws Exception;
-	
-	Volunteer findById(Long no);
 
 	void deleteVolunteer(Long no) throws Exception;
 	
-	List<Volunteer> selectAllVolunteers();
+	List<Volunteer> findAllVolunteers(); // 봉사 목록 전체 찾기
 	
+	List<Volunteer> findVolunteertByUserId(String userId); //유저아이디로 목록 검색
 	
 }

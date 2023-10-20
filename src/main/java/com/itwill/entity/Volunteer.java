@@ -38,7 +38,7 @@ public class Volunteer {
 	 * N : 1
 	 */
 	@Builder.Default
-	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
@@ -47,7 +47,7 @@ public class Volunteer {
 	 * N : 1
 	 */
 	@Builder.Default
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "center_no")
 	@ToString.Exclude
 	private Center center = new Center();
