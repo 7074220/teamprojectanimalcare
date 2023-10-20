@@ -24,6 +24,9 @@ public interface OrdersDao {
 	//id로 주문찾기
 	List<Orders> findOrdersById(String userId) ;
 	
+	//id로 최신주문정렬찾기
+		List<Orders> findAllByUserIdDESC(String userId) ;
+	
 	//최근주문별로 조회
 	List<Orders> findAllByOrderByOrderNoDesc();
 

@@ -19,5 +19,10 @@ public interface OrdersRepository extends JpaRepository<Orders, Long>{
 	//userid로 주문목록 조회
 	 @Query(value = "SELECT * FROM Orders o WHERE o.user_id = :user_id",nativeQuery = true)
 	List<Orders> findAllByUserId(@Param("user_id")String userId);
+	 
+	//userid로 최신 주문목록 조회
+		 @Query(value = "SELECT * FROM Orders o WHERE o.user_id = :user_id ORDER BY o.order_no DESC",nativeQuery = true)
+		List<Orders> findAllByUserIdDESC(@Param("user_id")String userId);
+	 
 
 }
