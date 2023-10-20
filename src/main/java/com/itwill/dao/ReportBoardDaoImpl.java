@@ -21,9 +21,7 @@ public class ReportBoardDaoImpl implements ReportBoardDao{
 	
 	@Override
 	public void deleteById(Long reportBoard_no) {
-		if(reportBoardRepository.findById(reportBoard_no).isPresent()) {
-			reportBoardRepository.deleteById(reportBoard_no);
-		}	
+		reportBoardRepository.deleteById(reportBoard_no);
 	}
 	
 	@Override
