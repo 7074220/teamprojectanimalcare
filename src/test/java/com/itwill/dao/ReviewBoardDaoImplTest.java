@@ -27,7 +27,7 @@ class ReviewBoardDaoImplTest {
 	@Autowired
 	ProductDao productDao;
 	
-	@Test
+	@Test//생성
 	@Disabled
 	@Transactional
 	@Rollback(false)
@@ -37,15 +37,15 @@ class ReviewBoardDaoImplTest {
 								.boardTitle("이것은 타이틀")
 								.boardContent("이것은 내용")
 								.boardDate(LocalDate.now())
-								.boardStar(2L)
+								.boardStar(5L)
 								.userinfo(userInfoDao.findById("전아현"))
-								.product(productDao.findByProductNo(6L))
+								.product(productDao.findByProductNo(1L))
 								.build();
 
 		reviewBoardDao.create(reviewBoard);
 		
 	}
-	@Test
+	@Test//상품번호로 리뷰찾기
 	@Transactional
 	@Rollback(value = false)
 	@Disabled
@@ -54,7 +54,7 @@ class ReviewBoardDaoImplTest {
 		System.out.println(selectReviewBoard);
 	}
 
-	@Test
+	@Test//유저 아이디로 찾기
 	@Transactional
 	@Disabled
 	void findByUserId() {
@@ -62,35 +62,56 @@ class ReviewBoardDaoImplTest {
 		System.out.println(findByUserIdReviewBoard);
 	}
 	
-	@Test
+	@Test//선택한 별점으로 찾기
 	@Transactional
+	@Disabled
 	void findAllByBoardStar() {
-		List<ReviewBoard> findAllByBoardStar = reviewBoardDao.findByStarAll(2L);
+		List<ReviewBoard> findAllByBoardStar = reviewBoardDao.findByStarAll(3L);
 		System.out.println(findAllByBoardStar);
 	}
+	@Test//별점 높은순
+	@Transactional
+	@Disabled
+	void findAllByOrderByBoardStarDesc() {
+		List<ReviewBoard> findAllByOrderByBoardStarDesc = reviewBoardDao.findAllByOrderByBoardStarDesc();
+		System.out.println(findAllByOrderByBoardStarDesc);
+	}
 	
-	 /*
-	 * 
-	 * @Test
-	 * 
-	 * @Disabled void testUpdate() { fail("Not yet implemented"); }
-	 * 
-	 * @Test
-	 * 
-	 * @Disabled void testDeleteById() { fail("Not yet implemented"); }
-	 * 
-	 * @Test
-	 * 
-	 * @Disabled void testFindByUserId() { fail("Not yet implemented"); }
-	 * 
-	 * @Test
-	 * 
-	 * @Disabled void testFindAll() { fail("Not yet implemented"); }
-	 * 
-	 * @Test
-	 * 
-	 * @Disabled void testFindByStarAll() { fail("Not yet implemented"); }
-	 * 
-	 * 
+	@Test//별점 낮은순
+	@Transactional
+	@Disabled
+	void findAllByOrderByBoardStarAsc() {
+		List<ReviewBoard> findAllByOrderByBoardStarAsc = reviewBoardDao.findAllByOrderByBoardStarAsc();
+		System.out.println(findAllByOrderByBoardStarAsc);
+	}
+	
+	@Test// 최신순 정렬(board no정렬)
+	@Transactional
+	@Disabled
+	void findAllByOrderByBoardNoDesc() {
+		List<ReviewBoard> findAllByOrderByBoardNoDesc = reviewBoardDao.findAllByOrderByBoardNoDesc();
+		System.out.println(findAllByOrderByBoardNoDesc);
+	}
+	
+	
+	@Test// 오래된순 정렬(board no정렬)
+	@Transactional
+	@Disabled
+	void findAllByOrderByBoardNoAsc() {
+		List<ReviewBoard> findAllByOrderByBoardNoAsc = reviewBoardDao.findAllByOrderByBoardNoAsc();
+		System.out.println(findAllByOrderByBoardNoAsc);
+	}
+	
+	
+	/*
+	  @Test//별점 높은순,최신순
+	  
+	  @Transactional
+	  
+	 *@Rollback(false) //@Disabled public void
+	  findByBoardStarOrderByBoardStarDescBoardNoDesc() { List<ReviewBoard>
+	  findByBoardStarOrderByBoardStarDescBoardNoDesc =
+	  reviewBoardDao.findByBoardStarOrderByBoardStarDescBoardNoDesc(3L);
+	  System.out.println(findByBoardStarOrderByBoardStarDescBoardNoDesc); }
 	 */
 }
