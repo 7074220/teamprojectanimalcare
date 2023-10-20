@@ -44,10 +44,15 @@ public class AdoptServiceImpl implements AdoptService{
 	}
 
 	@Override
-	public List<Adopt> findAllAdopts() {
+	public List<Adopt> findAdoptList() {
 		List<Adopt> adoptList=adoptDao.findAdoptList();
 		return adoptList;
 		
+	}
+
+	@Override
+	public List<Adopt> findByUserinfoUserId(String userId) {
+		return adoptDao.findByUserinfoUserId(userId);
 	}
 
 }

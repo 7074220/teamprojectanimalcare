@@ -72,4 +72,8 @@ public class Userinfo {
 	@Builder.Default
 	List<Volunteer> volunteers = new ArrayList<Volunteer>(); 
 	
+	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@Builder.Default
+	List<Adopt> adopts = new ArrayList<Adopt>();
+	
 }
