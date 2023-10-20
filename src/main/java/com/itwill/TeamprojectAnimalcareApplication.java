@@ -1,13 +1,32 @@
 package com.itwill;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.itwill.repository.ReportBoardRepository;
+import com.itwill.service.ReportBoardService;
 
 @SpringBootApplication
+@RestController
 public class TeamprojectAnimalcareApplication {
 
+	@Autowired
+	ReportBoardService reportBoardService;
+	
+	@RequestMapping("/test")
+	public String test() {
+		reportBoardService.countReadCount(1L);
+		return "test";
+	}
+	
 	public static void main(String[] args) {
 		SpringApplication.run(TeamprojectAnimalcareApplication.class, args);
+		
+		
 	}
 
 }
