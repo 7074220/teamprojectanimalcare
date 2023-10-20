@@ -40,13 +40,13 @@ public class Visit {
 	private String visitstatus;
 
 	@Builder.Default
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_Id")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
 
 	@Builder.Default
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinColumn(name = "center_no")
 	@ToString.Exclude
 	private Center center = new Center();

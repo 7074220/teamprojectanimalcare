@@ -28,14 +28,7 @@ public class AdoptServiceImpl implements AdoptService{
 
 	@Override
 	public Adopt updateAdopt(Adopt adopt) throws Exception {                   
-		Adopt updateAdopt = Adopt.builder()
-									.adoptDate(adopt.getAdoptDate())
-									.adoptTime(adopt.getAdoptTime())
-									.pet(adopt.getPet())
-									.status(adopt.getStatus())
-									.build();
-		Adopt updatedAdopt=adoptDao.updateAdopt(updateAdopt);
-		return updatedAdopt;
+		return adoptDao.updateAdopt(adopt);
 	}
 
 	@Override
@@ -44,10 +37,15 @@ public class AdoptServiceImpl implements AdoptService{
 	}
 
 	@Override
-	public List<Adopt> findAllAdopts() {
+	public List<Adopt> findAdoptList() {
 		List<Adopt> adoptList=adoptDao.findAdoptList();
 		return adoptList;
 		
+	}
+
+	@Override
+	public List<Adopt> findByUserinfoUserId(String userId) {
+		return adoptDao.findByUserinfoUserId(userId);
 	}
 
 }

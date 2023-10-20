@@ -7,14 +7,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.itwill.entity.Adopt;
 
 public interface AdoptService {
-	
-	Adopt findByNoAdopt(Long no);
 
-	Adopt insertAdopt(Adopt adopt);
+	public Adopt insertAdopt(Adopt adopt);
 
-	Adopt updateAdopt(Adopt adopt) throws Exception;
+	public Adopt findByNoAdopt(Long no);
 
-	void deleteAdopt(Long no) throws Exception;
+	public Adopt updateAdopt(Adopt adopt) throws Exception;
 
-	List<Adopt> findAllAdopts();
+	public void deleteAdopt(Long no) throws Exception;
+
+	public List<Adopt> findAdoptList();
+
+	public List<Adopt> findByUserinfoUserId(String userId);
 }
