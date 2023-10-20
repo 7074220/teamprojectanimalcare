@@ -56,7 +56,7 @@ class VolunteerServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	@Disabled
 	@Transactional
-	@Rollback(false)
+	@Rollback(value = false)
 	void testUpdateVolunteer() {
 		Volunteer volunteer = volunteerService.findById(1L);
 		volunteer.setVolunteerStatus("심사중");
@@ -71,23 +71,21 @@ class VolunteerServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	@Disabled
 	@Transactional
-	@Rollback(false)
 	void testFindById() {
-		System.out.println(volunteerService.findById(1L));
+		//System.out.println(volunteerService.findById(1L));
 	}
 
 	@Test
 	@Disabled
 	@Transactional
-	@Rollback(false)
-	void testDeleteVolunteer() {
-		
+	@Rollback(value = false)
+	void testDeleteVolunteer() throws Exception{
+		volunteerService.deleteVolunteer(1L);
 	}
 
 	@Test
 	@Disabled
 	@Transactional
-	@Rollback(false)
 	void testSelectAllVolunteers() {
 		
 	}
