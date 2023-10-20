@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -40,7 +41,7 @@ public class Coupon {
 	 @CreationTimestamp
 	 private LocalDateTime couponPayday;
 	 
-	 @ManyToOne(cascade = CascadeType.PERSIST)
+	 @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	 @Builder.Default
 	 @JoinColumn(name = "user_id")
 	 @ToString.Exclude
