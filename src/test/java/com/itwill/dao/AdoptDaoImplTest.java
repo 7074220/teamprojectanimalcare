@@ -50,7 +50,7 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 				.petgender("여")
 				.petLocal("인천")
 				.petRegisterDate(LocalDate.now())
-				.center(centerDao.selectCenter(1L))
+				.center(centerDao.findByCenterNo(1L))
 				.build();
 		petDao.petInsert(pet1);
 		
@@ -61,7 +61,7 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 				.petgender("남")
 				.petLocal("광주")
 				.petRegisterDate(LocalDate.now())
-				.center(centerDao.selectCenter(2L))
+				.center(centerDao.findByCenterNo(2L))
 				.build();
 		petDao.petInsert(pet2);
 		
@@ -130,9 +130,9 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	@Transactional
 	@Rollback(false)
-	//@Disabled
+	@Disabled
 	void selectByUserId() {
-		System.out.println(adoptDao.findAdoptListByUserId("전아현"));
+		System.out.println(adoptDao.findByUserinfoUserId("박태환"));
 	}
 	
 }

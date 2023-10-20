@@ -54,8 +54,8 @@ public class AdoptDaoImpl implements AdoptDao{
 
 	
 	@Override
-	public List<Adopt> findAdoptListByUserId(String userId) {
-		List<Adopt> adoptList=adoptRepository.findAdoptListByUserId(userId);
+	public List<Adopt> findByUserinfoUserId(String userId) {
+		List<Adopt> adoptList=adoptRepository.findByUserinfoUserId(userId);
 		return adoptList;
 	
 	}
