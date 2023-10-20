@@ -47,13 +47,13 @@ public class Adopt {
 	 * N:1
 	 */
 	@Builder.Default
-	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "user_id")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
 	
 	@Builder.Default
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@ToString.Exclude
 	@JoinColumn(name = "pet_no")
 	private Pet pet = new Pet();
