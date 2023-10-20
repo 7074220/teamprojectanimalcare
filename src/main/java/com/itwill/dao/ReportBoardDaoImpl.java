@@ -51,8 +51,8 @@ public class ReportBoardDaoImpl implements ReportBoardDao{
 	}
 	
 	@Override
-	public Integer countReadCount(Long boardNo) {
-		return reportBoardRepository.countReadCount(boardNo);
+	public void countReadCount(Long boardNo) {
+		reportBoardRepository.countReadCount(boardNo);
 	}
 	
 }
