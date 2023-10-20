@@ -2,6 +2,8 @@ package com.itwill.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,8 +61,12 @@ class CenterServiceImplTest {
 		updateCenter.setCenterName("뭐로하지보호소");
 		System.out.println(updateCenter);
 	}
-	
+	@Test
+	@Transactional
+	@Rollback(value = false)
+	//@Disabled
 	void findByName() {
-		
+		List<Center> findCenters = centerService.findByName("뭐로");
+		System.out.println(findCenters);
 	}
 }
