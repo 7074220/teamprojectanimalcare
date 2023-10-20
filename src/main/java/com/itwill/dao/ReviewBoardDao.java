@@ -15,6 +15,9 @@ public interface ReviewBoardDao {
 	public ReviewBoard findByUserId(String userId);
 
 	public List<ReviewBoard> findAll();
-
+	
+	List<ReviewBoard> getReviewBoardByProductNo(Long productNo);
+	//productNo로 reviewboard 리스트 검색
+	
 	//public List<ReviewBoard> findByStarAll(Long star);
 }

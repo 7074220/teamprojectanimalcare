@@ -3,10 +3,12 @@ package com.itwill.dao;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
 import com.itwill.TeamprojectAnimalcareApplicationTest;
@@ -14,9 +16,23 @@ import com.itwill.entity.ReviewBoard;
 import com.itwill.entity.Userinfo;
 
 import jakarta.transaction.Transactional;
-
-class ReviewBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
+@SpringBootTest
+class ReviewBoardDaoImplTest {
+	@Autowired
+	UserInfoDao userInfoDao;
+	@Autowired
+	ProductDao productDao;
+	@Autowired
+	ReviewBoardDao reviewBoardDao;
 	
+//	@Test
+//	@Transactional
+//	@Rollback(value = false)
+//	@Disabled
+//	void getReviewBoardByProductNo() {
+//		List<ReviewBoard> selectReviewBoard = reviewBoardDao.getReviewBoardByProductNo(1L);
+//		System.out.println(selectReviewBoard);
+//	}
 	/*
 	
 	@Autowired

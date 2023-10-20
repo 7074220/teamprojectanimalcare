@@ -49,5 +49,11 @@ public class ReviewBoardDaoImpl implements ReviewBoardDao{
 		return reviewBoardRepository.findByStarUserId(star);
 	}
 	*/
+
+	@Override
+	public List<ReviewBoard> getReviewBoardByProductNo(Long productNo) {
+		// productNo로 reviewboard 리스트 검색
+		return reviewBoardRepository.getReviewBoardByProductNo(productNo);
+	}
 	
 }
