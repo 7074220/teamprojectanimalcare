@@ -28,7 +28,7 @@ class ReviewBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	ProductDao productDao;
 	
 	@Test
-	//@Disabled
+	@Disabled
 	@Transactional
 	@Rollback(false)
 	void testCreate() {
@@ -49,6 +49,7 @@ class ReviewBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	
 	
 	
+	
 	/*
 	
 	@Test
@@ -63,11 +64,6 @@ class ReviewBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		fail("Not yet implemented");
 	}
 
-	@Test
-	@Disabled
-	void testFindByUserId() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	@Disabled
