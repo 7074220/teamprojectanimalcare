@@ -28,16 +28,18 @@ public class Userinfo {
 	@Id
 	private String userId;
 	private String userPassword;
-	private Integer userPoint;
+	private String userName;
 	private String userGender;
 	private String userAddress;
 	@Column(unique = true)
 	private String userPhoneNumber;
 	@Column(unique = true)
 	private String userEmail;
+	@Column(unique = true)
 	private String userResidentNumber;
 	@CreationTimestamp
 	private LocalDateTime userResisterDate;
+	private Integer userPoint;
 	
 	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@Builder.Default
