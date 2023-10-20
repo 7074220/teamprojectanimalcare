@@ -99,7 +99,7 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	}
 	
 	@Test
-	@Disabled
+	//@Disabled
 	@Transactional
 	@Rollback(false)
 	void cartTotalPriceTest() {
