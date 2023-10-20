@@ -27,5 +27,6 @@ public interface ReviewBoardDao {
 	public List<ReviewBoard> findAllByOrderByBoardStarDesc(); // 높은 평점순 정렬
 
 	public List<ReviewBoard> findAllByOrderByBoardStarAsc(); // 낮은 평점순 정렬
-
+	
+	
 }

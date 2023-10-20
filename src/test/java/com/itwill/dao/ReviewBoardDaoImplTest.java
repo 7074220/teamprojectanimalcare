@@ -28,7 +28,7 @@ class ReviewBoardDaoImplTest {
 	ProductDao productDao;
 	
 	@Test
-	@Disabled
+	//@Disabled
 	@Transactional
 	@Rollback(false)
 	void testCreate() {
@@ -37,10 +37,11 @@ class ReviewBoardDaoImplTest {
 								.boardTitle("이것은 타이틀")
 								.boardContent("이것은 내용")
 								.boardDate(LocalDate.now())
-								.boardStar(2L)
-								.userinfo(userInfoDao.findById("전아현"))
-								.product(productDao.findByProductNo(6L))
+								.boardStar(1L)
+								.userinfo(userInfoDao.findById("박태환"))
+								.product(productDao.findByProductNo(2L))
 								.build();
+		
 
 		reviewBoardDao.create(reviewBoard);
 		
@@ -50,7 +51,7 @@ class ReviewBoardDaoImplTest {
 	@Rollback(value = false)
 	@Disabled
 	void getReviewBoardByProduct_ProductNo() {
-		List<ReviewBoard> selectReviewBoard = reviewBoardDao.getReviewBoardByProductNo(6L);
+		List<ReviewBoard> selectReviewBoard = reviewBoardDao.getReviewBoardByProductNo(6L);	
 		System.out.println(selectReviewBoard);
 	}
 
@@ -64,6 +65,7 @@ class ReviewBoardDaoImplTest {
 	
 	@Test
 	@Transactional
+	@Disabled
 	void findAllByBoardStar() {
 		List<ReviewBoard> findAllByBoardStar = reviewBoardDao.findByStarAll(2L);
 		System.out.println(findAllByBoardStar);
