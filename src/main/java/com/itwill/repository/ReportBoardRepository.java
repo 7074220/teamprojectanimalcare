@@ -8,10 +8,12 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.itwill.entity.ReportBoard;
+import com.itwill.entity.ReviewBoard;
 import com.itwill.entity.Userinfo;
 
 public interface ReportBoardRepository extends JpaRepository<ReportBoard, Long>{
 	
+
 	@Query(value="select * from report_board where user_id=?1",nativeQuery = true)
 	public List<ReportBoard> findByUserId(String userId);
 	
