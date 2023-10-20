@@ -35,7 +35,8 @@ public class Product {
 	private String productCategory;
 	private Integer productQty;	
 	private String productImage;
-
+	//private String productDetailImage;
+	
 	private Integer productStarAvg;
 
 

@@ -74,9 +74,12 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	}
 	
 	@Test
-	@Disabled
+	//@Disabled
+	@Transactional
+	@Rollback(false)
 	// 강사님께 여쭤보기 ORA-01002 : fetch out of sequence
 	void deleteByUserIdTest(){
+		System.out.println(cartDao);
 		cartDao.deleteByUserId("전아현");
 	}
 	
@@ -96,7 +99,8 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	}
 	
 	@Test
-	//@Disabled
+	@Disabled
+	// SQL Error: 17006, SQLState: 99999 부적합한 열 이름
 	void cartTotalPriceTest() {
 		Cart totalPrice = cartDao.cartTotalPrice("전아현");
 		System.out.println(totalPrice);
