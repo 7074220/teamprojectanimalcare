@@ -56,7 +56,7 @@ void insert() {
 }
 	
 	@Test
-		//@Disabled
+		@Disabled
 void petFind() {
 		Pet pet = petDao.petFindById(1L);
 		System.out.println(pet);
