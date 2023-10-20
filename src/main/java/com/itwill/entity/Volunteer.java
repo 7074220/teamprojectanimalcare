@@ -23,7 +23,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@ToString(callSuper = true)
+//@ToString(callSuper = true)
 public class Volunteer {
  
 	@Id
@@ -38,7 +38,7 @@ public class Volunteer {
 	 * N : 1
 	 */
 	@Builder.Default
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
@@ -46,12 +46,11 @@ public class Volunteer {
 	/*
 	 * N : 1
 	 */
-	@ManyToOne(cascade = CascadeType.PERSIST)
 	@Builder.Default
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "center_no")
 	@ToString.Exclude
 	private Center center = new Center();
-	
 	
 
 }

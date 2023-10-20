@@ -46,7 +46,7 @@ public class ReportBoard {
 	private String boardName;
 	private String boardPhone;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST) // ManyToOne 확실한가?
+	@ManyToOne(cascade = CascadeType.PERSIST , fetch = FetchType.LAZY) // ManyToOne 확실한가?
 	@JoinColumn(name = "user_id")
 	@Builder.Default
 	@ToString.Exclude
