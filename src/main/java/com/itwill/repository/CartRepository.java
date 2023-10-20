@@ -1,5 +1,7 @@
 package com.itwill.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -26,8 +28,8 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
 	void deleteByUserId(String userId);
 	
 	// 카트에 담긴 모든 상품 합계 금액
-	@Query(value = "select SUM(p.product_price) from cart c join product p on c.product_no = p.product_no where c.user_id=?1", nativeQuery = true)
-	Cart cartTotalPrice(String userId);
+	//@Query(value = "select SUM(p.product_price) from cart c join product p on c.product_no = p.product_no where c.user_id=?1", nativeQuery = true)
+	//Integer cartTotalPrice(String userId);
 	
 	// 카트에 중복제품이 있으면 합산되어 담기도록
 	// select count(*) from product p join (select count(*) from cart c join userInfo u on c.u_id=u.u_id where u.u_id=#{u_id}) j on p.p_size=#{product.p_size} and p.p_no=#{product.p_no}
@@ -36,4 +38,8 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
 
 	// 카트에 담긴 모든 상품 출력
 	//List<Cart> findAll();
+	
+	// 카트에 담긴 모든 상품 출력 (아이디 별)
+	@Query(value = "select * from cart where user_id=?1", nativeQuery = true)
+	List<Cart> findAllCartByUserId(String userId);
 }
