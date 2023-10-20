@@ -33,6 +33,7 @@ public class Product {
 	private String productName;
 	private Integer productPrice;
 	private String productCategory;
+	private String productPetCategory;
 	private Integer productQty;	
 	private String productImage;
 
