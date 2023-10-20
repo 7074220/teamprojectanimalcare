@@ -13,6 +13,7 @@ import com.itwill.TeamprojectAnimalcareApplicationTest;
 import com.itwill.entity.Cart;
 import com.itwill.entity.Product;
 import com.itwill.entity.Userinfo;
+import com.itwill.repository.CartRepository;
 
 
 class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
@@ -98,11 +99,24 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	}
 	
 	@Test
-	//@Disabled
-	// SQL Error: 17006, SQLState: 99999 부적합한 열 이름
+
+	@Disabled
+	@Transactional
+	@Rollback(false)
 	void cartTotalPriceTest() {
-		Cart totalPrice = cartDao.cartTotalPrice("김창섭");
+
+		Integer totalPrice = cartDao.cartTotalPrice("김창섭");
 		System.out.println(totalPrice);
+		
+	}
+	
+	@Test
+	@Disabled
+	@Transactional
+	@Rollback(false)
+	void findAllCartbyUserIdTest() {
+		List<Cart> carts = cartDao.findAllCartByUserId("박태환");
+		System.out.println(carts);
 	}
 	
 }

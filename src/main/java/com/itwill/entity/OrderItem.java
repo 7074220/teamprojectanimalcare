@@ -27,8 +27,8 @@ import lombok.NoArgsConstructor;
 public class OrderItem {
 
 	@Id
-	@SequenceGenerator(name = "oi_no_seq",sequenceName = "oi_no_seq",allocationSize = 1,initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "oi_no_seq")
+	@SequenceGenerator(name = "oi_oi_no_seq",sequenceName = "oi_oi_no_seq",allocationSize = 1,initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "oi_oi_no_seq")
 	private Long oiNo;
 	private Integer oiQty;
 	

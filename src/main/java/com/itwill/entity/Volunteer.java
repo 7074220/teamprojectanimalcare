@@ -27,8 +27,8 @@ import lombok.ToString;
 public class Volunteer {
  
 	@Id
-	@SequenceGenerator(name = "volunteer_no_seq",sequenceName ="volunteer_no_seq",allocationSize = 1,initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "volunteer_no_seq")
+	@SequenceGenerator(name = "volunteer_volunteer_no_seq",sequenceName ="volunteer_volunteer_no_seq",allocationSize = 1,initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "volunteer_volunteer_no_seq")
 	private Long volunteerNo; // PK
 	private Long volunteerTime;
 	private LocalDate volunteerDate;

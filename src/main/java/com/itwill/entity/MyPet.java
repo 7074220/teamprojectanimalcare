@@ -30,8 +30,8 @@ import lombok.ToString;
 public class MyPet {
 	
 	@Id
-	@SequenceGenerator(name = "mypet_no_seq",sequenceName = "mypet_no_seq",allocationSize = 1,initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "mypet_no_seq")
+	@SequenceGenerator(name = "mypet_mypet_no_seq",sequenceName = "mypet_mypet_no_seq",allocationSize = 1,initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "mypet_mypet_no_seq")
 	private Long mypetNo;
 	private String mypetName;
 	private LocalDateTime mypetBirthday;

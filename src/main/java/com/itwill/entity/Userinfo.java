@@ -78,4 +78,8 @@ public class Userinfo {
 	@Builder.Default
 	List<Adopt> adopts = new ArrayList<Adopt>();
 	
+	@OneToMany(mappedBy = "userinfo",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@Builder.Default
+	List<ReplyBoard> replyBoards = new ArrayList<ReplyBoard>();
+	
 }

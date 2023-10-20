@@ -29,8 +29,8 @@ import lombok.ToString;
 public class Visit {
 
 	@Id
-	@SequenceGenerator(name = "visit_no_seq", sequenceName = "visit_no_seq", allocationSize = 1, initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "visit_no_seq")
+	@SequenceGenerator(name = "vist_visit_no_seq", sequenceName = "vist_visit_no_seq", allocationSize = 1, initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vist_visit_no_seq")
 	private Long visitNo;// PK
 
 	private Long visitTime;

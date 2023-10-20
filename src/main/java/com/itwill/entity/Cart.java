@@ -7,6 +7,7 @@ import org.apache.commons.lang3.builder.ToStringExclude;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,17 +31,17 @@ import lombok.ToString;
 public class Cart {
 	
 	@Id
-	@SequenceGenerator(name = "cart_no_seq",sequenceName = "cart_no_seq",allocationSize = 1,initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "cart_no_seq")
+	@SequenceGenerator(name = "cart_cart_no_seq",sequenceName = "cart_cart_no_seq",allocationSize = 1,initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "cart_cart_no_seq")
 	private Long cartNo;
 	private Integer cartQty;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@Builder.Default
 	@JoinColumn(name = "product_no")
 	private Product product = new Product();

@@ -27,8 +27,8 @@ import lombok.NoArgsConstructor;
 public class Center {
 
 	@Id
-	@SequenceGenerator(name = "center_no_seq", sequenceName = "center_no_seq", allocationSize = 1, initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "center_no_seq")
+	@SequenceGenerator(name = "center_center_no_seq", sequenceName = "center_center_no_seq", allocationSize = 1, initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "center_center_no_seq")
 	private Long centerNo;
 	private String centerName;
 	private String centerPhoneNumber;

@@ -12,15 +12,16 @@ public interface ReplyBoardDao {
 	public ReplyBoard Create(ReplyBoard replyBoard);
 	
 	// 작성자 비교후 삭제
-	public void deleteByWriter(String writer);
+	public void deleteByUserId(String userId);
 	
 	// 댓글 수정
-	public ReplyBoard update(String writer);
+	public ReplyBoard update(ReplyBoard replyBoard);
 	
 	//작성자가 쓴 글 목록 
-	public List<ReplyBoard> findByWriter(String writer);
+	public List<ReplyBoard> findByUserId(String userId);
 	
-	//like 검색 기능 
-	public List<ReplyBoard> findAllByLikeWriter(String writer);
+	// 오래된 순서
+	public List<ReplyBoard> findAllByOrderByReplyBoardNoAsc();
+	
 	
 }

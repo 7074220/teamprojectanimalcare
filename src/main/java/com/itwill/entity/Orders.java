@@ -29,8 +29,8 @@ import lombok.ToString;
 @Data
 public class Orders {
 	@Id
-	@SequenceGenerator(name = "orders_order_no_seq",sequenceName = "orders_order_no_seq",initialValue = 1,allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "orders_order_no_seq")
+	@SequenceGenerator(name = "orders_orders_no_seq",sequenceName = "orders_orders_no_seq",initialValue = 1,allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "orders_orders_no_seq")
 	private Long orderNo;
 	@CreationTimestamp
 	private LocalDate orderDate;
