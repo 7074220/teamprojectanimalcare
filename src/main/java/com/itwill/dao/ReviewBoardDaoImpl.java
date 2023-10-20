@@ -49,5 +49,23 @@ public class ReviewBoardDaoImpl implements ReviewBoardDao{
 		return reviewBoardRepository.findByStarUserId(star);
 	}
 	*/
+
+	@Override
+	public List<ReviewBoard> findByUserinfoUserId(String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ReviewBoard> findAllByOrderByReviewStarAvgDesc() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ReviewBoard> findAllByOrderByReviewStarAvgAsc() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
