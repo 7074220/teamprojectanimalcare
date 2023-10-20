@@ -80,7 +80,7 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	// 강사님께 여쭤보기 ORA-01002 : fetch out of sequence
 	void deleteByUserIdTest(){
 		System.out.println(cartDao);
-		cartDao.deleteByUserId("전아현");
+		cartDao.deleteByUserId("박태환");
 	}
 	
 	@Test
