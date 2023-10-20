@@ -12,14 +12,14 @@ public interface OrderService {
 	Orders insertOrder(Orders order);
 	
 	
-	Orders modifyOrder(Orders order);
+	Orders modifyOrder(Orders order) throws Exception;
 	//주문삭제 관리자전용
-	void removeOrder(Long orderNo);
+	void removeOrder(Long orderNo) throws Exception;
 	//주문 전체 조회 , 관리자전용
 	List<Orders> findOrders();
 	
 	//주문 번호로 조회
-	List<Orders> findOrderByNo(Long orderNo);
+	Orders findOrderByNo(Long orderNo);
 	
 	//회원아이디로 주문조회
 	List<Orders> findOrderById(String userId);
