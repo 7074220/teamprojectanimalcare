@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.itwill.entity.ReportBoard;
@@ -17,6 +18,7 @@ public interface ReportBoardRepository extends JpaRepository<ReportBoard, Long>{
 	@Query(value="select * from report_board where user_id like '%'|| ?1 || '%'",nativeQuery = true)
 	public List<ReportBoard> findAllByLikeUserId(String userId);
 	
+	@Modifying(clearAutomatically = true)
 	@Query(value="update report_board set board_read_count=board_read_count+1 where board_no=?1",nativeQuery = true)
 	public void countReadCount(Long boardNo);
 

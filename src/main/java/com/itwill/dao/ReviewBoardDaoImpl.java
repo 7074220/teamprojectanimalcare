@@ -51,6 +51,7 @@ public class ReviewBoardDaoImpl implements ReviewBoardDao{
 	*/
 
 	// userId로 리뷰 리스트 나오기
+	/*
 	@Override
 	public List<ReviewBoard> findByUserinfoUserId(String userId) {
 		return reviewBoardRepository.findByUserinfoUserId(userId);
@@ -65,5 +66,5 @@ public class ReviewBoardDaoImpl implements ReviewBoardDao{
 	public List<ReviewBoard> findAllByOrderByboardStarAsc() {
 		return reviewBoardRepository.findAllByOrderByboardStarAsc();
 	}
-	
+	*/
 }
