@@ -28,19 +28,18 @@ class ReviewBoardDaoImplTest {
 	ProductDao productDao;
 	
 	@Test
-	//@Disabled
+	@Disabled
 	@Transactional
 	@Rollback(false)
 	void testCreate() {
-		Userinfo userinfo = userInfoDao.findById("전아현");
-		Product product = productDao.findByProductNo(4L);
+	
 		ReviewBoard reviewBoard = ReviewBoard.builder()
 								.boardTitle("이것은 타이틀")
 								.boardContent("이것은 내용")
 								.boardDate(LocalDate.now())
 								.boardStar(2L)
-								.userinfo(userinfo)
-								.product(product)
+								.userinfo(userInfoDao.findById("전아현"))
+								.product(productDao.findByProductNo(6L))
 								.build();
 
 		reviewBoardDao.create(reviewBoard);
@@ -50,11 +49,26 @@ class ReviewBoardDaoImplTest {
 	@Transactional
 	@Rollback(value = false)
 	@Disabled
-	void getReviewBoardByProductNo() {
-		List<ReviewBoard> selectReviewBoard = reviewBoardDao.getReviewBoardByProductNo(1L);
+	void getReviewBoardByProduct_ProductNo() {
+		List<ReviewBoard> selectReviewBoard = reviewBoardDao.getReviewBoardByProductNo(6L);
 		System.out.println(selectReviewBoard);
 	}
 
+	@Test
+	@Transactional
+	@Disabled
+	void findByUserId() {
+		List<ReviewBoard> findByUserIdReviewBoard = reviewBoardDao.findAllByUserIdUserinfo("박태환");
+		System.out.println(findByUserIdReviewBoard);
+	}
+	
+	@Test
+	@Transactional
+	void findAllByBoardStar() {
+		List<ReviewBoard> findAllByBoardStar = reviewBoardDao.findByStarAll(2L);
+		System.out.println(findAllByBoardStar);
+	}
+	
 	 /*
 	 * 
 	 * @Test
