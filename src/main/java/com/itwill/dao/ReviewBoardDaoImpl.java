@@ -53,18 +53,19 @@ public class ReviewBoardDaoImpl implements ReviewBoardDao{
 	// userId로 리뷰 리스트 나오기
 	/*
 	@Override
-	public List<ReviewBoard> findByUserinfoUserId(String userId) {
-		return reviewBoardRepository.findByUserinfoUserId(userId);
+	public List<ReviewBoard> findAllByUserIdUserinfo(String userId) {
+		return reviewBoardRepository.findAllById(userId);
 	}
+	*/
 	// 높은평점순 정렬
 	@Override
-	public List<ReviewBoard> findAllByOrderByboardStarDesc() {
-		return reviewBoardRepository.findAllByOrderByboardStarDesc();
+	public List<ReviewBoard> findAllByOrderByBoardStarDesc() {
+		return reviewBoardRepository.findAllByOrderByBoardStarDesc();
 	}
 	// 낮은평점순 정렬
 	@Override
-	public List<ReviewBoard> findAllByOrderByboardStarAsc() {
-		return reviewBoardRepository.findAllByOrderByboardStarAsc();
+	public List<ReviewBoard> findAllByOrderByBoardStarAsc() {
+		return reviewBoardRepository.findAllByOrderByBoardStarAsc();
 	}
-	*/
+	
 }
