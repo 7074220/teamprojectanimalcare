@@ -16,13 +16,13 @@ public class VolunteerDaoImpl implements VolunteerDao{
 
 	@Override
 	public Volunteer insertVolunteer(Volunteer volunteer) {
-		Volunteer savedVolunteer = volunteerRepository.save(volunteer);
-		return savedVolunteer;
+		volunteerRepository.save(volunteer);
+		return volunteer;
 	}
 
 	@Override
-	public Volunteer findByVolunteerNo(Long volunteerNo) {
-		return volunteerRepository.findById(volunteerNo).get();
+	public Volunteer findByVolunteerNo(Long no) {
+		return volunteerRepository.findById(no).get();
 	}
 
 	@Override
@@ -41,15 +41,22 @@ public class VolunteerDaoImpl implements VolunteerDao{
 	}
 
 	@Override
-	public void deleteVolunteer(Long volunteerNo) {
-		volunteerRepository.deleteById(volunteerNo);
+	public void deleteVolunteer(Long no) {
+		volunteerRepository.deleteById(no);
 		
 	}
 
 	@Override
-	public List<Volunteer> findAllVolunteer() {
+	public List<Volunteer> findVolunteerList() {
 		return volunteerRepository.findAll();
 	}
 
+	
+	@Override
+	public List<Volunteer> findVolunteertByUserId(String userId) {
+		List<Volunteer> volunteerList = volunteerRepository.findVolunteertByUserId(userId);
+		return volunteerList;
+	}
+	
 	
 }

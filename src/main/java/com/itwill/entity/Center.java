@@ -6,6 +6,7 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,20 +20,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-
 @Builder
-
 @Data
-
 @AllArgsConstructor
-
 @NoArgsConstructor
 public class Center {
 
 	@Id
-
 	@SequenceGenerator(name = "center_no_seq", sequenceName = "center_no_seq", allocationSize = 1, initialValue = 1)
-
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "center_no_seq")
 	private Long centerNo;
 	private String centerName;
@@ -40,15 +35,15 @@ public class Center {
 	private String centerLocal;
 	private String centerOpenCloseTime;
 
-	@OneToMany(mappedBy = "center", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "center", cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	@Builder.Default
 	List<Visit> visits = new ArrayList<Visit>();
 
-	@OneToMany(mappedBy = "center", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "center", cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	@Builder.Default
 	List<Volunteer> volunteers = new ArrayList<Volunteer>();
 
-	@OneToMany(mappedBy = "center", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "center", cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	@Builder.Default
 	List<Pet> pets = new ArrayList<Pet>();
 	
