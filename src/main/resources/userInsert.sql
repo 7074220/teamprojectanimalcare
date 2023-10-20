@@ -17,9 +17,9 @@ insert into product(product_no, product_name, product_price, product_category, p
 
 -- cart insert
 
-insert into cart(cart_no, cart_qty, product_no, user_id) values(cart_cart_no_SEQ.nextval, 3, 1, '김창섭');
-insert into cart(cart_no, cart_qty, product_no, user_id) values(cart_cart_no_SEQ.nextval, 4, 2, '김창섭');
-insert into cart(cart_no, cart_qty, product_no, user_id) values(cart_cart_no_SEQ.nextval, 5, 3, '김창섭');
+insert into cart(cart_no, cart_qty, product_no, user_id) values(cart_cart_no_SEQ.nextval, 1, 1, '김창섭');
+insert into cart(cart_no, cart_qty, product_no, user_id) values(cart_cart_no_SEQ.nextval, 2, 2, '김창섭');
+insert into cart(cart_no, cart_qty, product_no, user_id) values(cart_cart_no_SEQ.nextval, 3, 3, '김창섭');
 
 insert into cart(cart_no, cart_qty, product_no, user_id) values(cart_cart_no_SEQ.nextval, 1, 4, '박태환');
 insert into cart(cart_no, cart_qty, product_no, user_id) values(cart_cart_no_SEQ.nextval, 2, 5, '박태환');
