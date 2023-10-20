@@ -6,6 +6,7 @@ import org.apache.commons.lang3.builder.ToStringExclude;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,11 +34,14 @@ public class Product {
 	private String productName;
 	private Integer productPrice;
 	private String productCategory;
+	private String productPetCategory;
 	private Integer productQty;	
 	private String productImage;
 	//private String productDetailImage;
 	
 	private Integer productStarAvg;
-
-
+	
+	@OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@Builder.Default
+	List<ReviewBoard> reviewBoards = new ArrayList<ReviewBoard>(); 
 }

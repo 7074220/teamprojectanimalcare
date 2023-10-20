@@ -19,14 +19,15 @@ class OrdersDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 @Autowired 
 private OrdersDao ordersDao;
 	
-//유저아이디로 주문조회
+//유저아이디로 최신주문조회
 @Test
-@Disabled
+//@Disabled
 @Transactional
 @Rollback(false)
 	void findOrdersById() {
 		
-	List<Orders> orders = ordersDao.findOrdersById("박태환");
+	List<Orders> orders = ordersDao.findAllByUserIdDESC("박태환");
+	
 	System.out.println(orders);
 	}
 
