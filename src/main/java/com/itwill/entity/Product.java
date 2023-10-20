@@ -40,5 +40,5 @@ public class Product {
 	
 	private Integer productStarAvg;
 
-
+ 
 }
