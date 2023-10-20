@@ -21,7 +21,7 @@ UserInfoService userInfoService;
 	@Test
 	@Transactional
 	
-	//@Disabled
+	@Disabled
 	void insert() throws Exception{
 		Userinfo user=userInfoService.findUser("김창섭");
 	
@@ -46,5 +46,51 @@ UserInfoService userInfoService;
 	orderService.modifyOrder(order);
 		
 	}
+	
+
+	@Test
+	@Transactional
+	@Rollback(false)
+	@Disabled
+	void delete() throws Exception{
+		orderService.removeOrder(1L);
+		
+	}
+	@Test
+	@Transactional
+	@Rollback(false)
+	@Disabled
+	void findOrders() throws Exception{
+		System.out.println(orderService.findOrders());
+		
+	}
+	@Test
+	@Transactional
+	@Rollback(false)
+	@Disabled
+	void findOrdersByNo() throws Exception{
+		System.out.println(orderService.findOrderByNo(2L));
+		
+	}
+	
+	@Test
+	@Transactional
+	@Rollback(false)
+	@Disabled
+	void findOrdersById() throws Exception{
+		System.out.println(orderService.findOrderById("박태환"));
+		
+	}
+	@Test
+	@Transactional
+	@Rollback(false)
+	//@Disabled
+	void findOrderByIdDesc() throws Exception{
+		System.out.println(orderService.findOrderByIdDesc("박태환"));
+		
+	}
+	
+	
+	
 
 }
