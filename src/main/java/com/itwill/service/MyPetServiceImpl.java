@@ -32,7 +32,7 @@ public class MyPetServiceImpl implements MyPetService{
 		return myPetDao.UpdatePet(myPet);
 	}
 	
-	// 마이펫 리스트
+	// 마이펫 전체 리스트
 	@Override
 	public List<MyPet> findAll() {
 		return myPetDao.findAll();

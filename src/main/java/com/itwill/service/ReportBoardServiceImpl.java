@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.dao.ReportBoardDao;
 import com.itwill.entity.ReportBoard;
@@ -19,7 +20,7 @@ public class ReportBoardServiceImpl implements ReportBoardService{
 		
 		return reportBoardDao.Create(repordBoard);
 	}
-
+	
 	@Override
 	public void deleteById(Long reportBoardNo) {
 		reportBoardDao.deleteById(reportBoardNo);
@@ -28,19 +29,16 @@ public class ReportBoardServiceImpl implements ReportBoardService{
 
 	@Override
 	public ReportBoard update(ReportBoard reportBoard) {
-		
 		return reportBoardDao.update(reportBoard);
 	}
-
+	
 	@Override
 	public List<ReportBoard> findByUserId(String userId) {
-		
 		return reportBoardDao.findByUserId(userId);
 	}
 
 	@Override
 	public List<ReportBoard> findAllByLikeUserId(String userId) {
-		
 		return reportBoardDao.findAllByLikeUserId(userId);
 	}
 
@@ -50,9 +48,8 @@ public class ReportBoardServiceImpl implements ReportBoardService{
 	}
 
 	@Override
-	public Integer countReadCount(Long boardNo) {
-		
-		return reportBoardDao.countReadCount(boardNo);
+	public void countReadCount(Long boardNo) {
+		reportBoardDao.countReadCount(boardNo);
 	}
 
 }

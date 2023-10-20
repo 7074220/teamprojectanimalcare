@@ -29,7 +29,7 @@ public interface ReportBoardService {
 	public ReportBoard findByBoardNo(Long reportNo);
 	
 	//조회수 1증가
-	public Integer countReadCount(Long boardNo);
+	public void countReadCount(Long boardNo);
 	
 	
 	

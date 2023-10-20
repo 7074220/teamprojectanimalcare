@@ -16,5 +16,5 @@ public interface AdoptDao {
 
 	public List<Adopt> findAdoptList();
 
-	public List<Adopt> findAdoptListByUserId(String userId);
+	public List<Adopt> findByUserinfoUserId(String userId);
 }

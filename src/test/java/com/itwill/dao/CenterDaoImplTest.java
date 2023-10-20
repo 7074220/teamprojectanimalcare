@@ -11,11 +11,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
 import com.itwill.entity.Center;
-import com.itwill.entity.Userinfo;
+import com.itwill.entity.Visit;
+import com.itwill.repository.VisitRepository;
 
 import jakarta.transaction.Transactional;
 @SpringBootTest
-class CenterDaoTest {
+class CenterDaoImplTest {
 	@Autowired
 	CenterDao centerDao;
 
@@ -28,7 +29,7 @@ class CenterDaoTest {
 
 		Center center = Center.builder()
 				.centerNo(null)
-				.centerName("아이티보호소")
+				.centerName("ABC보호소")
 				.centerPhoneNumber("010-1234-1234")
 				.centerOpenCloseTime("09:00~17:00")
 				.centerLocal("서울")
