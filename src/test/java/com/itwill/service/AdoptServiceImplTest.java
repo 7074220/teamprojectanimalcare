@@ -27,27 +27,38 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	@Transactional
 	@Rollback(false)
-	//@Disabled
+	@Disabled
 	void insertTest() throws Exception {
 		Userinfo user=userInfoService.findUser("박태환");
-		Pet pet=petService.petFindById(1L);
+		Pet pet1=petService.petFindById(10L);
+		Pet pet2=petService.petFindById(11L);
 		
-		Adopt insertAdopt = Adopt.builder()
+		Adopt insertAdopt1 = Adopt.builder()
 				.adoptDate(LocalDate.now())
 				.adoptTime(13L)
 				.status("입양신청")
-				.pet(pet)
+				.pet(pet1)
 				.userinfo(user)
 				.build();
-		adoptService.insertAdopt(insertAdopt);
+		adoptService.insertAdopt(insertAdopt1);
+		Adopt insertAdopt2 = Adopt.builder()
+				.adoptDate(LocalDate.now())
+				.adoptTime(16L)
+				.status("입양완료")
+				.pet(pet2)
+				.userinfo(user)
+				.build();
+		adoptService.insertAdopt(insertAdopt2);
 	}
 	
 	@Test
 	@Disabled
 	@Transactional
 	@Rollback(false)
-	void updateTest() {
-		
+	void updateTest() throws Exception{
+		Adopt adopt=adoptService.findByNoAdopt(9L);
+			adopt.setStatus("입양중");
+			adoptService.updateAdopt(adopt);
 	}
 	
 	@Test
@@ -55,7 +66,7 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(false)
 	void deleteTest() throws Exception {
-		adoptService.deleteAdopt(null);
+		adoptService.deleteAdopt(9L);
 	}
 	
 	@Test
@@ -63,7 +74,8 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(false)
 	void findByNoTest() {
-		adoptService.findByNoAdopt(null);
+		adoptService.findByNoAdopt(9L);
+		System.out.println(adoptService.findByNoAdopt(9L));
 	}
 	
 	@Test
@@ -71,7 +83,7 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(false)
 	void findAllTest() {
-		adoptService.findAdoptList();
+		System.out.println(adoptService.findAdoptList());
 	}
 	
 	
@@ -80,7 +92,7 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(false)
 	void findByUserinfoUserIdTest() {
-		adoptService.findByUserinfoUserId("박태환");
+		System.out.println(	adoptService.findByUserinfoUserId("박태환"));
 	}
 	
 	
