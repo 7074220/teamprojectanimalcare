@@ -29,19 +29,16 @@ public class ReportBoardServiceImpl implements ReportBoardService{
 
 	@Override
 	public ReportBoard update(ReportBoard reportBoard) {
-		
 		return reportBoardDao.update(reportBoard);
 	}
 	
 	@Override
 	public List<ReportBoard> findByUserId(String userId) {
-		
 		return reportBoardDao.findByUserId(userId);
 	}
 
 	@Override
 	public List<ReportBoard> findAllByLikeUserId(String userId) {
-		
 		return reportBoardDao.findAllByLikeUserId(userId);
 	}
 
@@ -51,9 +48,8 @@ public class ReportBoardServiceImpl implements ReportBoardService{
 	}
 
 	@Override
-	public Integer countReadCount(Long boardNo) {
-		
-		return reportBoardDao.countReadCount(boardNo);
+	public void countReadCount(Long boardNo) {
+		reportBoardDao.countReadCount(boardNo);
 	}
 
 }
