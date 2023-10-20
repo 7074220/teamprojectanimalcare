@@ -70,11 +70,11 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	}
 
 	@Test
-	//@Disabled
+	@Disabled
 	@Transactional
 	@Rollback(value = false)
 	void testDeleteVolunteer() throws Exception{
-		volunteerDao.deleteVolunteer(11L);
+		volunteerDao.deleteVolunteer(1L);
 	}
 	
 	
