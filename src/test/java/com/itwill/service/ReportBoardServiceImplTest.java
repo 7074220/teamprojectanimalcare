@@ -2,6 +2,7 @@ package com.itwill.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -19,11 +20,15 @@ class ReportBoardServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	UserInfoDao userInfoDao;
 	
 	@Autowired
+	ReportBoardService reportBoardService;
+	
+	@Autowired
 	ReportBoardDao reportBoardDao;
 	
 	@Test
 	@Transactional
 	@Rollback(false)
+	@Disabled
 	void test() {
 		Userinfo userinfo = userInfoDao.findById("전아현");
 		ReportBoard reportBoard = ReportBoard.builder()
@@ -39,7 +44,15 @@ class ReportBoardServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 									.boardTitle("제목")
 									.userinfo(userinfo)
 									.build();
-		reportBoardDao.Create(reportBoard);
+		reportBoardService.Create(reportBoard);
+	}
+	
+	@Test
+	@Transactional
+	@Rollback(false)
+	//@Disabled
+	void test2() {
+		reportBoardDao.deleteById(10L);
 	}
 
 }
