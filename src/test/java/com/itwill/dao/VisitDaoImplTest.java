@@ -14,6 +14,7 @@ import org.springframework.test.annotation.Rollback;
 import com.itwill.entity.Visit;
 
 import jakarta.transaction.Transactional;
+
 @SpringBootTest
 class VisitDaoImplTest {
 
@@ -29,19 +30,15 @@ class VisitDaoImplTest {
 	@Transactional
 	@Rollback(false)
 	@Test
-	//@Disabled
+	// @Disabled
 	void insetVisit() {
 		Visit visit = Visit.builder()
-			
-				.visitDate(LocalDate.now())
-				.visitstatus("접수완료")
-				.visitTime(7L)
-				.userinfo(userInfoDao.findById("박태환"))
-				.center(centerDao.findByCenterNo(4L))
-				.build();
+
+				.visitDate(LocalDate.now()).visitstatus("접수완료").visitTime(7L).userinfo(userInfoDao.findById("박태환"))
+				.center(centerDao.findByCenterNo(4L)).build();
 		visitDao.createVisit(visit);
 	}
-	
+
 	@Test
 	@Transactional
 	@Disabled
@@ -49,14 +46,15 @@ class VisitDaoImplTest {
 		Visit selectVisit = visitDao.findByVisitNo(2L);
 		System.out.println(selectVisit);
 	}
-	
+
 	@Test
 	@Transactional
 	@Rollback(value = false)
 	@Disabled
-	void deleteVisit()throws Exception {
+	void deleteVisit() throws Exception {
 		visitDao.deleteVisit(1L);
 	}
+
 	@Test
 	@Transactional
 	@Rollback(value = false)
@@ -66,7 +64,7 @@ class VisitDaoImplTest {
 		findVisit.setVisitstatus("대기중");
 		System.out.println(findVisit);
 	}
-	
+
 	@Test
 	@Transactional
 	@Rollback(value = false)
@@ -77,6 +75,3 @@ class VisitDaoImplTest {
 	}
 
 }
-
-
-
