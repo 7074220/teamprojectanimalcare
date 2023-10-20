@@ -87,7 +87,7 @@ class ReportBoardServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	//@Disabled
 	void test6() {
-		reportBoardService.countReadCount(8L);
+		reportBoardService.countReadCount(1L);
 	}
 	
 }
