@@ -37,8 +37,14 @@ public class ReviewBoard {
 	private Long boardStar;
 
 	@Builder.Default
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
+	
+	@Builder.Default
+	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@JoinColumn(name = "product_no")
+	@ToString.Exclude
+	private Product product = new Product();
 }
