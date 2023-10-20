@@ -36,7 +36,7 @@ class CouponServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 
 	@Transactional
 	@Rollback(false)
-	//@Disabled
+	// @Disabled
 	@Test
 	void test1() {
 
@@ -53,18 +53,16 @@ class CouponServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 		List<Coupon> coupons = couponService.findAll();
 		System.out.println(coupons);
 	}
-	
+
 	@Transactional
 	@Rollback(false)
 	@Disabled
 	@Test
 	void test3() {
-		
-	Coupon coupon=couponService.findById(1L);
-	System.out.println(coupon);
-		
+
+		Coupon coupon = couponService.findById(1L);
+		System.out.println(coupon);
+
 	}
-	
-	
 
 }
