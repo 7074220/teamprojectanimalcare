@@ -20,7 +20,7 @@ public class ReportBoardServiceImpl implements ReportBoardService{
 		
 		return reportBoardDao.Create(repordBoard);
 	}
-
+	
 	@Override
 	public void deleteById(Long reportBoardNo) {
 		reportBoardDao.deleteById(reportBoardNo);
@@ -32,7 +32,7 @@ public class ReportBoardServiceImpl implements ReportBoardService{
 		
 		return reportBoardDao.update(reportBoard);
 	}
-
+	
 	@Override
 	public List<ReportBoard> findByUserId(String userId) {
 		

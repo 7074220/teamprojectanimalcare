@@ -22,9 +22,6 @@ class ReportBoardServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Autowired
 	ReportBoardService reportBoardService;
 	
-	@Autowired
-	ReportBoardDao reportBoardDao;
-	
 	@Test
 	@Transactional
 	@Rollback(false)
@@ -50,9 +47,19 @@ class ReportBoardServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	@Transactional
 	@Rollback(false)
-	//@Disabled
+	@Disabled
 	void test2() {
-		reportBoardDao.deleteById(10L);
+		reportBoardService.deleteById(9L);
 	}
-
+	
+	@Test
+	@Transactional
+	@Rollback(false)
+	//@Disabled
+	void test3() {
+		ReportBoard reportBoard = reportBoardService.findByBoardNo(8L);
+		reportBoard.setBoardContent("내용수정");
+		reportBoardService.update(reportBoard);
+	}
+	
 }
