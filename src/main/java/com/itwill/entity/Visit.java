@@ -14,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +27,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "visit")
 public class Visit {
 
 	@Id
@@ -37,11 +39,11 @@ public class Visit {
 
 	private LocalDate visitDate;
 
-	private String visitstatus;
+	private String visitStatus;
 
 	@Builder.Default
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_Id")
+	@JoinColumn(name = "user_no")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
 
@@ -50,8 +52,9 @@ public class Visit {
 	@JoinColumn(name = "center_no")
 	@ToString.Exclude
 	private Center center = new Center();
+	/*
 	 public String getCenterName() {
 	        return center.getCenterName();
 	    }
-
+	*/
 }

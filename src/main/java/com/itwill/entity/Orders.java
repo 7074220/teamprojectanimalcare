@@ -40,7 +40,7 @@ public class Orders {
 	
 	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@Builder.Default
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_no")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
 	

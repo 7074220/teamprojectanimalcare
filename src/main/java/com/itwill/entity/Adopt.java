@@ -1,8 +1,8 @@
 package com.itwill.entity;
 
 
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringExclude;
@@ -39,16 +39,15 @@ public class Adopt {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "adopt_adopt_no_seq")
 	private Long adoptNo; // pk
 	private Long adoptTime;
-	
-	private LocalDate adoptDate;
-	private String status;
+	private Date adoptDate;
+	private String adoptStatus;
 	
 	/*
 	 * N:1
 	 */
 	@Builder.Default
 	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_no")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
 	
@@ -57,4 +56,5 @@ public class Adopt {
 	@ToString.Exclude
 	@JoinColumn(name = "pet_no")
 	private Pet pet = new Pet();
+	
 }

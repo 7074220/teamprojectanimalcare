@@ -15,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,6 +26,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
+@Table(name="replyboard")
 public class ReplyBoard {
 	
 	@Id
@@ -39,7 +41,7 @@ public class ReplyBoard {
 	private Integer ReplyBoardDepth;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_Id")
+	@JoinColumn(name = "user_no")
 	@Builder.Default
 	Userinfo userinfo = new Userinfo();
 	

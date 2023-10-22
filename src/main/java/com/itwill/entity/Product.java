@@ -35,7 +35,7 @@ public class Product {
 	private Integer productPrice;
 	private String productCategory;
 	private String productPetCategory;
-	private Integer productQty;	
+	private Integer productQty;
 	private String productImage;
 	//private String productDetailImage;
 	

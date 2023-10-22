@@ -44,7 +44,7 @@ public class OrderItem {
 	
 	@OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	@Builder.Default
-	@JoinColumn(name = "orderStatus_no")
+	@JoinColumn(name = "orderstatus_no")
 	private OrderStatus orderStatus = new OrderStatus();
 	
 

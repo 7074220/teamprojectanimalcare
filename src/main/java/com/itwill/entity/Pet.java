@@ -36,7 +36,7 @@ public class Pet {
 	 private Long petNo;
 	 private String petLocal;
 	 private String petType;
-	 private String petgender;
+	 private String petGender;
 	 private LocalDate  petRegisterDate;
 	 private String petFindPlace;
 	 private String petCharacter;
