@@ -16,24 +16,27 @@ public interface CartService {
 	Cart findByCartNo(Long no);
 
 	// 카트에 담긴 상품 전체삭제
-	void deleteByUserId(String userId) throws Exception;
+	void deleteByUserId(Long no) throws Exception;
 
 	// 카트에서 선택한 상품만 삭제
 	void deleteById(Long no) throws Exception;
 
 	// 카트에 담긴 모든 상품 합계 금액
-	Integer cartTotalPrice(String userId);
+	Integer cartTotalPrice(Long userNo);
 
 	// 카트에 중복제품이 있으면 (중복체크) --> 업데이트 돼서 담기도록
 	Cart updateOverlapCart(Cart overlapCart);
+	
+	// 중복된 상품이 있는 카트
+	Cart findByProductUserNo(Long userNo, Long productNo);
 
 	// 카트 중복체크
-	Integer countProductByUserId(String userId, Long no);
+	Integer countProductByUserId(Long userNo, Long productNo);
 
 	// 카트에 담긴 모든 상품 출력
 	List<Cart> findAll();
 
 	// 카트에 담긴 모든 상품 출력 (아이디 별)
-	List<Cart> findAllCartByUserId(String userId);
+	List<Cart> findAllCartByUserId(Long userNo);
 
 }

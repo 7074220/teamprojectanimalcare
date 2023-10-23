@@ -57,7 +57,7 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(false)
 	void updateTest() throws Exception{
-		Adopt adopt=adoptService.findByNoAdopt(9L);
+		Adopt adopt=adoptService.findByAdoptNo(9L);
 			adopt.setAdoptStatus("입양중");
 			adoptService.updateAdopt(adopt);
 	}
@@ -75,8 +75,8 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(false)
 	void findByNoTest() {
-		adoptService.findByNoAdopt(2L);
-		System.out.println(adoptService.findByNoAdopt(2L));
+		adoptService.findByAdoptNo(2L);
+		System.out.println(adoptService.findByAdoptNo(2L));
 	}
 	
 	@Test

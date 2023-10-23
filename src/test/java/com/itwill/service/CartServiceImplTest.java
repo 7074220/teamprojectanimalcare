@@ -30,14 +30,15 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	@Transactional
 	@Rollback(false)
-	//@Disabled
+	@Disabled
 	void insertCart() {
-		Userinfo userinfo = userInfoDao.findByNo(1L);
+		Userinfo userinfo = userInfoDao.findByNo(6L);
 		Product product = productDao.findByProductNo(1L);
 		Cart cart = Cart.builder()
 				.cartNo(null)
 				.cartQty(1)
 				.userinfo(userinfo)
+				.product(product)
 				.cartImage(product.getProductImage())
 				.build();
 		Cart babo = cartService.insertCart(cart);
@@ -72,7 +73,7 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	// 선택된 userId cart에 담긴 모든 상품 삭제
 	void deleteByUserIdTest() throws Exception {
-		cartService.deleteByUserId("전아현");
+		cartService.deleteByUserId(1L);
 	}
 	
 	@Test
@@ -81,7 +82,7 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	// 카트에서 선택한 상품만 삭제
 	void deleteByIdTest() throws Exception {
-		cartService.deleteById(1L);
+		cartService.deleteById(6L);
 	}
 	
 	@Test
@@ -98,7 +99,7 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(false)
 	void cartTotalPriceTest() {
-		Integer totalPrice = cartService.cartTotalPrice("전아현");
+		Integer totalPrice = cartService.cartTotalPrice(3L);
 		System.out.println(totalPrice);
 	}
 	
@@ -107,7 +108,7 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(false)
 	void findAllCartByUserIdTest() {
-		List<Cart> carts = cartService.findAllCartByUserId("전아현");
+		List<Cart> carts = cartService.findAllCartByUserId(3L);
 		System.out.println(carts);
 	}
 	
@@ -116,7 +117,7 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(false)
 	void countProductByUserIdTest() {
-		Integer count = cartService.countProductByUserId("전아현", 2L);
+		Integer count = cartService.countProductByUserId(2L, 2L);
 		System.out.println(count);
 	}
 	
@@ -124,9 +125,27 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Disabled
 	@Transactional
 	@Rollback(false)
+	// 중복된 상품이 있는 카트 정보 출력
+	void findByProductUserNo() {
+		Cart cart = cartService.findByProductUserNo(2L, 2L);
+		System.out.println(cart);
+	}
+	
+	@Test
+	//@Disabled
+	@Transactional
+	@Rollback(false)
 	// 카트에 중복제품이 있으면 (중복체크) --> 업데이트 돼서 담기도록 
 	void updateOverlapCart() {
-		Cart update = cartService.updateOverlapCart(null);
+		Cart cart = cartService.findByProductUserNo(6L, 1L);
+		/*
+		Cart cart1 = Cart.builder()
+						.userinfo(userInfoDao.findByNo(2L))
+						.product(productDao.findByProductNo(2L))
+						.build();
+						*/
+		Cart update = cartService.updateOverlapCart(cart);
 		
 	}
+	
 }
