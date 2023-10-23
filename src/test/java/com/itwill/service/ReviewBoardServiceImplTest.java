@@ -2,19 +2,46 @@ package com.itwill.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Date;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-class ReviewBoardServiceImplTest {
+import com.itwill.TeamprojectAnimalcareApplicationTest;
+import com.itwill.dao.ReviewBoardDao;
+import com.itwill.entity.ReviewBoard;
 
+@SpringBootTest
+class ReviewBoardServiceImplTest extends TeamprojectAnimalcareApplicationTest{
+	
+	@Autowired
+	ReviewBoardService reviewBoardService;
+	@Autowired
+	UserInfoService userInfoService;
+	@Autowired
+	ProductService productService;
+	
+	
 	@Test
-	@Disabled
+	//@Disabled
 	@Transactional
 	@Rollback(false)
-	void create() {
-		fail("Not yet implemented");
+	void create() throws Exception{
+		
+		ReviewBoard reviewBoard = ReviewBoard.builder()
+				 					.boardTitle("서비스 타이틀")
+				 					.boardContent("서비스 내용")
+				 					.boardDate(new Date())
+				 					.boardStar(5)
+				 					.userinfo(userInfoService.findUser(5L))
+				 					.product(productService.findByProductNo(5L))			
+				 					.build();
+		reviewBoardService.create(reviewBoard);
+		
 	}
 
 	@Test

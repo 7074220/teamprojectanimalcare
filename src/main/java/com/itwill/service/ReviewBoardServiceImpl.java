@@ -3,11 +3,13 @@ package com.itwill.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.itwill.dao.ReviewBoardDao;
 import com.itwill.entity.ReplyBoard;
 import com.itwill.entity.ReviewBoard;
 
+@Service
 public class ReviewBoardServiceImpl implements ReviewBoardDao {
 	
 	@Autowired
