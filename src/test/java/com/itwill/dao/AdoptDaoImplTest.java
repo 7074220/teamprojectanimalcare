@@ -17,6 +17,7 @@ import com.itwill.entity.Adopt;
 import com.itwill.entity.Center;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Userinfo;
+import com.itwill.repository.AdoptRepository;
 
 
 @SpringBootTest
@@ -30,20 +31,22 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	UserInfoDao userInfoDao;
 	@Autowired
 	CenterDao centerDao;
+	@Autowired
+	AdoptRepository adoptRepository;
 	
 	@Test
 	@Transactional
 	@Rollback(false)
-	//@Disabled
+	@Disabled
 	void insertTest() {
 		
-		Userinfo userinfo1 = userInfoDao.findByNo(1L);
-		Userinfo userinfo2 = userInfoDao.findByNo(2L);
+		Userinfo userinfo1 = userInfoDao.findByNo(3L);
+		Userinfo userinfo2 = userInfoDao.findByNo(4L);
 		
 		
-		//Pet pet1 = petDao.petFindById(1L);
-		//Pet pet2 = petDao.petFindById(2L);
-		
+		Pet pet1 = petDao.petFindById(1L);
+		Pet pet2 = petDao.petFindById(2L);
+		/*
 		Pet pet1 = Pet.builder()
 				.petType("포메")
 				.petCharacter("귀여움")
@@ -66,7 +69,7 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 				.build();
 		petDao.petInsert(pet2);
 		
-		
+		*/
 		
 		
 		Adopt adopt1 = Adopt.builder() 
@@ -113,7 +116,7 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	@Disabled
 	void findById() {
-		System.out.println(adoptDao.findByNoAdopt(6L));
+		System.out.println(adoptDao.findByAdoptNo(2L));
 	}
 	
 	@Test
@@ -121,7 +124,7 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	@Disabled
 	void updateTest() throws Exception{
-		Adopt adopt=adoptDao.findByNoAdopt(6L);
+		Adopt adopt=adoptDao.findByAdoptNo(2L);
 		//adopt.setAdoptTime(12L);
 		adopt.setAdoptStatus("입양완료");
 		adoptDao.updateAdopt(adopt);
@@ -133,7 +136,7 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	@Disabled
 	void selectByUserId() {
-		System.out.println(adoptDao.findByUserinfoUserId("박태환"));
+		System.out.println(adoptRepository.findAdoptsByUserNo(2L));
 	}
 	
 }

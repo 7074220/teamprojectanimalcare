@@ -11,11 +11,11 @@ import com.itwill.entity.Volunteer;
 public interface VolunteerRepository extends JpaRepository<Volunteer, Long>{
 	
 	/*
-	@Query(value = "SELECT * FROM volunteer WHERE user_id = :userId", nativeQuery = true)
-	List<Volunteer> findVolunteerByUserId(@Param("userId") String userId);
+	@Query(value = "SELECT * FROM volunteer WHERE user_no = ?1", nativeQuery = true)
+	List<Volunteer> findVolunteertByUserNo(@Param("userNo") Long userNo);
 	*/
 
-	@Query(value = "SELECT * FROM volunteer WHERE user_id = ?1", nativeQuery = true)
-	List<Volunteer> findVolunteertByUserId(@Param("userId") String userId);
+	@Query(value = "SELECT * FROM volunteer WHERE user_no = ?1", nativeQuery = true)
+	List<Volunteer> findVolunteertByUserNo(@Param("user_no") Long no);
 	
 }

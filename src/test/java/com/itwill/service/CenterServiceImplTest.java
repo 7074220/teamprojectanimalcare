@@ -41,7 +41,7 @@ class CenterServiceImplTest {
 	@Disabled
 	@Transactional
 	void  selectCenter() {
-		Center selectCenter = centerService.findByCenterNo(5L);
+		Center selectCenter = centerService.findByCenterNo(6L);
 		System.out.println(selectCenter);
 	}
 
@@ -50,14 +50,14 @@ class CenterServiceImplTest {
 	@Transactional
 	@Rollback(value = false)
 	void deleteCenter() throws Exception{
-		centerService.deleteCenter(5L);
+		centerService.deleteCenter(6L);
 	}
 	@Test
 	@Disabled
 	@Transactional
 	@Rollback(value = false)
 	void updateCenter() {
-		Center updateCenter = centerService.findByCenterNo(6L);
+		Center updateCenter = centerService.findByCenterNo(1L);
 		updateCenter.setCenterName("뭐로하지보호소");
 		System.out.println(updateCenter);
 	}

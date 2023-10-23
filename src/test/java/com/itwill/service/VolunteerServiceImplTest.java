@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -25,13 +26,13 @@ class VolunteerServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	UserInfoService userInfoService;
 	@Autowired
 	CenterService centerService;
-	@Autowired
-	VolunteerRepository volunteerRepository;
 	
 	@Test
 	@Disabled
+	@Transactional
+	@Rollback(false)
 	void testFindByVolunteerNo() {
-		System.out.println(volunteerService.findByVolunteerNo(2L));
+		System.out.println(volunteerService.findByVolunteerNo(5L));
 	}
 
 	@Test
@@ -40,8 +41,8 @@ class VolunteerServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	void testInsertVolunteer() throws Exception{
 		
-		Userinfo userinfo = userInfoService.findUser(2L);
-		Center center = centerService.findByCenterNo(22L);
+		Userinfo userinfo = userInfoService.findUser(5L);
+		Center center = centerService.findByCenterNo(2L);
 		
 		Volunteer volunteer = Volunteer.builder()
 										.volunteerDate(new Date())
@@ -58,7 +59,7 @@ class VolunteerServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(value = false)
 	void testUpdateVolunteer() throws Exception{
-		Volunteer volunteer = volunteerService.findByVolunteerNo(1L);
+		Volunteer volunteer = volunteerService.findByVolunteerNo(4L);
 		volunteer.setVolunteerStatus("테스트진행중t");
 		volunteerService.updateVolunteer(volunteer);
 	}
@@ -68,22 +69,23 @@ class VolunteerServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(value = false)
 	void testDeleteVolunteer() throws Exception{
-		volunteerService.deleteVolunteer(1L);
+		volunteerService.deleteVolunteer(4L);
 	}
 
 	@Test
 	@Disabled
 	@Transactional
-	void testFindAllVolunteers() {
+	void testFindAllVolunteers() {	
 		System.out.println(volunteerService.findAllVolunteers());
 	}
 
 	@Test
-	@Disabled
+	//@Disabled
 	@Transactional
-	@Rollback(false)
-	void testFindVolunteertByUserId() {
-		System.out.println(volunteerRepository.findVolunteertByUserId("전아현"));
+	@Rollback(value = false)
+	void findVolunteertByUserNo() {
+		
+		System.out.println(volunteerService.findVolunteertByUserNo(2L));
 	}
 
 }

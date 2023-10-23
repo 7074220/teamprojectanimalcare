@@ -32,12 +32,12 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	@Transactional
 	@Rollback(false)
-	//@Disabled
+	@Disabled
 	void testInsertVolunteer() {
 		
-		Userinfo userinfo = userInfoDao.findByNo(1L);
+		Userinfo userinfo = userInfoDao.findByNo(5L);
 		
-		Center center = centerDao.findByCenterNo(2L);	
+		Center center = centerDao.findByCenterNo(3L);	
 	
 		Volunteer volunteer = Volunteer.builder()
 									   .userinfo(userinfo)
@@ -84,7 +84,7 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(value = false)
 	void testFindVolunteerByUserId() {
-		List<Volunteer> selectVolunteer = volunteerDao.findVolunteertByUserId("전아현");
+		List<Volunteer> selectVolunteer = volunteerDao.findVolunteertByUserNo(2L);
 		System.out.println(selectVolunteer);
 	}
 	

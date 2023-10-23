@@ -23,7 +23,7 @@ class CenterDaoImplTest {
 	@Transactional
 	@Rollback(false)
 	@Test
-	//@Disabled
+	@Disabled
 	void insetCenter() {
 
 
@@ -41,7 +41,7 @@ class CenterDaoImplTest {
 	@Disabled
 	@Transactional
 	void  selectCenter() {
-		Center selectCenter = centerDao.findByCenterNo(11L);
+		Center selectCenter = centerDao.findByCenterNo(1L);
 		System.out.println(selectCenter);
 	}
 	
@@ -50,7 +50,7 @@ class CenterDaoImplTest {
 	@Rollback(value = false)
 	@Disabled
 	void deleteCenter()throws Exception {
-		centerDao.deleteCenter(1L);
+		centerDao.deleteCenter(5L);
 	}
 	@Test
 	@Transactional

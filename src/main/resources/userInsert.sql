@@ -87,7 +87,6 @@ VALUES (Coupon_coupon_id_SEQ.nextval,'생일쿠폰',30,TO_DATE('2023/04/05','YYY
 INSERT INTO volunteer(volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_no, center_no)
 values(Volunteer_volunteer_no_SEQ.nextval, 11, sysdate, '봉사신청',  1, 1);
 
-
 INSERT INTO volunteer(volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_no, center_no)
 values(Volunteer_volunteer_no_SEQ.nextval, 13, sysdate, '봉사중',  2, 2);
 
@@ -110,10 +109,14 @@ VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/
 
 -- review board
 
-INSERT INTO review_board (review_board.board_no, board_date, board_title, board_content, board_star, user_id) VALUES (ReviewBoard_board_no_SEQ.nextval, sysdate, '타이틀1', '내용1', 5, '전아현');
-INSERT INTO review_board (review_board.board_no, board_date, board_title, board_content, board_star, user_id) VALUES (ReviewBoard_board_no_SEQ.nextval, sysdate, '타이틀2', '내용2', 4, '김창섭');
-INSERT INTO review_board (review_board.board_no, board_date, board_title, board_content, board_star, user_id) VALUES (ReviewBoard_board_no_SEQ.nextval, sysdate, '타이틀3', '내용3', 3, '전아현');
-INSERT INTO review_board (review_board.board_no, board_date, board_title, board_content, board_star, user_id) VALUES (ReviewBoard_board_no_SEQ.nextval, sysdate, '타이틀4', '내용4', 1, '박태환');
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '이것은 타이틀1', '이것은 내용1', 5, 1, 5);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '이것은 타이틀2', '이것은 내용2', 4, 2, 4);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '이것은 타이틀3', '이것은 내용3', 3, 3, 3);
 
 -- visit
 INSERT INTO visit (VISIT_NO,VISIT_DATE, VISIT_TIME, VISIT_STATUS, CENTER_NO, USER_NO) VALUES (visit_visit_no_seq.nextval,  sysdate, 11,'봉사접수중', 1, 1);
