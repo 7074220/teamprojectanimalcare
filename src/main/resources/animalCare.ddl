@@ -20,10 +20,9 @@ CREATE TABLE UserInfo(
 		user_no                       		NUMBER(10)		 NULL ,
 		user_password                 		VARCHAR2(50)		 NULL ,
 		user_point                    		NUMBER(10)		 NULL ,
-		user_age                      		NUMBER(10)		 NULL ,
 		user_gender                   		NUMBER(10)		 NULL ,
 		user_address                  		VARCHAR2(50)		 NULL ,
-		user_phone_number             		NUMBER(10)		 NULL ,
+		user_phone_number             		VARCHAR2(50)		 NULL ,
 		user_id                       		VARCHAR2(50)		 NULL ,
 		user_resident_number          		VARCHAR2(50)		 NULL ,
 		user_register_date            		VARCHAR2(100)		 NULL ,
@@ -40,8 +39,8 @@ CREATE TABLE Coupon(
 		coupon_id                     		NUMBER(10)		 NULL ,
 		coupon_name                   		VARCHAR2(50)		 NULL ,
 		coupon_discount               		NUMBER(10)		 NULL ,
-		coupon_expiration_date        		NUMBER(10)		 NULL ,
-		coupon_payday                 		VARCHAR2(50)		 NULL ,
+		coupon_expiration_date        		DATE		 NULL ,
+		coupon_payday                 		DATE		 NULL ,
 		user_no                       		NUMBER(10)		 NULL 
 );
 
@@ -239,6 +238,7 @@ CREATE SEQUENCE Cart_cart_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 CREATE TABLE MyPet(
 		mypet_no                      		NUMBER(10)		 NULL ,
 		mypet_name                    		VARCHAR2(50)		 NULL ,
+        mypet_kind                    		VARCHAR2(50)		 NULL ,
 		mypet_birthday                		DATE		 NULL ,
 		user_no                       		NUMBER(10)		 NULL 
 );
