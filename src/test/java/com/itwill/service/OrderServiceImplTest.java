@@ -23,7 +23,7 @@ UserInfoService userInfoService;
 	
 	@Disabled
 	void insert() throws Exception{
-		Userinfo user=userInfoService.findUser("김창섭");
+		Userinfo user=userInfoService.findUser(2L);
 	
 		Orders orders=Orders.builder()
 		.orderAddress("서울특별시")
