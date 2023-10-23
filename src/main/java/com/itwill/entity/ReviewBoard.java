@@ -36,7 +36,7 @@ public class ReviewBoard {
 	private String boardTitle;
 	private String boardContent;
 	private LocalDate boardDate;
-	private Long boardStar;
+	private Integer boardStar;
 
 	@Builder.Default
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)

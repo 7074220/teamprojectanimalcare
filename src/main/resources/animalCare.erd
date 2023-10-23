@@ -583,8 +583,8 @@
                         <constraint>
                           <height>-1</height>
                           <width>-1</width>
-                          <x>501</x>
-                          <y>484</y>
+                          <x>584</x>
+                          <y>512</y>
                         </constraint>
                         <sourceConnections/>
                         <targetConnections>
@@ -597,8 +597,8 @@
                         <description></description>
                         <columns>
                           <net.java.amateras.db.visual.model.ColumnModel>
-                            <columnName>orderStatus_no</columnName>
-                            <logicalName>orderStatus_no</logicalName>
+                            <columnName>os_no</columnName>
+                            <logicalName>os_no</logicalName>
                             <columnType class="net.java.amateras.db.dialect.ColumnType">
                               <name>NUMBER</name>
                               <logicalName>Numeric</logicalName>
@@ -613,8 +613,8 @@
                             <defaultValue></defaultValue>
                           </net.java.amateras.db.visual.model.ColumnModel>
                           <net.java.amateras.db.visual.model.ColumnModel>
-                            <columnName>orderStatus_image</columnName>
-                            <logicalName>orderStatus_image</logicalName>
+                            <columnName>os_image</columnName>
+                            <logicalName>os_image</logicalName>
                             <columnType class="net.java.amateras.db.dialect.ColumnType">
                               <name>VARCHAR2</name>
                               <logicalName>String</logicalName>
@@ -629,8 +629,8 @@
                             <defaultValue></defaultValue>
                           </net.java.amateras.db.visual.model.ColumnModel>
                           <net.java.amateras.db.visual.model.ColumnModel>
-                            <columnName>orderStatus_desc</columnName>
-                            <logicalName>orderStatus_desc</logicalName>
+                            <columnName>os_desc</columnName>
+                            <logicalName>os_desc</logicalName>
                             <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
                             <size>50</size>
                             <notNull>false</notNull>
@@ -709,8 +709,8 @@
                       <defaultValue></defaultValue>
                     </net.java.amateras.db.visual.model.ColumnModel>
                     <net.java.amateras.db.visual.model.ColumnModel>
-                      <columnName>orderStatus_no</columnName>
-                      <logicalName>orderStatus_no</logicalName>
+                      <columnName>os_no</columnName>
+                      <logicalName>os_no</logicalName>
                       <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[3]/target/columns/net.java.amateras.db.visual.model.ColumnModel/columnType"/>
                       <size>10</size>
                       <notNull>false</notNull>
@@ -2123,8 +2123,8 @@
                 <defaultValue></defaultValue>
               </net.java.amateras.db.visual.model.ColumnModel>
               <net.java.amateras.db.visual.model.ColumnModel>
-                <columnName>board_readCount</columnName>
-                <logicalName>board_readCount</logicalName>
+                <columnName>board_read_Count</columnName>
+                <logicalName>board_read_Count</logicalName>
                 <columnType class="net.java.amateras.db.dialect.ColumnType">
                   <name>NUMBER</name>
                   <logicalName>Numeric</logicalName>
@@ -2157,7 +2157,12 @@
               <net.java.amateras.db.visual.model.ColumnModel>
                 <columnName>board_step</columnName>
                 <logicalName>board_step</logicalName>
-                <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[6]/columnType"/>
+                <columnType class="net.java.amateras.db.dialect.ColumnType">
+                  <name>NUMBER</name>
+                  <logicalName>Numeric</logicalName>
+                  <supportSize>true</supportSize>
+                  <type>2</type>
+                </columnType>
                 <size>10</size>
                 <notNull>false</notNull>
                 <primaryKey>false</primaryKey>
@@ -2168,7 +2173,7 @@
               <net.java.amateras.db.visual.model.ColumnModel>
                 <columnName>board_depth</columnName>
                 <logicalName>board_depth</logicalName>
-                <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[6]/columnType"/>
+                <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[8]/columnType"/>
                 <size>10</size>
                 <notNull>false</notNull>
                 <primaryKey>false</primaryKey>
@@ -2342,10 +2347,10 @@
           <columnName>user_register_date</columnName>
           <logicalName>user_register_date</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType">
-            <name>VARCHAR2</name>
-            <logicalName>String</logicalName>
-            <supportSize>true</supportSize>
-            <type>12</type>
+            <name>DATE</name>
+            <logicalName>Date</logicalName>
+            <supportSize>false</supportSize>
+            <type>91</type>
           </columnType>
           <size>100</size>
           <notNull>false</notNull>
