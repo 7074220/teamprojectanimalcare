@@ -2,6 +2,7 @@ package com.itwill.entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -34,7 +35,7 @@ public class ReplyBoard {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ReplyBoard_reply_board_no_SEQ")
 	private Long ReplyBoardNo;
 	@CreationTimestamp
-	private LocalDateTime ReplyBoardResisterDate;
+	private Date ReplyBoardResisterDate;
 	private String ReplyBoardContent;
 	private Integer ReplyBoardGroupNo;
 	private Integer ReplyBoardStep;
