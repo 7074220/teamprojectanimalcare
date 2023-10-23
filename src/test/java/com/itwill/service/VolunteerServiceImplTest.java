@@ -30,8 +30,10 @@ class VolunteerServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	
 	@Test
 	@Disabled
+	@Transactional
+	@Rollback(false)
 	void testFindByVolunteerNo() {
-		System.out.println(volunteerService.findByVolunteerNo(2L));
+		System.out.println(volunteerService.findByVolunteerNo(5L));
 	}
 
 	@Test
@@ -40,8 +42,8 @@ class VolunteerServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	void testInsertVolunteer() throws Exception{
 		
-		Userinfo userinfo = userInfoService.findUser(2L);
-		Center center = centerService.findByCenterNo(22L);
+		Userinfo userinfo = userInfoService.findUser(5L);
+		Center center = centerService.findByCenterNo(2L);
 		
 		Volunteer volunteer = Volunteer.builder()
 										.volunteerDate(new Date())
@@ -58,7 +60,7 @@ class VolunteerServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(value = false)
 	void testUpdateVolunteer() throws Exception{
-		Volunteer volunteer = volunteerService.findByVolunteerNo(1L);
+		Volunteer volunteer = volunteerService.findByVolunteerNo(4L);
 		volunteer.setVolunteerStatus("테스트진행중t");
 		volunteerService.updateVolunteer(volunteer);
 	}
@@ -68,7 +70,7 @@ class VolunteerServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(value = false)
 	void testDeleteVolunteer() throws Exception{
-		volunteerService.deleteVolunteer(1L);
+		volunteerService.deleteVolunteer(4L);
 	}
 
 	@Test
@@ -83,7 +85,7 @@ class VolunteerServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(false)
 	void testFindVolunteertByUserId() {
-		System.out.println(volunteerRepository.findVolunteertByUserId("전아현"));
+		System.out.println(volunteerRepository.findVolunteertByUserId(1L));
 	}
 
 }

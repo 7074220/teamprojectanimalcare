@@ -17,7 +17,7 @@ public interface VolunteerService {
 	void deleteVolunteer(Long no) throws Exception;
 	
 	List<Volunteer> findAllVolunteers(); // 봉사 목록 전체 찾기
-	
-	List<Volunteer> findVolunteertByUserId(String userId); //유저아이디로 목록 검색
+
+	List<Volunteer> findVolunteertByUserId(Long no); //유저아이디로 목록 검색
 	
 }

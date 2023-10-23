@@ -3,6 +3,7 @@ package com.itwill.dao;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
@@ -34,11 +35,11 @@ class ReviewBoardDaoImplTest {
 	void testCreate() {
 	
 		ReviewBoard reviewBoard = ReviewBoard.builder()
-								.boardTitle("이것은 타이틀")
-								.boardContent("이것은 내용")
-								.boardDate(LocalDate.now())
-								.boardStar(5L)
-								.userinfo(userInfoDao.findByNo(1L))
+								.boardTitle("Dao 테스트 타이틀2")
+								.boardContent("Dao 테스트 내용2")
+								.boardDate(new Date())
+								.boardStar(5)
+								.userinfo(userInfoDao.findByNo(5L))
 								.product(productDao.findByProductNo(1L))
 								.build();
 
@@ -50,15 +51,15 @@ class ReviewBoardDaoImplTest {
 	@Rollback(value = false)
 	@Disabled
 	void getReviewBoardByProduct_ProductNo() {
-		List<ReviewBoard> selectReviewBoard = reviewBoardDao.getReviewBoardByProductNo(6L);
+		List<ReviewBoard> selectReviewBoard = reviewBoardDao.getReviewBoardByProductNo(1L);
 		System.out.println(selectReviewBoard);
 	}
 
 	@Test//유저 아이디로 찾기
 	@Transactional
-	@Disabled
-	void findByUserId() {
-		List<ReviewBoard> findByUserIdReviewBoard = reviewBoardDao.findAllByUserIdUserinfo("박태환");
+	@Disabled 
+	void findByReviewBoardUserId() {
+		List<ReviewBoard> findByUserIdReviewBoard = reviewBoardDao.findByUserNo(5L);
 		System.out.println(findByUserIdReviewBoard);
 	}
 	
@@ -66,7 +67,7 @@ class ReviewBoardDaoImplTest {
 	@Transactional
 	@Disabled
 	void findAllByBoardStar() {
-		List<ReviewBoard> findAllByBoardStar = reviewBoardDao.findByStarAll(3L);
+		List<ReviewBoard> findAllByBoardStar = reviewBoardDao.findByStarAll(5L);
 		System.out.println(findAllByBoardStar);
 	}
 	@Test//별점 높은순
@@ -103,15 +104,27 @@ class ReviewBoardDaoImplTest {
 	}
 	
 	
-	/*
-	  @Test//별점 높은순,최신순
+	
+	  @Test//별점 높은순,최신순	  
+	  @Transactional  
+	  @Rollback(false) 
+	  @Disabled 
+	  public void findByOrderByBoardStarDescBoardDateDesc() { 
+		  List<ReviewBoard> findByOrderByBoardStarDescBoardDateDesc = reviewBoardDao.findByOrderByBoardStarDescBoardDateDesc();
+
+		  System.out.println(findByOrderByBoardStarDescBoardDateDesc); 
+	  }
+	 
+	  @Test//별점 낮은순,최신순	  
+	  @Transactional  
+	  @Rollback(false) 
+	  @Disabled 
+	  public void findByOrderByBoardStarAscBoardDateDesc() { 
+		  List<ReviewBoard> findByOrderByBoardStarAscBoardDateDesc = reviewBoardDao.findByOrderByBoardStarAscBoardDateDesc();
+		  
+		  System.out.println(findByOrderByBoardStarAscBoardDateDesc); 
+	  }
+	 
+	
 	  
-	  @Transactional
-	  
-	 *@Rollback(false) //@Disabled public void
-	  findByBoardStarOrderByBoardStarDescBoardNoDesc() { List<ReviewBoard>
-	  findByBoardStarOrderByBoardStarDescBoardNoDesc =
-	  reviewBoardDao.findByBoardStarOrderByBoardStarDescBoardNoDesc(3L);
-	  System.out.println(findByBoardStarOrderByBoardStarDescBoardNoDesc); }
-	 */
 }

@@ -11,8 +11,8 @@ import com.itwill.entity.Adopt;
 
 public interface AdoptRepository extends JpaRepository<Adopt, Long>{
 	
-	@Query(value = "SELECT * FROM adopt WHERE user_id = ?1", nativeQuery = true)
-    List<Adopt> findByUserinfoUserId(@Param("userId") String userId);
+	@Query(value = "SELECT * FROM adopt WHERE user_no = ?1", nativeQuery = true)
+    List<Adopt> findAdoptsByUserNo(@Param("user_no") Long userNo);
 
 	
 

@@ -40,6 +40,7 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 				.product(Arrays.asList(cartDao.))
 				.cartImage()
 				.build();
+		
 		cartDao.insertCart(cart1);
 		Cart cart2 = Cart.builder()
 				.cartNo(null)
@@ -84,7 +85,7 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Transactional
 	@Rollback(false)
 	void deleteByUserIdTest(){
-		cartDao.deleteByUserId("박태환");
+		cartDao.deleteByUserId(3L);
 	}
 	
 	@Test
@@ -120,7 +121,7 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Transactional
 	@Rollback(false)
 	void findAllCartbyUserIdTest() {
-		List<Cart> carts = cartDao.findAllCartByUserId("박태환");
+		List<Cart> carts = cartDao.findAllCartByUserId(3L);
 		System.out.println(carts);
 	}
 	
@@ -129,7 +130,7 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Transactional
 	@Rollback(false)
 	void countProductByUserIdTest() {
-		Integer count = cartDao.countProductByUserId("김창섭", 3L);
+		Integer count = cartDao.countProductByUserId(2L, 3L);
 		System.out.println(count);
 	}
 	
