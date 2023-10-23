@@ -38,6 +38,7 @@ OrderStatusRepository orderStatusRepository;
 		List<OrderItem> orderItems = order.getOrderItems();
 		Long userNo = order.getUserinfo().getUserNo();
 		List<Cart> carts = cartDao.findAllCartByUserId(userNo);
+		int price = 0;
 		
 		for (Cart cart : carts) {
 			OrderItem tempOrderItem = OrderItem.builder().build();
@@ -46,10 +47,10 @@ OrderStatusRepository orderStatusRepository;
 			tempOrderItem.setOrderStatus(orderStatusRepository.findById(1L).get()); 
 			tempOrderItem.setOiQty(cart.getCartQty());
 			tempOrderItem.setProduct(productDao.findByProductNo(p_no));
-			
+			price = price + cart.getProduct().getProductPrice();
 			orderItems.add(tempOrderItem);
 		}
-		///order.setOrderPrice();
+		order.setOrderPrice(price);
 		cartDao.deleteByUserId(order.getUserinfo().getUserNo());
 		return ordersDao.insertOrder(order);
 	}

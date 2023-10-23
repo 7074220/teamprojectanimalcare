@@ -62,8 +62,8 @@ public class CartDaoImpl implements CartDao{
 /*
 	@Override
 	// 카트에 담긴 모든 상품 합계 금액
-	public Integer cartTotalPrice(String userId) {
-		List<Cart> cartList = cartRepository.findAllCartByUserId(userId);
+	public Integer cartTotalPrice(Long userNo) {
+		List<Cart> cartList = cartRepository.findAllCartByUserId(userNo);
 		Integer total = 0;
 		for (Cart cart : cartList) {
 			total = total + cart.getProduct().getProductPrice()*cart.getCartQty();
@@ -98,7 +98,5 @@ public class CartDaoImpl implements CartDao{
 		Cart cart = cartRepository.findByProductUserNo(userNo, productNo);
 		return cart;
 	}
-
-
 	
 }
