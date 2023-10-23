@@ -74,7 +74,7 @@ class VisitServiceImplTest {
 		@Rollback(value = false)
 		@Disabled
 		void findVisitsByUserId() {
-		    List<Visit> selectVisit = visitService.getVisitsByUserNo("김창섭");
+		    List<Visit> selectVisit = visitService.getVisitsByUserNo(1L);
 		    System.out.println(selectVisit);
 		}
 
