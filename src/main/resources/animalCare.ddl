@@ -174,6 +174,7 @@ CREATE TABLE Product(
         product_pet_category              		VARCHAR2(50)		 NULL ,
 		product_qty                		NUMBER(10)		 NULL ,
 		product_image                 		VARCHAR2(50)		 NULL ,
+        product_detail_image                 		VARCHAR2(50)		 NULL ,
 		product_star_avg              		NUMBER(10)		 NULL 
 );
 
@@ -229,7 +230,8 @@ CREATE TABLE Cart(
 		cart_no                       		NUMBER(10)		 NULL ,
 		cart_qty                      		NUMBER(10)		 NULL ,
 		product_no                    		NUMBER(10)		 NULL ,
-		user_no                       		NUMBER(10)		 NULL 
+		user_no                       		NUMBER(10)		 NULL ,
+        cart_image                 		VARCHAR2(50)    NULL 
 );
 
 DROP SEQUENCE Cart_cart_no_SEQ;
