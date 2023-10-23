@@ -28,7 +28,7 @@ public interface UserInfoService {
 	/*
 	 * 회원상세보기
 	 */
-	Userinfo findUser(String userId) throws Exception;
+	Userinfo findUser(Long userNo) throws Exception;
 
 	/*
 	 * 회원수정
@@ -38,7 +38,7 @@ public interface UserInfoService {
 	/*
 	 * 회원탈퇴
 	 */
-	void remove(String userId) throws Exception;
+	void remove(Long userNo) throws Exception;
 
 	/*
 	 * 전체회원리스트
