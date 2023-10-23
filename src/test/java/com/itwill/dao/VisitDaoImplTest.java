@@ -3,6 +3,7 @@ package com.itwill.dao;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
@@ -34,9 +35,9 @@ class VisitDaoImplTest {
 	void insetVisit() {
 		Visit visit = Visit.builder()
 
-				.visitDate(LocalDate.now())
+				.visitDate(new Date())
 				.visitStatus("방문완료")
-				.visitTime(7L)
+				.visitTime(7)
 				.userinfo(userInfoDao.findById("박태환"))
 				.center(centerDao.findByCenterNo(4L))
 				.build();
