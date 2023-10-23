@@ -52,47 +52,50 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public void deleteById(Long no) throws Exception {
-		// TODO Auto-generated method stub
-		
+		cartDao.deleteById(no);
 	}
 
 	@Override
 	public Integer cartTotalPrice(String userId) {
-		/*
-		List<Cart> cartList = cartRepository.findAllCartByUserId(userId);
+		List<Cart> cartList = cartDao.findAllCartByUserId(userId);
 		Integer total = 0;
 		for (Cart cart : cartList) {
-			total = total + cart.getProduct().getProductPrice();
-			cart.getProduct().getProductPrice();
+			total = total + cart.getProduct().getProductPrice()*cart.getCartQty();
 		}
-		*/
-		return 0;
+		return total;
 		
 	} 
 
 	@Override
 	public List<Cart> findAll() {
 		List<Cart> carts = cartDao.findAll();
-		return null;
+		return carts;
 	}
 
 	@Override
 	public List<Cart> findAllCartByUserId(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Cart> carts = cartDao.findAllCartByUserId(userId);
+		return carts;
 	}
 
 	
 	@Override
+	// 카트 중복체크
 	public Integer countProductByUserId(String userId, Long no) {
-		// TODO Auto-generated method stub
-		return null;
+		return cartDao.countProductByUserId(userId, no);
 	}
 
 	@Override
+	// 카트에 중복제품이 있으면 (중복체크) --> 업데이트 돼서 담기도록 
 	public Cart updateOverlapCart(Cart overlapCart) {
-		// TODO Auto-generated method stub
-		return null;
+		int count = cartDao.countProductByUserId(overlapCart.getUserinfo().getUserId(), overlapCart.getProduct().getProductNo());
+		Cart overlapCount = null;
+		if(count > 0) {
+			overlapCount = cartRepository.save(overlapCart);
+		} else {
+			overlapCount = cartRepository.save(overlapCart);
+		}
+		return overlapCount;
 	}
 	
 }

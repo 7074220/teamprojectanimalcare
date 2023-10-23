@@ -36,7 +36,7 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 		
 		Adopt insertAdopt1 = Adopt.builder()
 				.adoptDate(new Date())
-				.adoptTime(13L)
+				.adoptTime(13)
 				.adoptStatus("입양신청")
 				.pet(pet1)
 				.userinfo(user)
@@ -44,7 +44,7 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 		adoptService.insertAdopt(insertAdopt1);
 		Adopt insertAdopt2 = Adopt.builder()
 				.adoptDate(new Date())
-				.adoptTime(16L)
+				.adoptTime(16)
 				.adoptStatus("입양완료")
 				.pet(pet2)
 				.userinfo(user)
