@@ -59,7 +59,7 @@ public class CartDaoImpl implements CartDao{
 		return cartRepository.findAllCartByUserId(userId);
 	}
 
-
+/*
 	@Override
 	// 카트에 담긴 모든 상품 합계 금액
 	public Integer cartTotalPrice(String userId) {
@@ -70,7 +70,7 @@ public class CartDaoImpl implements CartDao{
 		}
 		return total;
 	}
-
+*/
 	
 	@Override
 	// 카트 중복체크
@@ -78,7 +78,7 @@ public class CartDaoImpl implements CartDao{
 		return cartRepository.countProductByUserId(userId, no);
 	}
 
-
+/*
 	@Override
 	// 카트에 중복제품이 있으면 (중복체크) --> 업데이트 돼서 담기도록 
 	public Cart updateOverlapCart(Cart overlapCart) {
@@ -91,7 +91,7 @@ public class CartDaoImpl implements CartDao{
 		}
 		return overlapCount;
 	}
-
+*/
 
 	
 }

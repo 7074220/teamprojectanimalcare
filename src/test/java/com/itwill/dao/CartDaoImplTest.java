@@ -102,6 +102,7 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 		System.out.println(carts);
 	}
 	
+	/*
 	@Test
 	//@Disabled
 	@Transactional
@@ -112,6 +113,7 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 		System.out.println(totalPrice);
 		
 	}
+	*/
 	
 	@Test
 	@Disabled
@@ -131,6 +133,7 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 		System.out.println(count);
 	}
 	
+	/*
 	@Test
 	@Disabled
 	@Transactional
@@ -139,4 +142,5 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	void updateOverlapCart() {
 		Cart count = cartDao.updateOverlapCart(null);
 	}
+	*/
 }
