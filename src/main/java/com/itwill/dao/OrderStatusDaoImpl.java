@@ -9,7 +9,7 @@ import com.itwill.entity.Orderstatus;
 import com.itwill.repository.OrderStatusRepository;
 
 @Repository
-public class OrderStatusImpl implements OrderStatusDao {
+public class OrderStatusDaoImpl implements OrderStatusDao {
 
 	@Autowired
 	OrderStatusRepository orderStatusRepository;
