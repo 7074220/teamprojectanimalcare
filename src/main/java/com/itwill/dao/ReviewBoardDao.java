@@ -10,6 +10,8 @@ public interface ReviewBoardDao {
 
 	public ReviewBoard update(ReviewBoard reviewBoard);
 
+	public ReviewBoard findByBoardNo(Long BoardNo);
+	
 	public void deleteById(Long boardNo);
 
 
@@ -26,9 +28,9 @@ public interface ReviewBoardDao {
 
 	public List<ReviewBoard> findAllByOrderByBoardStarAsc(); // 낮은 평점순 정렬
 
-	public List<ReviewBoard> findAllByOrderByBoardNoDesc(); // 최신순 정렬(board no정렬)
+	public List<ReviewBoard> findAllByOrderByBoardDateDesc(); // 최신순 정렬(board Date정렬)
 	
-	public List<ReviewBoard> findAllByOrderByBoardNoAsc(); // 오래된 순 정렬(board no정렬)
+	public List<ReviewBoard> findAllByOrderByBoardDateAsc(); // 오래된 순 정렬(board Date정렬)
 	
 	public List<ReviewBoard> findByOrderByBoardStarDescBoardDateDesc();//별점 높은순,최신순
 	

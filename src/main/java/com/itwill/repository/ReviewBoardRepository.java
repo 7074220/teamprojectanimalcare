@@ -10,9 +10,10 @@ import com.itwill.entity.ReviewBoard;
 
 public interface ReviewBoardRepository extends JpaRepository<ReviewBoard, Long> {
 
-	public List<ReviewBoard> findAllByOrderByBoardNoDesc(); // 최신순 정렬(board no정렬)
+	
+	public List<ReviewBoard> findAllByOrderByBoardDateDesc(); // 최신순 정렬(board Date정렬)
 
-	public List<ReviewBoard> findAllByOrderByBoardNoAsc(); // 오래된순 정렬(board no정렬)
+	public List<ReviewBoard> findAllByOrderByBoardDateAsc(); // 오래된순 정렬(board Date정렬)
 
 	public List<ReviewBoard> findAllByOrderByBoardStarDesc(); // 높은 평점순 정렬
 
