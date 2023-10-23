@@ -11,6 +11,7 @@ import com.itwill.dao.CartDao;
 import com.itwill.dao.OrdersDao;
 import com.itwill.entity.Cart;
 import com.itwill.entity.Coupon;
+import com.itwill.entity.OrderItem;
 import com.itwill.entity.Orders;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Userinfo;
@@ -25,6 +26,19 @@ CartDao cartDao;
 	public Orders insertOrder(Orders order) {
 		String userId=order.getUserinfo().getUserId();
 		
+		List<Cart> cartList = order.getUserinfo().getCarts();
+		for (Cart cart : cartList) {
+			
+		
+			OrderItem orederItem=OrderItem.builder().build();
+		}
+		
+		
+		cartDao.findAllCartByUserId(userId);
+		order.builder()
+				.orderItems(null)
+	
+				.build();
 		
 		cartDao.deleteByUserId(userId);
 		Orders insertOrders=ordersDao.insertOrder(order);

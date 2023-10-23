@@ -7,7 +7,7 @@ import com.itwill.entity.Orders;
 public interface OrderService {
 
 	
-	//order insert 시 장바구니 전체삭제 , 포인트 및 할인쿠폰으로 결제금액결정
+	//order insert 시 장바구니 전체삭제 , 
 	
 	Orders insertOrder(Orders order);
 	
