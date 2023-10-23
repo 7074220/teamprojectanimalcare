@@ -84,7 +84,6 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Transactional
 	@Rollback(false)
 	void deleteByUserIdTest(){
-		System.out.println(cartDao);
 		cartDao.deleteByUserId("박태환");
 	}
 	
@@ -105,7 +104,6 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	
 	@Test
 	//@Disabled
-
 	@Transactional
 	@Rollback(false)
 	void cartTotalPriceTest() {

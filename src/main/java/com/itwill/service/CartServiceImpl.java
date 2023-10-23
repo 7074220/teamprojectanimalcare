@@ -41,14 +41,13 @@ public class CartServiceImpl implements CartService {
 	
 	@Override
 	public Cart findByCartNo(Long no) {
-		Cart findCart = cartRepository.findById(1L).get();
+		Cart findCart = cartRepository.findById(no).get();
 		return findCart;
 	}
 
 	@Override
 	public void deleteByUserId(String userId) {
-		// TODO Auto-generated method stub
-		
+		cartDao.deleteByUserId(userId);
 	}
 
 	@Override
@@ -73,7 +72,7 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public List<Cart> findAll() {
-		// TODO Auto-generated method stub
+		List<Cart> carts = cartDao.findAll();
 		return null;
 	}
 
