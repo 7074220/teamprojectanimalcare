@@ -1,6 +1,7 @@
 package com.itwill.entity;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -33,7 +34,7 @@ public class Orders {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Orders_order_no_SEQ")
 	private Long orderNo;
 	@CreationTimestamp
-	private LocalDate orderDate;
+	private Date orderDate;
 	private Integer orderPrice;
 	private String orderAddress;
 	private String orderDesc;

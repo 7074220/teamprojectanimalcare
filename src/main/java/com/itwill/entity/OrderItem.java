@@ -32,17 +32,17 @@ public class OrderItem {
 	private Long oiNo;
 	private Integer oiQty;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@Builder.Default
 	@JoinColumn(name = "order_no")
 	private Orders orders = new Orders();
 	
-	@OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@Builder.Default
 	@JoinColumn(name = "product_no")
 	private Product product =new Product();
 	
-	@OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@Builder.Default
 	@JoinColumn(name = "orderstatus_no")
 	private OrderStatus orderStatus = new OrderStatus();

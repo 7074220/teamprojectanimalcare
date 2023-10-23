@@ -3,6 +3,7 @@ package com.itwill.service;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
@@ -45,7 +46,7 @@ class MyPetServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 		
 		MyPet myPet = MyPet.builder()
 							.mypetName("바니")
-							.mypetBirthday(LocalDateTime.of(2022, 7, 9, 0, 0))
+							.mypetBirthday(new Date())
 							.mypetKind("강아지")
 							.userinfo(userinfo)
 							.build();

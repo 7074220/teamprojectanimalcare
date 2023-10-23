@@ -1,6 +1,7 @@
 package com.itwill.entity;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -35,9 +36,9 @@ public class Visit {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Visit_visit_no_SEQ")
 	private Long visitNo;// PK
 
-	private Long visitTime;
+	private Integer visitTime;
 
-	private LocalDate visitDate;
+	private Date visitDate;
 
 	private String visitStatus;
 
@@ -52,9 +53,6 @@ public class Visit {
 	@JoinColumn(name = "center_no")
 	@ToString.Exclude
 	private Center center = new Center();
-	/*
-	 public String getCenterName() {
-	        return center.getCenterName();
-	    }
-	*/
+	
+	
 }
