@@ -32,7 +32,7 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 										.ReplyBoardContent("내용")
 										.ReplyBoardDepth(0)
 										.ReplyBoardGroupNo(1)
-										.ReplyBoardResisterDate(new Date())
+										.ReplyBoardRegisterDate(new Date())
 										.ReplyBoardStep(1)
 										.userinfo(userinfo)
 										.build();
