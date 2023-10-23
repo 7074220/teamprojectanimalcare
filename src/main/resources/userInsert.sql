@@ -43,10 +43,10 @@ VALUES (pet_pet_no_seq.nextval,'서울특별시','짖는다','골목',sysdate,'�
 
 -- center insert
 
-INSERT INTO center (center_no, center_name, center_phone_number, center_local, center_open_close_time) VALUES ('11','안녕보호소','010-1111-1111','서울시','09:00 ~ 21:00');
-INSERT INTO center (center_no, center_name, center_phone_number, center_local, center_open_close_time) VALUES ('22','사랑보호소','010-2222-2222','경기도','09:00 ~ 22:00');
-INSERT INTO center (center_no, center_name, center_phone_number, center_local, center_open_close_time) VALUES ('33','하하보호소','010-3333-3333','강원도','09:00 ~ 23:00');
-INSERT INTO center (center_no, center_name, center_phone_number, center_local, center_open_close_time) VALUES ('44','소소보호소','010-4444-4444','충청도','09:00 ~ 24:00');
+INSERT INTO center (center_no, center_name, center_phone_number, center_local, center_open_close_time) VALUES (Center_center_no_SEQ.nextval,'안녕보호소','010-1111-1111','서울시','09:00 ~ 21:00');
+INSERT INTO center (center_no, center_name, center_phone_number, center_local, center_open_close_time) VALUES (Center_center_no_SEQ.nextval,'사랑보호소','010-2222-2222','경기도','09:00 ~ 22:00');
+INSERT INTO center (center_no, center_name, center_phone_number, center_local, center_open_close_time) VALUES (Center_center_no_SEQ.nextval,'하하보호소','010-3333-3333','강원도','09:00 ~ 23:00');
+INSERT INTO center (center_no, center_name, center_phone_number, center_local, center_open_close_time) VALUES (Center_center_no_SEQ.nextval,'소소보호소','010-4444-4444','충청도','09:00 ~ 24:00');
 
 -- adopt insert
 
