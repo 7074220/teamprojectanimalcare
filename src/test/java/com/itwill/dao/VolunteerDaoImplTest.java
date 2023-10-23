@@ -3,6 +3,7 @@ package com.itwill.dao;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
@@ -41,7 +42,7 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		Volunteer volunteer = Volunteer.builder()
 									   .userinfo(userinfo)
 									   .center(center)
-									   .volunteerDate(LocalDate.now())
+									   .volunteerDate(new Date())
 									   .volunteerTime(11L)
 									   .volunteerStatus("심사중t")
 									   .build();	

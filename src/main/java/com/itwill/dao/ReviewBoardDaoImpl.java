@@ -81,6 +81,12 @@ public class ReviewBoardDaoImpl implements ReviewBoardDao {
 	public List<ReviewBoard> findAllByOrderByBoardNoAsc() {
 		return reviewBoardRepository.findAllByOrderByBoardNoAsc();
 	}
+
+	@Override
+	public List<ReviewBoard> findAllByBoardStarDescAndBoardDateDesc() {
+		
+		return reviewBoardRepository.findAllByBoardStarDescAndBoardDateDesc();
+	}
 	
 	/*
 	  //별점 높은순,최신순
@@ -89,4 +95,6 @@ public class ReviewBoardDaoImpl implements ReviewBoardDao {
 	  findByBoardStarOrderByBoardStarDescBoardNoDesc(Long star) { return
 	  reviewBoardRepository.findByBoardStarOrderByBoardStarDescBoardNoDesc(star); }
 	 */
+	
+	
 }

@@ -25,12 +25,11 @@ CartDao cartDao;
 	@Override
 	public Orders insertOrder(Orders order) {
 		String userId=order.getUserinfo().getUserId();
-		
+		List<OrderItem> orderItems = order.getOrderItems();
 		List<Cart> cartList = order.getUserinfo().getCarts();
-		for (Cart cart : cartList) {
+		for (int i = 0; i < orderItems.size(); i++) {
+			orderItems.get(i).setOrders(order);
 			
-		
-			OrderItem orederItem=OrderItem.builder().build();
 		}
 		
 		
