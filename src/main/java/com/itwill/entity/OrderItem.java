@@ -20,10 +20,10 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Builder
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@NoArgsConstructor
 public class OrderItem {
 
 	@Id
@@ -44,8 +44,8 @@ public class OrderItem {
 	
 	@OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@Builder.Default
-	@JoinColumn(name = "orderstatus_no")
-	private OrderStatus orderStatus = new OrderStatus();
+	@JoinColumn(name = "os_no")
+	private Orderstatus orderStatus = new Orderstatus();
 	
 
 }
