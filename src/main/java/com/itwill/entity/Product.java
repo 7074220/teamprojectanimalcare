@@ -46,7 +46,6 @@ public class Product {
 	private Integer productStarAvg;
 	
 	@OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
-	@JoinColumn(name = "cart_no")
 	@Builder.Default
 	Cart cart = new Cart();
 	
