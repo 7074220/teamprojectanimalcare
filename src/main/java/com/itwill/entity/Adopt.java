@@ -35,8 +35,8 @@ import lombok.ToString;
 public class Adopt {
 
 	@Id
-	@SequenceGenerator(name = "adopt_adopt_no_seq",sequenceName = "adopt_adopt_no_seq",allocationSize = 1,initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "adopt_adopt_no_seq")
+	@SequenceGenerator(name = "Adopt_adopt_no_SEQ",sequenceName = "Adopt_adopt_no_SEQ",allocationSize = 1,initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Adopt_adopt_no_SEQ")
 	private Long adoptNo; // pk
 	private Long adoptTime;
 	private Date adoptDate;

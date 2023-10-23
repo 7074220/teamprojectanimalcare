@@ -3,6 +3,7 @@ package com.itwill.service;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -34,17 +35,17 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 		Pet pet2=petService.petFindById(11L);
 		
 		Adopt insertAdopt1 = Adopt.builder()
-				.adoptDate(LocalDate.now())
+				.adoptDate(new Date())
 				.adoptTime(13L)
-				.status("입양신청")
+				.adoptStatus("입양신청")
 				.pet(pet1)
 				.userinfo(user)
 				.build();
 		adoptService.insertAdopt(insertAdopt1);
 		Adopt insertAdopt2 = Adopt.builder()
-				.adoptDate(LocalDate.now())
+				.adoptDate(new Date())
 				.adoptTime(16L)
-				.status("입양완료")
+				.adoptStatus("입양완료")
 				.pet(pet2)
 				.userinfo(user)
 				.build();
@@ -57,7 +58,7 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	void updateTest() throws Exception{
 		Adopt adopt=adoptService.findByNoAdopt(9L);
-			adopt.setStatus("입양중");
+			adopt.setAdoptStatus("입양중");
 			adoptService.updateAdopt(adopt);
 	}
 	

@@ -35,8 +35,8 @@ import lombok.ToString;
 public class ReportBoard {
     
 	@Id
-	@SequenceGenerator(name = "ReportBoard_board_NO_SEQ", sequenceName = "ReportBoard_board_NO_SEQ", initialValue = 1, allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ReportBoard_board_NO_SEQ")
+	@SequenceGenerator(name = "ReportBoard_board_no_SEQ", sequenceName = "ReportBoard_board_no_SEQ", initialValue = 1, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ReportBoard_board_no_SEQ")
 	private Long boardNo;
 	private String boardTitle;
 	private Date boardRegisterDate;

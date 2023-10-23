@@ -30,8 +30,8 @@ import lombok.NoArgsConstructor;
 public class ReplyBoard {
 	
 	@Id
-	@SequenceGenerator(name = "ReplyBoard_ReplyBoard_NO_SEQ", sequenceName = "ReplyBoard_ReplyBoard_NO_SEQ", initialValue = 1, allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ReplyBoard_ReplyBoard_NO_SEQ")
+	@SequenceGenerator(name = "ReplyBoard_reply_board_no_SEQ", sequenceName = "ReplyBoard_reply_board_no_SEQ", initialValue = 1, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ReplyBoard_reply_board_no_SEQ")
 	private Long ReplyBoardNo;
 	@CreationTimestamp
 	private LocalDateTime ReplyBoardResisterDate;

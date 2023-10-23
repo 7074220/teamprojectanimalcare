@@ -30,8 +30,8 @@ import lombok.ToString;
 public class ReviewBoard {
 
 	@Id
-	@SequenceGenerator(name = "ReviewBoard_board_no_seq", sequenceName = "ReviewBoard_board_no_seq", allocationSize = 1, initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "ReviewBoard_board_no_seq")
+	@SequenceGenerator(name = "ReviewBoard_board_no_SEQ", sequenceName = "ReviewBoard_board_no_SEQ", allocationSize = 1, initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "ReviewBoard_board_no_SEQ")
 	private Long boardNo; // PK
 	private String boardTitle;
 	private String boardContent;

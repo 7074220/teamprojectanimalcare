@@ -3,6 +3,7 @@ package com.itwill.dao;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -29,10 +30,10 @@ class CouponDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		Userinfo userinfo = userInfoDao.findById("전아현");
 		Coupon coupon = Coupon.builder()
 							.couponDiscount(30)
-							.couponExpirationDate(LocalDateTime.now().plusDays(60))
+							.couponExpirationDate(new Date())
 							.couponId(null)
 							.couponName("가입쿠폰")
-							.couponPayday(LocalDateTime.now())
+							.couponPayday(new Date())
 							.userinfo(userinfo)
 							.build();
 		couponDao.Create(coupon);
@@ -40,10 +41,10 @@ class CouponDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		 userinfo = userInfoDao.findById("전아현");
 		 coupon = Coupon.builder()
 				.couponDiscount(30)
-				.couponExpirationDate(LocalDateTime.now().plusDays(30))
+				.couponExpirationDate(new Date())
 				.couponId(null)
 				.couponName("생일쿠폰")
-				.couponPayday(LocalDateTime.now())
+				.couponPayday(new Date())
 				.userinfo(userinfo)
 				.build();
 		couponDao.Create(coupon);

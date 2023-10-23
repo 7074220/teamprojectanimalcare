@@ -31,6 +31,8 @@ import lombok.ToString;
 @Builder
 public class Coupon {
      @Id
+     @SequenceGenerator(name = "Coupon_coupon_id_SEQ",allocationSize = 1,initialValue = 1)
+     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Coupon_coupon_id_SEQ")
      private Long couponId;
      
 	 private String couponName;

@@ -88,24 +88,7 @@ public class Userinfo {
 	@Builder.Default
 	List<ReplyBoard> replyBoards = new ArrayList<ReplyBoard>();
 
-	public Userinfo() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public Userinfo(String userId, String password, String userName) {
-
-	}
-
-	@Override
-	public String toString() {
-		return "Userinfo [userNo=" + userNo + ", userId=" + userId + ", userPassword=" + userPassword + ", userName="
-				+ userName + ", userGender=" + userGender + ", userAddress=" + userAddress + ", userPhoneNumber="
-				+ userPhoneNumber + ", userResidentNumber=" + userResidentNumber + ", userRegisterDate="
-				+ userRegisterDate + ", userPoint=" + userPoint + ", coupons=" + coupons + ", myPets=" + myPets
-				+ ", carts=" + carts + ", orders=" + orders + ", reportBoards=" + reportBoards + ", reviewBoards="
-				+ reviewBoards + ", visits=" + visits + ", volunteers=" + volunteers + ", adopts=" + adopts
-				+ ", replyBoards=" + replyBoards + "]";
-	}
+	
 
 	
 }

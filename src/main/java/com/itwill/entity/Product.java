@@ -28,8 +28,8 @@ import lombok.NoArgsConstructor;
 public class Product {
 
 	@Id
-	@SequenceGenerator(name = "product_product_no_seq",sequenceName = "product_product_no_seq",initialValue = 1,allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "product_product_no_seq")
+	@SequenceGenerator(name = "Product_product_no_SEQ",sequenceName = "Product_product_no_SEQ",initialValue = 1,allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Product_product_no_SEQ")
 	private Long productNo;
 	private String productName;
 	private Integer productPrice;

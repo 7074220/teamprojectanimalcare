@@ -28,8 +28,7 @@ CREATE TABLE UserInfo(
 		user_phone_number             		VARCHAR2(50)		 NULL ,
 		user_id                       		VARCHAR2(30)		 NULL,
 		user_resident_number          		VARCHAR2(50)		 NULL ,
-		user_register_date            		DATE		         NULL ,
-		reply_board_no                		LONG		         NULL 
+		user_register_date            		DATE		         NULL 
 );
 
 DROP SEQUENCE UserInfo_user_no_SEQ;
@@ -82,6 +81,9 @@ CREATE TABLE Local(
 		local_gu                      		VARCHAR2(50)		 NULL 
 );
 
+DROP SEQUENCE Local_local_no_SEQ;
+
+CREATE SEQUENCE Local_local_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 CREATE TABLE Center(
 		center_no                     		NUMBER(10)		 NULL ,
@@ -92,6 +94,9 @@ CREATE TABLE Center(
 		local_no                      		NUMBER(10)		 NULL 
 );
 
+DROP SEQUENCE Center_center_no_SEQ;
+
+CREATE SEQUENCE Center_center_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 CREATE TABLE Volunteer(
 		volunteer_no                  		NUMBER(10)		 NULL ,
@@ -217,6 +222,9 @@ CREATE TABLE Order_item(
 		orderStatus_no                		NUMBER(10)		 NULL 
 );
 
+DROP SEQUENCE Order_item_oi_no_SEQ;
+
+CREATE SEQUENCE Order_item_oi_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 CREATE TABLE Cart(
 		cart_no                       		NUMBER(10)		 NULL ,
@@ -228,8 +236,6 @@ CREATE TABLE Cart(
 DROP SEQUENCE Cart_cart_no_SEQ;
 
 CREATE SEQUENCE Cart_cart_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
-
 
 
 CREATE TABLE MyPet(
@@ -245,8 +251,6 @@ DROP SEQUENCE MyPet_mypet_no_SEQ;
 CREATE SEQUENCE MyPet_mypet_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
-
-
 CREATE TABLE ReviewBoard(
 		board_no                      		NUMBER(10)		 NULL ,
 		board_title                   		VARCHAR2(100)		 NULL ,
@@ -257,6 +261,9 @@ CREATE TABLE ReviewBoard(
 		user_no                       		NUMBER(10)		 NULL 
 );
 
+DROP SEQUENCE ReviewBoard_board_no_SEQ;
+
+CREATE SEQUENCE ReviewBoard_board_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 CREATE TABLE ReplyBoard(
 		reply_board_no                		NUMBER(10)		 NOT NULL,

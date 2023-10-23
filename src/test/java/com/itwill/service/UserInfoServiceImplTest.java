@@ -49,7 +49,7 @@ class UserInfoServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Disabled
 	void test2() throws Exception {
 		Userinfo loginUser=userInfoService.findUser("김창섭");
-		loginUser.setUserGender("여");
+		loginUser.setUserGender(1);
 		userInfoService.update(loginUser);
 		System.out.println(loginUser);
 		

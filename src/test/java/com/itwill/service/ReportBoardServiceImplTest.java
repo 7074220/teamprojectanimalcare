@@ -38,7 +38,7 @@ class ReportBoardServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 									.boardName(userinfo.getUserId())
 									.boardPhone(userinfo.getUserPhoneNumber())
 									.boardReadCount(0)
-									.boardResisterDate(null)
+									.boardRegisterDate(null)
 									.boardStep(0)
 									.boardTitle("제목")
 									.userinfo(userinfo)

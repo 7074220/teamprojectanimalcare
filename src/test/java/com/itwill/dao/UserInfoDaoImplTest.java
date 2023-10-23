@@ -20,10 +20,12 @@ class UserInfoDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	UserInfoDao userinfoDao;
 	
 	@Test
-
 	//@Disabled
 	void test1() {
-		Userinfo userinfo = new Userinfo("email", "1111", "테스트");
+		Userinfo userinfo = Userinfo.builder()
+							.userId("heoseungbum")
+							.userName("테스트")
+							.build();
 		System.out.println(userinfo);
 		userinfoDao.CreateUser(userinfo);
 	}

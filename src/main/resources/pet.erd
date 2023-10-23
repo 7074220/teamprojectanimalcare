@@ -23,8 +23,8 @@
       <constraint>
         <height>-1</height>
         <width>-1</width>
-        <x>674</x>
-        <y>40</y>
+        <x>685</x>
+        <y>59</y>
       </constraint>
       <sourceConnections/>
       <targetConnections>
@@ -257,8 +257,8 @@
                               <constraint>
                                 <height>-1</height>
                                 <width>-1</width>
-                                <x>1485</x>
-                                <y>367</y>
+                                <x>1433</x>
+                                <y>348</y>
                               </constraint>
                               <sourceConnections>
                                 <net.java.amateras.db.visual.model.ForeignKeyModel reference="../../.."/>
@@ -1885,8 +1885,8 @@
             <constraint>
               <height>-1</height>
               <width>-1</width>
-              <x>1366</x>
-              <y>688</y>
+              <x>1324</x>
+              <y>680</y>
             </constraint>
             <sourceConnections>
               <net.java.amateras.db.visual.model.ForeignKeyModel reference="../../.."/>
@@ -2347,22 +2347,6 @@
             <type>12</type>
           </columnType>
           <size>100</size>
-          <notNull>false</notNull>
-          <primaryKey>false</primaryKey>
-          <description></description>
-          <autoIncrement>false</autoIncrement>
-          <defaultValue></defaultValue>
-        </net.java.amateras.db.visual.model.ColumnModel>
-        <net.java.amateras.db.visual.model.ColumnModel>
-          <columnName>reply_board_no</columnName>
-          <logicalName>reply_board_no</logicalName>
-          <columnType class="net.java.amateras.db.dialect.ColumnType">
-            <name>LONG</name>
-            <logicalName>String</logicalName>
-            <supportSize>false</supportSize>
-            <type>2005</type>
-          </columnType>
-          <size>10</size>
           <notNull>false</notNull>
           <primaryKey>false</primaryKey>
           <description></description>
