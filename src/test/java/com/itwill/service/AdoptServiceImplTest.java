@@ -30,7 +30,7 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	@Disabled
 	void insertTest() throws Exception {
-		Userinfo user=userInfoService.findUser("박태환");
+		Userinfo user=userInfoService.findUser(1L);
 		Pet pet1=petService.petFindById(10L);
 		Pet pet2=petService.petFindById(11L);
 		
