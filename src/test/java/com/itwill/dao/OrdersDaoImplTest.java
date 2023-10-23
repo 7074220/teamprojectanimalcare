@@ -22,12 +22,12 @@ private OrdersDao ordersDao;
 	
 //유저아이디로 최신주문조회
 @Test
-//@Disabled
+@Disabled
 @Transactional
 @Rollback(false)
 	void findOrdersById() {
 		
-	List<Orders> orders = ordersDao.findAllByUserIdDESC("박태환");
+	List<Orders> orders = ordersDao.findAllByUserNoDESC(3L);
 	
 	System.out.println(orders);
 	}
@@ -35,6 +35,7 @@ private OrdersDao ordersDao;
 
 
 //주문최신순으로 조회
+//관리자 모드 
 @Test
 @Disabled
 @Transactional
@@ -45,6 +46,27 @@ private OrdersDao ordersDao;
 	System.out.println(orders);
 	}
 
+
+@Test
+@Disabled
+@Transactional
+@Rollback(false)
+	void findAllByOrderByOrderNo() {
+		
+	List<Orders> orders = ordersDao.findOrdersByuserNo(3L);
+	System.out.println(orders);
+	}
+
+//날짜별 기간으로 조회
+@Test
+@Disabled
+@Transactional
+@Rollback(false)
+	void findAllByOrdersByOrderDate() {
+		
+	List<Orders> orders = ordersDao.findAllByOrdersByOrderDate(new Date("2023-10-22"), new Date("2023-10-24"));
+	System.out.println(orders);
+	}
 
 @Test
 @Disabled

@@ -1,5 +1,6 @@
 package com.itwill.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,31 +9,50 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.dao.CartDao;
+import com.itwill.dao.OrderItemDao;
 import com.itwill.dao.OrdersDao;
+import com.itwill.dao.ProductDao;
 import com.itwill.entity.Cart;
 import com.itwill.entity.Coupon;
+import com.itwill.entity.OrderItem;
 import com.itwill.entity.Orders;
+import com.itwill.entity.Orderstatus;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Userinfo;
+import com.itwill.repository.OrderStatusRepository;
 @Service
 public class OrderServiceImpl implements OrderService{
 @Autowired 
 OrdersDao ordersDao;
+@Autowired 
 CartDao cartDao;
-
+@Autowired 
+OrderItemDao orderItemDao;
+@Autowired
+ProductDao productDao;
+@Autowired
+OrderStatusRepository orderStatusRepository;
 	
 	@Override
 	public Orders insertOrder(Orders order) {
+		List<OrderItem> orderItems = order.getOrderItems();
 		Long userNo = order.getUserinfo().getUserNo();
+		List<Cart> carts = cartDao.findAllCartByUserId(userNo);
+		int price = 0;
 		
-		
-		
-		Orders insertOrders=ordersDao.insertOrder(order);
-		
-		
-		cartDao.deleteByUserId(userNo);
-	return insertOrders;
-	
+		for (Cart cart : carts) {
+			OrderItem tempOrderItem = OrderItem.builder().build();
+			Long p_no = cart.getProduct().getProductNo();
+			tempOrderItem.setOrders(order);
+			tempOrderItem.setOrderStatus(orderStatusRepository.findById(1L).get()); 
+			tempOrderItem.setOiQty(cart.getCartQty());
+			tempOrderItem.setProduct(productDao.findByProductNo(p_no));
+			price = price + cart.getProduct().getProductPrice();
+			orderItems.add(tempOrderItem);
+		}
+		order.setOrderPrice(price);
+		cartDao.deleteByUserId(order.getUserinfo().getUserNo());
+		return ordersDao.insertOrder(order);
 	}
 	//배송지변경
 	@Override
@@ -72,24 +92,25 @@ CartDao cartDao;
 		return ordersDao.findOrderByNo(orderNo);
 	}
 
-	//회원주문목록조회
-	@Override
-	public List<Orders> findOrderById(String userId) {
-		
-		return ordersDao.findOrdersById(userId);
-	}
-
-	//회원주문목록 최신순으로 정렬
-	@Override
-	public List<Orders> findOrderByIdDesc(String userId) {
-		return ordersDao.findAllByUserIdDESC(userId);
-	}
 
 	//전체주문 최신순으로 정렬
 	@Override
 	public List<Orders> findAllByOrderByOrderNoDesc(Long orderNo) {
 		
 		return ordersDao.findAllByOrderByOrderNoDesc();
+	}
+	//회원주문목록조회
+	@Override
+	public List<Orders> findOrderById(Long userNo) {
+		return ordersDao.findOrdersByuserNo(userNo);
+	}
+	@Override
+	public List<Orders> findOrderByIdDesc(Long userNo) {
+		return ordersDao.findAllByUserNoDESC(userNo);
+	}
+	@Override
+	public List<Orders> findAllByOrdersByOrderDate(Date startDate, Date endDate) {
+		return ordersDao.findAllByOrdersByOrderDate(startDate,endDate);
 	}
 
 }

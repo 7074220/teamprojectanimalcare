@@ -15,8 +15,8 @@ public class AdoptServiceImpl implements AdoptService{
 	private AdoptDao adoptDao;
 
 	@Override
-	public Adopt findByNoAdopt(Long no) {                  
-		Adopt findAdopt=adoptDao.findByNoAdopt(no);
+	public Adopt findByAdoptNo(Long no) {                  
+		Adopt findAdopt=adoptDao.findByAdoptNo(no);
 		return findAdopt;
 	}
 
