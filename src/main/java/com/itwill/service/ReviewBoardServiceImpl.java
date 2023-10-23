@@ -23,87 +23,82 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 	@Override
 	public ReviewBoard create(ReviewBoard reviewBoard) {
 
-		return reviewBoardRepository.save(reviewBoard);
+		return reviewBoardDao.create(reviewBoard);
 	}
 
 	@Override
 	public ReviewBoard update(ReviewBoard reviewBoard) {
-		if (reviewBoardRepository.findById(reviewBoard.getBoardNo()).isPresent()) {
-			reviewBoardRepository.save(reviewBoard);
-		}
-		return reviewBoard;
+		return reviewBoardDao.update(reviewBoard);
 	}
 
 	@Override
 	public void deleteById(Long boardNo) {
-		if (reviewBoardRepository.findById(boardNo).isPresent()) {
-			reviewBoardRepository.deleteById(boardNo);
-		}
+		reviewBoardDao.deleteById(boardNo);
 
 	}
 
 	@Override
 	public List<ReviewBoard> findAll() {
 
-		return reviewBoardRepository.findAll();
+		return reviewBoardDao.findAll();
 	}
 
 	@Override
-	public List<ReviewBoard> getReviewBoardByProductNo(Long productNo) {
+	public List<ReviewBoard> findByProductNo(Long productNo) {
 		// productNo로 reviewboard 리스트 검색
-		return reviewBoardRepository.getReviewBoardByProduct_ProductNo(productNo);
+		return reviewBoardDao.findByProductNo(productNo);
 	}
 
 	@Override
 	public List<ReviewBoard> findByStarAll(Long star) {
 		// 선택한 별점으로 찾기
-		return reviewBoardRepository.findAllByBoardStar(star);
+		return reviewBoardDao.findByStarAll(star);
 	}
 
 	@Override
 	public List<ReviewBoard> findByUserNo(Long no) {
 		// 선택된 userId 리뷰 리스트만 나오기
-		return reviewBoardRepository.findByUserNo(no);
+		return reviewBoardDao.findByUserNo(no);
 	}
 
 	@Override
 	public List<ReviewBoard> findAllByOrderByBoardStarDesc() {
 		// 높은 평점순 정렬
-		return reviewBoardRepository.findAllByOrderByBoardStarDesc();
+		return reviewBoardDao.findAllByOrderByBoardStarDesc();
 	}
 
 	@Override
 	public List<ReviewBoard> findAllByOrderByBoardStarAsc() {
 		// 낮은 평점순 정렬
-		return reviewBoardRepository.findAllByOrderByBoardStarAsc();
+		return reviewBoardDao.findAllByOrderByBoardStarAsc();
 	}
 
 	@Override
 	public List<ReviewBoard> findAllByOrderByBoardDateDesc() {
 		// 최신순 정렬(board Date정렬)
-		return reviewBoardRepository.findAllByOrderByBoardDateDesc();
+		return reviewBoardDao.findAllByOrderByBoardDateDesc();
 	}
 
 	@Override
 	public List<ReviewBoard> findAllByOrderByBoardDateAsc() {
 		// 오래된 순 정렬(board Date정렬)
-		return reviewBoardRepository.findAllByOrderByBoardDateAsc();
+		return reviewBoardDao.findAllByOrderByBoardDateAsc();
 	}
 
 	@Override
 	public List<ReviewBoard> findByOrderByBoardStarDescBoardDateDesc() {
 		// 별점 높은순,최신순
-		return reviewBoardRepository.findByOrderByBoardStarDescBoardDateDesc();
+		return reviewBoardDao.findByOrderByBoardStarDescBoardDateDesc();
 	}
 
 	@Override
 	public List<ReviewBoard> findByOrderByBoardStarAscBoardDateDesc() {
 		// 별점 낮은순,최신순
-		return reviewBoardRepository.findByOrderByBoardStarAscBoardDateDesc();
+		return reviewBoardDao.findByOrderByBoardStarAscBoardDateDesc();
 	}
 
 	@Override
 	public ReviewBoard findByBoardNo(Long BoardNo) {
-		return reviewBoardRepository.findById(BoardNo).get();
+		return reviewBoardDao.findByBoardNo(BoardNo);
 	}
 }

@@ -18,7 +18,7 @@ public interface ReviewBoardDao {
 
 	public List<ReviewBoard> findAll();
 
-	List<ReviewBoard> getReviewBoardByProductNo(Long productNo); // productNo로 reviewboard 리스트 검색
+	List<ReviewBoard> findByProductNo(Long productNo); // productNo로 reviewboard 리스트 검색
 
 	public List<ReviewBoard> findByStarAll(Long star); //선택한 별점으로 찾기
 
