@@ -32,5 +32,5 @@ public interface ReviewBoardDao {
 	
 	//public List<ReviewBoard> findByBoardStarOrderByBoardStarDescBoardNoDesc(Long star);//별점 높은순,최신순
 	
-	List<ReviewBoard> findAllByBoardStarDescAndBoardDateDesc();
+	
 }		
