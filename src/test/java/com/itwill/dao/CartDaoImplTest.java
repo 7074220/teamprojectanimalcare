@@ -1,8 +1,10 @@
 package com.itwill.dao;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,8 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 				.cartNo(null)
 				.cartQty(5)
 				.userinfo(userInfoDao.findById("전아현"))
-				.product(productDao.findByProductNo(1L))
+				.product(Arrays.asList(cartDao.))
+				.cartImage()
 				.build();
 		cartDao.insertCart(cart1);
 		Cart cart2 = Cart.builder()
