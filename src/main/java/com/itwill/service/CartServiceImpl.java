@@ -88,6 +88,13 @@ public class CartServiceImpl implements CartService {
 	public Integer countProductByUserId(Long userNo, Long productNo) {
 		return cartDao.countProductByUserId(userNo, productNo);
 	}
+	
+	@Override
+	// 중복된 상품이 있는 카트 정보 출력
+	public Cart findByProductUserNo(Long userNo, Long productNo) {
+		Cart cart = cartDao.findByProductUserNo(userNo, productNo);
+		return cart;
+	}
 
 	@Override
 	// 카트에 중복제품이 있으면 (중복체크) --> 업데이트 돼서 담기도록 
@@ -98,21 +105,14 @@ public class CartServiceImpl implements CartService {
 		if(count > 0) {
 			Cart updateCart = cartDao.findByProductUserNo(cart.getUserinfo().getUserNo(), cart.getProduct().getProductNo());
 			int qty = cart.getCartQty();
-			updateCart.setCartQty(updateCart.getCartQty() + qty);
+			int updateQty = updateCart.getProduct().getProductQty();
+			updateCart.setCartQty(qty + updateQty);
 			overlapCount = cartRepository.save(updateCart);
 		} else {
 			overlapCount = cartRepository.save(cart);
 		}
-		
 		return overlapCount;
-		
 	}
 
-	@Override
-	// 중복된 상품이 있는 카트 정보 출력
-	public Cart findByProductUserNo(Long userNo, Long productNo) {
-		Cart cart = cartDao.findByProductUserNo(userNo, productNo);
-		return cart;
-	}
 	
 }

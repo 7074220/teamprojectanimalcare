@@ -32,7 +32,7 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	@Disabled
 	void insertCart() {
-		Userinfo userinfo = userInfoDao.findByNo(1L);
+		Userinfo userinfo = userInfoDao.findByNo(6L);
 		Product product = productDao.findByProductNo(1L);
 		Cart cart = Cart.builder()
 				.cartNo(null)
@@ -122,20 +122,6 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	}
 	
 	@Test
-	//@Disabled
-	@Transactional
-	//@Rollback(false)
-	// 카트에 중복제품이 있으면 (중복체크) --> 업데이트 돼서 담기도록 
-	void updateOverlapCart() {
-		Cart cart1 = Cart.builder()
-						.userinfo(userInfoDao.findByNo(2L))
-						.product(productDao.findByProductNo(2L))
-						.build();
-		Cart update = cartService.updateOverlapCart(cart1);
-		
-	}
-	
-	@Test
 	@Disabled
 	@Transactional
 	@Rollback(false)
@@ -144,4 +130,22 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 		Cart cart = cartService.findByProductUserNo(2L, 2L);
 		System.out.println(cart);
 	}
+	
+	@Test
+	//@Disabled
+	@Transactional
+	@Rollback(false)
+	// 카트에 중복제품이 있으면 (중복체크) --> 업데이트 돼서 담기도록 
+	void updateOverlapCart() {
+		Cart cart = cartService.findByProductUserNo(6L, 1L);
+		/*
+		Cart cart1 = Cart.builder()
+						.userinfo(userInfoDao.findByNo(2L))
+						.product(productDao.findByProductNo(2L))
+						.build();
+						*/
+		Cart update = cartService.updateOverlapCart(cart);
+		
+	}
+	
 }
