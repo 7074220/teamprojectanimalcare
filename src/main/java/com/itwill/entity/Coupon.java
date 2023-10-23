@@ -1,6 +1,8 @@
 package com.itwill.entity;
 
-import java.time.LocalDateTime;
+
+
+import java.util.Date;
 
 import org.apache.commons.lang3.builder.ToStringExclude;
 import org.hibernate.annotations.CreationTimestamp;
@@ -29,21 +31,19 @@ import lombok.ToString;
 @Builder
 public class Coupon {
      @Id
-     @SequenceGenerator(name = "coupon_id_seq",sequenceName = "coupon_id_seq",allocationSize = 1,initialValue = 1)
-     @GeneratedValue(strategy = GenerationType.SEQUENCE ,generator = "coupon_id_seq")
-	 private Long couponId;
+     @SequenceGenerator(name = "Coupon_coupon_id_SEQ",allocationSize = 1,initialValue = 1)
+     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Coupon_coupon_id_SEQ")
+     private Long couponId;
      
 	 private String couponName;
 	 private Integer couponDiscount;
 	 
-	 private LocalDateTime couponExpirationDate;
-	 
-	 @CreationTimestamp
-	 private LocalDateTime couponPayday;
+	 private Date couponExpirationDate;
+	 private Date couponPayday;
 	 
 	 @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	 @Builder.Default
-	 @JoinColumn(name = "user_id")
+	 @JoinColumn(name = "user_no")
 	 @ToString.Exclude
 	 private Userinfo userinfo = new Userinfo();
 }

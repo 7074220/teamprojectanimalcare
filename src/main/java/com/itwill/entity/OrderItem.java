@@ -27,8 +27,8 @@ import lombok.NoArgsConstructor;
 public class OrderItem {
 
 	@Id
-	@SequenceGenerator(name = "oi_no_seq",sequenceName = "oi_no_seq",allocationSize = 1,initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "oi_no_seq")
+	@SequenceGenerator(name = "Order_item_oi_no_SEQ",sequenceName = "Order_item_oi_no_SEQ",allocationSize = 1,initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Order_item_oi_no_SEQ")
 	private Long oiNo;
 	private Integer oiQty;
 	
@@ -44,7 +44,7 @@ public class OrderItem {
 	
 	@OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	@Builder.Default
-	@JoinColumn(name = "orderStatus_no")
+	@JoinColumn(name = "orderstatus_no")
 	private OrderStatus orderStatus = new OrderStatus();
 	
 

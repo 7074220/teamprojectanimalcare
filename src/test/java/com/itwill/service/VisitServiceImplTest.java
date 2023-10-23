@@ -39,7 +39,7 @@ class VisitServiceImplTest {
 				.visitTime(3L)
 				.visitDate(LocalDate.now())
 				.center(centerService.findByCenterNo(11L))
-				.visitstatus("접수중")
+				.visitStatus("접수중")
 				.build();
 		visitService.createVisit(insertVisit);
 	}
@@ -65,7 +65,7 @@ class VisitServiceImplTest {
 	@Disabled
 	void updateVisit() {
 		Visit findVisit = visitService.findByVisitNo(2L);
-		findVisit.setVisitstatus("접수완료");
+		findVisit.setVisitStatus("접수완료");
 	}
 	
 		@Test

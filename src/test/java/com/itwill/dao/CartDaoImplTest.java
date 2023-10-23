@@ -101,10 +101,12 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	}
 	
 	@Test
-	@Disabled
+	//@Disabled
+
 	@Transactional
 	@Rollback(false)
 	void cartTotalPriceTest() {
+
 		Integer totalPrice = cartDao.cartTotalPrice("김창섭");
 		System.out.println(totalPrice);
 		

@@ -74,7 +74,7 @@ public class CartDaoImpl implements CartDao{
 		List<Cart> cartList = cartRepository.findAllCartByUserId(userId);
 		Integer total = 0;
 		for (Cart cart : cartList) {
-			total = total + cart.getProduct().getProductPrice();
+			total = total + cart.getProduct().getProductPrice()*cart.getCartQty();
 		}
 		return total;
 	}

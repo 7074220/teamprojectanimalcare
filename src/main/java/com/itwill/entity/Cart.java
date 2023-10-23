@@ -34,13 +34,13 @@ import lombok.ToString;
 public class Cart {
 	
 	@Id
-	@SequenceGenerator(name = "cart_cart_no_seq",sequenceName = "cart_cart_no_seq",allocationSize = 1,initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "cart_cart_no_seq")
+	@SequenceGenerator(name = "Cart_cart_no_SEQ",sequenceName = "Cart_cart_no_SEQ",allocationSize = 1,initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Cart_cart_no_SEQ")
 	private Long cartNo;
 	private Integer cartQty;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_no")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
 	

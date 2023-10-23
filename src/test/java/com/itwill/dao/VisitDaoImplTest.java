@@ -35,7 +35,7 @@ class VisitDaoImplTest {
 		Visit visit = Visit.builder()
 
 				.visitDate(LocalDate.now())
-				.visitstatus("접수완료")
+				.visitStatus("방문완료")
 				.visitTime(7L)
 				.userinfo(userInfoDao.findById("박태환"))
 				.center(centerDao.findByCenterNo(4L))
@@ -65,7 +65,7 @@ class VisitDaoImplTest {
 	@Disabled
 	void updateVisit() {
 		Visit findVisit = visitDao.findByVisitNo(2L);
-		findVisit.setVisitstatus("대기중");
+		findVisit.setVisitStatus("대기중");
 		System.out.println(findVisit);
 	}
 

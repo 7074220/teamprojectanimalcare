@@ -53,7 +53,7 @@ private PetDao petDao;
 			Pet pet1 = petOptional.get();
 			pet1.setPetLocal(pet.getPetLocal());
 			pet1.setPetType(pet.getPetType());
-			pet1.setPetgender(pet.getPetgender());
+			pet1.setPetGender(pet.getPetGender());
 			pet1.setPetRegisterDate(pet.getPetRegisterDate());
 			pet1.setPetFindPlace(pet.getPetFindPlace());
 			pet1.setPetCharacter(pet.getPetCharacter());
