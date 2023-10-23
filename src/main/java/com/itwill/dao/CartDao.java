@@ -23,7 +23,7 @@ public interface CartDao {
 	void deleteById(Long no) throws Exception;
 	
 	// 카트에 담긴 모든 상품 합계 금액
-	//Integer cartTotalPrice(String userId);
+	//Integer cartTotalPrice(Long userNo);
 	
 	// 중복된 상품이 있는 카트??????????
 	Cart findByProductUserNo(Long userNo, Long productNo);
