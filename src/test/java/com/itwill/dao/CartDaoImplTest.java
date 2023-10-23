@@ -84,7 +84,6 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Transactional
 	@Rollback(false)
 	void deleteByUserIdTest(){
-		System.out.println(cartDao);
 		cartDao.deleteByUserId("박태환");
 	}
 	
@@ -103,9 +102,9 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 		System.out.println(carts);
 	}
 	
+	/*
 	@Test
 	//@Disabled
-
 	@Transactional
 	@Rollback(false)
 	void cartTotalPriceTest() {
@@ -114,6 +113,7 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 		System.out.println(totalPrice);
 		
 	}
+	*/
 	
 	@Test
 	@Disabled
@@ -133,6 +133,7 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 		System.out.println(count);
 	}
 	
+	/*
 	@Test
 	@Disabled
 	@Transactional
@@ -141,4 +142,5 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	void updateOverlapCart() {
 		Cart count = cartDao.updateOverlapCart(null);
 	}
+	*/
 }

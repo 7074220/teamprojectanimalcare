@@ -23,10 +23,10 @@ public interface CartDao {
 	void deleteById(Long no) throws Exception;
 	
 	// 카트에 담긴 모든 상품 합계 금액
-	Integer cartTotalPrice(String userId);
+	//Integer cartTotalPrice(String userId);
 	
 	// 카트에 중복제품이 있으면 (중복체크) --> 업데이트 돼서 담기도록 
-	Cart updateOverlapCart(Cart overlapCart);
+	//Cart updateOverlapCart(Cart overlapCart);
 	
 	// 카트 중복체크
 	Integer countProductByUserId(String userId, Long no);
