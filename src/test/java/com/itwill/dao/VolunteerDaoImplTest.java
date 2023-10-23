@@ -43,7 +43,7 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 									   .userinfo(userinfo)
 									   .center(center)
 									   .volunteerDate(new Date())
-									   .volunteerTime(11L)
+									   .volunteerTime(11)
 									   .volunteerStatus("심사중t")
 									   .build();	
 		volunteerDao.insertVolunteer(volunteer);
@@ -65,7 +65,7 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(value = false)
 	void testUpdateVolunteer() throws Exception{
 		Volunteer volunteer = volunteerDao.findByVolunteerNo(2L);
-		volunteer.setVolunteerTime(12L);
+		volunteer.setVolunteerTime(12);
 		volunteer.setVolunteerStatus("봉사완료a");
 		volunteerDao.updateVolunteer(volunteer);
 	}
