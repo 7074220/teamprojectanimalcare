@@ -15,6 +15,13 @@ insert into product(product_no, product_name, product_price, product_category, p
 insert into product(product_no, product_name, product_price, product_category, product_qty, product_image, product_star_avg, product_pet_category, product_detail_image) values(product_product_no_SEQ.nextval, '우프니 독 크런치 고구마 210g', 7200, '간식', 0, 'cat.jpg', 3, '강아지', 'cat.jpg');
 insert into product(product_no, product_name, product_price, product_category, product_qty, product_image, product_star_avg, product_pet_category, product_detail_image) values(product_product_no_SEQ.nextval, '우프니 독 크런치 BBQ', 7200, '간식', 0, 'cat.jpg', 3, '강아지', 'cat.jpg');
 
+-- cat product insert
+
+insert into product(product_no, product_name, product_price, product_category, product_qty, product_image, product_star_avg, product_pet_category, product_detail_image) values(product_product_no_SEQ.nextval, '뉴트리플랜 흰살참치 닭가슴살', 1500, '캔', 0, 'cat.jpg', 5, '고양이', 'cat.jpg');
+insert into product(product_no, product_name, product_price, product_category, product_qty, product_image, product_star_avg, product_pet_category, product_detail_image) values(product_product_no_SEQ.nextval, '뉴트리플랜 흰살참치 게맛살', 1500, '캔', 0, 'cat.jpg', 3, '고양이', 'cat.jpg');
+insert into product(product_no, product_name, product_price, product_category, product_qty, product_image, product_star_avg, product_pet_category, product_detail_image) values(product_product_no_SEQ.nextval, '뉴트리플랜 흰살참치 멸치', 1500, '캔', 0, 'cat.jpg', 3, '고양이', 'cat.jpg');
+
+
 -- cart insert
 
 insert into cart(cart_no, cart_qty, product_no, user_id) values(cart_cart_no_SEQ.nextval, 1, 1, '김창섭');
