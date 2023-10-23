@@ -37,8 +37,11 @@ public class Product {
 	private String productCategory;
 	private String productPetCategory;
 	private Integer productQty;
+	
+	// 제품 대표이미지
 	private String productImage;
-	//private String productDetailImage;
+	// 제품 상세이미지
+	private String productDetailImage;
 	
 	private Integer productStarAvg;
 	
