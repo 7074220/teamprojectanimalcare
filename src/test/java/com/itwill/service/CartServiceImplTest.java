@@ -32,7 +32,7 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	//@Disabled
 	void insertCart() {
-		Userinfo userinfo = userInfoDao.findById("전아현");
+		Userinfo userinfo = userInfoDao.findByNo(1L);
 		Product product = productDao.findByProductNo(1L);
 		Cart cart = Cart.builder()
 				.cartNo(null)

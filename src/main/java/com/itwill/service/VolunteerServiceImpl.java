@@ -44,8 +44,8 @@ public class VolunteerServiceImpl implements VolunteerService{
 	} //봉사목록 전체
 
 	@Override
-	public List<Volunteer> findVolunteertByUserId(String userId) {
-		return volunteerRepository.findVolunteertByUserId(userId);
+	public List<Volunteer> findVolunteertByUserId(Long no){
+		return volunteerRepository.findVolunteertByUserId(no);
 	} // 유저아이디로 봉사 목록
 	
 	
