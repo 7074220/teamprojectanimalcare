@@ -1,6 +1,7 @@
 package com.itwill.dao;
 
-import java.time.LocalDateTime;
+
+import java.util.Date;
 import java.util.List;
 
 import com.itwill.entity.Coupon;
@@ -11,7 +12,7 @@ public interface CouponDao {
 	
 	public void DelteById(Long couponId);
 	
-	public void autoDeleteExpiredCoupons(LocalDateTime couponExpirationDate);
+	public void autoDeleteExpiredCoupons(Date couponExpirationDate);
 	
 	public List<Coupon> findAll();
 	

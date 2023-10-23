@@ -47,6 +47,7 @@ public class Cart {
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_no")
+	@ToString.Exclude
 	private Product product;
 
 	

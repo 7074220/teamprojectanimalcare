@@ -16,13 +16,13 @@ import com.itwill.entity.Userinfo;
 
 public interface ReplyBoardRepository extends JpaRepository<ReplyBoard, Long>{
 	
-	@Query(value="delete from reply_board where user_id = ?1",nativeQuery = true)
+	@Query(value="delete from replyboard where user_id = ?1",nativeQuery = true)
 	public void deleteByUserId(String userId);
 	
-	@Query(value = "select * from reply_board where user_id = ?1",nativeQuery = true)
+	@Query(value = "select * from replyboard where user_id = ?1",nativeQuery = true)
 	public List<ReplyBoard> findByUserId(String userId);
 	
-	@Query(value = "select * from reply_board where user_id = ?1 order by reply_board.reply_board_resister_date asc",nativeQuery = true)
+	@Query(value = "select * from replyboard where user_id = ?1 order by reply_board.reply_board_register_date asc",nativeQuery = true)
 	public List<ReplyBoard> findAllByOrderByReplyBoardNoAsc();
 	
 

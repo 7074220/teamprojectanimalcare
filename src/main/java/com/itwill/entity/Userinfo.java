@@ -33,6 +33,7 @@ public class Userinfo {
 	@SequenceGenerator(name = "userinfo_user_no_seq", allocationSize = 1, initialValue = 1, sequenceName = "userinfo_user_no_seq")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userinfo_user_no_seq")
 	private Long userNo;
+	
 	// 아이디는 이메일로 사용함.
 	@Column(name = "user_id")
 	private String userId;
@@ -47,46 +48,57 @@ public class Userinfo {
 	private Date userRegisterDate;
 	private Integer userPoint;
 
-	@OneToMany(mappedBy = "userinfo", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	@Builder.Default
-	List<Coupon> coupons = new ArrayList<Coupon>();
-
-	@OneToMany(mappedBy = "userinfo", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	@Builder.Default
-	List<MyPet> myPets = new ArrayList<MyPet>();
-
-	@OneToMany(mappedBy = "userinfo", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "userinfo", cascade ={CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
 	@Builder.Default
 	@ToString.Exclude
-	List<Cart> carts = new ArrayList<Cart>();
+	private List<Coupon> coupons = new ArrayList<Coupon>();
 
-	@OneToMany(mappedBy = "userinfo", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "userinfo", cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
 	@Builder.Default
-	List<Orders> orders = new ArrayList<Orders>();
+	@ToString.Exclude
+	private List<MyPet> myPets = new ArrayList<MyPet>();
 
-	@OneToMany(mappedBy = "userinfo", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	@Builder.Default
-	List<ReportBoard> reportBoards = new ArrayList<ReportBoard>();
 
-	@OneToMany(mappedBy = "userinfo", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "userinfo", cascade ={CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
 	@Builder.Default
-	List<ReviewBoard> reviewBoards = new ArrayList<ReviewBoard>();
+	@ToString.Exclude
+	private List<Cart> carts = new ArrayList<Cart>();
 
-	@OneToMany(mappedBy = "userinfo", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "userinfo", cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
 	@Builder.Default
-	List<Visit> visits = new ArrayList<Visit>();
+	@ToString.Exclude
+	private List<Orders> orders = new ArrayList<Orders>();
 
-	@OneToMany(mappedBy = "userinfo", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	@Builder.Default
-	List<Volunteer> volunteers = new ArrayList<Volunteer>();
 
-	@OneToMany(mappedBy = "userinfo", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "userinfo", cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
 	@Builder.Default
-	List<Adopt> adopts = new ArrayList<Adopt>();
+	@ToString.Exclude
+	private List<ReportBoard> reportBoards = new ArrayList<ReportBoard>();
 
-	@OneToMany(mappedBy = "userinfo", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "userinfo", cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
 	@Builder.Default
-	List<ReplyBoard> replyBoards = new ArrayList<ReplyBoard>();
+	@ToString.Exclude
+	private List<ReviewBoard> reviewBoards = new ArrayList<ReviewBoard>();
+
+	@OneToMany(mappedBy = "userinfo", cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
+	@Builder.Default
+	@ToString.Exclude
+	private List<Visit> visits = new ArrayList<Visit>();
+
+	@OneToMany(mappedBy = "userinfo", cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
+	@Builder.Default
+	@ToString.Exclude
+	private List<Volunteer> volunteers = new ArrayList<Volunteer>();
+
+	@OneToMany(mappedBy = "userinfo", cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
+	@Builder.Default
+	@ToString.Exclude
+	private List<Adopt> adopts = new ArrayList<Adopt>();
+
+	@OneToMany(mappedBy = "userinfo", cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
+	@Builder.Default
+	@ToString.Exclude
+	private List<ReplyBoard> replyBoards = new ArrayList<ReplyBoard>();
 
 	
 

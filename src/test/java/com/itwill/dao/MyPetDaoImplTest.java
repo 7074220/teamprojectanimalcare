@@ -25,10 +25,10 @@ class MyPetDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	@Transactional
 	@Rollback(false)
-	//@Disabled
+	@Disabled
 	void test() {
 		
-		Userinfo userinfo = userInfoDao.findById("박태환");
+		Userinfo userinfo = userInfoDao.findByNo(4L);
 		MyPet myPet = MyPet.builder()
 							.mypetNo(null)
 							.mypetName("보리")
@@ -40,7 +40,7 @@ class MyPetDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		myPetDao.CreatePet(myPet);
 		
 		
-		userinfo = userInfoDao.findById("전아현");
+		userinfo = userInfoDao.findByNo(5L);
 		myPet = MyPet.builder()
 					.mypetNo(null)
 					.mypetName("율무")
@@ -51,7 +51,7 @@ class MyPetDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		
 		myPetDao.CreatePet(myPet);
 		
-		userinfo = userInfoDao.findById("김창섭");
+		userinfo = userInfoDao.findByNo(10L);
 		myPet = MyPet.builder()
 					.mypetNo(null)
 					.mypetName("나비")
@@ -61,10 +61,35 @@ class MyPetDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 					.build();
 		
 		myPetDao.CreatePet(myPet);
-	}
-	@Disabled
-	void test2() {
 		
 	}
+	
+	@Test
+	@Transactional
+	@Rollback(false)
+	@Disabled
+	void test2() {
+		myPetDao.DeletePet(2L);
+	}
+	
+	@Test
+	@Transactional
+	@Rollback(false)
+	@Disabled
+	void test3() {
+		MyPet pet= myPetDao.findByNo(5L);
+		pet.setMypetName("두부");
+		myPetDao.UpdatePet(pet);
+	}
+	
+	@Test
+	@Transactional
+	@Rollback(false)
+	//@Disabled
+	void test4() {
+	System.out.println(myPetDao.findAll());	
+	}
+	
+	
 
 }

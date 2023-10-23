@@ -40,11 +40,12 @@ class MyPetServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	void test() {
 		Userinfo userinfo=Userinfo.builder()
-				.userId("서지니")
+				.userNo(null)
 				.build();
 		
 		
 		MyPet myPet = MyPet.builder()
+							.mypetNo(null)
 							.mypetName("바니")
 							.mypetBirthday(new Date())
 							.mypetKind("강아지")
@@ -64,7 +65,7 @@ class MyPetServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	void test1() {
 		
-		myPetService.Delete(2L);
+		myPetService.Delete(4L);
 		
 	}
 	
@@ -75,7 +76,7 @@ class MyPetServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	void test2() throws Exception {
 		
 	
-		Userinfo loginUser=userInfoService.findUser("박태환");
+		Userinfo loginUser=userInfoService.findUser(11L);
 		
 		
 	  System.out.println(loginUser.getMyPets()); 
@@ -87,20 +88,30 @@ class MyPetServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	
 	@Transactional
 	@Rollback(false)
-	//@Disabled
+	@Disabled
 	@Test
 	void test3() throws Exception {
-		Userinfo loginUser=userInfoService.findUser("박태환");
+		Userinfo loginUser=userInfoService.findUser(4L);
 		List<MyPet> petList = loginUser.getMyPets();
 		MyPet myPet = petList.get(0);
 		myPet.setMypetName("봉남이");
 		System.out.println(myPet);
 		
-		
+	}
 	
+	@Transactional
+	@Rollback(false)
+	//@Disabled
+	@Test
+	void test4()  {
+	System.out.println(myPetService.findAll());
 		
 		
 	}
+		
+		
+	
+		
 	
 	
 	

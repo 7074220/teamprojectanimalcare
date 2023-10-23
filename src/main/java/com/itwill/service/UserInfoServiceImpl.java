@@ -45,7 +45,12 @@ public class UserInfoServiceImpl implements UserInfoService{
 	 */
 	@Override
 	public void remove(Long userNo) throws Exception {
-		userInfoDao.DeleteUser(userNo);
+		userInfoDao.DeleteUserByNo(userNo);
+	}
+	
+	// 아이디로 찾기
+	public Userinfo findByUserId(String userId) {
+		return userInfoDao.findByUserId(userId); 
 	}
 	
 	// 상세보기

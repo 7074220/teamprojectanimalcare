@@ -47,6 +47,7 @@ public class Orders {
 	
 	@OneToMany(mappedBy = "orders",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@Builder.Default
+	@ToString.Exclude
 	private List<OrderItem> orderItems = new ArrayList<OrderItem>();
 
 }
