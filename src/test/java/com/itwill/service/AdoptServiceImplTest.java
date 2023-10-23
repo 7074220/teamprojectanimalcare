@@ -93,7 +93,7 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(false)
 	void findByUserinfoUserIdTest() {
-		System.out.println(	adoptService.findByUserinfoUserId("박태환"));
+		System.out.println(	adoptService.findAdoptsByUserNo(2L));
 	}
 	
 	
