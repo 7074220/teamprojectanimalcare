@@ -50,7 +50,7 @@ public class Product {
 	@Builder.Default
 	Cart cart = new Cart();
 	
-	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@Builder.Default
 	List<ReviewBoard> reviewBoards = new ArrayList<ReviewBoard>(); 
 }

@@ -27,6 +27,6 @@ public class OrderStatus {
 	private String orderStatusImage;
 	private String orderStatusDesc;
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(mappedBy = "orderStatus", cascade = CascadeType.PERSIST)
 	private OrderItem orderItem;
 }

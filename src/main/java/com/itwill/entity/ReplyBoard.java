@@ -35,7 +35,7 @@ public class ReplyBoard {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ReplyBoard_reply_board_no_SEQ")
 	private Long ReplyBoardNo;
 	@CreationTimestamp
-	private Date ReplyBoardResisterDate;
+	private Date ReplyBoardRegisterDate;
 	private String ReplyBoardContent;
 	private Integer ReplyBoardGroupNo;
 	private Integer ReplyBoardStep;
