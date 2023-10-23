@@ -25,13 +25,12 @@ public interface CartDao {
 	// 카트에 담긴 모든 상품 합계 금액
 	Integer cartTotalPrice(String userId);
 	
-	// 카트에서 내가 선택한 상품의 합계 금액
-	Integer cartSelectTotalPrice(Long no);
+	// 카트에 중복제품이 있으면 (중복체크) --> 업데이트 돼서 담기도록 
+	Cart updateOverlapCart(Cart overlapCart);
 	
-	/*
-	// 카트에 중복제품이 있으면 합산되어 담기도록
-	int productWithKindByUserId(Cart cart);
-*/
+	// 카트 중복체크
+	Integer countProductByUserId(String userId, Long no);
+
 	// 카트에 담긴 모든 상품 출력
 	List<Cart> findAll();
 	
