@@ -1,6 +1,6 @@
 package com.itwill.entity;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -16,7 +16,6 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -35,7 +34,7 @@ public class ReviewBoard {
 	private Long boardNo; // PK
 	private String boardTitle;
 	private String boardContent;
-	private LocalDate boardDate;
+	private Date boardDate;
 	private Integer boardStar;
 
 	@Builder.Default
