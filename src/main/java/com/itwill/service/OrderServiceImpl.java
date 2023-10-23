@@ -1,5 +1,6 @@
 package com.itwill.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import com.itwill.dao.CartDao;
 import com.itwill.dao.OrdersDao;
 import com.itwill.entity.Cart;
 import com.itwill.entity.Coupon;
+import com.itwill.entity.OrderItem;
 import com.itwill.entity.Orders;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Userinfo;
@@ -24,7 +26,19 @@ CartDao cartDao;
 	@Override
 	public Orders insertOrder(Orders order) {
 		String userId=order.getUserinfo().getUserId();
+		List<OrderItem> orderItems = order.getOrderItems();
+		List<Cart> cartList = order.getUserinfo().getCarts();
+		for (int i = 0; i < orderItems.size(); i++) {
+			orderItems.get(i).setOrders(order);
+			
+		}
 		
+		
+		cartDao.findAllCartByUserId(userId);
+		order.builder()
+				.orderItems(null)
+	
+				.build();
 		
 		cartDao.deleteByUserId(userId);
 		Orders insertOrders=ordersDao.insertOrder(order);
@@ -69,24 +83,25 @@ CartDao cartDao;
 		return ordersDao.findOrderByNo(orderNo);
 	}
 
-	//회원주문목록조회
-	@Override
-	public List<Orders> findOrderById(String userId) {
-		
-		return ordersDao.findOrdersById(userId);
-	}
-
-	//회원주문목록 최신순으로 정렬
-	@Override
-	public List<Orders> findOrderByIdDesc(String userId) {
-		return ordersDao.findAllByUserIdDESC(userId);
-	}
 
 	//전체주문 최신순으로 정렬
 	@Override
 	public List<Orders> findAllByOrderByOrderNoDesc(Long orderNo) {
 		
 		return ordersDao.findAllByOrderByOrderNoDesc();
+	}
+	//회원주문목록조회
+	@Override
+	public List<Orders> findOrderById(Long userNo) {
+		return ordersDao.findOrdersByuserNo(userNo);
+	}
+	@Override
+	public List<Orders> findOrderByIdDesc(Long userNo) {
+		return ordersDao.findAllByUserNoDESC(userNo);
+	}
+	@Override
+	public List<Orders> findAllByOrdersByOrderDate(Date startDate, Date endDate) {
+		return ordersDao.findAllByOrdersByOrderDate(startDate,endDate);
 	}
 
 }

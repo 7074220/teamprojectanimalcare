@@ -1,5 +1,6 @@
 package com.itwill.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.itwill.entity.Orders;
@@ -7,7 +8,7 @@ import com.itwill.entity.Orders;
 public interface OrderService {
 
 	
-	//order insert 시 장바구니 전체삭제 , 포인트 및 할인쿠폰으로 결제금액결정
+	//order insert 시 장바구니 전체삭제 , 
 	
 	Orders insertOrder(Orders order);
 	
@@ -22,11 +23,13 @@ public interface OrderService {
 	Orders findOrderByNo(Long orderNo);
 	
 	//회원아이디로 주문조회
-	List<Orders> findOrderById(String userId);
+	List<Orders> findOrderById(Long userNo);
 	
-	List<Orders>findOrderByIdDesc(String userId);
+	List<Orders>findOrderByIdDesc(Long userNo);
 	//
 	List<Orders>findAllByOrderByOrderNoDesc(Long orderNo);
+	//날짜별 기간으로 조회
+		List<Orders> findAllByOrdersByOrderDate(Date startDate,Date endDate);
 	
 	
 	
