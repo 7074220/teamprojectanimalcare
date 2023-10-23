@@ -24,7 +24,7 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	ProductDao productDao;
 	@Autowired
 	CartService cartService;
-	/*
+	
 	@Test
 	@Transactional
 	@Rollback(false)
@@ -36,10 +36,9 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 				.cartNo(null)
 				.cartQty(1)
 				.userinfo(userinfo)
-				.product(product)
 				.build();
 		Cart babo = cartService.insertCart(cart);
 		System.out.println(babo);
 	}
-*/
+
 }
