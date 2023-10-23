@@ -35,7 +35,7 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Disabled
 	void testInsertVolunteer() {
 		
-		Userinfo userinfo = userInfoDao.findById("김창섭");
+		Userinfo userinfo = userInfoDao.findByNo(1L);
 		
 		Center center = centerDao.findByCenterNo(2L);	
 	
