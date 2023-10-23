@@ -9,7 +9,7 @@ import com.itwill.entity.Visit;
 
 public interface VisitRepository extends JpaRepository<Visit, Long> {
 	 
-	List<Visit> findByUserinfoUserId(String userId);
+	List<Visit> findByUserinfoUserNo(String userNo);
 		
 
 }

@@ -46,6 +46,7 @@ public class Cart {
 	private Userinfo userinfo = new Userinfo();
 	
 	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@JoinColumn(name = "product_no")
 	@Builder.Default
 	private Product product = new Product();
 

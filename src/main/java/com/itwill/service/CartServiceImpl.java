@@ -8,13 +8,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.dao.CartDao;
+import com.itwill.dao.UserInfoDao;
 import com.itwill.entity.Cart;
+import com.itwill.entity.Userinfo;
 import com.itwill.repository.CartRepository;
 
 @Transactional
 @Service
 public class CartServiceImpl implements CartService {
 
+	@Autowired
+	private UserInfoDao userinfoDao;
 	@Autowired
 	private CartDao cartDao;
 	@Autowired
@@ -88,14 +92,17 @@ public class CartServiceImpl implements CartService {
 	@Override
 	// 카트에 중복제품이 있으면 (중복체크) --> 업데이트 돼서 담기도록 
 	public Cart updateOverlapCart(Cart overlapCart) {
-		int count = cartDao.countProductByUserId(overlapCart.getUserinfo().getUserId(), overlapCart.getProduct().getProductNo());
+		/*
+		int count = cartDao.countProductByUserId(userId, no);
 		Cart overlapCount = null;
 		if(count > 0) {
 			overlapCount = cartRepository.save(overlapCart);
 		} else {
 			overlapCount = cartRepository.save(overlapCart);
 		}
-		return overlapCount;
+		*/
+		return null;
+		
 	}
 	
 }
