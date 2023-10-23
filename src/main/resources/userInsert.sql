@@ -50,8 +50,8 @@ INSERT INTO center (center_no, center_name, center_phone_number, center_local, c
 
 -- adopt insert
 
-INSERT INTO adopt (adopt_no, adopt_time, adopt_date, pet_no, user_no, adopt_status ) VALUES(adopt_adopt_no_seq.nextval, 11, sysdate, 10, 1, "입양완료");
-INSERT INTO adopt (adopt_no, adopt_time, adopt_date, pet_no, user_no, adopt_status ) VALUES(adopt_adopt_no_seq.nextval, 11, sysdate, 11, 2, "입양중");
+INSERT INTO adopt (adopt_no, adopt_time, adopt_date, pet_no, user_no, adopt_status ) VALUES(adopt_adopt_no_seq.nextval, 11, sysdate, 1, 1, "입양완료");
+INSERT INTO adopt (adopt_no, adopt_time, adopt_date, pet_no, user_no, adopt_status ) VALUES(adopt_adopt_no_seq.nextval, 12, sysdate, 2, 2, "입양중");
 
 -- mypet insert
 
@@ -109,3 +109,8 @@ INSERT INTO review_board (review_board.board_no, board_date, board_title, board_
 INSERT INTO review_board (review_board.board_no, board_date, board_title, board_content, board_star, user_id) VALUES (ReviewBoard_board_no_SEQ.nextval, sysdate, '타이틀2', '내용2', 4, '김창섭');
 INSERT INTO review_board (review_board.board_no, board_date, board_title, board_content, board_star, user_id) VALUES (ReviewBoard_board_no_SEQ.nextval, sysdate, '타이틀3', '내용3', 3, '전아현');
 INSERT INTO review_board (review_board.board_no, board_date, board_title, board_content, board_star, user_id) VALUES (ReviewBoard_board_no_SEQ.nextval, sysdate, '타이틀4', '내용4', 1, '박태환');
+
+-- visit
+INSERT INTO visit (VISIT_NO,VISIT_DATE, VISIT_TIME, VISIT_STATUS, CENTER_NO, USER_NO) VALUES (visit_visit_no_seq.nextval,  sysdate, 11,'봉사접수중', 1, 1);
+INSERT INTO visit (VISIT_NO,VISIT_DATE, VISIT_TIME, VISIT_STATUS, CENTER_NO, USER_NO) VALUES (visit_visit_no_seq.nextval,  sysdate, 12,'봉사접수중', 2, 2);
+INSERT INTO visit (VISIT_NO,VISIT_DATE, VISIT_TIME, VISIT_STATUS, CENTER_NO, USER_NO) VALUES (visit_visit_no_seq.nextval,  sysdate, 13,'봉사접수중', 3, 3);
