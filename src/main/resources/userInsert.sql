@@ -25,15 +25,15 @@ insert into product(product_no, product_name, product_price, product_category, p
 
 -- cart insert
 
-insert into cart(cart_no, cart_qty, product_no, user_id) values(cart_cart_no_SEQ.nextval, 1, 1, '김창섭');
-insert into cart(cart_no, cart_qty, product_no, user_id) values(cart_cart_no_SEQ.nextval, 2, 2, '김창섭');
-insert into cart(cart_no, cart_qty, product_no, user_id) values(cart_cart_no_SEQ.nextval, 3, 3, '김창섭');
+insert into cart(cart_no, cart_qty,cart_image ,product_no, user_no) values(cart_cart_no_SEQ.nextval, 1,'cat.jpg', 1, 1);
+insert into cart(cart_no, cart_qty,cart_image , product_no, user_no) values(cart_cart_no_SEQ.nextval, 2,'cat.jpg', 2, 1);
+insert into cart(cart_no, cart_qty,cart_image , product_no, user_no) values(cart_cart_no_SEQ.nextval, 3,'cat.jpg', 3, 1);
 
-insert into cart(cart_no, cart_qty, product_no, user_id) values(cart_cart_no_SEQ.nextval, 1, 4, '박태환');
-insert into cart(cart_no, cart_qty, product_no, user_id) values(cart_cart_no_SEQ.nextval, 2, 5, '박태환');
+insert into cart(cart_no, cart_qty,cart_image , product_no, user_no) values(cart_cart_no_SEQ.nextval, 1,'cat.jpg', 4, 2);
+insert into cart(cart_no, cart_qty,cart_image , product_no, user_no) values(cart_cart_no_SEQ.nextval, 2,'cat.jpg', 5, 2);
 
-insert into cart(cart_no, cart_qty, product_no, user_id) values(cart_cart_no_SEQ.nextval, 2, 11, '전아현');
-insert into cart(cart_no, cart_qty, product_no, user_id) values(cart_cart_no_SEQ.nextval, 3, 12, '전아현');
+insert into cart(cart_no, cart_qty,cart_image , product_no, user_no) values(cart_cart_no_SEQ.nextval, 2,'cat.jpg', 11, 3);
+insert into cart(cart_no, cart_qty,cart_image , product_no, user_no) values(cart_cart_no_SEQ.nextval, 3,'cat.jpg', 12, 3);
 
 -- pet insert
 

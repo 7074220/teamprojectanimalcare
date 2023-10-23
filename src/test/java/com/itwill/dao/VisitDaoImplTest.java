@@ -38,7 +38,7 @@ class VisitDaoImplTest {
 				.visitDate(new Date())
 				.visitStatus("방문완료")
 				.visitTime(7)
-				.userinfo(userInfoDao.findById("박태환"))
+				.userinfo(userInfoDao.findByNo(1L))
 				.center(centerDao.findByCenterNo(4L))
 				.build();
 		visitDao.createVisit(visit);
