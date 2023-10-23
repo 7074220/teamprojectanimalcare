@@ -50,8 +50,8 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public void deleteByUserId(String userId) {
-		cartDao.deleteByUserId(userId);
+	public void deleteByUserId(Long no) {
+		cartDao.deleteByUserId(no);
 	}
 
 	@Override
@@ -60,11 +60,11 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public Integer cartTotalPrice(String userId) {
-		List<Cart> cartList = cartDao.findAllCartByUserId(userId);
+	public Integer cartTotalPrice(Long userNo) {
+		List<Cart> cartList = cartDao.findAllCartByUserId(userNo);
 		Integer total = 0;
 		for (Cart cart : cartList) {
-			total = total + cart.getProduct().getProductPrice()*cart.getCartQty();
+			total = total + cart.getProduct().getProductPrice() * cart.getCartQty();
 		}
 		return total;
 		
@@ -77,32 +77,42 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public List<Cart> findAllCartByUserId(String userId) {
-		List<Cart> carts = cartDao.findAllCartByUserId(userId);
+	public List<Cart> findAllCartByUserId(Long userNo) {
+		List<Cart> carts = cartDao.findAllCartByUserId(userNo);
 		return carts;
 	}
 
 	
 	@Override
 	// 카트 중복체크
-	public Integer countProductByUserId(String userId, Long no) {
-		return cartDao.countProductByUserId(userId, no);
+	public Integer countProductByUserId(Long userNo, Long productNo) {
+		return cartDao.countProductByUserId(userNo, productNo);
+	}
+	
+	@Override
+	// 중복된 상품이 있는 카트 정보 출력
+	public Cart findByProductUserNo(Long userNo, Long productNo) {
+		Cart cart = cartDao.findByProductUserNo(userNo, productNo);
+		return cart;
 	}
 
 	@Override
 	// 카트에 중복제품이 있으면 (중복체크) --> 업데이트 돼서 담기도록 
-	public Cart updateOverlapCart(Cart overlapCart) {
+	public Cart updateOverlapCart(Cart cart) {
 		
-		int count = cartDao.countProductByUserId(overlapCart.getUserinfo().getUserId(), overlapCart.getProduct().getProductNo());
+		int count = cartDao.countProductByUserId(cart.getUserinfo().getUserNo(), cart.getProduct().getProductNo());
 		Cart overlapCount = null;
 		if(count > 0) {
-			overlapCount = cartRepository.save(overlapCart);
+			Cart updateCart = cartDao.findByProductUserNo(cart.getUserinfo().getUserNo(), cart.getProduct().getProductNo());
+			int qty = cart.getCartQty();
+			int updateQty = updateCart.getProduct().getProductQty();
+			updateCart.setCartQty(qty + updateQty);
+			overlapCount = cartRepository.save(updateCart);
 		} else {
-			overlapCount = cartRepository.save(overlapCart);
+			overlapCount = cartRepository.save(cart);
 		}
-		
 		return overlapCount;
-		
 	}
+
 	
 }

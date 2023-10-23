@@ -116,7 +116,7 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	@Disabled
 	void findById() {
-		System.out.println(adoptDao.findByNoAdopt(2L));
+		System.out.println(adoptDao.findByAdoptNo(2L));
 	}
 	
 	@Test
@@ -124,7 +124,7 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	@Disabled
 	void updateTest() throws Exception{
-		Adopt adopt=adoptDao.findByNoAdopt(2L);
+		Adopt adopt=adoptDao.findByAdoptNo(2L);
 		//adopt.setAdoptTime(12L);
 		adopt.setAdoptStatus("입양완료");
 		adoptDao.updateAdopt(adopt);

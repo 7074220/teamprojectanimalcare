@@ -2,6 +2,8 @@ package com.itwill.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -18,6 +20,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -35,6 +38,7 @@ public class OrderItem {
 	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@Builder.Default
 	@JoinColumn(name = "order_no")
+	@ToString.Exclude
 	private Orders orders = new Orders();
 	
 	@OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)

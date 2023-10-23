@@ -21,7 +21,7 @@ public class AdoptDaoImpl implements AdoptDao{
 	}
 
 	@Override
-	public Adopt findByNoAdopt(Long no) {
+	public Adopt findByAdoptNo(Long no) {
 		Adopt selectedAdopt=adoptRepository.findById(no).get();
 		return selectedAdopt;
 	}
