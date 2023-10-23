@@ -42,6 +42,7 @@ public class ReportBoard {
 	private Date boardRegisterDate;
 	private String boardContent;
 	private Date boardDate;
+	@Column(name = "board_readCount")
 	private Integer boardReadCount;
 	private Integer boardGroupNo;
 	private Integer boardStep;
