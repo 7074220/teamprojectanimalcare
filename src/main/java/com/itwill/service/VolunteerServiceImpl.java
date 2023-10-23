@@ -16,6 +16,7 @@ public class VolunteerServiceImpl implements VolunteerService{
 	
 	@Autowired
 	VolunteerDao volunteerDao;
+	@Autowired
 	VolunteerRepository volunteerRepository;
 
 	@Override
@@ -44,9 +45,9 @@ public class VolunteerServiceImpl implements VolunteerService{
 	} //봉사목록 전체
 
 	@Override
-	public List<Volunteer> findVolunteertByUserId(Long no){
-		return volunteerRepository.findVolunteertByUserId(no);
-	} // 유저아이디로 봉사 목록
+	public List<Volunteer> findVolunteertByUserNo(Long no){
+		return volunteerRepository.findVolunteertByUserNo(no);
+	} // userNo로 봉사 목록
 	
 	
 	
