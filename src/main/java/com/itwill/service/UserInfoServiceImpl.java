@@ -44,14 +44,14 @@ public class UserInfoServiceImpl implements UserInfoService{
 	 * 회원탈퇴
 	 */
 	@Override
-	public void remove(String userId) throws Exception {
-		userInfoDao.DeleteUser(userId);
+	public void remove(Long userNo) throws Exception {
+		userInfoDao.DeleteUser(userNo);
 	}
 	
 	// 상세보기
 	@Override
-	public Userinfo findUser(String userId) throws Exception {
-		return userInfoDao.findById(userId);
+	public Userinfo findUser(Long userNo) throws Exception {
+		return userInfoDao.findByNo(userNo);
 	}
 	
 	// 전체회원리스트
@@ -62,7 +62,7 @@ public class UserInfoServiceImpl implements UserInfoService{
 	
 	@Override
 	public Userinfo login(String userId, String password) throws Exception {
-		Userinfo userinfo = userInfoDao.findById(userId);
+		Userinfo userinfo = userInfoDao.findByUserId(userId);
 		Userinfo fUser= Userinfo.builder().userId(userId).userPassword(password).build();
 		
 		if(userinfo == null) {

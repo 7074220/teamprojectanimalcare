@@ -58,6 +58,10 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		return userinfoRepository.findByUserPassword(userId, userPhoneNumber);
 	}
 	
-	
+	// 아이디로 객체 찾기
+	@Override
+	public Userinfo findByUserId(String userId) {
+		return userinfoRepository.findByUserId(userId);
+	}
 	
 }
