@@ -32,12 +32,12 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	@Transactional
 	@Rollback(false)
-	//@Disabled
+	@Disabled
 	void testInsertVolunteer() {
 		
 		Userinfo userinfo = userInfoDao.findByNo(1L);
 		
-		Center center = centerDao.findByCenterNo(2L);	
+		Center center = centerDao.findByCenterNo(3L);	
 	
 		Volunteer volunteer = Volunteer.builder()
 									   .userinfo(userinfo)
