@@ -37,8 +37,8 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	//@Disabled
 	void insertTest() {
 		
-		Userinfo userinfo1 = userInfoDao.findById("박태환");
-		Userinfo userinfo2 = userInfoDao.findById("전아현");
+		Userinfo userinfo1 = userInfoDao.findByNo(1L);
+		Userinfo userinfo2 = userInfoDao.findByNo(2L);
 		
 		
 		//Pet pet1 = petDao.petFindById(1L);
