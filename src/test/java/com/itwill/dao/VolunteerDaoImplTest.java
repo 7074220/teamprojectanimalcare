@@ -80,7 +80,7 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	
 	
 	@Test
-	//@Disabled
+	@Disabled
 	@Transactional
 	@Rollback(value = false)
 	void testFindVolunteerByUserId() {

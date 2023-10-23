@@ -3,133 +3,155 @@ package com.itwill.service;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.itwill.TeamprojectAnimalcareApplicationTest;
-import com.itwill.dao.ReviewBoardDao;
 import com.itwill.entity.ReviewBoard;
 
+import jakarta.transaction.Transactional;
+
 @SpringBootTest
-class ReviewBoardServiceImplTest extends TeamprojectAnimalcareApplicationTest{
-	
+class ReviewBoardServiceImplTest {
+
 	@Autowired
 	ReviewBoardService reviewBoardService;
+
 	@Autowired
 	UserInfoService userInfoService;
+
 	@Autowired
 	ProductService productService;
-	
-	
-	@Test
-	//@Disabled
+
+	@Test // 생성
+	 @Disabled
 	@Transactional
 	@Rollback(false)
-	void create() throws Exception{
-		
+	void testCreate() throws Exception {
+
 		ReviewBoard reviewBoard = ReviewBoard.builder()
-				 					.boardTitle("서비스 타이틀")
-				 					.boardContent("서비스 내용")
-				 					.boardDate(new Date())
-				 					.boardStar(5)
-				 					.userinfo(userInfoService.findUser(5L))
-				 					.product(productService.findByProductNo(5L))			
-				 					.build();
+			
+				.boardTitle("service 테스트 타이틀1")
+				.boardContent("service 테스트 내용1")
+				.boardDate(new Date()).boardStar(4)
+				.userinfo(userInfoService.findUser(6L))
+				.product(productService.findByProductNo(5L))
+				.build();
+
 		reviewBoardService.create(reviewBoard);
-		
-	}
 
+	}
+	
 	@Test
-	@Disabled
 	@Transactional
-	@Rollback(false)
-	void testUpdate() {
-		fail("Not yet implemented");
+	@Rollback(value = false)
+	@Disabled
+	void updatereviewBoard() {
+		ReviewBoard updatereviewBoard = reviewBoardService.findByBoardNo(22L);
+		updatereviewBoard.setBoardContent("수정이될려나");
+		System.out.println(updatereviewBoard);
 	}
-
+	
 	@Test
-	@Disabled
 	@Transactional
-	@Rollback(false)
-	void testDeleteById() {
-		fail("Not yet implemented");
+	@Disabled
+	void selectBoard() {
+		ReviewBoard selectBoard = reviewBoardService.findByBoardNo(22L);
+		System.out.println(selectBoard);
 	}
-
+	
 	@Test
-	@Disabled
 	@Transactional
-	@Rollback(false)
-	void testFindAll() {
-		fail("Not yet implemented");
+	@Rollback(value = false)
+	//@Disabled
+	void deleteBoard() {
+		reviewBoardService.deleteById(22L);
 	}
 
-	@Test
-	@Disabled
-	@Transactional
-	@Rollback(false)
-	void testGetReviewBoardByProductNo() {
-		fail("Not yet implemented");
-	}
 
-	@Test
-	@Disabled
+	@Test // 상품번호로 리뷰찾기
 	@Transactional
-	@Rollback(false)
-	void testFindByStarAll() {
-		fail("Not yet implemented");
-	}
-
-	@Test
+	@Rollback(value = false)
 	@Disabled
-	@Transactional
-	@Rollback(false)
-	void testFindByUserNo() {
-		fail("Not yet implemented");
+	void getReviewBoardByProduct_ProductNo() {
+		List<ReviewBoard> selectReviewBoard = reviewBoardService.getReviewBoardByProductNo(1L);
+		System.out.println(selectReviewBoard);
 	}
-
-	@Test
+	
+	@Test//유저 아이디로 찾기
+	@Transactional
+	@Disabled 
+	void findByReviewBoardUserId() {
+		List<ReviewBoard> findByUserIdReviewBoard = reviewBoardService.findByUserNo(4L);
+		System.out.println(findByUserIdReviewBoard);
+	}
+	
+	@Test//선택한 별점으로 찾기
+	@Transactional
 	@Disabled
-	@Transactional
-	@Rollback(false)
-	void testFindAllByOrderByBoardStarDesc() {
-		fail("Not yet implemented");
+	void findAllByBoardStar() {
+		List<ReviewBoard> findAllByBoardStar = reviewBoardService.findByStarAll(5L);
+		System.out.println(findAllByBoardStar);
 	}
-
-	@Test
+	@Test//별점 높은순
+	@Transactional
 	@Disabled
-	@Transactional
-	@Rollback(false)
-	void testFindAllByOrderByBoardStarAsc() {
-		fail("Not yet implemented");
+	void findAllByOrderByBoardStarDesc() {
+		List<ReviewBoard> findAllByOrderByBoardStarDesc = reviewBoardService.findAllByOrderByBoardStarDesc();
+		System.out.println(findAllByOrderByBoardStarDesc);
 	}
-
-	@Test
+	
+	@Test//별점 낮은순
+	@Transactional
 	@Disabled
-	@Transactional
-	@Rollback(false)
-	void testFindAllByOrderByBoardNoDesc() {
-		fail("Not yet implemented");
+	void findAllByOrderByBoardStarAsc() {
+		List<ReviewBoard> findAllByOrderByBoardStarAsc = reviewBoardService.findAllByOrderByBoardStarAsc();
+		System.out.println(findAllByOrderByBoardStarAsc);
 	}
-
-	@Test
+	
+	@Test// 최신순 정렬(board Date정렬)
+	@Transactional
 	@Disabled
-	@Transactional
-	@Rollback(false)
-	void testFindAllByOrderByBoardNoAsc() {
-		fail("Not yet implemented");
+	void findAllByOrderByBoardNoDesc() {
+		List<ReviewBoard> findAllByOrderByBoardDateDesc = reviewBoardService.findAllByOrderByBoardDateDesc();
+		System.out.println(findAllByOrderByBoardDateDesc);
 	}
-
-	@Test
+	
+	
+	@Test// 오래된순 정렬(board Date정렬)
+	@Transactional
 	@Disabled
-	@Transactional
-	@Rollback(false)
-	void testFindByBoardStarOrderByBoardStarDescBoardDateDesc() {
-		fail("Not yet implemented");
+	void findAllByOrderByBoardNoAsc() {
+		List<ReviewBoard> findAllByOrderByBoardDateAsc = reviewBoardService.findAllByOrderByBoardDateAsc();
+		System.out.println(findAllByOrderByBoardDateAsc);
 	}
+	
+	
+	
+	  @Test//별점 높은순,최신순	  
+	  @Transactional  
+	  @Rollback(false) 
+	  @Disabled 
+	  public void findByOrderByBoardStarDescBoardDateDesc() { 
+		  List<ReviewBoard> findByOrderByBoardStarDescBoardDateDesc = reviewBoardService.findByOrderByBoardStarDescBoardDateDesc();
 
+		  System.out.println(findByOrderByBoardStarDescBoardDateDesc); 
+	  }
+	 
+	  @Test//별점 낮은순,최신순	  
+	  @Transactional  
+	  @Rollback(false) 
+	  @Disabled 
+	  public void findByOrderByBoardStarAscBoardDateDesc() { 
+		  List<ReviewBoard> findByOrderByBoardStarAscBoardDateDesc = reviewBoardService.findByOrderByBoardStarAscBoardDateDesc();
+		  
+		  System.out.println(findByOrderByBoardStarAscBoardDateDesc); 
+	  }
+	 
+	
+	  
 }

@@ -83,9 +83,9 @@ class VolunteerServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	//@Disabled
 	@Transactional
 	@Rollback(value = false)
-	void findByVolunteerByUserNo() {
-		List<Volunteer> selectVolunteer = volunteerService.findVolunteertByUserNo(5L);
-		System.out.println(selectVolunteer);
+	void findVolunteertByUserNo() {
+		
+		System.out.println(volunteerService.findVolunteertByUserNo(2L));
 	}
 
 }

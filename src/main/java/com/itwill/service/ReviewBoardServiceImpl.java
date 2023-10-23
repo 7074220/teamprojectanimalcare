@@ -5,104 +5,105 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.itwill.dao.AdoptDao;
 import com.itwill.dao.ReviewBoardDao;
-import com.itwill.entity.ReplyBoard;
+import com.itwill.entity.Adopt;
 import com.itwill.entity.ReviewBoard;
+import com.itwill.repository.ReviewBoardRepository;
 
 @Service
-public class ReviewBoardServiceImpl implements ReviewBoardDao {
-	
+public class ReviewBoardServiceImpl implements ReviewBoardService {
+
 	@Autowired
 	private ReviewBoardDao reviewBoardDao;
 
+	@Autowired
+	ReviewBoardRepository reviewBoardRepository;
+
 	@Override
 	public ReviewBoard create(ReviewBoard reviewBoard) {
-		ReviewBoard createReviewBoard = reviewBoardDao.create(reviewBoard);
-		return createReviewBoard;
+
+		return reviewBoardRepository.save(reviewBoard);
 	}
 
 	@Override
 	public ReviewBoard update(ReviewBoard reviewBoard) {
-		ReviewBoard updateReviewBoard = reviewBoardDao.update(reviewBoard);
-		return updateReviewBoard;
+		if (reviewBoardRepository.findById(reviewBoard.getBoardNo()).isPresent()) {
+			reviewBoardRepository.save(reviewBoard);
+		}
+		return reviewBoard;
 	}
 
 	@Override
 	public void deleteById(Long boardNo) {
-		reviewBoardDao.deleteById(boardNo);
-		
+		if (reviewBoardRepository.findById(boardNo).isPresent()) {
+			reviewBoardRepository.deleteById(boardNo);
+		}
+
 	}
 
 	@Override
 	public List<ReviewBoard> findAll() {
-		List<ReviewBoard> reviewBoardList = reviewBoardDao.findAll();
-		return reviewBoardList;
+
+		return reviewBoardRepository.findAll();
 	}
 
 	@Override
 	public List<ReviewBoard> getReviewBoardByProductNo(Long productNo) {
-		List<ReviewBoard> getReviewBoardByProductNo = 
-				reviewBoardDao.getReviewBoardByProductNo(productNo);
-		return getReviewBoardByProductNo;
+		// productNo로 reviewboard 리스트 검색
+		return reviewBoardRepository.getReviewBoardByProduct_ProductNo(productNo);
 	}
 
 	@Override
 	public List<ReviewBoard> findByStarAll(Long star) {
-		List<ReviewBoard> findByStarAll = 
-				reviewBoardDao.findByStarAll(star);
-		return findByStarAll;
+		// 선택한 별점으로 찾기
+		return reviewBoardRepository.findAllByBoardStar(star);
 	}
 
 	@Override
 	public List<ReviewBoard> findByUserNo(Long no) {
-		List<ReviewBoard> findByUserNo = 
-				reviewBoardDao.findByUserNo(no);
-		return findByUserNo;
+		// 선택된 userId 리뷰 리스트만 나오기
+		return reviewBoardRepository.findByUserNo(no);
 	}
 
 	@Override
 	public List<ReviewBoard> findAllByOrderByBoardStarDesc() {
-		List<ReviewBoard> findAllByOrderByBoardStarDesc = 
-				reviewBoardDao.findAllByOrderByBoardStarDesc();
-		return findAllByOrderByBoardStarDesc;
+		// 높은 평점순 정렬
+		return reviewBoardRepository.findAllByOrderByBoardStarDesc();
 	}
 
 	@Override
 	public List<ReviewBoard> findAllByOrderByBoardStarAsc() {
-		List<ReviewBoard> findAllByOrderByBoardStarAsc = 
-				reviewBoardDao.findAllByOrderByBoardStarAsc();
-		return findAllByOrderByBoardStarAsc;
+		// 낮은 평점순 정렬
+		return reviewBoardRepository.findAllByOrderByBoardStarAsc();
 	}
 
 	@Override
-	public List<ReviewBoard> findAllByOrderByBoardNoDesc() {
-		List<ReviewBoard> findAllByOrderByBoardNoDesc = 
-				reviewBoardDao.findAllByOrderByBoardNoDesc();
-		return findAllByOrderByBoardNoDesc;
+	public List<ReviewBoard> findAllByOrderByBoardDateDesc() {
+		// 최신순 정렬(board Date정렬)
+		return reviewBoardRepository.findAllByOrderByBoardDateDesc();
 	}
 
 	@Override
-	public List<ReviewBoard> findAllByOrderByBoardNoAsc() {
-		List<ReviewBoard> findAllByOrderByBoardNoAsc = 
-				reviewBoardDao.findAllByOrderByBoardNoAsc();
-		return findAllByOrderByBoardNoAsc;
+	public List<ReviewBoard> findAllByOrderByBoardDateAsc() {
+		// 오래된 순 정렬(board Date정렬)
+		return reviewBoardRepository.findAllByOrderByBoardDateAsc();
 	}
-	
 
 	@Override
 	public List<ReviewBoard> findByOrderByBoardStarDescBoardDateDesc() {
-		List<ReviewBoard> findByOrderByBoardStarDescBoardDateDesc = 
-				reviewBoardDao.findByOrderByBoardStarDescBoardDateDesc();
-		return findByOrderByBoardStarDescBoardDateDesc;
+		// 별점 높은순,최신순
+		return reviewBoardRepository.findByOrderByBoardStarDescBoardDateDesc();
 	}
 
 	@Override
 	public List<ReviewBoard> findByOrderByBoardStarAscBoardDateDesc() {
-		List<ReviewBoard> findByOrderByBoardStarAscBoardDateDesc = 
-				reviewBoardDao.findByOrderByBoardStarAscBoardDateDesc();
-		return findByOrderByBoardStarAscBoardDateDesc;
+		// 별점 낮은순,최신순
+		return reviewBoardRepository.findByOrderByBoardStarAscBoardDateDesc();
 	}
 
-
-
+	@Override
+	public ReviewBoard findByBoardNo(Long BoardNo) {
+		return reviewBoardRepository.findById(BoardNo).get();
+	}
 }

@@ -35,17 +35,42 @@ class ReviewBoardDaoImplTest {
 	void testCreate() {
 	
 		ReviewBoard reviewBoard = ReviewBoard.builder()
-								.boardTitle("Dao 테스트 타이틀2")
-								.boardContent("Dao 테스트 내용2")
+								.boardTitle("Dao 테스트 타이틀12")
+								.boardContent("Dao 테스트 내용12")
 								.boardDate(new Date())
-								.boardStar(5)
-								.userinfo(userInfoDao.findByNo(5L))
-								.product(productDao.findByProductNo(1L))
+								.boardStar(3)
+								.userinfo(userInfoDao.findByNo(11L))
+								.product(productDao.findByProductNo(11L))
 								.build();
 
 		reviewBoardDao.create(reviewBoard);
-		
 	}
+		@Test
+		@Transactional
+		@Rollback(value = false)
+		@Disabled
+		void updatereviewBoard() {
+			ReviewBoard updatereviewBoard = reviewBoardDao.findByBoardNo(2L);
+			updatereviewBoard.setBoardContent("수정이될려나");
+			System.out.println(updatereviewBoard);
+		}
+		
+		@Test
+		@Transactional
+		//@Disabled
+		void selectBoard() {
+			ReviewBoard selectBoard = reviewBoardDao.findByBoardNo(22L);
+			System.out.println(selectBoard);
+		}
+		
+		@Test
+		@Transactional
+		@Rollback(value = false)
+		@Disabled
+		void deleteBoard() {
+			reviewBoardDao.deleteById(1L);
+		}
+	
 	@Test//상품번호로 리뷰찾기
 	@Transactional
 	@Rollback(value = false)
@@ -86,21 +111,21 @@ class ReviewBoardDaoImplTest {
 		System.out.println(findAllByOrderByBoardStarAsc);
 	}
 	
-	@Test// 최신순 정렬(board no정렬)
+	@Test// 최신순 정렬(board Date정렬)
 	@Transactional
 	@Disabled
 	void findAllByOrderByBoardNoDesc() {
-		List<ReviewBoard> findAllByOrderByBoardNoDesc = reviewBoardDao.findAllByOrderByBoardNoDesc();
-		System.out.println(findAllByOrderByBoardNoDesc);
+		List<ReviewBoard> findAllByOrderByBoardDateDesc = reviewBoardDao.findAllByOrderByBoardDateDesc();
+		System.out.println(findAllByOrderByBoardDateDesc);
 	}
 	
 	
-	@Test// 오래된순 정렬(board no정렬)
+	@Test// 오래된순 정렬(board Date정렬)
 	@Transactional
 	@Disabled
 	void findAllByOrderByBoardNoAsc() {
-		List<ReviewBoard> findAllByOrderByBoardNoAsc = reviewBoardDao.findAllByOrderByBoardNoAsc();
-		System.out.println(findAllByOrderByBoardNoAsc);
+		List<ReviewBoard> findAllByOrderByBoardDateAsc = reviewBoardDao.findAllByOrderByBoardDateAsc();
+		System.out.println(findAllByOrderByBoardDateAsc);
 	}
 	
 	

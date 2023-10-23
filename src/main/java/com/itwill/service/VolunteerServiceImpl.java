@@ -16,6 +16,7 @@ public class VolunteerServiceImpl implements VolunteerService{
 	
 	@Autowired
 	VolunteerDao volunteerDao;
+	@Autowired
 	VolunteerRepository volunteerRepository;
 
 	@Override

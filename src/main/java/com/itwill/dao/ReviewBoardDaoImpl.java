@@ -69,27 +69,36 @@ public class ReviewBoardDaoImpl implements ReviewBoardDao {
 
 	}
 
-	// 최신순 정렬(board no정렬)
+	// 최신순 정렬(board Date정렬)
 	@Override
-	public List<ReviewBoard> findAllByOrderByBoardNoDesc() {
-		return reviewBoardRepository.findAllByOrderByBoardNoDesc();
+	public List<ReviewBoard> findAllByOrderByBoardDateDesc() {
+		return reviewBoardRepository.findAllByOrderByBoardDateDesc();
 	}
 
-	// 오래된순 정렬(board no정렬)
+	// 오래된순 정렬(board Date정렬)
 	@Override
-	public List<ReviewBoard> findAllByOrderByBoardNoAsc() {
-		return reviewBoardRepository.findAllByOrderByBoardNoAsc();
+	public List<ReviewBoard> findAllByOrderByBoardDateAsc() {
+		return reviewBoardRepository.findAllByOrderByBoardDateAsc();
 	}
 
 	// 별점 높은순,최신순
+
 	@Override
 	public List<ReviewBoard> findByOrderByBoardStarDescBoardDateDesc() {
 		return reviewBoardRepository.findByOrderByBoardStarDescBoardDateDesc();
 	}
 
-	//별점 높은순,최신순
+//별점 낮은순,최신순
+
 	@Override
 	public List<ReviewBoard> findByOrderByBoardStarAscBoardDateDesc() {
 		return reviewBoardRepository.findByOrderByBoardStarAscBoardDateDesc();
 	}
+
+	@Override
+	public ReviewBoard findByBoardNo(Long BoardNo) {
+		
+		return reviewBoardRepository.findById(BoardNo).get();
+	}
+
 }
