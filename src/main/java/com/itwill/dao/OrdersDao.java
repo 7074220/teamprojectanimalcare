@@ -24,10 +24,10 @@ public interface OrdersDao {
 	Orders findOrderByNo(Long orderNo) ;
 
 	//id로 주문찾기
-	List<Orders> findOrdersById(String userId) ;
+	List<Orders> findOrdersByNo(Long userNo) ;
 	
 	//id로 최신주문정렬찾기
-		List<Orders> findAllByUserIdDESC(String userId) ;
+		List<Orders> findAllByUserNoDESC(Long userNo);
 	
 	//최근주문별로 조회
 	List<Orders> findAllByOrderByOrderNoDesc();

@@ -1,5 +1,6 @@
 package com.itwill.dao;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,20 +42,7 @@ OrdersRepository ordersRepository;
 		Orders order = ordersRepository.findById(orderNo).get();
 		return order;
 	}
-	//userID로 최신주문목록정렬 조회
-	@Override
-	public List<Orders> findAllByUserIdDESC(String userId) {
-		List<Orders> orders = ordersRepository.findAllByUserIdDESC(userId);
-		return orders;
-	}
 
-	
-	//userid로 주문목록 조회
-	@Override
-	public List<Orders> findOrdersById(String userId) {
-		List<Orders> orders = ordersRepository.findAllByUserId(userId);
-		return orders;
-	}
 
 	//전체주문 최신목록으로 조회
 	@Override
@@ -62,8 +50,27 @@ OrdersRepository ordersRepository;
 		List<Orders> orders = ordersRepository.findAllByOrderByOrderNoDesc();
 		return orders;
 	}
+
+
+	@Override
+	public List<Orders> findAllByOrdersByOrderDate(Date startDate, Date endDate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Orders> findOrdersByNo(Long userNo) {
+		List<Orders> orders = ordersRepository.findAllByUserNo(userNo);
+		return orders;
+		
+	}
+
+	@Override
+	public List<Orders> findAllByUserNoDESC(Long userNo) {
+		List<Orders> orders = ordersRepository.findAllByUserNoDESC(userNo);
+		return orders;
+	}
 	
-	//orderItem insert
 	
 
 	

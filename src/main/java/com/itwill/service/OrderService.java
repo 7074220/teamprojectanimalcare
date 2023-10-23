@@ -22,7 +22,7 @@ public interface OrderService {
 	Orders findOrderByNo(Long orderNo);
 	
 	//회원아이디로 주문조회
-	List<Orders> findOrderById(String userId);
+	List<Orders> findOrderById(Long userNo);
 	
 	List<Orders>findOrderByIdDesc(String userId);
 	//
