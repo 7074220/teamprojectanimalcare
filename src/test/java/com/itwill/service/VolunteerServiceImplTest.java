@@ -45,7 +45,7 @@ class VolunteerServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 		
 		Volunteer volunteer = Volunteer.builder()
 										.volunteerDate(new Date())
-										.volunteerTime(20L)
+										.volunteerTime(20)
 										.volunteerStatus("서비스테스트")
 										.center(center)
 										.userinfo(userinfo)
