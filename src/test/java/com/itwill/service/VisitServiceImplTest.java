@@ -3,6 +3,7 @@ package com.itwill.service;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
@@ -35,9 +36,9 @@ class VisitServiceImplTest {
 	void insertVisit() throws Exception {
 		Visit insertVisit = Visit.builder()
 				.visitNo(null)
-				.userinfo(userInfoService.findUser("김창섭"))
-				.visitTime(3L)
-				.visitDate(LocalDate.now())
+				.userinfo(userInfoService.findUser(1L))
+				.visitTime(3)
+				.visitDate(new Date())
 				.center(centerService.findByCenterNo(11L))
 				.visitStatus("접수중")
 				.build();
@@ -73,7 +74,7 @@ class VisitServiceImplTest {
 		@Rollback(value = false)
 		@Disabled
 		void findVisitsByUserId() {
-		    List<Visit> selectVisit = visitService.getVisitsByUserId("김창섭");
+		    List<Visit> selectVisit = visitService.getVisitsByUserNo("김창섭");
 		    System.out.println(selectVisit);
 		}
 

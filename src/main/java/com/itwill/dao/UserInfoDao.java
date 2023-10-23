@@ -9,18 +9,20 @@ public interface UserInfoDao {
 	
 	public Userinfo CreateUser(Userinfo userinfo);
 	
-	public void DeleteUser(String userId);
+	public void DeleteUser(Long userNo);
 	
 	public Userinfo UpdateUser(Userinfo userinfo);
 	
 	public List<Userinfo> findAll();
 	
-	public Userinfo findById(String userId);
+	public Userinfo findByNo(Long userNo);
 	
 	public Integer countByUserId(String userId);
 
 	public Userinfo findByUserEmail(String userEmail);
 	
 	public Userinfo findByUserPassword(String userId , String userPhoneNumber);
+	
+	public Userinfo findByUserId(String userId);
 	
 }

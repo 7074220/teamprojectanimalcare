@@ -13,7 +13,7 @@ public class CartDaoImpl implements CartDao{
 
 	@Autowired
 	private CartRepository cartRepository;
-	/*
+	
 	@Override
 	public Cart insertCart(Cart cart) {
 		Cart savedCart = cartRepository.save(cart);
@@ -47,14 +47,6 @@ public class CartDaoImpl implements CartDao{
 	}
 
 	
-	
-
-	@Override
-	public int productWithKindByUserId(Cart cart) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 	@Override
 	public List<Cart> findAll() {
 		return cartRepository.findAll();
@@ -67,7 +59,7 @@ public class CartDaoImpl implements CartDao{
 		return cartRepository.findAllCartByUserId(userId);
 	}
 
-
+/*
 	@Override
 	// 카트에 담긴 모든 상품 합계 금액
 	public Integer cartTotalPrice(String userId) {
@@ -78,7 +70,7 @@ public class CartDaoImpl implements CartDao{
 		}
 		return total;
 	}
-
+*/
 	
 	@Override
 	// 카트 중복체크
@@ -86,7 +78,7 @@ public class CartDaoImpl implements CartDao{
 		return cartRepository.countProductByUserId(userId, no);
 	}
 
-
+/*
 	@Override
 	// 카트에 중복제품이 있으면 (중복체크) --> 업데이트 돼서 담기도록 
 	public Cart updateOverlapCart(Cart overlapCart) {
@@ -99,74 +91,7 @@ public class CartDaoImpl implements CartDao{
 		}
 		return overlapCount;
 	}
+*/
 
-
-	@Override
-	public Integer cartTotalPrice(String userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	*/
-
-	@Override
-	public Cart insertCart(Cart cart) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Cart update_qty(Cart updateQty) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Cart findByCartNo(Long no) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void deleteByUserId(String userId) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteById(Long no) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Integer cartTotalPrice(String userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Cart updateOverlapCart(Cart overlapCart) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Integer countProductByUserId(String userId, Long no) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Cart> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Cart> findAllCartByUserId(String userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }

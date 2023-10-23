@@ -30,13 +30,13 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	@Disabled
 	void insertTest() throws Exception {
-		Userinfo user=userInfoService.findUser("박태환");
+		Userinfo user=userInfoService.findUser(1L);
 		Pet pet1=petService.petFindById(10L);
 		Pet pet2=petService.petFindById(11L);
 		
 		Adopt insertAdopt1 = Adopt.builder()
 				.adoptDate(new Date())
-				.adoptTime(13L)
+				.adoptTime(13)
 				.adoptStatus("입양신청")
 				.pet(pet1)
 				.userinfo(user)
@@ -44,7 +44,7 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 		adoptService.insertAdopt(insertAdopt1);
 		Adopt insertAdopt2 = Adopt.builder()
 				.adoptDate(new Date())
-				.adoptTime(16L)
+				.adoptTime(16)
 				.adoptStatus("입양완료")
 				.pet(pet2)
 				.userinfo(user)

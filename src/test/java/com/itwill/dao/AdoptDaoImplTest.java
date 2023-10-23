@@ -37,8 +37,8 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	//@Disabled
 	void insertTest() {
 		
-		Userinfo userinfo1 = userInfoDao.findById("박태환");
-		Userinfo userinfo2 = userInfoDao.findById("전아현");
+		Userinfo userinfo1 = userInfoDao.findByNo(1L);
+		Userinfo userinfo2 = userInfoDao.findByNo(2L);
 		
 		
 		//Pet pet1 = petDao.petFindById(1L);
@@ -71,7 +71,7 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		
 		Adopt adopt1 = Adopt.builder() 
 							.adoptDate(new Date())
-							.adoptTime(11L)
+							.adoptTime(11)
 							.pet(pet1)
 							.adoptStatus("입양중")
 							.userinfo(userinfo1)
@@ -80,7 +80,7 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		
 		Adopt adopt2 = Adopt.builder() 
 				.adoptDate(new Date())
-				.adoptTime(10L)
+				.adoptTime(10)
 				.pet(pet2)
 				.adoptStatus("입양중")
 				.userinfo(userinfo2)

@@ -22,10 +22,8 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	}
 	
 	@Override
-	public void DeleteUser(String userId) {
-		if(userinfoRepository.findById(userId).isPresent()) {
-			userinfoRepository.deleteById(userId);
-		}
+	public void DeleteUser(Long userNo) {
+		userinfoRepository.deleteById(userNo);
 	}
 	
 	@Override
@@ -34,8 +32,8 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	}
 	
 	@Override
-	public Userinfo findById(String userId) {
-		return userinfoRepository.findById(userId).get();
+	public Userinfo findByNo(Long userNo) {
+		return userinfoRepository.findById(userNo).get();
 	}
 	
 	@Override
@@ -60,6 +58,10 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		return userinfoRepository.findByUserPassword(userId, userPhoneNumber);
 	}
 	
-	
+	// 아이디로 객체 찾기
+	@Override
+	public Userinfo findByUserId(String userId) {
+		return userinfoRepository.findByUserId(userId);
+	}
 	
 }

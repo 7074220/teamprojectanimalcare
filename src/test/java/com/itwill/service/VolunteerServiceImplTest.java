@@ -40,13 +40,13 @@ class VolunteerServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	void testInsertVolunteer() throws Exception{
 		
-		Userinfo userinfo = userInfoService.findUser("박태환");
+		Userinfo userinfo = userInfoService.findUser(2L);
 		Center center = centerService.findByCenterNo(22L);
 		
 		Volunteer volunteer = Volunteer.builder()
 										.volunteerDate(new Date())
-										.volunteerTime(20L)
-										.volunteerStatus("서비스테스트")
+										.volunteerTime(20)
+										.volunteerStatus("서비스테스트t")
 										.center(center)
 										.userinfo(userinfo)
 										.build();
@@ -59,7 +59,7 @@ class VolunteerServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(value = false)
 	void testUpdateVolunteer() throws Exception{
 		Volunteer volunteer = volunteerService.findByVolunteerNo(1L);
-		volunteer.setVolunteerStatus("테스트진행중");
+		volunteer.setVolunteerStatus("테스트진행중t");
 		volunteerService.updateVolunteer(volunteer);
 	}
 

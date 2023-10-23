@@ -32,10 +32,10 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	@Transactional
 	@Rollback(false)
-	@Disabled
+	//@Disabled
 	void testInsertVolunteer() {
 		
-		Userinfo userinfo = userInfoDao.findById("김창섭");
+		Userinfo userinfo = userInfoDao.findByNo(1L);
 		
 		Center center = centerDao.findByCenterNo(2L);	
 	
@@ -43,8 +43,8 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 									   .userinfo(userinfo)
 									   .center(center)
 									   .volunteerDate(new Date())
-									   .volunteerTime(11L)
-									   .volunteerStatus("심사중t")
+									   .volunteerTime(11)
+									   .volunteerStatus("테스트t")
 									   .build();	
 		volunteerDao.insertVolunteer(volunteer);
 		
@@ -65,8 +65,8 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(value = false)
 	void testUpdateVolunteer() throws Exception{
 		Volunteer volunteer = volunteerDao.findByVolunteerNo(2L);
-		volunteer.setVolunteerTime(12L);
-		volunteer.setVolunteerStatus("봉사완료a");
+		volunteer.setVolunteerTime(12);
+		volunteer.setVolunteerStatus("테스트t ");
 		volunteerDao.updateVolunteer(volunteer);
 	}
 

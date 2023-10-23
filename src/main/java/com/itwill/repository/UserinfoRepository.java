@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.itwill.entity.Userinfo;
 
-public interface UserinfoRepository extends JpaRepository<Userinfo, String>{
+public interface UserinfoRepository extends JpaRepository<Userinfo, Long>{
 	
 	@Query(value="select count(*) from userInfo where user_id=?1",nativeQuery = true)
 	Integer countByUserId(String userId);
@@ -15,4 +15,8 @@ public interface UserinfoRepository extends JpaRepository<Userinfo, String>{
 	
 	@Query(value="select * from userInfo where user_id=?1 and user_phone_number=?2",nativeQuery = true)
 	Userinfo findByUserPassword(String userId, String userPhoneNumber);
+	
+	@Query(value="select * from userInfo where user_id=?1",nativeQuery = true)
+	Userinfo findByUserId(String userId);
+	
 }

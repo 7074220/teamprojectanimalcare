@@ -3,6 +3,7 @@ package com.itwill.dao;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
@@ -34,10 +35,10 @@ class VisitDaoImplTest {
 	void insetVisit() {
 		Visit visit = Visit.builder()
 
-				.visitDate(LocalDate.now())
+				.visitDate(new Date())
 				.visitStatus("방문완료")
-				.visitTime(7L)
-				.userinfo(userInfoDao.findById("박태환"))
+				.visitTime(7)
+				.userinfo(userInfoDao.findByNo(1L))
 				.center(centerDao.findByCenterNo(4L))
 				.build();
 		visitDao.createVisit(visit);
@@ -74,7 +75,7 @@ class VisitDaoImplTest {
 	@Rollback(value = false)
 	@Disabled
 	void findVisitsByUserId() {
-		List<Visit> selectVisit = visitDao.getVisitsByUserId("박태환");
+		List<Visit> selectVisit = visitDao.getVisitsByUserNo("박태환");
 		System.out.println(selectVisit);
 	}
 
