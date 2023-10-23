@@ -45,10 +45,9 @@ public class Cart {
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
 	
-	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_no")
-	@Builder.Default
-	private Product product = new Product();
+	private Product product;
 
 	
 }

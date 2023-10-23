@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,15 +19,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderStatus {
+public class Orderstatus {
 	
 	@Id
-	@SequenceGenerator(name = "OrderStatus_orderStatus_no_SEQ",sequenceName = "OrderStatus_orderStatus_no_SEQ",initialValue = 1,allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "OrderStatus_orderStatus_no_SEQ")
-	private Long orderStatusNo;
-	private String orderStatusImage;
-	private String orderStatusDesc;
+	private Long osNo;
+	private String osImage;
+	private String osDesc;
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
-	private OrderItem orderItem;
+	
+	
 }

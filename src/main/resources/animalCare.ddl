@@ -25,14 +25,13 @@ CREATE TABLE UserInfo(
 		user_phone_number             		VARCHAR2(50)		 NULL ,
 		user_id                       		VARCHAR2(50)		 NULL ,
 		user_resident_number          		VARCHAR2(50)		 NULL ,
-		user_register_date            		VARCHAR2(100)		 NULL ,
+		user_register_date            		DATE		 NULL ,
 		user_name                     		VARCHAR2(50)		 NULL 
 );
 
 DROP SEQUENCE UserInfo_user_no_SEQ;
 
 CREATE SEQUENCE UserInfo_user_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 
 CREATE TABLE Coupon(
@@ -49,14 +48,13 @@ DROP SEQUENCE Coupon_coupon_id_SEQ;
 CREATE SEQUENCE Coupon_coupon_id_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
-
 CREATE TABLE ReportBoard(
 		board_no                      		NUMBER(10)		 NULL ,
 		board_title                   		VARCHAR2(100)		 NULL ,
 		board_register_date           		DATE		 NULL ,
 		board_content                 		VARCHAR2(100)		 NULL ,
 		board_date                    		DATE		 NULL ,
-		board_readCount               		NUMBER(10)		 NULL ,
+		board_read_Count              		NUMBER(10)		 NULL ,
 		board_group_no                		NUMBER(10)		 NULL ,
 		board_step                    		NUMBER(10)		 NULL ,
 		board_depth                   		NUMBER(10)		 NULL ,
@@ -70,7 +68,6 @@ DROP SEQUENCE ReportBoard_board_no_SEQ;
 CREATE SEQUENCE ReportBoard_board_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
-
 CREATE TABLE Local(
 		local_no                      		NUMBER(10)		 NULL ,
 		local_city                    		VARCHAR2(50)		 NULL ,
@@ -80,7 +77,6 @@ CREATE TABLE Local(
 DROP SEQUENCE Local_local_no_SEQ;
 
 CREATE SEQUENCE Local_local_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 
 CREATE TABLE Center(
@@ -97,7 +93,6 @@ DROP SEQUENCE Center_center_no_SEQ;
 CREATE SEQUENCE Center_center_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
-
 CREATE TABLE Volunteer(
 		volunteer_no                  		NUMBER(10)		 NULL ,
 		volunteer_time                		NUMBER(10)		 NULL ,
@@ -112,7 +107,6 @@ DROP SEQUENCE Volunteer_volunteer_no_SEQ;
 CREATE SEQUENCE Volunteer_volunteer_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
-
 CREATE TABLE Visit(
 		visit_no                      		NUMBER(10)		 NULL ,
 		visit_time                    		NUMBER(10)		 NULL ,
@@ -125,7 +119,6 @@ CREATE TABLE Visit(
 DROP SEQUENCE Visit_visit_no_SEQ;
 
 CREATE SEQUENCE Visit_visit_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 
 CREATE TABLE Pet(
@@ -146,7 +139,6 @@ DROP SEQUENCE Pet_pet_no_SEQ;
 CREATE SEQUENCE Pet_pet_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
-
 CREATE TABLE Adopt(
 		adopt_no                      		NUMBER(10)		 NULL ,
 		adopt_time                    		NUMBER(10)		 NULL ,
@@ -159,7 +151,6 @@ CREATE TABLE Adopt(
 DROP SEQUENCE Adopt_adopt_no_SEQ;
 
 CREATE SEQUENCE Adopt_adopt_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 
 CREATE TABLE Product(
@@ -179,7 +170,6 @@ DROP SEQUENCE Product_product_no_SEQ;
 CREATE SEQUENCE Product_product_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
-
 CREATE TABLE Orders(
 		order_no                      		NUMBER(10)		 NULL ,
 		order_date                    		DATE		 NULL ,
@@ -194,17 +184,15 @@ DROP SEQUENCE Orders_order_no_SEQ;
 CREATE SEQUENCE Orders_order_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
-
 CREATE TABLE OrderStatus(
-		orderStatus_no                		NUMBER(10)		 NULL ,
-		orderStatus_image             		VARCHAR2(50)		 NULL ,
-		orderStatus_desc              		VARCHAR2(50)		 NULL 
+		os_no                         		NUMBER(10)		 NULL ,
+		os_image                      		VARCHAR2(50)		 NULL ,
+		os_desc                       		VARCHAR2(50)		 NULL 
 );
 
-DROP SEQUENCE OrderStatus_orderStatus_no_SEQ;
+DROP SEQUENCE OrderStatus_os_no_SEQ;
 
-CREATE SEQUENCE OrderStatus_orderStatus_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
+CREATE SEQUENCE OrderStatus_os_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
 CREATE TABLE Order_item(
@@ -212,13 +200,12 @@ CREATE TABLE Order_item(
 		oi_qty                        		NUMBER(10)		 NULL ,
 		order_no                      		NUMBER(10)		 NULL ,
 		product_no                    		NUMBER(10)		 NULL ,
-		orderStatus_no                		NUMBER(10)		 NULL 
+		os_no                		        NUMBER(10)		 NULL 
 );
 
 DROP SEQUENCE Order_item_oi_no_SEQ;
 
 CREATE SEQUENCE Order_item_oi_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 
 CREATE TABLE Cart(
@@ -234,19 +221,17 @@ DROP SEQUENCE Cart_cart_no_SEQ;
 CREATE SEQUENCE Cart_cart_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
-
 CREATE TABLE MyPet(
 		mypet_no                      		NUMBER(10)		 NULL ,
 		mypet_name                    		VARCHAR2(50)		 NULL ,
-        mypet_kind                    		VARCHAR2(50)		 NULL ,
 		mypet_birthday                		DATE		 NULL ,
-		user_no                       		NUMBER(10)		 NULL 
+		user_no                       		NUMBER(10)		 NULL ,
+		mypet_kind                    		VARCHAR2(50)		 NULL 
 );
 
 DROP SEQUENCE MyPet_mypet_no_SEQ;
 
 CREATE SEQUENCE MyPet_mypet_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 
 CREATE TABLE ReviewBoard(
@@ -264,7 +249,6 @@ DROP SEQUENCE ReviewBoard_board_no_SEQ;
 CREATE SEQUENCE ReviewBoard_board_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
-
 CREATE TABLE ReplyBoard(
 		reply_board_no                		NUMBER(10)		 NOT NULL,
 		reply_board_register_date     		DATE		 NULL ,
@@ -278,7 +262,6 @@ CREATE TABLE ReplyBoard(
 DROP SEQUENCE ReplyBoard_reply_board_no_SEQ;
 
 CREATE SEQUENCE ReplyBoard_reply_board_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 
 
@@ -316,12 +299,11 @@ ALTER TABLE Product ADD CONSTRAINT IDX_Product_PK PRIMARY KEY (product_no);
 ALTER TABLE Orders ADD CONSTRAINT IDX_Orders_PK PRIMARY KEY (order_no);
 ALTER TABLE Orders ADD CONSTRAINT IDX_Orders_FK0 FOREIGN KEY (user_no) REFERENCES UserInfo (user_no);
 
-ALTER TABLE OrderStatus ADD CONSTRAINT IDX_OrderStatus_PK PRIMARY KEY (orderStatus_no);
+ALTER TABLE OrderStatus ADD CONSTRAINT IDX_OrderStatus_PK PRIMARY KEY (os_no);
 
 ALTER TABLE Order_item ADD CONSTRAINT IDX_Order_item_PK PRIMARY KEY (oi_no);
 ALTER TABLE Order_item ADD CONSTRAINT IDX_Order_item_FK0 FOREIGN KEY (order_no) REFERENCES Orders (order_no);
 ALTER TABLE Order_item ADD CONSTRAINT IDX_Order_item_FK1 FOREIGN KEY (product_no) REFERENCES Product (product_no);
-ALTER TABLE Order_item ADD CONSTRAINT IDX_Order_item_FK2 FOREIGN KEY (orderStatus_no) REFERENCES OrderStatus (orderStatus_no);
 
 ALTER TABLE Cart ADD CONSTRAINT IDX_Cart_PK PRIMARY KEY (cart_no);
 ALTER TABLE Cart ADD CONSTRAINT IDX_Cart_FK0 FOREIGN KEY (product_no) REFERENCES Product (product_no);
