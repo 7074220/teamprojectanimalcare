@@ -23,11 +23,14 @@ CartDao cartDao;
 	
 	@Override
 	public Orders insertOrder(Orders order) {
-		String userId=order.getUserinfo().getUserId();
+		Long userNo = order.getUserinfo().getUserNo();
 		
 		
-		cartDao.deleteByUserId(userId);
+		
 		Orders insertOrders=ordersDao.insertOrder(order);
+		
+		
+		cartDao.deleteByUserId(userNo);
 	return insertOrders;
 	
 	}

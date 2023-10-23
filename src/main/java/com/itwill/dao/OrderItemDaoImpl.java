@@ -1,5 +1,5 @@
 package com.itwill.dao;
 
-public class OrderItemDaoImpl {
+public class OrderItemDaoImpl implements OrderItemDao{
 
 }
