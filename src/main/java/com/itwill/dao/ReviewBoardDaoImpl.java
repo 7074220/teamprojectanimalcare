@@ -84,11 +84,11 @@ public class ReviewBoardDaoImpl implements ReviewBoardDao {
 	
 	
 	
-	  //별점 높은순,최신순
-	  
-	  @Override public List<ReviewBoard>
-	  findByBoardStarOrderByBoardStarDescBoardDateDesc(Long star) { return
-	  reviewBoardRepository.findByBoardStarOrderByBoardStarDescBoardDateDesc(star); }
+	//별점 높은순,최신순
+	@Override 
+	public List<ReviewBoard> findByBoardStarOrderByBoardStarDescBoardDateDesc(Long star) { 
+		return reviewBoardRepository.findByBoardStarOrderByBoardStarDescBoardDateDesc(star); 
+	}
 	 
 	
 	
