@@ -1,6 +1,7 @@
 package com.itwill.entity;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -35,7 +36,7 @@ public class ReviewBoard {
 	private Long boardNo; // PK
 	private String boardTitle;
 	private String boardContent;
-	private LocalDate boardDate;
+	private Date boardDate;
 	private Integer boardStar;
 
 	@Builder.Default

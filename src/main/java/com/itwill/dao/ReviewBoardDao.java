@@ -20,7 +20,7 @@ public interface ReviewBoardDao {
 
 	public List<ReviewBoard> findByStarAll(Long star); //선택한 별점으로 찾기
 
-	 public List<ReviewBoard> findAllByUserIdUserinfo(String userId); // 선택된 userId 리뷰 리스트만 나오기
+	 public List<ReviewBoard> findAllByUserIdUserinfo(Long no); // 선택된 userId 리뷰 리스트만 나오기
 
 	public List<ReviewBoard> findAllByOrderByBoardStarDesc(); // 높은 평점순 정렬
 
