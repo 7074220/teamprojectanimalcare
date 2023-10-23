@@ -32,7 +32,7 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	@Transactional
 	@Rollback(false)
-	@Disabled
+	//@Disabled
 	void testInsertVolunteer() {
 		
 		Userinfo userinfo = userInfoDao.findByNo(1L);
