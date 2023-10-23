@@ -87,16 +87,22 @@ public class ReviewBoardServiceImpl implements ReviewBoardDao {
 				reviewBoardDao.findAllByOrderByBoardNoAsc();
 		return findAllByOrderByBoardNoAsc;
 	}
+	
 
 	@Override
-	public List<ReviewBoard> findByBoardStarOrderByBoardStarDescBoardDateDesc(Long star) {
-		List<ReviewBoard> findByBoardStarOrderByBoardStarDescBoardDateDesc = 
-				reviewBoardDao.findByBoardStarOrderByBoardStarDescBoardDateDesc(star);
-		return findByBoardStarOrderByBoardStarDescBoardDateDesc;
+	public List<ReviewBoard> findByOrderByBoardStarDescBoardDateDesc() {
+		List<ReviewBoard> findByOrderByBoardStarDescBoardDateDesc = 
+				reviewBoardDao.findByOrderByBoardStarDescBoardDateDesc();
+		return findByOrderByBoardStarDescBoardDateDesc;
 	}
 
-	
-	
+	@Override
+	public List<ReviewBoard> findByOrderByBoardStarAscBoardDateDesc() {
+		List<ReviewBoard> findByOrderByBoardStarAscBoardDateDesc = 
+				reviewBoardDao.findByOrderByBoardStarAscBoardDateDesc();
+		return findByOrderByBoardStarAscBoardDateDesc;
+	}
+
 
 
 }

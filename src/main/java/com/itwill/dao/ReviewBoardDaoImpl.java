@@ -81,15 +81,15 @@ public class ReviewBoardDaoImpl implements ReviewBoardDao {
 		return reviewBoardRepository.findAllByOrderByBoardNoAsc();
 	}
 
-	
-	
-	
-	//별점 높은순,최신순
-	@Override 
-	public List<ReviewBoard> findByBoardStarOrderByBoardStarDescBoardDateDesc(Long star) { 
-		return reviewBoardRepository.findByBoardStarOrderByBoardStarDescBoardDateDesc(star); 
+	// 별점 높은순,최신순
+	@Override
+	public List<ReviewBoard> findByOrderByBoardStarDescBoardDateDesc() {
+		return reviewBoardRepository.findByOrderByBoardStarDescBoardDateDesc();
 	}
-	 
-	
-	
+
+	//별점 높은순,최신순
+	@Override
+	public List<ReviewBoard> findByOrderByBoardStarAscBoardDateDesc() {
+		return reviewBoardRepository.findByOrderByBoardStarAscBoardDateDesc();
+	}
 }

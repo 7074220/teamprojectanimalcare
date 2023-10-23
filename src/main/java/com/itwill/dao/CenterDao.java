@@ -16,6 +16,6 @@ public interface CenterDao {
 	public void deleteCenter(Long centerNo);
 	
 	public List<Center> findAllCenters();
-	//센터이름검색
-	public List<Center> findByName(String centerName);
+	
+	public List<Center> findByName(String centerName);//센터이름검색
 }
