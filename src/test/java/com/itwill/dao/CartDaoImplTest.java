@@ -49,29 +49,31 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Test
 	@Transactional
 	@Rollback(false)
-	@Disabled
+	//@Disabled
 	void insertCartTest() {
+		/*
 		Cart cart1 = Cart.builder()
 				.cartNo(null)
 				.cartQty(5)
 				.userinfo(userInfoDao.findById("전아현"))
-				.product(productDao.findByProductNo(22L))
+				.product(productDao.findByProductNo(1L))
 				.build();
 		cartDao.insertCart(cart1);
 		Cart cart2 = Cart.builder()
 				.cartNo(null)
 				.cartQty(5)
 				.userinfo(userInfoDao.findById("전아현"))
-				.product(productDao.findByProductNo(30L))
+				.product(productDao.findByProductNo(2L))
 				.build();
 		cartDao.insertCart(cart2);
 		Cart cart3 = Cart.builder()
 				.cartNo(null)
 				.cartQty(5)
 				.userinfo(userInfoDao.findById("전아현"))
-				.product(productDao.findByProductNo(1L))
+				.product(productDao.findByProductNo(3L))
 				.build();
 		cartDao.insertCart(cart3);
+		*/
 	}
 	
 	@Test
@@ -117,4 +119,21 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 		System.out.println(carts);
 	}
 	
+	@Test
+	//@Disabled
+	@Transactional
+	@Rollback(false)
+	void countProductByUserIdTest() {
+		Integer count = cartDao.countProductByUserId("김창섭", 3L);
+		System.out.println(count);
+	}
+	
+	@Test
+	@Disabled
+	@Transactional
+	@Rollback(false)
+	// 카트에 중복제품이 있으면 (중복체크) --> 업데이트 돼서 담기도록 
+	void updateOverlapCart() {
+		Cart count = cartDao.updateOverlapCart(null);
+	}
 }

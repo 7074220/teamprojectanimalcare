@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringExclude;
+import org.hibernate.annotations.Bag;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -41,7 +42,12 @@ public class Product {
 	
 	private Integer productStarAvg;
 	
-	@OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@JoinColumn(name = "cart_no")
+	@Builder.Default
+	Cart cart = new Cart();
+	
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@Builder.Default
 	List<ReviewBoard> reviewBoards = new ArrayList<ReviewBoard>(); 
 }

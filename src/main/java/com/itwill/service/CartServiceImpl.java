@@ -4,19 +4,25 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.dao.CartDao;
 import com.itwill.entity.Cart;
 import com.itwill.repository.CartRepository;
 
+@Transactional
+@Service
 public class CartServiceImpl implements CartService {
 
+	@Autowired
+	private CartDao cartDao;
 	@Autowired
 	private CartRepository cartRepository;
 
 	@Override
 	public Cart insertCart(Cart cart) {
-		Cart savedCart = cartRepository.save(cart);
+		Cart savedCart = cartDao.insertCart(cart);
 		return savedCart;
 	}
 
@@ -53,13 +59,17 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public Integer cartTotalPrice(String userId) {
+		/*
 		List<Cart> cartList = cartRepository.findAllCartByUserId(userId);
 		Integer total = 0;
 		for (Cart cart : cartList) {
 			total = total + cart.getProduct().getProductPrice();
+			cart.getProduct().getProductPrice();
 		}
-		return total;
-	}
+		*/
+		return 0;
+		
+	} 
 
 	@Override
 	public List<Cart> findAll() {
@@ -73,11 +83,17 @@ public class CartServiceImpl implements CartService {
 		return null;
 	}
 
+	
 	@Override
-	public Integer cartSelectTotalPrice(Long no) {
+	public Integer countProductByUserId(String userId, Long no) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
+	@Override
+	public Cart updateOverlapCart(Cart overlapCart) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

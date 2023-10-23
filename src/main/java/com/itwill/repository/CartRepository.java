@@ -31,8 +31,11 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
 	//@Query(value = "select SUM(p.product_price) from cart c join product p on c.product_no = p.product_no where c.user_id=?1", nativeQuery = true)
 	//Integer cartTotalPrice(String userId);
 	
-	// 카트에 중복제품이 있으면 합산되어 담기도록
-	// select count(*) from product p join (select count(*) from cart c join userInfo u on c.u_id=u.u_id where u.u_id=#{u_id}) j on p.p_size=#{product.p_size} and p.p_no=#{product.p_no}
+	// 카트 중복체크
+	@Query(value = "select count(*) from cart c join userinfo u on c.user_id=u.user_id where u.user_id=?1 and c.product_no=?2", nativeQuery = true)
+	Integer countProductByUserId(String userId, Long no);
+	
+	// 카트에 중복제품이 있으면 (중복체크) --> 업데이트 돼서 담기도록 
 	//@Query(value = "")
 	//int productWithKindByUserId(Cart cart);
 
