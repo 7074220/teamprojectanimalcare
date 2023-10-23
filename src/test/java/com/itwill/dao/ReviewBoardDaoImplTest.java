@@ -109,10 +109,22 @@ class ReviewBoardDaoImplTest {
 	  @Transactional  
 	  @Rollback(false) 
 	  @Disabled 
-	  public void findByBoardStarOrderByBoardStarDescBoardDateDesc() { 
-		  List<ReviewBoard> findByBoardStarOrderByBoardStarDescBoardDateDesc =
-	  reviewBoardDao.findByBoardStarOrderByBoardStarDescBoardDateDesc(5L);
-	  System.out.println(findByBoardStarOrderByBoardStarDescBoardDateDesc); 
+	  public void findByOrderByBoardStarDescBoardDateDesc() { 
+		  List<ReviewBoard> findByOrderByBoardStarDescBoardDateDesc = reviewBoardDao.findByOrderByBoardStarDescBoardDateDesc();
+
+		  System.out.println(findByOrderByBoardStarDescBoardDateDesc); 
 	  }
 	 
+	  @Test//별점 낮은순,최신순	  
+	  @Transactional  
+	  @Rollback(false) 
+	  @Disabled 
+	  public void findByOrderByBoardStarAscBoardDateDesc() { 
+		  List<ReviewBoard> findByOrderByBoardStarAscBoardDateDesc = reviewBoardDao.findByOrderByBoardStarAscBoardDateDesc();
+		  
+		  System.out.println(findByOrderByBoardStarAscBoardDateDesc); 
+	  }
+	 
+	
+	  
 }

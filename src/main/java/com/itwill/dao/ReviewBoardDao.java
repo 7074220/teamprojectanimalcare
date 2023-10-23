@@ -30,7 +30,10 @@ public interface ReviewBoardDao {
 	
 	public List<ReviewBoard> findAllByOrderByBoardNoAsc(); // 오래된 순 정렬(board no정렬)
 	
-	public List<ReviewBoard> findByBoardStarOrderByBoardStarDescBoardDateDesc(Long star);//별점 높은순,최신순
+	public List<ReviewBoard> findByOrderByBoardStarDescBoardDateDesc();//별점 높은순,최신순
+	
+	public List<ReviewBoard> findByOrderByBoardStarAscBoardDateDesc();//별점 낮은순,최신순
+
 	
 	
 }		
