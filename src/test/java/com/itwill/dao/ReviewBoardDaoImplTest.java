@@ -35,8 +35,8 @@ class ReviewBoardDaoImplTest {
 	void testCreate() {
 	
 		ReviewBoard reviewBoard = ReviewBoard.builder()
-								.boardTitle("Dao 테스트 타이틀")
-								.boardContent("Dao 테스트 내용")
+								.boardTitle("Dao 테스트 타이틀2")
+								.boardContent("Dao 테스트 내용2")
 								.boardDate(new Date())
 								.boardStar(5)
 								.userinfo(userInfoDao.findByNo(5L))
@@ -46,20 +46,20 @@ class ReviewBoardDaoImplTest {
 		reviewBoardDao.create(reviewBoard);
 		
 	}
-	@Test//상품번호로 리뷰찾기 -db 없음
+	@Test//상품번호로 리뷰찾기
 	@Transactional
 	@Rollback(value = false)
 	@Disabled
 	void getReviewBoardByProduct_ProductNo() {
-		List<ReviewBoard> selectReviewBoard = reviewBoardDao.getReviewBoardByProductNo(6L);
+		List<ReviewBoard> selectReviewBoard = reviewBoardDao.getReviewBoardByProductNo(1L);
 		System.out.println(selectReviewBoard);
 	}
 
 	@Test//유저 아이디로 찾기
 	@Transactional
-	@Disabled
-	void findByUserId() {
-		List<ReviewBoard> findByUserIdReviewBoard = reviewBoardDao.findAllByUserIdUserinfo(5L);
+	@Disabled 
+	void findByReviewBoardUserId() {
+		List<ReviewBoard> findByUserIdReviewBoard = reviewBoardDao.findByUserNo(5L);
 		System.out.println(findByUserIdReviewBoard);
 	}
 	
@@ -67,7 +67,7 @@ class ReviewBoardDaoImplTest {
 	@Transactional
 	@Disabled
 	void findAllByBoardStar() {
-		List<ReviewBoard> findAllByBoardStar = reviewBoardDao.findByStarAll(3L);
+		List<ReviewBoard> findAllByBoardStar = reviewBoardDao.findByStarAll(5L);
 		System.out.println(findAllByBoardStar);
 	}
 	@Test//별점 높은순
@@ -104,15 +104,15 @@ class ReviewBoardDaoImplTest {
 	}
 	
 	
-	/*
-	  @Test//별점 높은순,최신순
-	  
-	  @Transactional
-	  
-	 *@Rollback(false) //@Disabled public void
-	  findByBoardStarOrderByBoardStarDescBoardNoDesc() { List<ReviewBoard>
-	  findByBoardStarOrderByBoardStarDescBoardNoDesc =
-	  reviewBoardDao.findByBoardStarOrderByBoardStarDescBoardNoDesc(3L);
-	  System.out.println(findByBoardStarOrderByBoardStarDescBoardNoDesc); }
-	 */
+	
+	  @Test//별점 높은순,최신순	  
+	  @Transactional  
+	  @Rollback(false) 
+	  @Disabled 
+	  public void findByBoardStarOrderByBoardStarDescBoardDateDesc() { 
+		  List<ReviewBoard> findByBoardStarOrderByBoardStarDescBoardDateDesc =
+	  reviewBoardDao.findByBoardStarOrderByBoardStarDescBoardDateDesc(5L);
+	  System.out.println(findByBoardStarOrderByBoardStarDescBoardDateDesc); 
+	  }
+	 
 }

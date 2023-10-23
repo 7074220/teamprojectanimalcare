@@ -21,11 +21,12 @@ public interface ReviewBoardRepository extends JpaRepository<ReviewBoard, Long> 
 
 	List<ReviewBoard> getReviewBoardByProduct_ProductNo(Long productNo);// productNo로 reviewboard 리스트 검색
 	
-	//public List<ReviewBoard> findByBoardStarOrderByBoardStarDescBoardNoDesc(Long star); //별점 높은순,최신순
+	public List<ReviewBoard> findByBoardStarOrderByBoardStarDescBoardDateDesc(Long star); //별점 높은순,최신순
 	
 	public List<ReviewBoard> findAllByBoardStar(Long star);
 	
-	List<ReviewBoard> findAllByUserIdUserinfo(Long no); // 선택된 userId 리뷰 리스트만 나오기
+	@Query(value = "SELECT * FROM ReviewBoard WHERE user_no = ?1", nativeQuery = true)
+	List<ReviewBoard> findByUserNo(Long no); // 선택된 userId 리뷰 리스트만 나오기
 	
 
 }
