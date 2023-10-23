@@ -75,7 +75,7 @@ class VisitDaoImplTest {
 	@Rollback(value = false)
 	@Disabled
 	void findVisitsByUserId() {
-		List<Visit> selectVisit = visitDao.getVisitsByUserId("박태환");
+		List<Visit> selectVisit = visitDao.getVisitsByUserNo("박태환");
 		System.out.println(selectVisit);
 	}
 
