@@ -84,7 +84,7 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(value = false)
 	void testFindVolunteerByUserId() {
-		List<Volunteer> selectVolunteer = volunteerDao.findVolunteertByUserId("전아현");
+		List<Volunteer> selectVolunteer = volunteerDao.findVolunteertByUserId(1L);
 		System.out.println(selectVolunteer);
 	}
 	
