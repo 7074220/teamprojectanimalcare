@@ -49,8 +49,8 @@ public class VisitServiceImpl implements VisitService {
 	}
 
 	@Override
-	public List<Visit> getVisitsByUserId(String userId) {
+	public List<Visit> getVisitsByUserNo(String userNo) {
 
-		return visitRepository.findByUserinfoUserId(userId);
+		return visitRepository.findByUserinfoUserNo(userNo);
 	}
 }
