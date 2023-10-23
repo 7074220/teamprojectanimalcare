@@ -28,18 +28,19 @@ class ReviewBoardServiceImplTest {
 	ProductService productService;
 
 	@Test // 생성
-	 @Disabled
+	@Disabled
 	@Transactional
 	@Rollback(false)
 	void testCreate() throws Exception {
 
 		ReviewBoard reviewBoard = ReviewBoard.builder()
 			
-				.boardTitle("service 테스트 타이틀1")
-				.boardContent("service 테스트 내용1")
-				.boardDate(new Date()).boardStar(4)
-				.userinfo(userInfoService.findUser(6L))
-				.product(productService.findByProductNo(5L))
+				.boardTitle("service 테스트 타이틀111")
+				.boardContent("service 테스트 내용111")
+				.boardDate(new Date())
+				.boardStar(4)
+				.userinfo(userInfoService.findUser(14L))
+				.product(productService.findByProductNo(12L))
 				.build();
 
 		reviewBoardService.create(reviewBoard);
@@ -67,7 +68,7 @@ class ReviewBoardServiceImplTest {
 	@Test
 	@Transactional
 	@Rollback(value = false)
-	//@Disabled
+	@Disabled
 	void deleteBoard() {
 		reviewBoardService.deleteById(22L);
 	}
@@ -78,7 +79,7 @@ class ReviewBoardServiceImplTest {
 	@Rollback(value = false)
 	@Disabled
 	void getReviewBoardByProduct_ProductNo() {
-		List<ReviewBoard> selectReviewBoard = reviewBoardService.getReviewBoardByProductNo(1L);
+		List<ReviewBoard> selectReviewBoard = reviewBoardService.findByProductNo(11L);
 		System.out.println(selectReviewBoard);
 	}
 	

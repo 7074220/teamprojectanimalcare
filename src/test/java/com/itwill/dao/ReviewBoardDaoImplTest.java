@@ -76,7 +76,7 @@ class ReviewBoardDaoImplTest {
 	@Rollback(value = false)
 	@Disabled
 	void getReviewBoardByProduct_ProductNo() {
-		List<ReviewBoard> selectReviewBoard = reviewBoardDao.getReviewBoardByProductNo(1L);
+		List<ReviewBoard> selectReviewBoard = reviewBoardDao.findByProductNo(1L);
 		System.out.println(selectReviewBoard);
 	}
 

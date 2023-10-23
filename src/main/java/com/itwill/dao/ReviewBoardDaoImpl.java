@@ -45,9 +45,9 @@ public class ReviewBoardDaoImpl implements ReviewBoardDao {
 	}
 
 	@Override
-	public List<ReviewBoard> getReviewBoardByProductNo(Long productNo) {
+	public List<ReviewBoard> findByProductNo(Long productNo) {
 		// productNo로 reviewboard 리스트 검색
-		return reviewBoardRepository.getReviewBoardByProduct_ProductNo(productNo);
+		return reviewBoardRepository.findByProductProductNo(productNo);
 	}
 
 	// userId로 리뷰 리스트 나오기

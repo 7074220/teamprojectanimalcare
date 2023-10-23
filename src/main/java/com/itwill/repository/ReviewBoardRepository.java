@@ -20,7 +20,7 @@ public interface ReviewBoardRepository extends JpaRepository<ReviewBoard, Long> 
 	public List<ReviewBoard> findAllByOrderByBoardStarAsc(); // 낮은 평점순 정렬
 
 
-	List<ReviewBoard> getReviewBoardByProduct_ProductNo(Long productNo);// productNo로 reviewboard 리스트 검색
+	List<ReviewBoard> findByProductProductNo(Long productNo);// productNo로 reviewboard 리스트 검색
 	
 
 	List<ReviewBoard> findByOrderByBoardStarDescBoardDateDesc(); //별점 높은순,최신순
