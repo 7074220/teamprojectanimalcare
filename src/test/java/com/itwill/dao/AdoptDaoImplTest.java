@@ -34,7 +34,7 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	@Transactional
 	@Rollback(false)
-	@Disabled
+	//@Disabled
 	void insertTest() {
 		
 		Userinfo userinfo1 = userInfoDao.findById("박태환");
@@ -50,7 +50,7 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 				.petFindPlace("서울")
 				.petGender("여")
 				.petLocal("인천")
-				.petRegisterDate(LocalDate.now())
+				.petRegisterDate(new Date())
 				.center(centerDao.findByCenterNo(1L))
 				.build();
 		petDao.petInsert(pet1);
@@ -61,7 +61,7 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 				.petFindPlace("부산")
 				.petGender("남")
 				.petLocal("광주")
-				.petRegisterDate(LocalDate.now())
+				.petRegisterDate(new Date())
 				.center(centerDao.findByCenterNo(2L))
 				.build();
 		petDao.petInsert(pet2);

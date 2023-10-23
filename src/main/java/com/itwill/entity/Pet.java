@@ -1,6 +1,7 @@
 package com.itwill.entity;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringExclude;
@@ -37,7 +38,7 @@ public class Pet {
 	 private String petLocal;
 	 private String petType;
 	 private String petGender;
-	 private LocalDate  petRegisterDate;
+	 private Date  petRegisterDate;
 	 private String petFindPlace;
 	 private String petCharacter;
 	 
