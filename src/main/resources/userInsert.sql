@@ -43,10 +43,10 @@ VALUES (pet_pet_no_seq.nextval,'서울특별시','짖는다','골목',sysdate,'�
 
 -- center insert
 
-INSERT INTO center (center_no, center_name, center_phone_number, center_local, center_open_close_time) VALUES ('11','안녕보호소','010-1111-1111','서울시','09:00 ~ 21:00');
-INSERT INTO center (center_no, center_name, center_phone_number, center_local, center_open_close_time) VALUES ('22','사랑보호소','010-2222-2222','경기도','09:00 ~ 22:00');
-INSERT INTO center (center_no, center_name, center_phone_number, center_local, center_open_close_time) VALUES ('33','하하보호소','010-3333-3333','강원도','09:00 ~ 23:00');
-INSERT INTO center (center_no, center_name, center_phone_number, center_local, center_open_close_time) VALUES ('44','소소보호소','010-4444-4444','충청도','09:00 ~ 24:00');
+INSERT INTO center (center_no, center_name, center_phone_number, center_local, center_open_close_time) VALUES (Center_center_no_SEQ.nextval,'안녕보호소','010-1111-1111','서울시','09:00 ~ 21:00');
+INSERT INTO center (center_no, center_name, center_phone_number, center_local, center_open_close_time) VALUES (Center_center_no_SEQ.nextval,'사랑보호소','010-2222-2222','경기도','09:00 ~ 22:00');
+INSERT INTO center (center_no, center_name, center_phone_number, center_local, center_open_close_time) VALUES (Center_center_no_SEQ.nextval,'하하보호소','010-3333-3333','강원도','09:00 ~ 23:00');
+INSERT INTO center (center_no, center_name, center_phone_number, center_local, center_open_close_time) VALUES (Center_center_no_SEQ.nextval,'소소보호소','010-4444-4444','충청도','09:00 ~ 24:00');
 
 -- adopt insert
 
@@ -83,11 +83,11 @@ VALUES (Coupon_coupon_id_SEQ.nextval,'생일쿠폰',30,TO_DATE('2023/04/05','YYY
 
 -- volunteer insert
 
-INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_id, center_no) VALUES(01, 11, sysdate, '봉사접수중', '김창섭', 11);
-INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_id, center_no) VALUES(02, 13, sysdate, '심사중', '박태환', 22);
-INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_id, center_no) VALUES(03, 15, sysdate, '봉사완료', '전아현', 22);
-INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_id, center_no) VALUES(04, 10, sysdate, '심사중', '전아현', 11);
-INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_id, center_no) VALUES(05, 17, sysdate, '봉사접수중', '김창섭', 22);
+INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_id, center_no) VALUES(volunteer_volunteer_no_seq.nextval, 11, sysdate, '봉사접수중', '김창섭', 11);
+INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_id, center_no) VALUES(volunteer_volunteer_no_seq.nextval, 13, sysdate, '심사중', '박태환', 22);
+INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_id, center_no) VALUES(volunteer_volunteer_no_seq.nextval, 15, sysdate, '봉사완료', '전아현', 22);
+INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_id, center_no) VALUES(volunteer_volunteer_no_seq.nextval, 10, sysdate, '심사중', '전아현', 11);
+INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_id, center_no) VALUES(volunteer_volunteer_no_seq.nextval, 17, sysdate, '봉사접수중', '김창섭', 22);
 
 -- report board
 
@@ -105,7 +105,7 @@ VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/
 
 -- review board
 
-INSERT INTO review_board (review_board.board_no, board_date, board_title, board_content, board_star, user_id) VALUES (1, sysdate, '타이틀1', '내용1', 5, '전아현');
-INSERT INTO review_board (review_board.board_no, board_date, board_title, board_content, board_star, user_id) VALUES (2, sysdate, '타이틀2', '내용2', 4, '김창섭');
-INSERT INTO review_board (review_board.board_no, board_date, board_title, board_content, board_star, user_id) VALUES (3, sysdate, '타이틀3', '내용3', 3, '전아현');
-INSERT INTO review_board (review_board.board_no, board_date, board_title, board_content, board_star, user_id) VALUES (4, sysdate, '타이틀4', '내용4', 1, '박태환');
+INSERT INTO review_board (review_board.board_no, board_date, board_title, board_content, board_star, user_id) VALUES (ReviewBoard_board_no_SEQ.nextval, sysdate, '타이틀1', '내용1', 5, '전아현');
+INSERT INTO review_board (review_board.board_no, board_date, board_title, board_content, board_star, user_id) VALUES (ReviewBoard_board_no_SEQ.nextval, sysdate, '타이틀2', '내용2', 4, '김창섭');
+INSERT INTO review_board (review_board.board_no, board_date, board_title, board_content, board_star, user_id) VALUES (ReviewBoard_board_no_SEQ.nextval, sysdate, '타이틀3', '내용3', 3, '전아현');
+INSERT INTO review_board (review_board.board_no, board_date, board_title, board_content, board_star, user_id) VALUES (ReviewBoard_board_no_SEQ.nextval, sysdate, '타이틀4', '내용4', 1, '박태환');

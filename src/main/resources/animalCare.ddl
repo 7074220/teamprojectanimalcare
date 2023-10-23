@@ -102,7 +102,6 @@ CREATE TABLE Volunteer(
 		volunteer_no                  		NUMBER(10)		 NULL ,
 		volunteer_time                		NUMBER(10)		 NULL ,
 		volunteer_date                		DATE		 NULL ,
-		user_id                       		VARCHAR2(50)		 NULL ,
 		center_no                     		NUMBER(10)		 NULL ,
 		user_no                       		NUMBER(10)		 NULL,
         volunteer_status               		VARCHAR2(10)		 NULL

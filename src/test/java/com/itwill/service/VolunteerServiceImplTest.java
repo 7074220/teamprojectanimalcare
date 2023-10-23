@@ -3,6 +3,7 @@ package com.itwill.service;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -43,7 +44,7 @@ class VolunteerServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 		Center center = centerService.findByCenterNo(22L);
 		
 		Volunteer volunteer = Volunteer.builder()
-										.volunteerDate(LocalDate.now())
+										.volunteerDate(new Date())
 										.volunteerTime(20L)
 										.volunteerStatus("서비스테스트")
 										.center(center)

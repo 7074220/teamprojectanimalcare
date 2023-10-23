@@ -15,7 +15,7 @@ public interface VolunteerRepository extends JpaRepository<Volunteer, Long>{
 	List<Volunteer> findVolunteerByUserId(@Param("userId") String userId);
 	*/
 
-	@Query(value = "SELECT * FROM volunteer WHERE user_id = ?", nativeQuery = true)
+	@Query(value = "SELECT * FROM volunteer WHERE user_id = ?1", nativeQuery = true)
 	List<Volunteer> findVolunteertByUserId(@Param("userId") String userId);
 	
 }
