@@ -1,6 +1,6 @@
 package com.itwill.entity;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -25,7 +25,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @Table(name = "volunteer")
-//@ToString(callSuper = true)
+@ToString(callSuper = true)
 public class Volunteer {
  
 	@Id
@@ -33,14 +33,14 @@ public class Volunteer {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Volunteer_volunteer_no_SEQ")
 	private Long volunteerNo; // PK
 	private Long volunteerTime;
-	private LocalDate volunteerDate;
+	private Date volunteerDate;
 	private String volunteerStatus;
 	
 	/*
 	 * N : 1
 	 */
 	@Builder.Default
-	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_no")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
@@ -49,7 +49,7 @@ public class Volunteer {
 	 * N : 1
 	 */
 	@Builder.Default
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinColumn(name = "center_no")
 	@ToString.Exclude
 	private Center center = new Center();
