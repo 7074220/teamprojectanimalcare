@@ -35,12 +35,12 @@ OrderStatusRepository orderStatusRepository;
 	
 	@Override
 	public Orders insertOrder(Orders order) {
-		List<OrderItem> orderItems = order.getOrderItems();
 		Long userNo = order.getUserinfo().getUserNo();
 		List<Cart> carts = cartDao.findAllCartByUserId(userNo);
 		int price = 0;
 		
 		for (Cart cart : carts) {
+			List<OrderItem> orderItems = order.getOrderItems();
 			OrderItem tempOrderItem = OrderItem.builder().build();
 			Long p_no = cart.getProduct().getProductNo();
 			tempOrderItem.setOrders(order);
