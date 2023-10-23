@@ -1,13 +1,13 @@
 -- userinfo insert
 
-insert into userinfo (user_id,user_password,user_address,user_email,user_gender,user_phone_number,user_point,user_resident_number,user_resister_date) 
-VALUES ('김창섭','1111','경기도','111a','남','1111',1111,'1111',sysdate);
+insert into userinfo (user_no,user_id,user_password,user_address,user_email,user_gender,user_phone_number,user_point,user_resident_number,user_register_date) 
+VALUES (userinfo_user_no_seq.nextval,'김창섭','1111','경기도','111a','남','1111',1111,'1111',sysdate);
 
-insert into userinfo (user_id,user_password,user_address,user_email,user_gender,user_phone_number,user_point,user_resident_number,user_resister_date) 
-VALUES ('박태환','2222','서울','2222a','남','2222',2222,'2222',sysdate);
+insert into userinfo (user_id,user_password,user_address,user_email,user_gender,user_phone_number,user_point,user_resident_number,user_register_date) 
+VALUES (userinfo_user_no_seq.nextval,'박태환','2222','서울','2222a','남','2222',2222,'2222',sysdate);
 
-insert into userinfo (user_id,user_password,user_address,user_email,user_gender,user_phone_number,user_point,user_resident_number,user_resister_date) 
-VALUES ('전아현','3333','강원도','3333a','여','3333',3333,'3333',sysdate);	
+insert into userinfo (user_id,user_password,user_address,user_email,user_gender,user_phone_number,user_point,user_resident_number,user_register_date) 
+VALUES (userinfo_user_no_seq.nextval,'전아현','3333','강원도','3333a','여','3333',3333,'3333',sysdate);	
 
 -- dog product insert
 
@@ -50,8 +50,8 @@ INSERT INTO center (center_no, center_name, center_phone_number, center_local, c
 
 -- adopt insert
 
-INSERT INTO adopt (adopt_no, adopt_time, adopt_date, status, user_id, pet_no) VALUES(adopt_no_seq.nextval, 11, sysdate, '입양완료', '김창섭', 1);
-INSERT INTO adopt (adopt_no, adopt_time, adopt_date, status, user_id, pet_no) VALUES(adopt_no_seq.nextval, 15, sysdate, '입양중', '박태환', 2);
+INSERT INTO adopt (adopt_no, adopt_time, adopt_date, pet_no, user_no, adopt_status ) VALUES(adopt_adopt_no_seq.nextval, 11, sysdate, 10, 1, "입양완료");
+INSERT INTO adopt (adopt_no, adopt_time, adopt_date, pet_no, user_no, adopt_status ) VALUES(adopt_adopt_no_seq.nextval, 11, sysdate, 11, 2, "입양중");
 
 -- mypet insert
 
@@ -79,7 +79,7 @@ VALUES (orders_order_no_seq.nextval,'서울특별시','사료외..',sysdate,'222
 -- coupon insert
 
 insert into coupon (coupon_id,coupon_name,coupon_discount,coupon_payday,coupon_expiration_date,user_id) 
-VALUES (coupon_id_seq.nextval,'생일쿠폰',30,TO_DATE('2023/04/05','YYYY/MM/DD'),TO_DATE('2023/06/04','YYYY/MM/DD'),'전아현');
+VALUES (Coupon_coupon_id_SEQ.nextval,'생일쿠폰',30,TO_DATE('2023/04/05','YYYY/MM/DD'),TO_DATE('2023/06/04','YYYY/MM/DD'),'전아현');
 
 -- volunteer insert
 
@@ -92,16 +92,16 @@ INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_s
 -- report board
 
 insert into report_board (board_no,board_content,board_date,board_depth,board_group_no,board_name,board_phone,board_read_count,board_resister_date,board_step,board_title,user_id) 
-VALUES (board_no_seq.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),0,1,'전아현','1111',0,sysdate,0,'토토어디갓어','전아현');
+VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),0,1,'전아현','1111',0,sysdate,0,'토토어디갓어','전아현');
 
 insert into report_board (board_no,board_content,board_date,board_depth,board_group_no,board_name,board_phone,board_read_count,board_resister_date,board_step,board_title,user_id) 
-VALUES (board_no_seq.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),0,1,'박태환','1111',0,sysdate,0,'어디갓어','박태환');
+VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),0,1,'박태환','1111',0,sysdate,0,'어디갓어','박태환');
 
 insert into report_board (board_no,board_content,board_date,board_depth,board_group_no,board_name,board_phone,board_read_count,board_resister_date,board_step,board_title,user_id) 
-VALUES (board_no_seq.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),0,1,'김창섭','1111',0,sysdate,0,'어디갓어2','김창섭');
+VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),0,1,'김창섭','1111',0,sysdate,0,'어디갓어2','김창섭');
 
 insert into report_board (board_no,board_content,board_date,board_depth,board_group_no,board_name,board_phone,board_read_count,board_resister_date,board_step,board_title,user_id) 
-VALUES (board_no_seq.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),0,1,'김창섭','1111',0,sysdate,0,'어디갓어3','김창섭');
+VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),0,1,'김창섭','1111',0,sysdate,0,'어디갓어3','김창섭');
 
 -- review board
 
