@@ -25,27 +25,6 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Autowired
 	ProductDao productDao;
 	
-	
-	
-	@Test
-	@Disabled
-	@Transactional
-	@Rollback(false)
-	void updateCartTest() {
-		Cart findCart = cartDao.findByCartNo(1L);
-		findCart.setCartQty(50);
-		System.out.println(findCart);
-	}
-	
-	@Test
-	@Transactional
-	@Rollback(false)
-	@Disabled
-	void findByCartNoTest() {
-		Cart findCart = cartDao.findByCartNo(1L);
-		System.out.println(findCart);
-	}
-	
 	@Test
 	@Transactional
 	@Rollback(false)
@@ -73,8 +52,29 @@ class CartDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 				.product(productDao.findByProductNo(3L))
 				.build();
 		cartDao.insertCart(cart3);
-		*/
+		 */
 	}
+	
+	
+	@Test
+	@Disabled
+	@Transactional
+	@Rollback(false)
+	void updateCartTest() {
+		Cart findCart = cartDao.findByCartNo(1L);
+		findCart.setCartQty(50);
+		System.out.println(findCart);
+	}
+	
+	@Test
+	@Transactional
+	@Rollback(false)
+	@Disabled
+	void findByCartNoTest() {
+		Cart findCart = cartDao.findByCartNo(1L);
+		System.out.println(findCart);
+	}
+	
 	
 	@Test
 	@Disabled

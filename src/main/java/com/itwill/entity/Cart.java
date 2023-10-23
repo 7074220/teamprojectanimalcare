@@ -38,6 +38,7 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Cart_cart_no_SEQ")
 	private Long cartNo;
 	private Integer cartQty;
+	private String cartImage;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_no")
@@ -48,6 +49,5 @@ public class Cart {
 	@Builder.Default
 	private List<Product> product = new ArrayList<Product>();
 
-	
 	
 }
