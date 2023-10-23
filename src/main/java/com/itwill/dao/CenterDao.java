@@ -7,15 +7,15 @@ import com.itwill.entity.Center;
 
 public interface CenterDao {
 
-	Center createCenter(Center center);
+	public Center createCenter(Center center);
 	
-	Center findByCenterNo(Long centerNo);
+	public Center findByCenterNo(Long centerNo);
 
-	Center updateCenter(Center center);
+	public Center updateCenter(Center center);
 	
-	void deleteCenter(Long centerNo);
+	public void deleteCenter(Long centerNo);
 	
-	List<Center> findAllCenters();
+	public List<Center> findAllCenters();
 	//센터이름검색
-	List<Center> findByName(String centerName);
+	public List<Center> findByName(String centerName);
 }

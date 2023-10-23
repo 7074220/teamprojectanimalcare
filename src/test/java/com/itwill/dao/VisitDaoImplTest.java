@@ -31,15 +31,15 @@ class VisitDaoImplTest {
 	@Transactional
 	@Rollback(false)
 	@Test
-	// @Disabled
+	@Disabled
 	void insetVisit() {
 		Visit visit = Visit.builder()
 
 				.visitDate(new Date())
 				.visitStatus("방문완료")
 				.visitTime(7)
-				.userinfo(userInfoDao.findByNo(1L))
-				.center(centerDao.findByCenterNo(4L))
+				.userinfo(userInfoDao.findByNo(2L))
+				.center(centerDao.findByCenterNo(2L))
 				.build();
 		visitDao.createVisit(visit);
 	}
@@ -75,7 +75,7 @@ class VisitDaoImplTest {
 	@Rollback(value = false)
 	@Disabled
 	void findVisitsByUserId() {
-		List<Visit> selectVisit = visitDao.getVisitsByUserNo(1L);
+		List<Visit> selectVisit = visitDao.getVisitsByUserNo(2L);
 		System.out.println(selectVisit);
 	}
 

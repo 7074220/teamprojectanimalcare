@@ -39,7 +39,7 @@ class VisitServiceImplTest {
 				.userinfo(userInfoService.findUser(1L))
 				.visitTime(3)
 				.visitDate(new Date())
-				.center(centerService.findByCenterNo(11L))
+				.center(centerService.findByCenterNo(1L))
 				.visitStatus("접수중")
 				.build();
 		visitService.createVisit(insertVisit);
@@ -49,7 +49,7 @@ class VisitServiceImplTest {
 	@Transactional
 	@Disabled
 	void selectVisit() {
-		Visit selectVisit = visitService.findByVisitNo(1L);
+		Visit selectVisit = visitService.findByVisitNo(2L);
 		System.out.println(selectVisit);
 
 	}
@@ -58,7 +58,7 @@ class VisitServiceImplTest {
 	@Rollback(value = false)
 	@Disabled
 	void deleteVisit()throws Exception {
-		visitService.deleteVisit(1L);
+		visitService.deleteVisit(3L);
 	}
 	@Test
 	@Transactional
@@ -74,7 +74,7 @@ class VisitServiceImplTest {
 		@Rollback(value = false)
 		@Disabled
 		void findVisitsByUserId() {
-		    List<Visit> selectVisit = visitService.getVisitsByUserNo(1L);
+		    List<Visit> selectVisit = visitService.getVisitsByUserNo(2L);
 		    System.out.println(selectVisit);
 		}
 
