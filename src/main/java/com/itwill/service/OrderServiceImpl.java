@@ -9,41 +9,50 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.dao.CartDao;
+import com.itwill.dao.OrderItemDao;
 import com.itwill.dao.OrdersDao;
+import com.itwill.dao.ProductDao;
 import com.itwill.entity.Cart;
 import com.itwill.entity.Coupon;
 import com.itwill.entity.OrderItem;
 import com.itwill.entity.Orders;
+import com.itwill.entity.Orderstatus;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Userinfo;
+import com.itwill.repository.OrderStatusRepository;
 @Service
 public class OrderServiceImpl implements OrderService{
 @Autowired 
 OrdersDao ordersDao;
+@Autowired 
 CartDao cartDao;
-
+@Autowired 
+OrderItemDao orderItemDao;
+@Autowired
+ProductDao productDao;
+@Autowired
+OrderStatusRepository orderStatusRepository;
 	
 	@Override
 	public Orders insertOrder(Orders order) {
-		String userId=order.getUserinfo().getUserId();
 		List<OrderItem> orderItems = order.getOrderItems();
-		List<Cart> cartList = order.getUserinfo().getCarts();
-		for (int i = 0; i < orderItems.size(); i++) {
-			orderItems.get(i).setOrders(order);
-			
+		Long userNo = order.getUserinfo().getUserNo();
+		List<Cart> carts = cartDao.findAllCartByUserId(userNo);
+		int price = 0;
+		
+		for (Cart cart : carts) {
+			OrderItem tempOrderItem = OrderItem.builder().build();
+			Long p_no = cart.getProduct().getProductNo();
+			tempOrderItem.setOrders(order);
+			tempOrderItem.setOrderStatus(orderStatusRepository.findById(1L).get()); 
+			tempOrderItem.setOiQty(cart.getCartQty());
+			tempOrderItem.setProduct(productDao.findByProductNo(p_no));
+			price = price + cart.getProduct().getProductPrice();
+			orderItems.add(tempOrderItem);
 		}
-		
-		
-		cartDao.findAllCartByUserId(userId);
-		order.builder()
-				.orderItems(null)
-	
-				.build();
-		
-		cartDao.deleteByUserId(userId);
-		Orders insertOrders=ordersDao.insertOrder(order);
-	return insertOrders;
-	
+		order.setOrderPrice(price);
+		cartDao.deleteByUserId(order.getUserinfo().getUserNo());
+		return ordersDao.insertOrder(order);
 	}
 	//배송지변경
 	@Override
