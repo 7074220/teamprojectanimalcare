@@ -25,7 +25,7 @@ public interface ReviewBoardRepository extends JpaRepository<ReviewBoard, Long> 
 	
 	public List<ReviewBoard> findAllByBoardStar(Long star);
 	
-	List<ReviewBoard> findAllByUserinfoUserId(String userId); // 선택된 userId 리뷰 리스트만 나오기
+	List<ReviewBoard> findAllByUserIdUserinfo(Long no); // 선택된 userId 리뷰 리스트만 나오기
 	
 
 }

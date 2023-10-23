@@ -3,6 +3,7 @@ package com.itwill.dao;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
@@ -34,18 +35,18 @@ class ReviewBoardDaoImplTest {
 	void testCreate() {
 	
 		ReviewBoard reviewBoard = ReviewBoard.builder()
-								.boardTitle("이것은 타이틀")
-								.boardContent("이것은 내용")
-								.boardDate(LocalDate.now())
+								.boardTitle("Dao 테스트 타이틀")
+								.boardContent("Dao 테스트 내용")
+								.boardDate(new Date())
 								.boardStar(5)
-								.userinfo(userInfoDao.findByNo(1L))
+								.userinfo(userInfoDao.findByNo(5L))
 								.product(productDao.findByProductNo(1L))
 								.build();
 
 		reviewBoardDao.create(reviewBoard);
 		
 	}
-	@Test//상품번호로 리뷰찾기
+	@Test//상품번호로 리뷰찾기 -db 없음
 	@Transactional
 	@Rollback(value = false)
 	@Disabled
@@ -58,7 +59,7 @@ class ReviewBoardDaoImplTest {
 	@Transactional
 	@Disabled
 	void findByUserId() {
-		List<ReviewBoard> findByUserIdReviewBoard = reviewBoardDao.findAllByUserIdUserinfo("박태환");
+		List<ReviewBoard> findByUserIdReviewBoard = reviewBoardDao.findAllByUserIdUserinfo(5L);
 		System.out.println(findByUserIdReviewBoard);
 	}
 	
