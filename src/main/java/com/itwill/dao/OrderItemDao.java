@@ -10,11 +10,10 @@ public interface OrderItemDao {
 		OrderItem insertOrderItem(OrderItem orderItem);
 		
 
-		OrderItem updateOrderItem(OrderItem orderItem) throws Exception;
+		OrderItem updateOrderItem(OrderItem updateoOrderItem) throws Exception;
 
-		void deleteOrderItemByOrederNo(Long orderNo) throws Exception;
+		void deleteOrderItemByOrderNo(Long orderNo) throws Exception;
 		
-		OrderItem findByOrderItem(Long oiNo);
 		List<OrderItem> findAllOrderItem();
 		List<OrderItem> findAllOrderItemByOrderNo(Long orderNo);
 		

@@ -1,6 +1,6 @@
 package com.itwill.dao;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import com.itwill.entity.OrderItem;
@@ -24,7 +24,7 @@ public interface OrdersDao {
 	Orders findOrderByNo(Long orderNo) ;
 
 	//id로 주문찾기
-	List<Orders> findOrdersByNo(Long userNo) ;
+	List<Orders> findOrdersByuserNo(Long userNo) ;
 	
 	//id로 최신주문정렬찾기
 		List<Orders> findAllByUserNoDESC(Long userNo);

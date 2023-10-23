@@ -1,6 +1,6 @@
 package com.itwill.repository;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,8 +25,10 @@ public interface OrdersRepository extends JpaRepository<Orders, Long>{
 		 @Query(value = "SELECT * FROM Orders o WHERE o.user_no = :user_no ORDER BY o.order_no DESC",nativeQuery = true)
 		List<Orders> findAllByUserNoDESC(@Param("user_no")Long userNo);
 		
+		 //기간별로 주문목록 조회
+		 @Query(value = "SELECT * FROM Orders o where o.order_date BETWEEN :startDate AND :endDate",nativeQuery = true)
+		  List<Orders> findAllByOrdersByOrderDate(@Param("startDate")Date startDate,@Param("endDate")Date endDate);
 		 
 		 
-		 List<Orders> findAllByOrdersByOrderDate(Date startDate, Date endDate);
 
 }

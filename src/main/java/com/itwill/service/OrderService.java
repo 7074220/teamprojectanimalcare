@@ -1,5 +1,6 @@
 package com.itwill.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.itwill.entity.Orders;
@@ -24,9 +25,11 @@ public interface OrderService {
 	//회원아이디로 주문조회
 	List<Orders> findOrderById(Long userNo);
 	
-	List<Orders>findOrderByIdDesc(String userId);
+	List<Orders>findOrderByIdDesc(Long userNo);
 	//
 	List<Orders>findAllByOrderByOrderNoDesc(Long orderNo);
+	//날짜별 기간으로 조회
+		List<Orders> findAllByOrdersByOrderDate(Date startDate,Date endDate);
 	
 	
 	

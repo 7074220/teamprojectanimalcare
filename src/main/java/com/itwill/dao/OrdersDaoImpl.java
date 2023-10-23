@@ -1,6 +1,6 @@
 package com.itwill.dao;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,15 +51,15 @@ OrdersRepository ordersRepository;
 		return orders;
 	}
 
-
+// //기간별로 주문목록 조회
 	@Override
-	public List<Orders> findAllByOrdersByOrderDate(Date startDate, Date endDate) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Orders> findAllByOrdersByOrderDate(Date startDate,Date endDate) {
+		List<Orders> orders = ordersRepository.findAllByOrdersByOrderDate(startDate, endDate);
+		return orders;
 	}
 
 	@Override
-	public List<Orders> findOrdersByNo(Long userNo) {
+	public List<Orders> findOrdersByuserNo(Long userNo) {
 		List<Orders> orders = ordersRepository.findAllByUserNo(userNo);
 		return orders;
 		

@@ -1,5 +1,6 @@
 package com.itwill.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,24 +83,25 @@ CartDao cartDao;
 		return ordersDao.findOrderByNo(orderNo);
 	}
 
-	//회원주문목록조회
-	@Override
-	public List<Orders> findOrderById(String userId) {
-		
-		return ordersDao.findOrdersById(userId);
-	}
-
-	//회원주문목록 최신순으로 정렬
-	@Override
-	public List<Orders> findOrderByIdDesc(String userId) {
-		return ordersDao.findAllByUserIdDESC(userId);
-	}
 
 	//전체주문 최신순으로 정렬
 	@Override
 	public List<Orders> findAllByOrderByOrderNoDesc(Long orderNo) {
 		
 		return ordersDao.findAllByOrderByOrderNoDesc();
+	}
+	//회원주문목록조회
+	@Override
+	public List<Orders> findOrderById(Long userNo) {
+		return ordersDao.findOrdersByuserNo(userNo);
+	}
+	@Override
+	public List<Orders> findOrderByIdDesc(Long userNo) {
+		return ordersDao.findAllByUserNoDESC(userNo);
+	}
+	@Override
+	public List<Orders> findAllByOrdersByOrderDate(Date startDate, Date endDate) {
+		return ordersDao.findAllByOrdersByOrderDate(startDate,endDate);
 	}
 
 }
