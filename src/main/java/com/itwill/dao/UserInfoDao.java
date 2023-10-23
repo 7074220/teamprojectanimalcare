@@ -23,4 +23,6 @@ public interface UserInfoDao {
 	
 	public Userinfo findByUserPassword(String userId , String userPhoneNumber);
 	
+	public Userinfo findByUserId(String userId);
+	
 }

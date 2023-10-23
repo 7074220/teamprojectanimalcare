@@ -46,7 +46,7 @@ class VolunteerServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 		Volunteer volunteer = Volunteer.builder()
 										.volunteerDate(new Date())
 										.volunteerTime(20)
-										.volunteerStatus("서비스테스트")
+										.volunteerStatus("서비스테스트t")
 										.center(center)
 										.userinfo(userinfo)
 										.build();
@@ -59,7 +59,7 @@ class VolunteerServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(value = false)
 	void testUpdateVolunteer() throws Exception{
 		Volunteer volunteer = volunteerService.findByVolunteerNo(1L);
-		volunteer.setVolunteerStatus("테스트진행중");
+		volunteer.setVolunteerStatus("테스트진행중t");
 		volunteerService.updateVolunteer(volunteer);
 	}
 
