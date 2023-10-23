@@ -17,6 +17,6 @@ public interface VisitService {
     List<Visit> selectAllVisits();
     //견학 리스트 출력
     
-    List<Visit> getVisitsByUserNo(String userNo);
+    List<Visit> getVisitsByUserNo(Long userNo);
 	//userid로 visit리스트 검색
 }

@@ -36,7 +36,7 @@ class VisitServiceImplTest {
 	void insertVisit() throws Exception {
 		Visit insertVisit = Visit.builder()
 				.visitNo(null)
-				.userinfo(userInfoService.findUser("김창섭"))
+				.userinfo(userInfoService.findUser(1L))
 				.visitTime(3)
 				.visitDate(new Date())
 				.center(centerService.findByCenterNo(11L))

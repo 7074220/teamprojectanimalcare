@@ -49,7 +49,7 @@ public class VisitServiceImpl implements VisitService {
 	}
 
 	@Override
-	public List<Visit> getVisitsByUserNo(String userNo) {
+	public List<Visit> getVisitsByUserNo(Long userNo) {
 
 		return visitRepository.findByUserinfoUserNo(userNo);
 	}

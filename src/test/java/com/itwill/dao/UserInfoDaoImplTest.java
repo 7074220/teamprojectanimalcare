@@ -20,6 +20,8 @@ class UserInfoDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	UserInfoDao userinfoDao;
 	
 	@Test
+	@Transactional
+	@Rollback(false)
 	//@Disabled
 	void test1() {
 		Userinfo userinfo = Userinfo.builder()
@@ -33,7 +35,7 @@ class UserInfoDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Disabled
 	void test2() {
 		
-		userinfoDao.DeleteUser("장");
+		userinfoDao.DeleteUser(1L);
 	}
 	
 	@Test
@@ -44,12 +46,12 @@ class UserInfoDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	@Disabled
 	void test4() {
-		System.out.println(userinfoDao.findById("김"));
+		System.out.println(userinfoDao.findByNo(1L));
 	}
 	@Test
 	@Disabled
 	void test5() {
-		Userinfo userinfo = userinfoDao.findById("김");
+		Userinfo userinfo = userinfoDao.findByNo(1L);
 		//userinfo.setUserAddress("제주도");
 		System.out.println(userinfoDao.UpdateUser(userinfo));
 	}

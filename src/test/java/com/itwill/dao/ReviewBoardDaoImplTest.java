@@ -37,8 +37,8 @@ class ReviewBoardDaoImplTest {
 								.boardTitle("이것은 타이틀")
 								.boardContent("이것은 내용")
 								.boardDate(LocalDate.now())
-								.boardStar(5L)
-								.userinfo(userInfoDao.findById("전아현"))
+								.boardStar(5)
+								.userinfo(userInfoDao.findByNo(1L))
 								.product(productDao.findByProductNo(1L))
 								.build();
 
