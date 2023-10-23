@@ -52,8 +52,8 @@ public class ReviewBoardDaoImpl implements ReviewBoardDao {
 
 	// userId로 리뷰 리스트 나오기
 	@Override
-	public List<ReviewBoard> findAllByUserIdUserinfo(Long no) {
-		return reviewBoardRepository.findAllByUserIdUserinfo(no);
+	public List<ReviewBoard> findByUserNo(Long no) {
+		return reviewBoardRepository.findByUserNo(no);
 	}
 
 	// 높은평점순 정렬
@@ -83,13 +83,13 @@ public class ReviewBoardDaoImpl implements ReviewBoardDao {
 
 	
 	
-	/*
+	
 	  //별점 높은순,최신순
 	  
 	  @Override public List<ReviewBoard>
-	  findByBoardStarOrderByBoardStarDescBoardNoDesc(Long star) { return
-	  reviewBoardRepository.findByBoardStarOrderByBoardStarDescBoardNoDesc(star); }
-	 */
+	  findByBoardStarOrderByBoardStarDescBoardDateDesc(Long star) { return
+	  reviewBoardRepository.findByBoardStarOrderByBoardStarDescBoardDateDesc(star); }
+	 
 	
 	
 }
