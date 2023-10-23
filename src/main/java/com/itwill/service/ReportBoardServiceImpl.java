@@ -18,7 +18,6 @@ public class ReportBoardServiceImpl implements ReportBoardService{
 	 
 	@Override
 	public ReportBoard Create(ReportBoard repordBoard) {
-		
 		return reportBoardDao.Create(repordBoard);
 	}
 	
@@ -52,5 +51,6 @@ public class ReportBoardServiceImpl implements ReportBoardService{
 	public void countReadCount(Long boardNo) {
 		reportBoardDao.countReadCount(boardNo);
 	}
+	
 
 }

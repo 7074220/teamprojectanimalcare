@@ -17,7 +17,7 @@ public class ReplyBoardServiceImpl implements ReplyBoardService{
 	public ReplyBoard Create(ReplyBoard replyBoard) {
 		return replyBoardDao.Create(replyBoard);
 	}
-
+	
 	@Override
 	public void deleteByUserId(String userId) {
 		replyBoardDao.deleteByUserId(userId);
