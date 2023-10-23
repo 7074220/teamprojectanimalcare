@@ -18,17 +18,16 @@ DROP TABLE UserInfo CASCADE CONSTRAINTS;
 
 CREATE TABLE UserInfo(
 		user_no                       		NUMBER(10)		 NULL ,
-		user_password                       VARCHAR2(50)		 NULL ,
-		user_name                           VARCHAR2(50)		 NULL ,
-        user_point                    		NUMBER(10)		 NULL ,
-		user_birthday                 		VARCHAR2(100)		 NULL ,
+		user_password                 		VARCHAR2(50)		 NULL ,
+		user_point                    		NUMBER(10)		 NULL ,
 		user_age                      		NUMBER(10)		 NULL ,
 		user_gender                   		NUMBER(10)		 NULL ,
 		user_address                  		VARCHAR2(50)		 NULL ,
-		user_phone_number             		VARCHAR2(50)		 NULL ,
-		user_id                       		VARCHAR2(30)		 NULL,
+		user_phone_number             		NUMBER(10)		 NULL ,
+		user_id                       		VARCHAR2(50)		 NULL ,
 		user_resident_number          		VARCHAR2(50)		 NULL ,
-		user_register_date            		DATE		         NULL 
+		user_register_date            		VARCHAR2(100)		 NULL ,
+		user_name                     		VARCHAR2(50)		 NULL 
 );
 
 DROP SEQUENCE UserInfo_user_no_SEQ;
@@ -37,13 +36,12 @@ CREATE SEQUENCE UserInfo_user_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
 
-
 CREATE TABLE Coupon(
 		coupon_id                     		NUMBER(10)		 NULL ,
-		coupon_name                   		VARCHAR2(20)		 NULL ,
+		coupon_name                   		VARCHAR2(50)		 NULL ,
 		coupon_discount               		NUMBER(10)		 NULL ,
-		coupon_expiration_date        		DATE		 NULL ,
-		coupon_payday                 		DATE		 NULL ,
+		coupon_expiration_date        		NUMBER(10)		 NULL ,
+		coupon_payday                 		VARCHAR2(50)		 NULL ,
 		user_no                       		NUMBER(10)		 NULL 
 );
 
@@ -53,15 +51,14 @@ CREATE SEQUENCE Coupon_coupon_id_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
 
-
 CREATE TABLE ReportBoard(
 		board_no                      		NUMBER(10)		 NULL ,
 		board_title                   		VARCHAR2(100)		 NULL ,
 		board_register_date           		DATE		 NULL ,
 		board_content                 		VARCHAR2(100)		 NULL ,
 		board_date                    		DATE		 NULL ,
-		board_read_count               		NUMBER(10)		 NULL ,
-		board_group_no                 		NUMBER(10)		 NULL ,
+		board_readCount               		NUMBER(10)		 NULL ,
+		board_group_no                		NUMBER(10)		 NULL ,
 		board_step                    		NUMBER(10)		 NULL ,
 		board_depth                   		NUMBER(10)		 NULL ,
 		board_name                    		VARCHAR2(50)		 NULL ,
@@ -85,6 +82,8 @@ DROP SEQUENCE Local_local_no_SEQ;
 
 CREATE SEQUENCE Local_local_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+
+
 CREATE TABLE Center(
 		center_no                     		NUMBER(10)		 NULL ,
 		center_name                   		VARCHAR2(50)		 NULL ,
@@ -98,14 +97,15 @@ DROP SEQUENCE Center_center_no_SEQ;
 
 CREATE SEQUENCE Center_center_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+
+
 CREATE TABLE Volunteer(
 		volunteer_no                  		NUMBER(10)		 NULL ,
 		volunteer_time                		NUMBER(10)		 NULL ,
 		volunteer_date                		DATE		 NULL ,
 		center_no                     		NUMBER(10)		 NULL ,
-		user_no                       		NUMBER(10)		 NULL,
-        volunteer_status               		VARCHAR2(10)		 NULL
-
+		user_no                       		NUMBER(10)		 NULL ,
+		volunteer_status              		VARCHAR2(50)		 NULL 
 );
 
 DROP SEQUENCE Volunteer_volunteer_no_SEQ;
@@ -114,20 +114,18 @@ CREATE SEQUENCE Volunteer_volunteer_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
 
-
 CREATE TABLE Visit(
 		visit_no                      		NUMBER(10)		 NULL ,
 		visit_time                    		NUMBER(10)		 NULL ,
 		visit_date                    		DATE		 NULL ,
-        visit_status                        VARCHAR2(10)		 NULL ,
 		center_no                     		NUMBER(10)		 NULL ,
-		user_no                       		NUMBER(10)		 NULL 
+		user_no                       		NUMBER(10)		 NULL ,
+		visit_status                  		VARCHAR2(50)		 NULL 
 );
 
 DROP SEQUENCE Visit_visit_no_SEQ;
 
 CREATE SEQUENCE Visit_visit_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 
 
@@ -140,7 +138,8 @@ CREATE TABLE Pet(
 		pet_find_place                		VARCHAR2(50)		 NULL ,
 		pet_character                 		VARCHAR2(50)		 NULL ,
 		center_no                     		NUMBER(10)		 NULL ,
-		local_no                      		NUMBER(10)		 NULL 
+		local_no                      		NUMBER(10)		 NULL ,
+		pet_image                     		VARCHAR2(50)		 NULL 
 );
 
 DROP SEQUENCE Pet_pet_no_SEQ;
@@ -149,14 +148,13 @@ CREATE SEQUENCE Pet_pet_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
 
-
 CREATE TABLE Adopt(
 		adopt_no                      		NUMBER(10)		 NULL ,
 		adopt_time                    		NUMBER(10)		 NULL ,
 		adopt_date                    		DATE		 NULL ,
+		adopt_status                  		VARCHAR2(50)		 NULL ,
 		pet_no                        		NUMBER(10)		 NULL ,
-		user_no                       		NUMBER(10)		 NULL ,
-        adopt_status                        VARCHAR2(10)		 NULL
+		user_no                       		NUMBER(10)		 NULL 
 );
 
 DROP SEQUENCE Adopt_adopt_no_SEQ;
@@ -165,22 +163,21 @@ CREATE SEQUENCE Adopt_adopt_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
 
-
 CREATE TABLE Product(
 		product_no                    		NUMBER(10)		 NULL ,
-		product_name                  		VARCHAR2(30)		 NULL ,
+		product_name                  		VARCHAR2(50)		 NULL ,
 		product_price                 		NUMBER(10)		 NULL ,
 		product_category              		VARCHAR2(50)		 NULL ,
-        product_pet_category              		VARCHAR2(50)		 NULL ,
-		product_qty                		NUMBER(10)		 NULL ,
+		product_pet_category          		VARCHAR2(10)		 NULL ,
+		product_qty                   		NUMBER(10)		 NULL ,
 		product_image                 		VARCHAR2(50)		 NULL ,
+		product_detail_image          		VARCHAR2(50)		 NULL ,
 		product_star_avg              		NUMBER(10)		 NULL 
 );
 
 DROP SEQUENCE Product_product_no_SEQ;
 
 CREATE SEQUENCE Product_product_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 
 
@@ -199,7 +196,6 @@ CREATE SEQUENCE Orders_order_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
 
-
 CREATE TABLE OrderStatus(
 		orderStatus_no                		NUMBER(10)		 NULL ,
 		orderStatus_image             		VARCHAR2(50)		 NULL ,
@@ -209,7 +205,6 @@ CREATE TABLE OrderStatus(
 DROP SEQUENCE OrderStatus_orderStatus_no_SEQ;
 
 CREATE SEQUENCE OrderStatus_orderStatus_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 
 
@@ -225,11 +220,14 @@ DROP SEQUENCE Order_item_oi_no_SEQ;
 
 CREATE SEQUENCE Order_item_oi_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+
+
 CREATE TABLE Cart(
 		cart_no                       		NUMBER(10)		 NULL ,
 		cart_qty                      		NUMBER(10)		 NULL ,
 		product_no                    		NUMBER(10)		 NULL ,
-		user_no                       		NUMBER(10)		 NULL 
+		user_no                       		NUMBER(10)		 NULL ,
+		cart_image                    		VARCHAR2(50)		 NULL 
 );
 
 DROP SEQUENCE Cart_cart_no_SEQ;
@@ -237,17 +235,18 @@ DROP SEQUENCE Cart_cart_no_SEQ;
 CREATE SEQUENCE Cart_cart_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
+
 CREATE TABLE MyPet(
 		mypet_no                      		NUMBER(10)		 NULL ,
-		mypet_name                    		VARCHAR2(10)		 NULL ,
+		mypet_name                    		VARCHAR2(50)		 NULL ,
 		mypet_birthday                		DATE		 NULL ,
-        mypet_kind                    		VARCHAR2(10)		 NULL ,
 		user_no                       		NUMBER(10)		 NULL 
 );
 
 DROP SEQUENCE MyPet_mypet_no_SEQ;
 
 CREATE SEQUENCE MyPet_mypet_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+
 
 
 CREATE TABLE ReviewBoard(
@@ -264,11 +263,13 @@ DROP SEQUENCE ReviewBoard_board_no_SEQ;
 
 CREATE SEQUENCE ReviewBoard_board_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+
+
 CREATE TABLE ReplyBoard(
 		reply_board_no                		NUMBER(10)		 NOT NULL,
-		reply_board_resister_date     		DATE		 NULL ,
-		reply_board_content           		VARCHAR2(10)		 NULL ,
-		reply_board_group_no         		NUMBER(10)		 NULL ,
+		reply_board_register_date     		DATE		 NULL ,
+		reply_board_content           		VARCHAR2(50)		 NULL ,
+		reply_board_group_no          		NUMBER(10)		 NULL ,
 		reply_board_step              		NUMBER(10)		 NULL ,
 		reply_board_depth             		NUMBER(10)		 NULL ,
 		user_no                       		NUMBER(10)		 NULL 
@@ -277,7 +278,6 @@ CREATE TABLE ReplyBoard(
 DROP SEQUENCE ReplyBoard_reply_board_no_SEQ;
 
 CREATE SEQUENCE ReplyBoard_reply_board_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 
 

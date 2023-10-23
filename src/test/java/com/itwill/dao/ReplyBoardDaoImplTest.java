@@ -2,7 +2,7 @@ package com.itwill.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -32,7 +32,7 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 										.ReplyBoardContent("내용")
 										.ReplyBoardDepth(0)
 										.ReplyBoardGroupNo(1)
-										.ReplyBoardResisterDate(LocalDateTime.now())
+										.ReplyBoardResisterDate(new Date())
 										.ReplyBoardStep(1)
 										.userinfo(userinfo)
 										.build();
@@ -48,5 +48,7 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	
 		replyBoardDao.deleteByUserId("김창섭");
 	}
+	
+	
 
 }

@@ -32,7 +32,7 @@ public class Volunteer {
 	@SequenceGenerator(name = "Volunteer_volunteer_no_SEQ",sequenceName ="Volunteer_volunteer_no_SEQ",allocationSize = 1,initialValue = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Volunteer_volunteer_no_SEQ")
 	private Long volunteerNo; // PK
-	private Long volunteerTime;
+	private Integer volunteerTime;
 	private Date volunteerDate;
 	private String volunteerStatus;
 	

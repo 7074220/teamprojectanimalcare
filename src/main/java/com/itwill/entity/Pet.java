@@ -1,5 +1,4 @@
 package com.itwill.entity;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,6 +40,7 @@ public class Pet {
 	 private Date  petRegisterDate;
 	 private String petFindPlace;
 	 private String petCharacter;
+	 private String petImage;
 	 
 	 @ManyToOne(cascade = CascadeType.PERSIST ,fetch = FetchType.LAZY)
 	 @JoinColumn(name = "center_no")

@@ -3,6 +3,7 @@ package com.itwill.dao;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
@@ -51,7 +52,7 @@ private OrdersDao ordersDao;
 @Rollback(false)
 void insert() {
 	Orders order1=Orders.builder()
-			.orderDate(LocalDate.now())
+			.orderDate(new Date())
 			.orderPrice(5000)
 			.orderAddress("서울특별시 구로구")
 			.orderDesc("상품 외...")

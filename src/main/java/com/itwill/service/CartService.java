@@ -16,7 +16,7 @@ public interface CartService {
 	Cart findByCartNo(Long no);
 
 	// 카트에 담긴 상품 전체삭제
-	void deleteByUserId(String userId);
+	void deleteByUserId(String userId) throws Exception;
 
 	// 카트에서 선택한 상품만 삭제
 	void deleteById(Long no) throws Exception;
