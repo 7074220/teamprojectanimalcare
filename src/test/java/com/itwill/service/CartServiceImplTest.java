@@ -126,7 +126,6 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	// 카트에 중복제품이 있으면 (중복체크) --> 업데이트 돼서 담기도록 
 	void updateOverlapCart() {
-		
 		Cart update = cartService.updateOverlapCart(null);
 		
 	}
