@@ -45,7 +45,7 @@ public class Product {
 	
 	private Integer productStarAvg;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@JoinColumn(name = "cart_no")
 	@Builder.Default
 	Cart cart = new Cart();
