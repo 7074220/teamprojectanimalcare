@@ -40,7 +40,7 @@ class VolunteerServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	void testInsertVolunteer() throws Exception{
 		
-		Userinfo userinfo = userInfoService.findUser("박태환");
+		Userinfo userinfo = userInfoService.findUser(2L);
 		Center center = centerService.findByCenterNo(22L);
 		
 		Volunteer volunteer = Volunteer.builder()
