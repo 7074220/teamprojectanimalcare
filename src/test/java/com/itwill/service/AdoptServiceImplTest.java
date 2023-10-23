@@ -30,9 +30,9 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	@Disabled
 	void insertTest() throws Exception {
-		Userinfo user=userInfoService.findUser(1L);
-		Pet pet1=petService.petFindById(10L);
-		Pet pet2=petService.petFindById(11L);
+		Userinfo user=userInfoService.findUser(3L);
+		Pet pet1=petService.petFindById(1L);
+		Pet pet2=petService.petFindById(2L);
 		
 		Adopt insertAdopt1 = Adopt.builder()
 				.adoptDate(new Date())
@@ -67,7 +67,7 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(false)
 	void deleteTest() throws Exception {
-		adoptService.deleteAdopt(9L);
+		adoptService.deleteAdopt(5L);
 	}
 	
 	@Test
@@ -75,8 +75,8 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(false)
 	void findByNoTest() {
-		adoptService.findByNoAdopt(9L);
-		System.out.println(adoptService.findByNoAdopt(9L));
+		adoptService.findByNoAdopt(2L);
+		System.out.println(adoptService.findByNoAdopt(2L));
 	}
 	
 	@Test
@@ -93,7 +93,7 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(false)
 	void findByUserinfoUserIdTest() {
-		System.out.println(	adoptService.findAdoptsByUserNo(2L));
+		System.out.println(	adoptService.findAdoptsByUserNo(3L));
 	}
 	
 	
