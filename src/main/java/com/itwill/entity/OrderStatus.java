@@ -21,8 +21,8 @@ import lombok.NoArgsConstructor;
 public class OrderStatus {
 	
 	@Id
-	@SequenceGenerator(name = "orderStatus_no_seq",sequenceName = "orderStatus_no_seq",initialValue = 1,allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "orderStatus_no_seq")
+	@SequenceGenerator(name = "OrderStatus_orderStatus_no_SEQ",sequenceName = "OrderStatus_orderStatus_no_SEQ",initialValue = 1,allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "OrderStatus_orderStatus_no_SEQ")
 	private Long orderStatusNo;
 	private String orderStatusImage;
 	private String orderStatusDesc;

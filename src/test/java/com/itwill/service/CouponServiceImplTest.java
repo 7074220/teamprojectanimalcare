@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.contains;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
@@ -27,7 +28,7 @@ class CouponServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 	void test() {
 		Userinfo userinfo = Userinfo.builder().userId("장희주").build();
 		Coupon coupon = Coupon.builder().couponName("생일쿠폰").couponDiscount(20)
-				.couponExpirationDate(LocalDateTime.now().plusDays(30)).couponPayday(LocalDateTime.now())
+				.couponExpirationDate(new Date())
 				.userinfo(userinfo).build();
 
 		Coupon createCoupon = couponService.Create(coupon);

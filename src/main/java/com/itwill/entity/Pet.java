@@ -30,13 +30,13 @@ import lombok.ToString;
 @Data
 
 public class Pet {
-	@SequenceGenerator(name = "pet_pet_no_seq",sequenceName = "pet_pet_no_seq",initialValue = 1,allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "pet_pet_no_seq")
+	@SequenceGenerator(name = "Pet_pet_no_SEQ",sequenceName = "Pet_pet_no_SEQ",initialValue = 1,allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Pet_pet_no_SEQ")
 	@Id
 	 private Long petNo;
 	 private String petLocal;
 	 private String petType;
-	 private String petgender;
+	 private String petGender;
 	 private LocalDate  petRegisterDate;
 	 private String petFindPlace;
 	 private String petCharacter;
