@@ -21,6 +21,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 @Entity
 @Builder
 @Data
@@ -44,10 +45,6 @@ public class Product {
 	private String productDetailImage;
 	
 	private Integer productStarAvg;
-	
-	@OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
-	@Builder.Default
-	Cart cart = new Cart();
 	
 	@OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@Builder.Default
