@@ -44,8 +44,8 @@ public class AdoptServiceImpl implements AdoptService{
 	}
 
 	@Override
-	public List<Adopt> findByUserinfoUserId(String userId) {
-		return adoptDao.findByUserinfoUserId(userId);
+	public List<Adopt> findAdoptsByUserNo(Long no) {
+		return adoptDao.findAdoptsByUserNo(no);
 	}
 
 }
