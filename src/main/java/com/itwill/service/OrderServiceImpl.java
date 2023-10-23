@@ -53,7 +53,7 @@ OrderStatusRepository orderStatusRepository;
 			order.setOrderItems(orderItems);
 			
 			
-		}
+		}//유저 정보만 세팅하고 인서트 테스트 진행
 		
 		cartDao.deleteByUserId(order.getUserinfo().getUserNo());
 		return ordersDao.insertOrder(order);
