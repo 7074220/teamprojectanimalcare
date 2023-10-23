@@ -23,6 +23,8 @@ public class ReplyBoardServiceImpl implements ReplyBoardService{
 		replyBoardDao.deleteByUserId(userId);
 		
 	}
+	
+	
 
 	@Override
 	public ReplyBoard update(ReplyBoard replyBoard) {
@@ -37,6 +39,12 @@ public class ReplyBoardServiceImpl implements ReplyBoardService{
 	@Override
 	public List<ReplyBoard> findAllByOrderByReplyBoardNoAsc() {
 		return replyBoardDao.findAllByOrderByReplyBoardNoAsc();
+	}
+
+	@Override
+	public void deleteByReplyBoardNo(Long ReplyBoardNo) {
+		replyBoardDao.deleteByReplyBoardNo(ReplyBoardNo);
+		
 	}
 	
 	

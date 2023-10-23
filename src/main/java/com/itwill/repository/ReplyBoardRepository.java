@@ -18,7 +18,7 @@ public interface ReplyBoardRepository extends JpaRepository<ReplyBoard, Long>{
 	
 	@Query(value="delete from replyboard where user_id = ?1",nativeQuery = true)
 	public void deleteByUserId(String userId);
-	
+
 	@Query(value = "select * from replyboard where user_id = ?1",nativeQuery = true)
 	public List<ReplyBoard> findByUserId(String userId);
 	
