@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -25,8 +26,6 @@ class VolunteerServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	UserInfoService userInfoService;
 	@Autowired
 	CenterService centerService;
-	@Autowired
-	VolunteerRepository volunteerRepository;
 	
 	@Test
 	@Disabled
@@ -76,16 +75,17 @@ class VolunteerServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	@Disabled
 	@Transactional
-	void testFindAllVolunteers() {
+	void testFindAllVolunteers() {	
 		System.out.println(volunteerService.findAllVolunteers());
 	}
 
 	@Test
-	@Disabled
+	//@Disabled
 	@Transactional
-	@Rollback(false)
-	void testFindVolunteertByUserId() {
-		System.out.println(volunteerRepository.findVolunteertByUserId(1L));
+	@Rollback(value = false)
+	void findVolunteertByUserNo() {
+		
+		System.out.println(volunteerService.findVolunteertByUserNo(2L));
 	}
 
 }
