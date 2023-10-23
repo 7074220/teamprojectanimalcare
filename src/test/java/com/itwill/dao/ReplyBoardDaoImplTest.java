@@ -27,7 +27,7 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	//@Disabled
 	@Test
 	void test() {
-		Userinfo userinfo = userInfoDao.findById("김창섭");
+		Userinfo userinfo = userInfoDao.findByNo(1L);
 		ReplyBoard replyBoard = ReplyBoard.builder()
 										.ReplyBoardContent("내용")
 										.ReplyBoardDepth(0)
