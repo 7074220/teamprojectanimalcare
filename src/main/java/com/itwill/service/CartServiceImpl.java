@@ -92,16 +92,16 @@ public class CartServiceImpl implements CartService {
 	@Override
 	// 카트에 중복제품이 있으면 (중복체크) --> 업데이트 돼서 담기도록 
 	public Cart updateOverlapCart(Cart overlapCart) {
-		/*
-		int count = cartDao.countProductByUserId(userId, no);
+		
+		int count = cartDao.countProductByUserId(overlapCart.getUserinfo().getUserId(), overlapCart.getProduct().getProductNo());
 		Cart overlapCount = null;
 		if(count > 0) {
 			overlapCount = cartRepository.save(overlapCart);
 		} else {
 			overlapCount = cartRepository.save(overlapCart);
 		}
-		*/
-		return null;
+		
+		return overlapCount;
 		
 	}
 	
