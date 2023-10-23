@@ -137,14 +137,15 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	// 카트에 중복제품이 있으면 (중복체크) --> 업데이트 돼서 담기도록 
 	void updateOverlapCart() {
-		Cart cart = cartService.findByProductUserNo(6L, 1L);
-		/*
+		//Cart cart = cartService.findByProductUserNo(6L, 1L);
+		
 		Cart cart1 = Cart.builder()
 						.userinfo(userInfoDao.findByNo(2L))
 						.product(productDao.findByProductNo(2L))
+						.cartQty(3)
 						.build();
-						*/
-		Cart update = cartService.updateOverlapCart(cart);
+		
+		Cart update = cartService.updateOverlapCart(cart1);
 		
 	}
 	

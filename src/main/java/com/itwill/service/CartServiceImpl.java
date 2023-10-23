@@ -105,8 +105,8 @@ public class CartServiceImpl implements CartService {
 		if(count > 0) {
 			Cart updateCart = cartDao.findByProductUserNo(cart.getUserinfo().getUserNo(), cart.getProduct().getProductNo());
 			int qty = cart.getCartQty();
-			int updateQty = updateCart.getProduct().getProductQty();
-			updateCart.setCartQty(qty + updateQty);
+			int updateQty = updateCart.getCartQty() + qty;
+			updateCart.setCartQty(updateQty);
 			overlapCount = cartRepository.save(updateCart);
 		} else {
 			overlapCount = cartRepository.save(cart);
