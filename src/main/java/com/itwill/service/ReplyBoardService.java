@@ -8,8 +8,6 @@ public interface ReplyBoardService {
 
 	public ReplyBoard Create(ReplyBoard replyBoard);
 
-	public void deleteByUserId(String userId);
-
 	public ReplyBoard update(ReplyBoard replyBoard);
 
 	public List<ReplyBoard> findByUserId(String userId);
