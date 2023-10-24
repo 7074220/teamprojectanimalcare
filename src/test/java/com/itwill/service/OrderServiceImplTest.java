@@ -89,7 +89,7 @@ class OrderServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Test
 	@Transactional
 	@Rollback(false)
-	// @Disabled
+	@Disabled
 	void findOrderByIdDesc() throws Exception {
 		System.out.println(orderService.findOrderByIdDesc("박태환"));
 
