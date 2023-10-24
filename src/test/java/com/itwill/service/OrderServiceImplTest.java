@@ -16,7 +16,8 @@ import com.itwill.entity.Orders;
 import com.itwill.entity.Userinfo;
 
 class OrderServiceImplTest extends TeamprojectAnimalcareApplicationTest {
-	@Autowired 
+
+	@Autowired
 	OrderService orderService;
 	@Autowired
 	UserInfoService userInfoService;
@@ -38,62 +39,60 @@ class OrderServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 		orderService.insertOrder(orders);
 	}
 
-	
-	@Test
-	@Transactional
-	@Rollback(false)
-	@Disabled
-	void update() throws Exception{
-		Orders order=orderService.findOrderByNo(1L);
-	order.setOrderAddress("남양주시");
-	orderService.modifyOrder(order);
-		
-	}
-	
 
 	@Test
 	@Transactional
 	@Rollback(false)
 	@Disabled
-	void delete() throws Exception{
+	void update() throws Exception {
+		Orders order = orderService.findOrderByNo(1L);
+		order.setOrderAddress("남양주시");
+		orderService.modifyOrder(order);
+
+	}
+
+	@Test
+	@Transactional
+	@Rollback(false)
+	@Disabled
+	void delete() throws Exception {
 		orderService.removeOrder(1L);
-		
 	}
+
 	@Test
 	@Transactional
 	@Rollback(false)
 	@Disabled
-	void findOrders() throws Exception{
+	void findOrders() throws Exception {
 		System.out.println(orderService.findOrders());
-		
+
 	}
+
 	@Test
 	@Transactional
 	@Rollback(false)
 	@Disabled
-	void findOrdersByNo() throws Exception{
+	void findOrdersByNo() throws Exception {
 		System.out.println(orderService.findOrderByNo(2L));
-		
+
 	}
-	
+
 	@Test
 	@Transactional
 	@Rollback(false)
 	@Disabled
-	void findOrdersById() throws Exception{
-		//System.out.println(orderService.findOrderById("박태환"));
-		
+	void findOrdersById() throws Exception {
+		System.out.println(orderService.findOrderById("박태환"));
+
 	}
+
 	@Test
 	@Transactional
 	@Rollback(false)
-	@Disabled
-	void findOrderByIdDesc() throws Exception{
-		//System.out.println(orderService.findOrderByIdDesc("박태환"));
-		
+	// @Disabled
+	void findOrderByIdDesc() throws Exception {
+		System.out.println(orderService.findOrderByIdDesc("박태환"));
+
 	}
-	
-	
-	
 
 }

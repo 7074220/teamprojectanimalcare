@@ -8,14 +8,16 @@ import org.springframework.stereotype.Repository;
 import com.itwill.entity.OrderItem;
 import com.itwill.repository.OrderItemRepository;
 import com.itwill.repository.OrdersRepository;
+
 @Repository
-public class OrderItemDaoImpl implements OrderItemDao{
+public class OrderItemDaoImpl implements OrderItemDao {
 
 	@Autowired
 	OrderItemRepository orderItemRepository;
+
 	@Override
 	public OrderItem insertOrderItem(OrderItem orderItem) {
-		
+
 		return orderItemRepository.save(orderItem);
 	}
 
@@ -27,7 +29,7 @@ public class OrderItemDaoImpl implements OrderItemDao{
 	@Override
 	public void deleteOrderItemByOrderNo(Long orderNo) throws Exception {
 		orderItemRepository.deleteOrderItemByOrderNo(orderNo);
-		
+
 	}
 
 	@Override
