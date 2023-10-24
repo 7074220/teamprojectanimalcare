@@ -55,7 +55,7 @@ public class UserInfoServiceImpl implements UserInfoService{
 	
 	// 상세보기
 	@Override
-	public Userinfo findUser(Long userNo) throws Exception {
+	public Userinfo findUserByNo(Long userNo) throws Exception {
 		return userInfoDao.findByNo(userNo);
 	}
 	

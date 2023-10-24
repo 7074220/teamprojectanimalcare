@@ -22,16 +22,16 @@ import com.itwill.entity.Userinfo;
 import com.itwill.repository.OrderStatusRepository;
 @Service
 public class OrderServiceImpl implements OrderService{
-@Autowired 
-OrdersDao ordersDao;
-@Autowired 
-CartDao cartDao;
-@Autowired 
-OrderItemDao orderItemDao;
-@Autowired
-ProductDao productDao;
-@Autowired
-OrderStatusRepository orderStatusRepository;
+	@Autowired 
+	OrdersDao ordersDao;
+	@Autowired 
+	CartDao cartDao;
+	@Autowired 
+	OrderItemDao orderItemDao;
+	@Autowired
+	ProductDao productDao;
+	@Autowired
+	OrderStatusRepository orderStatusRepository;
 	
 	@Override
 	public Orders insertOrder(Orders order) {
@@ -47,7 +47,7 @@ OrderStatusRepository orderStatusRepository;
 			tempOrderItem.setOrderStatus(orderStatusRepository.findById(1L).get()); 
 			tempOrderItem.setOiQty(cart.getCartQty());
 			tempOrderItem.setProduct(productDao.findByProductNo(p_no));
-			price = price + cart.getProduct().getProductPrice();
+			price = price + (cart.getProduct().getProductPrice() * cart.getCartQty());
 			orderItems.add(tempOrderItem);
 		}
 		order.setOrderPrice(price);

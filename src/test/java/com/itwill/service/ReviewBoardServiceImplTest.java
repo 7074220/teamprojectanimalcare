@@ -39,7 +39,7 @@ class ReviewBoardServiceImplTest {
 				.boardContent("service 테스트 내용111")
 				.boardDate(new Date())
 				.boardStar(4)
-				.userinfo(userInfoService.findUser(14L))
+				.userinfo(userInfoService.findUserByNo(14L))
 				.product(productService.findByProductNo(12L))
 				.build();
 

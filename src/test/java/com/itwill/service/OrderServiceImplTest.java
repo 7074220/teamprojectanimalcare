@@ -2,6 +2,8 @@ package com.itwill.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Date;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,25 +16,26 @@ import com.itwill.entity.Orders;
 import com.itwill.entity.Userinfo;
 
 class OrderServiceImplTest extends TeamprojectAnimalcareApplicationTest {
-@Autowired 
-OrderService orderService;
-@Autowired
-UserInfoService userInfoService;
+	@Autowired 
+	OrderService orderService;
+	@Autowired
+	UserInfoService userInfoService;
+
 	@Test
 	@Transactional
-	
-	@Disabled
+	@Rollback(false)
+	//@Disabled
 	void insert() throws Exception{
-		Userinfo user=userInfoService.findUser(2L);
+		Userinfo user=userInfoService.findUserByNo(6L);
 	
 		Orders orders=Orders.builder()
 		.orderAddress("서울특별시")
 		.orderDesc("카트삭제되는 주문")
-	.userinfo(user)
-	.orderPrice(1555)
+		.orderDate(new Date())
+		.userinfo(user)
 		.build();
-		orderService.insertOrder(orders);
 		
+		orderService.insertOrder(orders);
 	}
 
 	
@@ -78,15 +81,15 @@ UserInfoService userInfoService;
 	@Rollback(false)
 	@Disabled
 	void findOrdersById() throws Exception{
-		System.out.println(orderService.findOrderById("박태환"));
+		//System.out.println(orderService.findOrderById("박태환"));
 		
 	}
 	@Test
 	@Transactional
 	@Rollback(false)
-	//@Disabled
+	@Disabled
 	void findOrderByIdDesc() throws Exception{
-		System.out.println(orderService.findOrderByIdDesc("박태환"));
+		//System.out.println(orderService.findOrderByIdDesc("박태환"));
 		
 	}
 	

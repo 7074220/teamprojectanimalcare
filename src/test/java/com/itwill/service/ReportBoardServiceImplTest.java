@@ -29,7 +29,7 @@ class ReportBoardServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	@Disabled
 	void test() {
-		Userinfo userinfo = userInfoDao.findById("전아현");
+		Userinfo userinfo = userInfoDao.findByUserId("전아현");
 		ReportBoard reportBoard = ReportBoard.builder()
 									.boardContent("내용")
 									.boardDate(null)

@@ -45,8 +45,5 @@ public class Product {
 	private String productDetailImage;
 	
 	private Integer productStarAvg;
-	
-	@OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	@Builder.Default
-	List<ReviewBoard> reviewBoards = new ArrayList<ReviewBoard>(); 
+
 }

@@ -76,7 +76,7 @@ class MyPetServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	void test2() throws Exception {
 		
 	
-		Userinfo loginUser=userInfoService.findUser(11L);
+		Userinfo loginUser=userInfoService.findUserByNo(11L);
 		
 		
 	  System.out.println(loginUser.getMyPets()); 
@@ -91,7 +91,7 @@ class MyPetServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Disabled
 	@Test
 	void test3() throws Exception {
-		Userinfo loginUser=userInfoService.findUser(4L);
+		Userinfo loginUser=userInfoService.findUserByNo(4L);
 		List<MyPet> petList = loginUser.getMyPets();
 		MyPet myPet = petList.get(0);
 		myPet.setMypetName("봉남이");

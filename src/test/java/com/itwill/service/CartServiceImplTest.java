@@ -30,7 +30,7 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	@Transactional
 	@Rollback(false)
-	@Disabled
+	//@Disabled
 	void insertCart() {
 		Userinfo userinfo = userInfoDao.findByNo(6L);
 		Product product = productDao.findByProductNo(1L);
@@ -132,7 +132,7 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	}
 	
 	@Test
-	//@Disabled
+	@Disabled
 	@Transactional
 	@Rollback(false)
 	// 카트에 중복제품이 있으면 (중복체크) --> 업데이트 돼서 담기도록 
