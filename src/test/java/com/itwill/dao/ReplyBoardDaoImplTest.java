@@ -14,12 +14,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.TeamprojectAnimalcareApplicationTest;
 import com.itwill.entity.ReplyBoard;
+import com.itwill.entity.ReportBoard;
 import com.itwill.entity.Userinfo;
 @WebAppConfiguration
 class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 
 	@Autowired
 	ReplyBoardDao replyBoardDao;
+	
+	@Autowired
+	ReportBoardDao reportBoardDao;
 	
 	@Autowired
 	UserInfoDao userInfoDao;
@@ -30,6 +34,7 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	void test() {
 		Userinfo userinfo = userInfoDao.findByNo(2L);
+		ReportBoard reportBoard = reportBoardDao.findByBoardNo(1L);
 		ReplyBoard replyBoard = ReplyBoard.builder()
 										.ReplyBoardContent("내용")
 										.ReplyBoardDepth(0)
@@ -37,6 +42,7 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 										.ReplyBoardRegisterDate(new Date())
 										.ReplyBoardStep(1)
 										.userinfo(userinfo)
+										.reportBoard(reportBoard)
 										.build();
 		
 		replyBoardDao.Create(replyBoard);
@@ -103,15 +109,14 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	void test6() {
 		Userinfo userinfo = userInfoDao.findByNo(5L);
+		ReportBoard reportBoard = reportBoardDao.findByBoardNo(1L);
 		ReplyBoard replyBoard=ReplyBoard.builder()
-										.ReplyBoardContent("하하")
+										.ReplyBoardContent("하하1")
 										.userinfo(userinfo)
-										.ReplyBoardNo(1L)
+										.reportBoard(reportBoard)
 										.build();
-										
 		
 		replyBoardDao.Create(replyBoard);
-		
 	}
 	
 	

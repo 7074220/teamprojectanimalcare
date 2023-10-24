@@ -27,11 +27,14 @@ public interface ReplyBoardRepository extends JpaRepository<ReplyBoard, Long>{
 	
 
 	
-	  @Query(
-	  value="insert into replyBoard(reply_board_no, reply_board_register_date, reply_board_content, reply_board_group_no, reply_board_step, reply_board_depth, user_no, board_no) \r\n"
-	  +
-	  "values(replyBoard_reply_board_no_seq.nextval, sysdate, ?1, replyBoard_reply_board_no_seq.currval, 1, 0, ?2, ?3)"
-	  ,nativeQuery = true) public ReplyBoard Create(ReplyBoard replyBoard);
+	/*
+	 * @Query(
+	 * value="insert into replyBoard(reply_board_no, reply_board_register_date, reply_board_content, reply_board_group_no, reply_board_step, reply_board_depth, user_no, board_no) \r\n"
+	 * +
+	 * "values(replyBoard_reply_board_no_seq.nextval, sysdate, ?1, replyBoard_reply_board_no_seq.currval, 1, 0, ?2, ?3)"
+	 * ,nativeQuery = true) public ReplyBoard Create(ReplyBoard replyBoard);
+	 */
+	 
 	 
 	
 	

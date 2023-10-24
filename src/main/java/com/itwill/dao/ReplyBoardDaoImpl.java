@@ -23,15 +23,15 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 	//댓글 작성
 	@Override
 	public ReplyBoard Create(ReplyBoard replyBoard) {
-		return replyBoardRepository.Create(replyBoard);
+		return replyBoardRepository.save(replyBoard);
 	}
 
 	//대댓글 작성
 	@Override
 	public ReplyBoard CreateReply(ReplyBoard replyBoard) {
-		Long No = replyBoard.getReplyBoardNo();
+		// 해당 그룹의 최대 스텝 수
 		ReplyBoard board = ReplyBoard.builder()
-					.ReplyBoardNo(No)
+					.ReplyBoardGroupNo(replyBoard.getReplyBoardGroupNo())
 					.ReplyBoardDepth(replyBoard.getReplyBoardDepth()+1)
 					.ReplyBoardStep(replyBoard.getReplyBoardStep()+1)
 					.build();
