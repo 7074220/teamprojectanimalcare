@@ -20,11 +20,13 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 	@Autowired
 	UserinfoRepository userinfoRepository;
 
+	//댓글 작성
 	@Override
 	public ReplyBoard Create(ReplyBoard replyBoard) {
-		return replyBoardRepository.save(replyBoard);
+		return replyBoardRepository.Create(replyBoard);
 	}
 
+	//대댓글 작성
 	@Override
 	public ReplyBoard CreateReply(ReplyBoard replyBoard) {
 		Long No = replyBoard.getReplyBoardNo();
@@ -36,10 +38,7 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 		return replyBoardRepository.save(board);
 	}
 	
-	@Override
-	public void deleteByUserId(String userId) {
-		replyBoardRepository.deleteByUserId(userId);
-	}
+
 
 	@Override
 	public ReplyBoard update(ReplyBoard replyBoard) {
@@ -47,8 +46,8 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 	}
 	
 	@Override
-	public List<ReplyBoard> findByUserId(String userId) {
-		return replyBoardRepository.findByUserId(userId);
+	public List<ReplyBoard> findByUserNo(Long userNo) {
+		return replyBoardRepository.findByUserNo(userNo);
 	}
 	
 	
@@ -62,6 +61,12 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 	public void deleteByReplyBoardNo(Long ReplyBoardNo) {
 		replyBoardRepository.deleteById(ReplyBoardNo);
 		
+	}
+
+	@Override
+	public ReplyBoard findByReplyBoardNo(Long replyBoardNo) {
+		// TODO Auto-generated method stub
+		return replyBoardRepository.findById(replyBoardNo).get();
 	}
 	
 }

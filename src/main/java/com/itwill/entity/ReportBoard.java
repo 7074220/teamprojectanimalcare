@@ -1,7 +1,9 @@
 package com.itwill.entity;
 
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -15,6 +17,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -57,6 +60,11 @@ public class ReportBoard {
 	@Builder.Default
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
+	
+	@OneToMany(mappedBy = "reportboard", cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@Builder.Default
+	@ToString.Exclude
+	List<ReplyBoard> replyBoards=new ArrayList<ReplyBoard>();
 
 
 

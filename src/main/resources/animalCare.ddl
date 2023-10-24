@@ -54,7 +54,7 @@ CREATE TABLE ReportBoard(
 		board_register_date           		DATE		 NULL ,
 		board_content                 		VARCHAR2(100)		 NULL ,
 		board_date                    		DATE		 NULL ,
-		board_read_Count              		NUMBER(10)		 NULL ,
+		board_readCount               		NUMBER(10)		 NULL ,
 		board_group_no                		NUMBER(10)		 NULL ,
 		board_step                    		NUMBER(10)		 NULL ,
 		board_depth                   		NUMBER(10)		 NULL ,
@@ -66,7 +66,6 @@ CREATE TABLE ReportBoard(
 DROP SEQUENCE ReportBoard_board_no_SEQ;
 
 CREATE SEQUENCE ReportBoard_board_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 CREATE TABLE Local(
 		local_no                      		NUMBER(10)		 NULL ,
@@ -256,12 +255,14 @@ CREATE TABLE ReplyBoard(
 		reply_board_group_no          		NUMBER(10)		 NULL ,
 		reply_board_step              		NUMBER(10)		 NULL ,
 		reply_board_depth             		NUMBER(10)		 NULL ,
-		user_no                       		NUMBER(10)		 NULL 
+		user_no                       		NUMBER(10)		 NULL ,
+		board_no                      		NUMBER(10)		 NULL 
 );
 
 DROP SEQUENCE ReplyBoard_reply_board_no_SEQ;
 
 CREATE SEQUENCE ReplyBoard_reply_board_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+
 
 
 
@@ -272,6 +273,7 @@ ALTER TABLE Coupon ADD CONSTRAINT IDX_Coupon_FK0 FOREIGN KEY (user_no) REFERENCE
 
 ALTER TABLE ReportBoard ADD CONSTRAINT IDX_ReportBoard_PK PRIMARY KEY (board_no);
 ALTER TABLE ReportBoard ADD CONSTRAINT IDX_ReportBoard_FK0 FOREIGN KEY (user_no) REFERENCES UserInfo (user_no);
+
 
 ALTER TABLE Local ADD CONSTRAINT IDX_Local_PK PRIMARY KEY (local_no);
 

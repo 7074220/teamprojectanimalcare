@@ -10,21 +10,13 @@ import com.itwill.entity.ReplyBoard;
 public class ReplyBoardServiceImpl implements ReplyBoardService{
 
 	@Autowired
-	ReplyBoardDao replyBoardDao;
+	private ReplyBoardDao replyBoardDao;
 	
 	
 	@Override
 	public ReplyBoard Create(ReplyBoard replyBoard) {
 		return replyBoardDao.Create(replyBoard);
-	}
-	
-	@Override
-	public void deleteByUserId(String userId) {
-		replyBoardDao.deleteByUserId(userId);
-		
-	}
-	
-	
+	}	
 
 	@Override
 	public ReplyBoard update(ReplyBoard replyBoard) {
@@ -32,8 +24,8 @@ public class ReplyBoardServiceImpl implements ReplyBoardService{
 	}
 
 	@Override
-	public List<ReplyBoard> findByUserId(String userId) {
-		return replyBoardDao.findByUserId(userId);
+	public List<ReplyBoard> findByUserNo(Long userNo) {
+		return replyBoardDao.findByUserNo(userNo);
 	}
 
 	@Override
@@ -45,6 +37,12 @@ public class ReplyBoardServiceImpl implements ReplyBoardService{
 	public void deleteByReplyBoardNo(Long ReplyBoardNo) {
 		replyBoardDao.deleteByReplyBoardNo(ReplyBoardNo);
 		
+	}
+
+	@Override
+	public ReplyBoard findByReplyBoardNo(Long replyBoardNo) {
+		
+		return replyBoardDao.findByReplyBoardNo(replyBoardNo);
 	}
 	
 	
