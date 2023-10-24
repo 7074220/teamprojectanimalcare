@@ -14,14 +14,14 @@ import com.itwill.entity.Userinfo;
 public interface ReportBoardRepository extends JpaRepository<ReportBoard, Long>{
 	
 
-	@Query(value="select * from report_board where user_id=?1",nativeQuery = true)
+	@Query(value="select * from reportboard where user_id=?1",nativeQuery = true)
 	public List<ReportBoard> findByUserId(String userId);
 	
-	@Query(value="select * from report_board where user_id like '%'|| ?1 || '%'",nativeQuery = true)
+	@Query(value="select * from reportboard where user_id like '%'|| ?1 || '%'",nativeQuery = true)
 	public List<ReportBoard> findAllByLikeUserId(String userId);
 	
 	@Modifying(clearAutomatically = true)
-	@Query(value="update report_board set board_read_count=board_read_count+1 where board_no=?1",nativeQuery = true)
+	@Query(value="update reportboard set board_read_count=board_read_count+1 where board_no=?1",nativeQuery = true)
 	public void countReadCount(Long boardNo);
 
 }

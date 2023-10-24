@@ -22,35 +22,39 @@ import com.itwill.entity.Userinfo;
 import com.itwill.repository.OrderStatusRepository;
 @Service
 public class OrderServiceImpl implements OrderService{
-@Autowired 
-OrdersDao ordersDao;
-@Autowired 
-CartDao cartDao;
-@Autowired 
-OrderItemDao orderItemDao;
-@Autowired
-ProductDao productDao;
-@Autowired
-OrderStatusRepository orderStatusRepository;
+	@Autowired 
+	OrdersDao ordersDao;
+	@Autowired 
+	CartDao cartDao;
+	@Autowired 
+	OrderItemDao orderItemDao;
+	@Autowired
+	ProductDao productDao;
+	@Autowired
+	OrderStatusRepository orderStatusRepository;
 	
 	@Override
 	public Orders insertOrder(Orders order) {
-		List<OrderItem> orderItems = order.getOrderItems();
 		Long userNo = order.getUserinfo().getUserNo();
 		List<Cart> carts = cartDao.findAllCartByUserId(userNo);
 		int price = 0;
 		
 		for (Cart cart : carts) {
+			List<OrderItem> orderItems = order.getOrderItems();
 			OrderItem tempOrderItem = OrderItem.builder().build();
 			Long p_no = cart.getProduct().getProductNo();
 			tempOrderItem.setOrders(order);
 			tempOrderItem.setOrderStatus(orderStatusRepository.findById(1L).get()); 
 			tempOrderItem.setOiQty(cart.getCartQty());
 			tempOrderItem.setProduct(productDao.findByProductNo(p_no));
-			price = price + cart.getProduct().getProductPrice();
-			orderItems.add(tempOrderItem);
-		}
-		order.setOrderPrice(price);
+			//price = price +(cart.getProduct().getProductPrice()*cart.getCartQty());
+			orderItemDao.insertOrderItem(tempOrderItem);
+			
+			order.setOrderItems(orderItems);
+			
+			
+		}//유저 정보만 세팅하고 인서트 테스트 진행
+		
 		cartDao.deleteByUserId(order.getUserinfo().getUserNo());
 		return ordersDao.insertOrder(order);
 	}

@@ -13,6 +13,8 @@ public interface MyPetDao {
      public MyPet UpdatePet(MyPet myPet);
      
      public List<MyPet> findAll();
+     
+     public MyPet findByNo(Long mypetNo);
     
    
    

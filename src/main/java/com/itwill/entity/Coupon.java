@@ -36,9 +36,12 @@ public class Coupon {
      private Long couponId;
 	 private String couponName;
 	 private Integer couponDiscount;
+	 @CreationTimestamp
+	 private Date couponPayday;
 	 
 	 private Date couponExpirationDate;
-	 private Date couponPayday;
+	 
+	 
 	 
 	 @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	 @Builder.Default

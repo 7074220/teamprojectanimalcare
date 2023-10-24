@@ -22,7 +22,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	}
 	
 	@Override
-	public void DeleteUser(Long userNo) {
+	public void DeleteUserByNo(Long userNo) {
 		userinfoRepository.deleteById(userNo);
 	}
 	
@@ -48,14 +48,14 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	
 	// 이메일로 아이디찾기
 	@Override
-	public Userinfo findByUserEmail(String userEmail) {
-		return userinfoRepository.findByUserEmail(userEmail);
+	public Userinfo findByUserPhone(String userPhoneNumber) {
+		return userinfoRepository.findByUserPhone(userPhoneNumber);
 	}
 	
 	// 아이디,폰번호로 비밀번호찾기
 	@Override
-	public Userinfo findByUserPassword(String userId, String userPhoneNumber) {
-		return userinfoRepository.findByUserPassword(userId, userPhoneNumber);
+	public Userinfo findPasswordByUserIdPhoneNumber(String userId, String userPhoneNumber) {
+		return userinfoRepository.findPasswordByUserIdPhoneNumber(userId, userPhoneNumber);
 	}
 	
 	// 아이디로 객체 찾기

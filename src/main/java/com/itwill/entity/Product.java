@@ -45,6 +45,10 @@ public class Product {
 	private String productDetailImage;
 	
 	private Integer productStarAvg;
+<<<<<<< HEAD
 	
 	 
+=======
+
+>>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 }

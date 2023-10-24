@@ -10,8 +10,8 @@ import com.itwill.entity.Orders;
 import com.itwill.repository.OrdersRepository;
 @Repository
 public class OrdersDaoImpl implements OrdersDao{
-@Autowired
-OrdersRepository ordersRepository;
+	@Autowired
+	OrdersRepository ordersRepository;
 	
 	@Override
 	public Orders insertOrder(Orders order) {

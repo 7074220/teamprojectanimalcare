@@ -30,8 +30,8 @@ import lombok.ToString;
 @Data
 public class Orders {
 	@Id
-	@SequenceGenerator(name = "order_status_no_seq",sequenceName = "order_status_no_seq",initialValue = 1,allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "order_status_no_seq")
+	@SequenceGenerator(name = "Orders_order_no_SEQ",sequenceName = "Orders_order_no_SEQ",initialValue = 1,allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Orders_order_no_SEQ")
 	private Long orderNo;
 	@CreationTimestamp
 	private Date orderDate;
@@ -47,6 +47,7 @@ public class Orders {
 	
 	@OneToMany(mappedBy = "orders",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@Builder.Default
+	@ToString.Exclude
 	private List<OrderItem> orderItems = new ArrayList<OrderItem>();
 
 }

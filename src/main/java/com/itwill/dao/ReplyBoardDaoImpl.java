@@ -26,9 +26,17 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 	}
 
 	@Override
-	public void deleteByUserId(String userId) {
-		replyBoardRepository.deleteByUserId(userId);
+	public ReplyBoard CreateReply(ReplyBoard replyBoard) {
+		Long No = replyBoard.getReplyBoardNo();
+		ReplyBoard board = ReplyBoard.builder()
+					.ReplyBoardNo(No)
+					.ReplyBoardDepth(replyBoard.getReplyBoardDepth()+1)
+					.ReplyBoardStep(replyBoard.getReplyBoardStep()+1)
+					.build();
+		return replyBoardRepository.save(board);
 	}
+	
+
 
 	@Override
 	public ReplyBoard update(ReplyBoard replyBoard) {
@@ -40,9 +48,17 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 		return replyBoardRepository.findByUserId(userId);
 	}
 	
+	
+	
 	@Override
 	public List<ReplyBoard> findAllByOrderByReplyBoardNoAsc() {
 		return replyBoardRepository.findAllByOrderByReplyBoardNoAsc();
+	}
+
+	@Override
+	public void deleteByReplyBoardNo(Long ReplyBoardNo) {
+		replyBoardRepository.deleteById(ReplyBoardNo);
+		
 	}
 	
 }

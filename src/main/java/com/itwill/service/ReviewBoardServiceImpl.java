@@ -22,7 +22,6 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 
 	@Override
 	public ReviewBoard create(ReviewBoard reviewBoard) {
-
 		return reviewBoardDao.create(reviewBoard);
 	}
 
@@ -39,7 +38,6 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 
 	@Override
 	public List<ReviewBoard> findAll() {
-
 		return reviewBoardDao.findAll();
 	}
 

@@ -28,7 +28,7 @@ public interface UserInfoService {
 	/*
 	 * 회원상세보기
 	 */
-	Userinfo findUser(Long userNo) throws Exception;
+	Userinfo findUserByNo(Long userNo) throws Exception;
 
 	/*
 	 * 회원수정

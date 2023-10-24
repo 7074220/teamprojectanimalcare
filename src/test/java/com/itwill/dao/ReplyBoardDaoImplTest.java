@@ -24,7 +24,7 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	
 	//@Transactional
 	//@Rollback(false)
-	//@Disabled
+	@Disabled
 	@Test
 	void test() {
 		Userinfo userinfo = userInfoDao.findByNo(1L);
@@ -40,13 +40,12 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		replyBoardDao.Create(replyBoard);
 	}
 	
-	//@Transactional
-	//@Rollback(false)
-	@Disabled
+	@Transactional
+	@Rollback(false)
+	//@Disabled
 	@Test
 	void test1() {
-	
-		replyBoardDao.deleteByUserId("");
+		replyBoardDao.deleteByReplyBoardNo(2L);
 	}
 	
 	
