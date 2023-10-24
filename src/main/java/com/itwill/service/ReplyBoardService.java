@@ -10,10 +10,13 @@ public interface ReplyBoardService {
 
 	public ReplyBoard update(ReplyBoard replyBoard);
 
-	public List<ReplyBoard> findByUserId(String userId);
+	public List<ReplyBoard> findByUserNo(Long userNo);
 
 	public List<ReplyBoard> findAllByOrderByReplyBoardNoAsc();
 
 	// 댓글 삭제
 	public void deleteByReplyBoardNo(Long ReplyBoardNo);
+	
+	//댓글 하나 찾기 
+	public ReplyBoard findByReplyBoardNo(Long replyBoardNo);
 }

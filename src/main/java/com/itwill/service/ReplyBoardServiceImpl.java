@@ -24,8 +24,8 @@ public class ReplyBoardServiceImpl implements ReplyBoardService{
 	}
 
 	@Override
-	public List<ReplyBoard> findByUserId(String userId) {
-		return replyBoardDao.findByUserId(userId);
+	public List<ReplyBoard> findByUserNo(Long userNo) {
+		return replyBoardDao.findByUserNo(userNo);
 	}
 
 	@Override
@@ -37,6 +37,12 @@ public class ReplyBoardServiceImpl implements ReplyBoardService{
 	public void deleteByReplyBoardNo(Long ReplyBoardNo) {
 		replyBoardDao.deleteByReplyBoardNo(ReplyBoardNo);
 		
+	}
+
+	@Override
+	public ReplyBoard findByReplyBoardNo(Long replyBoardNo) {
+		
+		return replyBoardDao.findByReplyBoardNo(replyBoardNo);
 	}
 	
 	

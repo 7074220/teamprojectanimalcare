@@ -41,9 +41,17 @@ public class ReplyBoard {
 	private Integer ReplyBoardStep;
 	private Integer ReplyBoardDepth;
 	
+	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_no")
+	@JoinColumn(name = "board_no")
+	@Builder.Default
+	ReportBoard reportBoard=new ReportBoard();
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_no") 
 	@Builder.Default
 	Userinfo userinfo = new Userinfo();
+	
+	
 	
 }

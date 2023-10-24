@@ -3,17 +3,19 @@ package com.itwill.dao;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.TeamprojectAnimalcareApplicationTest;
 import com.itwill.entity.ReplyBoard;
 import com.itwill.entity.Userinfo;
-
+@WebAppConfiguration
 class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 
 	@Autowired
@@ -42,11 +44,76 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	
 	@Transactional
 	@Rollback(false)
-	//@Disabled
+	@Disabled
 	@Test
 	void test1() {
 		replyBoardDao.deleteByReplyBoardNo(1L);
 	}
+	
+	
+	@Transactional
+	@Rollback(false)
+	@Disabled
+	@Test
+	void test2() {
+	List<ReplyBoard> boards=replyBoardDao.findAllByOrderByReplyBoardNoAsc();
+	System.out.println(boards);
+	
+	}
+	
+	
+	@Transactional
+	@Rollback(false)
+	@Disabled
+	@Test
+	void test3() {
+			
+	List<ReplyBoard> boards=	replyBoardDao.findByUserNo(2L);
+	System.out.println(boards);
+		
+	}
+	
+	@Transactional
+	@Rollback(false)
+	@Disabled
+	@Test
+	void test4() {
+		
+	ReplyBoard  replyBoard=replyBoardDao.findByReplyBoardNo(5L);
+	replyBoard.setReplyBoardContent("아리가또");
+	System.out.println(replyBoard);
+	
+	}
+	
+	@Transactional
+	@Rollback(false)
+	@Disabled
+	@Test
+	void test5() {
+		
+		ReplyBoard  replyBoard=replyBoardDao.findByReplyBoardNo(5L);
+		replyBoard.setReplyBoardContent("아리가또");
+		System.out.println(replyBoard);
+		
+	}
+	
+	@Transactional
+	@Rollback(false)
+	//@Disabled
+	@Test
+	void test6() {
+		Userinfo userinfo = userInfoDao.findByNo(5L);
+		ReplyBoard replyBoard=ReplyBoard.builder()
+										.ReplyBoardContent("하하")
+										.userinfo(userinfo)
+										.ReplyBoardNo(1L)
+										.build();
+										
+		
+		replyBoardDao.Create(replyBoard);
+		
+	}
+	
 	
 	
 
