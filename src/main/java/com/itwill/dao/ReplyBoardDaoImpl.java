@@ -36,10 +36,7 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 		return replyBoardRepository.save(board);
 	}
 	
-	@Override
-	public void deleteByUserId(String userId) {
-		replyBoardRepository.deleteByUserId(userId);
-	}
+
 
 	@Override
 	public ReplyBoard update(ReplyBoard replyBoard) {

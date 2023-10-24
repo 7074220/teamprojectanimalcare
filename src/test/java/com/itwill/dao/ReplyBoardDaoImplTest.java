@@ -22,12 +22,12 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Autowired
 	UserInfoDao userInfoDao;
 	
-	//@Transactional
-	//@Rollback(false)
-	//@Disabled
+	@Transactional
+	@Rollback(false)
+	@Disabled
 	@Test
 	void test() {
-		Userinfo userinfo = userInfoDao.findByNo(1L);
+		Userinfo userinfo = userInfoDao.findByNo(2L);
 		ReplyBoard replyBoard = ReplyBoard.builder()
 										.ReplyBoardContent("내용")
 										.ReplyBoardDepth(0)
@@ -40,13 +40,12 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		replyBoardDao.Create(replyBoard);
 	}
 	
-	//@Transactional
-	//@Rollback(false)
-	@Disabled
+	@Transactional
+	@Rollback(false)
+	//@Disabled
 	@Test
 	void test1() {
-	
-		replyBoardDao.deleteByUserId("김창섭");
+		replyBoardDao.deleteByReplyBoardNo(1L);
 	}
 	
 	

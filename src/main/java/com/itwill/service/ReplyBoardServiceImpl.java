@@ -10,21 +10,13 @@ import com.itwill.entity.ReplyBoard;
 public class ReplyBoardServiceImpl implements ReplyBoardService{
 
 	@Autowired
-	ReplyBoardDao replyBoardDao;
+	private ReplyBoardDao replyBoardDao;
 	
 	
 	@Override
 	public ReplyBoard Create(ReplyBoard replyBoard) {
 		return replyBoardDao.Create(replyBoard);
-	}
-	
-	@Override
-	public void deleteByUserId(String userId) {
-		replyBoardDao.deleteByUserId(userId);
-		
-	}
-	
-	
+	}	
 
 	@Override
 	public ReplyBoard update(ReplyBoard replyBoard) {

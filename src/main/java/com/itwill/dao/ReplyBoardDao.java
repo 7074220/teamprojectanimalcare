@@ -14,9 +14,6 @@ public interface ReplyBoardDao {
 	// 대댓글 작성
 	public ReplyBoard CreateReply(ReplyBoard replyBoard);
 	
-	// 작성자 비교후 삭제
-	public void deleteByUserId(String userId);
-	
 	// 댓글 삭제
 	public void deleteByReplyBoardNo(Long ReplyBoardNo);
 	
