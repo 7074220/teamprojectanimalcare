@@ -28,17 +28,25 @@ public class ReviewBoardRestController {
 	private ReviewBoardService reviewBoardService;
 	
 	
-	// public ReviewBoard create(ReviewBoard reviewBoard);
+	// public ReviewBoard create(ReviewBoard reviewBoard); // reviewBoard 작성
 	@PostMapping
 	public ResponseEntity<ReviewBoard> createReviewBoard(@RequestBody ReviewBoard reviewBoard) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(reviewBoardService.create(reviewBoard));
 	}
 	
+	/*
 	// public ReviewBoard findByBoardNo(Long BoardNo);
 	@GetMapping("/{no}")
-	public ResponseEntity<ReviewBoard> getFindByBoardNo(@PathVariable(name = "no") Long boardNo) {
+	public ResponseEntity<ReviewBoard> getBoardByNo(@PathVariable(name = "no") Long boardNo) {
 		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findByBoardNo(boardNo));
 	}
+	*/
+	
+	
+	
+	
+	
+	
 	
 	// public ReviewBoard update(ReviewBoard reviewBoard);
 	@PutMapping
