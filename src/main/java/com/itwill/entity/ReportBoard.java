@@ -45,7 +45,7 @@ public class ReportBoard {
 	private Date boardRegisterDate;
 	private String boardContent;
 	private Date boardDate;
-	@Column(name = "board_readCount")
+	@Column(name = "board_readcount")
 	private Integer boardReadCount;
 	private Integer boardGroupNo;
 	private Integer boardStep;
@@ -61,7 +61,7 @@ public class ReportBoard {
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
 	
-	@OneToMany(mappedBy = "reportboard", cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "reportBoard", cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@Builder.Default
 	@ToString.Exclude
 	List<ReplyBoard> replyBoards=new ArrayList<ReplyBoard>();
