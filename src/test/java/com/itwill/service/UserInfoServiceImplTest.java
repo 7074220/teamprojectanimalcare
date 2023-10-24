@@ -24,7 +24,7 @@ class UserInfoServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Disabled
 	void test() throws Exception {
 		Userinfo userinfo=Userinfo.builder()
-							.userId("장희주")
+							.userId("김진우")
 							.build();
 		Userinfo createUser=userInfoService.create(userinfo);
 		System.out.println(createUser);
