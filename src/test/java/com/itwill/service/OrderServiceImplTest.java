@@ -82,7 +82,7 @@ class OrderServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Rollback(false)
 	@Disabled
 	void findOrdersById() throws Exception {
-		System.out.println(orderService.findOrderById("박태환"));
+		System.out.println(orderService.findOrderById(2L));
 
 	}
 
@@ -91,7 +91,7 @@ class OrderServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Rollback(false)
 	// @Disabled
 	void findOrderByIdDesc() throws Exception {
-		System.out.println(orderService.findOrderByIdDesc("박태환"));
+		System.out.println(orderService.findOrderByIdDesc(2L));
 
 	}
 
