@@ -39,7 +39,7 @@ public class Orders {
 	private String orderAddress;
 	private String orderDesc;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@Builder.Default
 	@JoinColumn(name = "user_no")
 	@ToString.Exclude

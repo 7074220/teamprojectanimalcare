@@ -41,7 +41,7 @@ public class OrderItem {
 	@ToString.Exclude
 	private Orders orders = new Orders();
 	
-	@OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@Builder.Default
 	@JoinColumn(name = "product_no")
 	private Product product =new Product();

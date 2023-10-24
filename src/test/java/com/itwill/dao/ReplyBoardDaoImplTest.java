@@ -46,7 +46,7 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	void test1() {
 	
-		replyBoardDao.deleteByUserId("김창섭");
+		replyBoardDao.deleteByUserId("");
 	}
 	
 	
