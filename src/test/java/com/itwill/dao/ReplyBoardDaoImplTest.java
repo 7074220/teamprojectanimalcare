@@ -119,7 +119,15 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		replyBoardDao.Create(replyBoard);
 	}
 	
+	@Transactional
+	@Rollback(false)
+	//@Disabled
+	@Test
+	void test7() {
+		ReplyBoard replyBoard=replyBoardDao.findByReplyBoardNo(5L);
+		System.out.println(replyBoard);
 	
+	}
 	
 
 }

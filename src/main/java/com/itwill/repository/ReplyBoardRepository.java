@@ -25,7 +25,12 @@ public interface ReplyBoardRepository extends JpaRepository<ReplyBoard, Long>{
 	@Query(value = "select * from replyBoard order by reply_board_no asc ",nativeQuery = true)
 	public List<ReplyBoard> findAllByOrderByReplyBoardNoAsc();
 	
-
+	@Query(value = "select MAX (reply_board_step) from replyBoard where reply_board_group_no = ?1", nativeQuery = true)
+	public Integer findGreatestStepByGroupNo(Integer ReplyBoardGroupNo);
+	
+	
+	@Query(value="delete from replyboard where reply_board_step >= ?1 and reply_board_depth >=?2 and reply_board_group_no = ?3",nativeQuery = true)
+	public void deleteByReplyBoardStepBoardDepthBoardGroupNo(Integer ReplyBoardStep,Integer ReplyBoardDepth,Integer ReplyBoardGroupNo);
 	
 	/*
 	 * @Query(

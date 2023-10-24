@@ -30,11 +30,20 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 	@Override
 	public ReplyBoard CreateReply(ReplyBoard replyBoard) {
 		// 해당 그룹의 최대 스텝 수
+		Integer maxStep = replyBoardRepository.findGreatestStepByGroupNo(replyBoard.getReplyBoardGroupNo());
 		ReplyBoard board = ReplyBoard.builder()
 					.ReplyBoardGroupNo(replyBoard.getReplyBoardGroupNo())
 					.ReplyBoardDepth(replyBoard.getReplyBoardDepth()+1)
-					.ReplyBoardStep(replyBoard.getReplyBoardStep()+1)
+					.ReplyBoardStep(maxStep+1)
 					.build();
+		
+		/*
+		그룹1번의 제일 마지막 스텝이 몇번인지????
+		
+		첫번째 : 그룹 1번 스텝1
+			두번째 그룹 1번 스텝2 뎁스1
+			세번째 그룹 1번 스텝3 뎁스1
+		*/
 		return replyBoardRepository.save(board);
 	}
 	
@@ -58,15 +67,18 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 	}
 
 	@Override
-	public void deleteByReplyBoardNo(Long ReplyBoardNo) {
-		replyBoardRepository.deleteById(ReplyBoardNo);
-		
+	public void deleteByReplyBoardStepBoardDepthBoardGroupNo(Integer ReplyBoardStep,Integer ReplyBoardDepth,Integer ReplyBoardGroupNo) {
+		replyBoardRepository.deleteByReplyBoardStepBoardDepthBoardGroupNo(ReplyBoardStep, ReplyBoardDepth, ReplyBoardGroupNo);
 	}
 
 	@Override
 	public ReplyBoard findByReplyBoardNo(Long replyBoardNo) {
-		// TODO Auto-generated method stub
 		return replyBoardRepository.findById(replyBoardNo).get();
+	}
+	
+	@Override
+	public Integer findGreatestStepByGroupNo(Integer ReplyBoardGroupNo) {
+		return replyBoardRepository.findGreatestStepByGroupNo(ReplyBoardGroupNo);
 	}
 	
 }
