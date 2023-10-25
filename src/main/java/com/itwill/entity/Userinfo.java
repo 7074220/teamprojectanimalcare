@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -47,54 +50,62 @@ public class Userinfo {
 	private String userResidentNumber;
 	private Date userRegisterDate;
 	private Integer userPoint;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "userinfo", cascade ={CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
 	@Builder.Default
 	@ToString.Exclude
 	private List<Coupon> coupons = new ArrayList<Coupon>();
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "userinfo", cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
 	@Builder.Default
 	@ToString.Exclude
 	private List<MyPet> myPets = new ArrayList<MyPet>();
 
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "userinfo", cascade ={CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
 	@Builder.Default
 	@ToString.Exclude
 	private List<Cart> carts = new ArrayList<Cart>();
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "userinfo", cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
 	@Builder.Default
 	@ToString.Exclude
 	private List<Orders> orders = new ArrayList<Orders>();
 
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "userinfo", cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
 	@Builder.Default
 	@ToString.Exclude
 	private List<ReportBoard> reportBoards = new ArrayList<ReportBoard>();
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "userinfo", cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
 	@Builder.Default
 	@ToString.Exclude
 	private List<ReviewBoard> reviewBoards = new ArrayList<ReviewBoard>();
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "userinfo", cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
 	@Builder.Default
 	@ToString.Exclude
 	private List<Visit> visits = new ArrayList<Visit>();
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "userinfo", cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
 	@Builder.Default
 	@ToString.Exclude
 	private List<Volunteer> volunteers = new ArrayList<Volunteer>();
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "userinfo", cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
 	@Builder.Default
 	@ToString.Exclude
 	private List<Adopt> adopts = new ArrayList<Adopt>();
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "userinfo", cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
 	@Builder.Default
 	@ToString.Exclude
