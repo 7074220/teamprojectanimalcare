@@ -29,7 +29,7 @@ class WishDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	void insert() {
 		
 		Wish insert = Wish.builder()
-				.product(productDao.findByProductNo(1L))
+				.product(productDao.findByProductNo(2L))
 				.userinfo(userInfoDao.findByNo(2L))
 				.wishNo(null)
 				.build();
@@ -45,7 +45,7 @@ class WishDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	}
 	
 	@Test
-	@Disabled
+	//@Disabled
 	@Transactional
 	@Rollback(false)
 	void findAll() {
