@@ -48,7 +48,7 @@ public class ReplyBoard {
 	@Builder.Default
 	ReportBoard reportBoard=new ReportBoard();
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_no") 
 	@Builder.Default
 	Userinfo userinfo = new Userinfo();
