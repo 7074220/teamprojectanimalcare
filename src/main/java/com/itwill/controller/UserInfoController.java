@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itwill.dto.UserWriteActionDto;
 import com.itwill.entity.Userinfo;
 import com.itwill.service.UserInfoService;
 
@@ -30,13 +31,13 @@ public class UserInfoController {
 	// 회원가입
 	@Operation(summary = "회원가입")
 	@PostMapping
-	public ResponseEntity<Userinfo> user_write_action(@RequestBody Userinfo userinfo) throws Exception{
-		userInfoService.create(userinfo);
+	public ResponseEntity<UserWriteActionDto> user_write_action(@RequestBody UserWriteActionDto dto) throws Exception{
 		
+		userInfoService.create(UserWriteActionDto.toEntity(dto));
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		
-		return new ResponseEntity<Userinfo>(userinfo, httpHeaders, HttpStatus.CREATED);
+		return new ResponseEntity<UserWriteActionDto>(dto, httpHeaders, HttpStatus.CREATED);
 	}
 	
 	
