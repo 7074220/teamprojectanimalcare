@@ -38,10 +38,7 @@ public class Coupon {
 	 private Integer couponDiscount;
 	 @CreationTimestamp
 	 private Date couponPayday;
-	 
 	 private Date couponExpirationDate;
-	 
-	 
 	 
 	 @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	 @Builder.Default

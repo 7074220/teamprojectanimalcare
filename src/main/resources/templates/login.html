@@ -10,6 +10,8 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
     
+
+    
     <!-- CSS 
     ========================= -->
     <!--bootstrap min css-->
@@ -604,7 +606,8 @@
                <div class="col-lg-6 col-md-6">
                 <div class="account_form">
                     <h2>로그인</h2>
-                    <form action="#" onsubmit="return validateLoginForm()">
+                    <form action="my-account.html" onsubmit="return validateLoginForm()">
+                        
                         <p>   
                             <label>아이디 <span>*</span></label>
                             <input type="text" id="loginUserId">
@@ -619,7 +622,7 @@
                                 <input id="remember" type="checkbox">
                                 Remember me
                             </label>
-                            <button type="submit">login</button>
+                            <button type="submit">로그인</button>
                         </div>
                     </form>
                  </div>    
@@ -630,7 +633,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="account_form register">
                         <h2>회원가입</h2>
-                        <form action="#" onsubmit="return validateForm()">
+                        <form action="my-account.html" method="post" onsubmit="return validateForm()">
                             
                             <p>   
                                 <label>아이디 <span>*</span></label>
@@ -664,17 +667,20 @@
                                 <span id="genderError" style="color:red;"></span>
                              </p>
                 
-                            <p>   
-                                <label>이메일  <span>*</span></label>
-                                <input type="text" id="email">
-                                <span id="emailError" style="color:red;"></span>
-                             </p>
+                           
                 
                              <p>   
                                 <label>핸드폰번호  <span>*</span></label>
                                 <input type="text" id="phone">
                                 <span id="phoneError" style="color:red;"></span>
                              </p>
+
+                             <p>   
+                                <label>주소  <span>*</span></label>
+                                <input type="text" id="address">
+                                
+                                <span id="addressError" style="color:red;"></span>
+                            </p>
                 
                             <div class="login_submit">
                                 <button type="submit">확인</button>
@@ -819,10 +825,10 @@
         var confirmPassword = document.getElementById("confirmPassword").value;
         var name = document.getElementById("name").value.trim();
         var gender = document.getElementById("gender").value;
-        var email = document.getElementById("email").value.trim();
         var phone = document.getElementById("phone").value.trim();
+        var address = document.getElementById("address").value.trim();
     
-        var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+       
         var phonePattern = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
     
         // 초기화
@@ -831,8 +837,8 @@
         document.getElementById("confirmPasswordError").innerText = "";
         document.getElementById("nameError").innerText = "";
         document.getElementById("genderError").innerText = "";
-        document.getElementById("emailError").innerText = "";
         document.getElementById("phoneError").innerText = "";
+        document.getElementById("addressError").innerText="";
     
         if (!userId) {
             document.getElementById("userIdError").innerText = "아이디를 입력해주세요.";
@@ -859,13 +865,15 @@
             return false;
         }
     
-        if (!email || !emailPattern.test(email)) {
-            document.getElementById("emailError").innerText = "유효한 이메일 주소를 입력해주세요.";
-            return false;
-        }
+       
     
         if (!phone || !phonePattern.test(phone)) {
             document.getElementById("phoneError").innerText = "유효한 핸드폰 번호를 입력해주세요. 예) 010-1234-5678";
+            return false;
+        }
+
+        if (!address){
+            document.getElementById("addressError").innerText ="주소를 입력해주세요.";
             return false;
         }
     
@@ -906,6 +914,8 @@
 <!-- Main JS -->
 <script src="assets/js/main.js"></script>
 
+
+</script>
 
 </body>
 
