@@ -59,9 +59,9 @@ public class AdoptRestController {
 		return ResponseEntity.status(HttpStatus.OK).body(adoptService.findAdoptList());
 	}
 
-	@GetMapping
-	public ResponseEntity<List<Adopt>> findAdoptsByUserNo(@PathVariable(name = "no") Long no) {
-		return ResponseEntity.status(HttpStatus.OK).body(adoptService.findAdoptsByUserNo(no));
+	@GetMapping("/find/{userNo}")
+	public ResponseEntity<List<Adopt>> findAdoptsByUserNo(@PathVariable(name = "userNo") Long userNo) {
+		return ResponseEntity.status(HttpStatus.OK).body(adoptService.findAdoptsByUserNo(userNo));
 	}
 
 }

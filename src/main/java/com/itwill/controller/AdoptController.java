@@ -29,7 +29,7 @@ public class AdoptController {
 	
 		// sUserId가 없으면 login페이지로 이동
 	
-	
+	String user=(String)session.getAttribute("sUserId");
 	Adopt adopt = Adopt.builder()
 						.adoptTime(11)
 						.adoptDate(new Date())
