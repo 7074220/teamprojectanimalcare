@@ -1,46 +1,39 @@
 -- userinfo insert
 
-insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date) 
-VALUES (userinfo_user_no_seq.nextval,'김창섭','1017','분당',1,'010-7777-1111',0,'1111',sysdate);
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'김창섭','1017','분당',1,'010-7777-1111',0,'1111',sysdate, '김창섭');
 
-insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date) 
-VALUES (userinfo_user_no_seq.nextval,'박태환','1011','서울',1,'010-7111-1111',0,'2222',sysdate);
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'박태환','1011','서울',1,'010-7111-1111',0,'2222',sysdate, '박태환');
 
-insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date) 
-VALUES (userinfo_user_no_seq.nextval,'전아현','0707','부산',2,'010-1234-1111',0,'3333',sysdate);
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'전아현','0707','부산',2,'010-1234-1111',0,'3333',sysdate, '전아현');
 
 
 -- dog product insert
 
-insert into product(product_no, product_name, product_price, product_category, product_qty, product_image, product_star_avg, product_pet_category, product_detail_image) values(product_product_no_SEQ.nextval, '우프니 독 크런치 밀크 210g', 7200, '간식', 0, 'cat.jpg', 5, '강아지', 'cat.jpg');
-insert into product(product_no, product_name, product_price, product_category, product_qty, product_image, product_star_avg, product_pet_category, product_detail_image) values(product_product_no_SEQ.nextval, '우프니 독 크런치 고구마 210g', 7200, '간식', 0, 'cat.jpg', 3, '강아지', 'cat.jpg');
-insert into product(product_no, product_name, product_price, product_category, product_qty, product_image, product_star_avg, product_pet_category, product_detail_image) values(product_product_no_SEQ.nextval, '우프니 독 크런치 BBQ', 7200, '간식', 0, 'cat.jpg', 3, '강아지', 'cat.jpg');
+--insert into product(product_no, product_name, product_price, product_category, product_qty, product_image, product_star_avg, product_pet_category, product_detail_image) values(product_product_no_SEQ.nextval, '우프니 독 크런치 밀크 210g', 7200, '간식', 0, 'cat.jpg', 5, '강아지', 'cat.jpg');
+--insert into product(product_no, product_name, product_price, product_category, product_qty, product_image, product_star_avg, product_pet_category, product_detail_image) values(product_product_no_SEQ.nextval, '우프니 독 크런치 고구마 210g', 7200, '간식', 0, 'cat.jpg', 3, '강아지', 'cat.jpg');
+--insert into product(product_no, product_name, product_price, product_category, product_qty, product_image, product_star_avg, product_pet_category, product_detail_image) values(product_product_no_SEQ.nextval, '우프니 독 크런치 BBQ', 7200, '간식', 0, 'cat.jpg', 3, '강아지', 'cat.jpg');
 
 -- cat product insert
 
-insert into product(product_no, product_name, product_price, product_category, product_qty, product_image, product_star_avg, product_pet_category, product_detail_image) values(product_product_no_SEQ.nextval, '뉴트리플랜 흰살참치 닭가슴살', 1500, '캔', 0, 'cat.jpg', 5, '고양이', 'cat.jpg');
-insert into product(product_no, product_name, product_price, product_category, product_qty, product_image, product_star_avg, product_pet_category, product_detail_image) values(product_product_no_SEQ.nextval, '뉴트리플랜 흰살참치 게맛살', 1500, '캔', 0, 'cat.jpg', 3, '고양이', 'cat.jpg');
-insert into product(product_no, product_name, product_price, product_category, product_qty, product_image, product_star_avg, product_pet_category, product_detail_image) values(product_product_no_SEQ.nextval, '뉴트리플랜 흰살참치 멸치', 1500, '캔', 0, 'cat.jpg', 3, '고양이', 'cat.jpg');
-
+insert into product(product_no, product_name, product_price, product_category, product_qty, product_image, product_star_avg, product_pet_category, product_detail_image) values(product_product_no_SEQ.nextval, '이나바 챠오츄르 파우치 참치 연어 14g x 4개', 1780, '간식', 0, 'inaba_ciao_churu_tuna_salmon.jpg', 3, '고양이', 'inaba_ciao_churu_detail.jpg');
+insert into product(product_no, product_name, product_price, product_category, product_qty, product_image, product_star_avg, product_pet_category, product_detail_image) values(product_product_no_SEQ.nextval, '이나바 챠오츄르 파우치 헤어볼 참치 14g x 4개', 1780, '간식', 0, 'inaba_ciao_churu_tuna.jpg', 5, '고양이', 'inaba_ciao_churu_detail.jpg');
+insert into product(product_no, product_name, product_price, product_category, product_qty, product_image, product_star_avg, product_pet_category, product_detail_image) values(product_product_no_SEQ.nextval, '이나바 챠오츄르 파우치 닭가슴살 게살 14g X 4개', 1780, '간식', 0, 'inaba_ciao_churu_chicken_crab.jpg', 4, '고양이', 'inaba_ciao_churu_detail.jpg');
+insert into product(product_no, product_name, product_price, product_category, product_qty, product_image, product_star_avg, product_pet_category, product_detail_image) values(product_product_no_SEQ.nextval, '이나바 챠오츄르 파우치 가다랑어 14g X 4개', 1780, '간식', 0, 'inaba_ciao_churu_bonito.jpg', 4, '고양이', 'inaba_ciao_churu_detail.jpg');
 
 -- cart insert
 
-insert into cart(cart_no, cart_qty,cart_image ,product_no, user_no) values(cart_cart_no_SEQ.nextval, 1,'cat.jpg', 1, 1);
-insert into cart(cart_no, cart_qty,cart_image , product_no, user_no) values(cart_cart_no_SEQ.nextval, 2,'cat.jpg', 2, 1);
-insert into cart(cart_no, cart_qty,cart_image , product_no, user_no) values(cart_cart_no_SEQ.nextval, 3,'cat.jpg', 3, 1);
+insert into cart(cart_no, cart_qty, product_no, user_no) values(cart_cart_no_SEQ.nextval, 2, 2, 1);
+insert into cart(cart_no, cart_qty, product_no, user_no) values(cart_cart_no_SEQ.nextval, 3, 3, 1);
 
-insert into cart(cart_no, cart_qty,cart_image , product_no, user_no) values(cart_cart_no_SEQ.nextval, 1,'cat.jpg', 4, 2);
-insert into cart(cart_no, cart_qty,cart_image , product_no, user_no) values(cart_cart_no_SEQ.nextval, 2,'cat.jpg', 5, 2);
+insert into cart(cart_no, cart_qty, product_no, user_no) values(cart_cart_no_SEQ.nextval, 1, 1, 2);
+insert into cart(cart_no, cart_qty, product_no, user_no) values(cart_cart_no_SEQ.nextval, 2, 2, 2);
 
-insert into cart(cart_no, cart_qty,cart_image , product_no, user_no) values(cart_cart_no_SEQ.nextval, 2,'cat.jpg', 11, 3);
-insert into cart(cart_no, cart_qty,cart_image , product_no, user_no) values(cart_cart_no_SEQ.nextval, 3,'cat.jpg', 12, 3);
+insert into cart(cart_no, cart_qty, product_no, user_no) values(cart_cart_no_SEQ.nextval, 2, 1, 3);
+insert into cart(cart_no, cart_qty, product_no, user_no) values(cart_cart_no_SEQ.nextval, 3, 2, 3);
 
--- pet insert
-
-insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,petgender,center_no) 
-VALUES (pet_pet_no_seq.nextval,'서울특별시','온순하다','ㅁㅁ',sysdate,'프렌치불독','남',11);
-insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,petgender,center_no) 
-VALUES (pet_pet_no_seq.nextval,'서울특별시','짖는다','골목',sysdate,'퍼그','여',11);
 
 -- center insert
 
@@ -49,10 +42,17 @@ INSERT INTO center (center_no, center_name, center_phone_number, center_local, c
 INSERT INTO center (center_no, center_name, center_phone_number, center_local, center_open_close_time) VALUES (Center_center_no_SEQ.nextval,'하하보호소','010-3333-3333','강원도','09:00 ~ 23:00');
 INSERT INTO center (center_no, center_name, center_phone_number, center_local, center_open_close_time) VALUES (Center_center_no_SEQ.nextval,'소소보호소','010-4444-4444','충청도','09:00 ~ 24:00');
 
+-- pet insert
+
+insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no) 
+VALUES (pet_pet_no_seq.nextval,'서울특별시','온순하다','ㅁㅁ',sysdate,'프렌치불독','남',1);
+insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no) 
+VALUES (pet_pet_no_seq.nextval,'서울특별시','짖는다','골목',sysdate,'퍼그','여',2);
+
 -- adopt insert
 
-INSERT INTO adopt (adopt_no, adopt_time, adopt_date, pet_no, user_no, adopt_status ) VALUES(adopt_adopt_no_seq.nextval, 11, sysdate, 1, 1, '입양완료');
-INSERT INTO adopt (adopt_no, adopt_time, adopt_date, pet_no, user_no, adopt_status ) VALUES(adopt_adopt_no_seq.nextval, 12, sysdate, 2, 2, '입양중');
+INSERT INTO adopt (adopt_no, adopt_time, adopt_date, pet_no, user_no, adopt_status ) VALUES(adopt_adopt_no_seq.nextval, 1, sysdate, 1, 1, '입양완료');
+INSERT INTO adopt (adopt_no, adopt_time, adopt_date, pet_no, user_no, adopt_status ) VALUES(adopt_adopt_no_seq.nextval, 2, sysdate, 2, 2, '입양중');
 
 -- mypet insert
 
@@ -68,14 +68,14 @@ VALUES (mypet_mypet_no_seq.nextval,'나비','고양이',TO_DATE('2022/07/05','YY
 -- order insert
 
 
-insert into orders(order_no,order_address,order_desc,order_date,order_price,user_id) 
-VALUES (orders_order_no_seq.nextval,'서울특별시','사료외..',sysdate,'55555','박태환');
+insert into orders(order_no,order_address,order_desc,order_date,order_price,user_no) 
+VALUES (orders_order_no_seq.nextval,'서울특별시','사료외..',sysdate,'55555',1);
 
-insert into orders(order_no,order_address,order_desc,order_date,order_price,user_id) 
-VALUES (orders_order_no_seq.nextval,'서울특별시','사료외..',sysdate,'33333','박태환');
+insert into orders(order_no,order_address,order_desc,order_date,order_price,user_no) 
+VALUES (orders_order_no_seq.nextval,'서울특별시','사료외..',sysdate,'33333',2);
 
-insert into orders(order_no,order_address,order_desc,order_date,order_price,user_id) 
-VALUES (orders_order_no_seq.nextval,'서울특별시','사료외..',sysdate,'2222','전아현');
+insert into orders(order_no,order_address,order_desc,order_date,order_price,user_no) 
+VALUES (orders_order_no_seq.nextval,'서울특별시','사료외..',sysdate,'2222',3);
 
 -- coupon insert
 
@@ -95,25 +95,25 @@ values(Volunteer_volunteer_no_SEQ.nextval, 18, sysdate, '봉사완료',  3, 3);
 
 -- report board
 
-insert into reportboard (board_no,board_content,board_date,board_depth,board_group_no,board_name,board_phone,board_read_count,board_register_date,board_step,board_title,user_no) 
+insert into reportboard (board_no,board_content,board_date,board_depth,board_group_no,board_name,board_phone,board_readcount,board_register_date,board_step,board_title,user_no) 
 VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),0,1,'전아현','1111',0,sysdate,0,'토토어디갓어',2);
 
-insert into reportboard (board_no,board_content,board_date,board_depth,board_group_no,board_name,board_phone,board_read_count,board_register_date,board_step,board_title,user_no) 
-VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),0,1,'박태환','1111',0,sysdate,0,'어디갓어',4);
+insert into reportboard (board_no,board_content,board_date,board_depth,board_group_no,board_name,board_phone,board_readcount,board_register_date,board_step,board_title,user_no) 
+VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),0,1,'박태환','1111',0,sysdate,0,'어디갓어',1);
 
-insert into reportboard (board_no,board_content,board_date,board_depth,board_group_no,board_name,board_phone,board_read_count,board_register_date,board_step,board_title,user_no) 
-VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),0,1,'김창섭','1111',0,sysdate,0,'어디갓어2',5);
+insert into reportboard (board_no,board_content,board_date,board_depth,board_group_no,board_name,board_phone,board_readcount,board_register_date,board_step,board_title,user_no) 
+VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),0,1,'김창섭','1111',0,sysdate,0,'어디갓어2',3);
 
-insert into reportboard (board_no,board_content,board_date,board_depth,board_group_no,board_name,board_phone,board_read_count,board_register_date,board_step,board_title,user_no) 
+insert into reportboard (board_no,board_content,board_date,board_depth,board_group_no,board_name,board_phone,board_readcount,board_register_date,board_step,board_title,user_no) 
 VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),0,1,'김창섭','1111',0,sysdate,0,'어디갓어3',2);
 
 -- review board
 
 INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
-VALUES (review_board_board_no_seq.nextval, sysdate, '이것은 타이틀1', '이것은 내용1', 5, 1, 5);
+VALUES (review_board_board_no_seq.nextval, sysdate, '이것은 타이틀1', '이것은 내용1', 5, 1, 1);
 
 INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
-VALUES (review_board_board_no_seq.nextval, sysdate, '이것은 타이틀2', '이것은 내용2', 4, 2, 4);
+VALUES (review_board_board_no_seq.nextval, sysdate, '이것은 타이틀2', '이것은 내용2', 4, 2, 2);
 
 INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
 VALUES (review_board_board_no_seq.nextval, sysdate, '이것은 타이틀3', '이것은 내용3', 3, 3, 3);
@@ -124,11 +124,11 @@ INSERT INTO visit (VISIT_NO,VISIT_DATE, VISIT_TIME, VISIT_STATUS, CENTER_NO, USE
 INSERT INTO visit (VISIT_NO,VISIT_DATE, VISIT_TIME, VISIT_STATUS, CENTER_NO, USER_NO) VALUES (visit_visit_no_seq.nextval,  sysdate, 13,'봉사접수중', 3, 3);
 
 -- Reply board
-INSERT INTO replyboard (reply_board_no,reply_board_content,reply_board_depth,reply_board_group_no,reply_board_register_date,reply_board_step,user_no) 
-VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'내용',0,1,sysdate,0,1);
+INSERT INTO replyboard (reply_board_no,reply_board_content,reply_board_depth,reply_board_group_no,reply_board_register_date,reply_board_step,user_no,board_no) 
+VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'내용',0,1,sysdate,0,1,1);
 
-INSERT INTO replyboard (reply_board_no,reply_board_content,reply_board_depth,reply_board_group_no,reply_board_register_date,reply_board_step,user_no) 
-VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'내용1',0,1,sysdate,0,2);
+INSERT INTO replyboard (reply_board_no,reply_board_content,reply_board_depth,reply_board_group_no,reply_board_register_date,reply_board_step,user_no,board_no) 
+VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'내용1',0,1,sysdate,0,2,2);
 
-INSERT INTO replyboard (reply_board_no,reply_board_content,reply_board_depth,reply_board_group_no,reply_board_register_date,reply_board_step,user_no) 
-VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'내용2',0,1,sysdate,0,3);
+INSERT INTO replyboard (reply_board_no,reply_board_content,reply_board_depth,reply_board_group_no,reply_board_register_date,reply_board_step,user_no,board_no) 
+VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'내용2',0,1,sysdate,0,3,3);

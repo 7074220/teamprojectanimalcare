@@ -25,7 +25,7 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 	@Override
 	public ReplyBoard Create(ReplyBoard replyBoard) {
 		Integer MaxGroupNo = replyBoardRepository.findMaxGroupNo();
-		replyBoard.setReplyBoardGroupNo(MaxGroupNo);
+		replyBoard.setReplyBoardGroupNo(MaxGroupNo+1);
 		replyBoard.setReplyBoardStep(1);
 		replyBoard.setReplyBoardDepth(0);
 		return replyBoardRepository.save(replyBoard);
@@ -40,15 +40,9 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 					.ReplyBoardGroupNo(replyBoard.getReplyBoardGroupNo())
 					.ReplyBoardDepth(replyBoard.getReplyBoardDepth()+1)
 					.ReplyBoardStep(maxStep+1)
+					.ReplyBoardContent(replyBoard.getReplyBoardContent())
+					.reportBoard(replyBoard.getReportBoard())
 					.build();
-		
-		/*
-		그룹1번의 제일 마지막 스텝이 몇번인지????
-		
-		첫번째 : 그룹 1번 스텝1
-			두번째 그룹 1번 스텝2 뎁스1
-			세번째 그룹 1번 스텝3 뎁스1
-		*/
 		return replyBoardRepository.save(board);
 	}
 	
@@ -78,8 +72,7 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 
 	@Override
 	public ReplyBoard findByReplyBoardNo(Long replyBoardNo) {
-		Optional<ReplyBoard> optional =replyBoardRepository.findById(replyBoardNo);
-		ReplyBoard replyBoard = optional.get();
+		ReplyBoard replyBoard = replyBoardRepository.findById(replyBoardNo).get();
 		return replyBoard;
 	}
 	

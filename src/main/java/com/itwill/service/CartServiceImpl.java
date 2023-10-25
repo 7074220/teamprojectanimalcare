@@ -35,8 +35,8 @@ public class CartServiceImpl implements CartService {
 		Optional<Cart> findCartOptional = cartRepository.findById(updateQty.getCartNo());
 		Cart updatedCart = null;
 		if(findCartOptional.isPresent()) {
-			Cart cart = findCartOptional.get();
-			cart.setCartQty(updateQty.getCartQty());
+			updatedCart = findCartOptional.get();
+			updatedCart.setCartQty(updateQty.getCartQty());
 		} else {
 			throw new Exception("존재하지 않습니다.");
 		}

@@ -35,6 +35,8 @@ DROP SEQUENCE UserInfo_user_no_SEQ;
 CREATE SEQUENCE UserInfo_user_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
+
+
 CREATE TABLE Coupon(
 		coupon_id                     		NUMBER(10)		 NULL ,
 		coupon_name                   		VARCHAR2(50)		 NULL ,
@@ -57,7 +59,7 @@ CREATE TABLE ReportBoard(
 		board_register_date           		DATE		 NULL ,
 		board_content                 		VARCHAR2(100)		 NULL ,
 		board_date                    		DATE		 NULL ,
-		board_read_Count              		NUMBER(10)		 NULL ,
+		board_readCount              		NUMBER(10)		 NULL ,
 		board_group_no                		NUMBER(10)		 NULL ,
 		board_step                    		NUMBER(10)		 NULL ,
 		board_depth                   		NUMBER(10)		 NULL ,
@@ -168,17 +170,15 @@ DROP SEQUENCE Adopt_adopt_no_SEQ;
 CREATE SEQUENCE Adopt_adopt_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
-
-
 CREATE TABLE Product(
 		product_no                    		NUMBER(10)		 NULL ,
-		product_name                  		VARCHAR2(50)		 NULL ,
+		product_name                  		VARCHAR2(100)		 NULL ,
 		product_price                 		NUMBER(10)		 NULL ,
 		product_category              		VARCHAR2(50)		 NULL ,
 		product_pet_category          		VARCHAR2(10)		 NULL ,
 		product_qty                   		NUMBER(10)		 NULL ,
-		product_image                 		VARCHAR2(50)		 NULL ,
-		product_detail_image          		VARCHAR2(50)		 NULL ,
+		product_image                 		VARCHAR2(100)		 NULL ,
+		product_detail_image          		VARCHAR2(100)		 NULL ,
 		product_star_avg              		NUMBER(10)		 NULL 
 );
 
@@ -201,7 +201,6 @@ CREATE TABLE Orders(
 DROP SEQUENCE Orders_order_no_SEQ;
 
 CREATE SEQUENCE Orders_order_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 
 CREATE TABLE OrderStatus(
@@ -236,14 +235,12 @@ CREATE TABLE Cart(
 		cart_no                       		NUMBER(10)		 NULL ,
 		cart_qty                      		NUMBER(10)		 NULL ,
 		product_no                    		NUMBER(10)		 NULL ,
-		user_no                       		NUMBER(10)		 NULL ,
-		cart_image                    		VARCHAR2(50)		 NULL 
+		user_no                       		NUMBER(10)		 NULL 
 );
 
 DROP SEQUENCE Cart_cart_no_SEQ;
 
 CREATE SEQUENCE Cart_cart_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 
 CREATE TABLE MyPet(
@@ -274,8 +271,6 @@ CREATE TABLE ReviewBoard(
 DROP SEQUENCE ReviewBoard_board_no_SEQ;
 
 CREATE SEQUENCE ReviewBoard_board_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
-
 
 
 CREATE TABLE ReplyBoard(
