@@ -2,6 +2,7 @@ package com.itwill.service;
 
 import java.util.List;
 
+import com.itwill.dto.UserWriteActionDto;
 import com.itwill.entity.Userinfo;
 
 public interface UserInfoService {
