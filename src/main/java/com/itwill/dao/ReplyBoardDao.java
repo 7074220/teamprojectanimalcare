@@ -33,4 +33,8 @@ public interface ReplyBoardDao {
 	// 해당 그룹 최대 스텝 수 찾기
 	public Integer findGreatestStepByGroupNo(Integer ReplyBoardGroupNo);
 	
+	//해당 게시물의 댓글 보여주기 
+	public List<ReplyBoard> findAllByReportBoardNo(Long BoardNo);
+	
+	
 }
