@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="kr">
 
 <head>
     <meta charset="utf-8">
@@ -601,50 +601,88 @@
         <div class="container">
             <div class="row">
                <!--login area start-->
-                <div class="col-lg-6 col-md-6">
-                    <div class="account_form">
-                        <h2>login</h2>
-                        <form action="#">
-                            <p>   
-                                <label>Username or email <span>*</span></label>
-                                <input type="text">
-                             </p>
-                             <p>   
-                                <label>Passwords <span>*</span></label>
-                                <input type="password">
-                             </p>   
-                            <div class="login_submit">
-                               <a href="#">Lost your password?</a>
-                                <label for="remember">
-                                    <input id="remember" type="checkbox">
-                                    Remember me
-                                </label>
-                                <button type="submit">login</button>
-                                
-                            </div>
-
-                        </form>
-                     </div>    
-                </div>
+               <div class="col-lg-6 col-md-6">
+                <div class="account_form">
+                    <h2>로그인</h2>
+                    <form action="#" onsubmit="return validateLoginForm()">
+                        <p>   
+                            <label>아이디 <span>*</span></label>
+                            <input type="text" id="loginUserId">
+                         </p>
+                         <p>   
+                            <label>비밀번호 <span>*</span></label>
+                            <input type="password" id="loginPassword">
+                         </p>   
+                        <div class="login_submit">
+                           <a href="#"></a>
+                            <label for="remember">
+                                <input id="remember" type="checkbox">
+                                Remember me
+                            </label>
+                            <button type="submit">login</button>
+                        </div>
+                    </form>
+                 </div>    
+            </div>
                 <!--login area start-->
 
                 <!--register area start-->
                 <div class="col-lg-6 col-md-6">
                     <div class="account_form register">
-                        <h2>Register</h2>
-                        <form action="#">
+                        <h2>회원가입</h2>
+                        <form action="#" onsubmit="return validateForm()">
+                            
                             <p>   
-                                <label>Email address  <span>*</span></label>
-                                <input type="text">
+                                <label>아이디 <span>*</span></label>
+                                <input type="text" id="userId">
+                                <span id="userIdError" style="color:red;"></span>
                              </p>
+                
+                             <p>
+                                <label>비밀번호 <span>*</span></label>
+                                <input type="password" id="password">
+                                <span id="passwordError" style="color:red;"></span>
+                            </p>
+                            <p>
+                                <label>비밀번호 확인 <span>*</span></label>
+                                <input type="password" id="confirmPassword">
+                                <span id="confirmPasswordError" style="color:red;"></span>
+                            </p>
+                            <p>   
+                                <label>이름  <span>*</span></label>
+                                <input type="text" id="name">
+                                <span id="nameError" style="color:red;"></span>
+                             </p>
+                
+                             <p>
+                                <label>성별  <span>*</span></label>
+                                <select id="gender">
+                                    <option value="">성별 선택</option>
+                                    <option value="남">남</option>
+                                    <option value="여">여</option>
+                                </select>
+                                <span id="genderError" style="color:red;"></span>
+                             </p>
+                
+                            <p>   
+                                <label>이메일  <span>*</span></label>
+                                <input type="text" id="email">
+                                <span id="emailError" style="color:red;"></span>
+                             </p>
+                
                              <p>   
-                                <label>Passwords <span>*</span></label>
-                                <input type="password">
+                                <label>핸드폰번호  <span>*</span></label>
+                                <input type="text" id="phone">
+                                <span id="phoneError" style="color:red;"></span>
                              </p>
+                
                             <div class="login_submit">
-                                <button type="submit">Register</button>
+                                <button type="submit">확인</button>
                             </div>
-                        </form>
+
+                        </div>
+                    
+                    </form>
                     </div>    
                 </div>
                 <!--register area end-->
@@ -748,6 +786,94 @@
     
 <!-- JS
 ============================================ -->
+
+
+<!--로그인,회원가입 유효성 검사 --> 
+<script>
+
+    function validateLoginForm() {
+        var loginUserId = document.getElementById("loginUserId").value.trim();
+        var loginPassword = document.getElementById("loginPassword").value;
+
+        if (!loginUserId) {
+            alert("아이디를 입력해주세요.");
+            return false;
+        }
+
+        if (!loginPassword) {
+            alert("비밀번호를 입력해주세요.");
+            return false;
+        }
+
+        return true;
+    }
+
+    
+    
+    function validateForm() {
+
+        var userLoginId = document.getElementById("userId").value.trim();
+
+        var userId = document.getElementById("userId").value.trim();
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+        var name = document.getElementById("name").value.trim();
+        var gender = document.getElementById("gender").value;
+        var email = document.getElementById("email").value.trim();
+        var phone = document.getElementById("phone").value.trim();
+    
+        var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        var phonePattern = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
+    
+        // 초기화
+        document.getElementById("userIdError").innerText = "";
+        document.getElementById("passwordError").innerText = "";
+        document.getElementById("confirmPasswordError").innerText = "";
+        document.getElementById("nameError").innerText = "";
+        document.getElementById("genderError").innerText = "";
+        document.getElementById("emailError").innerText = "";
+        document.getElementById("phoneError").innerText = "";
+    
+        if (!userId) {
+            document.getElementById("userIdError").innerText = "아이디를 입력해주세요.";
+            return false;
+        }
+    
+        if (!password) {
+            document.getElementById("passwordError").innerText = "비밀번호를 입력해주세요.";
+            return false;
+        }
+    
+        if (password !== confirmPassword) {
+            document.getElementById("confirmPasswordError").innerText = "비밀번호가 일치하지 않습니다.";
+            return false;
+        }
+    
+        if (!name) {
+            document.getElementById("nameError").innerText = "이름을 입력해주세요.";
+            return false;
+        }
+    
+        if (!gender) {
+            document.getElementById("genderError").innerText = "성별을 선택해주세요.";
+            return false;
+        }
+    
+        if (!email || !emailPattern.test(email)) {
+            document.getElementById("emailError").innerText = "유효한 이메일 주소를 입력해주세요.";
+            return false;
+        }
+    
+        if (!phone || !phonePattern.test(phone)) {
+            document.getElementById("phoneError").innerText = "유효한 핸드폰 번호를 입력해주세요. 예) 010-1234-5678";
+            return false;
+        }
+    
+        return true;
+    }
+    </script>
+
+
 <!--jquery min js-->
 <script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
 <!--popper min js-->

@@ -7,7 +7,7 @@ import com.itwill.entity.ReviewBoard;
 public interface ReviewBoardService {
 	public ReviewBoard create(ReviewBoard reviewBoard);
 
-	public ReviewBoard findByBoardNo(Long BoardNo);
+	public ReviewBoard findByBoardNo(Long boardNo);
 	
 	public ReviewBoard update(ReviewBoard reviewBoard);
 
@@ -19,7 +19,7 @@ public interface ReviewBoardService {
 
 	public List<ReviewBoard> findByStarAll(Long star); // 선택한 별점으로 찾기
 
-	public List<ReviewBoard> findByUserNo(Long no); // 선택된 userId 리뷰 리스트만 나오기
+	public List<ReviewBoard> findByUserNo(Long no); // 선택된 userNo 리뷰 리스트만 나오기
 
 	public List<ReviewBoard> findAllByOrderByBoardStarDesc(); // 높은 평점순 정렬
 
