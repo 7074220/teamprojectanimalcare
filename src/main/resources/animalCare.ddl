@@ -135,6 +135,7 @@ CREATE SEQUENCE Visit_visit_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
 
+
 CREATE TABLE Pet(
 		pet_local                     		VARCHAR2(50)		 NULL ,
 		pet_no                        		NUMBER(10)		 NULL ,
@@ -168,6 +169,10 @@ DROP SEQUENCE Adopt_adopt_no_SEQ;
 
 CREATE SEQUENCE Adopt_adopt_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 
 
 CREATE TABLE Product(
@@ -202,7 +207,10 @@ DROP SEQUENCE Orders_order_no_SEQ;
 
 CREATE SEQUENCE Orders_order_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 
 
 CREATE TABLE OrderStatus(
@@ -244,7 +252,10 @@ DROP SEQUENCE Cart_cart_no_SEQ;
 
 CREATE SEQUENCE Cart_cart_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 
 
 CREATE TABLE MyPet(
@@ -276,6 +287,10 @@ DROP SEQUENCE ReviewBoard_board_no_SEQ;
 
 CREATE SEQUENCE ReviewBoard_board_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 
 
 CREATE TABLE ReplyBoard(

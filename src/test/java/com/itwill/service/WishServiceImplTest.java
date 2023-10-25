@@ -42,11 +42,11 @@ class WishServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(false)
 	void delete() throws Exception{
-		wishService.deleteWish(1L);
+		wishService.deleteWish(2L);
 	}
 	
 	@Test
-	@Disabled
+	//@Disabled
 	@Transactional
 	@Rollback(false)
 	void findAll() {
