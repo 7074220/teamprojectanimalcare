@@ -1,6 +1,7 @@
 package com.itwill.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,6 +24,10 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 	//댓글 작성
 	@Override
 	public ReplyBoard Create(ReplyBoard replyBoard) {
+		Integer MaxGroupNo = replyBoardRepository.findMaxGroupNo();
+		replyBoard.setReplyBoardGroupNo(MaxGroupNo);
+		replyBoard.setReplyBoardStep(1);
+		replyBoard.setReplyBoardDepth(0);
 		return replyBoardRepository.save(replyBoard);
 	}
 
@@ -73,7 +78,9 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 
 	@Override
 	public ReplyBoard findByReplyBoardNo(Long replyBoardNo) {
-		return replyBoardRepository.findById(replyBoardNo).get();
+		Optional<ReplyBoard> optional =replyBoardRepository.findById(replyBoardNo);
+		ReplyBoard replyBoard = optional.get();
+		return replyBoard;
 	}
 	
 	@Override
