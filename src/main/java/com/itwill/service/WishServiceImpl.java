@@ -15,26 +15,25 @@ public class WishServiceImpl implements WishService {
 	@Autowired
 	private WishRepository wishrepoRepository;
 	@Autowired
-	private CartDao cartDao;
+	private WishDao wishDao;
 	@Autowired
 	private UserInfoDao userinfoDao;
 	
 	@Override
 	public Wish insertWish(Wish wish) {
-		// TODO Auto-generated method stub
-		return null;
+		Wish insert = wishDao.insertWish(wish);
+		return insert;
 	}
 
 	@Override
 	public void deleteWish(Long no) throws Exception {
-		// TODO Auto-generated method stub
+		wishDao.deleteWish(no);
 		
 	}
 
 	@Override
 	public List<Wish> findAllWishByUserNo(Long userNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return wishDao.findAllWishByUserNo(userNo);
 	}
 
 	

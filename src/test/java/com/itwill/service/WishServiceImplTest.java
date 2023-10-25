@@ -1,4 +1,4 @@
-package com.itwill.dao;	
+package com.itwill.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,37 +11,38 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.TeamprojectAnimalcareApplicationTest;
+import com.itwill.dao.ProductDao;
+import com.itwill.dao.UserInfoDao;
 import com.itwill.entity.Wish;
 
-class WishDaoImplTest extends TeamprojectAnimalcareApplicationTest{
-
+class WishServiceImplTest extends TeamprojectAnimalcareApplicationTest{
+	
 	@Autowired
-	WishDao wishDao;
-	@Autowired
-	UserInfoDao userInfoDao;
+	UserInfoDao userinfoDao;
 	@Autowired
 	ProductDao productDao;
+	@Autowired
+	WishService wishService;
 	
 	@Test
-	//@Disabled
+	@Disabled
 	@Transactional
 	@Rollback(false)
 	void insert() {
-		
 		Wish insert = Wish.builder()
 				.product(productDao.findByProductNo(1L))
-				.userinfo(userInfoDao.findByNo(2L))
+				.userinfo(userinfoDao.findByNo(2L))
 				.wishNo(null)
 				.build();
-		wishDao.insertWish(insert);
+		wishService.insertWish(insert);
 	}
-
+	
 	@Test
 	@Disabled
 	@Transactional
 	@Rollback(false)
 	void delete() throws Exception{
-		wishDao.deleteWish(1L);
+		wishService.deleteWish(1L);
 	}
 	
 	@Test
@@ -49,8 +50,8 @@ class WishDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(false)
 	void findAll() {
-		List<Wish> wishList = wishDao.findAllWishByUserNo(2L);
+		List<Wish> wishList = wishService.findAllWishByUserNo(2L);
 		System.out.println(wishList);
 	}
-	
+
 }
