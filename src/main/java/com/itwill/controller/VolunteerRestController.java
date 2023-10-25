@@ -28,23 +28,27 @@ public class VolunteerRestController {
 	private VolunteerService volunteerService;
 	
 	
-	
 	@GetMapping
 	public ResponseEntity<List<Volunteer>> findAllVolunteers() {		
 		List<Volunteer> volunteerList = volunteerService.findAllVolunteers();
 		return ResponseEntity.status(HttpStatus.OK).body(volunteerList);
-	} // 목록 전체 조회
+	} 
+	
+	// 목록 전체 조회
 	
 	@GetMapping("/{no}")
 	public ResponseEntity<List<Volunteer>> findVolunteertByUserNo(@PathVariable(name = "no") Long no) {
 		return ResponseEntity.status(HttpStatus.OK).body(volunteerService.findVolunteertByUserNo(no));
-	} // userNo 로 Volunteer 목록 조회
+	} 
 	
+	// userNo 로 Volunteer 목록 조회
+	/*
 	@GetMapping("/{no}")
 	public ResponseEntity<Volunteer> findByVolunteerNo(@PathVariable(name = "no") Long no) {
 		return ResponseEntity.status(HttpStatus.OK).body(volunteerService.findByVolunteerNo(no));
-	} // 봉사 목록 찾기
-	
+	} 
+	*/
+	// 봉사 목록 찾기
 	@PostMapping
 	public ResponseEntity<Volunteer> insertVolunteer(@RequestBody Volunteer volunteer) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(volunteerService.insertVolunteer(volunteer));

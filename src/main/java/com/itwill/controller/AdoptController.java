@@ -16,7 +16,6 @@ import com.itwill.service.UserInfoService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/adopt")
 public class AdoptController {
 
 	private UserInfoService userInfoService;

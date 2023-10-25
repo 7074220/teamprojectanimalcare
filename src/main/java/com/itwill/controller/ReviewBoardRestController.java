@@ -90,6 +90,7 @@ public class ReviewBoardRestController {
 		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findByUserNo(no));
 	}
 	 
+	/*
 	@GetMapping
 	public ResponseEntity<List<ReviewBoard>> findAllByOrderByBoardStarDesc() {
 		// 높은 평점순 정렬
@@ -125,6 +126,6 @@ public class ReviewBoardRestController {
 		// 별점 낮은순,최신순
 		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findByOrderByBoardStarAscBoardDateDesc());
 	}
-	
+	*/
 	
 }
