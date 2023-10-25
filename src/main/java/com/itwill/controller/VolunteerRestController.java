@@ -51,7 +51,7 @@ public class VolunteerRestController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(volunteerService.insertVolunteer(volunteer));
 	} // INSERT
 	
-	@PutMapping("{volunteerNo}")
+	@PutMapping("/{volunteerNo}")
 	public ResponseEntity<Volunteer> updateVolunteer(@PathVariable Long volunteerNo, @RequestBody Volunteer updateVolunteer) throws Exception {	
 		Volunteer existingVolunteer = volunteerService.findByVolunteerNo(volunteerNo);	
 		if (existingVolunteer == null) {
