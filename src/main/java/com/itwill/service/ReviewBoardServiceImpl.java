@@ -55,7 +55,7 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 
 	@Override
 	public List<ReviewBoard> findByUserNo(Long no) {
-		// 선택된 userId 리뷰 리스트만 나오기
+		// 선택된 userNo 리뷰 리스트만 나오기
 		return reviewBoardDao.findByUserNo(no);
 	}
 

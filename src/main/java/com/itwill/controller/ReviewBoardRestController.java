@@ -28,69 +28,103 @@ public class ReviewBoardRestController {
 	private ReviewBoardService reviewBoardService;
 	
 	
-	// public ReviewBoard create(ReviewBoard reviewBoard); // reviewBoard 작성
 	@PostMapping
 	public ResponseEntity<ReviewBoard> createReviewBoard(@RequestBody ReviewBoard reviewBoard) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(reviewBoardService.create(reviewBoard));
 	}
 	
-	/*
-	// public ReviewBoard findByBoardNo(Long BoardNo);
-	@GetMapping("/{no}")
-	public ResponseEntity<ReviewBoard> getBoardByNo(@PathVariable(name = "no") Long boardNo) {
-		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findByBoardNo(boardNo));
-	}
-	*/
-	
-	
-	
-	
-	
-	
-	
-	// public ReviewBoard update(ReviewBoard reviewBoard);
-	@PutMapping
-	public ResponseEntity<ReviewBoard> updateReviewBoard(@RequestBody ReviewBoard reviewBoard) throws Exception{
-		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.update(reviewBoard));
+	@GetMapping("/{boardNo}")
+	public ResponseEntity<ReviewBoard> findByBoardNo(@PathVariable Long boardNo) {
+		ReviewBoard reviewBoard = reviewBoardService.findByBoardNo(boardNo);
+		if(reviewBoard != null) {
+			// ReviewBoard no 가 존재하면 ok 와 함께 반환
+			return ResponseEntity.ok(reviewBoard);
+		} else {
+			// ReviewBoard no 가 존재하지 않으면 notFound() 반환
+			return ResponseEntity.notFound().build();
+		}
 	}
 	
-	// public void deleteById(Long boardNo);
+	@PutMapping("/{boardNo}")
+	public ResponseEntity<ReviewBoard> updateReviewBoard(@PathVariable Long boardNo, @RequestBody ReviewBoard updatedReviewBoard) throws Exception {		
+		ReviewBoard existingReviewBoard = reviewBoardService.findByBoardNo(boardNo);		
+		if (existingReviewBoard == null) {
+			// boardNo 가 존재하지 않으면 notFound() 반환
+	        return ResponseEntity.notFound().build();
+	    }		
+		// boardNo 가 존재하면 업데이트 적용 후 저장
+	    existingReviewBoard.setBoardTitle(updatedReviewBoard.getBoardTitle());
+	    existingReviewBoard.setBoardContent(updatedReviewBoard.getBoardContent());
+	    existingReviewBoard.setBoardStar(updatedReviewBoard.getBoardStar());
+	    ReviewBoard updatedBoard = reviewBoardService.update(existingReviewBoard);	    
+	    return ResponseEntity.ok(updatedBoard);
+	} 
+
 	@DeleteMapping("/{no}")
 	public ResponseEntity<Map> deleteReviewBoard(@PathVariable(name = "no") Long boardNo) throws Exception {
 		return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>());
 	}
 	
-	// public List<ReviewBoard> findAll();
 	@GetMapping
-	public ResponseEntity<List<ReviewBoard>> getRevoewBoardList() {
+	public ResponseEntity<List<ReviewBoard>> findAll() {
+		// 전체 조회
 		List<ReviewBoard> reviewBoardList = reviewBoardService.findAll();
 		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardList);
 	}
 	
-	// List<ReviewBoard> findByProductNo(Long productNo); // productNo로 reviewboard 리스트 검색
-	public ResponseEntity<List<ReviewBoard>> getFindByProductNo(@PathVariable(name = "no") Long productNo) {
-		return null;
+	@GetMapping("/{productNo}")
+	public ResponseEntity<List<ReviewBoard>> findByProductNo(@PathVariable Long productNo) {
+		// productNo로 reviewboard 리스트 검색
+		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findByProductNo(productNo));
 	}
 	
+	@GetMapping("/{star}")
+	public ResponseEntity<List<ReviewBoard>> findByStarAll(@PathVariable Long star) {
+		// 선택한 별점으로 찾기
+		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findByStarAll(star));
+	}
 	
+	@GetMapping("/{no}")
+	public ResponseEntity<List<ReviewBoard>> findByUserNo(@PathVariable Long no) {
+		// 선택된 userNo 리뷰 리스트만 나오기
+		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findByUserNo(no));
+	}
+	 
+	@GetMapping
+	public ResponseEntity<List<ReviewBoard>> findAllByOrderByBoardStarDesc() {
+		// 높은 평점순 정렬
+		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findAllByOrderByBoardStarDesc());
+	}
 	
+	@GetMapping
+	public ResponseEntity<List<ReviewBoard>> findAllByOrderByBoardStarAsc() {
+		// 낮은 평점순 정렬
+		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findAllByOrderByBoardStarAsc());		
+	}
 	
+	@GetMapping
+	public ResponseEntity<List<ReviewBoard>> findAllByOrderByBoardDateDesc() {
+		// 최신순 정렬(board Date정렬)
+		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findAllByOrderByBoardDateDesc());
+	}
 	
+	@GetMapping
+	public ResponseEntity<List<ReviewBoard>> findAllByOrderByBoardDateAsc() {
+		// 오래된 순 정렬(board Date정렬)
+		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findAllByOrderByBoardDateAsc());
+	}
 	
+	@GetMapping
+	public ResponseEntity<List<ReviewBoard>> findByOrderByBoardStarDescBoardDateDesc() {
+		// 별점 높은순,최신순
+		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findByOrderByBoardStarDescBoardDateDesc());
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@GetMapping
+	public ResponseEntity<List<ReviewBoard>> findByOrderByBoardStarAscBoardDateDesc() {
+		// 별점 낮은순,최신순
+		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findByOrderByBoardStarAscBoardDateDesc());
+	}
 	
 	
 }
