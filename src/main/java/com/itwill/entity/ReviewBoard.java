@@ -1,6 +1,6 @@
 package com.itwill.entity;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -12,10 +12,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -24,21 +24,22 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "reviewboard")
 @ToString(callSuper = true)
 public class ReviewBoard {
 
 	@Id
-	@SequenceGenerator(name = "board_no_seq", sequenceName = "board_no_seq", allocationSize = 1, initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "ReviewBoard_board_no_SEQ", sequenceName = "ReviewBoard_board_no_SEQ", allocationSize = 1, initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "ReviewBoard_board_no_SEQ")
 	private Long boardNo; // PK
 	private String boardTitle;
 	private String boardContent;
-	private LocalDate boardDate;
-	private Long boardStar;
+	private Date boardDate;
+	private Integer boardStar;
 
 	@Builder.Default
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_no")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
 	

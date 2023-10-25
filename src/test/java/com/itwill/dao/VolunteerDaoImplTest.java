@@ -3,6 +3,7 @@ package com.itwill.dao;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
@@ -34,16 +35,16 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Disabled
 	void testInsertVolunteer() {
 		
-		Userinfo userinfo = userInfoDao.findById("김창섭");
+		Userinfo userinfo = userInfoDao.findByNo(5L);
 		
-		Center center = centerDao.findByCenterNo(2L);	
+		Center center = centerDao.findByCenterNo(3L);	
 	
 		Volunteer volunteer = Volunteer.builder()
 									   .userinfo(userinfo)
 									   .center(center)
-									   .volunteerDate(LocalDate.now())
-									   .volunteerTime(11L)
-									   .volunteerStatus("심사중t")
+									   .volunteerDate(new Date())
+									   .volunteerTime(11)
+									   .volunteerStatus("테스트t")
 									   .build();	
 		volunteerDao.insertVolunteer(volunteer);
 		
@@ -64,8 +65,8 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(value = false)
 	void testUpdateVolunteer() throws Exception{
 		Volunteer volunteer = volunteerDao.findByVolunteerNo(2L);
-		volunteer.setVolunteerTime(12L);
-		volunteer.setVolunteerStatus("봉사완료a");
+		volunteer.setVolunteerTime(12);
+		volunteer.setVolunteerStatus("테스트t ");
 		volunteerDao.updateVolunteer(volunteer);
 	}
 
@@ -83,7 +84,7 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(value = false)
 	void testFindVolunteerByUserId() {
-		List<Volunteer> selectVolunteer = volunteerDao.findVolunteertByUserId("전아현");
+		List<Volunteer> selectVolunteer = volunteerDao.findVolunteertByUserNo(2L);
 		System.out.println(selectVolunteer);
 	}
 	

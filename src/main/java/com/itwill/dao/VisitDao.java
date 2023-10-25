@@ -21,7 +21,7 @@ public interface VisitDao {
 	List<Visit> selectAllVisits();
 	// Visit테이블에 저장된 데이터를 가져와서 리스트로 변환
 
-	List<Visit> getVisitsByUserId(String userId);
+	List<Visit> getVisitsByUserNo(Long userNo);
 	//userid로 visit리스트 검색
 
 	

@@ -37,6 +37,11 @@ public class MyPetDaoImpl implements MyPetDao{
       return myPetRepository.findAll();
    }
    
+   @Override
+	public MyPet findByNo(Long mypetNo) {
+		   MyPet pet = myPetRepository.findById(mypetNo).get();
+		return pet;
+	}
 }
 
    

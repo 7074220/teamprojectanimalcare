@@ -2,6 +2,8 @@ package com.itwill.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -18,34 +20,36 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
-@Builder
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@NoArgsConstructor
 public class OrderItem {
 
 	@Id
-	@SequenceGenerator(name = "oi_no_seq",sequenceName = "oi_no_seq",allocationSize = 1,initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "oi_no_seq")
+	@SequenceGenerator(name = "Order_item_oi_no_SEQ",sequenceName = "Order_item_oi_no_SEQ",allocationSize = 1,initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Order_item_oi_no_SEQ")
 	private Long oiNo;
 	private Integer oiQty;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@Builder.Default
 	@JoinColumn(name = "order_no")
+	@ToString.Exclude
 	private Orders orders = new Orders();
 	
-	@OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.LAZY)
 	@Builder.Default
 	@JoinColumn(name = "product_no")
 	private Product product =new Product();
 	
-	@OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.LAZY)
 	@Builder.Default
-	@JoinColumn(name = "orderStatus_no")
-	private OrderStatus orderStatus = new OrderStatus();
+	@JoinColumn(name = "os_no")
+	private Orderstatus orderStatus = new Orderstatus();
 	
 
 }

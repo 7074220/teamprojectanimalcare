@@ -3,6 +3,7 @@ package com.itwill.service;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -29,22 +30,22 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	@Disabled
 	void insertTest() throws Exception {
-		Userinfo user=userInfoService.findUser("박태환");
-		Pet pet1=petService.petFindById(10L);
-		Pet pet2=petService.petFindById(11L);
+		Userinfo user=userInfoService.findUserByNo(3L);
+		Pet pet1=petService.petFindById(1L);
+		Pet pet2=petService.petFindById(2L);
 		
 		Adopt insertAdopt1 = Adopt.builder()
-				.adoptDate(LocalDate.now())
-				.adoptTime(13L)
-				.status("입양신청")
+				.adoptDate(new Date())
+				.adoptTime(13)
+				.adoptStatus("입양신청")
 				.pet(pet1)
 				.userinfo(user)
 				.build();
 		adoptService.insertAdopt(insertAdopt1);
 		Adopt insertAdopt2 = Adopt.builder()
-				.adoptDate(LocalDate.now())
-				.adoptTime(16L)
-				.status("입양완료")
+				.adoptDate(new Date())
+				.adoptTime(16)
+				.adoptStatus("입양완료")
 				.pet(pet2)
 				.userinfo(user)
 				.build();
@@ -56,8 +57,8 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(false)
 	void updateTest() throws Exception{
-		Adopt adopt=adoptService.findByNoAdopt(9L);
-			adopt.setStatus("입양중");
+		Adopt adopt=adoptService.findByAdoptNo(9L);
+			adopt.setAdoptStatus("입양중");
 			adoptService.updateAdopt(adopt);
 	}
 	
@@ -66,7 +67,7 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(false)
 	void deleteTest() throws Exception {
-		adoptService.deleteAdopt(9L);
+		adoptService.deleteAdopt(5L);
 	}
 	
 	@Test
@@ -74,8 +75,8 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(false)
 	void findByNoTest() {
-		adoptService.findByNoAdopt(9L);
-		System.out.println(adoptService.findByNoAdopt(9L));
+		adoptService.findByAdoptNo(2L);
+		System.out.println(adoptService.findByAdoptNo(2L));
 	}
 	
 	@Test
@@ -92,7 +93,7 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(false)
 	void findByUserinfoUserIdTest() {
-		System.out.println(	adoptService.findByUserinfoUserId("박태환"));
+		System.out.println(	adoptService.findAdoptsByUserNo(2L));
 	}
 	
 	

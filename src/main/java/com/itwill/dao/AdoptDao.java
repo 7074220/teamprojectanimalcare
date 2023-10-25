@@ -8,7 +8,7 @@ public interface AdoptDao {
 	
 	public Adopt insertAdopt(Adopt adopt);
 
-	public Adopt findByNoAdopt(Long no);
+	public Adopt findByAdoptNo(Long no);
 
 	public Adopt updateAdopt(Adopt adopt) throws Exception;
 
@@ -16,5 +16,5 @@ public interface AdoptDao {
 
 	public List<Adopt> findAdoptList();
 
-	public List<Adopt> findByUserinfoUserId(String userId);
+	public List<Adopt> findAdoptsByUserNo(Long no);
 }

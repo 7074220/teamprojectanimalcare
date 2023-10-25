@@ -1,5 +1,9 @@
 package com.itwill.dao;
 
-public class OrderStatusDao {
+import com.itwill.entity.Orderstatus;
+
+public interface OrderStatusDao {
+
+	Orderstatus findOrderStatus(Long osNo);
 
 }

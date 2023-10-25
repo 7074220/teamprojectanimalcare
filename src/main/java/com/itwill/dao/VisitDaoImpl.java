@@ -43,8 +43,8 @@ public class VisitDaoImpl implements VisitDao {
 	}
 	 //userid로 visit리스트 검색
 	  @Override
-	    public List<Visit> getVisitsByUserId(String userId) {
-	        return visitRepository.findByUserinfoUserId(userId);
+	    public List<Visit> getVisitsByUserNo(Long userNo) {
+	        return visitRepository.findByUserinfoUserNo(userNo);
 	    }
 
 }

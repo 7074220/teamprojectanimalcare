@@ -29,7 +29,7 @@ class ReportBoardServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	@Disabled
 	void test() {
-		Userinfo userinfo = userInfoDao.findById("전아현");
+		Userinfo userinfo = userInfoDao.findByUserId("전아현");
 		ReportBoard reportBoard = ReportBoard.builder()
 									.boardContent("내용")
 									.boardDate(null)
@@ -38,7 +38,7 @@ class ReportBoardServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 									.boardName(userinfo.getUserId())
 									.boardPhone(userinfo.getUserPhoneNumber())
 									.boardReadCount(0)
-									.boardResisterDate(null)
+									.boardRegisterDate(null)
 									.boardStep(0)
 									.boardTitle("제목")
 									.userinfo(userinfo)

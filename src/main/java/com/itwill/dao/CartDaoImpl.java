@@ -34,31 +34,69 @@ public class CartDaoImpl implements CartDao{
 
 
 	@Override
-	public void deleteByUserId(String userId)  {
-		cartRepository.deleteByUserId(userId);
+	// 카트에 담긴 상품 전체삭제
+	public void deleteByUserId(Long no)  {
+		cartRepository.deleteByUserNo(no);
 	}
 
 
 	@Override
+	// 카트에서 선택한 상품만 삭제
 	public void deleteById(Long no) throws Exception {
 		cartRepository.deleteById(no);
 	}
 
-	@Override
-	public Cart cartTotalPrice(String userId) {
-		return cartRepository.cartTotalPrice(userId);
-	}
-/*
-	@Override
-	public int productWithKindByUserId(Cart cart) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-*/
+	
 	@Override
 	public List<Cart> findAll() {
 		return cartRepository.findAll();
 	}
+
+
+	@Override
+	// 카트에 담긴 모든 상품 출력 (아이디 별)
+	public List<Cart> findAllCartByUserId(Long userNo) {
+		return cartRepository.findAllCartByUserNo(userNo);
+	}
+
+/*
+	@Override
+	// 카트에 담긴 모든 상품 합계 금액
+	public Integer cartTotalPrice(Long userNo) {
+		List<Cart> cartList = cartRepository.findAllCartByUserId(userNo);
+		Integer total = 0;
+		for (Cart cart : cartList) {
+			total = total + cart.getProduct().getProductPrice()*cart.getCartQty();
+		}
+		return total;
+	}
+*/
 	
+	@Override
+	// 카트 중복체크
+	public Integer countProductByUserId(Long userNo, Long productNo) {
+		return cartRepository.countProductByUserNo(userNo, productNo);
+	}
+
+
+	@Override
+	// 카트에 중복제품이 있으면 (중복체크) --> 업데이트 돼서 담기도록 
+	public Cart updateOverlapCart(Cart overlapCart) {
+		int count = cartRepository.countProductByUserNo(overlapCart.getUserinfo().getUserNo(), overlapCart.getProduct().getProductNo());
+		Cart overlapCount = null;
+		if(count > 0) {
+			overlapCount = cartRepository.save(overlapCart);
+		} else {
+			overlapCount = cartRepository.save(overlapCart);
+		}
+		return overlapCount;
+	}
+
+
+	@Override
+	public Cart findByProductUserNo(Long userNo, Long productNo) {
+		Cart cart = cartRepository.findByProductUserNo(userNo, productNo);
+		return cart;
+	}
 	
 }

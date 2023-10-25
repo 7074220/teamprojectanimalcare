@@ -39,12 +39,23 @@ public class VolunteerDaoImpl implements VolunteerDao{
 		
 		
 	}
-
+	
+	/*
 	@Override
 	public void deleteVolunteer(Long no) {
-		volunteerRepository.deleteById(no);
+		volunteerRepository.deleteById(no);		
+	}
+	*/
+	
+	@Override
+	public void deleteVolunteer(Long no) throws Exception{
+		Optional<Volunteer> selectVolunteer = volunteerRepository.findById(no);
+		if(selectVolunteer.isPresent()) {
+			volunteerRepository.delete(selectVolunteer.get());
+		}
 		
 	}
+	
 
 	@Override
 	public List<Volunteer> findVolunteerList() {
@@ -53,9 +64,8 @@ public class VolunteerDaoImpl implements VolunteerDao{
 
 	
 	@Override
-	public List<Volunteer> findVolunteertByUserId(String userId) {
-		List<Volunteer> volunteerList = volunteerRepository.findVolunteertByUserId(userId);
-		return volunteerList;
+	public List<Volunteer> findVolunteertByUserNo(Long no) {
+		return volunteerRepository.findVolunteertByUserNo(no);
 	}
 	
 	

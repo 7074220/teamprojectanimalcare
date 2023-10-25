@@ -1,6 +1,6 @@
 package com.itwill.dao;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ public class CouponDaoImpl implements CouponDao{
 
 	// 만료된 쿠폰찾기 
 	 @Override
-	  public void autoDeleteExpiredCoupons(LocalDateTime couponExpirationDate) {
+	  public void autoDeleteExpiredCoupons(Date couponExpirationDate) {
 		  couponRepository.findByExpirationDateBefore(couponExpirationDate);
 		  
 	  }

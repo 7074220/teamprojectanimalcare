@@ -3,6 +3,7 @@ package com.itwill.dao;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
@@ -28,16 +29,16 @@ void insert() {
 		Pet pet = Pet.builder()
 				.petLocal("서울특별시")
 				.petType("프렌치불독")
-				.petgender("암컷")
-				.petRegisterDate(LocalDate.now())
+				.petGender("암컷")
+				.petRegisterDate(new Date())
 				.petFindPlace("서울특별시")
 				.petCharacter("이쁘고 온순하다")
 				.build();
 		Pet pet2 = Pet.builder()
 				.petLocal("서울특별시")
 				.petType("진돗개")
-				.petgender("수컷")
-				.petRegisterDate(LocalDate.now())
+				.petGender("수컷")
+				.petRegisterDate(new Date())
 				.petFindPlace("서울특별시")
 				.petCharacter("이쁘고 온순하다")
 				.build();

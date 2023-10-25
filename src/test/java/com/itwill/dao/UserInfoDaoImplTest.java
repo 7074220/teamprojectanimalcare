@@ -11,9 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.itwill.TeamprojectAnimalcareApplicationTest;
 import com.itwill.entity.Userinfo;
 
-
-
-
 class UserInfoDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	
 	@Autowired
@@ -24,53 +21,64 @@ class UserInfoDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	@Disabled
 	void test1() {
-		Userinfo userinfo = Userinfo.builder().userId("와").build();
+		Userinfo userinfo = Userinfo.builder()
+							.userId("heoseungbum")
+							.userName("테스트222")
+							.build();
+		System.out.println(userinfo);
 		userinfoDao.CreateUser(userinfo);
 	}
 	@Test
 	@Disabled
 	void test2() {
-		
-		userinfoDao.DeleteUser("장");
+		userinfoDao.DeleteUserByNo(8L);
 	}
 	
 	@Test
-	//@Disabled
+	@Disabled
+	@Transactional
 	void test3() {
 		System.out.println(userinfoDao.findAll());
 	}
 	@Test
-	//@Disabled
+	@Disabled
+	@Transactional
 	void test4() {
-		System.out.println(userinfoDao.findById("김"));
+		System.out.println(userinfoDao.findByNo(3L));
 	}
 	@Test
 	@Disabled
+	@Transactional
+	@Rollback(false)
 	void test5() {
-		Userinfo userinfo = userinfoDao.findById("김");
+		Userinfo userinfo = userinfoDao.findByNo(3L);
 		userinfo.setUserAddress("제주도");
 		System.out.println(userinfoDao.UpdateUser(userinfo));
 	}
 	@Test
 	@Disabled
+	@Transactional
+	
 	void test6() {
 		 
-		 System.out.println(userinfoDao.countByUserId("김"));
+		 System.out.println(userinfoDao.findByUserId("박태환"));
 		
 	}
 	@Test
 	@Disabled
+	@Transactional
 	void test7() {
 		
-		System.out.println(userinfoDao.findByUserEmail("222a"));
+		System.out.println(userinfoDao.findByUserPhone("010-7111-1111"));
 		
 	}
 	
 	@Test
-	@Disabled
+	//@Disabled
+	@Transactional
 	void test8() {
 		
-		System.out.println(userinfoDao.findByUserPassword("전", "3333"));
+		System.out.println(userinfoDao.findPasswordByUserIdPhoneNumber("박태환", "010-7111-1111"));
 		
 	}
 	

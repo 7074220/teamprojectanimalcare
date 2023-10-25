@@ -38,18 +38,19 @@ class UserInfoServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	@Disabled
 	void test1() throws Exception {
-		Userinfo loginUser=userInfoService.login("전아현","3333");
+		Userinfo loginUser=userInfoService.login("박태환","1011");
 		System.out.println(loginUser);
 		
 		
 		
 	}
-	
+	@Transactional
+	@Rollback(false)
 	@Test
 	@Disabled
 	void test2() throws Exception {
-		Userinfo loginUser=userInfoService.findUser("김창섭");
-		loginUser.setUserGender("여");
+		Userinfo loginUser=userInfoService.findUserByNo(3L);
+		loginUser.setUserGender(2);
 		userInfoService.update(loginUser);
 		System.out.println(loginUser);
 		
@@ -58,7 +59,7 @@ class UserInfoServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	@Disabled
 	void test3() throws Exception {
-		userInfoService.remove("장희주");
+		userInfoService.remove(3L);
 		
 		
 	}

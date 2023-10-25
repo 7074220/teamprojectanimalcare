@@ -9,18 +9,23 @@ public interface UserInfoDao {
 	
 	public Userinfo CreateUser(Userinfo userinfo);
 	
-	public void DeleteUser(String userId);
+	public void DeleteUserByNo(Long userNo);
 	
 	public Userinfo UpdateUser(Userinfo userinfo);
 	
 	public List<Userinfo> findAll();
 	
-	public Userinfo findById(String userId);
+	public Userinfo findByNo(Long userNo);
 	
-	public Integer countByUserId(String userId);
+	//아이디 중복체크 
+	public Integer countByUserId(String userId); //이게 필요한가?
+	
+	
 
-	public Userinfo findByUserEmail(String userEmail);
+	public Userinfo findByUserPhone(String userPhoneNumber);
 	
-	public Userinfo findByUserPassword(String userId , String userPhoneNumber);
+	public Userinfo findPasswordByUserIdPhoneNumber(String userId , String userPhoneNumber);
+	
+	public Userinfo findByUserId(String userId);
 	
 }

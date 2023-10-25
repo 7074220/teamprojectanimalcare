@@ -1,6 +1,6 @@
 package com.itwill.entity;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,23 +24,24 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-//@ToString(callSuper = true)
+@Table(name = "volunteer")
+@ToString(callSuper = true)
 public class Volunteer {
  
 	@Id
-	@SequenceGenerator(name = "volunteer_no_seq",sequenceName ="volunteer_no_seq",allocationSize = 1,initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "volunteer_no_seq")
+	@SequenceGenerator(name = "Volunteer_volunteer_no_SEQ",sequenceName ="Volunteer_volunteer_no_SEQ",allocationSize = 1,initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Volunteer_volunteer_no_SEQ")
 	private Long volunteerNo; // PK
-	private Long volunteerTime;
-	private LocalDate volunteerDate;
+	private Integer volunteerTime;
+	private Date volunteerDate;
 	private String volunteerStatus;
 	
 	/*
 	 * N : 1
 	 */
 	@Builder.Default
-	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_no")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
 	
@@ -47,7 +49,7 @@ public class Volunteer {
 	 * N : 1
 	 */
 	@Builder.Default
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinColumn(name = "center_no")
 	@ToString.Exclude
 	private Center center = new Center();

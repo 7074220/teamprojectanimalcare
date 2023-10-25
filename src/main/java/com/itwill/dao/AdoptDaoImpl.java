@@ -21,7 +21,7 @@ public class AdoptDaoImpl implements AdoptDao{
 	}
 
 	@Override
-	public Adopt findByNoAdopt(Long no) {
+	public Adopt findByAdoptNo(Long no) {
 		Adopt selectedAdopt=adoptRepository.findById(no).get();
 		return selectedAdopt;
 	}
@@ -54,8 +54,8 @@ public class AdoptDaoImpl implements AdoptDao{
 
 	
 	@Override
-	public List<Adopt> findByUserinfoUserId(String userId) {
-		List<Adopt> adoptList=adoptRepository.findByUserinfoUserId(userId);
+	public List<Adopt> findAdoptsByUserNo(Long no) {
+		List<Adopt> adoptList=adoptRepository.findAdoptsByUserNo(no);
 		return adoptList;
 	
 	}

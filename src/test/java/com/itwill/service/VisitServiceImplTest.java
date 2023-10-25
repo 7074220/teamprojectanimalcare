@@ -3,6 +3,8 @@ package com.itwill.service;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -15,17 +17,18 @@ import com.itwill.entity.Userinfo;
 import com.itwill.entity.Visit;
 
 import jakarta.transaction.Transactional;
+
 @SpringBootTest
 class VisitServiceImplTest {
 	@Autowired
 	VisitService visitService;
-	
+
 	@Autowired
 	CenterService centerService;
-	
+
 	@Autowired
 	UserInfoService userInfoService;
-	
+
 	@Transactional
 	@Rollback(value = false)
 	@Disabled
@@ -33,24 +36,49 @@ class VisitServiceImplTest {
 	void insertVisit() throws Exception {
 		Visit insertVisit = Visit.builder()
 				.visitNo(null)
-				.userinfo(userInfoService.findUser("김창섭"))
-				.visitTime(3L)
-				.visitDate(LocalDate.now())
-				.center(centerService.findByCenterNo(4L))
-				.visitstatus("접수중")
+				.userinfo(userInfoService.findUserByNo(3L))
+				.visitTime(3)
+				.visitDate(new Date())
+				.center(centerService.findByCenterNo(3L))
+				.visitStatus("접수중")
 				.build();
 		visitService.createVisit(insertVisit);
 	}
-	
+
 	@Test
 	@Transactional
-	//@Disabled
+	@Disabled
 	void selectVisit() {
-		Visit selectVisit = visitService.findByVisitNo(1L);
+		Visit selectVisit = visitService.findByVisitNo(2L);
+		System.out.println(selectVisit);
 
-	    
-		    System.out.println(selectVisit);
-		 
 	}
+	@Test
+	@Transactional
+	@Rollback(value = false)
+	@Disabled
+	void deleteVisit()throws Exception {
+		visitService.deleteVisit(3L);
+	}
+	@Test
+	@Transactional
+	@Rollback(value = false)
+	@Disabled
+	void updateVisit() {
+		Visit findVisit = visitService.findByVisitNo(2L);
+		findVisit.setVisitStatus("접수완료");
+	}
+	
+		@Test
+		@Transactional
+		@Rollback(value = false)
+		@Disabled
+		void findVisitsByUserId() {
+		    List<Visit> selectVisit = visitService.getVisitsByUserNo(2L);
+		    System.out.println(selectVisit);
+		}
+
+		
+	
 
 }

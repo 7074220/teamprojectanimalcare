@@ -1,6 +1,6 @@
 package com.itwill.entity;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringExclude;
@@ -28,17 +28,19 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+
 public class Pet {
-	@SequenceGenerator(name = "pet_pet_no_seq",sequenceName = "pet_pet_no_seq",initialValue = 1,allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "pet_pet_no_seq")
+	@SequenceGenerator(name = "Pet_pet_no_SEQ",sequenceName = "Pet_pet_no_SEQ",initialValue = 1,allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Pet_pet_no_SEQ")
 	@Id
 	 private Long petNo;
 	 private String petLocal;
 	 private String petType;
-	 private String petgender;
-	 private LocalDate  petRegisterDate;
+	 private String petGender;
+	 private Date  petRegisterDate;
 	 private String petFindPlace;
 	 private String petCharacter;
+	 private String petImage;
 	 
 	 @ManyToOne(cascade = CascadeType.PERSIST ,fetch = FetchType.LAZY)
 	 @JoinColumn(name = "center_no")

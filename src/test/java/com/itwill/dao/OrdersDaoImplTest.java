@@ -3,6 +3,7 @@ package com.itwill.dao;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
@@ -19,20 +20,22 @@ class OrdersDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 @Autowired 
 private OrdersDao ordersDao;
 	
-//유저아이디로 주문조회
+//유저아이디로 최신주문조회
 @Test
 @Disabled
 @Transactional
 @Rollback(false)
 	void findOrdersById() {
 		
-	List<Orders> orders = ordersDao.findOrdersById("박태환");
+	List<Orders> orders = ordersDao.findAllByUserNoDESC(3L);
+	
 	System.out.println(orders);
 	}
 
 
 
 //주문최신순으로 조회
+//관리자 모드 
 @Test
 @Disabled
 @Transactional
@@ -48,9 +51,30 @@ private OrdersDao ordersDao;
 @Disabled
 @Transactional
 @Rollback(false)
+	void findAllByOrderByOrderNo() {
+		
+	List<Orders> orders = ordersDao.findOrdersByuserNo(3L);
+	System.out.println(orders);
+	}
+
+//날짜별 기간으로 조회
+@Test
+@Disabled
+@Transactional
+@Rollback(false)
+	void findAllByOrdersByOrderDate() {
+		
+	List<Orders> orders = ordersDao.findAllByOrdersByOrderDate(new Date("2023-10-22"), new Date("2023-10-24"));
+	System.out.println(orders);
+	}
+
+@Test
+@Disabled
+@Transactional
+@Rollback(false)
 void insert() {
 	Orders order1=Orders.builder()
-			.orderDate(LocalDate.now())
+			.orderDate(new Date())
 			.orderPrice(5000)
 			.orderAddress("서울특별시 구로구")
 			.orderDesc("상품 외...")

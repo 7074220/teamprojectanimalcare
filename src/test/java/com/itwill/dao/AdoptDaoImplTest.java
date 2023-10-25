@@ -3,6 +3,7 @@ package com.itwill.dao;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import com.itwill.entity.Adopt;
 import com.itwill.entity.Center;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Userinfo;
+import com.itwill.repository.AdoptRepository;
 
 
 @SpringBootTest
@@ -29,6 +31,8 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	UserInfoDao userInfoDao;
 	@Autowired
 	CenterDao centerDao;
+	@Autowired
+	AdoptRepository adoptRepository;
 	
 	@Test
 	@Transactional
@@ -36,20 +40,20 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Disabled
 	void insertTest() {
 		
-		Userinfo userinfo1 = userInfoDao.findById("박태환");
-		Userinfo userinfo2 = userInfoDao.findById("전아현");
+		Userinfo userinfo1 = userInfoDao.findByNo(3L);
+		Userinfo userinfo2 = userInfoDao.findByNo(4L);
 		
 		
-		//Pet pet1 = petDao.petFindById(1L);
-		//Pet pet2 = petDao.petFindById(2L);
-		
+		Pet pet1 = petDao.petFindById(1L);
+		Pet pet2 = petDao.petFindById(2L);
+		/*
 		Pet pet1 = Pet.builder()
 				.petType("포메")
 				.petCharacter("귀여움")
 				.petFindPlace("서울")
-				.petgender("여")
+				.petGender("여")
 				.petLocal("인천")
-				.petRegisterDate(LocalDate.now())
+				.petRegisterDate(new Date())
 				.center(centerDao.findByCenterNo(1L))
 				.build();
 		petDao.petInsert(pet1);
@@ -58,30 +62,30 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 				.petType("푸들")
 				.petCharacter("사나움")
 				.petFindPlace("부산")
-				.petgender("남")
+				.petGender("남")
 				.petLocal("광주")
-				.petRegisterDate(LocalDate.now())
+				.petRegisterDate(new Date())
 				.center(centerDao.findByCenterNo(2L))
 				.build();
 		petDao.petInsert(pet2);
 		
-		
+		*/
 		
 		
 		Adopt adopt1 = Adopt.builder() 
-							.adoptDate(LocalDate.now())
-							.adoptTime(11L)
+							.adoptDate(new Date())
+							.adoptTime(11)
 							.pet(pet1)
-							.status("입양중")
+							.adoptStatus("입양중")
 							.userinfo(userinfo1)
 							.build();
 		adoptDao.insertAdopt(adopt1);
 		
 		Adopt adopt2 = Adopt.builder() 
-				.adoptDate(LocalDate.now())
-				.adoptTime(10L)
+				.adoptDate(new Date())
+				.adoptTime(10)
 				.pet(pet2)
-				.status("입양완료")
+				.adoptStatus("입양중")
 				.userinfo(userinfo2)
 				.build();
 		adoptDao.insertAdopt(adopt2);
@@ -112,7 +116,7 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	@Disabled
 	void findById() {
-		System.out.println(adoptDao.findByNoAdopt(6L));
+		System.out.println(adoptDao.findByAdoptNo(2L));
 	}
 	
 	@Test
@@ -120,9 +124,9 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	@Disabled
 	void updateTest() throws Exception{
-		Adopt adopt=adoptDao.findByNoAdopt(6L);
+		Adopt adopt=adoptDao.findByAdoptNo(2L);
 		//adopt.setAdoptTime(12L);
-		adopt.setStatus("입양신청");
+		adopt.setAdoptStatus("입양완료");
 		adoptDao.updateAdopt(adopt);
 		
 	}
@@ -132,7 +136,7 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	@Disabled
 	void selectByUserId() {
-		System.out.println(adoptDao.findByUserinfoUserId("박태환"));
+		System.out.println(adoptRepository.findAdoptsByUserNo(2L));
 	}
 	
 }
