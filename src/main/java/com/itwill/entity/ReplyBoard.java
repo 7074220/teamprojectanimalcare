@@ -39,10 +39,8 @@ public class ReplyBoard {
 	private Date ReplyBoardRegisterDate;
 	private String ReplyBoardContent;
 	private Integer ReplyBoardGroupNo;
-	@Builder.Default
-	private Integer ReplyBoardStep = 1;
-	@Builder.Default
-	private Integer ReplyBoardDepth = 0;
+	private Integer ReplyBoardStep;
+	private Integer ReplyBoardDepth;
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY)

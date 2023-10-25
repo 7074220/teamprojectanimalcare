@@ -20,27 +20,24 @@ import com.itwill.entity.Userinfo;
 class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 
 	@Autowired
-	ReplyBoardDao replyBoardDao;
+	private ReplyBoardDao replyBoardDao;
 	
 	@Autowired
-	ReportBoardDao reportBoardDao;
+	private ReportBoardDao reportBoardDao;
 	
 	@Autowired
-	UserInfoDao userInfoDao;
+	private UserInfoDao userInfoDao;
 	
 	@Transactional
 	@Rollback(false)
-	@Disabled
+	//@Disabled
 	@Test
 	void test() {
 		Userinfo userinfo = userInfoDao.findByNo(2L);
 		ReportBoard reportBoard = reportBoardDao.findByBoardNo(1L);
 		ReplyBoard replyBoard = ReplyBoard.builder()
 										.ReplyBoardContent("내용")
-										.ReplyBoardDepth(0)
-										.ReplyBoardGroupNo(1)
 										.ReplyBoardRegisterDate(new Date())
-										.ReplyBoardStep(1)
 										.userinfo(userinfo)
 										.reportBoard(reportBoard)
 										.build();
