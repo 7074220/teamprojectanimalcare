@@ -128,7 +128,7 @@ INSERT INTO replyboard (reply_board_no,reply_board_content,reply_board_depth,rep
 VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'내용',0,1,sysdate,0,1,1);
 
 INSERT INTO replyboard (reply_board_no,reply_board_content,reply_board_depth,reply_board_group_no,reply_board_register_date,reply_board_step,user_no,board_no) 
-VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'내용1',0,1,sysdate,0,2,2);
+VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'내용1',0,2,sysdate,0,2,2);
 
 INSERT INTO replyboard (reply_board_no,reply_board_content,reply_board_depth,reply_board_group_no,reply_board_register_date,reply_board_step,user_no,board_no) 
-VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'내용2',0,1,sysdate,0,3,3);
+VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'내용2',0,3,sysdate,0,3,3);

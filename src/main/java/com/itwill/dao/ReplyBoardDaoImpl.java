@@ -42,6 +42,7 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 					.ReplyBoardStep(maxStep+1)
 					.ReplyBoardContent(replyBoard.getReplyBoardContent())
 					.reportBoard(replyBoard.getReportBoard())
+					.userinfo(null)
 					.build();
 		return replyBoardRepository.save(board);
 	}
