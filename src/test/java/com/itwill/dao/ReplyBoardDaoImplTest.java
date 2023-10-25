@@ -53,7 +53,7 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Disabled
 	@Test
 	void test1() {
-		replyBoardDao.deleteByReplyBoardNo(1L);
+		//replyBoardDao.deleteByReplyBoardNo(1L);
 	}
 	
 	

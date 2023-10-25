@@ -18,7 +18,9 @@ public interface ReplyBoardRepository extends JpaRepository<ReplyBoard, Long>{
 	
 	//@Query(value="delete from replyboard where user_no = ?1",nativeQuery = true)
 	//public void deleteByUserNo(Long userNo);
-
+	
+	public ReplyBoard insert(ReplyBoard replyBoard);
+	
 	@Query(value = "select * from replyboard where user_no = ?1",nativeQuery = true)
 	public List<ReplyBoard> findByUserNo(Long userNo);
 	

@@ -28,6 +28,7 @@ class ReplyBoardServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 								.ReplyBoardRegisterDate(null)
 								.ReplyBoardStep(null)
 								.userinfo(null)
+								.reportBoard(null)
 								.build();
 		
 		replyBoardService.Create(null);

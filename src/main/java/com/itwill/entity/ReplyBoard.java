@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -38,8 +39,10 @@ public class ReplyBoard {
 	private Date ReplyBoardRegisterDate;
 	private String ReplyBoardContent;
 	private Integer ReplyBoardGroupNo;
-	private Integer ReplyBoardStep;
-	private Integer ReplyBoardDepth;
+	@Builder.Default
+	private Integer ReplyBoardStep = 1;
+	@Builder.Default
+	private Integer ReplyBoardDepth = 0;
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
