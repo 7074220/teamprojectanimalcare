@@ -15,8 +15,12 @@ public interface ReplyBoardService {
 	public List<ReplyBoard> findAllByOrderByReplyBoardNoAsc();
 
 	// 댓글 삭제
-	public void deleteByReplyBoardNo(Long ReplyBoardNo);
+	public void deleteByReplyBoardStepBoardDepthBoardGroupNo(Integer ReplyBoardStep,Integer ReplyBoardDepth,Integer ReplyBoardGroupNo);
 	
 	//댓글 하나 찾기 
 	public ReplyBoard findByReplyBoardNo(Long replyBoardNo);
+	
+	// 대댓글 작성
+	public ReplyBoard CreateReply(ReplyBoard replyBoard);
+	
 }

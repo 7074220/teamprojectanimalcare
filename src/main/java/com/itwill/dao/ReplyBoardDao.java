@@ -16,7 +16,7 @@ public interface ReplyBoardDao {
 	public ReplyBoard findByReplyBoardNo(Long replyBoardNo);
 	
 	// 댓글 삭제
-	public void deleteByReplyBoardNo(Long replyBoardNo);
+	public void deleteByReplyBoardStepBoardDepthBoardGroupNo(Integer ReplyBoardStep,Integer ReplyBoardDepth,Integer ReplyBoardGroupNo);
 	
 	// 대댓글 작성
 	public ReplyBoard CreateReply(ReplyBoard replyBoard);
@@ -29,5 +29,8 @@ public interface ReplyBoardDao {
 	
 	// 오래된 순서
 	public List<ReplyBoard> findAllByOrderByReplyBoardNoAsc();
+	
+	// 해당 그룹 최대 스텝 수 찾기
+	public Integer findGreatestStepByGroupNo(Integer ReplyBoardGroupNo);
 	
 }

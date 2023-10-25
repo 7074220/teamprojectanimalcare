@@ -34,16 +34,19 @@ public class ReplyBoardServiceImpl implements ReplyBoardService{
 	}
 
 	@Override
-	public void deleteByReplyBoardNo(Long ReplyBoardNo) {
-		replyBoardDao.deleteByReplyBoardNo(ReplyBoardNo);
-		
+	public void deleteByReplyBoardStepBoardDepthBoardGroupNo(Integer ReplyBoardStep, Integer ReplyBoardDepth,
+			Integer ReplyBoardGroupNo) {
+		replyBoardDao.deleteByReplyBoardStepBoardDepthBoardGroupNo(ReplyBoardStep, ReplyBoardDepth, ReplyBoardGroupNo);
 	}
-
+	
 	@Override
 	public ReplyBoard findByReplyBoardNo(Long replyBoardNo) {
-		
 		return replyBoardDao.findByReplyBoardNo(replyBoardNo);
 	}
 	
+	@Override
+	public ReplyBoard CreateReply(ReplyBoard replyBoard) {
+		return replyBoardDao.CreateReply(replyBoard);
+	}
 	
 }
