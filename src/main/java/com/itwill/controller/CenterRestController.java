@@ -24,7 +24,8 @@ public class CenterRestController {
 
 	@Autowired
 	private CenterService centerService;
-
+	
+	@GetMapping("/no/{centerNo}")
 	public ResponseEntity<Center> getCenterByNo(@PathVariable Long CenterNo) {
 		// 센터 번호에 해당하는 센터 정보 조회
 		Center center = centerService.findByCenterNo(CenterNo);
@@ -47,7 +48,8 @@ public class CenterRestController {
 
 	@PutMapping("/{centerNo}")
 	public ResponseEntity<Center> updateCenter(@PathVariable Long centerNo, @RequestBody Center updatedCenter) {
-		// 센터수정
+		
+
 		// 센터 정보 조회
 		Center SearchCenter = centerService.findByCenterNo(centerNo);
 		// 업데이트된 센터 정보 적용 후 저장
