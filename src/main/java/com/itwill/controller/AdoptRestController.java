@@ -28,15 +28,21 @@ public class AdoptRestController {
 
 	@PostMapping
 	public ResponseEntity<Adopt> insertAdopt(@RequestBody Adopt adopt) {
-		return ResponseEntity.status(HttpStatus.OK).body(adoptService.insertAdopt(adopt));
+		return ResponseEntity.status(HttpStatus.CREATED).body(adoptService.insertAdopt(adopt));
 	}
 
 	@GetMapping("/{no}")
 	public ResponseEntity<Adopt> findByAdoptNo(@PathVariable(value = "no") Long no) {
-		return ResponseEntity.status(HttpStatus.OK).body(adoptService.findByAdoptNo(no));
+		Adopt adopt=adoptService.findByAdoptNo(no);
+		if(adopt!=null) {
+			return ResponseEntity.ok(adopt);
+		}else {
+			return ResponseEntity.notFound().build();
+		}
+		
 	}
 
-	@PutMapping
+	@PutMapping("/{no}")
 	public ResponseEntity<Adopt> updateAdopt(@PathVariable Long no,@RequestBody Adopt adopt) throws Exception {
 	Adopt findAdopt=adoptService.findByAdoptNo(no);
 		findAdopt.setAdoptTime(adopt.getAdoptTime());
@@ -54,15 +60,15 @@ public class AdoptRestController {
 
 	}
 	
-	/*
-	@GetMapping
-	public ResponseEntity<List<Adopt>> findAdoptList() {
+	
+	@GetMapping("/all")
+	public ResponseEntity<List<Adopt>> findAllAdopts() {
 		return ResponseEntity.status(HttpStatus.OK).body(adoptService.findAdoptList());
 	}
 
-	@GetMapping("/find/{userNo}")
+	@GetMapping("/findAdopts/{userNo}")
 	public ResponseEntity<List<Adopt>> findAdoptsByUserNo(@PathVariable(name = "userNo") Long userNo) {
 		return ResponseEntity.status(HttpStatus.OK).body(adoptService.findAdoptsByUserNo(userNo));
 	}
-	*/
+	
 }
