@@ -31,7 +31,7 @@ public class UserWriteActionDto {
 	private Integer userPoint;
 	
 	public static Userinfo toEntity(UserWriteActionDto dto) {
-		Userinfo.builder()
+		Userinfo userinfo = Userinfo.builder()
 				.userId(dto.getUserId())
 				.build();
 		return null;
