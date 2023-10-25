@@ -18,7 +18,7 @@ class ReplyBoardServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	
 	@Transactional
 	@Rollback(false)
-	//@Disabled
+	@Disabled
 	@Test
 	void insert() {
 		ReplyBoard replyBoard = ReplyBoard.builder()
@@ -33,5 +33,25 @@ class ReplyBoardServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 		
 		replyBoardService.Create(null);
 	}
-
+	
+	@Transactional
+	@Rollback(false)
+	@Disabled
+	@Test
+	void insertReply() {
+		ReplyBoard replyBoard = replyBoardService.findByReplyBoardNo(1L);
+		replyBoardService.CreateReply(replyBoard);
+		
+	}
+	
+	@Transactional
+	@Rollback(false)
+	//@Disabled
+	@Test
+	void delete() {
+		ReplyBoard replyBoard=  replyBoardService.findByReplyBoardNo(1L);
+		replyBoardService.deleteByReplyBoardStepBoardDepthBoardGroupNo(replyBoard.getReplyBoardStep(),replyBoard.getReplyBoardDepth(),replyBoard.getReplyBoardGroupNo());
+		
+	}
+	
 }

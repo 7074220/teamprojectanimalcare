@@ -30,7 +30,7 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	@Transactional
 	@Rollback(false)
-	//@Disabled
+	@Disabled
 	void insertCart() {
 		Userinfo userinfo = userInfoDao.findByNo(6L);
 		Product product = productDao.findByProductNo(1L);
@@ -39,7 +39,6 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 				.cartQty(1)
 				.userinfo(userinfo)
 				.product(product)
-				.cartImage(product.getProductImage())
 				.build();
 		Cart babo = cartService.insertCart(cart);
 		System.out.println(babo);
@@ -56,13 +55,13 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	}
 	
 	@Test
-	@Disabled
+	//@Disabled
 	@Transactional
 	@Rollback(false)
 	// 카트에서 cartNo로 하나 선택 --> 수량 업데이트
 	void updateQtyCartTest() {
-		Cart update = cartService.findByCartNo(1L);
-		update.setCartQty(100);
+		Cart update = cartService.findByCartNo(38L);
+		update.setCartQty(200);
 		System.out.println(update);
 	}
 	
