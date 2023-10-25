@@ -53,7 +53,8 @@ public class AdoptRestController {
 		return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>());
 
 	}
-
+	
+	/*
 	@GetMapping
 	public ResponseEntity<List<Adopt>> findAdoptList() {
 		return ResponseEntity.status(HttpStatus.OK).body(adoptService.findAdoptList());
@@ -63,5 +64,5 @@ public class AdoptRestController {
 	public ResponseEntity<List<Adopt>> findAdoptsByUserNo(@PathVariable(name = "no") Long no) {
 		return ResponseEntity.status(HttpStatus.OK).body(adoptService.findAdoptsByUserNo(no));
 	}
-
+	*/
 }
