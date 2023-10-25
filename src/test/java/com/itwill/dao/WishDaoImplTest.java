@@ -2,6 +2,8 @@ package com.itwill.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,7 @@ class WishDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	ProductDao productDao;
 	
 	@Test
-	//@Disabled
+	@Disabled
 	@Transactional
 	@Rollback(false)
 	void insert() {
@@ -34,4 +36,21 @@ class WishDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		wishDao.insertWish(insert);
 	}
 
+	@Test
+	@Disabled
+	@Transactional
+	@Rollback(false)
+	void delete() throws Exception{
+		wishDao.deleteWish(1L);
+	}
+	
+	@Test
+	@Disabled
+	@Transactional
+	@Rollback(false)
+	void findAll() {
+		List<Wish> wishList = wishDao.findAllWishByUserNo(2L);
+		System.out.println(wishList);
+	}
+	
 }
