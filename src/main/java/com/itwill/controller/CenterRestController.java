@@ -41,27 +41,27 @@ public class CenterRestController {
 
 	@PostMapping
 	public ResponseEntity<Center> createCenter(@RequestBody Center center) {
-		// 센터 생성
-		Center createCenter = centerService.createCenter(center);
-		return ResponseEntity.status(HttpStatus.CREATED).body(createCenter);
+	    // 센터 생성
+	    Center createCenter = centerService.createCenter(center);
+	    return ResponseEntity.status(HttpStatus.CREATED).body(createCenter);
 	}
+
 
 	@PutMapping("/{centerNo}")
 	public ResponseEntity<Center> updateCenter(@PathVariable Long centerNo, @RequestBody Center updatedCenter) {
-		
+	    // 센터 정보 조회
+	    Center SearchCenter = centerService.findByCenterNo(centerNo);
+	    // 업데이트된 센터 정보 적용 후 저장
+	    SearchCenter.setCenterName(updatedCenter.getCenterName());
+	    SearchCenter.setCenterLocal(updatedCenter.getCenterLocal());
+	    SearchCenter.setCenterOpenCloseTime(updatedCenter.getCenterOpenCloseTime());
+	    SearchCenter.setCenterPhoneNumber(updatedCenter.getCenterPhoneNumber());
 
-		// 센터 정보 조회
-		Center SearchCenter = centerService.findByCenterNo(centerNo);
-		// 업데이트된 센터 정보 적용 후 저장
-		SearchCenter.setCenterName(updatedCenter.getCenterName());
-		SearchCenter.setCenterLocal(updatedCenter.getCenterLocal());
-		SearchCenter.setCenterOpenCloseTime(updatedCenter.getCenterOpenCloseTime());
-		SearchCenter.setCenterPhoneNumber(updatedCenter.getCenterPhoneNumber());
+	    Center saveCenter = centerService.updateCenter(SearchCenter);
 
-		Center saveCenter = centerService.updateCenter(SearchCenter);
-
-		return ResponseEntity.ok(saveCenter);
+	    return ResponseEntity.ok(saveCenter);
 	}
+
 
 	@DeleteMapping("/{centerNo}")
 	public ResponseEntity<Void> deleteCenter(@PathVariable Long centerNo) {
