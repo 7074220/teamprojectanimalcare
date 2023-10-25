@@ -25,7 +25,6 @@ public class WishServiceImpl implements WishService {
 	
 	@Override
 	public Wish insertWish(Wish insertWish) {
-		
 		Optional<Wish> find = wishrepoRepository.findById(insertWish.getProduct().getProductNo());
 		if (find.isPresent()) {
 			System.out.println("이미 존재하는 상품입니다.");
@@ -36,7 +35,6 @@ public class WishServiceImpl implements WishService {
 		}
 		
 		return insertWish;
-	
 	}
 
 	@Override
