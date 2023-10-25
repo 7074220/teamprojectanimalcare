@@ -47,7 +47,7 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	
 	@Transactional
 	@Rollback(false)
-	//@Disabled
+	@Disabled
 	@Test
 	void test1() {
 		ReplyBoard replyBoard = replyBoardDao.findByReplyBoardNo(1L);
@@ -122,13 +122,15 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	
 	@Transactional
 	@Rollback(false)
-	@Disabled
+	//@Disabled
 	@Test
 	void test7() {
-		ReplyBoard replyBoard=replyBoardDao.findByReplyBoardNo(5L);
-		System.out.println(replyBoard);
+		List<ReplyBoard>  replyBoardList= replyBoardDao.findAllByReportBoardNo(2L);
+		System.out.println(replyBoardList);
 	
 	}
 	
 
+	
+	
 }

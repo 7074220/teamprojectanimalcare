@@ -52,5 +52,11 @@ public class ReplyBoardServiceImpl implements ReplyBoardService{
 	public ReplyBoard CreateReply(ReplyBoard replyBoard) {
 		return replyBoardDao.CreateReply(replyBoard);
 	}
+
+	@Override
+	public List<ReplyBoard> findAllByReportBoardNo(Long BoardNo) {
+		
+		return replyBoardDao.findAllByReportBoardNo(BoardNo);
+	}
 	
 }

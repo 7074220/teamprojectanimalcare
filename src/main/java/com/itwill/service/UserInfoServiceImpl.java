@@ -18,7 +18,7 @@ import com.itwill.exception.UserNotFoundException;
 public class UserInfoServiceImpl implements UserInfoService{
 	
 	@Autowired
-	UserInfoDao userInfoDao;
+	private UserInfoDao userInfoDao;
 	
 	// 회원가입
 	@Override
