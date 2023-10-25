@@ -82,6 +82,12 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 		return replyBoardRepository.findGreatestStepByGroupNo(ReplyBoardGroupNo);
 	}
 	
+	// 해당 게시물의 댓글 보여주기
+	@Override
+	public List<ReplyBoard> findAllByReportBoardNo(Long BoardNo) {
+		return replyBoardRepository.findAllByReportBoardNo(BoardNo);
+	}
+	
 }
 
 
