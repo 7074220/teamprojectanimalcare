@@ -18,7 +18,6 @@ import lombok.ToString;
 @Builder
 public class UserWriteActionDto {
 	
-	
 	private Long userNo;
 	private String userId;
 	private String userPassword;
@@ -33,8 +32,16 @@ public class UserWriteActionDto {
 	public static Userinfo toEntity(UserWriteActionDto dto) {
 		Userinfo userinfo = Userinfo.builder()
 				.userId(dto.getUserId())
+				.userPassword(dto.getUserPassword())
+				.userName(dto.getUserName())
+				.userGender(dto.getUserGender())
+				.userAddress(dto.getUserAddress())
+				.userPhoneNumber(dto.getUserPhoneNumber())
+				.userResidentNumber(dto.getUserResidentNumber())
+				.userRegisterDate(dto.getUserRegisterDate())
+				.userPoint(dto.getUserPoint())
 				.build();
-		return null;
+		return userinfo;
 	}
 	
 }

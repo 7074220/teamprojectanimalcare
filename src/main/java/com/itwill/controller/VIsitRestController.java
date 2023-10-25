@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,6 +39,24 @@ public class VIsitRestController {
 		List<Visit> visits = visitService.selectAllVisits();
 		return ResponseEntity.ok(visits);
 	}
-
+	@PutMapping("/{visitNo}")
+	public ResponseEntity<Visit> updateVisit (@PathVariable Long visitNo, @RequestBody Visit updatedVisit) {
+		// 센터수정
+		Visit SearchVisit = visitService.findByVisitNo(visitNo);
+		SearchVisit.setVisitDate(updatedVisit.getVisitDate());
+		SearchVisit.setVisitStatus(updatedVisit.getVisitStatus());
+		SearchVisit.setVisitTime(updatedVisit.getVisitTime());
+		
+		Visit saveVisit = visitService.updateVisit(SearchVisit);
+		
+		return ResponseEntity.ok(saveVisit);
+	}
 	
+	
+	public ResponseEntity<Visit> daleteVisit (@PathVariable Long visitNo) {
+		visitService.deleteVisit(visitNo);
+		//견학 삭제
+		
+		return ResponseEntity.noContent().build();
+	}
 }
