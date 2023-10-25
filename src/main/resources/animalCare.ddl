@@ -169,11 +169,6 @@ DROP SEQUENCE Adopt_adopt_no_SEQ;
 
 CREATE SEQUENCE Adopt_adopt_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
-
 
 CREATE TABLE Product(
 		product_no                    		NUMBER(10)		 NULL ,
@@ -206,11 +201,6 @@ CREATE TABLE Orders(
 DROP SEQUENCE Orders_order_no_SEQ;
 
 CREATE SEQUENCE Orders_order_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 
 
 CREATE TABLE OrderStatus(
@@ -252,11 +242,6 @@ DROP SEQUENCE Cart_cart_no_SEQ;
 
 CREATE SEQUENCE Cart_cart_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
-
 
 CREATE TABLE MyPet(
 		mypet_no                      		NUMBER(10)		 NULL ,
@@ -286,11 +271,6 @@ CREATE TABLE ReviewBoard(
 DROP SEQUENCE ReviewBoard_board_no_SEQ;
 
 CREATE SEQUENCE ReviewBoard_board_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 
 
 CREATE TABLE ReplyBoard(

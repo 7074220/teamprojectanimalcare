@@ -95,16 +95,16 @@ values(Volunteer_volunteer_no_SEQ.nextval, 18, sysdate, '봉사완료',  3, 3);
 
 -- report board
 
-insert into reportboard (board_no,board_content,board_date,board_depth,board_group_no,board_name,board_phone,board_read_count,board_register_date,board_step,board_title,user_no) 
+insert into reportboard (board_no,board_content,board_date,board_depth,board_group_no,board_name,board_phone,board_readcount,board_register_date,board_step,board_title,user_no) 
 VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),0,1,'전아현','1111',0,sysdate,0,'토토어디갓어',2);
 
-insert into reportboard (board_no,board_content,board_date,board_depth,board_group_no,board_name,board_phone,board_read_count,board_register_date,board_step,board_title,user_no) 
+insert into reportboard (board_no,board_content,board_date,board_depth,board_group_no,board_name,board_phone,board_readcount,board_register_date,board_step,board_title,user_no) 
 VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),0,1,'박태환','1111',0,sysdate,0,'어디갓어',1);
 
-insert into reportboard (board_no,board_content,board_date,board_depth,board_group_no,board_name,board_phone,board_read_count,board_register_date,board_step,board_title,user_no) 
+insert into reportboard (board_no,board_content,board_date,board_depth,board_group_no,board_name,board_phone,board_readcount,board_register_date,board_step,board_title,user_no) 
 VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),0,1,'김창섭','1111',0,sysdate,0,'어디갓어2',3);
 
-insert into reportboard (board_no,board_content,board_date,board_depth,board_group_no,board_name,board_phone,board_read_count,board_register_date,board_step,board_title,user_no) 
+insert into reportboard (board_no,board_content,board_date,board_depth,board_group_no,board_name,board_phone,board_readcount,board_register_date,board_step,board_title,user_no) 
 VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),0,1,'김창섭','1111',0,sysdate,0,'어디갓어3',2);
 
 -- review board
@@ -124,11 +124,11 @@ INSERT INTO visit (VISIT_NO,VISIT_DATE, VISIT_TIME, VISIT_STATUS, CENTER_NO, USE
 INSERT INTO visit (VISIT_NO,VISIT_DATE, VISIT_TIME, VISIT_STATUS, CENTER_NO, USER_NO) VALUES (visit_visit_no_seq.nextval,  sysdate, 13,'봉사접수중', 3, 3);
 
 -- Reply board
-INSERT INTO replyboard (reply_board_no,reply_board_content,reply_board_depth,reply_board_group_no,reply_board_register_date,reply_board_step,user_no) 
-VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'내용',0,1,sysdate,0,1);
+INSERT INTO replyboard (reply_board_no,reply_board_content,reply_board_depth,reply_board_group_no,reply_board_register_date,reply_board_step,user_no,board_no) 
+VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'내용',0,1,sysdate,0,1,1);
 
-INSERT INTO replyboard (reply_board_no,reply_board_content,reply_board_depth,reply_board_group_no,reply_board_register_date,reply_board_step,user_no) 
-VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'내용1',0,1,sysdate,0,2);
+INSERT INTO replyboard (reply_board_no,reply_board_content,reply_board_depth,reply_board_group_no,reply_board_register_date,reply_board_step,user_no,board_no) 
+VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'내용1',0,1,sysdate,0,2,2);
 
-INSERT INTO replyboard (reply_board_no,reply_board_content,reply_board_depth,reply_board_group_no,reply_board_register_date,reply_board_step,user_no) 
-VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'내용2',0,1,sysdate,0,3);
+INSERT INTO replyboard (reply_board_no,reply_board_content,reply_board_depth,reply_board_group_no,reply_board_register_date,reply_board_step,user_no,board_no) 
+VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'내용2',0,1,sysdate,0,3,3);

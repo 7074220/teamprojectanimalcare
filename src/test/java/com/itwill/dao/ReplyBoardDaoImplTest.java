@@ -30,7 +30,7 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	
 	@Transactional
 	@Rollback(false)
-	@Disabled
+	//@Disabled
 	@Test
 	void test() {
 		Userinfo userinfo = userInfoDao.findByNo(2L);
