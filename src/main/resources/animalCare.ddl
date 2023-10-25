@@ -57,7 +57,7 @@ CREATE TABLE ReportBoard(
 		board_register_date           		DATE		 NULL ,
 		board_content                 		VARCHAR2(100)		 NULL ,
 		board_date                    		DATE		 NULL ,
-		board_read_Count              		NUMBER(10)		 NULL ,
+		board_readCount              		NUMBER(10)		 NULL ,
 		board_group_no                		NUMBER(10)		 NULL ,
 		board_step                    		NUMBER(10)		 NULL ,
 		board_depth                   		NUMBER(10)		 NULL ,
