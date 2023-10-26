@@ -97,8 +97,9 @@ public class VolunteerRestController {
 	
 	@Operation(summary = "봉사삭제")
 	@DeleteMapping("/{volunteerNo}")
-	public void VolunteerDelete(@PathVariable(name = "volunteerNo") Long volunteerNo) throws Exception{
+	public ResponseEntity<Map> VolunteerDelete(@PathVariable(name = "volunteerNo") Long volunteerNo) throws Exception{
 		volunteerService.deleteVolunteer(volunteerNo);	
+		return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>());
 	} // DELETE
 	
 	

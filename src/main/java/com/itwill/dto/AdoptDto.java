@@ -44,7 +44,7 @@ public class AdoptDto {
 
 	public static AdoptDto fromEntity(Adopt adopt) {
         return AdoptDto.builder()
-        		.userNo(adopt.getAdoptNo())
+        		.userNo(adopt.getUserinfo().getUserNo())
                 .adoptNo(adopt.getAdoptNo())
                 .adoptDate(adopt.getAdoptDate())
                 .adoptStatus(adopt.getAdoptStatus())
