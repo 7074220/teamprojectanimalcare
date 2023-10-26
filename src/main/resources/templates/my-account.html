@@ -606,10 +606,11 @@
                         <!-- Nav tabs -->
                         <div class="dashboard_tab_button">
                             <ul role="tablist" class="nav flex-column dashboard-list">
-                                <li><a href="#dashboard" data-toggle="tab" class="nav-link active">마이페이지</a></li>
-                                <li> <a href="#orders" data-toggle="tab" class="nav-link">상품주문</a></li>
-                                <li><a href="#downloads" data-toggle="tab" class="nav-link">입양 봉사 견학</a></li>
                                 <li><a href="#account-details" data-toggle="tab" class="nav-link">내정보</a></li>
+                                <li><a href="#mypet" data-toggle="tab" class="nav-link">마이펫</a></li>
+                                <li><a href="#cuponpage" data-toggle="tab" class="nav-link">쿠폰</a></li>
+                                <li><a href="#adoptVo" data-toggle="tab" class="nav-link">입양 봉사 견학</a></li>
+                                <li> <a href="#orders" data-toggle="tab" class="nav-link">상품주문</a></li>
                                 <li><a href="login.html" class="nav-link">로그아웃</a></li>
                                 <li><a href="login.html" class="nav-link">회원탈퇴</a></li>
                             </ul>
@@ -618,10 +619,7 @@
                     <div class="col-sm-12 col-md-9 col-lg-9">
                         <!-- Tab panes -->
                         <div class="tab-content dashboard_content">
-                            <div class="tab-pane fade show active" id="dashboard">
-                                <h3>Dashboard </h3>
-                                <p>From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a>, manage your <a href="#">shipping and billing addresses</a> and <a href="#">Edit your password and account details.</a></p>
-                            </div>
+                            
                             
                             <div class="tab-pane fade" id="orders">
                                 <h3>주문목록</h3>
@@ -656,7 +654,46 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade" id="downloads">
+
+
+                            <div class="tab-pane fade" id="cuponpage">
+                                <h3>쿠폰 리스트</h3>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Order</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                                <th>Total</th>
+                                                <th>Actions</th>                 
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>May 10, 2018</td>
+                                                <td><span class="success">Completed</span></td>
+                                                <td>$25.00 for 1 item </td>
+                                                <td><a href="cart.html" class="view">view</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>May 10, 2018</td>
+                                                <td>Processing</td>
+                                                <td>$17.00 for 1 item </td>
+                                                <td><a href="cart.html" class="view">view</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>    
+
+
+
+
+
+                            <div class="tab-pane fade" id="adoptVo">
                                 <h3>입양 봉사 견학</h3>
                                 <div class="table-responsive">
                                     <table class="table">
@@ -689,71 +726,43 @@
                                 </div>
                             </div>
 
-            <div class="tab-pane fade" id="downloads1">
-                <h3>입양 봉사 견학</h3>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Order</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th>Total</th>
-                                <th>Actions</th>                 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>May 10, 2018</td>
-                                <td><span class="success">Completed</span></td>
-                                <td>$25.00 for 1 item </td>
-                                <td><a href="cart.html" class="view">view</a></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>May 10, 2018</td>
-                                <td>Processing</td>
-                                <td>$17.00 for 1 item </td>
-                                <td><a href="cart.html" class="view">view</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            
+                            <div class="tab-pane fade" id="mypet">
+                                <h3>마이펫</h3>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>이름</th>
+                                                <th>생일</th>
+                                                <th>사진</th>
+                                                <th>종류</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>바둑이</td>
+                                                <td>Jan 10, 2020</td>
+                                                <td><img src="" alt="바둑이 사진" width="50" height="50"></td>
+                                                <td>강아지</td>
+                                                <td><a href="#" class="view">view</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>나비</td>
+                                                <td>Feb 15, 2019</td>
+                                                <td><img src="path_to_another_image.jpg" alt="나비 사진" width="50" height="50"></td>
+                                                <td>고양이</td>
+                                                <td><a href="#" class="view">view</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                             
-            <div class="tab-pane fade" id="downloads2">
-                <h3>입양 봉사 견학</h3>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Order</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th>Total</th>
-                                <th>Actions</th>                 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>May 10, 2018</td>
-                                <td><span class="success">Completed</span></td>
-                                <td>$25.00 for 1 item </td>
-                                <td><a href="cart.html" class="view">view</a></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>May 10, 2018</td>
-                                <td>Processing</td>
-                                <td>$17.00 for 1 item </td>
-                                <td><a href="cart.html" class="view">view</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>   
             
 
                             
