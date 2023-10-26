@@ -16,7 +16,7 @@ public interface MyPetDao {
      
      public MyPet findByNo(Long mypetNo);
     
+     public List<MyPet> findMyPetListByuserNo(Long userNo);
    
-   
-     
+     public void deleteMypetNoByUserNo(Long userNo,Long mypetNo);
 }
