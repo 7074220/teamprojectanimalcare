@@ -56,10 +56,10 @@ UserInfoService userInfoService;
 		return "forward:pet-list.html" ;
 	}
 	//펫 삭제 관리자만
-	@PostMapping("/petDelete/{petNo}")
-	public String petDelete(@PathVariable Long PetNo) throws Exception{
+	@PostMapping("/delete_action")
+	public String delete_action(@PathVariable Long petNo) throws Exception{
 		try {
-			petService.petRemove(PetNo);
+			petService.petRemove(petNo);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
