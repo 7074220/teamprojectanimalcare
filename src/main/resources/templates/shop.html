@@ -1,5 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -686,9 +687,9 @@
                             
                             	<!-- 3 X 3 상품리스트 시작(product imgae 뿌리기) -->
                                 <div class="product_thumb" th:each="product:${productList}">
-                                        <a class="primary_img" href="product-details.html"><img src="assets/img/product/avoderm_chicken_duck.jpg" alt=""></a>
+                                        <a class="primary_img" href="product-details.html"><img th:src="@{'assets/img/product/' + ${product.product_image}}" alt=""></a>
                                       
-                                      
+                                      	
                                         
                                         
                                         <!-- 상품리스트 시작 -->
