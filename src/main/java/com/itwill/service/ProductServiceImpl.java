@@ -36,105 +36,57 @@ public class ProductServiceImpl implements ProductService {
 		}
 		return findProduct;
 	}
-/*
+
 	@Override
 	public Product findByProductNo(Long no) {
-		Product selectedProduct = productRepository.findById(no).get();
+		Product selectedProduct = productDao.findByProductNo(no);
 		return selectedProduct;
 	}
 	
 	@Override
 	public void deleteProduct(Long no) throws Exception {
-		Optional<Product> selectedProdcuOptional = productRepository.findById(no);
-		if (selectedProdcuOptional.isEmpty()) {
+		Product findProduct = productDao.findByProductNo(no);
+		if (findProduct == null) {
 			throw new Exception("존재하지 않는 제품입니다.");
 		}
-		productRepository.delete(selectedProdcuOptional.get());
+		productDao.deleteProduct(no);
 	}
 
 	// 일부 단어 입력으로 제품 검색
 	@Override
 	public List<Product> findByContains(String productName) { 
-		return productRepository.findByContains(productName);
+		return productDao.findByContains(productName);
 	}
 
 	// 높은 가격순 정렬
 	@Override
 	public List<Product> findAllByOrderByProductPriceDesc() {
-		return productRepository.findAllByOrderByProductPriceDesc();
+		return productDao.findAllByOrderByProductPriceDesc();
 	}
 
 	// 낮은 가격순 정렬
 	@Override
 	public List<Product> findAllByOrderByProductPriceAsc () {
-		return productRepository.findAllByOrderByProductPriceAsc();
+		return productDao.findAllByOrderByProductPriceAsc();
 	}
 
 	// 평점높은순 정렬
 	@Override
 	public List<Product> findAllByOrderByProductStarAvgDesc() {
-		return productRepository.findAllByOrderByProductStarAvgDesc();
+		return productDao.findAllByOrderByProductStarAvgDesc();
 	}
 
 	// 최신번호순 정렬
 	@Override
 	public List<Product> findAllByOrderByProductNoDesc() {
-		return productRepository.findAllByOrderByProductNoDesc();
+		return productDao.findAllByOrderByProductNoDesc();
 	}
 
 	// 낮은번호순 정렬
 	@Override
 	public List<Product> findAllByOrderByProductNoAsc() {
-		return productRepository.findAllByOrderByProductNoAsc();
+		return productDao.findAllByOrderByProductNoAsc();
 	}
-	*/
-
-	@Override
-	public Product findByProductNo(Long no) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void deleteProduct(Long no) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public List<Product> findByContains(String productName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Product> findAllByOrderByProductPriceDesc() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Product> findAllByOrderByProductPriceAsc() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Product> findAllByOrderByProductStarAvgDesc() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Product> findAllByOrderByProductNoDesc() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Product> findAllByOrderByProductNoAsc() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	
 }
