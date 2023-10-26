@@ -103,6 +103,7 @@ public class UserInfoRestController {
 	@GetMapping("/{userNo}")
 	public ResponseEntity<UserWriteActionDto> user_view(@PathVariable(name = "userNo") Long userNo, HttpSession session)
 			throws Exception {
+		
 		UserWriteActionDto dto = UserWriteActionDto.builder().build();
 		if (session.getAttribute("userNo") != null) {
 			Userinfo loginUser = userInfoService.findUserByNo(userNo);
