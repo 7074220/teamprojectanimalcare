@@ -31,7 +31,7 @@ public class CenterRestController {
 
 	@Autowired
 	private CenterService centerService;
-	
+
 	@Operation(summary = "센터추가")
 	@PostMapping
 	public ResponseEntity<CenterDto> createCenter(@RequestBody CenterDto dto) {
@@ -59,61 +59,85 @@ public class CenterRestController {
 		return new ResponseEntity<List<CenterDto>>(centerDtoList, httpHeaders, HttpStatus.OK);
 
 	}
-	
+
 	@Operation(summary = "센터삭제")
 	@DeleteMapping("/{centerNo}")
-	public void CenterDelete(@PathVariable(name = "centerNo")Long centerNo) {
+	public void CenterDelete(@PathVariable(name = "centerNo") Long centerNo) {
 		centerService.deleteCenter(centerNo);
 	}
-	
+
 	@Operation(summary = "센터이름검색")
 	@GetMapping("/centers/search")
 	public ResponseEntity<List<CenterDto>> searchCentersByName(@RequestParam(name = "name") String name) {
-	    List<Center> centers = centerService.findAllCenters();
-	    List<CenterDto> centerDtoList = new ArrayList<CenterDto>();
-	    
-	    for (Center center : centers) {
-	        String centerName = center.getCenterName();
-	        if (centerName != null && centerName.equals(name)) { 	//<NullPointerException시 추가 
-	            centerDtoList.add(CenterDto.toDto(center));
-	        }
-	    }
+		List<Center> centers = centerService.findAllCenters();
+		List<CenterDto> centerDtoList = new ArrayList<CenterDto>();
 
-	    HttpHeaders httpHeaders = new HttpHeaders();
-	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		for (Center center : centers) {
+			String centerName = center.getCenterName();
+			if (centerName != null && centerName.equals(name)) { // <NullPointerException시 추가
+				centerDtoList.add(CenterDto.toDto(center));
+			}
+		}
 
-	    if (!centerDtoList.isEmpty()) {
-	        return new ResponseEntity<>(centerDtoList, httpHeaders, HttpStatus.OK);
-	    } else {
-	        return new ResponseEntity<>(httpHeaders, HttpStatus.NOT_FOUND); 
-	    }
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+		if (!centerDtoList.isEmpty()) {
+			return new ResponseEntity<>(centerDtoList, httpHeaders, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(httpHeaders, HttpStatus.NOT_FOUND);
+		}
 	}
 
-	
 	@Operation(summary = "센터번호검색")
 	@GetMapping("/centers/search/no")
 	public ResponseEntity<List<CenterDto>> searchCentersByNo(@RequestParam(name = "no") Long no) {
-	    List<Center> centers = centerService.findAllCenters();
-	    List<CenterDto> centerDtoList = new ArrayList<CenterDto>();
-	    
-	    for (Center center : centers) {
-	        Long centerNo = center.getCenterNo();
-	        if (centerNo != null && centerNo.equals(no)) { 	//<NullPointerException시 추가 
-	            centerDtoList.add(CenterDto.toDto(center));
-	        }
-	    }
+		List<Center> centers = centerService.findAllCenters();
+		List<CenterDto> centerDtoList = new ArrayList<CenterDto>();
 
-	    HttpHeaders httpHeaders = new HttpHeaders();
-	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		for (Center center : centers) {
+			Long centerNo = center.getCenterNo();
+			if (centerNo != null && centerNo.equals(no)) { // <NullPointerException시 추가
+				centerDtoList.add(CenterDto.toDto(center));
+			}
+		}
 
-	    if (!centerDtoList.isEmpty()) {
-	        return new ResponseEntity<>(centerDtoList, httpHeaders, HttpStatus.OK);
-	    } else {
-	        return new ResponseEntity<>(httpHeaders, HttpStatus.NOT_FOUND); 
-	    }
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+		if (!centerDtoList.isEmpty()) {
+			return new ResponseEntity<>(centerDtoList, httpHeaders, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(httpHeaders, HttpStatus.NOT_FOUND);
+		}
 	}
+
+	@Operation(summary = "센터 업데이트")
+	@PutMapping("/{centerNo}")
+	public ResponseEntity<CenterDto> updateCenter(@PathVariable(name = "centerNo") Long centerNo,
+			@RequestBody CenterDto dto) {
+		Center existingCenter = centerService.findByCenterNo(centerNo);
+
+		if (existingCenter != null) {
+			// if 문으로 클라이언트가 전달한 필드만 업데이트
+			if (dto.getCenterName() != null) {
+				existingCenter.setCenterName(dto.getCenterName());
+			}
+			if (dto.getCenterPhoneNumber() != null) {
+				existingCenter.setCenterPhoneNumber(dto.getCenterPhoneNumber());
+			}
+			if (dto.getCenterLocal() != null) {
+				existingCenter.setCenterLocal(dto.getCenterLocal());
+			}
+			if (dto.getCenterOpenCloseTime() != null) {
+				existingCenter.setCenterOpenCloseTime(dto.getCenterOpenCloseTime());
+			}
+
+			centerService.updateCenter(existingCenter); // 업데이트된 센터 정보 저장
+			return new ResponseEntity<>(CenterDto.toDto(existingCenter), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
-
-	
-
+}
