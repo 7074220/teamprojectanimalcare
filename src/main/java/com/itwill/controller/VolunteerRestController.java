@@ -1,11 +1,14 @@
 package com.itwill.controller;
 
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +19,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itwill.dto.VolunteerDto;
 import com.itwill.entity.Volunteer;
 import com.itwill.service.CenterService;
 import com.itwill.service.UserInfoService;
 import com.itwill.service.VolunteerService;
+
+import io.swagger.v3.oas.annotations.Operation;
 
 //import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
@@ -30,6 +36,18 @@ public class VolunteerRestController {
 	@Autowired
 	private VolunteerService volunteerService;
 	
+	@Operation(summary = "봉사신청")
+	@PostMapping
+	public ResponseEntity<VolunteerDto> insertVolunteer(@RequestBody VolunteerDto dto) {
+		volunteerService.insertVolunteer(VolunteerDto.toEntity(dto));
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		return new ResponseEntity<VolunteerDto>(dto, httpHeaders, HttpStatus.CREATED);		
+	} // INSERT
+	
+	
+	/*
 	@GetMapping
 	public ResponseEntity<List<Volunteer>> findAllVolunteers() {		
 		List<Volunteer> volunteerList = volunteerService.findAllVolunteers();
@@ -40,13 +58,7 @@ public class VolunteerRestController {
 	public ResponseEntity<List<Volunteer>> findVolunteertByUserNo(@PathVariable(name = "userNo") Long no) {
 		return ResponseEntity.status(HttpStatus.OK).body(volunteerService.findVolunteertByUserNo(no));
 	} // userNo 로 Volunteer 목록 조회
-	
-	/*
-	@GetMapping("/{no}")
-	public ResponseEntity<Volunteer> findByVolunteerNo(@PathVariable(name = "no") Long no) {
-		return ResponseEntity.status(HttpStatus.OK).body(volunteerService.findByVolunteerNo(no));
-	} // 봉사 목록 찾기
-	*/
+
 	
 	@PostMapping
 	public ResponseEntity<Volunteer> insertVolunteer(@RequestBody Volunteer volunteer) {
@@ -74,6 +86,13 @@ public class VolunteerRestController {
 		return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>());
 	} // DELETE
 	
+	
+	
+	@GetMapping("/{no}") -> 매핑오류 주석됨
+	public ResponseEntity<Volunteer> findByVolunteerNo(@PathVariable(name = "no") Long no) {
+		return ResponseEntity.status(HttpStatus.OK).body(volunteerService.findByVolunteerNo(no));
+	} // 봉사 목록 찾기
+	*/
 
 	
 }
