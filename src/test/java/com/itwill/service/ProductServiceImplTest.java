@@ -35,7 +35,7 @@ class ProductServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 	}
 	
 	@Test
-	@Disabled
+	//@Disabled
 	void findByProductNo() {
 		Product findProduct = productService.findByProductNo(2L);
 		System.out.println(findProduct);
