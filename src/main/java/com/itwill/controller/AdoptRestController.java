@@ -99,15 +99,42 @@ public class AdoptRestController {
 	public ResponseEntity<AdoptDto> updateAdopt(@PathVariable(value = "no") Long no, @RequestBody AdoptDto dto) throws Exception {
 		Adopt findAdopt = adoptService.findByAdoptNo(no);
 		
-		if (findAdopt == null) {
-			throw new Exception("입양정보를 찾을 수 없습니다.");
+		if(findAdopt!=null) {
+			if(dto.getAdoptDate()!=null) {
+				findAdopt.setAdoptDate(dto.getAdoptDate());
+			}
+			
+			if(dto.getAdoptStatus()!=null) {
+				findAdopt.setAdoptStatus(dto.getAdoptStatus());
+			}
+			
+			if(dto.getAdoptTime()!=null) {
+				findAdopt.setAdoptTime(dto.getAdoptTime());
+			}
+			
+			if (dto.getPetNo() != null) {
+			    Pet findPet = petService.petFindById(dto.getPetNo());
+			    if (findPet != null) {
+			        findAdopt.setPet(findPet);
+			    } else {
+			        // 오류 처리: 해당 ID의 Pet을 찾을 수 없음
+			        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			    }
+			}
+			
+			adoptService.updateAdopt(findAdopt);
+			AdoptDto updatedDto = AdoptDto.fromEntity(findAdopt);
+			HttpHeaders httpHeaders = new HttpHeaders();
+			httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+			
+			return new ResponseEntity<>(updatedDto, httpHeaders, HttpStatus.OK);
+			
+		}else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		
 		
-		//Pet pet = Pet.builder().petNo(dto.getPetNo()).build();
-		Pet pet = petService.petFindById(dto.getPetNo());
-		
-		
+		/*
 		findAdopt.setAdoptTime(dto.getAdoptTime());
 		findAdopt.setAdoptDate(dto.getAdoptDate());
 		findAdopt.setAdoptStatus(dto.getAdoptStatus());
@@ -117,6 +144,7 @@ public class AdoptRestController {
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		return new ResponseEntity<>(updatedDto, httpHeaders, HttpStatus.OK);
+		*/
 	}
 
 	
