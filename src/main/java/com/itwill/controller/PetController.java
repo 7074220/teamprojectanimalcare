@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -57,7 +58,7 @@ UserInfoService userInfoService;
 	}
 	//펫 삭제 관리자만
 	@PostMapping("/delete_action")
-	public String delete_action(@PathVariable Long petNo) throws Exception{
+	public String delete_action(@PathVariable(name = "petNo") Long petNo) throws Exception{
 		try {
 			petService.petRemove(petNo);
 		} catch (Exception e) {
@@ -66,7 +67,17 @@ UserInfoService userInfoService;
 		}
 		return "redirect:pet-list.html";
 	}
-	
+	//펫 업데이트
+	@PostMapping("/update_action")
+	public String update_action(@RequestBody PetDto updatepetDto) throws Exception{
+		try {
+			petService.petUpdate(updatepetDto.toEntity(updatepetDto));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "redirect:pet-list.html";
+	}
 	
 	
 
