@@ -35,9 +35,28 @@ public class VolunteerDto {
 				 		.volunteerStatus(dto.getVolunteerStatus())			
 				 		.center(Center.builder().centerNo(dto.getCenterNo()).build())
 				 		.build();
-		return volunteer;
-		
+		return volunteer;		
 	}
+	
+	public static VolunteerDto toDto(Volunteer volunteer) {
+		VolunteerDto volunteerDto = VolunteerDto.builder()
+								.userNo(volunteer.getUserinfo().getUserNo())
+								.volunteerNo(volunteer.getVolunteerNo())
+								.volunteerTime(volunteer.getVolunteerTime())
+								.volunteerDate(volunteer.getVolunteerDate())
+								.volunteerStatus(volunteer.getVolunteerStatus())
+								.centerNo(volunteer.getCenter().getCenterNo())
+								.build();
+		return volunteerDto;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
