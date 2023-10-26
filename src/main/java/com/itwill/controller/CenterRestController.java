@@ -36,8 +36,26 @@ public class CenterRestController {
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		return new ResponseEntity<CenterDto>(dto, httpHeaders, HttpStatus.CREATED);
+	}	
+	
+	@GetMapping("/centers/{centerNo}")
+	public ResponseEntity<CenterDto> getCenterById(@PathVariable Long centerNo) {
+	    Center center = centerService.findByCenterNo(centerNo);
+
+	    if (center != null) {
+	        CenterDto centerDto = CenterDto.toEntity(center);
+	        HttpHeaders httpHeaders = new HttpHeaders();
+	        httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+	        return new ResponseEntity<>(centerDto, httpHeaders, HttpStatus.OK);
+	    } else {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 센터를 찾지 못한 경우 404 응답 반환
+	    }
 	}
-}
+
+	}
+
+
+
 
 //	@GetMapping("/no/{centerNo}")
 //	public ResponseEntity<Center> getCenterByNo(@PathVariable Long CenterNo) {
