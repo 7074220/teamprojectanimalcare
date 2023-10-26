@@ -35,9 +35,29 @@ public class VolunteerDto {
 				 		.volunteerStatus(dto.getVolunteerStatus())			
 				 		.center(Center.builder().centerNo(dto.getCenterNo()).build())
 				 		.build();
-		return volunteer;
+		return volunteer;		
+	}
+	
+	public static VolunteerDto formEntity(Volunteer volunteer) {
+		return VolunteerDto.builder()
+						.userNo(volunteer.getUserinfo().getUserNo())
+						.volunteerNo(volunteer.getVolunteerNo())
+						.volunteerTime(volunteer.getVolunteerTime())
+						.volunteerStatus(volunteer.getVolunteerStatus())
+						.centerNo(volunteer.getCenter().getCenterNo())
+						.build();
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

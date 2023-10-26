@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itwill.dao.VolunteerDao;
 import com.itwill.dto.VolunteerDto;
 import com.itwill.entity.Volunteer;
 import com.itwill.service.CenterService;
@@ -41,15 +42,51 @@ public class VolunteerRestController {
 	@PostMapping
 	public ResponseEntity<VolunteerDto> insertVolunteer(@RequestBody VolunteerDto dto, HttpSession httpSession) throws Exception{
 		//volunteerService.insertVolunteer(VolunteerDto.toEntity(dto));
-		Volunteer volunteerEntity = VolunteerDto.toEntity(dto);
-		
-		volunteerService.insertVolunteer(volunteerEntity);
-		
+		Volunteer volunteerEntity = VolunteerDto.toEntity(dto);		
+		volunteerService.insertVolunteer(volunteerEntity);	
 		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));		
 		return new ResponseEntity<>(dto, httpHeaders, HttpStatus.CREATED);		
 	} // INSERT
+
+	
+	@Operation(summary = "no로 봉사신청 보기")
+	@GetMapping("/{no}") 
+	public ResponseEntity<VolunteerDto> findByVolunteerNo(@PathVariable(name = "no") Long no,  HttpSession httpSession) throws Exception{		
+		Volunteer findVolunteer = volunteerService.findByVolunteerNo(no);		
+		if(findVolunteer == null) {
+			throw new Exception("찾을수없다.");
+		}
+		VolunteerDto volunteerDto = VolunteerDto.formEntity(findVolunteer);
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));		
+		return new ResponseEntity<VolunteerDto>(volunteerDto, httpHeaders, HttpStatus.OK);
+	} // 봉사 목록 찾기
+	
+	
+	@Operation(summary = "봉사수정")
+	@PutMapping("/{volunteerNo}")
+	public ResponseEntity<VolunteerDto> updateVolunteer(@PathVariable(name = "volunteerNo") Long volunteerNo, @RequestBody Volunteer updateVolunteer, HttpSession httpSession) throws Exception {	
+		Volunteer existingVolunteer = volunteerService.findByVolunteerNo(volunteerNo);
+		
+		if (existingVolunteer == null) {
+			
+			return ResponseEntity.notFound().build();
+		} else {
+		existingVolunteer.setVolunteerTime(updateVolunteer.getVolunteerTime());
+		existingVolunteer.setVolunteerStatus(updateVolunteer.getVolunteerStatus());
+		existingVolunteer.setVolunteerDate(updateVolunteer.getVolunteerDate());
+		//existingVolunteer.setCenter(updateVolunteer.getCenter());	
+	
+		VolunteerDto updatedVolunteerDto = VolunteerDto.formEntity(existingVolunteer);
+	    HttpHeaders httpHeaders = new HttpHeaders();
+	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+	    return new ResponseEntity<>(updatedVolunteerDto, httpHeaders, HttpStatus.OK);
+		} // UPDATE
+	}
+	
+	
 	
 	
 	/*
@@ -65,7 +102,7 @@ public class VolunteerRestController {
 	} // userNo 로 Volunteer 목록 조회
 
 	
-	@PostMapping
+	@PostMapping --> 성공
 	public ResponseEntity<Volunteer> insertVolunteer(@RequestBody Volunteer volunteer) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(volunteerService.insertVolunteer(volunteer));
 	} // INSERT
@@ -93,7 +130,7 @@ public class VolunteerRestController {
 	
 	
 	
-	@GetMapping("/{no}") -> 매핑오류 주석됨
+	@GetMapping("/{no}") --> 성공
 	public ResponseEntity<Volunteer> findByVolunteerNo(@PathVariable(name = "no") Long no) {
 		return ResponseEntity.status(HttpStatus.OK).body(volunteerService.findByVolunteerNo(no));
 	} // 봉사 목록 찾기
