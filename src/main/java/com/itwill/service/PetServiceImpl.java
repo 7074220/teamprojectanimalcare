@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.itwill.dao.PetDao;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Product;
+@Transactional
 @Service
 public class PetServiceImpl implements PetService{
 @Autowired

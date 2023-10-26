@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.AdoptDto;
+import com.itwill.dto.PetDto;
 import com.itwill.entity.Adopt;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Userinfo;
@@ -95,9 +96,9 @@ public class AdoptRestController {
 	}
 
 	@Operation(summary = "no로 입양 수정하기")
-	@PutMapping("/{no}")
-	public ResponseEntity<AdoptDto> updateAdopt(@PathVariable(value = "no") Long no, @RequestBody AdoptDto dto) throws Exception {
-		Adopt findAdopt = adoptService.findByAdoptNo(no);
+	@PutMapping("/{adoptNo}")
+	public ResponseEntity<AdoptDto> updateAdopt(@PathVariable(value = "adoptNo") Long adoptNo, @RequestBody AdoptDto dto) throws Exception {
+		Adopt findAdopt = adoptService.findByAdoptNo(adoptNo);
 		
 		if(findAdopt!=null) {
 			if(dto.getAdoptDate()!=null) {
@@ -112,8 +113,8 @@ public class AdoptRestController {
 				findAdopt.setAdoptTime(dto.getAdoptTime());
 			}
 			
+			Pet findPet = findAdopt.getPet();
 			if (dto.getPetNo() != null) {
-			    Pet findPet = petService.petFindById(dto.getPetNo());
 			    if (findPet != null) {
 			        findAdopt.setPet(findPet);
 			    } else {
@@ -121,6 +122,7 @@ public class AdoptRestController {
 			        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			    }
 			}
+			
 			
 			adoptService.updateAdopt(findAdopt);
 			AdoptDto updatedDto = AdoptDto.fromEntity(findAdopt);
