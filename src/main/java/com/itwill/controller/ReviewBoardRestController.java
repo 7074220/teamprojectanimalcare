@@ -1,11 +1,14 @@
 package com.itwill.controller;
 
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,24 +18,41 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itwill.dto.ReviewBoardDto;
 import com.itwill.entity.ReviewBoard;
 import com.itwill.service.ReviewBoardService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/ReviewBoard")
+@RequestMapping("/reviewBoard")
 public class ReviewBoardRestController {
 	
 	@Autowired
 	private ReviewBoardService reviewBoardService;
 	
-	
+	/*
+	@Operation(summary = "리뷰작성")
 	@PostMapping
-	public ResponseEntity<ReviewBoard> createReviewBoard(@RequestBody ReviewBoard reviewBoard) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(reviewBoardService.create(reviewBoard));
+	public ResponseEntity<ReviewBoardDto> createReviewBoard(@RequestBody ReviewBoardDto dto, HttpSession httpSession) throws Exception{
+		ReviewBoard reviewBoardEntity = ReviewBoardDto.toEntity(dto);
+		reviewBoardService.create(reviewBoardEntity);
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));				
+		
+		return new ResponseEntity<>(dto, httpHeaders, HttpStatus.CREATED);
 	}
+	*/
 	
+	
+	
+	
+	
+	
+	
+	/*
 	@GetMapping("/{boardNo}")
 	public ResponseEntity<ReviewBoard> findByBoardNo(@PathVariable Long boardNo) {
 		ReviewBoard reviewBoard = reviewBoardService.findByBoardNo(boardNo);
@@ -90,7 +110,7 @@ public class ReviewBoardRestController {
 		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findByUserNo(no));
 	}
 	 
-	/*
+	
 	@GetMapping
 	public ResponseEntity<List<ReviewBoard>> findAllByOrderByBoardStarDesc() {
 		// 높은 평점순 정렬
