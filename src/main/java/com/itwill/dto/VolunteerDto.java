@@ -38,18 +38,17 @@ public class VolunteerDto {
 		return volunteer;		
 	}
 	
-	public static VolunteerDto formEntity(Volunteer volunteer) {
-		return VolunteerDto.builder()
-						.userNo(volunteer.getUserinfo().getUserNo())
-						.volunteerNo(volunteer.getVolunteerNo())
-						.volunteerTime(volunteer.getVolunteerTime())
-						.volunteerStatus(volunteer.getVolunteerStatus())
-						.centerNo(volunteer.getCenter().getCenterNo())
-						.build();
-		
+	public static VolunteerDto toDto(Volunteer volunteer) {
+		VolunteerDto volunteerDto = VolunteerDto.builder()
+								.userNo(volunteer.getUserinfo().getUserNo())
+								.volunteerNo(volunteer.getVolunteerNo())
+								.volunteerTime(volunteer.getVolunteerTime())
+								.volunteerDate(volunteer.getVolunteerDate())
+								.volunteerStatus(volunteer.getVolunteerStatus())
+								.centerNo(volunteer.getCenter().getCenterNo())
+								.build();
+		return volunteerDto;
 	}
-	
-	
 	
 	
 	
