@@ -34,8 +34,7 @@ import jakarta.websocket.server.PathParam;
 public class PetController {
 @Autowired
 PetService petService;
-@Autowired
-UserInfoService userInfoService;
+//@Autowired
 //팻 등록
 	@PostMapping("/insert_action")
 	public String insert_action(@RequestBody PetDto petDto) throws Exception {
