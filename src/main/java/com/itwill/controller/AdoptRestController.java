@@ -42,18 +42,7 @@ public class AdoptRestController {
 	private PetService petService;
 
 	
-	@Operation(summary = "입양신청")
-	@PostMapping
-	public ResponseEntity<AdoptDto> insertAdopt(@RequestBody AdoptDto dto, HttpSession session) throws Exception {
-	    Adopt adoptEntity = AdoptDto.toEntity(dto); // AdoptDto를 Adopt 엔티티로 변환
-
-	    adoptService.insertAdopt(adoptEntity); // 변환된 엔티티를 서비스를 통해 저장
-
-	    HttpHeaders httpHeaders = new HttpHeaders();
-	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-
-	    return new ResponseEntity<>(dto, httpHeaders, HttpStatus.CREATED);
-	}
+	
 	/*
 	@Operation(summary = "no로 입양신청 보기")
 	@GetMapping("/{no}")
