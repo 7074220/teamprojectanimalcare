@@ -26,6 +26,7 @@ import com.itwill.service.UserInfoService;
 import com.itwill.service.VolunteerService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.http.HttpSession;
 
 //import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
@@ -38,7 +39,7 @@ public class VolunteerRestController {
 	
 	@Operation(summary = "봉사신청")
 	@PostMapping
-	public ResponseEntity<VolunteerDto> insertVolunteer(@RequestBody VolunteerDto dto) {
+	public ResponseEntity<VolunteerDto> insertVolunteer(@RequestBody VolunteerDto dto, HttpSession httpSession) throws Exception{
 		volunteerService.insertVolunteer(VolunteerDto.toEntity(dto));
 		
 		HttpHeaders httpHeaders = new HttpHeaders();

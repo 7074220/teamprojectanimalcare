@@ -26,6 +26,7 @@ public class VolunteerDto {
 	
 	public static Volunteer toEntity(VolunteerDto dto) {
 		return Volunteer.builder()
+						.volunteerNo(dto.getVolunteerNo())
 				 		.volunteerTime(dto.getVolunteerTime())
 				 		.volunteerDate(dto.getVolunteerDate())
 				 		.volunteerStatus(dto.getVolunteerStatus())			
