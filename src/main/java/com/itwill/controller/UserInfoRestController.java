@@ -121,6 +121,7 @@ public class UserInfoRestController {
 			dto = UserWriteActionDto.builder().build();
 		}
 
+		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
