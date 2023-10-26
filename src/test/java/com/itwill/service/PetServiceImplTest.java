@@ -27,7 +27,7 @@ class PetServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	@Transactional
 	@Rollback(false)
-	@Disabled
+	//@Disabled
 	void petList() {
 		petService.petFindAll();
 		System.out.println(petService.petFindAll());

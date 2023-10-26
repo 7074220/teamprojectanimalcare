@@ -4,15 +4,17 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.dao.MyPetDao;
 import com.itwill.entity.MyPet;
 
+@Transactional
 @Service
 public class MyPetServiceImpl implements MyPetService{
 	
 	@Autowired
-	MyPetDao myPetDao;
+	private MyPetDao myPetDao;
 	
 	// 마이펫 입력
 	@Override
@@ -43,12 +45,17 @@ public class MyPetServiceImpl implements MyPetService{
 		return myPetDao.findMyPetListByuserNo(userNo);
 	}
 
+	// 마이펫 중 1개 삭제
 	@Override
-	public void deleteMypetNoByUserNo(Long userNo, Long mypetNo) {
-		// TODO Auto-generated method stub
-		
+	public void deleteMypetByUserNo(Long userNo, Long mypetNo) {
+		myPetDao.deleteMypetByUserNo(userNo, mypetNo);
 	}
 	
+	// 마이펫 전체 삭제
+	@Override
+	public void deleteMypetAllByUserNo(Long userNo) {
+		myPetDao.deleteMypetAllByUserNo(userNo);
+	}
 	
 	
 }
