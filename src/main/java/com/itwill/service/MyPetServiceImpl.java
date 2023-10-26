@@ -45,7 +45,6 @@ public class MyPetServiceImpl implements MyPetService{
 
 	@Override
 	public void deleteMypetNoByUserNo(Long userNo, Long mypetNo) {
-		// TODO Auto-generated method stub
 		
 	}
 	
