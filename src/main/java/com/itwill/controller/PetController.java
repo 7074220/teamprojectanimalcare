@@ -29,13 +29,11 @@ import com.itwill.service.UserInfoService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.server.PathParam;
-@RequestMapping("/pet")
 @Controller
 public class PetController {
 @Autowired
 PetService petService;
-@Autowired
-UserInfoService userInfoService;
+//@Autowired
 //팻 등록
 	@PostMapping("/insert_action")
 	public String insert_action(@RequestBody PetDto petDto) throws Exception {
@@ -45,7 +43,7 @@ UserInfoService userInfoService;
 		return "redirect:pet-list.html";
 	}
 	//펫 리스트
-	@GetMapping()
+	@GetMapping("/petList")
 	public String petList(Model model) {
 		List<PetDto> petDtoList = new ArrayList<>();
 		List<Pet> petList = petService.petFindAll();
