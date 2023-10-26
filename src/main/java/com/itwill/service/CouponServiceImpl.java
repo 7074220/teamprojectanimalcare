@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.dao.CouponDao;
 import com.itwill.entity.Coupon;
 
 @Service
+@Transactional
 public class CouponServiceImpl implements CouponService{
 	
 	@Autowired
