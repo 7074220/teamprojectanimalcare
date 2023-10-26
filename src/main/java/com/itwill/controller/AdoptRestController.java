@@ -1,7 +1,8 @@
 package com.itwill.controller;
 
-
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.AdoptDto;
 import com.itwill.entity.Adopt;
+import com.itwill.entity.Pet;
 import com.itwill.service.AdoptService;
 import com.itwill.service.PetService;
 import com.itwill.service.UserInfoService;
@@ -36,69 +38,93 @@ public class AdoptRestController {
 
 	@Autowired
 	private AdoptService adoptService;
-	
+
 	@Operation(summary = "입양신청")
 	@PostMapping
 	public ResponseEntity<AdoptDto> insertAdopt(@RequestBody AdoptDto dto, HttpSession session) throws Exception {
-	    Adopt adoptEntity = AdoptDto.toEntity(dto);
+		Adopt adoptEntity = AdoptDto.toEntity(dto);
 
-	    adoptService.insertAdopt(adoptEntity);
+		adoptService.insertAdopt(adoptEntity);
 
-	    HttpHeaders httpHeaders = new HttpHeaders();
-	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-	    return new ResponseEntity<>(dto, httpHeaders, HttpStatus.CREATED);
+		return new ResponseEntity<>(dto, httpHeaders, HttpStatus.CREATED);
 	}
-	
-	
+
 	@Operation(summary = "no로 입양신청 보기")
 	@GetMapping("/{no}")
 	public ResponseEntity<AdoptDto> findByAdoptNo(@PathVariable(value = "no") Long no) throws Exception {
-		Adopt findAdopt=adoptService.findByAdoptNo(no);
-		if(findAdopt==null) {
+		Adopt findAdopt = adoptService.findByAdoptNo(no);
+		if (findAdopt == null) {
 			throw new Exception("입양신청을 찾을 수 없습니다.");
 		}
-		 AdoptDto adoptDto = AdoptDto.fromEntity(findAdopt);
+		AdoptDto adoptDto = AdoptDto.fromEntity(findAdopt);
 		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application","json",Charset.forName("UTF-8")));
-		return new ResponseEntity<AdoptDto>(adoptDto,httpHeaders,HttpStatus.OK);
-		
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		return new ResponseEntity<AdoptDto>(adoptDto, httpHeaders, HttpStatus.OK);
+
 	}
-	
-	/*
+
+	@Operation(summary = "userNo로 입양신청 찾기")
+	@GetMapping("/find/{userNo}")
+	public ResponseEntity<List<AdoptDto>> findAdoptsByUserNo(@PathVariable(name = "userNo") Long userNo) {
+		List<Adopt> findAdopt = adoptService.findAdoptsByUserNo(userNo);
+		if (findAdopt.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
+		}
+		List<AdoptDto> adoptDtoList = new ArrayList<>();
+
+		for (Adopt adopt : findAdopt) {
+			AdoptDto adoptDto = AdoptDto.fromEntity(adopt);
+			adoptDtoList.add(adoptDto);
+		}
+
+		return ResponseEntity.status(HttpStatus.OK).body(adoptDtoList);
+	}
+
+	@Operation(summary = "no로 삭제")
+	@DeleteMapping("/{no}")
+	public ResponseEntity<Map> deleteAdopt(@PathVariable(value  = "no") Long no) throws Exception {
+		adoptService.deleteAdopt(no);
+		return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>());
+	}
+
 	@Operation(summary = "no로 입양 수정하기")
 	@PutMapping("/{no}")
-	public ResponseEntity<AdoptDto> updateAdopt(@PathVariable Long no,@RequestBody AdoptDto dto) throws Exception {
-	Adopt findAdopt=adoptService.findByAdoptNo(no);
+	public ResponseEntity<AdoptDto> updateAdopt(@PathVariable(value = "no") Long no, @RequestBody AdoptDto dto) throws Exception {
+		Adopt findAdopt = adoptService.findByAdoptNo(no);
+		
+		if (findAdopt == null) {
+			throw new Exception("입양정보를 찾을 수 없습니다.");
+		}
+		
+		Pet pet = Pet.builder().petNo(dto.getPetNo()).build();
 		findAdopt.setAdoptTime(dto.getAdoptTime());
 		findAdopt.setAdoptDate(dto.getAdoptDate());
 		findAdopt.setAdoptStatus(dto.getAdoptStatus());
-		//findAdopt.setPet(dto.getPet());
-		
+		findAdopt.setPet(pet);
+		adoptService.updateAdopt(findAdopt);
+		AdoptDto updatedDto = AdoptDto.fromEntity(findAdopt);
 		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application","json",Charset.forName("UTF-8")));
-		return new ResponseEntity<AdoptDto>(dto,httpHeaders,HttpStatus.CREATED);
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		return new ResponseEntity<>(updatedDto, httpHeaders, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/{no}")
-	public ResponseEntity<Map> deleteAdopt(@PathVariable(name = "no") Long no) throws Exception {
-		adoptService.deleteAdopt(no);
-		return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>());
-
-	}
-	
-	
+	@Operation(summary = "전체 리스트 보기")
 	@GetMapping("/all")
-	public ResponseEntity<AdoptDto> findAllAdopts(@RequestBody AdoptDto dto) {
-		List<Adopt> adoptList=adoptService.findAdoptList();
+	public ResponseEntity<List<AdoptDto>> findAllAdopts() {
+		List<Adopt> adoptList = adoptService.findAdoptList();
+		List<AdoptDto> adoptDtoList = new ArrayList<>();
+
+		for (Adopt adopt : adoptList) {
+			AdoptDto adoptDto = AdoptDto.fromEntity(adopt);
+			adoptDtoList.add(adoptDto);
+		}
+
 		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application","json",Charset.forName("UTF-8")));
-		return new ResponseEntity<AdoptDto>(dto,httpHeaders,HttpStatus.OK);
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		return new ResponseEntity<>(adoptDtoList, httpHeaders, HttpStatus.OK);
 	}
 
-	@GetMapping("/find/{userNo}")
-	public ResponseEntity<List<Adopt>> findAdoptsByUserNo(@PathVariable(name = "userNo") Long userNo) {
-		return ResponseEntity.status(HttpStatus.OK).body(adoptService.findAdoptsByUserNo(userNo));
-	}
-*/
 }
