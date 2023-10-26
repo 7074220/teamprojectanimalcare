@@ -29,18 +29,17 @@ public class PetRestController {
 
 	@Autowired
 	private PetService petService;
-@Operation(summary = "펫 리스트")	
-@GetMapping()
-public ResponseEntity<List<PetDto>> petList(){
-		List<PetDto> petDtoList = new ArrayList<>();
-		List<Pet> petList = petService.petFindAll();
-		for (Pet pet : petList) {
-			petDtoList.add(PetDto.toDto(pet));
-		}
-		
-		
-		return ResponseEntity.status(HttpStatus.OK).body(petDtoList);
-	}
+	
+	/*
+	 * @Operation(summary = "펫 리스트")
+	 * 
+	 * @GetMapping() public ResponseEntity<List<PetDto>> petList(){ List<PetDto>
+	 * petDtoList = new ArrayList<>(); List<Pet> petList = petService.petFindAll();
+	 * for (Pet pet : petList) { petDtoList.add(PetDto.toDto(pet)); }
+	 * 
+	 * 
+	 * return ResponseEntity.status(HttpStatus.OK).body(petDtoList); }
+	 */
 @Operation(summary = "펫 등록")	
 @PostMapping()
 public ResponseEntity<PetDto> petSave(@RequestBody PetDto petdto){
