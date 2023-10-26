@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itwill.dto.AdoptDto;
 import com.itwill.entity.Adopt;
 import com.itwill.entity.Pet;
+import com.itwill.entity.Userinfo;
 import com.itwill.service.AdoptService;
 import com.itwill.service.PetService;
 import com.itwill.service.UserInfoService;
@@ -38,7 +40,9 @@ public class AdoptRestController {
 
 	@Autowired
 	private AdoptService adoptService;
-
+	@Autowired
+	private PetService petService;
+	
 	@Operation(summary = "입양신청")
 	@PostMapping
 	public ResponseEntity<AdoptDto> insertAdopt(@RequestBody AdoptDto dto, HttpSession session) throws Exception {
@@ -99,7 +103,11 @@ public class AdoptRestController {
 			throw new Exception("입양정보를 찾을 수 없습니다.");
 		}
 		
-		Pet pet = Pet.builder().petNo(dto.getPetNo()).build();
+		
+		//Pet pet = Pet.builder().petNo(dto.getPetNo()).build();
+		Pet pet = petService.petFindById(dto.getPetNo());
+		
+		
 		findAdopt.setAdoptTime(dto.getAdoptTime());
 		findAdopt.setAdoptDate(dto.getAdoptDate());
 		findAdopt.setAdoptStatus(dto.getAdoptStatus());
@@ -111,6 +119,11 @@ public class AdoptRestController {
 		return new ResponseEntity<>(updatedDto, httpHeaders, HttpStatus.OK);
 	}
 
+	
+	
+	
+	
+	
 	@Operation(summary = "전체 리스트 보기")
 	@GetMapping("/all")
 	public ResponseEntity<List<AdoptDto>> findAllAdopts() {
