@@ -40,11 +40,15 @@ public class VolunteerRestController {
 	@Operation(summary = "봉사신청")
 	@PostMapping
 	public ResponseEntity<VolunteerDto> insertVolunteer(@RequestBody VolunteerDto dto, HttpSession httpSession) throws Exception{
-		volunteerService.insertVolunteer(VolunteerDto.toEntity(dto));
+		//volunteerService.insertVolunteer(VolunteerDto.toEntity(dto));
+		Volunteer volunteerEntity = VolunteerDto.toEntity(dto);
+		
+		volunteerService.insertVolunteer(volunteerEntity);
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		return new ResponseEntity<VolunteerDto>(dto, httpHeaders, HttpStatus.CREATED);		
+		
+		return new ResponseEntity<>(dto, httpHeaders, HttpStatus.CREATED);		
 	} // INSERT
 	
 	

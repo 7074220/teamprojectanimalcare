@@ -19,20 +19,23 @@ import lombok.ToString;
 @Builder
 public class VolunteerDto {
 	
+	private Long userNo;
 	private Long volunteerNo;
 	private Integer volunteerTime;
 	private Date volunteerDate;
 	private String volunteerStatus;
+	private Long centerNo;
 	
 	public static Volunteer toEntity(VolunteerDto dto) {
-		return Volunteer.builder()
-						//.volunteerNo(dto.getVolunteerNo())
+		Volunteer volunteer = Volunteer.builder()
+						.userinfo(Userinfo.builder().userNo(dto.getUserNo()).build())
+						.volunteerNo(dto.getVolunteerNo())
 				 		.volunteerTime(dto.getVolunteerTime())
 				 		.volunteerDate(dto.getVolunteerDate())
 				 		.volunteerStatus(dto.getVolunteerStatus())			
-				 		
+				 		.center(Center.builder().centerNo(dto.getCenterNo()).build())
 				 		.build();
-		
+		return volunteer;
 		
 	}
 	
