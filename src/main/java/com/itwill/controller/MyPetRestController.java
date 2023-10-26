@@ -47,8 +47,14 @@ public class MyPetRestController {
 	
 	@Operation(summary = "마이펫 전체삭제")
 	@DeleteMapping("/{userNo}")
-	public void MyPetDelete(@PathVariable(name = "userNo")Long userNo) {
-		myPetService.Delete(userNo);
+	public void MyPetAllDelete(@PathVariable(name = "userNo")Long userNo) {
+		myPetService.deleteMypetAllByUserNo(userNo);
+	}
+	
+	@Operation(summary = "마이펫 1개 삭제")
+	@DeleteMapping("/{userNo}/{mypetNo}")
+	public void MyPetDeleteByUserNo(@PathVariable(name = "userNo")Long userNo,@PathVariable(name = "mypetNo")Long mypetNo) {
+		myPetService.deleteMypetByUserNo(userNo, mypetNo);
 	}
 	
 }

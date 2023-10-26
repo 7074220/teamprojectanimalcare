@@ -22,5 +22,8 @@ public interface MyPetService {
 	public List<MyPet> findMyPetListByuserNo(Long userNo);
 
 	//마이펫 하나만 삭제
-	public void deleteMypetNoByUserNo(Long userNo, Long mypetNo);
+	public void deleteMypetByUserNo(Long userNo,Long mypetNo);
+
+	//마이펫 전체 삭제
+	public void deleteMypetAllByUserNo(Long userNo);
 }
