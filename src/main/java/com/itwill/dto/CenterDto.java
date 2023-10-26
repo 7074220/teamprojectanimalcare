@@ -8,41 +8,39 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Data
 @ToString
 @Builder
 public class CenterDto {
 
 	private Long centerNo;
-	//센터번호
-	private String centerName; 
-	//센터이름
+	// 센터번호
+	private String centerName;
+	// 센터이름
 	private String centerPhoneNumber;
-	//센터전화번호
+	// 센터전화번호
 	private String centerLocal;
-	//센터지역
+	// 센터지역
 	private String centerOpenCloseTime;
-	//센터영업시간
-	
+	// 센터영업시간
+
 	public static Center toEntity(CenterDto dto) {
-		return Center.builder()
-				.centerNo(dto.getCenterNo())
-				.centerName(dto.getCenterName())
-				.centerPhoneNumber(dto.getCenterPhoneNumber())
-				.centerLocal(dto.getCenterLocal())
-				.centerOpenCloseTime(dto.getCenterOpenCloseTime())
-				.build();
+		Center center = Center.builder().centerNo(dto.getCenterNo()).centerName(dto.getCenterName())
+				.centerPhoneNumber(dto.getCenterPhoneNumber()).centerLocal(dto.getCenterLocal())
+				.centerOpenCloseTime(dto.getCenterOpenCloseTime()).build();
+		return center;
 	}
 
-	public static CenterDto toEntity(Center center) {
-		  return CenterDto.builder()
+	public static CenterDto toDto(Center center) {
+		CenterDto centerDto = CenterDto.builder()
 		            .centerNo(center.getCenterNo())
 		            .centerName(center.getCenterName())
 		            .centerPhoneNumber(center.getCenterPhoneNumber())
 		            .centerLocal(center.getCenterLocal())
 		            .centerOpenCloseTime(center.getCenterOpenCloseTime())
 		            .build();
-	}
+		return centerDto;
+}
 }
