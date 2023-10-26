@@ -37,6 +37,16 @@ public class MyPetServiceImpl implements MyPetService{
 	public List<MyPet> findAll() {
 		return myPetDao.findAll();
 	}
+
+	@Override
+	public List<MyPet> findMyPetListByuserNo(Long userNo) {
+		return myPetDao.findMyPetListByuserNo(userNo);
+	}
+
+	@Override
+	public void deleteMypetNoByUserNo(Long userNo, Long mypetNo) {
+		
+	}
 	
 	
 	
