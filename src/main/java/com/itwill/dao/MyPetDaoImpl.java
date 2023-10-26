@@ -13,7 +13,7 @@ import com.itwill.repository.UserinfoRepository;
 @Repository
 public class MyPetDaoImpl implements MyPetDao {
 	@Autowired
-	MyPetRepository myPetRepository;
+	private MyPetRepository myPetRepository;
 
 	@Override
 	public MyPet CreatePet(MyPet myPet) {
@@ -49,9 +49,13 @@ public class MyPetDaoImpl implements MyPetDao {
 	}
 
 	@Override
-	public void deleteMypetNoByUserNo(Long userNo, Long mypetNo) {
-		myPetRepository.deleteMypetNoByUserNo(userNo, mypetNo);
-		
+	public void deleteMypetByUserNo(Long userNo, Long mypetNo) {
+		myPetRepository.deleteMypetByUserNo(userNo, mypetNo);
 	}
-
+	
+	@Override
+	public void deleteMypetAllByUserNo(Long userNo) {
+		myPetRepository.deleteMypetAllByUserNo(userNo);
+	}
+	
 }

@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.MyPetListDto;
@@ -21,7 +22,8 @@ import com.itwill.service.MyPetService;
 
 import io.swagger.v3.oas.annotations.Operation;
 
-@RestController("/mypet")
+@RestController
+@RequestMapping("/mypet")
 public class MyPetRestController {
 	
 	@Autowired
@@ -45,8 +47,14 @@ public class MyPetRestController {
 	
 	@Operation(summary = "마이펫 전체삭제")
 	@DeleteMapping("/{userNo}")
-	public void MyPetDelete(@PathVariable(name = "userNo")Long userNo) {
-		myPetService.Delete(userNo);
+	public void MyPetAllDelete(@PathVariable(name = "userNo")Long userNo) {
+		myPetService.deleteMypetAllByUserNo(userNo);
+	}
+	
+	@Operation(summary = "마이펫 1개 삭제")
+	@DeleteMapping("/{userNo}/{mypetNo}")
+	public void MyPetDeleteByUserNo(@PathVariable(name = "userNo")Long userNo,@PathVariable(name = "mypetNo")Long mypetNo) {
+		myPetService.deleteMypetByUserNo(userNo, mypetNo);
 	}
 	
 }

@@ -5,55 +5,38 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.dao.ProductDao;
-import com.itwill.dto.ProductResponseDto;
-import com.itwill.dto.ProductUpdateDto;
 import com.itwill.entity.Product;
 import com.itwill.repository.ProductRepository;
 
+@Transactional
 @Service
 public class ProductServiceImpl implements ProductService {
 
 	@Autowired
-	private ProductRepository productRepository;
-	
 	private ProductDao productDao;
 
 	@Override
 	public Product insertProduct(Product product) {
-		return productRepository.save(product);
+		return productDao.insertProduct(product);
 	}
-/*
+
 	@Override
-	public ProductResponseDto updateProduct(ProductUpdateDto updateProduct) throws Exception {
-		Optional<Product> findProductOptional = productRepository.findById(updateProduct.getProductNo());
-		Product updatedProduct = null;
-		if (findProductOptional.isPresent()) {
-			Product product = findProductOptional.get();
-			product.setProductName(updateProduct.getProductName());
-			product.setProductPrice(updateProduct.getProductPrice());
-			product.setProductImage(updateProduct.getProductImage());
-			updatedProduct = productDao.updateProduct(updateProduct);
+	public Product updateProduct(Product updateProduct) throws Exception {
+		Product findProduct = productDao.findByProductNo(updateProduct.getProductNo());
+		if (findProduct!=null) {
+			findProduct.setProductName(updateProduct.getProductName());
+			findProduct.setProductPrice(updateProduct.getProductPrice());
+			findProduct.setProductImage(updateProduct.getProductImage());
+			productDao.updateProduct(findProduct);
 		} else {
 			throw new Exception("존재하지 않는 제품입니다.");
 		}
-		return updatedProduct;
+		return findProduct;
 	}
-*/
-	
-	@Override
-	public ProductResponseDto updateProduct(ProductUpdateDto product) throws Exception {
-		Product findProduct = Product.builder()
-				.productNo(product.getProductNo())
-				.productName(product.getProductName())
-				.productImage(product.getProductImage())
-				.build();
-		Product updateProduct = productDao.updateProduct(findProduct);
-		ProductResponseDto productResponseDto = ProductResponseDto.toDto(updateProduct);
-		return productResponseDto;
-	}
-	
+/*
 	@Override
 	public Product findByProductNo(Long no) {
 		Product selectedProduct = productRepository.findById(no).get();
@@ -104,7 +87,54 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> findAllByOrderByProductNoAsc() {
 		return productRepository.findAllByOrderByProductNoAsc();
 	}
-	
-	
+	*/
+
+	@Override
+	public Product findByProductNo(Long no) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteProduct(Long no) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Product> findByContains(String productName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product> findAllByOrderByProductPriceDesc() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product> findAllByOrderByProductPriceAsc() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product> findAllByOrderByProductStarAvgDesc() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product> findAllByOrderByProductNoDesc() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product> findAllByOrderByProductNoAsc() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

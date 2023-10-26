@@ -13,7 +13,7 @@ public interface ProductService {
 
 	Product insertProduct(Product product);
 	
-	ProductResponseDto updateProduct(ProductUpdateDto product) throws Exception;
+	Product updateProduct(Product updateProduct) throws Exception;
 	
 	Product findByProductNo(Long no);
 	

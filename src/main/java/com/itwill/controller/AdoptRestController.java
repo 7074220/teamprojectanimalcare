@@ -36,39 +36,36 @@ public class AdoptRestController {
 
 	@Autowired
 	private AdoptService adoptService;
-	@Autowired
-	private UserInfoService userInfoService;
-	@Autowired
-	private PetService petService;
-
 	
 	@Operation(summary = "입양신청")
 	@PostMapping
 	public ResponseEntity<AdoptDto> insertAdopt(@RequestBody AdoptDto dto, HttpSession session) throws Exception {
-	    Adopt adoptEntity = AdoptDto.toEntity(dto); // AdoptDto를 Adopt 엔티티로 변환
+	    Adopt adoptEntity = AdoptDto.toEntity(dto);
 
-	    adoptService.insertAdopt(adoptEntity); // 변환된 엔티티를 서비스를 통해 저장
+	    adoptService.insertAdopt(adoptEntity);
 
 	    HttpHeaders httpHeaders = new HttpHeaders();
 	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
 	    return new ResponseEntity<>(dto, httpHeaders, HttpStatus.CREATED);
 	}
-	/*
+	
+	
 	@Operation(summary = "no로 입양신청 보기")
 	@GetMapping("/{no}")
-	public ResponseEntity<AdoptDto> findByAdoptNo(@PathVariable(value = "no") Long no, @RequestBody AdoptDto dto) throws Exception {
+	public ResponseEntity<AdoptDto> findByAdoptNo(@PathVariable(value = "no") Long no) throws Exception {
 		Adopt findAdopt=adoptService.findByAdoptNo(no);
-		if(findAdopt.getAdoptNo()==null) {
-			throw new Exception();
+		if(findAdopt==null) {
+			throw new Exception("입양신청을 찾을 수 없습니다.");
 		}
+		 AdoptDto adoptDto = AdoptDto.fromEntity(findAdopt);
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application","json",Charset.forName("UTF-8")));
-		return new ResponseEntity<AdoptDto>(dto,httpHeaders,HttpStatus.OK);
+		return new ResponseEntity<AdoptDto>(adoptDto,httpHeaders,HttpStatus.OK);
 		
 	}
 	
-	
+	/*
 	@Operation(summary = "no로 입양 수정하기")
 	@PutMapping("/{no}")
 	public ResponseEntity<AdoptDto> updateAdopt(@PathVariable Long no,@RequestBody AdoptDto dto) throws Exception {
@@ -103,5 +100,5 @@ public class AdoptRestController {
 	public ResponseEntity<List<Adopt>> findAdoptsByUserNo(@PathVariable(name = "userNo") Long userNo) {
 		return ResponseEntity.status(HttpStatus.OK).body(adoptService.findAdoptsByUserNo(userNo));
 	}
-	*/
+*/
 }
