@@ -28,7 +28,8 @@ public interface CouponService {
 	// 만료일 쿠폰 찾기
 	public List<Coupon> autoDeleteExpiredCoupons(Date couponExpirationDate);
 	
-	
+	// 유저에 따른 만료 쿠폰 
+	public List<Coupon> findExpireCouponByUserNo(Date date, Long userNo);
 	
 	
 }

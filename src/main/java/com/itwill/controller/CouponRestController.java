@@ -56,10 +56,10 @@ public class CouponRestController {
 		List<Coupon> coupons= couponService.findAllByUserNo(userNo);
 		List<CouponDto> couponList = new ArrayList<CouponDto>();
 		
+		
 		for (Coupon coupon : coupons) {
-			//couponService.autoDeleteExpiredCoupons(coupon);
-			CouponDto couponDto = CouponDto.toDto(coupon);
-			couponList.add(couponDto);
+			List<Coupon> couponsList = couponService.findExpireCouponByUserNo(coupon.getCouponExpirationDate(),userNo);
+			
 		}
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
