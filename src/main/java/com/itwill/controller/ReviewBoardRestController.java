@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.ReviewBoardDto;
+import com.itwill.dto.VolunteerDto;
 import com.itwill.entity.ReviewBoard;
 import com.itwill.service.ReviewBoardService;
 
@@ -33,23 +34,36 @@ public class ReviewBoardRestController {
 	@Autowired
 	private ReviewBoardService reviewBoardService;
 	
-	/*
 	@Operation(summary = "리뷰작성")
 	@PostMapping
-	public ResponseEntity<ReviewBoardDto> createReviewBoard(@RequestBody ReviewBoardDto dto, HttpSession httpSession) throws Exception{
-		ReviewBoard reviewBoardEntity = ReviewBoardDto.toEntity(dto);
-		reviewBoardService.create(reviewBoardEntity);
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));				
-		
-		return new ResponseEntity<>(dto, httpHeaders, HttpStatus.CREATED);
+	public ResponseEntity<ReviewBoardDto> createReviewBoard(ReviewBoardDto dto, HttpSession httpSession) throws Exception {
+	    ReviewBoard reviewBoardEntity = ReviewBoardDto.toEntity(dto);
+	    reviewBoardService.create(reviewBoardEntity);
+	    HttpHeaders httpHeaders = new HttpHeaders();
+	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+	    return new ResponseEntity<>(dto, httpHeaders, HttpStatus.CREATED);
+	}
+	
+	/*
+	@Operation(summary = "no로 리뷰 보기")
+	@GetMapping("/{boardNo}")
+	public ResponseEntity<ReviewBoardDto> findByBoardNo(@PathVariable Long boardNo, HttpSession httpSession) throws Exception {    
+	    ReviewBoard reviewBoard = reviewBoardService.findByBoardNo(boardNo);
+
+	    if (reviewBoard == null) {
+	        // ReviewBoard가 없을 때 NOT_FOUND 상태 반환
+	        return ResponseEntity.notFound().build();
+	    } else {
+	        ReviewBoardDto reviewBoardDto = ReviewBoardDto.toDto(reviewBoard);
+	        HttpHeaders httpHeaders = new HttpHeaders();
+	        httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));    
+	        return new ResponseEntity<>(reviewBoardDto, httpHeaders, HttpStatus.OK);
+	    }
+	
+	
 	}
 	*/
-	
-	
-	
-	
-	
 	
 	
 	/*
