@@ -44,7 +44,7 @@ public class ReviewBoard {
 	private Userinfo userinfo = new Userinfo();
 	
 	@Builder.Default
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_no")
 	@ToString.Exclude
 	private Product product = new Product();

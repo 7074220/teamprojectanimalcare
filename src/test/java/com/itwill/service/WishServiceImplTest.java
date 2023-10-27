@@ -30,8 +30,7 @@ class WishServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	void insert() {
 		Wish insert = Wish.builder()
-				.product(productDao.findByProductNo(2L))
-				.userinfo(userinfoDao.findByNo(8L))
+
 				.wishNo(null)
 				.build();
 		wishService.insertWish(insert);
@@ -42,7 +41,7 @@ class WishServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Transactional
 	@Rollback(false)
 	void delete() throws Exception{
-		wishService.deleteWish(2L);
+		wishService.deleteWish(3L);
 	}
 	
 	@Test
@@ -54,4 +53,24 @@ class WishServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 		System.out.println(wishList);
 	}
 
+	@Test
+	@Disabled
+	@Transactional
+	@Rollback(false)
+	void findByWishNo() {
+		Wish wish = wishService.findByWishNo(19L);
+		System.out.println(wish);
+	}
+	
+	@Test
+	@Disabled
+	@Transactional
+	@Rollback(false)
+	void findByUserNoProductNo() {
+		Wish wish = wishService.findByUserNoProductNo(8L, 1L);
+		System.out.println(wish);	
+	}
 }
+
+
+
