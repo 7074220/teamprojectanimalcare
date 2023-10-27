@@ -76,7 +76,7 @@ public ResponseEntity<PetDto> petUpdate(@RequestBody PetDto petdto) throws Excep
 		pet1.setPetRegisterDate(petdto.getPetRegisterDate());
 		pet1.setPetFindPlace(petdto.getPetFindPlace());
 		pet1.setPetCharacter(petdto.getPetCharacter());
-		pet1.setCenter(Center.builder().centerNo(petdto.getCenterNo()).build());
+		//pet1.setCenter(Center.builder().centerNo(petdto.getCenterNo()).build());
 		
 		
 		petService.petUpdate(pet1);
