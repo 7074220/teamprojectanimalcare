@@ -32,14 +32,8 @@ class ReportBoardServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 		Userinfo userinfo = userInfoDao.findByUserId("전아현");
 		ReportBoard reportBoard = ReportBoard.builder()
 									.boardContent("내용")
-									.boardDate(null)
-									.boardDepth(0)
-									.boardGroupNo(1)
-									.boardName(userinfo.getUserId())
-									.boardPhone(userinfo.getUserPhoneNumber())
 									.boardReadCount(0)
 									.boardRegisterDate(null)
-									.boardStep(0)
 									.boardTitle("제목")
 									.userinfo(userinfo)
 									.build();
