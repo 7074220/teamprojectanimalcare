@@ -20,32 +20,41 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 	@Autowired
 	UserinfoRepository userinfoRepository;
 
+	//댓글 작성
 	@Override
 	public ReplyBoard Create(ReplyBoard replyBoard) {
 		return replyBoardRepository.save(replyBoard);
 	}
 
+	//대댓글 작성
 	@Override
 	public ReplyBoard CreateReply(ReplyBoard replyBoard) {
-		Long No = replyBoard.getReplyBoardNo();
+		// 해당 그룹의 최대 스텝 수
+		Integer maxStep = replyBoardRepository.findGreatestStepByGroupNo(replyBoard.getReplyBoardGroupNo());
 		ReplyBoard board = ReplyBoard.builder()
-					.ReplyBoardNo(No)
+					.ReplyBoardGroupNo(replyBoard.getReplyBoardGroupNo())
 					.ReplyBoardDepth(replyBoard.getReplyBoardDepth()+1)
-					.ReplyBoardStep(replyBoard.getReplyBoardStep()+1)
+					.ReplyBoardStep(maxStep+1)
 					.build();
+		
+		/*
+		그룹1번의 제일 마지막 스텝이 몇번인지????
+		
+		첫번째 : 그룹 1번 스텝1
+			두번째 그룹 1번 스텝2 뎁스1
+			세번째 그룹 1번 스텝3 뎁스1
+		*/
 		return replyBoardRepository.save(board);
 	}
 	
-	@Override
-	public void deleteByUserId(String userId) {
-		replyBoardRepository.deleteByUserId(userId);
-	}
 
-	@Override
-	public void deleteByReplyBoardNo(Long ReplyBoardNo) {
-		replyBoardRepository.deleteById(ReplyBoardNo);
-		
-	}
+
+	/*
+	 * @Override public void deleteByReplyBoardNo(Long ReplyBoardNo) {
+	 * replyBoardRepository.deleteById(ReplyBoardNo);
+	 * 
+	 * }
+	 */
 	
 	@Override
 	public ReplyBoard update(ReplyBoard replyBoard) {
@@ -53,8 +62,8 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 	}
 	
 	@Override
-	public List<ReplyBoard> findByUserId(String userId) {
-		return replyBoardRepository.findByUserId(userId);
+	public List<ReplyBoard> findByUserNo(Long userNo) {
+		return replyBoardRepository.findByUserNo(userNo);
 	}
 	
 	
@@ -64,7 +73,22 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 		return replyBoardRepository.findAllByOrderByReplyBoardNoAsc();
 	}
 
+
+	@Override
+	public void deleteByReplyBoardStepBoardDepthBoardGroupNo(Integer ReplyBoardStep,Integer ReplyBoardDepth,Integer ReplyBoardGroupNo) {
+		replyBoardRepository.deleteByReplyBoardStepBoardDepthBoardGroupNo(ReplyBoardStep, ReplyBoardDepth, ReplyBoardGroupNo);
+	}
+
+	@Override
+	public ReplyBoard findByReplyBoardNo(Long replyBoardNo) {
+		return replyBoardRepository.findById(replyBoardNo).get();
+	}
 	
+	@Override
+	public Integer findGreatestStepByGroupNo(Integer ReplyBoardGroupNo) {
+		return replyBoardRepository.findGreatestStepByGroupNo(ReplyBoardGroupNo);
+	}
+
 }
 
 

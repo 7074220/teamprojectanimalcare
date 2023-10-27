@@ -27,7 +27,7 @@ class OrderServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Rollback(false)
 	//@Disabled
 	void insert() throws Exception{
-		Userinfo user=userInfoService.findUserByNo(6L);
+		Userinfo user=userInfoService.findUserByNo(2L);
 	
 		Orders orders=Orders.builder()
 		.orderAddress("서울특별시")
@@ -82,16 +82,16 @@ class OrderServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Rollback(false)
 	@Disabled
 	void findOrdersById() throws Exception {
-		System.out.println(orderService.findOrderById("박태환"));
+		System.out.println(orderService.findOrderById(2L));
 
 	}
 
 	@Test
 	@Transactional
 	@Rollback(false)
-	// @Disabled
+	@Disabled
 	void findOrderByIdDesc() throws Exception {
-		System.out.println(orderService.findOrderByIdDesc("박태환"));
+		System.out.println(orderService.findOrderByIdDesc(2L));
 
 	}
 

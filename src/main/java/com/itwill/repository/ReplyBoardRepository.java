@@ -16,14 +16,32 @@ import com.itwill.entity.Userinfo;
 
 public interface ReplyBoardRepository extends JpaRepository<ReplyBoard, Long>{
 	
-	@Query(value="delete from replyboard where user_id = ?1",nativeQuery = true)
-	public void deleteByUserId(String userId);
+	//@Query(value="delete from replyboard where user_no = ?1",nativeQuery = true)
+	//public void deleteByUserNo(Long userNo);
 
-	@Query(value = "select * from replyboard where user_id = ?1",nativeQuery = true)
-	public List<ReplyBoard> findByUserId(String userId);
+	@Query(value = "select * from replyboard where user_no = ?1",nativeQuery = true)
+	public List<ReplyBoard> findByUserNo(Long userNo);
 	
-	@Query(value = "select * from replyboard where user_id = ?1 order by reply_board.reply_board_register_date asc",nativeQuery = true)
+	@Query(value = "select * from replyBoard order by reply_board_no asc ",nativeQuery = true)
 	public List<ReplyBoard> findAllByOrderByReplyBoardNoAsc();
+	
+	@Query(value = "select MAX (reply_board_step) from replyBoard where reply_board_group_no = ?1", nativeQuery = true)
+	public Integer findGreatestStepByGroupNo(Integer ReplyBoardGroupNo);
+	
+	
+	@Query(value="delete from replyboard where reply_board_step >= ?1 and reply_board_depth >=?2 and reply_board_group_no = ?3",nativeQuery = true)
+	public void deleteByReplyBoardStepBoardDepthBoardGroupNo(Integer ReplyBoardStep,Integer ReplyBoardDepth,Integer ReplyBoardGroupNo);
+	
+	/*
+	 * @Query(
+	 * value="insert into replyBoard(reply_board_no, reply_board_register_date, reply_board_content, reply_board_group_no, reply_board_step, reply_board_depth, user_no, board_no) \r\n"
+	 * +
+	 * "values(replyBoard_reply_board_no_seq.nextval, sysdate, ?1, replyBoard_reply_board_no_seq.currval, 1, 0, ?2, ?3)"
+	 * ,nativeQuery = true) public ReplyBoard Create(ReplyBoard replyBoard);
+	 */
+	 
+	 
+	
 	
 
 }

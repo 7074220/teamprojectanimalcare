@@ -17,8 +17,8 @@ public class ReportBoardServiceImpl implements ReportBoardService{
 	ReportBoardDao reportBoardDao;
 	 
 	@Override
-	public ReportBoard Create(ReportBoard repordBoard) {
-		return reportBoardDao.Create(repordBoard);
+	public ReportBoard Create(ReportBoard reportBoard) {
+		return reportBoardDao.Create(reportBoard);
 	}
 	
 	@Override

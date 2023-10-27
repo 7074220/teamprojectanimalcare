@@ -10,21 +10,13 @@ import com.itwill.entity.ReplyBoard;
 public class ReplyBoardServiceImpl implements ReplyBoardService{
 
 	@Autowired
-	ReplyBoardDao replyBoardDao;
+	private ReplyBoardDao replyBoardDao;
 	
 	
 	@Override
 	public ReplyBoard Create(ReplyBoard replyBoard) {
 		return replyBoardDao.Create(replyBoard);
-	}
-	
-	@Override
-	public void deleteByUserId(String userId) {
-		replyBoardDao.deleteByUserId(userId);
-		
-	}
-	
-	
+	}	
 
 	@Override
 	public ReplyBoard update(ReplyBoard replyBoard) {
@@ -32,8 +24,8 @@ public class ReplyBoardServiceImpl implements ReplyBoardService{
 	}
 
 	@Override
-	public List<ReplyBoard> findByUserId(String userId) {
-		return replyBoardDao.findByUserId(userId);
+	public List<ReplyBoard> findByUserNo(Long userNo) {
+		return replyBoardDao.findByUserNo(userNo);
 	}
 
 	@Override
@@ -42,10 +34,19 @@ public class ReplyBoardServiceImpl implements ReplyBoardService{
 	}
 
 	@Override
-	public void deleteByReplyBoardNo(Long ReplyBoardNo) {
-		replyBoardDao.deleteByReplyBoardNo(ReplyBoardNo);
-		
+	public void deleteByReplyBoardStepBoardDepthBoardGroupNo(Integer ReplyBoardStep, Integer ReplyBoardDepth,
+			Integer ReplyBoardGroupNo) {
+		replyBoardDao.deleteByReplyBoardStepBoardDepthBoardGroupNo(ReplyBoardStep, ReplyBoardDepth, ReplyBoardGroupNo);
 	}
 	
+	@Override
+	public ReplyBoard findByReplyBoardNo(Long replyBoardNo) {
+		return replyBoardDao.findByReplyBoardNo(replyBoardNo);
+	}
+	
+	@Override
+	public ReplyBoard CreateReply(ReplyBoard replyBoard) {
+		return replyBoardDao.CreateReply(replyBoard);
+	}
 	
 }
