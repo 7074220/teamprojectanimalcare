@@ -26,7 +26,8 @@ public class ReviewBoardDto {
 	private Long boardNo; 
 	private String boardTitle;
 	private String boardContent;
-	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'") 
+	// @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'") 
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'") 
 	private Date boardDate;
 	private Integer boardStar;
 	private Long productNo;
