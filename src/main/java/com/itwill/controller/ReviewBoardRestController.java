@@ -103,6 +103,24 @@ public class ReviewBoardRestController {
 		return ResponseEntity.status(HttpStatus.OK).body(reviewDtoList);
 	}
 	
+	@Operation(summary = "별점으로 review 찾기")
+	@GetMapping("/{boardStar}")
+	public ResponseEntity<List<ReviewBoardDto>> findByStarAll(@PathVariable(value = "boardStar") Long star) {
+		// 선택한 별점으로 찾기
+		List<ReviewBoard> reviewBoardList = reviewBoardService.findByStarAll(star);
+		if(reviewBoardList.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
+		}
+		List<ReviewBoardDto> reviewBoardDtoList =  new ArrayList<>();		
+		
+		for (ReviewBoard reviewBoard : reviewBoardList) {
+			ReviewBoardDto reviewBoardDto = ReviewBoardDto.toDto(reviewBoard);
+			reviewBoardDtoList.add(reviewBoardDto);
+		}
+		
+		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardDtoList);
+	}
+	
 	/*
 	@GetMapping("/{boardNo}")
 	public ResponseEntity<ReviewBoard> findByBoardNo(@PathVariable(value = "boardNo") Long boardNo) {
@@ -135,12 +153,6 @@ public class ReviewBoardRestController {
 	} 
 
 	
-	
-	@GetMapping("/{star}")
-	public ResponseEntity<List<ReviewBoard>> findByStarAll(@PathVariable Long star) {
-		// 선택한 별점으로 찾기
-		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findByStarAll(star));
-	}
 	
 	@GetMapping("/{no}")
 	public ResponseEntity<List<ReviewBoard>> findByUserNo(@PathVariable Long no) {
