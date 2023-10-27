@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.PetDto;
+import com.itwill.entity.Center;
 import com.itwill.entity.Pet;
 import com.itwill.service.PetService;
 
@@ -40,6 +43,7 @@ public class PetRestController {
 	 * 
 	 * return ResponseEntity.status(HttpStatus.OK).body(petDtoList); }
 	 */
+	
 @Operation(summary = "펫 등록")	
 @PostMapping()
 public ResponseEntity<PetDto> petSave(@RequestBody PetDto petdto){
@@ -51,16 +55,37 @@ public ResponseEntity<PetDto> petSave(@RequestBody PetDto petdto){
 @Operation(summary = "펫 삭제")	
 @DeleteMapping("/{petNo}")
 public ResponseEntity<Map> petDelete(@PathVariable(name = "petNo") Long petNo) throws Exception{
+	Optional<Pet> petOptional = Optional.of(petService.petFindById(petNo));
+	if(petOptional.isEmpty()) {
+		throw new Exception("존재하지 않는 동물입니다.");
+	
+		}
 		petService.petRemove(petNo);
 		return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>());
 	}
 
 @Operation(summary = "펫 업데이트")
 @PutMapping()
-public ResponseEntity<PetDto> petDelete(@RequestBody PetDto petdto) throws Exception{
-	petService.petUpdate(petdto.toEntity(petdto));
+public ResponseEntity<PetDto> petUpdate(@RequestBody PetDto petdto) throws Exception{
+	Optional<Pet> petOptional = Optional.of(petService.petFindById(petdto.getPetNo()));
+	if(petOptional.isPresent()) {
+		Pet pet1 = petOptional.get();
+		pet1.setPetLocal(petdto.getPetLocal());
+		pet1.setPetType(petdto.getPetType());
+		pet1.setPetGender(petdto.getPetGender());
+		pet1.setPetRegisterDate(petdto.getPetRegisterDate());
+		pet1.setPetFindPlace(petdto.getPetFindPlace());
+		pet1.setPetCharacter(petdto.getPetCharacter());
+		pet1.setCenter(Center.builder().centerNo(petdto.getCenterNo()).build());
+		
+		
+		petService.petUpdate(pet1);
+		return ResponseEntity.status(HttpStatus.OK).body(PetDto.toDto(pet1));
+		
+	}else {
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
 	
-	return ResponseEntity.status(HttpStatus.OK).body(petdto);
 }
 @Operation(summary = "펫 리스트 최신등록순")	
 @GetMapping()
@@ -75,4 +100,18 @@ public ResponseEntity<List<PetDto>> petDescList(){
 	
 	
 }
+@Operation(summary = "펫타입 리스트")	
+@GetMapping("/{petType}")
+public ResponseEntity<List<PetDto>> petTypeList(@RequestParam(name = "petType")String petType){
+		List<PetDto> petDtoList = new ArrayList<>();
+		List<Pet> petList = petService.findAllByOrderBypetType(petType);
+		for (Pet pet : petList) {
+			petDtoList.add(PetDto.toDto(pet));
+		}
+
+		return ResponseEntity.status(HttpStatus.OK).body(petDtoList);
+	
+	
+}
+
 }

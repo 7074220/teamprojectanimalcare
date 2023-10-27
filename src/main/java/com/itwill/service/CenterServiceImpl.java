@@ -40,7 +40,7 @@ public class CenterServiceImpl implements CenterService {
 		// 센터 삭제
 		centerDao.deleteCenter(centerNo);
 	}
-
+	
 	@Override
 	public List<Center> findAllCenters() {
 		// 모든 센터리스트 검색
@@ -52,5 +52,5 @@ public class CenterServiceImpl implements CenterService {
 		// 센터 이름으로 검색
 		return centerDao.findByName(centerName);
 	}
-
+	
 }

@@ -103,7 +103,14 @@ void test2() {
 		List<Pet> pet = petDao.petFindAll();
 	System.out.println(pet);
 	}
-	
+
+	//펫 타입리스트
+	@Test
+	@Disabled
+	void findallPetType() {
+		List<Pet> pet = petDao.findAllByOrderByPetType("퍼");
+	System.out.println(pet);
+	}
 }
 
 
