@@ -26,20 +26,18 @@ public class WishServiceImpl implements WishService {
 	@Override
 	public Wish insertWish(Wish insertWish) {
 		
-		Wish wish1 = wishrepoRepository.findByUserNoProductNo(insertWish.getUserinfo().getUserNo(), insertWish.getProduct().getProductNo());
-		System.out.println(">>>>>>>>>>>>>>>>>" + wish1);
-		/*
-		 * Optional<Wish> wish2 = wishrepoRepository.findById(1L);
-		 * System.out.println(wish1.isPresent()); System.out.println(wish2.isPresent());
-		 * if (wish1.isPresent() && wish2.isPresent()) {
-		 * System.out.println("이미 존재하는 상품입니다."); return null; } else { Wish wish = new
-		 * Wish(); wish.setProduct(insertWish.getProduct());
-		 * wish.setUserinfo(insertWish.getUserinfo());
-		 * 
-		 * 
-		 * return wishDao.insertWish(wish); }
-		 */
-		return null;
+		Wish findWish = wishrepoRepository.findByUserNoProductNo(insertWish.getUserinfo().getUserNo(), insertWish.getProduct().getProductNo());
+
+		if (findWish != null) {
+			System.out.println("이미 존재하는 상품입니다.");
+		} else {
+			Wish wish = new Wish();
+			wish.setProduct(insertWish.getProduct());
+			wish.setUserinfo(insertWish.getUserinfo());
+
+			wishDao.insertWish(wish);
+		}
+		return insertWish;
 	}
 
 	@Override
