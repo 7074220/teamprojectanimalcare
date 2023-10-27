@@ -39,10 +39,13 @@ public class CouponRestController {
 	@Operation(summary = "쿠폰 생성")
 	@PutMapping("/{userNo}")
 	public ResponseEntity<CouponDto> insertCoupon(@PathVariable(name = "userNo") Long userNo) throws Exception{
+		
+		//생일 스캐쥴링 하는 방법 아직 생각즁 ㅋ ㅈㅅ
 		Userinfo findUserinfo = userInfoService.findUserByNo(userNo);
 		Coupon coupon = Coupon.builder()
-								.couponName("생일쿠폰")
+								.couponName("생일쿠폰")  
 								.couponDiscount(30)
+								.userinfo(findUserinfo)
 								.build();
 		coupon.setCouponDate(30L);
 		
@@ -58,21 +61,14 @@ public class CouponRestController {
 	@Operation(summary = "유저에 따른 쿠폰 뽑기")
 	@GetMapping("/{userNo}")
 	public ResponseEntity<List<CouponDto>> findAllByUserNo(@PathVariable(name = "userNo") Long userNo)throws Exception {
+		couponService.deleteExpireCouponByUserNo(userNo);
 		List<Coupon> coupons = couponService.findAllByUserNo(userNo);
 		List<CouponDto> couponList = new ArrayList<CouponDto>();
 
 		for (Coupon coupon : coupons) {
-			couponService.deleteExpireCouponByUserNo(coupon.getCouponExpirationDate(), userNo);
-		}
-		
-		//coupons = couponService.findAllByUserNo(userNo);
-		
-		/*
-		for (Coupon coupon : coupons) {
 			CouponDto couponDto = CouponDto.toDto(coupon);
 			couponList.add(couponDto);
 		}
-		*/
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));

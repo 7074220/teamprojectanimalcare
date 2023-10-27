@@ -1,7 +1,9 @@
 package com.itwill.controller;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -164,5 +166,28 @@ public class UserInfoRestController {
 		
 		return new ResponseEntity<UserWriteActionDto>(userWriteActionDto, httpHeaders, HttpStatus.OK);
 	}
-
+	
+	@Operation(summary = "전체회원리스트")
+	@GetMapping("/list")
+	public ResponseEntity<List<Userinfo>> userList(HttpSession session) throws Exception{
+		List<Userinfo> userinfos = new ArrayList<>();
+		
+		if (session.getAttribute("userNo") != null) {
+			Long adminNo = (Long)session.getAttribute("userNo");
+			Userinfo admin = userInfoService.findUserByNo(adminNo);
+			if(admin.getUserId().equals("admin")) {
+				userinfos = userInfoService.findUserList();
+			}else {
+				throw new Exception("admin만 가능합니다.");
+			}
+		}else {
+			throw new Exception("관리자로 로그인해주세요.");
+		}
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<List<Userinfo>>(userinfos, httpHeaders, HttpStatus.OK);
+	}
+	
 }

@@ -39,7 +39,6 @@ public class Coupon {
      private Long couponId;
 	 private String couponName;
 	 private Integer couponDiscount;
-	 @CreationTimestamp
 	 private LocalDateTime couponPayday;
 	 private LocalDateTime couponExpirationDate;
 	 
