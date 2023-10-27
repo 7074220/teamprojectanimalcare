@@ -26,10 +26,10 @@ public interface CouponService {
 	public List<Coupon> findAllByUserNo(Long userNo);
 	
 	// 만료일 쿠폰 찾기
-	public List<Coupon> autoDeleteExpiredCoupons(LocalDateTime couponExpirationDate);
+	public List<Coupon> autoDeleteExpiredCoupons();
 	
 	// 유저에 따른 만료 쿠폰 
-	public void deleteExpireCouponByUserNo(LocalDateTime date, Long userNo);
+	public void deleteExpireCouponByUserNo(Long userNo);
 	
 	
 }

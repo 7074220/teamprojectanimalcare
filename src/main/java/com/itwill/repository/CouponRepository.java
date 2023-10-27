@@ -13,8 +13,8 @@ import com.itwill.entity.Coupon;
 public interface CouponRepository extends JpaRepository<Coupon, Long> {
 
 	@Modifying
-	@Query(value = "select * from coupon where ?1 < TRUNC(sysdate)", nativeQuery = true)
-	public List<Coupon> findByExpirationDateBefore(LocalDateTime couponExpirationDate);
+	@Query(value = "select * from coupon where coupon_expiration_date < sysdate", nativeQuery = true)
+	public List<Coupon> findByExpirationDateBefore();
 
 	// 유저에 대한 쿠폰 리스트 뽑기
 	@Modifying
@@ -23,7 +23,7 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 
 	// 유저에 따른 만료쿠폰 제거
 	@Modifying
-	@Query(value = "delete from coupon where ?1 < TRUNC(sysdate) and user_no=?2", nativeQuery = true)
-	List<Coupon> deleteExpireCouponByUserNo(LocalDateTime date, Long userNo);
+	@Query(value = "delete from coupon where coupon.coupon_expiration_date< sysdate and coupon.user_no=?1", nativeQuery = true)
+	void deleteExpireCouponByUserNo(Long userNo);
 
 }

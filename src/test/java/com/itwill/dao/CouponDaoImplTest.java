@@ -66,8 +66,10 @@ class CouponDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		
 	@Test
 	//@Disabled
+	@Transactional
+	@Rollback(false)
 	void test4() {
-		couponDao.deleteExpireCouponByUserNo(LocalDateTime.of(2023, 10, 28, 0, 0), 3L);
+		couponDao.deleteExpireCouponByUserNo(3L);
 	}	
 			
 	

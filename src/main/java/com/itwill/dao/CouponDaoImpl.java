@@ -42,8 +42,8 @@ public class CouponDaoImpl implements CouponDao {
 
 	// 만료된 쿠폰찾기
 	@Override
-	public List<Coupon> autoDeleteExpiredCoupons(LocalDateTime couponExpirationDate) {
-		return couponRepository.findByExpirationDateBefore(couponExpirationDate);
+	public List<Coupon> autoDeleteExpiredCoupons() {
+		return couponRepository.findByExpirationDateBefore();
 	}
 
 	@Override
@@ -52,8 +52,8 @@ public class CouponDaoImpl implements CouponDao {
 	}
 
 	@Override
-	public void deleteExpireCouponByUserNo(LocalDateTime date, Long userNo) {
-		couponRepository.deleteExpireCouponByUserNo(date, userNo);
+	public void deleteExpireCouponByUserNo(Long userNo) {
+		couponRepository.deleteExpireCouponByUserNo(userNo);
 	}
 	
 }

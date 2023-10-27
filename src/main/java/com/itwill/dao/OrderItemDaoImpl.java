@@ -22,6 +22,25 @@ public class OrderItemDaoImpl implements OrderItemDao {
 	}
 
 	@Override
+	public OrderItem updateOrderItem(OrderItem orderItem) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public OrderItem deleteOrderItem(OrderItem orderItem) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrderItem> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	/*
+	@Override
 	public OrderItem updateOrderItem(OrderItem updateorderItem) throws Exception {
 		return orderItemRepository.save(updateorderItem);
 	}
@@ -41,5 +60,5 @@ public class OrderItemDaoImpl implements OrderItemDao {
 	public List<OrderItem> findAllOrderItemByOrderNo(Long orderNo) {
 		return orderItemRepository.findAllOrderItemByOrderNo(orderNo);
 	}
-
+	*/
 }
