@@ -28,12 +28,12 @@ public class Wish {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Wish_wish_no_SEQ")
 	private Long wishNo;
 	
-	@OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_no")
 	@Builder.Default
 	private Product product = new Product();
 	
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_no")
 	@Builder.Default
 	private Userinfo userinfo = new Userinfo();
