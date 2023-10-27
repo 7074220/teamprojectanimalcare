@@ -1,5 +1,6 @@
 package com.itwill.service;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,8 +27,8 @@ public class WishServiceImpl implements WishService {
 	@Override
 	public Wish insertWish(Wish insertWish) {
 		Optional<Wish> findProductNo = wishrepoRepository.findById(insertWish.getProduct().getProductNo());
-		Optional<Wish> findUserNo = wishrepoRepository.findById(insertWish.getUserinfo().getUserNo());
-		if (findUserNo.isPresent()  && findProductNo.isEmpty()) {
+		//Optional<Wish> findUserNo = wishrepoRepository.findById(insertWish.getUserinfo().getUserNo());
+		if (findProductNo.isPresent()) {
 			System.out.println("이미 존재하는 상품입니다.");
 		} else {
 			Wish wish = new Wish(); // Wish 객체를 생성

@@ -30,8 +30,8 @@ class WishServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	void insert() {
 		Wish insert = Wish.builder()
-				.product(productDao.findByProductNo(1L))
-				.userinfo(userinfoDao.findByNo(2L))
+				.product(productDao.findByProductNo(2L))
+				.userinfo(userinfoDao.findByNo(8L))
 				.wishNo(null)
 				.build();
 		wishService.insertWish(insert);
