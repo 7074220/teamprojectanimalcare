@@ -29,6 +29,20 @@ public class WishDaoImpl implements WishDao{
 	public List<Wish> findAllWishByUserNo(Long userNo) {
 		return wishRepository.findAllByUserNo(userNo);
 	}
+
+	@Override
+	public Wish findByWishNo(Long no) {
+		return wishRepository.findById(no).get();
+	}
+
+	@Override
+	public Wish findByUserNoProductNo(Long userNo, Long productNo) {
+		return wishRepository.findByUserNoProductNo(userNo, productNo);
+	}
+
+	
+
+
 	
 	
 }
