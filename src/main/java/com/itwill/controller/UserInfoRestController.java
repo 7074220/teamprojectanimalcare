@@ -1,6 +1,7 @@
 package com.itwill.controller;
 
 import java.nio.charset.Charset;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.UserLoginActionDto;
 import com.itwill.dto.UserWriteActionDto;
+import com.itwill.entity.Coupon;
 import com.itwill.entity.Userinfo;
+import com.itwill.service.CouponService;
 import com.itwill.service.UserInfoService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,13 +33,26 @@ public class UserInfoRestController {
 
 	@Autowired
 	private UserInfoService userInfoService;
-
+	
+	@Autowired
+	private CouponService couponService;
+	
 	// 회원가입
 	@Operation(summary = "회원가입")
 	@PostMapping()
 	public ResponseEntity<UserWriteActionDto> user_write_action(UserWriteActionDto dto) throws Exception {
-
-		userInfoService.create(UserWriteActionDto.toEntity(dto));
+		
+		Userinfo createUserinfo = userInfoService.create(UserWriteActionDto.toEntity(dto));
+		
+		Coupon coupon=Coupon.builder()
+				.couponName("가입쿠폰")
+				.couponDiscount(30)
+				.userinfo(createUserinfo)
+				.build();
+		coupon.setCouponDate(60L);
+		
+		coupon = couponService.Create(coupon);
+		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
@@ -116,7 +132,7 @@ public class UserInfoRestController {
 			dto.setUserResidentNumber(loginUser.getUserResidentNumber());
 			
 		} else {
-			dto = UserWriteActionDto.builder().build();
+			throw new Exception("로그인을 해주세요");
 		}
 
 		HttpHeaders httpHeaders = new HttpHeaders();
@@ -129,16 +145,19 @@ public class UserInfoRestController {
 	@Operation(summary="회원정보수정")
 	@PutMapping("/{userNo}")
 	public ResponseEntity<UserWriteActionDto> updateUser(@RequestBody UserWriteActionDto userWriteActionDto,@PathVariable(name="userNo")Long userNo, 
-			HttpSession httpSession) throws Exception{
+			HttpSession session) throws Exception{
 		
-		Userinfo userinfo=	userInfoService.findUserByNo(userNo);
-		userinfo.setUserPassword(userWriteActionDto.getUserPassword());
-		userinfo.setUserName(userWriteActionDto.getUserName());
-		userinfo.setUserGender(userWriteActionDto.getUserGender());
-		userinfo.setUserAddress(userWriteActionDto.getUserAddress());
-		userinfo.setUserPhoneNumber(userWriteActionDto.getUserPhoneNumber());
-		
-		userInfoService.update(userinfo);
+		if (session.getAttribute("userNo") != null) {
+			Userinfo userinfo=	userInfoService.findUserByNo(userNo);
+			userinfo.setUserPassword(userWriteActionDto.getUserPassword());
+			userinfo.setUserName(userWriteActionDto.getUserName());
+			userinfo.setUserGender(userWriteActionDto.getUserGender());
+			userinfo.setUserAddress(userWriteActionDto.getUserAddress());
+			userinfo.setUserPhoneNumber(userWriteActionDto.getUserPhoneNumber());
+			userInfoService.update(userinfo);
+		}else {
+			throw new Exception("로그인을 해주세요");
+		}
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));

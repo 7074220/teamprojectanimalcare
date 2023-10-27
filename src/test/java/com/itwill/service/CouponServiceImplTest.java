@@ -28,11 +28,10 @@ class CouponServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 	void test() {
 		Userinfo userinfo = Userinfo.builder().userId("장희주").build();
 		Coupon coupon = Coupon.builder().couponName("생일쿠폰").couponDiscount(20)
-								.couponPayday(new Date())
-								.couponExpirationDate(new Date())
 								.userinfo(userinfo).build();
 
-		Coupon createCoupon = couponService.Create(coupon,60);
+
+		Coupon createCoupon = couponService.Create(coupon);
 		System.out.println(createCoupon);
 	}
 
