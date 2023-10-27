@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.itwill.entity.ReportBoard;
 import com.itwill.entity.Userinfo;
+import com.itwill.service.UserInfoService;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
@@ -30,20 +31,32 @@ public class ReportBoardInsertDto {
 	private String boardFindName;
 	private String boardFindPhone;
 	
-	private Userinfo userinfo;
+	private Long userNo;
 	
 	public static ReportBoard toEntity(ReportBoardInsertDto reportBoardInsertDto) {
 		ReportBoard reportBoard =ReportBoard.builder()
-											.boardContent("")
-											.boardFindDate(null)
-											.boardFindName(null)
-											.boardFindPhone(null)
-											.boardNo(null)
-											.boardRegisterDate(null)
-											.boardTitle(null)
-											.userinfo(reportBoardInsertDto.getUserinfo())
+											.boardContent(reportBoardInsertDto.getBoardContent())
+											.boardFindDate(reportBoardInsertDto.getBoardFindDate())
+											.boardFindName(reportBoardInsertDto.getBoardFindName())
+											.boardFindPhone(reportBoardInsertDto.getBoardFindPhone())
+											.boardRegisterDate(reportBoardInsertDto.getBoardRegisterDate())
+											.boardTitle(reportBoardInsertDto.getBoardTitle())
 											.build();
+
 		return reportBoard;
+	}
+	public static ReportBoardInsertDto toDto(ReportBoard reportBoard) {
+		ReportBoardInsertDto reportBoardInsertDto =ReportBoardInsertDto.builder()
+											.boardNo(reportBoard.getBoardNo())
+											.boardContent(reportBoard.getBoardContent())
+											.boardFindDate(reportBoard.getBoardFindDate())
+											.boardFindName(reportBoard.getBoardFindName())
+											.boardFindPhone(reportBoard.getBoardFindPhone())
+											.boardRegisterDate(reportBoard.getBoardRegisterDate())
+											.boardTitle(reportBoard.getBoardTitle())
+											.build();
+
+		return reportBoardInsertDto;
 	}
 	
 }
