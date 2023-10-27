@@ -50,4 +50,10 @@ public class CouponDaoImpl implements CouponDao {
 		return couponRepository.findAllByUserNo(userNo);
 	}
 
+	@Override
+	public List<Coupon> findExpireCouponByUserNo(Date date, Long userNo) {
+		
+		return couponRepository.findExpireCouponByUserNo(date, userNo);
+	}
+
 }

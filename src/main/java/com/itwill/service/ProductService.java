@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.itwill.dto.ProductResponseDto;
-import com.itwill.dto.ProductUpdateDto;
 import com.itwill.entity.Product;
 
 @Transactional

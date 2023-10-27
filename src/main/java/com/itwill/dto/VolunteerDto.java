@@ -50,16 +50,4 @@ public class VolunteerDto {
 		return volunteerDto;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

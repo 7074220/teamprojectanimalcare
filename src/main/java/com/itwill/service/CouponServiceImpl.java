@@ -57,4 +57,10 @@ public class CouponServiceImpl implements CouponService{
 		return couponDao.autoDeleteExpiredCoupons(couponExpirationDate);
 	}
 	
+	@Override
+	public List<Coupon> findExpireCouponByUserNo(Date date, Long userNo) {
+		
+		return couponDao.findExpireCouponByUserNo(date, userNo);
+	}
+	
 }
