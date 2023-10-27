@@ -1,6 +1,7 @@
 package com.itwill.controller;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,16 +54,21 @@ public class WishRestController {
 		wishService.deleteWish(no);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Operation(summary = "위시리스트 보기")
+	@GetMapping("/find/{userNo}")
+	public ResponseEntity<List<WishlistInsertDto>> findAllWish(@PathVariable(name = "userNo") Long no) {
+		List<Wish> wishList = wishService.findAllWishByUserNo(no);
+		List<WishlistInsertDto> wishDtoList = new ArrayList<>();
+		
+		for (Wish wish : wishList) {
+			WishlistInsertDto wishlistInsertDtos = WishlistInsertDto.toDto(wish);
+			wishDtoList.add(wishlistInsertDtos);
+		}
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<List<WishlistInsertDto>>(wishDtoList, httpHeaders, HttpStatus.OK);
+	}
 	
 }
