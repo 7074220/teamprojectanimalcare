@@ -42,12 +42,20 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 					.ReplyBoardStep(maxStep+1)
 					.ReplyBoardContent(replyBoard.getReplyBoardContent())
 					.reportBoard(replyBoard.getReportBoard())
+					.userinfo(null)
 					.build();
 		return replyBoardRepository.save(board);
 	}
 	
 
 
+	/*
+	 * @Override public void deleteByReplyBoardNo(Long ReplyBoardNo) {
+	 * replyBoardRepository.deleteById(ReplyBoardNo);
+	 * 
+	 * }
+	 */
+	
 	@Override
 	public ReplyBoard update(ReplyBoard replyBoard) {
 		return replyBoardRepository.save(replyBoard);
@@ -65,6 +73,7 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 		return replyBoardRepository.findAllByOrderByReplyBoardNoAsc();
 	}
 
+
 	@Override
 	public void deleteByReplyBoardStepBoardDepthBoardGroupNo(Integer ReplyBoardStep,Integer ReplyBoardDepth,Integer ReplyBoardGroupNo) {
 		replyBoardRepository.deleteByReplyBoardStepBoardDepthBoardGroupNo(ReplyBoardStep, ReplyBoardDepth, ReplyBoardGroupNo);
@@ -80,7 +89,15 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 	public Integer findGreatestStepByGroupNo(Integer ReplyBoardGroupNo) {
 		return replyBoardRepository.findGreatestStepByGroupNo(ReplyBoardGroupNo);
 	}
+
 	
+	// 해당 게시물의 댓글 보여주기
+	@Override
+	public List<ReplyBoard> findAllByReportBoardNo(Long BoardNo) {
+		return replyBoardRepository.findAllByReportBoardNo(BoardNo);
+	}
+	
+
 }
 
 

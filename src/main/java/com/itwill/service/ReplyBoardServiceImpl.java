@@ -3,10 +3,14 @@ package com.itwill.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.dao.ReplyBoardDao;
 import com.itwill.entity.ReplyBoard;
 
+@Service
+@Transactional
 public class ReplyBoardServiceImpl implements ReplyBoardService{
 
 	@Autowired
@@ -47,6 +51,12 @@ public class ReplyBoardServiceImpl implements ReplyBoardService{
 	@Override
 	public ReplyBoard CreateReply(ReplyBoard replyBoard) {
 		return replyBoardDao.CreateReply(replyBoard);
+	}
+
+	@Override
+	public List<ReplyBoard> findAllByReportBoardNo(Long BoardNo) {
+		
+		return replyBoardDao.findAllByReportBoardNo(BoardNo);
 	}
 	
 }

@@ -11,7 +11,7 @@ public interface ProductService {
 
 	Product insertProduct(Product product);
 	
-	Product updateProduct(Product product) throws Exception;
+	Product updateProduct(Product updateProduct) throws Exception;
 	
 	Product findByProductNo(Long no);
 	
@@ -30,6 +30,7 @@ public interface ProductService {
 	List<Product> findAllByOrderByProductStarAvgDesc();
 
 	// 최신번호순 정렬
+	// default
 	List<Product> findAllByOrderByProductNoDesc();
 	
 	// 낮은번호순 정렬

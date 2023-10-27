@@ -11,40 +11,51 @@ import com.itwill.repository.MyPetRepository;
 import com.itwill.repository.UserinfoRepository;
 
 @Repository
-public class MyPetDaoImpl implements MyPetDao{
+public class MyPetDaoImpl implements MyPetDao {
 	@Autowired
-	MyPetRepository myPetRepository;
-	
-   @Override
-   public MyPet CreatePet(MyPet myPet) {
-      return myPetRepository.save(myPet);
-   }
+	private MyPetRepository myPetRepository;
 
-   @Override
-   public void DeletePet(Long mypetNo) {
-	   if(myPetRepository.findById(mypetNo).isPresent()) {
-		   myPetRepository.deleteById(mypetNo);
+	@Override
+	public MyPet CreatePet(MyPet myPet) {
+		return myPetRepository.save(myPet);
+	}
+
+	@Override
+	public void DeletePet(Long mypetNo) {
+		if (myPetRepository.findById(mypetNo).isPresent()) {
+			myPetRepository.deleteById(mypetNo);
 		}
-   }
+	}
 
-   @Override
-   public MyPet UpdatePet(MyPet myPet) {
-      return myPetRepository.save(myPet);
-   }
+	@Override
+	public MyPet UpdatePet(MyPet myPet) {
+		return myPetRepository.save(myPet);
+	}
 
-   @Override
-   public List<MyPet> findAll() {
-      return myPetRepository.findAll();
-   }
-   
-   @Override
+	@Override
+	public List<MyPet> findAll() {
+		return myPetRepository.findAll();
+	}
+
+	@Override
 	public MyPet findByNo(Long mypetNo) {
-		   MyPet pet = myPetRepository.findById(mypetNo).get();
+		MyPet pet = myPetRepository.findById(mypetNo).get();
 		return pet;
 	}
-}
 
-   
-   
-     
-   
+	@Override
+	public List<MyPet> findMyPetListByuserNo(Long userNo) {
+		return myPetRepository.findMyPetListByuserNo(userNo);
+	}
+
+	@Override
+	public void deleteMypetByUserNo(Long userNo, Long mypetNo) {
+		myPetRepository.deleteMypetByUserNo(userNo, mypetNo);
+	}
+	
+	@Override
+	public void deleteMypetAllByUserNo(Long userNo) {
+		myPetRepository.deleteMypetAllByUserNo(userNo);
+	}
+	
+}

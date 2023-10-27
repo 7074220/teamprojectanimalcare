@@ -1,0 +1,45 @@
+package com.itwill.dto;
+
+import java.util.List;
+
+import com.itwill.entity.Product;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+public class ProductListDto {
+
+	private Long productNo;
+	private Integer productPrice;
+	private String productImage;
+	private String productName;
+	private String productCategory;
+	
+	public static Product toEntity(ProductListDto dto) {
+		Product product = Product.builder()
+				.productNo(dto.getProductNo())
+				.productPrice(dto.getProductPrice())
+				.productImage(dto.getProductImage())
+				.productName(dto.getProductName())
+				.productCategory(dto.getProductCategory())
+				.build();
+		return product;
+	}
+	
+	public static ProductListDto toDto(Product product) {
+		ProductListDto productListDto = ProductListDto.builder()
+				.productNo(product.getProductNo())
+				.productPrice(product.getProductPrice())
+				.productImage(product.getProductImage())
+				.productName(product.getProductName())
+				.productCategory(product.getProductCategory())
+				.build();
+		return productListDto;
+	}
+}

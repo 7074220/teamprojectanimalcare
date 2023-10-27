@@ -5,86 +5,87 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.itwill.dao.ProductDao;
 import com.itwill.entity.Product;
 import com.itwill.repository.ProductRepository;
 
+@Transactional
 @Service
 public class ProductServiceImpl implements ProductService {
 
 	@Autowired
-	private ProductRepository productRepository;
+	private ProductDao productDao;
 
 	@Override
 	public Product insertProduct(Product product) {
-		return productRepository.save(product);
+		return productDao.insertProduct(product);
 	}
 
 	@Override
 	public Product updateProduct(Product updateProduct) throws Exception {
-		Optional<Product> findProductOptional = productRepository.findById(updateProduct.getProductNo());
-		Product updatedProduct = null;
-		if (findProductOptional.isPresent()) {
-			Product product = findProductOptional.get();
-			product.setProductName(updateProduct.getProductName());
-			product.setProductPrice(updateProduct.getProductPrice());
-			product.setProductImage(updateProduct.getProductImage());
-			updatedProduct = productRepository.save(updateProduct);
+		Product findProduct = productDao.findByProductNo(updateProduct.getProductNo());
+		if (findProduct!=null) {
+			findProduct.setProductName(updateProduct.getProductName());
+			findProduct.setProductPrice(updateProduct.getProductPrice());
+			findProduct.setProductImage(updateProduct.getProductImage());
+			productDao.updateProduct(findProduct);
 		} else {
 			throw new Exception("존재하지 않는 제품입니다.");
 		}
-		return updatedProduct;
+		return findProduct;
 	}
 
 	@Override
 	public Product findByProductNo(Long no) {
-		Product selectedProduct = productRepository.findById(no).get();
+		Product selectedProduct = productDao.findByProductNo(no);
 		return selectedProduct;
 	}
 	
 	@Override
 	public void deleteProduct(Long no) throws Exception {
-		Optional<Product> selectedProdcuOptional = productRepository.findById(no);
-		if (selectedProdcuOptional.isEmpty()) {
+		Product findProduct = productDao.findByProductNo(no);
+		if (findProduct == null) {
 			throw new Exception("존재하지 않는 제품입니다.");
 		}
-		productRepository.delete(selectedProdcuOptional.get());
+		productDao.deleteProduct(no);
 	}
 
 	// 일부 단어 입력으로 제품 검색
 	@Override
 	public List<Product> findByContains(String productName) { 
-		return productRepository.findByContains(productName);
+		return productDao.findByContains(productName);
 	}
 
 	// 높은 가격순 정렬
 	@Override
 	public List<Product> findAllByOrderByProductPriceDesc() {
-		return productRepository.findAllByOrderByProductPriceDesc();
+		return productDao.findAllByOrderByProductPriceDesc();
 	}
 
 	// 낮은 가격순 정렬
 	@Override
 	public List<Product> findAllByOrderByProductPriceAsc () {
-		return productRepository.findAllByOrderByProductPriceAsc();
+		return productDao.findAllByOrderByProductPriceAsc();
 	}
 
 	// 평점높은순 정렬
 	@Override
 	public List<Product> findAllByOrderByProductStarAvgDesc() {
-		return productRepository.findAllByOrderByProductStarAvgDesc();
+		return productDao.findAllByOrderByProductStarAvgDesc();
 	}
 
 	// 최신번호순 정렬
 	@Override
 	public List<Product> findAllByOrderByProductNoDesc() {
-		return productRepository.findAllByOrderByProductNoDesc();
+		return productDao.findAllByOrderByProductNoDesc();
 	}
 
 	// 낮은번호순 정렬
 	@Override
 	public List<Product> findAllByOrderByProductNoAsc() {
-		return productRepository.findAllByOrderByProductNoAsc();
+		return productDao.findAllByOrderByProductNoAsc();
 	}
 	
 	

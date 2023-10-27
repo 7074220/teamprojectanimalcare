@@ -51,7 +51,13 @@ public class PetDaoImpl implements PetDao {
 		List<Pet> petList = petRepository.findAllByOrderByPetNoDesc();
 		return petList;
 	}
-
+	
+	//펫타입으로 정렬
+		@Override
+		public List<Pet> findAllByOrderByPetType(String petType) {
+			List<Pet> petList = petRepository.findByPetType(petType);
+			return petList;
+		}
 	
 	
 

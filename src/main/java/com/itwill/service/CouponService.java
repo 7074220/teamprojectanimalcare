@@ -1,6 +1,7 @@
 package com.itwill.service;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,14 @@ public interface CouponService {
 	public List<Coupon> findAll();
 	// 쿠폰 찾기
 	public Coupon findById(Long couponId);
+	//사용자 유저에 따른 쿠폰 뽑기
+	public List<Coupon> findAllByUserNo(Long userNo);
+	
+	// 만료일 쿠폰 찾기
+	public List<Coupon> autoDeleteExpiredCoupons();
+	
+	// 유저에 따른 만료 쿠폰 
+	public void deleteExpireCouponByUserNo(Long userNo);
+	
 	
 }

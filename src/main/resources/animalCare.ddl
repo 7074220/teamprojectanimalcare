@@ -41,8 +41,8 @@ CREATE TABLE Coupon(
 		coupon_id                     		NUMBER(10)		 NULL ,
 		coupon_name                   		VARCHAR2(50)		 NULL ,
 		coupon_discount               		NUMBER(10)		 NULL ,
-		coupon_expiration_date        		DATE		 NULL ,
-		coupon_payday                 		DATE		 NULL ,
+		coupon_expiration_date        		TIMESTAMP(9)		 NULL ,
+		coupon_payday                 		TIMESTAMP(9)		 NULL ,
 		user_no                       		NUMBER(10)		 NULL 
 );
 
@@ -58,20 +58,16 @@ CREATE TABLE ReportBoard(
 		board_title                   		VARCHAR2(100)		 NULL ,
 		board_register_date           		DATE		 NULL ,
 		board_content                 		VARCHAR2(100)		 NULL ,
-		board_date                    		DATE		 NULL ,
-		board_readCount              		NUMBER(10)		 NULL ,
-		board_group_no                		NUMBER(10)		 NULL ,
-		board_step                    		NUMBER(10)		 NULL ,
-		board_depth                   		NUMBER(10)		 NULL ,
-		board_name                    		VARCHAR2(50)		 NULL ,
-		board_phone                   		VARCHAR2(50)		 NULL ,
+		board_find_date               		DATE		 NULL ,
+		board_readCount               		NUMBER(10)		 NULL ,
+		board_find_name               		VARCHAR2(50)		 NULL ,
+		board_find_phone              		VARCHAR2(50)		 NULL ,
 		user_no                       		NUMBER(10)		 NULL 
 );
 
 DROP SEQUENCE ReportBoard_board_no_SEQ;
 
 CREATE SEQUENCE ReportBoard_board_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 
 

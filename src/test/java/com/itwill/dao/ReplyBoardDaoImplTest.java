@@ -30,7 +30,7 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	
 	@Transactional
 	@Rollback(false)
-	//@Disabled
+	@Disabled
 	@Test
 	void test() {
 		Userinfo userinfo = userInfoDao.findByNo(2L);
@@ -45,17 +45,29 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		replyBoardDao.Create(replyBoard);
 	}
 	
+
+	
+	/*
+	 * @Transactional
+	 * 
+	 * @Rollback(false)
+	 * 
+	 * @Disabled
+	 * 
+	 * @Test void test1() { replyBoardDao.deleteByReplyBoardNo(1L); }
+	 */
+
 	@Transactional
 	@Rollback(false)
 	@Disabled
 	@Test
 	void test1() {
-		ReplyBoard replyBoard = replyBoardDao.findByReplyBoardNo(7L);
+		ReplyBoard replyBoard = replyBoardDao.findByReplyBoardNo(1L);
 		replyBoard.setReplyBoardContent("대댓글 텟");
 		replyBoardDao.CreateReply(replyBoard);
 	}
 	
-	
+
 	
 	
 	@Transactional
@@ -122,13 +134,15 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	
 	@Transactional
 	@Rollback(false)
-	@Disabled
+	//@Disabled
 	@Test
 	void test7() {
-		ReplyBoard replyBoard=replyBoardDao.findByReplyBoardNo(5L);
-		System.out.println(replyBoard);
+		List<ReplyBoard>  replyBoardList= replyBoardDao.findAllByReportBoardNo(2L);
+		System.out.println(replyBoardList);
 	
 	}
 	
 
+	
+	
 }

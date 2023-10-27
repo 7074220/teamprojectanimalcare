@@ -2,6 +2,8 @@ package com.itwill.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,7 @@ class ReplyBoardServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	
 	@Transactional
 	@Rollback(false)
-	//@Disabled
+	@Disabled
 	@Test
 	void insert() {
 		ReplyBoard replyBoard = ReplyBoard.builder()
@@ -33,5 +35,46 @@ class ReplyBoardServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 		
 		replyBoardService.Create(null);
 	}
-
+	
+	@Transactional
+	@Rollback(false)
+	@Disabled
+	@Test
+	void insertReply() {
+		ReplyBoard replyBoard = replyBoardService.findByReplyBoardNo(1L);
+		replyBoardService.CreateReply(replyBoard);
+		
+	}
+	
+	@Disabled
+	@Test
+	void delete() {
+		ReplyBoard replyBoard=  replyBoardService.findByReplyBoardNo(1L);
+		replyBoardService.deleteByReplyBoardStepBoardDepthBoardGroupNo(replyBoard.getReplyBoardStep(),replyBoard.getReplyBoardDepth(),replyBoard.getReplyBoardGroupNo());
+		
+	}
+	
+	@Disabled
+	@Test
+	void update() {
+		ReplyBoard replyBoard=  replyBoardService.findByReplyBoardNo(2L);
+		replyBoard.setReplyBoardContent("희주짱나");
+		replyBoardService.update(replyBoard);
+		
+	}
+	@Transactional
+	@Rollback(false)
+	//@Disabled
+	@Test
+	void findAllByReportBoardNo() {
+		
+	List<ReplyBoard> board=replyBoardService.findAllByReportBoardNo(2L);
+		System.out.println(board);
+		
+		
+		
+	}
+	
+	
+	
 }

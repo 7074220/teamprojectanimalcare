@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,6 +16,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
@@ -47,17 +51,16 @@ public class Userinfo {
 	private String userResidentNumber;
 	private Date userRegisterDate;
 	private Integer userPoint;
-
+	
 	@OneToMany(mappedBy = "userinfo", cascade ={CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
 	@Builder.Default
 	@ToString.Exclude
 	private List<Coupon> coupons = new ArrayList<Coupon>();
-
+	
 	@OneToMany(mappedBy = "userinfo", cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
 	@Builder.Default
 	@ToString.Exclude
 	private List<MyPet> myPets = new ArrayList<MyPet>();
-
 
 	@OneToMany(mappedBy = "userinfo", cascade ={CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
 	@Builder.Default
@@ -68,7 +71,6 @@ public class Userinfo {
 	@Builder.Default
 	@ToString.Exclude
 	private List<Orders> orders = new ArrayList<Orders>();
-
 
 	@OneToMany(mappedBy = "userinfo", cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
 	@Builder.Default
