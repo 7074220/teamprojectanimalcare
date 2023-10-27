@@ -114,8 +114,7 @@ public class CenterRestController {
 
 	@Operation(summary = "센터 업데이트")
 	@PutMapping("/{centerNo}")
-	public ResponseEntity<CenterDto> updateCenter(@PathVariable(name = "centerNo") Long centerNo,
-			@RequestBody CenterDto dto) {
+	public ResponseEntity<CenterDto> updateCenter(@PathVariable(name = "centerNo") Long centerNo, @RequestBody CenterDto dto) {
 		Center existingCenter = centerService.findByCenterNo(centerNo);
 
 		if (existingCenter != null) {
