@@ -39,7 +39,7 @@ public class ReviewBoardRestController {
 	
 	@Operation(summary = "리뷰작성")
 	@PostMapping
-	public ResponseEntity<ReviewBoardDto> createReviewBoard(@org.springframework.web.bind.annotation.RequestBody ReviewBoardDto dto, HttpSession httpSession) throws Exception {
+	public ResponseEntity<ReviewBoardDto> createReviewBoard(@RequestBody ReviewBoardDto dto, HttpSession httpSession) throws Exception {
 	    ReviewBoard reviewBoardEntity = ReviewBoardDto.toEntity(dto);
 	    reviewBoardService.create(reviewBoardEntity);
 	    HttpHeaders httpHeaders = new HttpHeaders();
@@ -139,8 +139,7 @@ public class ReviewBoardRestController {
 		}
 		
 		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardDtoList);
-	}
-	
+	}	
 	
 	@Operation(summary = "boardNo로 reviewBoard 수정")
 	@PutMapping("/{boardNo}")
@@ -173,50 +172,166 @@ public class ReviewBoardRestController {
 		
 	}
 		
-		
-		
 	
-	
-	/*
-	
+	@Operation(summary = "높은 평점순 정렬")
+	@GetMapping("reviewBoards/BoardStarDesc")
+	public ResponseEntity<List<ReviewBoardDto>> findAllByOrderByBoardStarDesc() {
+	    List<ReviewBoard> reviewBoards = reviewBoardService.findAllByOrderByBoardStarDesc();
+	    List<ReviewBoardDto> reviewBoardDtos = new ArrayList<>();
 
+	    for (ReviewBoard reviewBoard : reviewBoards) {
+	        ReviewBoardDto dto = new ReviewBoardDto();
+	        dto.setBoardNo(reviewBoard.getBoardNo());
+	        dto.setBoardTitle(reviewBoard.getBoardTitle());
+	        dto.setBoardContent(reviewBoard.getBoardContent());
+	        dto.setBoardDate(reviewBoard.getBoardDate());
+	        dto.setBoardStar(reviewBoard.getBoardStar());
+
+	        reviewBoardDtos.add(dto);
+	    }
+	    HttpHeaders httpHeaders = new HttpHeaders();
+	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+	    if (!reviewBoardDtos.isEmpty()) {
+	        return new ResponseEntity<>(reviewBoardDtos, httpHeaders, HttpStatus.OK);
+	    } else {
+	        return new ResponseEntity<>(httpHeaders, HttpStatus.NOT_FOUND);
+	    }
+	}	
 	
-	
-	@GetMapping
-	public ResponseEntity<List<ReviewBoard>> findAllByOrderByBoardStarDesc() {
-		// 높은 평점순 정렬
-		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findAllByOrderByBoardStarDesc());
+	@Operation(summary = "낮은 평점순 정렬")
+	@GetMapping("reviewBoards/BoardStarAsc")
+	public ResponseEntity<List<ReviewBoardDto>> findAllByOrderByBoardStarAsc() {
+	    List<ReviewBoard> reviewBoards = reviewBoardService.findAllByOrderByBoardStarAsc();
+	    List<ReviewBoardDto> reviewBoardDtos = new ArrayList<>();
+
+	    for (ReviewBoard reviewBoard : reviewBoards) {
+	        ReviewBoardDto dto = new ReviewBoardDto();
+	        dto.setBoardNo(reviewBoard.getBoardNo());
+	        dto.setBoardTitle(reviewBoard.getBoardTitle());
+	        dto.setBoardContent(reviewBoard.getBoardContent());
+	        dto.setBoardDate(reviewBoard.getBoardDate());
+	        dto.setBoardStar(reviewBoard.getBoardStar());
+
+	        reviewBoardDtos.add(dto);
+	    }
+	    HttpHeaders httpHeaders = new HttpHeaders();
+	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+	    if (!reviewBoardDtos.isEmpty()) {
+	        return new ResponseEntity<>(reviewBoardDtos, httpHeaders, HttpStatus.OK);
+	    } else {
+	        return new ResponseEntity<>(httpHeaders, HttpStatus.NOT_FOUND);
+	    }
 	}
 	
-	@GetMapping
-	public ResponseEntity<List<ReviewBoard>> findAllByOrderByBoardStarAsc() {
-		// 낮은 평점순 정렬
-		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findAllByOrderByBoardStarAsc());		
+	@Operation(summary = "최신 날짜순으로 정렬")
+	@GetMapping("reviewBoards/BoardDateDesc")
+	public ResponseEntity<List<ReviewBoardDto>> findAllByOrderByBoardDateDesc() {
+	    List<ReviewBoard> reviewBoards = reviewBoardService.findAllByOrderByBoardDateDesc();
+	    List<ReviewBoardDto> reviewBoardDtos = new ArrayList<>();
+
+	    for (ReviewBoard reviewBoard : reviewBoards) {
+	        ReviewBoardDto dto = new ReviewBoardDto();
+	        dto.setBoardNo(reviewBoard.getBoardNo());
+	        dto.setBoardTitle(reviewBoard.getBoardTitle());
+	        dto.setBoardContent(reviewBoard.getBoardContent());
+	        dto.setBoardDate(reviewBoard.getBoardDate());
+	        dto.setBoardStar(reviewBoard.getBoardStar());
+
+	        reviewBoardDtos.add(dto);
+	    }
+
+	    HttpHeaders httpHeaders = new HttpHeaders();
+	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+	    if (!reviewBoardDtos.isEmpty()) {
+	        return new ResponseEntity<>(reviewBoardDtos, httpHeaders, HttpStatus.OK);
+	    } else {
+	        return new ResponseEntity<>(httpHeaders, HttpStatus.NOT_FOUND);
+	    }
 	}
 	
-	@GetMapping
-	public ResponseEntity<List<ReviewBoard>> findAllByOrderByBoardDateDesc() {
-		// 최신순 정렬(board Date정렬)
-		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findAllByOrderByBoardDateDesc());
+	@Operation(summary = "오래된 날짜순으로 정렬")
+	@GetMapping("reviewBoards/BoardDateAsc")
+	public ResponseEntity<List<ReviewBoardDto>> findAllByOrderByBoardDateAsc() {
+	    List<ReviewBoard> reviewBoards = reviewBoardService.findAllByOrderByBoardDateAsc();
+	    List<ReviewBoardDto> reviewBoardDtos = new ArrayList<>();
+
+	    for (ReviewBoard reviewBoard : reviewBoards) {
+	        ReviewBoardDto dto = new ReviewBoardDto();
+	        dto.setBoardNo(reviewBoard.getBoardNo());
+	        dto.setBoardTitle(reviewBoard.getBoardTitle());
+	        dto.setBoardContent(reviewBoard.getBoardContent());
+	        dto.setBoardDate(reviewBoard.getBoardDate());
+	        dto.setBoardStar(reviewBoard.getBoardStar());
+
+	        reviewBoardDtos.add(dto);
+	    }
+
+	    HttpHeaders httpHeaders = new HttpHeaders();
+	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+	    if (!reviewBoardDtos.isEmpty()) {
+	        return new ResponseEntity<>(reviewBoardDtos, httpHeaders, HttpStatus.OK);
+	    } else {
+	        return new ResponseEntity<>(httpHeaders, HttpStatus.NOT_FOUND);
+	    }
+	}
+
+	@Operation(summary = "별점 높은순, 최신순으로 정렬")
+	@GetMapping("reviewBoards/BoardStarDescBoardDateDesc")
+	public ResponseEntity<List<ReviewBoardDto>> findByOrderByBoardStarDescBoardDateDesc() {
+	    List<ReviewBoard> reviewBoards = reviewBoardService.findByOrderByBoardStarDescBoardDateDesc();
+	    List<ReviewBoardDto> reviewBoardDtos = new ArrayList<>();
+
+	    for (ReviewBoard reviewBoard : reviewBoards) {
+	        ReviewBoardDto dto = new ReviewBoardDto();
+	        dto.setBoardNo(reviewBoard.getBoardNo());
+	        dto.setBoardTitle(reviewBoard.getBoardTitle());
+	        dto.setBoardContent(reviewBoard.getBoardContent());
+	        dto.setBoardDate(reviewBoard.getBoardDate());
+	        dto.setBoardStar(reviewBoard.getBoardStar());
+
+	        reviewBoardDtos.add(dto);
+	    }
+
+	    HttpHeaders httpHeaders = new HttpHeaders();
+	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+	    if (!reviewBoardDtos.isEmpty()) {
+	        return new ResponseEntity<>(reviewBoardDtos, httpHeaders, HttpStatus.OK);
+	    } else {
+	        return new ResponseEntity<>(httpHeaders, HttpStatus.NOT_FOUND);
+	    }
 	}
 	
-	@GetMapping
-	public ResponseEntity<List<ReviewBoard>> findAllByOrderByBoardDateAsc() {
-		// 오래된 순 정렬(board Date정렬)
-		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findAllByOrderByBoardDateAsc());
+	@Operation(summary = "별점 낮은순, 최신순으로 정렬")
+	@GetMapping("reviewBoards/BoardStarAscBoardDateDesc")
+	public ResponseEntity<List<ReviewBoardDto>> findByOrderByBoardStarAscBoardDateDesc() {
+	    List<ReviewBoard> reviewBoards = reviewBoardService.findByOrderByBoardStarAscBoardDateDesc();
+	    List<ReviewBoardDto> reviewBoardDtos = new ArrayList<>();
+
+	    for (ReviewBoard reviewBoard : reviewBoards) {
+	        ReviewBoardDto dto = new ReviewBoardDto();
+	        dto.setBoardNo(reviewBoard.getBoardNo());
+	        dto.setBoardTitle(reviewBoard.getBoardTitle());
+	        dto.setBoardContent(reviewBoard.getBoardContent());
+	        dto.setBoardDate(reviewBoard.getBoardDate());
+	        dto.setBoardStar(reviewBoard.getBoardStar());
+
+	        reviewBoardDtos.add(dto);
+	    }
+
+	    HttpHeaders httpHeaders = new HttpHeaders();
+	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+	    if (!reviewBoardDtos.isEmpty()) {
+	        return new ResponseEntity<>(reviewBoardDtos, httpHeaders, HttpStatus.OK);
+	    } else {
+	        return new ResponseEntity<>(httpHeaders, HttpStatus.NOT_FOUND);
+	    }
 	}
 	
-	@GetMapping
-	public ResponseEntity<List<ReviewBoard>> findByOrderByBoardStarDescBoardDateDesc() {
-		// 별점 높은순,최신순
-		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findByOrderByBoardStarDescBoardDateDesc());
-	}
-	
-	@GetMapping
-	public ResponseEntity<List<ReviewBoard>> findByOrderByBoardStarAscBoardDateDesc() {
-		// 별점 낮은순,최신순
-		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findByOrderByBoardStarAscBoardDateDesc());
-	}
-	*/
 	
 }
