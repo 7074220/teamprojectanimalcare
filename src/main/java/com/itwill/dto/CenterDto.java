@@ -27,9 +27,13 @@ public class CenterDto {
 	// 센터영업시간
 
 	public static Center toEntity(CenterDto dto) {
-		Center center = Center.builder().centerNo(dto.getCenterNo()).centerName(dto.getCenterName())
-				.centerPhoneNumber(dto.getCenterPhoneNumber()).centerLocal(dto.getCenterLocal())
-				.centerOpenCloseTime(dto.getCenterOpenCloseTime()).build();
+		Center center = Center.builder()
+				.centerNo(dto.getCenterNo())
+				.centerName(dto.getCenterName())
+				.centerPhoneNumber(dto.getCenterPhoneNumber())
+				.centerLocal(dto.getCenterLocal())
+				.centerOpenCloseTime(dto.getCenterOpenCloseTime())
+				.build();
 		return center;
 	}
 
