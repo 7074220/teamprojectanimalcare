@@ -24,15 +24,14 @@ class CouponServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 	CouponService couponService;
 
 	@Test
-	@Disabled
+	//@Disabled
 	void test() {
 		Userinfo userinfo = Userinfo.builder().userId("장희주").build();
 		Coupon coupon = Coupon.builder().couponName("생일쿠폰").couponDiscount(20)
-								.couponPayday(new Date())
-								.couponExpirationDate(new Date())
 								.userinfo(userinfo).build();
 
-		Coupon createCoupon = couponService.Create(coupon,30);
+
+		Coupon createCoupon = couponService.Create(coupon);
 		System.out.println(createCoupon);
 	}
 
@@ -56,7 +55,7 @@ class CouponServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 
 	@Transactional
 	@Rollback(false)
-	//@Disabled
+	@Disabled
 	@Test
 	void test3() {
 		Coupon coupon = couponService.findById(5L);

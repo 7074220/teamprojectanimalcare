@@ -25,4 +25,6 @@ public interface ReportBoardDao {
 	//조회수 1증가
 	public void countReadCount(Long boardNo);
 	
+	
+	
 }

@@ -1933,10 +1933,10 @@
                 <columnName>coupon_expiration_date</columnName>
                 <logicalName>coupon_expiration_date</logicalName>
                 <columnType class="net.java.amateras.db.dialect.ColumnType">
-                  <name>DATE</name>
+                  <name>TIMESTAMP</name>
                   <logicalName>Date</logicalName>
-                  <supportSize>false</supportSize>
-                  <type>91</type>
+                  <supportSize>true</supportSize>
+                  <type>93</type>
                 </columnType>
                 <size>10</size>
                 <notNull>false</notNull>
@@ -1949,7 +1949,7 @@
                 <columnName>coupon_payday</columnName>
                 <logicalName>coupon_payday</logicalName>
                 <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
-                <size>50</size>
+                <size>10</size>
                 <notNull>false</notNull>
                 <primaryKey>false</primaryKey>
                 <description></description>

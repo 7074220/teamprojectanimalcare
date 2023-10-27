@@ -46,13 +46,12 @@ public class UserInfoRestController {
 		
 		Coupon coupon=Coupon.builder()
 				.couponName("가입쿠폰")
-				.couponExpirationDate(null)
-				.couponPayday(new Date())
 				.couponDiscount(30)
 				.userinfo(createUserinfo)
 				.build();
-
-		coupon = couponService.Create(coupon, 60);
+		coupon.setCouponDate(60L);
+		
+		coupon = couponService.Create(coupon);
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));

@@ -15,7 +15,7 @@ import com.itwill.entity.Coupon;
 public interface CouponService {
 	
 	// 쿠폰지급
-	public Coupon Create(Coupon coupon,Integer period);
+	public Coupon Create(Coupon coupon);
 	// 쿠폰삭제
 	public void Delete(Long couponId);
 	// 쿠폰 리스트
@@ -26,10 +26,10 @@ public interface CouponService {
 	public List<Coupon> findAllByUserNo(Long userNo);
 	
 	// 만료일 쿠폰 찾기
-	public List<Coupon> autoDeleteExpiredCoupons(Date couponExpirationDate);
+	public List<Coupon> autoDeleteExpiredCoupons(LocalDateTime couponExpirationDate);
 	
 	// 유저에 따른 만료 쿠폰 
-	public List<Coupon> deleteExpireCouponByUserNo(Date date, Long userNo);
+	public void deleteExpireCouponByUserNo(LocalDateTime date, Long userNo);
 	
 	
 }
