@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itwill.dto.ProductInsertDto;
 import com.itwill.dto.ProductListDto;
 import com.itwill.dto.ProductResponseDto;
+import com.itwill.dto.ProductListDto;
 import com.itwill.dto.ProductUpdateDto;
 import com.itwill.entity.Product;
 import com.itwill.service.ProductService;
@@ -194,21 +196,20 @@ public class ProductRestController {
 	
 	
 	@Operation(summary = "상품 검색")
-	@GetMapping("/products/search")
-	public ResponseEntity<List<ProductListDto>> search(@RequestParam(name = "productName") String productName){
-		List<Product> products = productService.findAllByOrderByProductNoDesc();
+	@PostMapping("/products/search")
+	public ResponseEntity<List<ProductListDto>> search(@RequestBody ProductListDto productdto){
 		List<ProductListDto> productListDto = new ArrayList<ProductListDto>();
+		List<Product> findList = productService.findByContains(productdto.getProductName());
 		
-		for (Product product : products) {
-			String words = product.getProductName();
-			if(words != null && words.contains(productName)) {
-				List<Product> find = productService.findByContains(words);
-				productListDto.add(ProductListDto.toDto(product));
-			}
+		for (Product product : findList) {
+			ProductListDto productDto = ProductListDto.toDto(product);
+			productListDto.add(productDto);
 		}
 		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		
-		return null;
+		return new ResponseEntity<List<ProductListDto>>(productListDto, httpHeaders, HttpStatus.OK);
 	}
 }
 
