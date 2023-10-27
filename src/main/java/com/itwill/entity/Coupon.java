@@ -1,7 +1,6 @@
 package com.itwill.entity;
 
-
-
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -19,6 +18,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,6 +31,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @Builder
+@Table(name = "COUPON")
 public class Coupon {
      @Id
      @SequenceGenerator(name = "Coupon_coupon_id_SEQ",allocationSize = 1,initialValue = 1)
@@ -39,8 +40,8 @@ public class Coupon {
 	 private String couponName;
 	 private Integer couponDiscount;
 	 @CreationTimestamp
-	 private Date couponPayday;
-	 private Date couponExpirationDate;
+	 private LocalDateTime couponPayday;
+	 private LocalDateTime couponExpirationDate;
 	 
 	 @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	 @Builder.Default
@@ -48,15 +49,10 @@ public class Coupon {
 	 @ToString.Exclude
 	 private Userinfo userinfo = new Userinfo();
 	 
-		/*
-		 * @PrePersist public void setExpirationDate() { Calendar calendar =
-		 * Calendar.getInstance(); calendar.setTime(couponPayday);
-		 * 
-		 * // couponPayday에서 30일을 더하여 couponExpirationDate를 설정합니다.
-		 * calendar.add(Calendar.DAY_OF_MONTH, 30);
-		 * 
-		 * couponExpirationDate = calendar.getTime(); }
-		 */
+	 public void setCouponDate(Long days) {
+		 this.couponPayday = LocalDateTime.now();
+		 this.couponExpirationDate = couponPayday.plusDays(days);
+	 }
 	 
 }
 

@@ -1,5 +1,6 @@
 package com.itwill.dto;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -20,8 +21,8 @@ public class CouponDto {
 	private Long couponId;
 	private String couponName;
 	private Integer couponDiscount;
-	private Date couponPayday;
-	private Date couponExpirationDate;
+	private LocalDateTime couponPayday;
+	private LocalDateTime couponExpirationDate;
 	
 	public static CouponDto toDto(Coupon coupon) {
 		

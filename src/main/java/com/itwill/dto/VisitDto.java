@@ -42,7 +42,17 @@ public class VisitDto {
 				.build();
 		
 		return visit;
-		
+	}
+		public static VisitDto toDto(Visit visit) {
+			VisitDto visitDto = VisitDto.builder()
+					.visitNo(visit.getVisitNo())
+					.visitDate(visit.getVisitDate())
+					.visitTime(visit.getVisitTime())
+					.visitStatus(visit.getVisitStatus())
+					.userNo(visit.getUserinfo().getUserNo())
+					.centerNo(visit.getCenter().getCenterNo())
+					.build();
+			return visitDto;
 		
 		
 	}
