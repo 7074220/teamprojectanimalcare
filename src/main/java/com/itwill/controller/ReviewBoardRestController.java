@@ -74,7 +74,7 @@ public class ReviewBoardRestController {
 	}
 	
 	@Operation(summary = "reviewList 전체 조회")
-	@GetMapping
+	@GetMapping("/all")
 	public ResponseEntity<List<ReviewBoardDto>> findAll() {
 		// 전체 조회
 		
