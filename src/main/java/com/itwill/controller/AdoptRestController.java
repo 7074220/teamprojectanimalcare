@@ -136,17 +136,6 @@ public class AdoptRestController {
 		}
 		
 		
-		/*
-		findAdopt.setAdoptTime(dto.getAdoptTime());
-		findAdopt.setAdoptDate(dto.getAdoptDate());
-		findAdopt.setAdoptStatus(dto.getAdoptStatus());
-		findAdopt.setPet(pet);
-		adoptService.updateAdopt(findAdopt);
-		AdoptDto updatedDto = AdoptDto.fromEntity(findAdopt);
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		return new ResponseEntity<>(updatedDto, httpHeaders, HttpStatus.OK);
-		*/
 	}
 
 	
