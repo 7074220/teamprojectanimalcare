@@ -1,6 +1,7 @@
 package com.itwill.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,6 +24,10 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 	//댓글 작성
 	@Override
 	public ReplyBoard Create(ReplyBoard replyBoard) {
+		Integer MaxGroupNo = replyBoardRepository.findMaxGroupNo();
+		replyBoard.setReplyBoardGroupNo(MaxGroupNo+1);
+		replyBoard.setReplyBoardStep(1);
+		replyBoard.setReplyBoardDepth(0);
 		return replyBoardRepository.save(replyBoard);
 	}
 
@@ -35,15 +40,10 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 					.ReplyBoardGroupNo(replyBoard.getReplyBoardGroupNo())
 					.ReplyBoardDepth(replyBoard.getReplyBoardDepth()+1)
 					.ReplyBoardStep(maxStep+1)
+					.ReplyBoardContent(replyBoard.getReplyBoardContent())
+					.reportBoard(replyBoard.getReportBoard())
+					.userinfo(null)
 					.build();
-		
-		/*
-		그룹1번의 제일 마지막 스텝이 몇번인지????
-		
-		첫번째 : 그룹 1번 스텝1
-			두번째 그룹 1번 스텝2 뎁스1
-			세번째 그룹 1번 스텝3 뎁스1
-		*/
 		return replyBoardRepository.save(board);
 	}
 	
@@ -81,13 +81,22 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 
 	@Override
 	public ReplyBoard findByReplyBoardNo(Long replyBoardNo) {
-		return replyBoardRepository.findById(replyBoardNo).get();
+		ReplyBoard replyBoard = replyBoardRepository.findById(replyBoardNo).get();
+		return replyBoard;
 	}
 	
 	@Override
 	public Integer findGreatestStepByGroupNo(Integer ReplyBoardGroupNo) {
 		return replyBoardRepository.findGreatestStepByGroupNo(ReplyBoardGroupNo);
 	}
+
+	
+	// 해당 게시물의 댓글 보여주기
+	@Override
+	public List<ReplyBoard> findAllByReportBoardNo(Long BoardNo) {
+		return replyBoardRepository.findAllByReportBoardNo(BoardNo);
+	}
+	
 
 }
 

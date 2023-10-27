@@ -2,6 +2,7 @@ package com.itwill.entity;
 
 
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.commons.lang3.builder.ToStringExclude;
@@ -16,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,14 +40,23 @@ public class Coupon {
 	 private Integer couponDiscount;
 	 @CreationTimestamp
 	 private Date couponPayday;
-	 
 	 private Date couponExpirationDate;
-	 
-	 
 	 
 	 @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	 @Builder.Default
 	 @JoinColumn(name = "user_no")
 	 @ToString.Exclude
 	 private Userinfo userinfo = new Userinfo();
+	 
+		/*
+		 * @PrePersist public void setExpirationDate() { Calendar calendar =
+		 * Calendar.getInstance(); calendar.setTime(couponPayday);
+		 * 
+		 * // couponPayday에서 30일을 더하여 couponExpirationDate를 설정합니다.
+		 * calendar.add(Calendar.DAY_OF_MONTH, 30);
+		 * 
+		 * couponExpirationDate = calendar.getTime(); }
+		 */
+	 
 }
+

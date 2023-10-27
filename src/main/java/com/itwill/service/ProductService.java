@@ -11,7 +11,7 @@ public interface ProductService {
 
 	Product insertProduct(Product product);
 	
-	Product updateProduct(Product product) throws Exception;
+	Product updateProduct(Product updateProduct) throws Exception;
 	
 	Product findByProductNo(Long no);
 	

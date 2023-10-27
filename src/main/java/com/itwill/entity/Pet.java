@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringExclude;
 
+import com.itwill.dto.PetDto;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -46,6 +48,7 @@ public class Pet {
 	 @JoinColumn(name = "center_no")
 	 @ToString.Exclude
 	 private Center center;
+	 
 	 
 
 }

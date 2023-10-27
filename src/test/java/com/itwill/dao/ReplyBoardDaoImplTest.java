@@ -20,13 +20,13 @@ import com.itwill.entity.Userinfo;
 class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 
 	@Autowired
-	ReplyBoardDao replyBoardDao;
+	private ReplyBoardDao replyBoardDao;
 	
 	@Autowired
-	ReportBoardDao reportBoardDao;
+	private ReportBoardDao reportBoardDao;
 	
 	@Autowired
-	UserInfoDao userInfoDao;
+	private UserInfoDao userInfoDao;
 	
 	@Transactional
 	@Rollback(false)
@@ -36,17 +36,16 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		Userinfo userinfo = userInfoDao.findByNo(2L);
 		ReportBoard reportBoard = reportBoardDao.findByBoardNo(1L);
 		ReplyBoard replyBoard = ReplyBoard.builder()
-										.ReplyBoardContent("내용")
-										.ReplyBoardDepth(0)
-										.ReplyBoardGroupNo(1)
+										.ReplyBoardContent("희주짱나죽겟음")
 										.ReplyBoardRegisterDate(new Date())
-										.ReplyBoardStep(1)
 										.userinfo(userinfo)
 										.reportBoard(reportBoard)
 										.build();
 		
 		replyBoardDao.Create(replyBoard);
 	}
+	
+
 	
 	/*
 	 * @Transactional
@@ -57,6 +56,19 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	 * 
 	 * @Test void test1() { replyBoardDao.deleteByReplyBoardNo(1L); }
 	 */
+
+	@Transactional
+	@Rollback(false)
+	@Disabled
+	@Test
+	void test1() {
+		ReplyBoard replyBoard = replyBoardDao.findByReplyBoardNo(1L);
+		replyBoard.setReplyBoardContent("대댓글 텟");
+		replyBoardDao.CreateReply(replyBoard);
+	}
+	
+
+	
 	
 	@Transactional
 	@Rollback(false)
@@ -106,7 +118,7 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	
 	@Transactional
 	@Rollback(false)
-	//@Disabled
+	@Disabled
 	@Test
 	void test6() {
 		Userinfo userinfo = userInfoDao.findByNo(5L);
@@ -125,10 +137,12 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	//@Disabled
 	@Test
 	void test7() {
-		ReplyBoard replyBoard=replyBoardDao.findByReplyBoardNo(5L);
-		System.out.println(replyBoard);
+		List<ReplyBoard>  replyBoardList= replyBoardDao.findAllByReportBoardNo(2L);
+		System.out.println(replyBoardList);
 	
 	}
 	
 
+	
+	
 }

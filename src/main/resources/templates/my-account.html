@@ -40,7 +40,13 @@
     
     <!--modernizr min js here-->
     <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
-    
+    <style>
+        .modal-dialog {
+        margin: auto;
+        margin-top: 20vh; /* 회원탈퇴창 가운데 정도로 떨어트림 */
+    }
+
+    </style>
 
 </head>
 
@@ -606,24 +612,118 @@
                         <!-- Nav tabs -->
                         <div class="dashboard_tab_button">
                             <ul role="tablist" class="nav flex-column dashboard-list">
-                                <li><a href="#dashboard" data-toggle="tab" class="nav-link active">Dashboard</a></li>
-                                <li> <a href="#orders" data-toggle="tab" class="nav-link">Orders</a></li>
-                                <li><a href="#downloads" data-toggle="tab" class="nav-link">Downloads</a></li>
-                                <li><a href="#address" data-toggle="tab" class="nav-link">Addresses</a></li>
-                                <li><a href="#account-details" data-toggle="tab" class="nav-link">Account details</a></li>
-                                <li><a href="login.html" class="nav-link">logout</a></li>
+                                <li><a href="#account-details" data-toggle="tab" class="nav-link">내정보</a></li>
+                                <li><a href="#mypet" data-toggle="tab" class="nav-link">마이펫</a></li>
+                                <li><a href="#cuponpage" data-toggle="tab" class="nav-link">쿠폰</a></li>
+                                <li><a href="#adoptVo" data-toggle="tab" class="nav-link">입양 봉사 견학</a></li>
+                                <li> <a href="#orders" data-toggle="tab" class="nav-link">상품주문</a></li>
+                                <li><a href="login.html" class="nav-link">로그아웃</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li>
+
                             </ul>
                         </div>    
                     </div>
                     <div class="col-sm-12 col-md-9 col-lg-9">
                         <!-- Tab panes -->
                         <div class="tab-content dashboard_content">
-                            <div class="tab-pane fade show active" id="dashboard">
-                                <h3>Dashboard </h3>
-                                <p>From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a>, manage your <a href="#">shipping and billing addresses</a> and <a href="#">Edit your password and account details.</a></p>
-                            </div>
+                            
+                            
                             <div class="tab-pane fade" id="orders">
-                                <h3>Orders</h3>
+                                <h3>주문목록</h3>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>번호</th>
+                                                <th>구입날짜</th>
+                                                <th>상품명</th>
+                                                <th>총가격</th>
+                                                <th>리뷰</th>	 	 	 	
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>May 10, 2018</td>
+                                                <td><span class="success">고양이캔조림</span></td>
+                                                <td>$25.00 for 1 item </td>
+                                                <td><a href="cart.html" class="view">주문상세</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>May 10, 2018</td>
+                                                <td>강아지닭가슴살사료</td>
+                                                <td>$17.00 for 1 item </td>
+                                                <td><a href="cart.html" class="view">주문상세</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                             <!-- 주문 상세 모달 -->
+                            <div class="modal fade" id="orderDetailsModal" tabindex="-1" 
+                                 aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="orderDetailsModalLabel">주문 상세</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <!-- 주문 상세 내용이 여기에 로드됩니다 -->
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary">리뷰 저장</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                                    
+                                    </div>
+                                </div>
+                                </div>
+                            </div>   
+                            
+                            
+
+                            
+                            <div class="modal fade" id="deleteModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <!-- 모달 헤더 -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">회원탈퇴 이유 선택</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                            
+                                        <!-- 회원탈퇴 모달 본문 -->
+                                        <div class="modal-body">
+                                            <form id="deleteReasonForm">
+                                                <!-- 탈퇴 이유 선택 -->
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="reason" id="reason1" value="Not satisfied">
+                                                    <label class="form-check-label" for="reason1">서비스에 만족하지 않음</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="reason" id="reason2" value="Found alternative">
+                                                    <label class="form-check-label" for="reason2">다른 서비스를 사용</label>
+                                                </div>
+                                                <!-- ... 다른 이유들도 추가 가능 ... -->
+                                            </form>
+                                        </div>
+                            
+                                        <!-- 모달 푸터 -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" id="confirmDelete">탈퇴하기</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="tab-pane fade" id="cuponpage">
+                                <h3>쿠폰 관리</h3>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
@@ -632,7 +732,44 @@
                                                 <th>Date</th>
                                                 <th>Status</th>
                                                 <th>Total</th>
-                                                <th>Actions</th>	 	 	 	
+                                                <th>Actions</th>                 
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>May 10, 2018</td>
+                                                <td><span class="success">Completed</span></td>
+                                                <td>$25.00 for 1 item </td>
+                                                <td><a href="cart.html" class="view">view</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>May 10, 2018</td>
+                                                <td>Processing</td>
+                                                <td>$17.00 for 1 item </td>
+                                                <td><a href="cart.html" class="view">view</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>    
+
+
+
+
+
+                            <div class="tab-pane fade" id="adoptVo">
+                                <h3>입양 봉사 견학</h3>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Order</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                                <th>Total</th>
+                                                <th>Actions</th>                 
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -654,84 +791,69 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="downloads">
-                                <h3>Downloads</h3>
+
+            
+                            <div class="tab-pane fade" id="mypet">
+                                <h3>마이펫</h3>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>Product</th>
-                                                <th>Downloads</th>
-                                                <th>Expires</th>
-                                                <th>Download</th>	 	 	 	
+                                                <th>No</th>
+                                                <th>이름</th>
+                                                <th>생일</th>
+                                                <th>사진</th>
+                                                <th>종류</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Shopnovilla - Free Real Estate PSD Template</td>
-                                                <td>May 10, 2018</td>
-                                                <td><span class="danger">Expired</span></td>
-                                                <td><a href="#" class="view">Click Here To Download Your File</a></td>
+                                                <td>1</td>
+                                                <td>바둑이</td>
+                                                <td>Jan 10, 2020</td>
+                                                <td><img src="" alt="바둑이 사진" width="50" height="50"></td>
+                                                <td>강아지</td>
+                                                <td><a href="#" class="view">view</a></td>
                                             </tr>
                                             <tr>
-                                                <td>Organic - ecommerce html template</td>
-                                                <td>Sep 11, 2018</td>
-                                                <td>Never</td>
-                                                <td><a href="#" class="view">Click Here To Download Your File</a></td>
+                                                <td>2</td>
+                                                <td>나비</td>
+                                                <td>Feb 15, 2019</td>
+                                                <td><img src="path_to_another_image.jpg" alt="나비 사진" width="50" height="50"></td>
+                                                <td>고양이</td>
+                                                <td><a href="#" class="view">view</a></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="address">
-                               <p>The following addresses will be used on the checkout page by default.</p>
-                                <h4 class="billing-address">Billing address</h4>
-                                <a href="#" class="view">Edit</a>
-                                <p><strong>Bobby Jackson</strong></p>
-                                <address>
-                                    House #15<br>
-                                    Road #1<br>
-                                    Block #C <br>
-                                    Banasree <br>
-                                    Dhaka <br>
-                                    1212
-                                </address>
-                                <p>Bangladesh</p>   
-                            </div>
+                            
+            
+
+                            
                             <div class="tab-pane fade" id="account-details">
-                                <h3>Account details </h3>
+                                <h3>내정보 </h3>
                                 <div class="login">
                                     <div class="login_form_container">
                                         <div class="account_login_form">
                                             <form action="#">
-                                                <p>Already have an account? <a href="#">Log in instead!</a></p>
-                                                <div class="input-radio">
-                                                    <span class="custom-radio"><input type="radio" value="1" name="id_gender"> Mr.</span>
-                                                    <span class="custom-radio"><input type="radio" value="1" name="id_gender"> Mrs.</span>
-                                                </div> <br>
-                                                <label>First Name</label>
-                                                <input type="text" name="first-name">
-                                                <label>Last Name</label>
+                                                <p><a href="#"></a></p>
+                                                <div class="input-select"></div>
+                                                
+                                                <label>이름</label>
                                                 <input type="text" name="last-name">
-                                                <label>Email</label>
-                                                <input type="text" name="email-name">
-                                                <label>Password</label>
-                                                <input type="password" name="user-password">
-                                                <label>Birthdate</label>
-                                                <input type="text" placeholder="MM/DD/YYYY" value="" name="birthday">
-                                                <span class="example">
-                                                  (E.g.: 05/31/1970)
-                                                </span>
+                                                <label>이메일</label>
+                                                <input type="text"  value="" name="email-name">
+                                                <label>비밀번호</label>
+                                                <input type="password"  value=""name="user-password">
+                                                <label>핸드폰번호</label>
+                                                <input type="password"  value=""name="user-password">
+                                                <label>주소</label>
+                                                <input type="text"  value="" name="address">
+                                                
                                                 <br>
-                                                <span class="custom_checkbox">
-                                                    <input type="checkbox" value="1" name="optin">
-                                                    <label>Receive offers from our partners</label>
-                                                </span>
-                                                <br>
-                                                <span class="custom_checkbox">
-                                                    <input type="checkbox" value="1" name="newsletter">
-                                                    <label>Sign up for our newsletter<br><em>You may unsubscribe at any moment. For that purpose, please find our contact info in the legal notice.</em></label>
-                                                </span>
+                                               
                                                 <div class="save_button primary_btn default_button">
                                                    <button type="submit">Save</button>
                                                 </div>
@@ -873,6 +995,41 @@
 
 <!-- Main JS -->
 <script src="assets/js/main.js"></script>
+
+<!-- 회원탈퇴  -->
+<script>
+    $('#confirmDelete').on('click', function() {
+        const selectedReason = $('input[name="reason"]:checked').val();
+        if (selectedReason) {
+            console.log("회원탈퇴 이유:", selectedReason);
+            // 여기에 탈퇴 로직 
+            // 탈퇴가 완료되면 index.html로 리다이렉트
+        window.location.href = 'index.html';
+        } else {
+            alert("탈퇴하시려면 이유를 선택해주세요.");
+        }
+    });
+</script>
+
+
+<!-- 주문한 상품 리뷰쓰기  -->
+<script>
+
+    // 마이페이지 상품주문 완료된 항목에서 주문상세를 누르면 창이 뜨고 이 창에서만 리뷰를 쓸수 있음
+    // 주문 상세 링크를 클릭할 때 이벤트 핸들러
+    document.querySelector('.table').addEventListener('click', function(e) {
+    if (e.target.classList.contains('view')) {
+        e.preventDefault();
+        
+        // 주문상세 정보를 로드 하기
+        
+
+        // 모달창 표시
+        $('#orderDetailsModal').modal('show');
+    }
+    });
+
+</script>
 
 
 
