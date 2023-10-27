@@ -1,6 +1,8 @@
 package com.itwill.controller;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +26,6 @@ import com.itwill.entity.ReviewBoard;
 import com.itwill.service.ReviewBoardService;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
@@ -36,7 +37,7 @@ public class ReviewBoardRestController {
 	
 	@Operation(summary = "리뷰작성")
 	@PostMapping
-	public ResponseEntity<ReviewBoardDto> createReviewBoard(ReviewBoardDto dto, HttpSession httpSession) throws Exception {
+	public ResponseEntity<ReviewBoardDto> createReviewBoard(@org.springframework.web.bind.annotation.RequestBody ReviewBoardDto dto, HttpSession httpSession) throws Exception {
 	    ReviewBoard reviewBoardEntity = ReviewBoardDto.toEntity(dto);
 	    reviewBoardService.create(reviewBoardEntity);
 	    HttpHeaders httpHeaders = new HttpHeaders();
@@ -45,10 +46,10 @@ public class ReviewBoardRestController {
 	    return new ResponseEntity<>(dto, httpHeaders, HttpStatus.CREATED);
 	}
 	
-	/*
-	@Operation(summary = "no로 리뷰 보기")
-	@GetMapping("/{boardNo}")
-	public ResponseEntity<ReviewBoardDto> findByBoardNo(@PathVariable Long boardNo, HttpSession httpSession) throws Exception {    
+	
+	@Operation(summary = "boardNo로 리뷰 보기")
+	@GetMapping("/board/{boardNo}")
+	public ResponseEntity<ReviewBoardDto> findByBoardNo(@PathVariable(value = "boardNo") Long boardNo, HttpSession httpSession) throws Exception {    
 	    ReviewBoard reviewBoard = reviewBoardService.findByBoardNo(boardNo);
 
 	    if (reviewBoard == null) {
@@ -63,12 +64,48 @@ public class ReviewBoardRestController {
 	
 	
 	}
-	*/
+	@Operation(summary = "no로 review 삭제")
+	@DeleteMapping("/{no}")
+	public ResponseEntity<Map> deleteReviewBoard(@PathVariable(value = "no") Long boardNo) throws Exception {
+		reviewBoardService.deleteById(boardNo);
+		return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>());
+	}
 	
+	@Operation(summary = "reviewList 전체 조회")
+	@GetMapping
+	public ResponseEntity<List<ReviewBoardDto>> findAll() {
+		// 전체 조회
+		
+		List<ReviewBoard> reviewBoardList = reviewBoardService.findAll();
+		List<ReviewBoardDto> reviewBoardDtoList = new ArrayList<>();
+		for (ReviewBoard reviewBoard : reviewBoardList) {
+			ReviewBoardDto reviewBoardDto = ReviewBoardDto.toDto(reviewBoard);
+			reviewBoardDtoList.add(reviewBoardDto);
+		}
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		return new ResponseEntity<>(reviewBoardDtoList, httpHeaders, HttpStatus.OK);
+	}
+	
+	@Operation(summary = "productNo로 reviewList 조회")
+	@GetMapping("/product/{productNo}")
+	public ResponseEntity<List<ReviewBoardDto>> findByProductNo(@PathVariable(value = "productNo") Long productNo) {
+		// productNo로 reviewboard 리스트 검색
+		List<ReviewBoard> findReview=reviewBoardService.findByProductNo(productNo);
+		if(findReview.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
+		}
+		List<ReviewBoardDto> reviewDtoList = new ArrayList<>();
+		for (ReviewBoard reviewBoard : findReview) {
+			ReviewBoardDto boardDto=ReviewBoardDto.toDto(reviewBoard);
+			reviewDtoList.add(boardDto);
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(reviewDtoList);
+	}
 	
 	/*
 	@GetMapping("/{boardNo}")
-	public ResponseEntity<ReviewBoard> findByBoardNo(@PathVariable Long boardNo) {
+	public ResponseEntity<ReviewBoard> findByBoardNo(@PathVariable(value = "boardNo") Long boardNo) {
 		ReviewBoard reviewBoard = reviewBoardService.findByBoardNo(boardNo);
 		if(reviewBoard != null) {
 			// ReviewBoard no 가 존재하면 ok 와 함께 반환
@@ -78,6 +115,9 @@ public class ReviewBoardRestController {
 			return ResponseEntity.notFound().build();
 		}
 	}
+	*/
+	
+	/*
 	
 	@PutMapping("/{boardNo}")
 	public ResponseEntity<ReviewBoard> updateReviewBoard(@PathVariable Long boardNo, @RequestBody ReviewBoard updatedReviewBoard) throws Exception {		
@@ -94,23 +134,7 @@ public class ReviewBoardRestController {
 	    return ResponseEntity.ok(updatedBoard);
 	} 
 
-	@DeleteMapping("/{no}")
-	public ResponseEntity<Map> deleteReviewBoard(@PathVariable(name = "no") Long boardNo) throws Exception {
-		return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>());
-	}
 	
-	@GetMapping
-	public ResponseEntity<List<ReviewBoard>> findAll() {
-		// 전체 조회
-		List<ReviewBoard> reviewBoardList = reviewBoardService.findAll();
-		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardList);
-	}
-	
-	@GetMapping("/{productNo}")
-	public ResponseEntity<List<ReviewBoard>> findByProductNo(@PathVariable Long productNo) {
-		// productNo로 reviewboard 리스트 검색
-		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findByProductNo(productNo));
-	}
 	
 	@GetMapping("/{star}")
 	public ResponseEntity<List<ReviewBoard>> findByStarAll(@PathVariable Long star) {
