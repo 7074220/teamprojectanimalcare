@@ -103,7 +103,6 @@ public class UserInfoRestController {
 	@GetMapping("/{userNo}")
 	public ResponseEntity<UserWriteActionDto> user_view(@PathVariable(name = "userNo") Long userNo, HttpSession session)
 			throws Exception {
-		
 		UserWriteActionDto dto = UserWriteActionDto.builder().build();
 		if (session.getAttribute("userNo") != null) {
 			Userinfo loginUser = userInfoService.findUserByNo(userNo);
@@ -122,7 +121,6 @@ public class UserInfoRestController {
 			dto = UserWriteActionDto.builder().build();
 		}
 
-		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
