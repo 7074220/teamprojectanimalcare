@@ -69,7 +69,7 @@ public class VIsitRestController {
 		visitService.deleteVisit(visitNo);
 	}
 	
-	
+	@Operation(summary = "견학리스트업데이트")
 	@PutMapping("/{centerNo}")
 	public ResponseEntity<VisitDto> updateVisit(@PathVariable(name = "centerNo") Long visitNo, @RequestBody VisitDto dto) {
 		Visit existingVisit = visitService.findByVisitNo(visitNo);
