@@ -41,8 +41,7 @@ public class AdoptRestController {
 
 	@Autowired
 	private AdoptService adoptService;
-	@Autowired
-	private PetService petService;
+	
 	
 	@Operation(summary = "입양신청")
 	@PostMapping

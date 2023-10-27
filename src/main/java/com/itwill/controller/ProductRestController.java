@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,14 +15,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.ProductInsertDto;
 import com.itwill.dto.ProductListDto;
 import com.itwill.dto.ProductResponseDto;
+import com.itwill.dto.ProductListDto;
 import com.itwill.dto.ProductUpdateDto;
 import com.itwill.entity.Product;
 import com.itwill.service.ProductService;
@@ -172,6 +176,41 @@ public class ProductRestController {
 		return new ResponseEntity<List<ProductListDto>>(productsDto, httpHeaders, HttpStatus.OK);
 	}
 	
+	
+	@Operation(summary = "상품 전체 리스트")
+	@GetMapping("/products")
+	public ResponseEntity<List<ProductListDto>> findAllByOrderByProductNoDesc(){
+		List<Product> productList = productService.findAllByOrderByProductNoDesc();
+		List<ProductListDto> productDtoList = new ArrayList<>();
+		
+		for (Product product : productList) {
+			ProductListDto productDto = ProductListDto.toDto(product);
+			productDtoList.add(productDto);
+		}
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<>(productDtoList, httpHeaders, HttpStatus.OK);
+	}
+	
+	
+	@Operation(summary = "상품 검색")
+	@PostMapping("/products/search")
+	public ResponseEntity<List<ProductListDto>> search(@RequestBody ProductListDto productdto){
+		List<ProductListDto> productListDto = new ArrayList<ProductListDto>();
+		List<Product> findList = productService.findByContains(productdto.getProductName());
+		
+		for (Product product : findList) {
+			ProductListDto productDto = ProductListDto.toDto(product);
+			productListDto.add(productDto);
+		}
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<List<ProductListDto>>(productListDto, httpHeaders, HttpStatus.OK);
+	}
 }
 
 
