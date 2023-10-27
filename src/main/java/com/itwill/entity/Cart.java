@@ -39,7 +39,7 @@ public class Cart {
 	private Long cartNo;
 	private Integer cartQty;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_no")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
