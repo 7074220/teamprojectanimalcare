@@ -1,10 +1,13 @@
 package com.itwill.controller;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.CartDto;
+import com.itwill.dto.CartOverlapDto;
 import com.itwill.entity.Cart;
 import com.itwill.service.CartService;
 
@@ -57,27 +61,62 @@ public class CartRestController {
 
 		return new ResponseEntity<CartDto>(httpHeaders, HttpStatus.OK);
 	}
-	
+
 	@Operation(summary = "상품 수량 업데이트")
 	@PutMapping("/{cartNo}")
-	public ResponseEntity<CartDto> updateCartQty(@PathVariable(name = "cartNo") Long no, @RequestBody CartDto dto) throws Exception {
+	public ResponseEntity<CartDto> updateCartQty(@PathVariable(name = "cartNo") Long no, @RequestBody CartDto dto)
+			throws Exception {
 		Cart findCart = cartService.findByCartNo(no);
-	
+
 		findCart.setCartQty(dto.getCartQty());
 		cartService.update_qty(findCart);
-		
+
 		CartDto updatedDto = CartDto.toDto(findCart);
+
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+		return new ResponseEntity<CartDto>(updatedDto, httpHeaders, HttpStatus.OK);
+	}
+
+	@Operation(summary = "카트번호로 선택하기")
+	@GetMapping("/{cartNo}")
+	public ResponseEntity<CartDto> findByCartNo(@PathVariable(name = "cartNo") Long cartNo) throws Exception {
+
+		Cart findCart = cartService.findByCartNo(cartNo);
+		CartDto cartDto = CartDto.toDto(findCart);
+
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+		return new ResponseEntity<CartDto>(cartDto, httpHeaders, HttpStatus.OK);
+	}
+
+	@Operation(summary = "유저 카트 리스트")
+	@GetMapping("/cartList/{userNo}")
+	public ResponseEntity<List<CartDto>> cartList(@PathVariable(name = "userNo") Long no) {
+		List<Cart> cartList = cartService.findAllCartByUserId(no);
+		List<CartDto> cartsDto = new ArrayList<CartDto>();
+
+		for (Cart cart : cartList) {
+			cartsDto.add(CartDto.toDto(cart));
+		}
+
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+		return new ResponseEntity<List<CartDto>>(cartsDto, httpHeaders, HttpStatus.OK);
+	}
+
+	@Operation(summary = "중복 상품 업데이트")
+	@PutMapping
+	public ResponseEntity<CartOverlapDto> updateOverlapCart(CartOverlapDto dto) throws Exception {
+		Cart updateCart = cartService.updateOverlapCart(CartOverlapDto.toEntity(dto));
+		CartOverlapDto cartOverlapDto = CartOverlapDto.toDto(updateCart);
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		
-		return new ResponseEntity<CartDto>(updatedDto, httpHeaders, HttpStatus.OK);
-	}
-	
-	@Operation(summary = "중복 상품 업데이트")
-	@PutMapping("/update/{cartNo}")
-	public ResponseEntity<CartDto> updateOverlapCart() {
-	
-		return null;
+
+		return new ResponseEntity<CartOverlapDto>(cartOverlapDto, httpHeaders, HttpStatus.OK);
 	}
 }
