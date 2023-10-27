@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.ProductInsertDto;
@@ -172,6 +174,42 @@ public class ProductRestController {
 		return new ResponseEntity<List<ProductListDto>>(productsDto, httpHeaders, HttpStatus.OK);
 	}
 	
+	
+	@Operation(summary = "상품 전체 리스트")
+	@GetMapping("/products")
+	public ResponseEntity<List<ProductListDto>> findAllByOrderByProductNoDesc(){
+		List<Product> productList = productService.findAllByOrderByProductNoDesc();
+		List<ProductListDto> productDtoList = new ArrayList<>();
+		
+		for (Product product : productList) {
+			ProductListDto productDto = ProductListDto.toDto(product);
+			productDtoList.add(productDto);
+		}
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<>(productDtoList, httpHeaders, HttpStatus.OK);
+	}
+	
+	
+	@Operation(summary = "상품 검색")
+	@GetMapping("/products/search")
+	public ResponseEntity<List<ProductListDto>> search(@RequestParam(name = "productName") String productName){
+		List<Product> products = productService.findAllByOrderByProductNoDesc();
+		List<ProductListDto> productListDto = new ArrayList<ProductListDto>();
+		
+		for (Product product : products) {
+			String words = product.getProductName();
+			if(words != null && words.contains(productName)) {
+				List<Product> find = productService.findByContains(words);
+				productListDto.add(ProductListDto.toDto(product));
+			}
+		}
+		
+		
+		return null;
+	}
 }
 
 
