@@ -60,6 +60,12 @@ public class CouponRestController {
 			couponService.deleteExpireCouponByUserNo(coupon.getCouponExpirationDate(),userNo);
 		}
 		
+		coupons= couponService.findAllByUserNo(userNo);
+		
+		for (Coupon coupon : coupons) {
+			couponList.add(CouponDto.toDto(coupon));
+		}
+		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 

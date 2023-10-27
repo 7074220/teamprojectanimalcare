@@ -32,7 +32,7 @@ class CouponServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 								.couponExpirationDate(new Date())
 								.userinfo(userinfo).build();
 
-		Coupon createCoupon = couponService.Create(coupon);
+		Coupon createCoupon = couponService.Create(coupon,30);
 		System.out.println(createCoupon);
 	}
 
