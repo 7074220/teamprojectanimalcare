@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itwill.dto.PetDto;
 import com.itwill.entity.Center;
 import com.itwill.entity.Pet;
+import com.itwill.service.CenterService;
 import com.itwill.service.PetService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,6 +33,8 @@ public class PetRestController {
 
 	@Autowired
 	private PetService petService;
+	@Autowired
+	private CenterService centerService;
 	
 	/*
 	 * @Operation(summary = "펫 리스트")
@@ -57,7 +60,7 @@ public ResponseEntity<PetDto> petSave(@RequestBody PetDto petdto){
 public ResponseEntity<Map> petDelete(@PathVariable(name = "petNo") Long petNo) throws Exception{
 	Optional<Pet> petOptional = Optional.of(petService.petFindById(petNo));
 	if(petOptional.isEmpty()) {
-		throw new Exception("존재하지 않는 동물입니다.");
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	
 		}
 		petService.petRemove(petNo);
@@ -68,6 +71,7 @@ public ResponseEntity<Map> petDelete(@PathVariable(name = "petNo") Long petNo) t
 @PutMapping()
 public ResponseEntity<PetDto> petUpdate(@RequestBody PetDto petdto) throws Exception{
 	Optional<Pet> petOptional = Optional.of(petService.petFindById(petdto.getPetNo()));
+	Center center = centerService.findByCenterNo(petdto.getCenterNo());
 	if(petOptional.isPresent()) {
 		Pet pet1 = petOptional.get();
 		pet1.setPetLocal(petdto.getPetLocal());
@@ -76,7 +80,7 @@ public ResponseEntity<PetDto> petUpdate(@RequestBody PetDto petdto) throws Excep
 		pet1.setPetRegisterDate(petdto.getPetRegisterDate());
 		pet1.setPetFindPlace(petdto.getPetFindPlace());
 		pet1.setPetCharacter(petdto.getPetCharacter());
-		pet1.setCenter(Center.builder().centerNo(petdto.getCenterNo()).build());
+		pet1.setCenter(center);
 		
 		
 		petService.petUpdate(pet1);
