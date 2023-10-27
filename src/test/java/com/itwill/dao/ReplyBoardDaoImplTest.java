@@ -45,6 +45,18 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		replyBoardDao.Create(replyBoard);
 	}
 	
+
+	
+	/*
+	 * @Transactional
+	 * 
+	 * @Rollback(false)
+	 * 
+	 * @Disabled
+	 * 
+	 * @Test void test1() { replyBoardDao.deleteByReplyBoardNo(1L); }
+	 */
+
 	@Transactional
 	@Rollback(false)
 	@Disabled
@@ -55,7 +67,7 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		replyBoardDao.CreateReply(replyBoard);
 	}
 	
-	
+
 	
 	
 	@Transactional
