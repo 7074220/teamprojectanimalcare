@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.ReviewBoardDto;
 import com.itwill.dto.VolunteerDto;
+import com.itwill.entity.Product;
 import com.itwill.entity.ReviewBoard;
 import com.itwill.service.ReviewBoardService;
 
@@ -121,45 +123,64 @@ public class ReviewBoardRestController {
 		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardDtoList);
 	}
 	
-	/*
-	@GetMapping("/{boardNo}")
-	public ResponseEntity<ReviewBoard> findByBoardNo(@PathVariable(value = "boardNo") Long boardNo) {
-		ReviewBoard reviewBoard = reviewBoardService.findByBoardNo(boardNo);
-		if(reviewBoard != null) {
-			// ReviewBoard no 가 존재하면 ok 와 함께 반환
-			return ResponseEntity.ok(reviewBoard);
-		} else {
-			// ReviewBoard no 가 존재하지 않으면 notFound() 반환
-			return ResponseEntity.notFound().build();
+	@Operation(summary = "userNo로 리뷰리스트 조회")
+	@GetMapping("/user/{userNo}")
+	public ResponseEntity<List<ReviewBoardDto>> findByUserNo(@PathVariable(value = "userNo") Long userNo) {
+		// 선택된 userNo 리뷰 리스트만 나오기
+		List<ReviewBoard> reviewBoards=reviewBoardService.findByUserNo(userNo);
+		if(reviewBoards.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
 		}
+		List<ReviewBoardDto> reviewBoardDtoList = new ArrayList<>();
+		
+		for (ReviewBoard reviewBoard : reviewBoards) {
+			ReviewBoardDto reviewBoardDto = ReviewBoardDto.toDto(reviewBoard);
+			reviewBoardDtoList.add(reviewBoardDto);
+		}
+		
+		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardDtoList);
 	}
-	*/
+	
+	
+	@Operation(summary = "boardNo로 reviewBoard 수정")
+	@PutMapping("/{boardNo}")
+	public ResponseEntity<ReviewBoardDto> updateReviewBoard(@PathVariable(value = "boardNo") Long boardNo, @RequestBody ReviewBoardDto dto) throws Exception {		
+		ReviewBoard existingReviewBoard = reviewBoardService.findByBoardNo(boardNo);		
+		
+		if(existingReviewBoard!=null) {
+			if(dto.getBoardContent()!=null) {
+				existingReviewBoard.setBoardContent(dto.getBoardContent());
+			}
+			if(dto.getBoardStar()!=null) {
+				existingReviewBoard.setBoardStar(dto.getBoardStar());
+			}
+			if(dto.getBoardTitle()!=null) {
+				existingReviewBoard.setBoardTitle(dto.getBoardTitle());
+			}
+			
+		// productNo는 수정할수없다.?
+			
+			reviewBoardService.update(existingReviewBoard);
+			ReviewBoardDto reviewBoardDto = ReviewBoardDto.toDto(existingReviewBoard);
+			HttpHeaders httpHeaders = new HttpHeaders();
+			httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+			
+			return new ResponseEntity<>(reviewBoardDto, httpHeaders, HttpStatus.OK);
+		
+		}else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+	}
+		
+		
+		
+	
 	
 	/*
 	
-	@PutMapping("/{boardNo}")
-	public ResponseEntity<ReviewBoard> updateReviewBoard(@PathVariable Long boardNo, @RequestBody ReviewBoard updatedReviewBoard) throws Exception {		
-		ReviewBoard existingReviewBoard = reviewBoardService.findByBoardNo(boardNo);		
-		if (existingReviewBoard == null) {
-			// boardNo 가 존재하지 않으면 notFound() 반환
-	        return ResponseEntity.notFound().build();
-	    }		
-		// boardNo 가 존재하면 업데이트 적용 후 저장
-	    existingReviewBoard.setBoardTitle(updatedReviewBoard.getBoardTitle());
-	    existingReviewBoard.setBoardContent(updatedReviewBoard.getBoardContent());
-	    existingReviewBoard.setBoardStar(updatedReviewBoard.getBoardStar());
-	    ReviewBoard updatedBoard = reviewBoardService.update(existingReviewBoard);	    
-	    return ResponseEntity.ok(updatedBoard);
-	} 
 
 	
-	
-	@GetMapping("/{no}")
-	public ResponseEntity<List<ReviewBoard>> findByUserNo(@PathVariable Long no) {
-		// 선택된 userNo 리뷰 리스트만 나오기
-		return ResponseEntity.status(HttpStatus.OK).body(reviewBoardService.findByUserNo(no));
-	}
-	 
 	
 	@GetMapping
 	public ResponseEntity<List<ReviewBoard>> findAllByOrderByBoardStarDesc() {
