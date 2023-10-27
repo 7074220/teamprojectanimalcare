@@ -44,16 +44,14 @@ public class ReportBoard {
 	private String boardTitle;
 	private Date boardRegisterDate;
 	private String boardContent;
-	private Date boardDate;
+	private Date boardFindDate;
 	@Column(name = "board_readcount")
 	private Integer boardReadCount;
-	private Integer boardGroupNo;
-	private Integer boardStep;
-	private Integer boardDepth;
-	private String boardName;
+	
+	private String boardFindName;
 	
 	@Column(unique = true)
-	private String boardPhone;
+	private String boardFindPhone;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST , fetch = FetchType.LAZY) // ManyToOne 확실한가?
 	@JoinColumn(name = "user_no")

@@ -38,39 +38,23 @@ private PetDao petDao;
 	@Override
 	public void petRemove(Long petNo) throws Exception {
 	
-	Optional<Pet> petOptional = Optional.of(petDao.petFindById(petNo));
-	if(petOptional.isEmpty()) {
-		throw new Exception("존재하지 않는 동물입니다.");
-	
-		}
 	petDao.petDelete(petNo);
 	}
 	
 	@Override
 	public Pet petUpdate(Pet pet) throws Exception {
-		Optional<Pet> petOptional = Optional.of(petDao.petFindById(pet.getPetNo()));
-		Pet updatedPet = null;
-		if(petOptional.isPresent()) {
-			Pet pet1 = petOptional.get();
-			pet1.setPetLocal(pet.getPetLocal());
-			pet1.setPetType(pet.getPetType());
-			pet1.setPetGender(pet.getPetGender());
-			pet1.setPetRegisterDate(pet.getPetRegisterDate());
-			pet1.setPetFindPlace(pet.getPetFindPlace());
-			pet1.setPetCharacter(pet.getPetCharacter());
-			pet1.setCenter(pet.getCenter());
-			
-			updatedPet=petDao.petUpdate(pet1);
-		}else {
-			throw new Exception("존재하지 않는 동물입니다.");
-		}
-		return updatedPet;
+		return petDao.petUpdate(pet);
 	}
 
 	@Override
 	public List<Pet> findAllByOrderBypetNoDesc() {
 	 
 		return petDao.findAllByOrderBypetNoDesc();
+	}
+
+	@Override
+	public List<Pet> findAllByOrderBypetType(String petType) {
+		return petDao.findAllByOrderByPetType(petType);
 	}
 
 }

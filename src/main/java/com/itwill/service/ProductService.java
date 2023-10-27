@@ -30,6 +30,7 @@ public interface ProductService {
 	List<Product> findAllByOrderByProductStarAvgDesc();
 
 	// 최신번호순 정렬
+	// default
 	List<Product> findAllByOrderByProductNoDesc();
 	
 	// 낮은번호순 정렬

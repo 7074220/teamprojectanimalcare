@@ -13,7 +13,7 @@ public interface CouponDao {
 	
 	public void DelteById(Long couponId);
 	
-	public List<Coupon> autoDeleteExpiredCoupons(LocalDateTime couponExpirationDate);
+	public List<Coupon> autoDeleteExpiredCoupons();
 	
 	public List<Coupon> findAll();
 	
@@ -23,7 +23,7 @@ public interface CouponDao {
 	public List<Coupon> findAllByUserNo(Long userNo);
 	
 	//유저에 따른 쿠폰 삭제 기능 
-	public void deleteExpireCouponByUserNo(LocalDateTime date , Long userNo);
+	public void deleteExpireCouponByUserNo(Long userNo);
 	
 }
 
