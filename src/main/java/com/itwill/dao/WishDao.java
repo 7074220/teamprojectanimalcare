@@ -15,4 +15,7 @@ public interface WishDao {
 	
 	// 위시리스트 모두 출력 (userNo)
 	List<Wish> findAllWishByUserNo(Long userNo);
+	
+	// 위시리스트에서 하나 찾기(userNo)
+	//Wish 
 }
