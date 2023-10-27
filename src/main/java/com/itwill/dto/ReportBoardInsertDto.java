@@ -45,6 +45,18 @@ public class ReportBoardInsertDto {
 
 		return reportBoard;
 	}
-	
+	public static ReportBoardInsertDto toDto(ReportBoard reportBoard) {
+		ReportBoardInsertDto reportBoardInsertDto =ReportBoardInsertDto.builder()
+											.boardNo(reportBoard.getBoardNo())
+											.boardContent(reportBoard.getBoardContent())
+											.boardFindDate(reportBoard.getBoardFindDate())
+											.boardFindName(reportBoard.getBoardFindName())
+											.boardFindPhone(reportBoard.getBoardFindPhone())
+											.boardRegisterDate(reportBoard.getBoardRegisterDate())
+											.boardTitle(reportBoard.getBoardTitle())
+											.build();
+
+		return reportBoardInsertDto;
+	}
 	
 }

@@ -41,4 +41,15 @@ public class ReplyCreateDto {
 		return replyBoard;
 	}
 	
+	public static ReplyCreateDto toDto(ReplyBoard replyBoard) {
+		ReplyCreateDto createDto = ReplyCreateDto.builder()
+												.ReplyBoardContent(replyBoard.getReplyBoardContent())
+												.ReplyBoardDepth(replyBoard.getReplyBoardDepth())
+												.ReplyBoardGroupNo(replyBoard.getReplyBoardGroupNo())
+												.ReplyBoardStep(replyBoard.getReplyBoardStep())
+												.build();
+		
+		return createDto;
+	}
+	
 }
