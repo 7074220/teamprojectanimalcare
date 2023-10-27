@@ -22,7 +22,7 @@ public interface CouponDao {
 	public List<Coupon> findAllByUserNo(Long userNo);
 	
 	//유저에 따른 쿠폰 삭제 기능 
-	List<Coupon> findExpireCouponByUserNo(Date date , Long userNo);
+	List<Coupon> deleteExpireCouponByUserNo(Date date , Long userNo);
 	
 }
 

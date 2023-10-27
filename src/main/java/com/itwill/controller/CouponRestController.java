@@ -50,16 +50,14 @@ public class CouponRestController {
 		return new ResponseEntity<CouponDto>(couponDto,httpHeaders,HttpStatus.OK);
 	}
 	
-	@Operation(summary = "유저에 따른 쿠폰 뽑기")
+	@Operation(summary = "유저에 따른 쿠폰 뽑기 --> 만료된 쿠폰 삭제")
 	@GetMapping("/{userNo}")
 	public ResponseEntity<List<CouponDto>> findAllByUserNo(@PathVariable(name = "userNo") Long userNo) throws Exception {
 		List<Coupon> coupons= couponService.findAllByUserNo(userNo);
 		List<CouponDto> couponList = new ArrayList<CouponDto>();
 		
-		
 		for (Coupon coupon : coupons) {
-			List<Coupon> couponsList = couponService.findExpireCouponByUserNo(coupon.getCouponExpirationDate(),userNo);
-			
+			couponService.deleteExpireCouponByUserNo(coupon.getCouponExpirationDate(),userNo);
 		}
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
