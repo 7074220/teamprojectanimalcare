@@ -12,7 +12,7 @@ import com.itwill.dao.UserInfoDao;
 import com.itwill.dao.WishDao;
 import com.itwill.entity.Wish;
 import com.itwill.repository.WishRepository;
-
+@Transactional
 @Service
 public class WishServiceImpl implements WishService {
 

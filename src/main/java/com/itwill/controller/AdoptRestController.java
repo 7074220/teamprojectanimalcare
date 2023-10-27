@@ -41,8 +41,7 @@ public class AdoptRestController {
 
 	@Autowired
 	private AdoptService adoptService;
-	@Autowired
-	private PetService petService;
+	
 	
 	@Operation(summary = "입양신청")
 	@PostMapping
@@ -113,6 +112,8 @@ public class AdoptRestController {
 				findAdopt.setAdoptTime(dto.getAdoptTime());
 			}
 			
+			/*
+			 * petNo 로 수정 불가?
 			Pet findPet = findAdopt.getPet();
 			if (dto.getPetNo() != null) {
 			    if (findPet != null) {
@@ -122,7 +123,7 @@ public class AdoptRestController {
 			        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			    }
 			}
-			
+			*/
 			
 			adoptService.updateAdopt(findAdopt);
 			AdoptDto updatedDto = AdoptDto.fromEntity(findAdopt);

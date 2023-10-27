@@ -41,8 +41,8 @@ CREATE TABLE Coupon(
 		coupon_id                     		NUMBER(10)		 NULL ,
 		coupon_name                   		VARCHAR2(50)		 NULL ,
 		coupon_discount               		NUMBER(10)		 NULL ,
-		coupon_expiration_date        		DATE		 NULL ,
-		coupon_payday                 		DATE		 NULL ,
+		coupon_expiration_date        		TIMESTAMP(10)		 NULL ,
+		coupon_payday                 		TIMESTAMP(10)		 NULL ,
 		user_no                       		NUMBER(10)		 NULL 
 );
 

@@ -29,4 +29,12 @@ public class WishlistInsertDto {
 				.build();
 		return insertWishlist;
 	}
+	
+	public static WishlistInsertDto toDto(Wish wish) {
+		return WishlistInsertDto.builder()
+				.wishNo(wish.getWishNo())
+				.userNo(wish.getUserinfo().getUserNo())
+				.productNo(wish.getProduct().getProductNo())
+				.build();
+	}
 }

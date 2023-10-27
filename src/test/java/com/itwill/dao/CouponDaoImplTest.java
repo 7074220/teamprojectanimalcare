@@ -19,9 +19,9 @@ import com.itwill.entity.Userinfo;
 class CouponDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	
 	@Autowired
-	CouponDao couponDao;
+	private CouponDao couponDao;
 	@Autowired
-	UserInfoDao userInfoDao;
+	private UserInfoDao userInfoDao;
 	
 	@Test
 	@Transactional
@@ -31,10 +31,8 @@ class CouponDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		Userinfo userinfo = userInfoDao.findByNo(11L);
 		Coupon coupon = Coupon.builder()
 							.couponDiscount(30)
-							.couponExpirationDate(new Date())
 							.couponId(null)
 							.couponName("가입쿠폰")
-							.couponPayday(new Date())
 							.userinfo(userinfo)
 							.build();
 		couponDao.Create(coupon);
@@ -42,58 +40,20 @@ class CouponDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		 userinfo = userInfoDao.findByNo(11L);
 		 coupon = Coupon.builder()
 				.couponDiscount(30)
-				.couponExpirationDate(new Date())
 				.couponId(null)
 				.couponName("생일쿠폰")
-				.couponPayday(new Date())
 				.userinfo(userinfo)
 				.build();
 		couponDao.Create(coupon);
-		
-	userinfo = userInfoDao.findByNo(12L);
-	coupon = Coupon.builder()
-			.couponDiscount(30)
-			.couponExpirationDate(new Date())
-			.couponId(null)
-			.couponName("가입쿠폰")
-			.couponPayday(new Date())
-			.userinfo(userinfo)
-			.build();
-	couponDao.Create(coupon);
-	
-	userinfo = userInfoDao.findByNo(11L);
-	coupon = Coupon.builder()
-			.couponDiscount(30)
-			.couponExpirationDate(new Date())
-			.couponId(null)
-			.couponName("생일쿠폰")
-			.couponPayday(new Date())
-			.userinfo(userinfo)
-			.build();
-	couponDao.Create(coupon);
-	
-	
 }
 
 	
 	@Test
 	@Transactional
 	@Rollback(false)
-	//@Disabled
+	@Disabled
 	void test1() {
 		couponDao.DelteById(2L);
-	}
-	
-	
-	@Test
-	@Transactional
-	@Rollback(false)
-	@Disabled
-	void test2() {
-		
-		Date date =  couponDao.findById(3L).getCouponExpirationDate();
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+date);
-		 couponDao.autoDeleteExpiredCoupons(date);
 	}
 	
 	@Test
@@ -101,13 +61,14 @@ class CouponDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	@Disabled
 	void test3() {
-		
 		System.out.println(couponDao.findById(3L));
-		
-	
 	}
 		
-		
+	@Test
+	//@Disabled
+	void test4() {
+		couponDao.deleteExpireCouponByUserNo(LocalDateTime.of(2023, 10, 28, 0, 0), 3L);
+	}	
 			
 	
 	
