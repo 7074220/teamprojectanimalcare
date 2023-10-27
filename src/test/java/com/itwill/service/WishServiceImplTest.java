@@ -25,7 +25,7 @@ class WishServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	WishService wishService;
 	
 	@Test
-	@Disabled
+	//@Disabled
 	@Transactional
 	@Rollback(false)
 	void insert() {
