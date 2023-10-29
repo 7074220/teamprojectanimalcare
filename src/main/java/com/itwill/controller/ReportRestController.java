@@ -66,6 +66,7 @@ public class ReportRestController {
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		reportBoardService.deleteById(boardNo);
 		return new ResponseEntity<ReportBoardInsertDto>(httpHeaders, HttpStatus.OK);
 
 }
@@ -120,19 +121,19 @@ public class ReportRestController {
 	
 	@Operation(summary = "유저 게시물 조회")
 	@GetMapping("/boards/searchByUser")
-	public ResponseEntity<List<ReportBoardInsertDto>> findByUserId(@RequestParam(name = "userId") String userId) {
-	    List<ReportBoard> boards = reportBoardService.findByUserId(userId);
+	public ResponseEntity<List<ReportBoardInsertDto>> findByUserId(@RequestParam(name = "userNo") Long userNo) {
+	    List<ReportBoard> boards = reportBoardService.findByUserNo(userNo);
 
 	    if (!boards.isEmpty()) {
 	        List<ReportBoardInsertDto> boardDtoList = new ArrayList<>();
 	        for (ReportBoard board : boards) {
 	            boardDtoList.add(ReportBoardInsertDto.toDto(board));
 	        }
-	        return new ResponseEntity<>(boardDtoList, HttpStatus.OK);
+	        return new ResponseEntity<List<ReportBoardInsertDto>>(boardDtoList, HttpStatus.OK);
 	    } else {
 	        HttpHeaders httpHeaders = new HttpHeaders();
 	        httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-	        return new ResponseEntity<>(httpHeaders, HttpStatus.NOT_FOUND);
+	        return new ResponseEntity<List<ReportBoardInsertDto>>(httpHeaders, HttpStatus.NOT_FOUND);
 	    }
 	}
 

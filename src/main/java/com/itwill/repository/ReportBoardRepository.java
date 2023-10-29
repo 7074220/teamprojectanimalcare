@@ -17,6 +17,9 @@ public interface ReportBoardRepository extends JpaRepository<ReportBoard, Long>{
 	@Query(value="select * from reportboard where user_id=?1",nativeQuery = true)
 	public List<ReportBoard> findByUserId(String userId);
 	
+	@Query(value="select * from reportboard where user_no=?1",nativeQuery = true)
+	public List<ReportBoard> findByUserNo(Long userNo);
+	
 	@Query(value="select * from reportboard where user_id like '%'|| ?1 || '%'",nativeQuery = true)
 	public List<ReportBoard> findAllByLikeUserId(String userId);
 	

@@ -19,6 +19,10 @@ public interface ReportBoardDao {
 	//사용자가 쓴 글 목록 
 	public List<ReportBoard> findByUserId(String userId);
 	
+	//사용자 번호로 쓴글 목록 보기
+	public List<ReportBoard> findByUserNo(Long userNo);
+
+	
 	//like 검색 기능 
 	public List<ReportBoard> findAllByLikeUserId(String userId);
 	

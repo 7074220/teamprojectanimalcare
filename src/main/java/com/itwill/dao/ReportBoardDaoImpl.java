@@ -54,5 +54,11 @@ public class ReportBoardDaoImpl implements ReportBoardDao{
 	public void countReadCount(Long boardNo) {
 		reportBoardRepository.countReadCount(boardNo);
 	}
+
+	@Override
+	public List<ReportBoard> findByUserNo(Long userNo) {
+		
+		return reportBoardRepository.findByUserNo(userNo);
+	}
 	
 }

@@ -22,6 +22,9 @@ public interface ReportBoardService {
 	//마이페이지에 사용자가 쓴 글 목록 확인
 	public List<ReportBoard> findByUserId(String userId);
 	
+	//마이페이지에 사용자가 쓴 글 목록 확인
+	public List<ReportBoard> findByUserNo(Long userNo);
+	
 	//like검색기능
 	public List<ReportBoard> findAllByLikeUserId(String userId);
 	
