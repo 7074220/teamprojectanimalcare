@@ -23,6 +23,7 @@ import com.itwill.entity.Wish;
 import com.itwill.service.WishService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.http.HttpSession;
 
 
 @RestController
@@ -36,7 +37,11 @@ public class WishRestController {
 	@Operation(summary = "위시리스트 추가")
 	@PostMapping
 	// insert
-	public ResponseEntity<WishlistInsertDto> insertWishlist(@RequestBody WishlistInsertDto dto){
+	public ResponseEntity<WishlistInsertDto> insertWishlist(@RequestBody WishlistInsertDto dto, HttpSession session) throws Exception {
+		if (session.getAttribute("userNo") == null) {
+			throw new Exception("로그인 하세요.");
+		}
+		
 		Wish wishlist = WishlistInsertDto.toEntity(dto);
 		
 		wishService.insertWish(wishlist);

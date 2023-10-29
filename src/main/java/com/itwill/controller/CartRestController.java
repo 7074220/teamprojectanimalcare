@@ -24,6 +24,7 @@ import com.itwill.entity.Cart;
 import com.itwill.service.CartService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/cart")
@@ -34,13 +35,19 @@ public class CartRestController {
 
 	@Operation(summary = "카트 추가")
 	@GetMapping
-	public ResponseEntity<CartDto> insertCart(CartDto dto) throws Exception{
+	public ResponseEntity<CartDto> insertCart(CartDto dto, HttpSession session) throws Exception{
 
-		if(dto.getCartQty() == 0) {
+		if (session.getAttribute("userNo") == null) {
+			throw new Exception("로그인 하세요.");
+			
+		} else if (session.getAttribute("userNo") != null && dto.getCartQty() == 0) {
 			throw new Exception("수량을 입력하세요.");
-		}
-		cartService.insertCart(CartDto.toEntity(dto));
+			
+		} else if (session.getAttribute("userNo") != null && dto.getCartQty() != 0) {
+			cartService.insertCart(CartDto.toEntity(dto));
 
+		}
+		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
@@ -49,43 +56,59 @@ public class CartRestController {
 
 	@Operation(summary = "카트 번호로 한 개 삭제")
 	@DeleteMapping("/delete/{cartNo}")
-	public void deleteByCartNo(@PathVariable(name = "cartNo") Long cartNo) throws Exception {
-
+	public void deleteByCartNo(@PathVariable(name = "cartNo") Long cartNo, HttpSession session) throws Exception {
+		if (session.getAttribute("userNo") == null) {
+			throw new Exception("로그인 하세요.");
+		}
+		
 		cartService.deleteById(cartNo);
 	}
 
+	
 	@Operation(summary = "유저 아이디로 카트 전체 삭제")
 	@DeleteMapping("/delete/user/{userNo}")
-	public ResponseEntity<CartDto> deleteByUserNo(@PathVariable(name = "userNo") Long userNo) throws Exception {
+	public ResponseEntity<CartDto> deleteByUserNo(@PathVariable(name = "userNo") Long userNo, HttpSession session) throws Exception {
 
-		HttpHeaders httpHeaders = new HttpHeaders();
-
+		if (session.getAttribute("userNo") == null) {
+			throw new Exception("로그인 하세요.");
+		}
+		
 		cartService.deleteByUserId(userNo);
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
 
 		return new ResponseEntity<CartDto>(httpHeaders, HttpStatus.OK);
 	}
 
+	
 	@Operation(summary = "상품 수량 업데이트")
 	@PutMapping("/{cartNo}")
-	public ResponseEntity<CartDto> updateCartQty(@PathVariable(name = "cartNo") Long no, @RequestBody CartDto dto)
-			throws Exception {
+	public ResponseEntity<CartDto> updateCartQty(@PathVariable(name = "cartNo") Long no, @RequestBody CartDto dto, HttpSession session) throws Exception {
+		if (session.getAttribute("userNo") == null) {
+			throw new Exception("로그인 하세요.");
+		}
+		
 		Cart findCart = cartService.findByCartNo(no);
 
 		findCart.setCartQty(dto.getCartQty());
 		cartService.update_qty(findCart);
 
 		CartDto updatedDto = CartDto.toDto(findCart);
-
+		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
 		return new ResponseEntity<CartDto>(updatedDto, httpHeaders, HttpStatus.OK);
 	}
 
+	
 	@Operation(summary = "카트번호로 선택하기")
 	@GetMapping("/{cartNo}")
-	public ResponseEntity<CartDto> findByCartNo(@PathVariable(name = "cartNo") Long cartNo) throws Exception {
-
+	public ResponseEntity<CartDto> findByCartNo(@PathVariable(name = "cartNo") Long cartNo, HttpSession session) throws Exception {
+		if (session.getAttribute("userNo") == null) {
+			throw new Exception("로그인 하세요.");
+		}
+		
 		Cart findCart = cartService.findByCartNo(cartNo);
 		CartDto cartDto = CartDto.toDto(findCart);
 
@@ -95,16 +118,21 @@ public class CartRestController {
 		return new ResponseEntity<CartDto>(cartDto, httpHeaders, HttpStatus.OK);
 	}
 
+	
 	@Operation(summary = "유저 카트 리스트")
 	@GetMapping("/cartList/{userNo}")
-	public ResponseEntity<List<CartDto>> cartList(@PathVariable(name = "userNo") Long no) {
+	public ResponseEntity<List<CartDto>> cartList(@PathVariable(name = "userNo") Long no, HttpSession session) throws Exception{
+		if (session.getAttribute("userNo") == null) {
+			throw new Exception("로그인 하세요.");
+		}
+		
 		List<Cart> cartList = cartService.findAllCartByUserId(no);
 		List<CartDto> cartsDto = new ArrayList<CartDto>();
 
 		for (Cart cart : cartList) {
 			cartsDto.add(CartDto.toDto(cart));
 		}
-
+		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
@@ -114,7 +142,11 @@ public class CartRestController {
 	
 	@Operation(summary = "중복 상품 업데이트")
 	@PutMapping
-	public ResponseEntity<List<CartDto>> updateOverlapCart(CartOverlapDto dto) throws Exception {
+	public ResponseEntity<List<CartDto>> updateOverlapCart(CartOverlapDto dto, HttpSession session) throws Exception {
+		if (session.getAttribute("userNo") == null) {
+			throw new Exception("로그인 하세요.");
+		}
+		
 		Cart updateCart = cartService.updateOverlapCart(CartOverlapDto.toEntity(dto));
 		CartOverlapDto cartOverlapDto = CartOverlapDto.toDto(updateCart);
 		
@@ -134,7 +166,11 @@ public class CartRestController {
 	
 	@Operation(summary = "카트에 있는 모든 상품 가격")
 	@GetMapping("/totalPrice/{userNo}")
-	public ResponseEntity<CartTotalPriceDto> cartTotalPrice(@PathVariable(name = "userNo") Long userNo){
+	public ResponseEntity<CartTotalPriceDto> cartTotalPrice(@PathVariable(name = "userNo") Long userNo, HttpSession session) throws Exception{
+		if (session.getAttribute("userNo") == null) {
+			throw new Exception("로그인 하세요.");
+		}
+		
 		Integer totalPrice = cartService.cartTotalPrice(userNo);
 		CartTotalPriceDto total = new CartTotalPriceDto();
 		total.setTotalPrice(totalPrice);

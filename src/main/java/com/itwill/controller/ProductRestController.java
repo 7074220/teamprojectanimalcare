@@ -31,6 +31,7 @@ import com.itwill.entity.Product;
 import com.itwill.service.ProductService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.http.HttpSession;
 
 
 @RestController
@@ -40,10 +41,10 @@ public class ProductRestController {
 	@Autowired
 	private ProductService productService;
 	
-	@Operation(summary = "상품 추가")
+	@Operation(summary = "상품 추가 (관리자)")
 	@GetMapping
 	// insert
-	public ResponseEntity<ProductInsertDto> insertProduct(ProductInsertDto dto){
+	public ResponseEntity<ProductInsertDto> insertProduct(ProductInsertDto dto, HttpSession session) throws Exception{
 		
 		productService.insertProduct(ProductInsertDto.toEntity(dto));
 		
@@ -53,18 +54,18 @@ public class ProductRestController {
 		return new ResponseEntity<ProductInsertDto>(dto, httpHeaders, HttpStatus.CREATED);
 	}
 	
-	@Operation(summary = "상품 삭제")
+	@Operation(summary = "상품 삭제 (관리자)")
 	@DeleteMapping("/{no}")
 	// delete
-	public ResponseEntity deleteProduct(@PathVariable(name = "no") Long no) throws Exception{
-		
+	public ResponseEntity deleteProduct(@PathVariable(name = "no") Long no, HttpSession session) throws Exception{
+	
 		HttpHeaders httpHeaders = new HttpHeaders();
 		
 		productService.deleteProduct(no);
 		return new ResponseEntity(httpHeaders, HttpStatus.OK);
 	}
 	
-	@Operation(summary = "상품 수정")
+	@Operation(summary = "상품 수정 (관리자)")
 	@PutMapping("{productNo}")
 	// update
 	public ResponseEntity<ProductListDto> updateProduct(@PathVariable(value = "productNo") Long productNo, @RequestBody ProductListDto dto) throws Exception{
@@ -86,7 +87,7 @@ public class ProductRestController {
 	@Operation(summary = "상품 리스트(최신 번호순)")
 	@GetMapping("/productNoDescList")
 	// productNo 최신번호순
-	public ResponseEntity<List<ProductListDto>> productNoDescList(){
+	public ResponseEntity<List<ProductListDto>> productNoDescList() {
 		List<Product> products = productService.findAllByOrderByProductNoDesc();
 		List<ProductListDto> productsDto = new ArrayList<ProductListDto>();
 		
