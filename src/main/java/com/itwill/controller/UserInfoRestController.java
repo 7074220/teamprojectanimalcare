@@ -34,10 +34,10 @@ import jakarta.servlet.http.HttpSession;
 public class UserInfoRestController {
 
 	@Autowired
-	private UserInfoService userInfoService;
+	UserInfoService userInfoService;
 	
 	@Autowired
-	private CouponService couponService;
+	CouponService couponService;
 	
 	// 회원가입
 	@Operation(summary = "회원가입")
@@ -64,7 +64,7 @@ public class UserInfoRestController {
 	// 로그인
 	@Operation(summary = "로그인")
 	@GetMapping("/login")
-	public ResponseEntity<UserLoginActionDto> user_login_action(@RequestBody UserLoginActionDto dto,
+	public ResponseEntity<UserLoginActionDto> user_login_action(UserLoginActionDto dto,
 			HttpSession session) throws Exception {
 
 		Userinfo loginUserCheck = userInfoService.login(dto.getUserId(), dto.getUserPassword());
@@ -99,7 +99,7 @@ public class UserInfoRestController {
 	// 회원 로그아웃
 	@Operation(summary = "회원로그아웃")
 	@GetMapping("/logout")
-	public ResponseEntity<UserLoginActionDto> user_logout_action(@RequestBody UserLoginActionDto dto,
+	public ResponseEntity<UserLoginActionDto> user_logout_action(UserLoginActionDto dto,
 			HttpSession session) throws Exception {
 
 		if (session.getAttribute("userNo") != null) {
@@ -146,7 +146,7 @@ public class UserInfoRestController {
 	
 	@Operation(summary="회원정보수정")
 	@PutMapping("/{userNo}")
-	public ResponseEntity<UserWriteActionDto> updateUser(@RequestBody UserWriteActionDto userWriteActionDto,@PathVariable(name="userNo")Long userNo, 
+	public ResponseEntity<UserWriteActionDto> updateUser(UserWriteActionDto userWriteActionDto,@PathVariable(name="userNo")Long userNo, 
 			HttpSession session) throws Exception{
 		
 		if (session.getAttribute("userNo") != null) {

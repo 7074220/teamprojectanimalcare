@@ -55,7 +55,7 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	}
 	
 	@Test
-	//@Disabled
+	@Disabled
 	@Transactional
 	@Rollback(false)
 	// 카트에서 cartNo로 하나 선택 --> 수량 업데이트
@@ -131,7 +131,7 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	}
 	
 	@Test
-	@Disabled
+	//@Disabled
 	@Transactional
 	@Rollback(false)
 	// 카트에 중복제품이 있으면 (중복체크) --> 업데이트 돼서 담기도록 
@@ -139,8 +139,8 @@ class CartServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 		//Cart cart = cartService.findByProductUserNo(6L, 1L);
 		
 		Cart cart1 = Cart.builder()
-						.userinfo(userInfoDao.findByNo(2L))
-						.product(productDao.findByProductNo(2L))
+						.userinfo(userInfoDao.findByNo(1L))
+						.product(productDao.findByProductNo(1L))
 						.cartQty(3)
 						.build();
 		

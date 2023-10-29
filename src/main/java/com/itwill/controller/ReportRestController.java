@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.itwill.dto.ReportBoardInsertDto;
 import com.itwill.dto.UserLoginActionDto;
 import com.itwill.dto.UserWriteActionDto;
@@ -67,6 +66,7 @@ public class ReportRestController {
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		reportBoardService.deleteById(boardNo);
+		
 		return new ResponseEntity<ReportBoardInsertDto>(httpHeaders, HttpStatus.OK);
 
 }
@@ -137,7 +137,5 @@ public class ReportRestController {
 	    }
 	}
 
-
-	
 	
 }

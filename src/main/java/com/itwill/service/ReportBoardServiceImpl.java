@@ -14,7 +14,7 @@ import com.itwill.entity.ReportBoard;
 public class ReportBoardServiceImpl implements ReportBoardService{
 
 	@Autowired
-	ReportBoardDao reportBoardDao;
+	private ReportBoardDao reportBoardDao;
 	 
 	@Override
 	public ReportBoard Create(ReportBoard reportBoard) {
