@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.CartDto;
 import com.itwill.dto.CartOverlapDto;
+import com.itwill.dto.CartTotalPriceDto;
 import com.itwill.entity.Cart;
 import com.itwill.service.CartService;
 
@@ -34,8 +34,11 @@ public class CartRestController {
 
 	@Operation(summary = "카트 추가")
 	@GetMapping
-	public ResponseEntity<CartDto> insertCart(CartDto dto) {
+	public ResponseEntity<CartDto> insertCart(CartDto dto) throws Exception{
 
+		if(dto.getCartQty() == 0) {
+			throw new Exception("수량을 입력하세요.");
+		}
 		cartService.insertCart(CartDto.toEntity(dto));
 
 		HttpHeaders httpHeaders = new HttpHeaders();
@@ -108,34 +111,40 @@ public class CartRestController {
 		return new ResponseEntity<List<CartDto>>(cartsDto, httpHeaders, HttpStatus.OK);
 	}
 
+	
 	@Operation(summary = "중복 상품 업데이트")
 	@PutMapping
-	public ResponseEntity<CartOverlapDto> updateOverlapCart(CartOverlapDto dto) throws Exception {
+	public ResponseEntity<List<CartDto>> updateOverlapCart(CartOverlapDto dto) throws Exception {
 		Cart updateCart = cartService.updateOverlapCart(CartOverlapDto.toEntity(dto));
 		CartOverlapDto cartOverlapDto = CartOverlapDto.toDto(updateCart);
 		
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		List<Cart> cartList = cartService.findAllCartByUserId(dto.getUserNo());
+		List<CartDto> cartsDto = new ArrayList<CartDto>();
 
-		return new ResponseEntity<CartOverlapDto>(cartOverlapDto, httpHeaders, HttpStatus.OK);
-	}
-	
-	
-	@Operation(summary = "카트번호로 선택하기")
-	@GetMapping("/{cartNo}")
-	public ResponseEntity<CartDto> findByCartNo(@PathVariable(name = "cartNo")Long cartNo) throws Exception{
-
-		Cart findCart = cartService.findByCartNo(cartNo);
-		CartDto cartDto = CartDto.toDto(findCart);
+		for (Cart cart : cartList) {
+			cartsDto.add(CartDto.toDto(cart));
+		}
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		
-		return new ResponseEntity<CartDto>(cartDto, httpHeaders, HttpStatus.OK);
+
+		return new ResponseEntity<List<CartDto>>(cartsDto, httpHeaders, HttpStatus.OK);
 	}
 	
 	
-	
+	@Operation(summary = "카트에 있는 모든 상품 가격")
+	@GetMapping("/totalPrice/{userNo}")
+	public ResponseEntity<CartTotalPriceDto> cartTotalPrice(@PathVariable(name = "userNo") Long userNo){
+		Integer totalPrice = cartService.cartTotalPrice(userNo);
+		CartTotalPriceDto total = new CartTotalPriceDto();
+		total.setTotalPrice(totalPrice);
+
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+		return new ResponseEntity<CartTotalPriceDto>(total, httpHeaders, HttpStatus.OK);
+	}
 	
 	
 	
