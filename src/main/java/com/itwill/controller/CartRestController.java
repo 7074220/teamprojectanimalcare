@@ -80,4 +80,29 @@ public class CartRestController {
 	
 		return null;
 	}
+	
+	
+	@Operation(summary = "카트번호로 선택하기")
+	@GetMapping("/{cartNo}")
+	public ResponseEntity<CartDto> findByCartNo(@PathVariable(name = "cartNo")Long cartNo) throws Exception{
+
+		Cart findCart = cartService.findByCartNo(cartNo);
+		CartDto cartDto = CartDto.toDto(findCart);
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<CartDto>(cartDto, httpHeaders, HttpStatus.OK);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	 
 }
