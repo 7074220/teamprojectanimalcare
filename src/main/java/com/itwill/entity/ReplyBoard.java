@@ -43,7 +43,7 @@ public class ReplyBoard {
 	private Integer ReplyBoardDepth;
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@JoinColumn(name = "board_no")
 	@Builder.Default
 	ReportBoard reportBoard=new ReportBoard();

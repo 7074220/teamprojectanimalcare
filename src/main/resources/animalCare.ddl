@@ -242,7 +242,7 @@ CREATE SEQUENCE Cart_cart_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 CREATE TABLE MyPet(
 		mypet_no                      		NUMBER(10)		 NULL ,
 		mypet_name                    		VARCHAR2(50)		 NULL ,
-		mypet_birthday                		DATE		 NULL ,
+		mypet_birthday                		TIMESTAMP(9)		 NULL ,
 		user_no                       		NUMBER(10)		 NULL ,
 		mypet_kind                    		VARCHAR2(50)		 NULL 
 );

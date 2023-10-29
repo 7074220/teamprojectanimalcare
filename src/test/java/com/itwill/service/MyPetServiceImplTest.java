@@ -47,7 +47,7 @@ class MyPetServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 		MyPet myPet = MyPet.builder()
 							.mypetNo(null)
 							.mypetName("바니")
-							.mypetBirthday(new Date())
+							//.mypetBirthday(new Date())
 							.mypetKind("강아지")
 							.userinfo(userinfo)
 							.build();

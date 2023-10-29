@@ -37,6 +37,7 @@ public class ReplyCreateDto {
 											.ReplyBoardGroupNo(replyCreateDto.getReplyBoardGroupNo())
 											.ReplyBoardStep(replyCreateDto.getReplyBoardStep())
 											.ReplyBoardDepth(replyCreateDto.getReplyBoardDepth())
+											.ReplyBoardNo(replyCreateDto.getReplyBoardNo())
 											.build();
 		return replyBoard;
 	}
@@ -47,6 +48,10 @@ public class ReplyCreateDto {
 												.ReplyBoardDepth(replyBoard.getReplyBoardDepth())
 												.ReplyBoardGroupNo(replyBoard.getReplyBoardGroupNo())
 												.ReplyBoardStep(replyBoard.getReplyBoardStep())
+												.ReplyBoardNo(replyBoard.getReplyBoardNo())
+												.ReplyBoardRegisterDate(replyBoard.getReplyBoardRegisterDate())
+												.reportNo(replyBoard.getReportBoard().getBoardNo())
+												.userNo(replyBoard.getUserinfo().getUserNo())
 												.build();
 		
 		return createDto;
