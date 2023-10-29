@@ -25,11 +25,7 @@ public interface MyPetRepository extends JpaRepository<MyPet, Long>{
 	public void deleteMypetAllByUserNo(Long userNo);
 	
 	//마이펫 대표 뽑기 
-	@Modifying
-	@Query(value="SELECT *\r\n"
-			+ "FROM mypet\r\n"
-			+ "WHERE user_no = ?1\r\n"
-			+ "AND mypet_no = (SELECT MIN(mypet_no) FROM mypet WHERE user_no = ?1);",nativeQuery = true)
+	@Query(value="SELECT * FROM (SELECT * FROM mypet WHERE user_no = ?1 ORDER BY mypet_no) WHERE ROWNUM = 1",nativeQuery = true)
 	public MyPet findLeaderMyPet(Long userNo);
 	
 	

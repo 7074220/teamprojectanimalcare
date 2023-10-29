@@ -26,8 +26,10 @@ public class CouponScheduler {
 	@Autowired
 	private UserInfoService userInfoService;
 	
-	@Scheduled(cron = "0 58 17 * * ?")
+	@Scheduled(cron = "0 16 18 * * ?")
 	public void CreateBirthdayCoupon() throws Exception {
+		System.out.println("스케줄 되니?");
+		/*
 		List<Userinfo> userinfoList = userInfoService.findUserList();
 		Coupon birthCoupon = Coupon.builder()
 									.couponDiscount(30)
@@ -35,27 +37,16 @@ public class CouponScheduler {
 									.build();
 		birthCoupon.setCouponDate(30L);
 		
-		/*for (Userinfo userinfo : userinfoList) {
+		for (Userinfo userinfo : userinfoList) {
 			MyPet myPetLeader = myPetService.findLeaderMyPet(userinfo.getUserNo());
+			birthCoupon.setUserinfo(userinfo);
 			couponService.Create(birthCoupon);
-			//if(myPetLeader.getMypetBirthday().equals(LocalDateTime.now())){
-			//}
+			if(myPetLeader.getMypetBirthday().equals(LocalDateTime.now())){
+			}
 			
 		}
+		*/
 		
+	}
 		
-	}*/
-		
-		 for (Userinfo userinfo : userinfoList) {
-		        MyPet myPetLeader = myPetService.findLeaderMyPet(userinfo.getUserNo());
-		        if (myPetLeader.getMypetBirthday() != null && myPetLeader.getMypetBirthday().equals(LocalDate.now())) {
-		            // 생일인 경우에만 쿠폰 생성 및 저장
-		            Coupon createdCoupon = couponService.Create(birthCoupon);
-		            // 생성된 쿠폰을 사용자에게 지급할 수 있습니다.
-		            // 예: userinfo 또는 myPetLeader에 쿠폰 정보 추가
-		        }
-		    }
-		}
-	
-	
 }

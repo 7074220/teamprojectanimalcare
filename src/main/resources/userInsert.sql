@@ -57,17 +57,17 @@ INSERT INTO adopt (adopt_no, adopt_time, adopt_date, pet_no, user_no, adopt_stat
 -- mypet insert
 
 insert into mypet (mypet_no,mypet_name,mypet_kind,mypet_birthday,user_no) 
-VALUES (mypet_mypet_no_seq.nextval,'보리','강아지',TO_DATE('2022/04/05','YYYY/MM/DD'),1);
+VALUES (mypet_mypet_no_seq.nextval,'보리','강아지',TO_DATE('2022/10/29','YYYY/MM/DD'),1);
 
 insert into mypet (mypet_no,mypet_name,mypet_kind,mypet_birthday,user_no) 
-VALUES (mypet_mypet_no_seq.nextval,'율무','강아지',TO_DATE('2022/11/11','YYYY/MM/DD'),2);
+VALUES (mypet_mypet_no_seq.nextval,'율무','강아지',TO_DATE('2022/10/29','YYYY/MM/DD'),2);
 
 insert into mypet (mypet_no,mypet_name,mypet_kind,mypet_birthday,user_no) 
-VALUES (mypet_mypet_no_seq.nextval,'나비','고양이',TO_DATE('2022/07/05','YYYY/MM/DD'),3);
+VALUES (mypet_mypet_no_seq.nextval,'나비','고양이',TO_DATE('2022/10/29','YYYY/MM/DD'),3);
 
 
 insert into mypet (mypet_no,mypet_name,mypet_kind,mypet_birthday,user_no) 
-VALUES (mypet_mypet_no_seq.nextval,'토토','고양이',TO_DATE('2022/04/05','YYYY/MM/DD'),1);
+VALUES (mypet_mypet_no_seq.nextval,'토토','고양이',TO_DATE('2022/10/29','YYYY/MM/DD'),1);
 
 -- order insert
 
