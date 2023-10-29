@@ -1,9 +1,18 @@
 package com.itwill.dto;
 
+import java.nio.charset.Charset;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+
 import com.itwill.entity.Cart;
 import com.itwill.entity.Product;
 import com.itwill.entity.Userinfo;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -41,4 +50,20 @@ public class CartDto {
 				.userNo(cart.getUserinfo().getUserNo())
 				.build();
 	}
+	
+	
+	
+/*
+	@Operation(summary = "카트 추가")
+	@GetMapping
+	public ResponseEntity<CartDto> insertCart(CartDto dto) {
+
+		cartService.insertCart(CartDto.toEntity(dto));
+
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+		return new ResponseEntity<CartDto>(dto, httpHeaders, HttpStatus.CREATED);
+	}
+	*/
 }
