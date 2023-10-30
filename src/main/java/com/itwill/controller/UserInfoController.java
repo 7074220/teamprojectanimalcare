@@ -31,6 +31,8 @@ public class UserInfoController {
 		return "login";
 	}
 	
+	
+	
 	// 관리자가 유저리스트 볼때
 	@GetMapping(value = "/userList")
 	public String list(Model model) throws Exception {
