@@ -27,12 +27,12 @@ public class VolunteerController {
 	@Autowired
 	private VolunteerService volunteerService;
 
-	@PostMapping("/insert_action") // 봉사 신청
+	@GetMapping("/insert_action") // 봉사 신청
 	public String insert_action(@RequestBody VolunteerDto dto) throws Exception {		
 		volunteerService.insertVolunteer(dto.toEntity(dto));		
 		return "redirect:volunteer_list.html"; // 링크수정하기	
 	}
-	
+	/*
 	@GetMapping("/volunteerList") // 봉사 리스트
 	public String volunteerList(Model model) {
 		List<Volunteer> volunteerList = volunteerService.findAllVolunteers();
@@ -74,7 +74,7 @@ public class VolunteerController {
 		return "redirect:volunteer_list.html"; // 링크수정하기	
 	}
 	
-	
+	*/
 	
 	
 	
