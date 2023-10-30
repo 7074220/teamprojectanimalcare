@@ -17,39 +17,34 @@ import com.itwill.entity.Userinfo;
 @Component
 @Service
 public class CouponScheduler {
-	
+
 	@Autowired
 	private CouponService couponService;
-	
+
 	@Autowired
 	private MyPetService myPetService;
-	
+
 	@Autowired
 	private UserInfoService userInfoService;
-	
-	@Scheduled(cron = "0 1 11 * * ?")
+
+	@Scheduled(cron = "0 0 0 * * ?")
 	@Transactional
 	public void CreateBirthdayCoupon() throws Exception {
-		
-		System.out.println("스케줄 되니?");
-		
 		List<Userinfo> userinfoList = userInfoService.findUserList();
-		Coupon birthCoupon = Coupon.builder()
-									.couponDiscount(30)
-									.couponName("생일쿠폰")
-									.build();
+		Coupon birthCoupon = Coupon.builder().couponDiscount(30).couponName("생일쿠폰").build();
 		birthCoupon.setCouponDate(30L);
 		
 		for (Userinfo userinfo : userinfoList) {
 			MyPet myPetLeader = myPetService.findLeaderMyPet(userinfo.getUserNo());
-			birthCoupon.setUserinfo(userinfo);
-			couponService.Create(birthCoupon);
-			if(myPetLeader.getMypetBirthday().equals(LocalDateTime.now())){
+			if (myPetLeader!=null) {
+				if(LocalDateTime.now().getMonthValue()==myPetLeader.getMypetBirthday().getMonthValue()) {
+					if(LocalDateTime.now().getDayOfMonth()==myPetLeader.getMypetBirthday().getDayOfMonth()) {
+						birthCoupon.setUserinfo(userinfo);
+						couponService.Create(birthCoupon);
+					}
+				}
 			}
-			
 		}
-		
-		
 	}
-		
+
 }
