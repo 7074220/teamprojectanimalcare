@@ -20,7 +20,6 @@ import com.itwill.entity.Product;
 import com.itwill.service.ProductService;
 
 @Controller
-@RequestMapping("/product")
 public class ProductController {
 	
 	@Autowired
