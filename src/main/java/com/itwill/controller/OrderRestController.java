@@ -14,9 +14,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.CartDto;
 import com.itwill.dto.OrderItemDto;
+import com.itwill.dto.OrderUpdateDto;
 import com.itwill.dto.OrdersDto;
 import com.itwill.dto.ProductListDto;
 import com.itwill.entity.Cart;
@@ -206,6 +209,37 @@ public class OrderRestController {
 		
 		return new ResponseEntity<List<OrdersDto>>(ordersListDto, httpHeaders, HttpStatus.OK);
 	}
+	
+	
+	@Operation(summary = "사용자 주문후 배송지변경")
+	@PutMapping()
+	public ResponseEntity<OrderUpdateDto> modifyOrders(OrderUpdateDto updateDto) throws Exception{
+		
+		orderService.modifyOrder(OrderUpdateDto.toEntity(updateDto));
+		
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<OrderUpdateDto>(updateDto, httpHeaders, HttpStatus.OK);
+	}
+	
+	
+	
+	@Operation(summary = "주문삭제 관리자버전")
+	@DeleteMapping("/{orderNo}")
+	public void removeOrders(@PathVariable(name ="orderNo" ) Long orderNo,HttpSession session) throws Exception{
+		if (session.getAttribute("userNo") == null) {
+			throw new Exception("로그인 하세요.");
+		}
+		orderService.removeOrder(orderNo);
+		
+		
+	}
+	
+	
+	
+	
 }
 
 
