@@ -88,8 +88,7 @@ class MyPetDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	//@Disabled
 	void test4() {
 		System.out.println(myPetDao.findMyPetListByuserNo(1L));	
-		System.out.println(myPetDao.findMyPetListByuserNo(2L));	
-		System.out.println(myPetDao.findMyPetListByuserNo(3L));	
+		System.out.println(myPetDao.findLeaderMyPet(1L));	
 	}
 	
 	
