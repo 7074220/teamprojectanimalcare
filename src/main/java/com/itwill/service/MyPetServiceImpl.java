@@ -56,6 +56,12 @@ public class MyPetServiceImpl implements MyPetService{
 	public void deleteMypetAllByUserNo(Long userNo) {
 		myPetDao.deleteMypetAllByUserNo(userNo);
 	}
+
+	@Override
+	public MyPet findLeaderMyPet(Long userNo) {
+		
+		return myPetDao.findLeaderMyPet(userNo);
+	}
 	
 	
 }

@@ -21,4 +21,7 @@ public interface MyPetDao {
      public void deleteMypetByUserNo(Long userNo,Long mypetNo);
      
      public void deleteMypetAllByUserNo(Long userNo);
+     
+     //대표 동물 뽑아오기 
+     public MyPet findLeaderMyPet(Long userNo);
 }

@@ -1,5 +1,6 @@
 package com.itwill.dao;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -41,8 +42,8 @@ public class CouponDaoImpl implements CouponDao {
 
 	// 만료된 쿠폰찾기
 	@Override
-	public List<Coupon> autoDeleteExpiredCoupons(Date couponExpirationDate) {
-		return couponRepository.findByExpirationDateBefore(couponExpirationDate);
+	public List<Coupon> autoDeleteExpiredCoupons() {
+		return couponRepository.findByExpirationDateBefore();
 	}
 
 	@Override
@@ -51,9 +52,8 @@ public class CouponDaoImpl implements CouponDao {
 	}
 
 	@Override
-	public List<Coupon> findExpireCouponByUserNo(Date date, Long userNo) {
-		
-		return couponRepository.findExpireCouponByUserNo(date, userNo);
+	public void deleteExpireCouponByUserNo(Long userNo) {
+		couponRepository.deleteExpireCouponByUserNo(userNo);
 	}
 	
 }

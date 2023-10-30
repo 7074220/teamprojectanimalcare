@@ -1,5 +1,7 @@
 package com.itwill.dto;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import com.itwill.entity.MyPet;
@@ -19,7 +21,7 @@ public class MyPetListDto {
 
 	private Long mypetNo;
 	private String mypetName;
-	private Date mypetBirthday;
+	private LocalDateTime mypetBirthday;
 	private String mypetKind;
 	
 	public static MyPet toEntity(MyPetListDto dto) {

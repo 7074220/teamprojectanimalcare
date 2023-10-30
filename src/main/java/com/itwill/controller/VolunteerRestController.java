@@ -51,7 +51,7 @@ public class VolunteerRestController {
 	} // INSERT
 	
 	
-	@Operation(summary = "no로 봉사신청 보기") 
+	@Operation(summary = "volunteerNo로 봉사신청 보기") 
 	@GetMapping("/{volunteerNo}") 
 	public ResponseEntity<VolunteerDto> findByVolunteerNo(@PathVariable(name = "volunteerNo") Long no,  HttpSession httpSession) throws Exception{		
 		Volunteer findVolunteer = volunteerService.findByVolunteerNo(no);		

@@ -3,6 +3,7 @@ package com.itwill.controller;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.fasterxml.jackson.core.sym.Name;
 import com.itwill.dto.PetDto;
 import com.itwill.dto.UserWriteActionDto;
+import com.itwill.entity.Center;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Userinfo;
 import com.itwill.service.PetService;
@@ -57,26 +59,33 @@ PetService petService;
 	//펫 삭제 관리자만
 	@PostMapping("/delete_action")
 	public String delete_action(@PathVariable(name = "petNo") Long petNo) throws Exception{
-		try {
+		Optional<Pet> petOptional = Optional.of(petService.petFindById(petNo));
+		if(petOptional.isEmpty()) {
+			throw new Exception("존재하지 않는 동물입니다.");
+		
+			}
 			petService.petRemove(petNo);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return "redirect:pet-list.html";
 	}
 	//펫 업데이트
 	@PostMapping("/update_action")
 	public String update_action(@RequestBody PetDto updatepetDto) throws Exception{
-		try {
-			petService.petUpdate(updatepetDto.toEntity(updatepetDto));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return "redirect:pet-list.html";
+		Optional<Pet> petOptional = Optional.of(petService.petFindById(updatepetDto.getPetNo()));
+		if(petOptional.isPresent()) {
+			Pet pet1 = petOptional.get();
+			pet1.setPetLocal(updatepetDto.getPetLocal());
+			pet1.setPetType(updatepetDto.getPetType());
+			pet1.setPetGender(updatepetDto.getPetGender());
+			pet1.setPetRegisterDate(updatepetDto.getPetRegisterDate());
+			pet1.setPetFindPlace(updatepetDto.getPetFindPlace());
+			pet1.setPetCharacter(updatepetDto.getPetCharacter());
+			pet1.setCenter(Center.builder().centerNo(updatepetDto.getCenterNo()).build());
+			
+			
+			petService.petUpdate(pet1);
 	}
+		return "redirect:pet-list.html";
 	
-	
+	}
 
 }

@@ -33,7 +33,7 @@ class MyPetDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 							.mypetNo(null)
 							.mypetName("보리")
 							.mypetKind("강아지")
-							.mypetBirthday(new Date())
+							//.mypetBirthday(new Date())
 							.userinfo(userinfo)
 							.build();
 		
@@ -45,7 +45,7 @@ class MyPetDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 					.mypetNo(null)
 					.mypetName("율무")
 					.mypetKind("강아지")
-					.mypetBirthday(new Date())
+					//.mypetBirthday(new Date())
 					.userinfo(userinfo)
 					.build();
 		
@@ -56,7 +56,7 @@ class MyPetDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 					.mypetNo(null)
 					.mypetName("나비")
 					.mypetKind("고양이")
-					.mypetBirthday(new Date())
+					//.mypetBirthday(new Date())
 					.userinfo(userinfo)
 					.build();
 		
@@ -87,7 +87,8 @@ class MyPetDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Rollback(false)
 	//@Disabled
 	void test4() {
-	System.out.println(myPetDao.findAll());	
+		System.out.println(myPetDao.findMyPetListByuserNo(1L));	
+		System.out.println(myPetDao.findLeaderMyPet(1L));	
 	}
 	
 	

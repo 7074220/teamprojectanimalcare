@@ -14,7 +14,7 @@ import com.itwill.entity.ReportBoard;
 public class ReportBoardServiceImpl implements ReportBoardService{
 
 	@Autowired
-	ReportBoardDao reportBoardDao;
+	private ReportBoardDao reportBoardDao;
 	 
 	@Override
 	public ReportBoard Create(ReportBoard reportBoard) {
@@ -50,6 +50,11 @@ public class ReportBoardServiceImpl implements ReportBoardService{
 	@Override
 	public void countReadCount(Long boardNo) {
 		reportBoardDao.countReadCount(boardNo);
+	}
+
+	@Override
+	public List<ReportBoard> findByUserNo(Long userNo) {
+		return reportBoardDao.findByUserNo(userNo);
 	}
 	
 

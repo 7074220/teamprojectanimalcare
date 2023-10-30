@@ -26,4 +26,7 @@ public interface MyPetService {
 
 	//마이펫 전체 삭제
 	public void deleteMypetAllByUserNo(Long userNo);
+	
+	//대표 동물 뽑아오기 
+    public MyPet findLeaderMyPet(Long userNo);
 }

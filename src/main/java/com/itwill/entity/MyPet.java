@@ -3,7 +3,11 @@ package com.itwill.entity;
 
 
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
+
+import org.springframework.scheduling.annotation.Scheduled;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -37,7 +41,7 @@ public class MyPet {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "MyPet_mypet_no_SEQ")
 	private Long mypetNo;
 	private String mypetName;
-	private Date mypetBirthday;
+	private LocalDateTime mypetBirthday;
 	private String mypetKind; //고양이인지 강아지인지 구별
 	
 	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)

@@ -22,14 +22,7 @@ public class CouponServiceImpl implements CouponService{
 	private CouponDao couponDao;
 	
 	@Override
-	public Coupon Create(Coupon coupon,Integer period) {
-		// 60일을 더할 Calendar 객체 생성
-		Calendar calendar = Calendar.getInstance();
-	    calendar.setTime(coupon.getCouponPayday());
-	    calendar.add(Calendar.DAY_OF_MONTH, period);
-
-	    // Calendar 객체에서 Date로 변환하여 couponExpirationDate 필드에 설정
-	    coupon.setCouponExpirationDate(calendar.getTime());
+	public Coupon Create(Coupon coupon) {
 		return couponDao.Create(coupon);
 	}
 	
@@ -53,14 +46,13 @@ public class CouponServiceImpl implements CouponService{
 	}
 	
 	@Override
-	public List<Coupon> autoDeleteExpiredCoupons(Date couponExpirationDate) {
-		return couponDao.autoDeleteExpiredCoupons(couponExpirationDate);
+	public List<Coupon> autoDeleteExpiredCoupons( ) {
+		return couponDao.autoDeleteExpiredCoupons();
 	}
 	
 	@Override
-	public List<Coupon> findExpireCouponByUserNo(Date date, Long userNo) {
-		
-		return couponDao.findExpireCouponByUserNo(date, userNo);
+	public void deleteExpireCouponByUserNo(Long userNo) {
+		couponDao.deleteExpireCouponByUserNo(userNo);
 	}
 	
 }
