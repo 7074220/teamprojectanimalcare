@@ -74,7 +74,7 @@ public class OrderRestController {
 			orderDto.setOrderItemDtos(orderItemDtos);
 			}
 			orderDto.setOrderPrice(totalPrice);
-			
+			orderDto.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+carts.size()+"상품");
 			cartService.deleteById(userNo);
 			orderService.insertOrder(orderDto.toEntity(orderDto));
 			
