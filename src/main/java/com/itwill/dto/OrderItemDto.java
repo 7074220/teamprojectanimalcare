@@ -46,6 +46,7 @@ private Long oiNo;
 		
 		return orderItemDto;
 }
+
 	public static OrderItem toEntity(OrderItemDto dto) {
 		OrderItem orderItem = OrderItem.builder()
 									.oiNo(dto.getOiNo())
