@@ -49,7 +49,9 @@ public class OrderItem {
 	@OneToOne(fetch = FetchType.LAZY)
 	@Builder.Default
 	@JoinColumn(name = "os_no")
-	private Orderstatus orderStatus = new Orderstatus();
+	private Orderstatus orderStatus = new 
+	
+	Orderstatus();
 	
 
 }

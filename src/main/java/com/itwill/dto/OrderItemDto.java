@@ -1,0 +1,47 @@
+package com.itwill.dto;
+
+import java.util.Date;
+import java.util.List;
+
+import com.itwill.entity.OrderItem;
+import com.itwill.entity.Orders;
+import com.itwill.entity.Userinfo;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class OrderItemDto {
+
+private Long oiNo;
+	
+	private Integer oiQty;
+	
+
+	
+	private Long orderNo;
+	private Long productNo;
+	private Long osNo;
+	
+//	private Long orderId;
+	
+	public static OrderItemDto toDto(OrderItem entity) {
+		OrderItemDto orderItemDto = OrderItemDto.builder()
+									.oiNo(entity.getOiNo())
+									.oiQty(entity.getOiQty())
+									.orderNo(entity.getOrders().getOrderNo())
+									.productNo(entity.getProduct().getProductNo())
+									.osNo(entity.getOrderStatus().getOsNo())
+								 .build();
+		
+		return orderItemDto;
+}
+}
