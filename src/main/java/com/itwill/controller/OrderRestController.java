@@ -14,9 +14,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.CartDto;
 import com.itwill.dto.OrderItemDto;
+import com.itwill.dto.OrderUpdateDto;
 import com.itwill.dto.OrdersDto;
 import com.itwill.dto.ProductListDto;
 import com.itwill.entity.Cart;
@@ -67,6 +70,8 @@ public class OrderRestController {
 		 Exception("로그인 하세요."); 
 		  
 		  }
+		  
+		  
 		 
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
@@ -100,6 +105,8 @@ public class OrderRestController {
 		return new ResponseEntity<OrdersDto>(orderDto,httpHeaders,HttpStatus.CREATED);
 	}
 	
+	
+	
 	@Operation(summary = "주문 번호로 조회")
 	@GetMapping("/{orderNo}")
 	public ResponseEntity<OrdersDto> findOrdersByNo(@PathVariable(name = "orderNo") Long no, HttpSession session) throws Exception {
@@ -116,6 +123,8 @@ public class OrderRestController {
 		return new ResponseEntity<OrdersDto>(ordersDto, httpHeaders, HttpStatus.OK);
 	}
 	
+	
+	
 	@Operation(summary = "주문 전체 조회 , 관리자전용")
 	@GetMapping("/ordersList")
 	public ResponseEntity<List<OrdersDto>> findOrders() {
@@ -131,6 +140,8 @@ public class OrderRestController {
 
 		return new ResponseEntity<List<OrdersDto>>(ordersDto, httpHeaders, HttpStatus.OK);
 	}
+	
+	
 	
 	@Operation(summary = "회원아이디로 주문조회")
 	@GetMapping("/ordersList/{userNo}")
@@ -152,6 +163,8 @@ public class OrderRestController {
 		return new ResponseEntity<List<OrdersDto>>(ordersDto, httpHeaders, HttpStatus.OK);
 	}
 		
+	
+	
 	@Operation(summary = "회원아이디로 주문 정렬")
 	@GetMapping("/ordersList/desc/{userNo}")
 	public ResponseEntity<List<OrdersDto>> findOrderByIdDesc(@PathVariable(name = "userNo") Long no, HttpSession session) throws Exception {
@@ -171,7 +184,9 @@ public class OrderRestController {
 
 		return new ResponseEntity<List<OrdersDto>>(ordersDto, httpHeaders, HttpStatus.OK);
 	}
-			
+		
+	
+	
 	@Operation(summary = "주문 번호로 내림차순 정렬")
 	@PostMapping("/{orderNo}")
 	public ResponseEntity<List<OrdersDto>> findAllByOrderByOrderNoDesc(@PathVariable(name = "orderNo") Long orderNo){
@@ -190,6 +205,7 @@ public class OrderRestController {
 	}
 	
 	
+
 	@Operation(summary = "날짜별 기간으로 조회")
 	@GetMapping("/{startDate}/{endDate}")
 	public ResponseEntity<List<OrdersDto>> findAllByOrdersByOrderDate(@PathVariable(name = "startDate") Date startDate, @PathVariable(name = "endDate") Date endDate){
@@ -200,11 +216,59 @@ public class OrderRestController {
 			OrdersDto ordersDto = OrdersDto.toDto(orders);
 			ordersListDto.add(ordersDto);
 		}
-
+		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		
 		return new ResponseEntity<List<OrdersDto>>(ordersListDto, httpHeaders, HttpStatus.OK);
 	}
+	
+	
+	@Operation(summary = "날짜별 기간으로 조회(아이디별)")
+	@GetMapping("/{startDate}/{endDate}/{userNo}")
+	public ResponseEntity<List<OrdersDto>> findAllByOrdersByOrderDateByUserNo(@PathVariable(name = "startDate") Date startDate, @PathVariable(name = "endDate") Date endDate, @PathVariable(name = "userNo") Long userNo){
+		List<OrdersDto> ordersListDto = new ArrayList<OrdersDto>();
+		List<Orders> ordersList = orderService.findAllByOrdersByOrderDateByUserNo(startDate, endDate, userNo);
+		
+		for (Orders orders : ordersList) {
+			OrdersDto ordersDto = OrdersDto.toDto(orders);
+			ordersListDto.add(ordersDto);
+		}
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<List<OrdersDto>>(ordersListDto, httpHeaders, HttpStatus.OK);
+	}
+	
+	
+	@Operation(summary = "사용자 주문후 배송지변경")
+	@PutMapping()
+	public ResponseEntity<OrderUpdateDto> modifyOrders(OrderUpdateDto updateDto) throws Exception{
+		
+		orderService.modifyOrder(OrderUpdateDto.toEntity(updateDto));
+		
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<OrderUpdateDto>(updateDto, httpHeaders, HttpStatus.OK);
+	}
+	
+	
+	
+	@Operation(summary = "주문삭제 관리자버전")
+	@DeleteMapping("/{orderNo}")
+	public void removeOrders(@PathVariable(name ="orderNo" ) Long orderNo,HttpSession session) throws Exception{
+		if (session.getAttribute("userNo") == null) {
+			throw new Exception("로그인 하세요.");
+		}
+		orderService.removeOrder(orderNo);
+		
+		
+	}
+	
+	
+	
+	
 }
-

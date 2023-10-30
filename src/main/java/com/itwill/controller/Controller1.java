@@ -9,15 +9,12 @@ public class Controller1 {
 	
 	@GetMapping(value = "/")
 	public String main() {
-		return "layout/layout";
+		return "layout/sample";
 	}
 	
 	@GetMapping(value = "/index")
 	public String index() {
 		return "index";
 	}
-	
-	
-	
 
 }
