@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import com.itwill.entity.MyPet;
 
 
-import groovy.transform.ToString;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +16,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-@ToString
 public class MypetDto {
 	
 	private Long mypetNo;
