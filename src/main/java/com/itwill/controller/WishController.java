@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.itwill.dto.WishlistDto;
 import com.itwill.dto.WishlistInsertDto;
 import com.itwill.entity.Wish;
 import com.itwill.service.WishService;
