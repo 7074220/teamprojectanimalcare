@@ -12,4 +12,12 @@ public class Controller1 {
 		return "layout/sample";
 	}
 	
+	@GetMapping(value = "/index")
+	public String index() {
+		return "index";
+	}
+	
+	
+	
+
 }

@@ -46,17 +46,18 @@ private Long oiNo;
 		
 		return orderItemDto;
 }
-	
+
 	public static OrderItem toEntity(OrderItemDto dto) {
+		OrderItem orderItem = OrderItem.builder()
+									.oiNo(dto.getOiNo())
+									.oiQty(dto.getOiQty())
+									.orders(Orders.builder().orderNo(dto.getOrderNo()).build())
+									.orderStatus(Orderstatus.builder().osNo(dto.getOsNo()).build())
+									.product(Product.builder().productNo(dto.getProductNo()).build())
+								 .build();
 		
-		OrderItem orderitem = OrderItem.builder()
-				.oiNo(dto.getOiNo())
-				.oiQty(dto.getOiQty())
-				.orders(Orders.builder().orderNo(dto.getOrderNo()).build())
-				.product(Product.builder().productNo(dto.getProductNo()).build())
-				.orderStatus(Orderstatus.builder().osNo(dto.getOsNo()).build())
-				.build();
-		
-		return orderitem;
-	}
+		return orderItem;
+}
+	
+
 }

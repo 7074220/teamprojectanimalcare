@@ -94,5 +94,14 @@ class OrderServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 		System.out.println(orderService.findOrderByIdDesc(2L));
 
 	}
+	@Test
+	@Transactional
+	@Rollback(false)
+	@Disabled
+	void findAllByOrdersByOrderDateByUserNo() throws Exception {
+		//System.out.println(orderService.findAllByOrdersByOrderDateByUserNo(new Date(), null, null));
+
+	}
+	
 
 }

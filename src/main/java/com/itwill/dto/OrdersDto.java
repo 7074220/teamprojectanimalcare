@@ -23,7 +23,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class OrdersDto {
-
+	
 	private Long orderNo;
 	private Date orderDate;
 	private Integer orderPrice;
@@ -32,6 +32,7 @@ public class OrdersDto {
 	private Long userNo;
 	private List<OrderItemDto> orderItemDtos = new ArrayList();
 
+	
 	public static OrdersDto toDto(Orders entity) {
 		OrdersDto orderDto = OrdersDto.builder().orderNo(entity.getOrderNo()).orderDate(entity.getOrderDate())
 				.orderAddress(entity.getOrderAddress()).orderDesc(entity.getOrderDesc())
@@ -61,3 +62,5 @@ public class OrdersDto {
 	}
 
 }
+
+
