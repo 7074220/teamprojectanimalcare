@@ -20,7 +20,7 @@ public class WishController {
 	@Autowired
 	private WishService wishService;
 	
-	@GetMapping("/list")
+	@GetMapping("/wishList/{userNo}")
 	// 위시리스트
 	public String Wishlist(Model model, @PathVariable(name = "userNo") Long userNo) {
 		List<WishlistInsertDto> wishlistDto = new ArrayList<>();

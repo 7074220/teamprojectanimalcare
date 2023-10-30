@@ -19,7 +19,7 @@ public class CartController {
 	@Autowired
 	private CartService cartService;
 	
-	@GetMapping("/list")
+	@GetMapping("/cartList/{userNo}")
 	// 카트 리스트 보기 (유저)
 	public String cartList(Model model, @PathVariable(name = "userNo") Long userNo) {
 		List<CartDto> cartListDto = new ArrayList<>();

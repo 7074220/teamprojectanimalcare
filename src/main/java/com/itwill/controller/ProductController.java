@@ -37,7 +37,7 @@ public class ProductController {
 	
 	
 	// 상품 리스트
-	@GetMapping("/list")
+	@GetMapping("/productList")
 	public String ProductList(Model model) {
 		List<ProductListDto> productListDto = new ArrayList<>();
 		List<Product> productList = productService.findAllByOrderByProductNoDesc();
