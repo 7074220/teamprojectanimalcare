@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class Controller1 {
 	
-	@GetMapping(value = {"/","/index"})
+	@GetMapping(value = "/")
 	public String main() {
-		return "index";
+		return "layout/sample";
 	}
 	
 }
