@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.entity.Coupon;
 import com.itwill.entity.MyPet;
@@ -26,10 +27,11 @@ public class CouponScheduler {
 	@Autowired
 	private UserInfoService userInfoService;
 	
-	@Scheduled(cron = "0 16 18 * * ?")
+	@Scheduled(cron = "0 1 11 * * ?")
+	@Transactional
 	public void CreateBirthdayCoupon() throws Exception {
 		System.out.println("스케줄 되니?");
-		/*
+		
 		List<Userinfo> userinfoList = userInfoService.findUserList();
 		Coupon birthCoupon = Coupon.builder()
 									.couponDiscount(30)
@@ -45,7 +47,7 @@ public class CouponScheduler {
 			}
 			
 		}
-		*/
+		
 		
 	}
 		
