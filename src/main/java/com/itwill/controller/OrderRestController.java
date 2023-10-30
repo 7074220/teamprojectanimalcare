@@ -70,6 +70,8 @@ public class OrderRestController {
 		 Exception("로그인 하세요."); 
 		  
 		  }
+		  
+		  
 		 
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
@@ -103,6 +105,8 @@ public class OrderRestController {
 		return new ResponseEntity<OrdersDto>(orderDto,httpHeaders,HttpStatus.CREATED);
 	}
 	
+	
+	
 	@Operation(summary = "주문 번호로 조회")
 	@GetMapping("/{orderNo}")
 	public ResponseEntity<OrdersDto> findOrdersByNo(@PathVariable(name = "orderNo") Long no, HttpSession session) throws Exception {
@@ -119,6 +123,8 @@ public class OrderRestController {
 		return new ResponseEntity<OrdersDto>(ordersDto, httpHeaders, HttpStatus.OK);
 	}
 	
+	
+	
 	@Operation(summary = "주문 전체 조회 , 관리자전용")
 	@GetMapping("/ordersList")
 	public ResponseEntity<List<OrdersDto>> findOrders() {
@@ -134,6 +140,8 @@ public class OrderRestController {
 
 		return new ResponseEntity<List<OrdersDto>>(ordersDto, httpHeaders, HttpStatus.OK);
 	}
+	
+	
 	
 	@Operation(summary = "회원아이디로 주문조회")
 	@GetMapping("/ordersList/{userNo}")
@@ -155,6 +163,8 @@ public class OrderRestController {
 		return new ResponseEntity<List<OrdersDto>>(ordersDto, httpHeaders, HttpStatus.OK);
 	}
 		
+	
+	
 	@Operation(summary = "회원아이디로 주문 정렬")
 	@GetMapping("/ordersList/desc/{userNo}")
 	public ResponseEntity<List<OrdersDto>> findOrderByIdDesc(@PathVariable(name = "userNo") Long no, HttpSession session) throws Exception {
@@ -174,7 +184,9 @@ public class OrderRestController {
 
 		return new ResponseEntity<List<OrdersDto>>(ordersDto, httpHeaders, HttpStatus.OK);
 	}
-			
+		
+	
+	
 	@Operation(summary = "주문 번호로 내림차순 정렬")
 	@PostMapping("/{orderNo}")
 	public ResponseEntity<List<OrdersDto>> findAllByOrderByOrderNoDesc(@PathVariable(name = "orderNo") Long orderNo){
@@ -193,6 +205,7 @@ public class OrderRestController {
 	}
 	
 	
+
 	@Operation(summary = "날짜별 기간으로 조회")
 	@GetMapping("/{startDate}/{endDate}")
 	public ResponseEntity<List<OrdersDto>> findAllByOrdersByOrderDate(@PathVariable(name = "startDate") Date startDate, @PathVariable(name = "endDate") Date endDate){
@@ -203,7 +216,25 @@ public class OrderRestController {
 			OrdersDto ordersDto = OrdersDto.toDto(orders);
 			ordersListDto.add(ordersDto);
 		}
-
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<List<OrdersDto>>(ordersListDto, httpHeaders, HttpStatus.OK);
+	}
+	
+	
+	@Operation(summary = "날짜별 기간으로 조회(아이디별)")
+	@GetMapping("/{startDate}/{endDate}/{userNo}")
+	public ResponseEntity<List<OrdersDto>> findAllByOrdersByOrderDateByUserNo(@PathVariable(name = "startDate") Date startDate, @PathVariable(name = "endDate") Date endDate, @PathVariable(name = "userNo") Long userNo){
+		List<OrdersDto> ordersListDto = new ArrayList<OrdersDto>();
+		List<Orders> ordersList = orderService.findAllByOrdersByOrderDateByUserNo(startDate, endDate, userNo);
+		
+		for (Orders orders : ordersList) {
+			OrdersDto ordersDto = OrdersDto.toDto(orders);
+			ordersListDto.add(ordersDto);
+		}
+		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		

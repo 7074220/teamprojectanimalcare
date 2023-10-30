@@ -50,50 +50,7 @@ public class VolunteerRestController {
 		return new ResponseEntity<>(dto, httpHeaders, HttpStatus.CREATED);		
 	} // INSERT
 	
-	
-	@Operation(summary = "volunteerNo로 봉사신청 보기") 
-	@GetMapping("/{volunteerNo}") 
-	public ResponseEntity<VolunteerDto> findByVolunteerNo(@PathVariable(name = "volunteerNo") Long no,  HttpSession httpSession) throws Exception{		
-		Volunteer findVolunteer = volunteerService.findByVolunteerNo(no);		
-		if(findVolunteer == null) {
-			throw new Exception("정보를 찾을 수 없습니다.");
-		}
-		VolunteerDto volunteerDto = VolunteerDto.toDto(findVolunteer);
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));		
-		return new ResponseEntity<VolunteerDto>(volunteerDto, httpHeaders, HttpStatus.OK);
-	} // 봉사 목록 찾기
-	
-	
-	@Operation(summary = "userNo로 봉사목록 조회") 
-	@GetMapping("/user/{userNo}")
-	public ResponseEntity<List<VolunteerDto>> findVolunteertByUserNo(@PathVariable(name = "userNo") Long userNo) {
-		List<Volunteer> volunteers = volunteerService.findVolunteertByUserNo(userNo);
-		List<VolunteerDto> volunteerDtoList = new ArrayList<VolunteerDto>();
-		
-		for (Volunteer volunteer : volunteers) {
-			volunteerDtoList.add(VolunteerDto.toDto(volunteer));
-		}
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		return new ResponseEntity<List<VolunteerDto>>(volunteerDtoList, httpHeaders, HttpStatus.OK);
-	} // userNo 로 VolunteerList 조회
-	
-	
-	@Operation(summary = "봉사리스트") 
-	@GetMapping("/volunteers")
-	public ResponseEntity<List<VolunteerDto>> volunteerList() {
-		List<Volunteer> volunteers = volunteerService.findAllVolunteers();
-		List<VolunteerDto> volunteerDtoList = new ArrayList<VolunteerDto>();
-		
-		for (Volunteer volunteer : volunteers) {
-			volunteerDtoList.add(VolunteerDto.toDto(volunteer));			
-		}	
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));				
-		return new ResponseEntity<List<VolunteerDto>>(volunteerDtoList, httpHeaders, HttpStatus.OK);
-	} // 목록 전체 조회
-	
+
 	
 	@Operation(summary = "봉사삭제")
 	@DeleteMapping("/{volunteerNo}")
@@ -132,5 +89,49 @@ public class VolunteerRestController {
 	} // UPDATE
 
 
+	/*
+	@Operation(summary = "volunteerNo로 봉사신청 보기") 
+	@GetMapping("/{volunteerNo}") 
+	public ResponseEntity<VolunteerDto> findByVolunteerNo(@PathVariable(name = "volunteerNo") Long no,  HttpSession httpSession) throws Exception{		
+		Volunteer findVolunteer = volunteerService.findByVolunteerNo(no);		
+		if(findVolunteer == null) {
+			throw new Exception("정보를 찾을 수 없습니다.");
+		}
+		VolunteerDto volunteerDto = VolunteerDto.toDto(findVolunteer);
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));		
+		return new ResponseEntity<VolunteerDto>(volunteerDto, httpHeaders, HttpStatus.OK);
+	} // 봉사 목록 찾기
+	
+	
+	@Operation(summary = "userNo로 봉사목록 조회") 
+	@GetMapping("/user/{userNo}")
+	public ResponseEntity<List<VolunteerDto>> findVolunteertByUserNo(@PathVariable(name = "userNo") Long userNo) {
+		List<Volunteer> volunteers = volunteerService.findVolunteertByUserNo(userNo);
+		List<VolunteerDto> volunteerDtoList = new ArrayList<VolunteerDto>();
+		
+		for (Volunteer volunteer : volunteers) {
+			volunteerDtoList.add(VolunteerDto.toDto(volunteer));
+		}
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		return new ResponseEntity<List<VolunteerDto>>(volunteerDtoList, httpHeaders, HttpStatus.OK);
+	} // userNo 로 VolunteerList 조회
+	
+	
+	@Operation(summary = "봉사리스트") 
+	@GetMapping("/volunteers")
+	public ResponseEntity<List<VolunteerDto>> findAllVolunteers() {
+		List<Volunteer> volunteerList = volunteerService.findAllVolunteers();
+		List<VolunteerDto> volunteerDtoList = new ArrayList<VolunteerDto>();
+		
+		for (Volunteer volunteer : volunteerList) {
+			volunteerDtoList.add(VolunteerDto.toDto(volunteer));			
+		}	
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));				
+		return new ResponseEntity<List<VolunteerDto>>(volunteerDtoList, httpHeaders, HttpStatus.OK);
+	} // 목록 전체 조회
+	*/
 	
 }

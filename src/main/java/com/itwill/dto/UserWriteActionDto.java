@@ -1,7 +1,12 @@
 package com.itwill.dto;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import com.itwill.entity.MyPet;
+import com.itwill.entity.Pet;
 import com.itwill.entity.Userinfo;
 
 import jakarta.persistence.Column;
@@ -28,6 +33,8 @@ public class UserWriteActionDto {
 	private String userResidentNumber;
 	private Date userRegisterDate;
 	private Integer userPoint;
+	
+	List<MyPet> myPets = new ArrayList<MyPet>();
 	
 	public static Userinfo toEntity(UserWriteActionDto dto) {
 		Userinfo userinfo = Userinfo.builder()

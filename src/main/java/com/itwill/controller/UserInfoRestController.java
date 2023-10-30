@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itwill.dto.UserLoginActionDto;
 import com.itwill.dto.UserWriteActionDto;
 import com.itwill.entity.Coupon;
+import com.itwill.entity.MyPet;
 import com.itwill.entity.Userinfo;
 import com.itwill.service.CouponService;
+import com.itwill.service.MyPetService;
 import com.itwill.service.UserInfoService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,10 +36,13 @@ import jakarta.servlet.http.HttpSession;
 public class UserInfoRestController {
 
 	@Autowired
-	UserInfoService userInfoService;
+	private UserInfoService userInfoService;
 	
 	@Autowired
-	CouponService couponService;
+	private CouponService couponService;
+	
+	@Autowired
+	private MyPetService myPetService;
 	
 	// 회원가입
 	@Operation(summary = "회원가입")
@@ -45,6 +50,10 @@ public class UserInfoRestController {
 	public ResponseEntity<UserWriteActionDto> user_write_action(UserWriteActionDto dto) throws Exception {
 		
 		Userinfo createUserinfo = userInfoService.create(UserWriteActionDto.toEntity(dto));
+		List<MyPet> myPets = dto.getMyPets();
+		for (MyPet myPet : myPets) {
+			myPetService.Create(myPet);
+		}
 		
 		Coupon coupon=Coupon.builder()
 				.couponName("가입쿠폰")

@@ -23,14 +23,13 @@ public class AdoptController {
 
 	@Autowired
 	private AdoptService adoptService;
-
+/*
 	// 입양신청
-	@PostMapping("/insert_action")
+	@GetMapping("/re/insert_action")
 	public String insert_action(@RequestBody AdoptDto dto) {
-		adoptService.insertAdopt(dto.toEntity(dto));
-		return "redirect:my-account.html";
+		return "my-account";
 	}
-
+*/
 	// 입양 리스트 조회
 	@GetMapping("/adoptList")
 	public String adoptList(Model model) {
@@ -40,33 +39,29 @@ public class AdoptController {
 			adoptDtoList.add(AdoptDto.fromEntity(adopt));
 		}
 		model.addAttribute("adoptDtoList", adoptDtoList);
-		return "forward:my-account.html";
+		return "my-account";
 	}
 
-	// 수정
-	@PostMapping("/update_action")
-	public String update_action(@RequestBody AdoptDto dto) throws Exception {
-		Adopt adopt = adoptService.findByAdoptNo(dto.getAdoptNo());
-        if (adopt != null) {
-            adopt.setAdoptDate(dto.getAdoptDate());
-            adopt.setAdoptStatus(dto.getAdoptStatus());
-            adopt.setAdoptTime(dto.getAdoptTime());
-            adoptService.updateAdopt(adopt);
-        }
-        return "redirect:my-account.html";
-    }
-
-		
-
-	// 삭제
-	@PostMapping("/delete_action/{adoptNo}")
-	public String delete_action(@PathVariable(name = "adoptNo") Long adoptNo) throws Exception{
-		 Adopt adopt = adoptService.findByAdoptNo(adoptNo);
-	        if (adopt != null) {
-	            adoptService.deleteAdopt(adoptNo);
-	        }
-	        return "redirect:my-account.html";
+	//userNo에 따른 입양리스트 조회
+	@GetMapping("/adoptList/{userNo}")
+	public String findByUserNoAdoptList(Model model, @PathVariable(name = "userNo") Long userNo) {
+		List<Adopt> adoptList=adoptService.findAdoptsByUserNo(userNo);
+		List<AdoptDto> adoptDtoUserNoList = new ArrayList<>();
+		for (Adopt adopt : adoptList) {
+			adoptDtoUserNoList.add(AdoptDto.fromEntity(adopt));
+		}
+		model.addAttribute("adoptDtoUserNoList", adoptDtoUserNoList);
+		return "my-account";
 	}
+
+	// adoptNo 입양 조회
+	@GetMapping("/adoptList/{adoptNo}")
+	public String findByAdoptNoAdopt(Model model, @PathVariable(name = "adoptNo") Long adoptNo) {
+		Adopt adopt=adoptService.findByAdoptNo(adoptNo);
+		model.addAttribute("adopt", adopt);
+		return "my-account";
+	}
+	
 
 	
 	
