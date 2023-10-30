@@ -1,25 +1,35 @@
 package com.itwill.controller;
 
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.jaxb.SpringDataJaxb.OrderDto;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itwill.dto.CartDto;
 import com.itwill.dto.OrderItemDto;
 import com.itwill.dto.OrdersDto;
 import com.itwill.entity.Cart;
 import com.itwill.entity.OrderItem;
+import com.itwill.entity.Orders;
 import com.itwill.entity.Orderstatus;
 import com.itwill.repository.OrderStatusRepository;
 import com.itwill.service.CartService;
 import com.itwill.service.OrderService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.persistence.criteria.Order;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
@@ -32,7 +42,8 @@ public class OrderRestController {
 	private CartService cartService;
 	@Autowired
 	OrderStatusRepository orderStatusRepository;
-
+	
+	/*
 	@Operation(summary = "주문 등록")
 	@PostMapping("/insert_Order")
 	public ResponseEntity<OrderDto> insert_Order(@RequestBody OrdersDto orderDto, HttpSession session) {
@@ -53,6 +64,42 @@ public class OrderRestController {
 				
 				
 			}
-	}
+		*/
+	
+	/*
+	@Operation(summary = "주문 번호로 조회")
+	@GetMapping("/{orderNo}")
+	public ResponseEntity<OrdersDto> findOrdersByNo(@PathVariable(name = "orderNo") Long no, HttpSession session) throws Exception {
+		if (session.getAttribute("userNo") == null) {
+			throw new Exception("로그인 하세요.");
+		}
+		
+		Orders findOrder = orderService.findOrderByNo(no);
+		OrdersDto ordersDto = OrdersDto.toDto(findOrder);
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
+		return new ResponseEntity<OrdersDto>(ordersDto, httpHeaders, HttpStatus.OK);
+	}
+	
+	@Operation(summary = "주문 전체 조회 , 관리자전용")
+	@GetMapping("/ordersList")
+	public ResponseEntity<List<OrdersDto>> findOrders() {
+		List<Orders> orderList = orderService.findOrders();
+		List<OrdersDto> ordersDtos = new ArrayList<OrdersDto>();
+		
+		for (Orders order : orderList) {
+			ordersDtos.add(OrdersDto.toDto(order));
+		}
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+		return new ResponseEntity<List<OrdersDto>>(ordersDtos, httpHeaders, HttpStatus.OK);
+	}
+	*/	
+			
 }
+
+
