@@ -233,12 +233,34 @@ public class OrderRestController {
 			throw new Exception("로그인 하세요.");
 		}
 		orderService.removeOrder(orderNo);
+	}
+
+	@Operation(summary = "오더아이템 리스트 확인")
+	@GetMapping("/orderItemList/{orderNo}")
+	public ResponseEntity<List<OrderItemDto>> viewOrderItem(@PathVariable(name ="orderNo" ) Long orderNo,HttpSession session) throws Exception{
+		if (session.getAttribute("userNo") == null) {
+			throw new Exception("로그인 하세요.");
+		}
+		Orders orders=orderService.findOrderByNo(orderNo);
+		OrdersDto ordersDto = OrdersDto.toDto(orders);
 		
+		List<OrderItemDto> orderItemDtos = ordersDto.getOrderItemDtos();
 		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new  ResponseEntity<List<OrderItemDto>>(orderItemDtos, httpHeaders, HttpStatus.OK);
 	}
 	
 	
 	
 	
-}
+	
+	}
+	
+	
+	
+	
+	
+
 
