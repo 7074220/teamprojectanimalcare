@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class Controller1 {
 	
-	@GetMapping(value = {"/"})
+	@GetMapping(value = "/")
 	public String main() {
 		return "layout/sample";
 	}
-	
 }
