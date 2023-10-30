@@ -1,6 +1,6 @@
 package com.itwill.service;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import com.itwill.entity.Orders;
@@ -32,6 +32,6 @@ public interface OrderService {
 	// 날짜별 기간으로 조회
 	List<Orders> findAllByOrdersByOrderDate(Date startDate, Date endDate);
 	
-	
+	public List<Orders> findAllByOrdersByOrderDateByUserNo(Date startDate, Date endDate, Long userNo);
 	
 }
