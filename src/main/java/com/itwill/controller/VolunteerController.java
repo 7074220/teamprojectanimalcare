@@ -27,13 +27,16 @@ public class VolunteerController {
 	@Autowired
 	private VolunteerService volunteerService;
 
+	/*
 	@GetMapping("/insert_action") // 봉사 신청
 	public String insert_action(@RequestBody VolunteerDto dto) throws Exception {		
 		volunteerService.insertVolunteer(dto.toEntity(dto));		
 		return "redirect:volunteer_list.html"; // 링크수정하기	
 	}
-	/*
-	@GetMapping("/volunteerList") // 봉사 리스트
+	*/
+	
+	// 봉사 전체 리스트 조회. 관리자?
+	@GetMapping("/volunteerList") 
 	public String volunteerList(Model model) {
 		List<Volunteer> volunteerList = volunteerService.findAllVolunteers();
 		List<VolunteerDto> volunteerDtoList = new ArrayList<>();
@@ -42,40 +45,30 @@ public class VolunteerController {
 			volunteerDtoList.add(VolunteerDto.toDto(volunteer));
 		}
 		model.addAttribute("volunteerDtoList", volunteerDtoList);
-		return "forward:volunteer_list.html"; // 일반적으로 뷰 템플릿의 경로를 지정	
+		return "forward:volunteer_list.html"; // 일반적으로 뷰 템플릿의 경로를 지정. 링크수정하기
 	}
+
 	
-	@PostMapping("/update_action") // 봉사 일부분 수정
-	public String update_action(@RequestBody VolunteerDto dto) throws Exception {
-		Optional<Volunteer> volunteerOptional = Optional.of(volunteerService.findByVolunteerNo(dto.getVolunteerNo()));
-		//Volunteer volunteer =volunteerService.findByVolunteerNo(dto.getVolunteerNo());
-		if(volunteerOptional.isPresent()) {
-			Volunteer volunteer = volunteerOptional.get();
-			volunteer.setVolunteerTime(dto.getVolunteerTime());
-			volunteer.setVolunteerDate(dto.getVolunteerDate());
-			volunteer.setVolunteerStatus(dto.getVolunteerStatus());
-			volunteer.setCenter(Center.builder().centerNo(dto.getCenterNo()).build());
-			
-			volunteerService.updateVolunteer(volunteer);
-		}
+	// userNo 로 봉사 목록 조회. 로그인한 회원
+	@GetMapping("/volunteerList/{userNo}")
+	public String findByUserNoVolunteerList(Model model, @PathVariable(name = "userNo") Long userNo) throws Exception{
+		List<Volunteer> volunteerList = volunteerService.findVolunteertByUserNo(userNo);
+		List<VolunteerDto> volunteerDtoUserNoList = new ArrayList<>();
 		
-		return "redirect:volunteer_list.html"; // 링크수정하기	
-	}
-	
-	
-	@PostMapping("/delete_action/{volunteerNo}") // 봉사 삭제
-	public String delete_action(@PathVariable(name = "volunteerNo") Long volunteerNo) throws Exception {
-		Optional<Volunteer> volunteerOptional = Optional.of(volunteerService.findByVolunteerNo(volunteerNo));
-		//Volunteer volunteer = volunteerService.findByVolunteerNo(volunteerNo);
-		if(volunteerOptional.isEmpty()) {
-			throw new Exception("존재하지 않는 게시물입니다.");
+		for (Volunteer volunteer : volunteerList) {
+			volunteerDtoUserNoList.add(VolunteerDto.toDto(volunteer));
 		}
-		volunteerService.deleteVolunteer(volunteerNo);
+		model.addAttribute("volunteerDtoUserNoList", volunteerDtoUserNoList);
 		return "redirect:volunteer_list.html"; // 링크수정하기	
 	}
 	
-	*/
 	
-	
+	// volunteerNo 로 봉사 목록 조회. 관리자?
+	@GetMapping("/volunteerList/{volunteerNo}")
+	public String findByVolunteerNoVolunteer(Model model, @PathVariable(name = "volunteerNo") Long volunteerNo) throws Exception{
+		Volunteer volunteer = volunteerService.findByVolunteerNo(volunteerNo);
+		model.addAttribute("volunteer", volunteer);
+		return "redirect:volunteer_list.html"; // 링크수정하기	
+	}
 	
 }
