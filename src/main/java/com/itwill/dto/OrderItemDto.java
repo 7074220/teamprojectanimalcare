@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.itwill.entity.OrderItem;
 import com.itwill.entity.Orders;
+import com.itwill.entity.Orderstatus;
+import com.itwill.entity.Product;
 import com.itwill.entity.Userinfo;
 
 import lombok.AllArgsConstructor;
@@ -44,4 +46,17 @@ private Long oiNo;
 		
 		return orderItemDto;
 }
+	
+	public static OrderItem toEntity(OrderItemDto dto) {
+		
+		OrderItem orderitem = OrderItem.builder()
+				.oiNo(dto.getOiNo())
+				.oiQty(dto.getOiQty())
+				.orders(Orders.builder().orderNo(dto.getOrderNo()).build())
+				.product(Product.builder().productNo(dto.getProductNo()).build())
+				.orderStatus(Orderstatus.builder().osNo(dto.getOsNo()).build())
+				.build();
+		
+		return orderitem;
+	}
 }
