@@ -2,6 +2,7 @@ package com.itwill.controller;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,19 +88,60 @@ public class OrderRestController {
 	@GetMapping("/ordersList")
 	public ResponseEntity<List<OrdersDto>> findOrders() {
 		List<Orders> orderList = orderService.findOrders();
-		List<OrdersDto> ordersDtos = new ArrayList<OrdersDto>();
+		List<OrdersDto> ordersDto = new ArrayList<OrdersDto>();
 		
-		for (Orders order : orderList) {
-			ordersDtos.add(OrdersDto.toDto(order));
+		for (Orders orders : orderList) {
+			ordersDto.add(OrdersDto.toDto(orders));
 		}
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-		return new ResponseEntity<List<OrdersDto>>(ordersDtos, httpHeaders, HttpStatus.OK);
+		return new ResponseEntity<List<OrdersDto>>(ordersDto, httpHeaders, HttpStatus.OK);
 	}
-	*/	
-			
+	*/
+	
+	/*
+	@Operation(summary = "회원아이디로 주문조회")
+	@GetMapping("/ordersList/{userNo}")
+	public ResponseEntity<List<OrdersDto>> findOrderById(@PathVariable(name = "userNo") Long no, HttpSession session) throws Exception {
+		if (session.getAttribute("userNo") == null) {
+			throw new Exception("로그인 하세요.");
+		}
+		
+		List<Orders> orderList = orderService.findOrderById(no);
+		List<OrdersDto> ordersDto = new ArrayList<OrdersDto>();
+		
+		for (Orders orders : orderList) {
+			ordersDto.add(OrdersDto.toDto(orders));
+		}
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+		return new ResponseEntity<List<OrdersDto>>(ordersDto, httpHeaders, HttpStatus.OK);
+	}
+		
+	@Operation(summary = "회원아이디로 주문 정렬")
+	@GetMapping("/ordersList/desc/{userNo}")
+	public ResponseEntity<List<OrdersDto>> findOrderByIdDesc(@PathVariable(name = "userNo") Long no, HttpSession session) throws Exception {
+		if (session.getAttribute("userNo") == null) {
+			throw new Exception("로그인 하세요.");
+		}
+		
+		List<Orders> orderList = orderService.findOrderByIdDesc(no);
+		List<OrdersDto> ordersDto = new ArrayList<OrdersDto>();
+		
+		for (Orders orders : orderList) {
+			ordersDto.add(OrdersDto.toDto(orders));
+		}
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+		return new ResponseEntity<List<OrdersDto>>(ordersDto, httpHeaders, HttpStatus.OK);
+	}
+	*/
 }
 
 
