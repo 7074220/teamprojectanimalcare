@@ -54,6 +54,7 @@ public class ProductRestController {
 		return new ResponseEntity<ProductInsertDto>(dto, httpHeaders, HttpStatus.CREATED);
 	}
 	
+	
 	@Operation(summary = "상품 삭제 (관리자)")
 	@DeleteMapping("/{no}")
 	// delete
@@ -64,6 +65,7 @@ public class ProductRestController {
 		productService.deleteProduct(no);
 		return new ResponseEntity(httpHeaders, HttpStatus.OK);
 	}
+	
 	
 	@Operation(summary = "상품 수정 (관리자)")
 	@PutMapping("{productNo}")
@@ -83,6 +85,7 @@ public class ProductRestController {
 		
 		return new ResponseEntity<ProductListDto>(updatedDto, httpHeaders, HttpStatus.OK);
 	}
+	
 	
 	@Operation(summary = "상품 리스트(최신 번호순)")
 	@GetMapping("/productNoDescList")
@@ -213,21 +216,6 @@ public class ProductRestController {
 		return new ResponseEntity<List<ProductListDto>>(productListDto, httpHeaders, HttpStatus.OK);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
