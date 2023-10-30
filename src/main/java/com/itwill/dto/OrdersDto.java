@@ -31,6 +31,7 @@ public class OrdersDto {
 	private String orderDesc;
 	private Long userNo;
 	private List<OrderItemDto> orderItemDtos = new ArrayList();
+
 	
 	public static OrdersDto toDto(Orders entity) {
 		OrdersDto orderDto = OrdersDto.builder().orderNo(entity.getOrderNo()).orderDate(entity.getOrderDate())
@@ -47,25 +48,19 @@ public class OrdersDto {
 	}
 
 	public static Orders toEntity(OrdersDto dto) {
-		
-		
-		Orders order = Orders.builder()
-				.orderNo(dto.getOrderNo())
-				.orderDate(dto.getOrderDate())
-				.orderAddress(dto.getOrderAddress())
-				.orderDesc(dto.getOrderDesc())
-				.orderPrice(dto.getOrderPrice())
-				.userinfo(Userinfo.builder()
-				.userNo(dto.getUserNo()).build())
-				.build();
+
+		Orders order = Orders.builder().orderNo(dto.getOrderNo()).orderDate(dto.getOrderDate())
+				.orderAddress(dto.getOrderAddress()).orderDesc(dto.getOrderDesc()).orderPrice(dto.getOrderPrice())
+				.userinfo(Userinfo.builder().userNo(dto.getUserNo()).build()).build();
 		/*
-		List<OrderItem> orderItemList = new ArrayList<>();
-		for (OrderItemDto orderItemDto : dto.getOrderItemDtos()) {
-			orderItemList.add(OrderItemDto.toEntity(orderItemDto));
-		}
-		order.setOrderItems(orderItemList);
-		*/
+		 * List<OrderItem> orderItemList = new ArrayList<>(); for (OrderItemDto
+		 * orderItemDto : dto.getOrderItemDtos()) {
+		 * orderItemList.add(OrderItemDto.toEntity(orderItemDto)); }
+		 * order.setOrderItems(orderItemList);
+		 */
 		return order;
 	}
 
 }
+
+

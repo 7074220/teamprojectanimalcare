@@ -54,9 +54,9 @@ public class OrderRestController {
 	@Autowired
 	OrderStatusRepository orderStatusRepository;
 
+
 	@Autowired
 	OrderItemService itemService;
-	
 	
 	
 	@Operation(summary = "주문 등록")
@@ -241,5 +241,4 @@ public class OrderRestController {
 	
 	
 }
-
 
