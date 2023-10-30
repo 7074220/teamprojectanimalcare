@@ -59,12 +59,12 @@ private OrdersDao ordersDao;
 
 //날짜별 기간으로 조회
 @Test
-@Disabled
+//@Disabled
 @Transactional
 @Rollback(false)
 	void findAllByOrdersByOrderDate() {
 		
-	List<Orders> orders = ordersDao.findAllByOrdersByOrderDate(new Date("2023-10-22"), new Date("2023-10-24"));
+	List<Orders> orders = ordersDao.findAllByOrdersByOrderDate(new Date("2023-10-25"), new Date("2023-10-26"));
 	System.out.println(orders);
 	}
 
@@ -115,7 +115,7 @@ void findNo() {
 	System.out.println(order);
 }
 @Test
-//@Disabled
+@Disabled
 @Transactional
 @Rollback(false)
 void findall() {

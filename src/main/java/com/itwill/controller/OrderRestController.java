@@ -2,9 +2,10 @@ package com.itwill.controller;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.jaxb.SpringDataJaxb.OrderDto;
 import org.springframework.http.HttpHeaders;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itwill.dto.CartDto;
 import com.itwill.dto.OrderItemDto;
 import com.itwill.dto.OrdersDto;
+import com.itwill.dto.ProductListDto;
 import com.itwill.entity.Cart;
 import com.itwill.entity.OrderItem;
 import com.itwill.entity.Orders;
@@ -28,6 +30,7 @@ import com.itwill.entity.Orderstatus;
 import com.itwill.repository.OrderStatusRepository;
 import com.itwill.service.CartService;
 import com.itwill.service.OrderService;
+import com.itwill.service.OrderStatusService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.persistence.criteria.Order;
@@ -99,6 +102,7 @@ public class OrderRestController {
 
 		return new ResponseEntity<List<OrdersDto>>(ordersDto, httpHeaders, HttpStatus.OK);
 	}
+<<<<<<< HEAD
 	*/
 	
 	/*
@@ -140,6 +144,43 @@ public class OrderRestController {
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
 		return new ResponseEntity<List<OrdersDto>>(ordersDto, httpHeaders, HttpStatus.OK);
+=======
+	
+			
+	@Operation(summary = "주문 번호로 내림차순 정렬")
+	@PostMapping("/{orderNo}")
+	public ResponseEntity<List<OrdersDto>> findAllByOrderByOrderNoDesc(@PathVariable(name = "orderNo") Long orderNo){
+		List<OrdersDto> ordersListDto = new ArrayList<OrdersDto>();
+		List<Orders> ordersList = orderService.findAllByOrderByOrderNoDesc(orderNo);
+	
+		for (Orders orders : ordersList) {
+			OrdersDto ordersDto = OrdersDto.toDto(orders);
+			ordersListDto.add(ordersDto);
+		}
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<List<OrdersDto>>(ordersListDto, httpHeaders, HttpStatus.OK);
+	}
+	
+	
+	@Operation(summary = "날짜별 기간으로 조회")
+	@GetMapping("/{startDate}/{endDate}")
+	public ResponseEntity<List<OrdersDto>> findAllByOrdersByOrderDate(@PathVariable(name = "startDate") Date startDate, @PathVariable(name = "endDate") Date endDate){
+		List<OrdersDto> ordersListDto = new ArrayList<OrdersDto>();
+		List<Orders> ordersList = orderService.findAllByOrdersByOrderDate(startDate, endDate);
+		
+		for (Orders orders : ordersList) {
+			OrdersDto ordersDto = OrdersDto.toDto(orders);
+			ordersListDto.add(ordersDto);
+		}
+
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<List<OrdersDto>>(ordersListDto, httpHeaders, HttpStatus.OK);
+>>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 	}
 	*/
 }
