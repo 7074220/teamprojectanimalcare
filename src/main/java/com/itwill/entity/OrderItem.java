@@ -35,7 +35,7 @@ public class OrderItem {
 	private Long oiNo;
 	private Integer oiQty;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@Builder.Default
 	@JoinColumn(name = "order_no")
 	@ToString.Exclude
