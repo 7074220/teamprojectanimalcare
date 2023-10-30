@@ -50,7 +50,7 @@ public class VolunteerRestController {
 		return new ResponseEntity<>(dto, httpHeaders, HttpStatus.CREATED);		
 	} // INSERT
 	
-	
+	/*
 	@Operation(summary = "volunteerNo로 봉사신청 보기") 
 	@GetMapping("/{volunteerNo}") 
 	public ResponseEntity<VolunteerDto> findByVolunteerNo(@PathVariable(name = "volunteerNo") Long no,  HttpSession httpSession) throws Exception{		
@@ -93,7 +93,7 @@ public class VolunteerRestController {
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));				
 		return new ResponseEntity<List<VolunteerDto>>(volunteerDtoList, httpHeaders, HttpStatus.OK);
 	} // 목록 전체 조회
-	
+	*/
 	
 	@Operation(summary = "봉사삭제")
 	@DeleteMapping("/{volunteerNo}")
