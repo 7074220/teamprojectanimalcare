@@ -50,4 +50,24 @@ public class OrdersDto {
 		    return orderDto;
 		}
 		
+		public static Orders toEntity(OrdersDto dto) {
+			Orders order = Orders.builder()
+										.orderNo(dto.getOrderNo())
+										.orderDate(dto.getOrderDate())
+										.orderAddress(dto.getOrderAddress())
+										.orderDesc(dto.getOrderDesc())
+										.orderPrice(dto.getOrderPrice())
+										.userinfo(Userinfo.builder().userNo(dto.getUserNo()).build())
+										
+										.build();
+			
+		    List<OrderItem> orderItemList = new ArrayList<>();
+		    for (OrderItemDto orderItemDto : dto.getOrderItemDtos()) {
+		    	orderItemList.add(OrderItemDto.toEntity(orderItemDto));
+		    }
+		    order.setOrderItems(orderItemList);
+			
+		    return order;
+		}
+		
 }

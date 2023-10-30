@@ -2,8 +2,8 @@ package com.itwill.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
@@ -59,12 +59,25 @@ private OrdersDao ordersDao;
 
 //날짜별 기간으로 조회
 @Test
-@Disabled
+//@Disabled
 @Transactional
 @Rollback(false)
 	void findAllByOrdersByOrderDate() {
 		
-	List<Orders> orders = ordersDao.findAllByOrdersByOrderDate(new Date("2023-10-22"), new Date("2023-10-24"));
+	List<Orders> orders = ordersDao.findAllByOrdersByOrderDate(new Date(2023,10,23), new Date(2023,10,26));
+	System.out.println(orders);
+	}
+
+//회원이 날짜별 기간으로 조회 
+//테스트 실패
+@Test
+//@Disabled
+@Transactional
+@Rollback(false)
+	void findAllByOrdersByOrderDatebyuser() {
+		
+	List<Orders> orders = ordersDao.findAllByOrdersByOrderDateByUserNo(new Date(2023,10,25), new Date(2023,10,26),2L);
+	//List<Orders> orders = ordersDao.findAllByOrdersByOrderDate(new Date("2023-10-25"), new Date("2023-10-26"));
 	System.out.println(orders);
 	}
 
@@ -74,7 +87,7 @@ private OrdersDao ordersDao;
 @Rollback(false)
 void insert() {
 	Orders order1=Orders.builder()
-			.orderDate(new Date())
+		//	.orderDate(new Date())
 			.orderPrice(5000)
 			.orderAddress("서울특별시 구로구")
 			.orderDesc("상품 외...")
@@ -115,7 +128,7 @@ void findNo() {
 	System.out.println(order);
 }
 @Test
-//@Disabled
+@Disabled
 @Transactional
 @Rollback(false)
 void findall() {

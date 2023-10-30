@@ -1,7 +1,9 @@
 package com.itwill.dao;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
+
+import org.springframework.data.repository.query.Param;
 
 import com.itwill.entity.OrderItem;
 import com.itwill.entity.Orders;
@@ -32,9 +34,9 @@ public interface OrdersDao {
 	//최근주문별로 조회
 	List<Orders> findAllByOrderByOrderNoDesc();
 	
-	//날짜별 기간으로 조회
+	// 관리자모드 날짜별 기간으로 조회
 	List<Orders> findAllByOrdersByOrderDate(Date startDate,Date endDate);
-
-
+	//회원모드 날짜별 기간으로 조회
+	 List<Orders> findAllByOrdersByOrderDateByUserNo(Date startDate,Date endDate,Long userNo);
 	
 }

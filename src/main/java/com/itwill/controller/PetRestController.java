@@ -51,7 +51,7 @@ public class PetRestController {
 @PostMapping()
 public ResponseEntity<PetDto> petSave(@RequestBody PetDto petdto){
 		petService.petSave(petdto.toEntity(petdto));
-		return ResponseEntity.status(HttpStatus.OK).body(petdto);
+		return ResponseEntity.status(HttpStatus.CREATED).body(petdto);
 	}
 
 

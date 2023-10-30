@@ -35,20 +35,16 @@ public class CouponRestController {
 
 	@Autowired
 	private UserInfoService userInfoService;
-	
+
 	@Operation(summary = "쿠폰 생성")
 	@PutMapping("/{userNo}")
-	public ResponseEntity<CouponDto> insertCoupon(@PathVariable(name = "userNo") Long userNo) throws Exception{
-		
-		//생일 스캐쥴링 하는 방법 아직 생각즁 ㅋ ㅈㅅ
+	public ResponseEntity<CouponDto> insertCoupon(@PathVariable(name = "userNo") Long userNo) throws Exception {
+
+		// 생일 스캐쥴링 하는 방법 아직 생각즁 ㅋ ㅈㅅ
 		Userinfo findUserinfo = userInfoService.findUserByNo(userNo);
-		Coupon coupon = Coupon.builder()
-								.couponName("생일쿠폰")  
-								.couponDiscount(30)
-								.userinfo(findUserinfo)
-								.build();
+		Coupon coupon = Coupon.builder().couponName("생일쿠폰").couponDiscount(30).userinfo(findUserinfo).build();
 		coupon.setCouponDate(30L);
-		
+
 		coupon = couponService.Create(coupon);
 		CouponDto couponDto = CouponDto.toDto(coupon);
 
@@ -60,7 +56,8 @@ public class CouponRestController {
 
 	@Operation(summary = "유저에 따른 쿠폰 뽑기")
 	@GetMapping("/{userNo}")
-	public ResponseEntity<List<CouponDto>> findAllByUserNo(@PathVariable(name = "userNo") Long userNo)throws Exception {
+	public ResponseEntity<List<CouponDto>> findAllByUserNo(@PathVariable(name = "userNo") Long userNo)
+			throws Exception {
 		couponService.deleteExpireCouponByUserNo(userNo);
 		List<Coupon> coupons = couponService.findAllByUserNo(userNo);
 		List<CouponDto> couponList = new ArrayList<CouponDto>();
@@ -69,14 +66,12 @@ public class CouponRestController {
 			CouponDto couponDto = CouponDto.toDto(coupon);
 			couponList.add(couponDto);
 		}
-		
+
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		
+
 		return new ResponseEntity<List<CouponDto>>(couponList, httpHeaders, HttpStatus.OK);
 
 	}
-	
-	
-	
+
 }
