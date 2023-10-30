@@ -28,7 +28,7 @@ public class UserInfoController {
 	
 	@GetMapping("/register")
 	public String register(Model model) throws Exception {
-		return "login";
+		return "register";
 	}
 	
 	

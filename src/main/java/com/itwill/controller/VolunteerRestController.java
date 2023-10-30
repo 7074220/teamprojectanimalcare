@@ -50,7 +50,46 @@ public class VolunteerRestController {
 		return new ResponseEntity<>(dto, httpHeaders, HttpStatus.CREATED);		
 	} // INSERT
 	
+
 	
+	@Operation(summary = "봉사삭제")
+	@DeleteMapping("/{volunteerNo}")
+	public ResponseEntity<Map> VolunteerDelete(@PathVariable(name = "volunteerNo") Long volunteerNo) throws Exception{
+		volunteerService.deleteVolunteer(volunteerNo);	
+		return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>());
+	} // DELETE
+	
+	
+	@Operation(summary = "봉사 부분 업데이트") 
+	@PutMapping("/{volunteerNo}")
+	public ResponseEntity<VolunteerDto> updateVolunteer(@PathVariable(name = "volunteerNo") Long volunteerNo, @RequestBody VolunteerDto dto) throws Exception {
+	    Volunteer existingVolunteer = volunteerService.findByVolunteerNo(volunteerNo);
+
+	    if (existingVolunteer == null) {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    } else {
+	        if (dto.getVolunteerTime() != null) {
+	            existingVolunteer.setVolunteerTime(dto.getVolunteerTime());
+	        }
+	        if (dto.getVolunteerDate() != null) {
+	            existingVolunteer.setVolunteerDate(dto.getVolunteerDate());
+	        }
+	        if (dto.getVolunteerStatus() != null) {
+	            existingVolunteer.setVolunteerStatus(dto.getVolunteerStatus());
+	        }	
+	        if (dto.getCenterNo() != null) {
+	        	Center center = centerService.findByCenterNo(dto.getCenterNo());
+	            existingVolunteer.setCenter(center);
+	        }
+  
+	        volunteerService.updateVolunteer(existingVolunteer);
+	        VolunteerDto updatedVolunteerDto = VolunteerDto.toDto(existingVolunteer);
+	        return new ResponseEntity<>(updatedVolunteerDto, HttpStatus.OK);
+	    }
+	} // UPDATE
+
+
+	/*
 	@Operation(summary = "volunteerNo로 봉사신청 보기") 
 	@GetMapping("/{volunteerNo}") 
 	public ResponseEntity<VolunteerDto> findByVolunteerNo(@PathVariable(name = "volunteerNo") Long no,  HttpSession httpSession) throws Exception{		
@@ -93,44 +132,6 @@ public class VolunteerRestController {
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));				
 		return new ResponseEntity<List<VolunteerDto>>(volunteerDtoList, httpHeaders, HttpStatus.OK);
 	} // 목록 전체 조회
-	
-	
-	@Operation(summary = "봉사삭제")
-	@DeleteMapping("/{volunteerNo}")
-	public ResponseEntity<Map> VolunteerDelete(@PathVariable(name = "volunteerNo") Long volunteerNo) throws Exception{
-		volunteerService.deleteVolunteer(volunteerNo);	
-		return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>());
-	} // DELETE
-	
-	
-	@Operation(summary = "봉사 부분 업데이트") 
-	@PutMapping("/{volunteerNo}")
-	public ResponseEntity<VolunteerDto> updateVolunteer(@PathVariable(name = "volunteerNo") Long volunteerNo, @RequestBody VolunteerDto dto) throws Exception {
-	    Volunteer existingVolunteer = volunteerService.findByVolunteerNo(volunteerNo);
-
-	    if (existingVolunteer == null) {
-	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    } else {
-	        if (dto.getVolunteerTime() != null) {
-	            existingVolunteer.setVolunteerTime(dto.getVolunteerTime());
-	        }
-	        if (dto.getVolunteerDate() != null) {
-	            existingVolunteer.setVolunteerDate(dto.getVolunteerDate());
-	        }
-	        if (dto.getVolunteerStatus() != null) {
-	            existingVolunteer.setVolunteerStatus(dto.getVolunteerStatus());
-	        }	
-	        if (dto.getCenterNo() != null) {
-	        	Center center = centerService.findByCenterNo(dto.getCenterNo());
-	            existingVolunteer.setCenter(center);
-	        }
-  
-	        volunteerService.updateVolunteer(existingVolunteer);
-	        VolunteerDto updatedVolunteerDto = VolunteerDto.toDto(existingVolunteer);
-	        return new ResponseEntity<>(updatedVolunteerDto, HttpStatus.OK);
-	    }
-	} // UPDATE
-
-
+	*/
 	
 }
