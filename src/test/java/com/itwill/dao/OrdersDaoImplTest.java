@@ -59,11 +59,12 @@ private OrdersDao ordersDao;
 
 //날짜별 기간으로 조회
 @Test
-@Disabled
+//@Disabled
 @Transactional
 @Rollback(false)
 	void findAllByOrdersByOrderDate() {
 		
+<<<<<<< HEAD
 	List<Orders> orders = ordersDao.findAllByOrdersByOrderDate(new Date(2023,10,23), new Date(2023,10,26));
 	System.out.println(orders);
 	}
@@ -77,6 +78,9 @@ private OrdersDao ordersDao;
 	void findAllByOrdersByOrderDatebyuser() {
 		
 	List<Orders> orders = ordersDao.findAllByOrdersByOrderDateByUserNo(new Date(2023,10,25), new Date(2023,10,26),2L);
+=======
+	List<Orders> orders = ordersDao.findAllByOrdersByOrderDate(new Date("2023-10-25"), new Date("2023-10-26"));
+>>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 	System.out.println(orders);
 	}
 

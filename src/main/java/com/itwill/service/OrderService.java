@@ -15,12 +15,17 @@ public interface OrderService {
 	// 주문삭제 관리자전용
 	void removeOrder(Long orderNo) throws Exception;
 
-	// 주문 전체 조회 , 관리자전용
-	List<Orders> findOrders();
+	
+	
+	
+	
 
 	// 주문 번호로 조회
 	Orders findOrderByNo(Long orderNo);
 
+	// 주문 전체 조회 , 관리자전용
+	List<Orders> findOrders();
+	
 	// 회원아이디로 주문조회
 	List<Orders> findOrderById(Long userNo);
 
