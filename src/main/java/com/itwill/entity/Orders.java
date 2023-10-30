@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.itwill.dto.OrderItemDto;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -33,7 +35,6 @@ public class Orders {
 	@SequenceGenerator(name = "Orders_order_no_SEQ",sequenceName = "Orders_order_no_SEQ",initialValue = 1,allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Orders_order_no_SEQ")
 	private Long orderNo;
-	@CreationTimestamp
 	private Date orderDate;
 	private Integer orderPrice;
 	private String orderAddress;

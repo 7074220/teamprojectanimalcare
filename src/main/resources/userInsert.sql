@@ -135,4 +135,17 @@ VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'내용1',0,2,sysdate,0,2,2);
 INSERT INTO replyboard (reply_board_no,reply_board_content,reply_board_depth,reply_board_group_no,reply_board_register_date,reply_board_step,user_no,board_no) 
 VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'내용2',0,3,sysdate,0,3,3);
 
+-- orderStatus
+insert into orderstatus(os_no,os_image,os_desc) 
+VALUES (1,'주문확인.jpg','주문확인');
+
+insert into orderstatus(os_no,os_image,os_desc) 
+VALUES (2,'배송준비.jpg','배송준비');
+
+insert into orderstatus(os_no,os_image,os_desc) 
+VALUES (3,'배송중.jpg','배송중');
+
+insert into orderstatus(os_no,os_image,os_desc) 
+VALUES (4,'배송완료.jpg','배송완료');
+
 commit;

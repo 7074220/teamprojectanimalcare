@@ -27,7 +27,7 @@ class OrderServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Rollback(false)
 	//@Disabled
 	void insert() throws Exception{
-		Userinfo user=userInfoService.findUserByNo(2L);
+		Userinfo user=userInfoService.findUserByNo(5L);
 	
 		Orders orders=Orders.builder()
 		.orderAddress("서울특별시")
