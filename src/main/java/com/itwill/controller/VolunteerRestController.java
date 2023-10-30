@@ -82,11 +82,11 @@ public class VolunteerRestController {
 	
 	@Operation(summary = "봉사리스트") 
 	@GetMapping("/volunteers")
-	public ResponseEntity<List<VolunteerDto>> volunteerList() {
-		List<Volunteer> volunteers = volunteerService.findAllVolunteers();
+	public ResponseEntity<List<VolunteerDto>> findAllVolunteers() {
+		List<Volunteer> volunteerList = volunteerService.findAllVolunteers();
 		List<VolunteerDto> volunteerDtoList = new ArrayList<VolunteerDto>();
 		
-		for (Volunteer volunteer : volunteers) {
+		for (Volunteer volunteer : volunteerList) {
 			volunteerDtoList.add(VolunteerDto.toDto(volunteer));			
 		}	
 		HttpHeaders httpHeaders = new HttpHeaders();
