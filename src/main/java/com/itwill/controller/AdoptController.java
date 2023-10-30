@@ -23,15 +23,15 @@ public class AdoptController {
 
 	@Autowired
 	private AdoptService adoptService;
-
+/*
 	// 입양신청
 	@GetMapping("/re/insert_action")
 	public String insert_action(@RequestBody AdoptDto dto) {
 		return "my-account";
 	}
-
+*/
 	// 입양 리스트 조회
-	@GetMapping("/fo/adoptList")
+	@GetMapping("/adoptList")
 	public String adoptList(Model model) {
 		List<AdoptDto> adoptDtoList = new ArrayList<>();
 		List<Adopt> adoptList = adoptService.findAdoptList();
@@ -43,7 +43,7 @@ public class AdoptController {
 	}
 
 	//userNo에 따른 입양리스트 조회
-	@GetMapping("/fo/adoptList/{userNo}")
+	@GetMapping("/adoptList/{userNo}")
 	public String findByUserNoAdoptList(Model model, @PathVariable(name = "userNo") Long userNo) {
 		List<Adopt> adoptList=adoptService.findAdoptsByUserNo(userNo);
 		List<AdoptDto> adoptDtoUserNoList = new ArrayList<>();
@@ -54,6 +54,13 @@ public class AdoptController {
 		return "my-account";
 	}
 
+	// adoptNo 입양 조회
+	@GetMapping("/adoptList/{adoptNo}")
+	public String findByAdoptNoAdopt(Model model, @PathVariable(name = "adoptNo") Long adoptNo) {
+		Adopt adopt=adoptService.findByAdoptNo(adoptNo);
+		model.addAttribute("adopt", adopt);
+		return "my-account";
+	}
 	
 
 	
