@@ -28,7 +28,7 @@ public class UserInfoController {
 	
 	@GetMapping("/register")
 	public String register(Model model) throws Exception {
-		return "login";
+		return "register";
 	}
 	
 	// 관리자가 유저리스트 볼때
