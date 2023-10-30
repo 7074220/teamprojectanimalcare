@@ -36,7 +36,7 @@ public class CouponRestController {
 	public ResponseEntity<CouponDto> insertCoupon(@PathVariable(name = "userNo") Long userNo) {
 		Coupon coupon = Coupon.builder().couponName("생일쿠폰").couponExpirationDate(null).couponPayday(new Date())
 				.couponDiscount(30).build();
-
+       
 		coupon = couponService.Create(coupon, 30);
 		CouponDto couponDto = CouponDto.toDto(coupon);
 
@@ -53,7 +53,7 @@ public class CouponRestController {
 		List<CouponDto> couponList = new ArrayList<CouponDto>();
 
 		for (Coupon coupon : coupons) {
-			List<Coupon> couponsList = couponService.findExpireCouponByUserNo(coupon.getCouponExpirationDate(), userNo);
+		
 
 			HttpHeaders httpHeaders = new HttpHeaders();
 			httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
