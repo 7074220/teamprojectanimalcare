@@ -1,13 +1,14 @@
 package com.itwill.controller;
 
 import java.nio.charset.Charset;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.jaxb.SpringDataJaxb.OrderDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,6 +30,7 @@ import com.itwill.entity.Orders;
 import com.itwill.entity.Orderstatus;
 import com.itwill.repository.OrderStatusRepository;
 import com.itwill.service.CartService;
+import com.itwill.service.OrderItemService;
 import com.itwill.service.OrderService;
 import com.itwill.service.OrderStatusService;
 
@@ -46,11 +48,18 @@ public class OrderRestController {
 	private CartService cartService;
 	@Autowired
 	OrderStatusRepository orderStatusRepository;
+
+	@Autowired
+	OrderItemService itemService;
 	
-	/*
+	
+	
 	@Operation(summary = "주문 등록")
-	@PostMapping("/insert_Order")
-	public ResponseEntity<OrderDto> insert_Order(@RequestBody OrdersDto orderDto, HttpSession session) {
+	@PostMapping()
+	public ResponseEntity<OrdersDto> insert_Order(@RequestBody OrdersDto orderDto, HttpSession session,int totalPrice)throws Exception {
+		if (session.getAttribute("userNo") == null) {
+			throw new Exception("로그인 하세요.");
+		}
 		Long userNo = (Long) session.getAttribute("userNo");
 		Orderstatus orderstatus= orderStatusRepository.findById(1L).get();
 		Long osNo = orderstatus.getOsNo();
@@ -59,18 +68,24 @@ public class OrderRestController {
 			for (Cart cart : carts) {
 			List<OrderItemDto> orderItemDtos = orderDto.getOrderItemDtos();
 			OrderItemDto tempOrderItemDto=OrderItemDto.builder().build();
-			Long p_no = cart.getProduct().getProductNo();
 			tempOrderItemDto.setOiQty(cart.getCartQty());
 			tempOrderItemDto.setOrderNo(orderDto.getOrderNo());
 			tempOrderItemDto.setOsNo(osNo);
 			tempOrderItemDto.setProductNo(cart.getProduct().getProductNo());
-				
-				
-				
+			
+			
+			itemService.insertOrderItem(tempOrderItemDto.toEntity(tempOrderItemDto));
+			orderDto.setOrderItemDtos(orderItemDtos);
 			}
-		*/
+			orderDto.setOrderPrice(totalPrice);
+			orderDto.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+carts.size()+"상품");
+			orderService.insertOrder(orderDto.toEntity(orderDto));
+			cartService.deleteById(userNo);
+			
+			return ResponseEntity.status(HttpStatus.CREATED).body(orderDto);
+			
+	}
 	
-	/*
 	@Operation(summary = "주문 번호로 조회")
 	@GetMapping("/{orderNo}")
 	public ResponseEntity<OrdersDto> findOrdersByNo(@PathVariable(name = "orderNo") Long no, HttpSession session) throws Exception {
@@ -102,10 +117,7 @@ public class OrderRestController {
 
 		return new ResponseEntity<List<OrdersDto>>(ordersDto, httpHeaders, HttpStatus.OK);
 	}
-<<<<<<< HEAD
-	*/
 	
-	/*
 	@Operation(summary = "회원아이디로 주문조회")
 	@GetMapping("/ordersList/{userNo}")
 	public ResponseEntity<List<OrdersDto>> findOrderById(@PathVariable(name = "userNo") Long no, HttpSession session) throws Exception {
@@ -144,8 +156,7 @@ public class OrderRestController {
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
 		return new ResponseEntity<List<OrdersDto>>(ordersDto, httpHeaders, HttpStatus.OK);
-=======
-	
+	}
 			
 	@Operation(summary = "주문 번호로 내림차순 정렬")
 	@PostMapping("/{orderNo}")
@@ -180,9 +191,7 @@ public class OrderRestController {
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		
 		return new ResponseEntity<List<OrdersDto>>(ordersListDto, httpHeaders, HttpStatus.OK);
->>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 	}
-	*/
 }
 
 

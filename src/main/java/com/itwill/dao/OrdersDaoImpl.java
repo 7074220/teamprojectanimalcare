@@ -1,6 +1,6 @@
 package com.itwill.dao;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +57,11 @@ public class OrdersDaoImpl implements OrdersDao{
 		List<Orders> orders = ordersRepository.findAllByOrdersByOrderDate(startDate, endDate);
 		return orders;
 	}
+	@Override
+	public List<Orders> findAllByOrdersByOrderDateByUserNo(Date startDate, Date endDate, Long userNo) {
+		List<Orders> orders = ordersRepository.findAllByOrdersByOrderDateByUserNo(startDate,endDate,userNo);
+		return orders;
+	}
 
 	@Override
 	public List<Orders> findOrdersByuserNo(Long userNo) {
@@ -70,6 +75,8 @@ public class OrdersDaoImpl implements OrdersDao{
 		List<Orders> orders = ordersRepository.findAllByUserNoDESC(userNo);
 		return orders;
 	}
+
+	
 	
 	
 
