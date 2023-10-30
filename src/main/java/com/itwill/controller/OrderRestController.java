@@ -55,7 +55,7 @@ public class OrderRestController {
 	
 	
 	@Operation(summary = "주문 등록")
-	@PostMapping("/insert_Order")
+	@PostMapping()
 	public ResponseEntity<OrdersDto> insert_Order(@RequestBody OrdersDto orderDto, HttpSession session,int totalPrice)throws Exception {
 		if (session.getAttribute("userNo") == null) {
 			throw new Exception("로그인 하세요.");
@@ -73,13 +73,14 @@ public class OrderRestController {
 			tempOrderItemDto.setOsNo(osNo);
 			tempOrderItemDto.setProductNo(cart.getProduct().getProductNo());
 			
+			
 			itemService.insertOrderItem(tempOrderItemDto.toEntity(tempOrderItemDto));
 			orderDto.setOrderItemDtos(orderItemDtos);
 			}
 			orderDto.setOrderPrice(totalPrice);
 			orderDto.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+carts.size()+"상품");
-			cartService.deleteById(userNo);
 			orderService.insertOrder(orderDto.toEntity(orderDto));
+			cartService.deleteById(userNo);
 			
 			return ResponseEntity.status(HttpStatus.CREATED).body(orderDto);
 			
