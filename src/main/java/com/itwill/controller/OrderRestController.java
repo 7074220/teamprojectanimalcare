@@ -193,6 +193,7 @@ public class OrderRestController {
 	}
 	
 	
+
 	@Operation(summary = "날짜별 기간으로 조회")
 	@GetMapping("/{startDate}/{endDate}")
 	public ResponseEntity<List<OrdersDto>> findAllByOrdersByOrderDate(@PathVariable(name = "startDate") Date startDate, @PathVariable(name = "endDate") Date endDate){
@@ -203,7 +204,23 @@ public class OrderRestController {
 			OrdersDto ordersDto = OrdersDto.toDto(orders);
 			ordersListDto.add(ordersDto);
 		}
-
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<List<OrdersDto>>(ordersListDto, httpHeaders, HttpStatus.OK);
+	}
+	@Operation(summary = "날짜별 기간으로 조회(아이디별)")
+	@GetMapping("/{startDate}/{endDate}/{userNo}")
+	public ResponseEntity<List<OrdersDto>> findAllByOrdersByOrderDateByUserNo(@PathVariable(name = "startDate") Date startDate, @PathVariable(name = "endDate") Date endDate, @PathVariable(name = "userNo") Long userNo){
+		List<OrdersDto> ordersListDto = new ArrayList<OrdersDto>();
+		List<Orders> ordersList = orderService.findAllByOrdersByOrderDateByUserNo(startDate, endDate, userNo);
+		
+		for (Orders orders : ordersList) {
+			OrdersDto ordersDto = OrdersDto.toDto(orders);
+			ordersListDto.add(ordersDto);
+		}
+		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		
@@ -241,4 +258,3 @@ public class OrderRestController {
 	
 	
 }
-
