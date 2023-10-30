@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.itwill.entity.OrderItem;
 import com.itwill.entity.Orders;
 import com.itwill.entity.Userinfo;
+import com.itwill.service.UserInfoService;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,60 +17,55 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class OrdersDto {
-
+	
 	private Long orderNo;
 	private Date orderDate;
 	private Integer orderPrice;
 	private String orderAddress;
 	private String orderDesc;
 	private Long userNo;
-	
 	private List<OrderItemDto> orderItemDtos = new ArrayList();
-
 	
-		public static OrdersDto toDto(Orders entity) {
-			OrdersDto orderDto = OrdersDto.builder()
-										.orderNo(entity.getOrderNo())
-										.orderDate(entity.getOrderDate())
-										.orderAddress(entity.getOrderAddress())
-										.orderDesc(entity.getOrderDesc())
-										.userNo(entity.getUserinfo().getUserNo())
-										.build();
-			
-		    List<OrderItemDto> orderItemDtoList = new ArrayList<>();
-		    for (OrderItem orderItem : entity.getOrderItems()) {
-		        orderItemDtoList.add(OrderItemDto.toDto(orderItem));
-		    }
-		    orderDto.setOrderItemDtos(orderItemDtoList);
-			
-		    return orderDto;
+	public static OrdersDto toDto(Orders entity) {
+		OrdersDto orderDto = OrdersDto.builder().orderNo(entity.getOrderNo()).orderDate(entity.getOrderDate())
+				.orderAddress(entity.getOrderAddress()).orderDesc(entity.getOrderDesc())
+				.userNo(entity.getUserinfo().getUserNo()).build();
+
+		List<OrderItemDto> orderItemDtoList = new ArrayList<>();
+		for (OrderItem orderItem : entity.getOrderItems()) {
+			orderItemDtoList.add(OrderItemDto.toDto(orderItem));
 		}
+		orderDto.setOrderItemDtos(orderItemDtoList);
+
+		return orderDto;
+	}
+
+	public static Orders toEntity(OrdersDto dto) {
 		
-		public static Orders toEntity(OrdersDto dto) {
-			Orders order = Orders.builder()
-										.orderNo(dto.getOrderNo())
-										.orderDate(dto.getOrderDate())
-										.orderAddress(dto.getOrderAddress())
-										.orderDesc(dto.getOrderDesc())
-										.orderPrice(dto.getOrderPrice())
-										.userinfo(Userinfo.builder().userNo(dto.getUserNo()).build())
-										
-										.build();
-			
-		    List<OrderItem> orderItemList = new ArrayList<>();
-		    for (OrderItemDto orderItemDto : dto.getOrderItemDtos()) {
-		    	orderItemList.add(OrderItemDto.toEntity(orderItemDto));
-		    }
-		    order.setOrderItems(orderItemList);
-			
-		    return order;
+		
+		Orders order = Orders.builder()
+				.orderNo(dto.getOrderNo())
+				.orderDate(dto.getOrderDate())
+				.orderAddress(dto.getOrderAddress())
+				.orderDesc(dto.getOrderDesc())
+				.orderPrice(dto.getOrderPrice())
+				.userinfo(Userinfo.builder()
+				.userNo(dto.getUserNo()).build())
+				.build();
+		/*
+		List<OrderItem> orderItemList = new ArrayList<>();
+		for (OrderItemDto orderItemDto : dto.getOrderItemDtos()) {
+			orderItemList.add(OrderItemDto.toEntity(orderItemDto));
 		}
-		
+		order.setOrderItems(orderItemList);
+		*/
+		return order;
+	}
+
 }

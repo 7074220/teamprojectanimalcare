@@ -13,11 +13,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.CartDto;
@@ -55,35 +57,47 @@ public class OrderRestController {
 	
 	
 	@Operation(summary = "주문 등록")
+	@Transactional
 	@PostMapping()
-	public ResponseEntity<OrdersDto> insert_Order(@RequestBody OrdersDto orderDto, HttpSession session,int totalPrice)throws Exception {
-		if (session.getAttribute("userNo") == null) {
-			throw new Exception("로그인 하세요.");
-		}
+	public ResponseEntity<OrdersDto> insert_Order(@RequestBody OrdersDto orderDto, HttpSession session)throws Exception {
+		
+		  if (session.getAttribute("userNo") == null) {
+			  
+			  throw new
+		 Exception("로그인 하세요."); 
+		  
+		  }
+		 
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		Long userNo = (Long) session.getAttribute("userNo");
 		Orderstatus orderstatus= orderStatusRepository.findById(1L).get();
 		Long osNo = orderstatus.getOsNo();
 		List<Cart> carts = cartService.findAllCartByUserId(userNo);
+		Orders insertOrder = orderService.insertOrder(OrdersDto.toEntity(orderDto));
 		
-			for (Cart cart : carts) {
-			List<OrderItemDto> orderItemDtos = orderDto.getOrderItemDtos();
+		List<OrderItemDto> orderItemDtos = new ArrayList<OrderItemDto>();
+		
+		for (Cart cart : carts) {
 			OrderItemDto tempOrderItemDto=OrderItemDto.builder().build();
 			tempOrderItemDto.setOiQty(cart.getCartQty());
-			tempOrderItemDto.setOrderNo(orderDto.getOrderNo());
+			tempOrderItemDto.setOrderNo(insertOrder.getOrderNo());
 			tempOrderItemDto.setOsNo(osNo);
 			tempOrderItemDto.setProductNo(cart.getProduct().getProductNo());
 			
+			itemService.insertOrderItem(OrderItemDto.toEntity(tempOrderItemDto));
+			orderItemDtos.add(tempOrderItemDto);
 			
-			itemService.insertOrderItem(tempOrderItemDto.toEntity(tempOrderItemDto));
-			orderDto.setOrderItemDtos(orderItemDtos);
-			}
-			orderDto.setOrderPrice(totalPrice);
-			orderDto.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+carts.size()+"상품");
-			orderService.insertOrder(orderDto.toEntity(orderDto));
-			cartService.deleteById(userNo);
-			
-			return ResponseEntity.status(HttpStatus.CREATED).body(orderDto);
-			
+		}
+		orderDto.setOrderItemDtos(orderItemDtos);
+		orderDto.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+(carts.size()-1)+"개 상품");
+		insertOrder.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+(carts.size()-1)+"개 상품");
+		insertOrder.setOrderAddress(orderDto.getOrderAddress());
+		
+		orderService.insertOrder(insertOrder);
+		cartService.deleteByUserId(userNo);
+		
+		return new ResponseEntity<OrdersDto>(orderDto,httpHeaders,HttpStatus.CREATED);
 	}
 	
 	@Operation(summary = "주문 번호로 조회")
