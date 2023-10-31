@@ -89,7 +89,6 @@
                                         <li><a href="#">$ US Dollar</a></li>
                                     </ul>
                                 </li>
-                            </ul>
                         </div>
                         <div class="header_social text-right">
                             <ul>
@@ -227,7 +226,7 @@
                                 <li><a href="#mypet" data-toggle="tab" class="nav-link">마이펫</a></li>
                                 <li><a href="#cuponpage" data-toggle="tab" class="nav-link">쿠폰</a></li>
                                 <li><a href="#adoptVo" data-toggle="tab" class="nav-link">입양 봉사 견학</a></li>
-                                <li> <a href="#orders" data-toggle="tab" class="nav-link">상품주문</a></li>
+                                <li> <a href="#orders" data-toggle="tab" class="nav-link">주문목록</a></li>
                                 <li><a href="login.html" class="nav-link">로그아웃</a></li>
                                 <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li>
 
@@ -237,9 +236,168 @@
                     <div class="col-sm-12 col-md-9 col-lg-9">
                         <!-- Tab panes -->
                         <div class="tab-content dashboard_content">
+                        
+                             <div class="tab-pane fade" id="account-details">
+                                <h3>내정보 </h3>
+                                <div class="login">
+                                    <div class="login_form_container">
+                                        <div class="account_login_form">
+                                            <form action="#">
+                                                <p><a href="#"></a></p>
+                                                <div class="input-select"></div>
+                                                
+                                                <label>이름</label>
+                                                <input type="text" name="last-name">
+                                                <label>이메일</label>
+                                                <input type="text"  value="" name="email-name">
+                                                <label>비밀번호</label>
+                                                <input type="password"  value=""name="user-password">
+                                                <label>핸드폰번호</label>
+                                                <input type="password"  value=""name="user-password">
+                                                <label>주소</label>
+                                                <input type="text"  value="" name="address">
+                                                
+                                                
+                                                <br>
+                                               
+                                                <div class="save_button primary_btn default_button">
+                                                   <button type="submit">Save</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                                <div class="tab-pane fade" id="mypet">
+                                <h3>마이펫</h3>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>이름</th>
+                                                <th>생일</th>
+                                                <th>사진</th>
+                                                <th>종류</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>바둑이</td>
+                                                <td>Jan 10, 2020</td>
+                                                <td><img src="" alt="바둑이 사진" width="50" height="50"></td>
+                                                <td>강아지</td>
+                                                <td><a href="#" class="view">view</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>나비</td>
+                                                <td>Feb 15, 2019</td>
+                                                <td><img src="path_to_another_image.jpg" alt="나비 사진" width="50" height="50"></td>
+                                                <td>고양이</td>
+                                                <td><a href="#" class="view">view</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                             
                             
-                            <div class="tab-pane fade" id="orders">
+                                   <div class="tab-pane fade" id="cuponpage">
+                                <h3>쿠폰 관리</h3>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Order</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                                <th>Total</th>
+                                                <th>Actions</th>                 
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>May 10, 2018</td>
+                                                <td><span class="success">Completed</span></td>
+                                                <td>$25.00 for 1 item </td>
+                                                <td><a href="cart.html" class="view">view</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>May 10, 2018</td>
+                                                <td>Processing</td>
+                                                <td>$17.00 for 1 item </td>
+                                                <td><a href="cart.html" class="view">view</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>    
+                            
+                            
+                                 <div class="tab-pane fade" id="adoptVo">
+									<!--   <h3>입양 봉사 견학</h3> -->
+
+									<ul class="nav nav-tabs" id="myTab" role="tablist">
+										<li class="nav-item">
+											<a class="nav-link active" id="adopt-tab" data-toggle="tab" href="#adoptVo" role="tab"
+												aria-controls="adoptVo" aria-selected="true">입양</a></li>
+										<li class="nav-item">
+											<a class="nav-link " id="volunteer-tab" data-toggle="tab" href="#volunteer"
+												role="tab" aria-controls="volunteer" aria-selected="false">봉사</a></li>
+										<li class="nav-item">
+											<a class="nav-link " id="tour-tab" data-toggle="tab" href="#tour" role="tab"
+												aria-controls="tour" aria-selected="false">견학</a></li>
+									</ul>
+		
+
+									<div class="table-responsive">
+
+										<div class="tab-pane fade show active" id="adoptVo"
+											role="tabpanel" aria-labelledby="adopt-tab">
+
+											<table class="table">
+												<thead>
+													<tr>
+														<th>Order</th>
+														<th>Date</th>
+														<th>Status</th>
+														<th>Total</th>
+														<th>Actions</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>1</td>
+														<td>May 10, 2018</td>
+														<td><span class="success">Completed</span></td>
+														<td>$25.00 for 1 item</td>
+														<td><a href="cart.html" class="view">view</a></td>
+													</tr>
+													<tr>
+														<td>2</td>
+														<td>May 10, 2018</td>
+														<td>Processing</td>
+														<td>$17.00 for 1 item</td>
+														<td><a href="cart.html" class="view">view</a></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										
+
+
+									</div>
+
+
+
+									<div class="tab-pane fade" id="orders">
                                 <h3>주문목록</h3>
                                 <div class="table-responsive">
                                     <table class="table">
@@ -331,146 +489,6 @@
                                 </div>
                             </div>
 
-
-                            <div class="tab-pane fade" id="cuponpage">
-                                <h3>쿠폰 관리</h3>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Order</th>
-                                                <th>Date</th>
-                                                <th>Status</th>
-                                                <th>Total</th>
-                                                <th>Actions</th>                 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>May 10, 2018</td>
-                                                <td><span class="success">Completed</span></td>
-                                                <td>$25.00 for 1 item </td>
-                                                <td><a href="cart.html" class="view">view</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>May 10, 2018</td>
-                                                <td>Processing</td>
-                                                <td>$17.00 for 1 item </td>
-                                                <td><a href="cart.html" class="view">view</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>    
-
-
-
-
-
-                            <div class="tab-pane fade" id="adoptVo">
-                                <h3>입양 봉사 견학</h3>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Order</th>
-                                                <th>Date</th>
-                                                <th>Status</th>
-                                                <th>Total</th>
-                                                <th>Actions</th>                 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>May 10, 2018</td>
-                                                <td><span class="success">Completed</span></td>
-                                                <td>$25.00 for 1 item </td>
-                                                <td><a href="cart.html" class="view">view</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>May 10, 2018</td>
-                                                <td>Processing</td>
-                                                <td>$17.00 for 1 item </td>
-                                                <td><a href="cart.html" class="view">view</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-            
-                            <div class="tab-pane fade" id="mypet">
-                                <h3>마이펫</h3>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>이름</th>
-                                                <th>생일</th>
-                                                <th>사진</th>
-                                                <th>종류</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>바둑이</td>
-                                                <td>Jan 10, 2020</td>
-                                                <td><img src="" alt="바둑이 사진" width="50" height="50"></td>
-                                                <td>강아지</td>
-                                                <td><a href="#" class="view">view</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>나비</td>
-                                                <td>Feb 15, 2019</td>
-                                                <td><img src="path_to_another_image.jpg" alt="나비 사진" width="50" height="50"></td>
-                                                <td>고양이</td>
-                                                <td><a href="#" class="view">view</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            
-            
-
-                            <div class="tab-pane fade" id="account-details">
-                                <h3>내정보 </h3>
-                                <div class="login">
-                                    <div class="login_form_container">
-                                        <div class="account_login_form">
-                                            <form action="#">
-                                                <p><a href="#"></a></p>
-                                                <div class="input-select"></div>
-                                                
-                                                <label>이름</label>
-                                                <input type="text" name="last-name">
-                                                <label>이메일</label>
-                                                <input type="text"  value="" name="email-name">
-                                                <label>비밀번호</label>
-                                                <input type="password"  value=""name="user-password">
-                                                <label>핸드폰번호</label>
-                                                <input type="password"  value=""name="user-password">
-                                                <label>주소</label>
-                                                <input type="text"  value="" name="address">
-                                                
-                                                
-                                                <br>
-                                               
-                                                <div class="save_button primary_btn default_button">
-                                                   <button type="submit">Save</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
