@@ -47,6 +47,7 @@ public class ProductController {
 		}
 		
 		model.addAttribute("productList", productListDto);
+		System.out.println(productList.get(0).getProductPetCategory());
 		return "shop";
 	}
 	
