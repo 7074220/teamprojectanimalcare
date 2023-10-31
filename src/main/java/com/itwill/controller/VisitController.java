@@ -26,6 +26,7 @@ public class VisitController {
 		return "visit";
 	}
 
+
 	// 관리자 견학리스트 전체출력
 	@GetMapping("/visitList")
 	public String centerList(Model model) {
