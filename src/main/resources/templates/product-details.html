@@ -1,5 +1,7 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
+	   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorate="layout/layout(title='')">
 
 <head>
     <meta charset="utf-8">
@@ -46,7 +48,7 @@
 <body>
 
   <!--header area start-->
-    
+    <th layout:fragment="content">
     <!--offcanvas menu area start-->
     <div class="off_canvars_overlay">
                 
@@ -182,7 +184,7 @@
     </div>
     <!--offcanvas menu area end-->
     
-    <header>
+   <!-- <header>
         <div class="main_header">
             <div class="header_top">
                 <div class="container">
@@ -272,7 +274,7 @@
                                     </div>
                                     <div class="header_account_list  mini_cart_wrapper">
                                        <a href="javascript:void(0)"><span class="lnr lnr-cart"></span><span class="item_count">2</span></a>
-                                        <!--mini cart-->
+                                        mini cart
                                         <div class="mini_cart">
                                             <div class="cart_gallery">
                                                 <div class="cart_close">
@@ -330,7 +332,7 @@
 
                                             </div>
                                         </div>
-                                        <!--mini cart end-->
+                                        mini cart end
                                    </div>
                                 </div>
                             </div>
@@ -497,7 +499,7 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <!--main menu start-->
+                            main menu start
                             <div class="main_menu menu_position"> 
                                 <nav>  
                                     <ul>
@@ -564,7 +566,7 @@
                                     </ul>  
                                 </nav> 
                             </div>
-                            <!--main menu end-->
+                            main menu end
                         </div>
                         <div class="col-lg-3">
                             <div class="call-support">
@@ -575,7 +577,7 @@
                 </div>
             </div>
         </div> 
-    </header>
+    </header>-->
     <!--header area end-->
 
     <!--breadcrumbs area start-->
@@ -595,7 +597,9 @@
     </div>
     <!--breadcrumbs area end-->
     
-    <!--product details start-->
+    <!-- 상품 디테일 시작 -->
+    
+    
     <div class="product_details mt-70 mb-70">
         <div class="container">
             <div class="row">
@@ -708,7 +712,7 @@
             </div>
         </div>    
     </div>
-    <!--product details end-->
+    <!-- 상품 디테일 끝 -->
     
     <!--product info start-->
     <div class="product_d_info mb-65">
@@ -1198,9 +1202,10 @@
         </div>
     </section>
     <!--product area end-->
+    </th:block>
 
    <!--footer area start-->
-    <footer class="footer_widgets footer_border">
+    <!--<footer class="footer_widgets footer_border">
         <div class="container">
             <div class="footer_top">
                 <div class="row">
@@ -1255,12 +1260,12 @@
                                         <input id="mc-email" type="email" autocomplete="off" placeholder="Enter you email" />
                                         <button id="mc-submit">Subscribe</button>
                                     </form>
-                                    <!-- mailchimp-alerts Start -->
+                                     mailchimp-alerts Start 
                                     <div class="mailchimp-alerts text-centre">
-                                        <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-                                        <div class="mailchimp-success"></div><!-- mailchimp-success end -->
-                                        <div class="mailchimp-error"></div><!-- mailchimp-error end -->
-                                    </div><!-- mailchimp-alerts end -->
+                                        <div class="mailchimp-submitting"></div> mailchimp-submitting end 
+                                        <div class="mailchimp-success"></div> mailchimp-success end 
+                                        <div class="mailchimp-error"></div> mailchimp-error end 
+                                    </div> mailchimp-alerts end 
                                 </div>
                             </div>
                         </div>
@@ -1288,11 +1293,11 @@
                 </div>
              </div>   
         </div>  
-    </footer>
+    </footer>-->
     <!--footer area end-->
     
     <!-- modal area start-->
-    <div class="modal fade" id="modal_box" tabindex="-1" role="dialog"  aria-hidden="true">
+    <!--<div class="modal fade" id="modal_box" tabindex="-1" role="dialog"  aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -1401,7 +1406,7 @@
                 </div>    
             </div>
         </div>
-    </div>
+    </div>-->
     <!-- modal area end-->
 
 
