@@ -17,6 +17,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MyPetCreateDto {
 	
-	private List<MyPet> myPets = new ArrayList<MyPet>();
+	private List<MypetDto> myPets = new ArrayList<MypetDto>();
 	
 }

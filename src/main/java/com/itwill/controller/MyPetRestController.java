@@ -35,20 +35,14 @@ public class MyPetRestController {
 	// 로그인 상태에서 펫 등록 누름
 	 @Operation(summary = "마이펫등록")
 	 @GetMapping("/create")
-	 public ResponseEntity<List<MypetDto>> MypetList(MyPetCreateDto myPetCreateDto , HttpSession session) throws Exception{
+	 public ResponseEntity<List<MypetDto>> MypetCreate(MyPetCreateDto myPetCreateDto , HttpSession session) throws Exception{
 		 	Long userNo = (Long)session.getAttribute("userNo");	
 		 	
 		 	if(userNo==null) {
 		 		throw new Exception("로그인을 해주세요");
 		 	}
 		 	
-		 	List<MyPet> myPetCreateDtos = myPetCreateDto.getMyPets();
-		 	List<MypetDto> mypetDtos = new ArrayList<MypetDto>();
-		 	
-		 	for (MyPet myPet : myPetCreateDtos) {
-				MypetDto mypetDto = MypetDto.toDto(myPet);
-				mypetDtos.add(mypetDto);
-			}
+		 	List<MypetDto> mypetDtos = myPetCreateDto.getMyPets();
 			
 			HttpHeaders httpHeaders = new HttpHeaders();
 			httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
