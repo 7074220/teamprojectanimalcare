@@ -48,7 +48,7 @@ export function user_write_form(responseJsonObject = {}) {
                              </p>
                 
                              <p>
-                                <label>비밀번호 <span>*</span></label>
+                                <label>비밀번 <span>*</span></label>
                                 <input type="password" id="password">
                                 <span id="passwordError" style="color:red;"></span>
                             </p>
@@ -136,7 +136,6 @@ export function user_write_form(responseJsonObject = {}) {
     <!--footer area start-->
     
     <!--footer area end-->`;
-	
 	
 	let bindTemplate = Handlebars.compile(htmlTemplate);
 	let resultTemplate = bindTemplate(responseJsonObject);
