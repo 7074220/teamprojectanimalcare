@@ -68,7 +68,7 @@ public class VolunteerController {
 	public String findByVolunteerNoVolunteer(Model model, @PathVariable(name = "volunteerNo") Long volunteerNo) throws Exception{
 		Volunteer volunteer = volunteerService.findByVolunteerNo(volunteerNo);
 		model.addAttribute("volunteer", volunteer);
-		return "volunteer_list"; // 링크수정하기	
+		return "redirect:volunteer_list"; // 링크수정하기	
 	}
 	
 }
