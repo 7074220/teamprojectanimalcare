@@ -611,10 +611,10 @@
                             </a>
                         </div>
                         
-                        <div class="single-zoom-thumb">
+                        <div class="single-zoom-thumb" >
                         
-                            <ul class="s-tab-zoom owl-carousel single-product-active" id="gallery_01" th:each="product:${productName}">
-                                <li>
+                            <ul class="s-tab-zoom owl-carousel single-product-active" id="gallery_01" >
+                                <li th:each="product:${productName}">
                                     <a href="#" class="elevatezoom-gallery active" data-update="" data-image="assets/img/product/productbig4.jpg" data-zoom-image="assets/img/product/productbig4.jpg">
                                         <img src="#" alt="zo-th-1" th:src="@{/image/product/} + ${product.getProductImage}"/>
                                     </a>
@@ -699,7 +699,7 @@
                             </div>
                             
                         </form>
-                        <div class="priduct_social">
+                       <!--  <div class="priduct_social">
                             <ul>
                                 <li><a class="facebook" href="#" title="facebook"><i class="fa fa-facebook"></i> Like</a></li>           
                                 <li><a class="twitter" href="#" title="twitter"><i class="fa fa-twitter"></i> tweet</a></li>           
@@ -707,7 +707,7 @@
                                 <li><a class="google-plus" href="#" title="google +"><i class="fa fa-google-plus"></i> share</a></li>        
                                 <li><a class="linkedin" href="#" title="linkedin"><i class="fa fa-linkedin"></i> linked</a></li>        
                             </ul>      
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>
