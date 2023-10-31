@@ -42,7 +42,7 @@ PetService petService;
 		
 		petService.petSave(petDto.toEntity(petDto));
 		
-		return "redirect:pet-list.html";
+		return "pet-list";
 	}
 	//펫 리스트
 	@GetMapping("/petList")
@@ -54,7 +54,7 @@ PetService petService;
 		}
 		
 		model.addAttribute("petList",petDtoList);
-		return "forward:pet-list.html" ;
+		return "pet-list" ;
 	}
 	//펫 삭제 관리자만
 	@PostMapping("/delete_action")
@@ -65,7 +65,7 @@ PetService petService;
 		
 			}
 			petService.petRemove(petNo);
-		return "redirect:pet-list.html";
+		return "pet-list";
 	}
 	//펫 업데이트
 	@PostMapping("/update_action")
@@ -84,7 +84,7 @@ PetService petService;
 			
 			petService.petUpdate(pet1);
 	}
-		return "redirect:pet-list.html";
+		return "pet-list";
 	
 	}
 
