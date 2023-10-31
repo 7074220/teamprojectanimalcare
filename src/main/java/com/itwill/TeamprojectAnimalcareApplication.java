@@ -13,17 +13,8 @@ import com.itwill.service.ReportBoardService;
 
 @EnableScheduling
 @SpringBootApplication
-@RestController
 public class TeamprojectAnimalcareApplication {
 
-	@Autowired
-	ReportBoardService reportBoardService;
-	
-	@RequestMapping("/test")
-	public String test() {
-		reportBoardService.countReadCount(1L);
-		return "test";
-	}
 	
 	public static void main(String[] args) {
 		SpringApplication.run(TeamprojectAnimalcareApplication.class, args);

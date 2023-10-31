@@ -30,5 +30,9 @@ public interface ReportBoardDao {
 	public void countReadCount(Long boardNo);
 	
 	
+	//게시판 전체 뽑기 
+	public List<ReportBoard> findAll();
+	
+	
 	
 }

@@ -56,6 +56,12 @@ public class ReportBoardServiceImpl implements ReportBoardService{
 	public List<ReportBoard> findByUserNo(Long userNo) {
 		return reportBoardDao.findByUserNo(userNo);
 	}
+
+	@Override
+	public List<ReportBoard> findAll() {
+		
+		return reportBoardDao.findAll();
+	}
 	
 
 }
