@@ -31,6 +31,7 @@ function registEvent() {
 	$(document).on('click', function(e) {
 		if ($(e.target).attr('data-navigate')) {
 			alert('click event --> hash변경:' + $(e.target).attr('data-navigate'));
+			// 해쉬 변경
 			window.location.hash = e.target.getAttribute('data-navigate');
 		}
 	});
@@ -40,12 +41,19 @@ function registEvent() {
 	이벤트발생시 처리메쏘드
 */
 function navigate() {
-	path = hash.substring(1);
 	if (path == '/user_write_action') {
 		/**************** /user_write_action******************/
-		console.log('콘솔');
-		//html = user_write_form();
-		//$('content').html(html);
+		let sendJsonObject = {
+				userId: document.f.userId.value,
+				userPassword: document.f.password.value,
+				userName: document.f.name.value,
+				userGender: document.f.gender.value,
+				userPhoneNumber: document.f.phone.value,
+				userAddress: document.f.address.value
+		}
+		const responseJsonObject = ajaxRequest('POST','user',sendJsonObject);
+		html = user_write_form(responseJsonObject);
+		$('#content').html(html);
 	}
 }
 

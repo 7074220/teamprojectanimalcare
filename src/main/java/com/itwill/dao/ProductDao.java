@@ -21,6 +21,10 @@ public interface ProductDao {
 	// 일부 단어 입력으로 제품 검색
 	List<Product> findByContains(String productName);
 
+	// 선택된 상품의 카테고리와 펫카테고리가 일치하는 모든 상품 출력
+	List<Product> findAllProductByCategory(String productCategory, String productPetCategory);
+	
+	
 	// 높은 가격순 정렬
 	//List<Product> findByProductPriceDesc();
 	List<Product> findAllByOrderByProductPriceDesc();
