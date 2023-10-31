@@ -73,7 +73,7 @@ public class ReviewBoardRestController {
 		return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>());
 	}
 	
-	@Operation(summary = "reviewList 전체 조회")
+	@Operation(summary = "reviewList 전체 조회")    // admin 인 것 같음..?
 	@GetMapping("/all")
 	public ResponseEntity<List<ReviewBoardDto>> findAll() {
 		// 전체 조회
@@ -88,8 +88,8 @@ public class ReviewBoardRestController {
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		return new ResponseEntity<>(reviewBoardDtoList, httpHeaders, HttpStatus.OK);
 	}
-	
-	@Operation(summary = "productNo로 reviewList 조회")
+	/*
+	@Operation(summary = "productNo로 reviewList 조회")     // controller 예상..
 	@GetMapping("/product/{productNo}")
 	public ResponseEntity<List<ReviewBoardDto>> findByProductNo(@PathVariable(value = "productNo") Long productNo) {
 		// productNo로 reviewboard 리스트 검색
@@ -104,8 +104,8 @@ public class ReviewBoardRestController {
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(reviewDtoList);
 	}
-	
-	@Operation(summary = "별점으로 review 찾기")
+	*/
+	@Operation(summary = "별점으로 review 찾기")     //restController 예상..
 	@GetMapping("/{boardStar}")
 	public ResponseEntity<List<ReviewBoardDto>> findByStarAll(@PathVariable(value = "boardStar") Long star) {
 		// 선택한 별점으로 찾기

@@ -51,6 +51,7 @@ public class Userinfo {
 	private String userResidentNumber;
 	private Date userRegisterDate;
 	private Integer userPoint;
+	private Integer userCouponYear;
 	
 	@OneToMany(mappedBy = "userinfo", cascade ={CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
 	@Builder.Default
