@@ -15,16 +15,15 @@ import com.itwill.service.CenterService;
 import com.itwill.service.VisitService;
 
 @Controller
-@RequestMapping()
 public class VisitController {
 
 	@Autowired
 	VisitService visitService;
 
 	// 견학신청
-	@GetMapping("/visitApply")
+	@GetMapping("/visit")
 	public String apply(Model model) throws Exception {
-		return "my-account";
+		return "visit";
 	}
 
 	// 관리자 견학리스트 전체출력
