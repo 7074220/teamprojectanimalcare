@@ -21,7 +21,7 @@ CREATE TABLE UserInfo(
 		user_no                       		NUMBER(10)		 NULL ,
 		user_password                 		VARCHAR2(50)		 NULL ,
 		user_point                    		NUMBER(10)		 NULL ,
-		user_gender                   		NUMBER(10)		 NULL ,
+		user_gender                   		VARCHAR2(50)		 NULL ,
 		user_address                  		VARCHAR2(50)		 NULL ,
 		user_phone_number             		VARCHAR2(50)		 NULL ,
 		user_id                       		VARCHAR2(50)		 NULL ,

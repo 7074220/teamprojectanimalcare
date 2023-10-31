@@ -43,7 +43,7 @@ public class Userinfo {
 	private String userId;
 	private String userPassword;
 	private String userName;
-	private Integer userGender;
+	private String userGender;
 	private String userAddress;
 	@Column(unique = true)
 	private String userPhoneNumber;

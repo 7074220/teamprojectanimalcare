@@ -43,8 +43,16 @@ function registEvent() {
 function navigate() {
 	if (path == '/user_write_action') {
 		/**************** /user_write_action******************/
-		ajaxRequest(method,url,sendObject);
-		html = user_write_form();
+		let sendJsonObject = {
+				userId: document.f.userId.value,
+				userPassword: document.f.password.value,
+				userName: document.f.name.value,
+				userGender: document.f.gender.value,
+				userPhoneNumber: document.f.phone.value,
+				userAddress: document.f.address.value
+		}
+		const responseJsonObject = ajaxRequest('POST','user',sendJsonObject);
+		html = user_write_form(responseJsonObject);
 		$('#content').html(html);
 	}
 }
