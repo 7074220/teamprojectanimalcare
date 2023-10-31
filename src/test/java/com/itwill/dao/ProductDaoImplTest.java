@@ -71,6 +71,13 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 	}
 	
 	@Test
+	//@Disabled
+	void findAllProductByCategory() {
+		List<Product> find = productDao.findAllProductByCategory("간식", "강아지");
+		System.out.println(find);
+	}
+	
+	@Test
 	@Disabled
 	// 높은 가격순 정렬
 	void findAllByOrderByProductPriceDesc() {

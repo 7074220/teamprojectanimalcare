@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itwill.dto.ProductNameDto;
 import com.itwill.dto.ProductInsertDto;
 import com.itwill.dto.ProductListDto;
 import com.itwill.dto.ProductResponseDto;
@@ -204,6 +205,23 @@ public class ProductRestController {
 	public ResponseEntity<List<ProductListDto>> search(@RequestBody ProductListDto productdto){
 		List<ProductListDto> productListDto = new ArrayList<ProductListDto>();
 		List<Product> findList = productService.findByContains(productdto.getProductName());
+		
+		for (Product product : findList) {
+			ProductListDto productDto = ProductListDto.toDto(product);
+			productListDto.add(productDto);
+		}
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<List<ProductListDto>>(productListDto, httpHeaders, HttpStatus.OK);
+	}
+	
+	@Operation(summary = "선택된 상품의 카테고리와 펫카테고리가 일치하는 모든 상품 출력")
+	@PostMapping("/products/categorySearch")
+	public ResponseEntity<List<ProductListDto>> categorySearch(@RequestBody ProductListDto dto) {
+		List<ProductListDto> productListDto = new ArrayList<>();
+		List<Product> findList = productService.findAllProductByCategory(dto.getProductCategory(), dto.getProductPetCategory());
 		
 		for (Product product : findList) {
 			ProductListDto productDto = ProductListDto.toDto(product);

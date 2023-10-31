@@ -1,67 +1,34 @@
-<!DOCTYPE html>
-<html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
-	   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-       layout:decorate="layout/layout(title='')">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Safira - login</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-    
-    <!-- CSS 
-    ========================= -->
-    <!--bootstrap min css-->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <!--owl carousel min css-->
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <!--slick min css-->
-    <link rel="stylesheet" href="assets/css/slick.css">
-    <!--magnific popup min css-->
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <!--font awesome css-->
-    <link rel="stylesheet" href="assets/css/font.awesome.css">
-    <!--ionicons css-->
-    <link rel="stylesheet" href="assets/css/ionicons.min.css">
-    <!--linearicons css-->
-    <link rel="stylesheet" href="assets/css/linearicons.css">
-    <!--animate css-->
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <!--jquery ui min css-->
-    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
-    <!--slinky menu css-->
-    <link rel="stylesheet" href="assets/css/slinky.menu.css">
-    <!--plugins css-->
-    <link rel="stylesheet" href="assets/css/plugins.css">
-    
-    <!-- Main Style CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    
-    <!--modernizr min js here-->
-    <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
-	
-
-	
-</head>
-
-<body>
-     <!--header area start-->
+export function user_write_form(responseJsonObject = {}) {
+	let htmlTemplate =
+	`<!--header area start-->
     
     <!--offcanvas menu area start-->
     
     <!--header area end-->
 
     <!--breadcrumbs area start-->
-    
-    
+    <th:block layout:fragment="content">
+    <div class="breadcrumbs_area">
+        <div class="container">   
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb_content">
+                       <h3>Login</h3>
+                        <ul>
+                            <li><a href="index.html">home</a></li>
+                            <li>Login</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>         
+    </div>
     <!--breadcrumbs area end-->
     
     <!-- customer login start -->
-    <th:block layout:fragment="content">
-    <div class="customer_login" id="content">
+    
+    <div class="customer_login">
         <div class="container">
             <div class="row">
                <!--login area start-->
@@ -76,7 +43,7 @@
                             
                             <p>   
                                 <label>아이디 <span>*</span></label>
-                                <input type="text" id="userId">
+                                <input type="text" id="userId" value="{{userId}}">
                                 <span id="userIdError" style="color:red;"></span>
                              </p>
                 
@@ -93,12 +60,6 @@
                             <p>   
                                 <label>이름  <span>*</span></label>
                                 <input type="text" id="name">
-                                <span id="nameError" style="color:red;"></span>
-                             </p>
-                
-                            <p>   
-                                <label>주민번호  <span>*</span></label>
-                                <input type="text" id="residentNumber">
                                 <span id="nameError" style="color:red;"></span>
                              </p>
                 
@@ -126,7 +87,7 @@
                             </p>
                 
                             <div class="login_submit">
-                                <button type="button" data-navigate="#/user_write_action">확인</button>
+                                <button type="button" data-navigate="/user_write_action">확인</button>
                             </div>
 						</form>
                         </div>
@@ -139,14 +100,14 @@
                 <!--register area start-->
                 <div class="col-lg-6 col-md-6">
                     <div class="account_form register">
-                        <h2 th:text="MyPet">Register</h2>
+                        <h2 th:text="MyPet">MyPet</h2>
                         <form action="#">
                             <p>   
-                                <label th:text="이름">Email address  <span>*</span></label>
+                                <label th:text="이름">이름  <span>*</span></label>
                                 <input type="text">
                              </p>
                              <p>   
-                                <label th:text="생일">Passwords <span>*</span></label>
+                                <label th:text="생일">생일 <span>*</span></label>
                                 <input type="text">
                              </p>
                               <p>
@@ -174,47 +135,9 @@
 
     <!--footer area start-->
     
-    <!--footer area end-->
-    
-    
-<!-- JS
-============================================ -->
-
-</body>
-
-<!--jquery min js-->
-<script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
-<!--popper min js-->
-<script src="assets/js/popper.js"></script>
-<!--bootstrap min js-->
-<script src="assets/js/bootstrap.min.js"></script>
-<!--owl carousel min js-->
-<script src="assets/js/owl.carousel.min.js"></script>
-<!--slick min js-->
-<script src="assets/js/slick.min.js"></script>
-<!--magnific popup min js-->
-<script src="assets/js/jquery.magnific-popup.min.js"></script>
-<!--counterup min js-->
-<script src="assets/js/jquery.counterup.min.js"></script>
-<!--jquery countdown min js-->
-<script src="assets/js/jquery.countdown.js"></script>
-<!--jquery ui min js-->
-<script src="assets/js/jquery.ui.js"></script>
-<!--jquery elevatezoom min js-->
-<script src="assets/js/jquery.elevatezoom.js"></script>
-<!--isotope packaged min js-->
-<script src="assets/js/isotope.pkgd.min.js"></script>
-<!--slinky menu js-->
-<script src="assets/js/slinky.menu.js"></script>
-<!--instagramfeed menu js-->
-<script src="assets/js/jquery.instagramFeed.min.js"></script>
-<!-- Plugins JS -->
-<script src="assets/js/plugins.js"></script>
-
-<!-- Main JS -->
-<script src="assets/js/main.js"></script>
-<script src="assets/js/custom/userApp.js"></script>
-
-</body>
-
-</html>
+    <!--footer area end-->`;
+	
+	let bindTemplate = Handlebars.compile(htmlTemplate);
+	let resultTemplate = bindTemplate(responseJsonObject);
+	return resultTemplate;
+}
