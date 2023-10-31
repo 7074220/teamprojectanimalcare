@@ -27,7 +27,8 @@ CREATE TABLE UserInfo(
 		user_id                       		VARCHAR2(50)		 NULL ,
 		user_resident_number          		VARCHAR2(50)		 NULL ,
 		user_register_date            		DATE		 NULL ,
-		user_name                     		VARCHAR2(50)		 NULL 
+		user_name                     		VARCHAR2(50)		 NULL ,
+        user_coupon_year              		NUMBER(10)		 NULL
 );
 
 DROP SEQUENCE UserInfo_user_no_SEQ;
