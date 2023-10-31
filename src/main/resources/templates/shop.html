@@ -781,7 +781,7 @@
                         <div class="col-lg-4 col-md-4 col-sm-6 col-12" th:each="product:${productList}">
                             <div class="single_product">
                                 <div class="product_thumb">
-                                        <a class="primary_img" href="productDetail/${product.productNo}" th:href="${product.productNo}"><img src="#" alt="" th:src="@{/image/cat/} + ${product.getProductImage}" ></a>
+                                        <a class="primary_img" href="productDetail/${product.productNo}" th:href="${product.productNo}"><img src="#" alt="" th:src="@{/image/product/} + ${product.getProductImage}" ></a>
 
                                        <!-- <a class="secondary_img" href="product-details.html"><img src="assets/img/product/productbig2.jpg" alt=""></a>-->
                                         <div class="action_links">
