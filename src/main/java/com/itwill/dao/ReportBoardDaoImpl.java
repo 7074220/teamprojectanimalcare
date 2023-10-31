@@ -60,5 +60,10 @@ public class ReportBoardDaoImpl implements ReportBoardDao{
 		
 		return reportBoardRepository.findByUserNo(userNo);
 	}
+
+	@Override
+	public List<ReportBoard> findAll() {
+		return reportBoardRepository.findAll();
+	}
 	
 }
