@@ -610,15 +610,17 @@
                                 <img id="zoom1" src="assets/img/product/productbig4.jpg" data-zoom-image="assets/img/product/productbig4.jpg" alt="big-1">
                             </a>
                         </div>
+                        
                         <div class="single-zoom-thumb">
-                            <ul class="s-tab-zoom owl-carousel single-product-active" id="gallery_01">
+                        
+                            <ul class="s-tab-zoom owl-carousel single-product-active" id="gallery_01" th:each="product:${productName}">
                                 <li>
                                     <a href="#" class="elevatezoom-gallery active" data-update="" data-image="assets/img/product/productbig4.jpg" data-zoom-image="assets/img/product/productbig4.jpg">
-                                        <img src="assets/img/product/productbig4.jpg" alt="zo-th-1"/>
+                                        <img src="#" alt="zo-th-1" th:src="@{/image/product/} + ${product.getProductImage}"/>
                                     </a>
 
                                 </li>
-                                <li >
+                                <!-- <li >
                                     <a href="#" class="elevatezoom-gallery active" data-update="" data-image="assets/img/product/productbig1.jpg" data-zoom-image="assets/img/product/productbig1.jpg">
                                         <img src="assets/img/product/productbig1.jpg" alt="zo-th-1"/>
                                     </a>
@@ -635,7 +637,7 @@
                                         <img src="assets/img/product/productbig3.jpg" alt="zo-th-1"/>
                                     </a>
 
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
