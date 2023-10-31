@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.ProductInsertDto;
@@ -47,6 +48,7 @@ public class ProductController {
 		}
 		
 		model.addAttribute("productList", productListDto);
+		System.out.println(productList.get(0).getProductPetCategory());
 		return "shop";
 	}
 	
@@ -61,5 +63,14 @@ public class ProductController {
 		return "redirect:shop.html";
 	}
 	*/
+	
+	@GetMapping(value = "/productDetail", params = "productNo")
+	public String productDetail(@RequestParam Long productNo, Model model) {
+		Product product = productService.findByProductNo(productNo);
+		
+		model.addAttribute("product", product);
+		
+		return "product-details";
+	}
 	
 }

@@ -20,6 +20,7 @@ public class ProductListDto {
 	private String productImage;
 	private String productName;
 	private String productCategory;
+	private String productPetCategory;
 	
 	public static Product toEntity(ProductListDto dto) {
 		Product product = Product.builder()
@@ -28,6 +29,7 @@ public class ProductListDto {
 				.productImage(dto.getProductImage())
 				.productName(dto.getProductName())
 				.productCategory(dto.getProductCategory())
+				.productPetCategory(dto.productPetCategory)
 				.build();
 		return product;
 	}
@@ -39,6 +41,7 @@ public class ProductListDto {
 				.productImage(product.getProductImage())
 				.productName(product.getProductName())
 				.productCategory(product.getProductCategory())
+				.productPetCategory(product.getProductPetCategory())
 				.build();
 		return productListDto;
 	}
