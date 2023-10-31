@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -264,11 +265,57 @@ public class OrderRestController {
 			throw new Exception("로그인 하세요.");
 		}
 		orderService.removeOrder(orderNo);
+	}
+
+	@Operation(summary = "오더아이템 리스트 확인")
+	@GetMapping("/orderItemList/{orderNo}")
+	public ResponseEntity<List<OrderItemDto>> viewOrderItem(@PathVariable(name ="orderNo" ) Long orderNo,HttpSession session) throws Exception{
+		if (session.getAttribute("userNo") == null) {
+			throw new Exception("로그인 하세요.");
+		}
+		Orders orders=orderService.findOrderByNo(orderNo);
+		OrdersDto ordersDto = OrdersDto.toDto(orders);
 		
+		List<OrderItemDto> orderItemDtos = ordersDto.getOrderItemDtos();
 		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new  ResponseEntity<List<OrderItemDto>>(orderItemDtos, httpHeaders, HttpStatus.OK);
+	}
+	
+	//controller로 옮길 예정
+	@Operation(summary = "오더insert form view")
+	@GetMapping("orderView")
+	public void orderView(HttpSession session,Model model) throws Exception{
+		if (session.getAttribute("userNo") == null) {
+			throw new Exception("로그인 하세요.");
+		}
+		Long userNo=(Long)session.getAttribute("userNo");
+		List<Cart> carts=cartService.findAllCartByUserId(userNo);
+		List<CartDto> cartDtos=new ArrayList<>();
+		for (Cart cart : carts) {
+			cartDtos.add(CartDto.toDto(cart));
+		}
+		//model.addAttribute("user",userinfodto);//userinfo는 서비스로 찾는지 의문
+		model.addAttribute("cartList",cartDtos);
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		//return new  ResponseEntity<List<OrderItemDto>>(orderItemDtos, httpHeaders, HttpStatus.OK);
 	}
 	
 	
 	
 	
-}
+	
+	
+	}
+	
+	
+	
+	
+	
+
+

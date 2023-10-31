@@ -16,11 +16,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itwill.dto.MyPetCreateDto;
 import com.itwill.dto.MyPetListDto;
+import com.itwill.dto.MypetDto;
 import com.itwill.entity.MyPet;
 import com.itwill.service.MyPetService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/mypet")
@@ -28,6 +31,24 @@ public class MyPetRestController {
 	
 	@Autowired
 	private MyPetService myPetService;
+	
+	// 로그인 상태에서 펫 등록 누름
+	 @Operation(summary = "마이펫등록")
+	 @GetMapping("/create")
+	 public ResponseEntity<List<MypetDto>> MypetCreate(MyPetCreateDto myPetCreateDto , HttpSession session) throws Exception{
+		 	Long userNo = (Long)session.getAttribute("userNo");	
+		 	
+		 	if(userNo==null) {
+		 		throw new Exception("로그인을 해주세요");
+		 	}
+		 	
+		 	List<MypetDto> mypetDtos = myPetCreateDto.getMyPets();
+			
+			HttpHeaders httpHeaders = new HttpHeaders();
+			httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+			
+			return new ResponseEntity<List<MypetDto>>(mypetDtos,httpHeaders ,HttpStatus.OK);
+		}
 	
 	@Operation(summary = "마이펫리스트")
 	@GetMapping("/{userNo}")

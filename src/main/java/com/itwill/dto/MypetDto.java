@@ -22,9 +22,7 @@ public class MypetDto {
 	private String mypetName;
 	private LocalDateTime mypetBirthday;
 	private String mypetKind; 
-	 
-	 
-	
+	private Long userNo;
 	 
 	 public static MyPet toEntity(MypetDto mypetDto) {
 		 return MyPet.builder()

@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.entity.Userinfo;
-import com.itwill.service.CouponService;
 import com.itwill.service.UserInfoService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserInfoController {
@@ -28,8 +28,10 @@ public class UserInfoController {
 	
 	@GetMapping("/register")
 	public String register(Model model) throws Exception {
-		return "login";
+		return "register";
 	}
+	
+	
 	
 	// 관리자가 유저리스트 볼때
 	@GetMapping(value = "/userList")
@@ -38,6 +40,24 @@ public class UserInfoController {
 		model.addAttribute("userList", userList);
 		return "userList";
 	}
+	
+	//마이페이지 이동
+	@GetMapping(value="/userinfo")
+	public String view(Model model, HttpSession session) throws Exception{
+		Long userNo = (Long)session.getAttribute("userNo");
+		if(userNo==null) {
+			throw new Exception("로그인을 해주세요");
+		}
+		Userinfo userinfo = userInfoService.findUserByNo(userNo);
+		model.addAttribute("userinfo", userinfo);
+		
+		return "userview";
+		
+	}
 
+	
+	
+	
+	
 	
 }

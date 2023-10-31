@@ -20,12 +20,12 @@ import com.itwill.entity.Product;
 import com.itwill.service.ProductService;
 
 @Controller
-@RequestMapping("/product")
 public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
 	
+	/*
 	// 상품 등록
 	public String insertProduct(ProductInsertDto dto) {
 		
@@ -33,9 +33,11 @@ public class ProductController {
 		
 		return "redirect:shop.html";
 	}
+	*/
+	
 	
 	// 상품 리스트
-	@GetMapping("/list")
+	@GetMapping("/productList")
 	public String ProductList(Model model) {
 		List<ProductListDto> productListDto = new ArrayList<>();
 		List<Product> productList = productService.findAllByOrderByProductNoDesc();
@@ -45,10 +47,10 @@ public class ProductController {
 		}
 		
 		model.addAttribute("productList", productListDto);
-		return "forward:shop.html";
+		return "shop";
 	}
 	
-	
+	/*
 	@PostMapping("/delete/{productNo}")
 	public String deleteProduct(@PathVariable(name = "productNo") Long productNo) throws Exception{
 		Optional<Product> product = Optional.of(productService.findByProductNo(productNo));
@@ -58,11 +60,6 @@ public class ProductController {
 		productService.deleteProduct(productNo);
 		return "redirect:shop.html";
 	}
-	
-	/*
-	@PostMapping
-	public String updateProduct() {
-		
-	}
 	*/
+	
 }
