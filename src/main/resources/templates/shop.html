@@ -49,6 +49,7 @@
 
     <!--header area start-->
     <th layout:fragment="content">
+		
     <!--offcanvas menu area start-->
     <div class="off_canvars_overlay">
                 
@@ -777,10 +778,10 @@
                    
                    
                      <div class="row shop_wrapper">
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-12 ">
-                            <div class="single_product" >
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-12" th:each="product:${productList}">
+                            <div class="single_product">
                                 <div class="product_thumb">
-                                        <a class="primary_img" href="product-details.html"><img src="assets/img/product/productbig1.jpg" alt=""></a>
+                                        <a class="primary_img" href="productDetail/${product.productNo}" th:href="${product.productNo}"><img src="#" alt="" th:src="@{/image/cat/} + ${product.getProductImage}" ></a>
                                        <!-- <a class="secondary_img" href="product-details.html"><img src="assets/img/product/productbig2.jpg" alt=""></a>-->
                                         <div class="action_links">
                                             <ul>
@@ -792,16 +793,16 @@
                                         </div>
                                     </div>
                                 <div class="product_content grid_content">
-                                        <h4 class="product_name"><a href="product-details.html">상품 이름</a></h4>
-                                        <p><a href="#">Fruits</a></p>
+                                        <h4 class="product_name"><a href="product-details.html" th:text="${product.productName}">상품 이름</a></h4>
+                                        <p><a href="#" th:text="${product.productPetCategory}">Fruits</a></p>
                                         <div class="price_box"> 
-                                            <span class="current_price">$26.00</span>
+                                            <span class="current_price" th:text="${product.productPrice}">$26.00</span>
                                            <!-- <span class="old_price">$362.00</span>-->
                                         </div>
                                     </div>
                                 <div class="product_content list_content">
                                     <h4 class="product_name"><a href="product-details.html">상품 이름</a></h4>
-                                    <p><a href="#">Fruits</a></p>
+                                    <!--<p><a href="#">Fruits</a></p>-->
                                     <div class="price_box"> 
                                         <span class="current_price">$26.00</span>
                                         <!--<span class="old_price">$362.00</span>-->
