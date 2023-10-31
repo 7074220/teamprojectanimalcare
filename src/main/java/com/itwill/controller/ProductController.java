@@ -62,4 +62,13 @@ public class ProductController {
 	}
 	*/
 	
+	@GetMapping("/productDetail/{productNo}")
+	public String productDetail(@PathVariable Long productNo, Model model) {
+		Product product = productService.findByProductNo(productNo);
+		
+		model.addAttribute("product", product);
+		
+		return "product-details";
+	}
+	
 }
