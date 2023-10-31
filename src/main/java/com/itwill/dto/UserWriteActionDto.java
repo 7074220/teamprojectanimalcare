@@ -31,7 +31,7 @@ public class UserWriteActionDto {
 	private String userAddress;
 	private String userPhoneNumber;
 	private String userResidentNumber;
-	private Date userRegisterDate;
+	private LocalDateTime userRegisterDate;
 	private Integer userPoint;
 	
 	List<MyPet> myPets = new ArrayList<MyPet>();
