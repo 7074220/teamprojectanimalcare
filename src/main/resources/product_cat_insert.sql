@@ -73,6 +73,6 @@ insert into product(product_no, product_name, product_price, product_category, p
 
 insert into product(product_no, product_name, product_price, product_category, product_qty, product_image, product_star_avg, product_pet_category, product_detail_image) values(product_product_no_SEQ.nextval, '네코이찌 발톱깎이', 18500, '미용', 0, 'necoichi_clawing.jpg', 5, '고양이', 'necoichi_clawing_detail.jpg');
 
-insert into product(product_no, product_name, product_price, product_category, product_qty, product_image, product_star_avg, product_pet_category, product_detail_image) values(product_product_no_SEQ.nextval, '네오짱 꿀벌 원터치 브러쉬 엉킨털 죽은털 제거 빗 옐로우', 7900, '미용', 0, 'neo_brush.jpg', 2, '고양이', 'neo_brush_detail.jpg');
+insert into product(product_no, product_name, product_price, product_category, product_qty, product_image, product_star_avg, product_pet_category, product_detail_image) values(product_product_no_SEQ.nextval, '네오짱 꿀벌 원터치 브러쉬 엉킨털 죽은털 제거 빗 옐로우', 7900, '미용', 0, 'neo_brush.jpeg', 2, '고양이', 'neo_brush_detail.jpg');
 
 insert into product(product_no, product_name, product_price, product_category, product_qty, product_image, product_star_avg, product_pet_category, product_detail_image) values(product_product_no_SEQ.nextval, '하이포닉 고양이용 샴푸(무향) 300ml', 23000, '미용', 0, 'hyponic_catshampoo.jpg', 3, '고양이', 'hyponic_catshampoo_detail.jpg');
