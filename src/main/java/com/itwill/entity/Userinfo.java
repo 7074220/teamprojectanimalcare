@@ -49,7 +49,8 @@ public class Userinfo {
 	private String userPhoneNumber;
 	@Column(unique = true)
 	private String userResidentNumber;
-	private Date userRegisterDate;
+	@CreationTimestamp
+	private LocalDateTime userRegisterDate;
 	private Integer userPoint;
 	private Integer userCouponYear;
 	
