@@ -96,11 +96,12 @@ public class OrderRestController {
 			
 		}
 		orderDto.setOrderItemDtos(orderItemDtos);
+		orderDto.setUserNo(userNo);
 		orderDto.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+(carts.size()-1)+"개 상품");
-		insertOrder.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+(carts.size()-1)+"개 상품");
-		insertOrder.setOrderAddress(orderDto.getOrderAddress());
+		//insertOrder.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+(carts.size()-1)+"개 상품");
+		//insertOrder.setOrderAddress(orderDto.getOrderAddress());
 		
-		orderService.insertOrder(insertOrder);
+		orderService.insertOrder(orderDto.toEntity(orderDto));
 		cartService.deleteByUserId(userNo);
 		
 		return new ResponseEntity<OrdersDto>(orderDto,httpHeaders,HttpStatus.CREATED);
