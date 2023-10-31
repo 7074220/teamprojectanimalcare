@@ -67,8 +67,15 @@ public class ProductController {
 	@GetMapping(value = "/productDetail", params = "productNo")
 	public String productDetail(@RequestParam Long productNo, Model model) {
 		Product product = productService.findByProductNo(productNo);
+		List<ProductListDto> productListDto = new ArrayList<>();
+		List<Product> products = productService.findAllProductByCategory(product.getProductCategory(), product.getProductPetCategory());
+		
+		for (Product productCategory : products) {
+			productListDto.add(ProductListDto.toDto(productCategory));
+		}
 		
 		model.addAttribute("product", product);
+		model.addAttribute("products", productListDto);
 		
 		return "product-details";
 	}
