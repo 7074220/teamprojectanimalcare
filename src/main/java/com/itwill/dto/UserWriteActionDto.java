@@ -27,11 +27,11 @@ public class UserWriteActionDto {
 	private String userId;
 	private String userPassword;
 	private String userName;
-	private Integer userGender;
+	private String userGender;
 	private String userAddress;
 	private String userPhoneNumber;
 	private String userResidentNumber;
-	private Date userRegisterDate;
+	private LocalDateTime userRegisterDate;
 	private Integer userPoint;
 	
 	List<MyPet> myPets = new ArrayList<MyPet>();

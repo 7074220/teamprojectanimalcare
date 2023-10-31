@@ -34,6 +34,9 @@ public interface ReportBoardService {
 	//조회수 1증가
 	public void countReadCount(Long boardNo);
 	
+	//게시판 전체 글 뽑기
+	public List<ReportBoard> findAll();
+	
 	
 	
 }

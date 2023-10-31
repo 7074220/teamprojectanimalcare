@@ -27,7 +27,7 @@ public class CouponScheduler {
 	@Autowired
 	private UserInfoService userInfoService;
 
-	@Scheduled(cron = "0 0 0 * * ?")
+	@Scheduled(cron = "0 44 11 * * ?")
 	@Transactional
 	public void CreateBirthdayCoupon() throws Exception {
 		List<Userinfo> userinfoList = userInfoService.findUserList();
@@ -37,10 +37,15 @@ public class CouponScheduler {
 		for (Userinfo userinfo : userinfoList) {
 			MyPet myPetLeader = myPetService.findLeaderMyPet(userinfo.getUserNo());
 			if (myPetLeader!=null) {
-				if(LocalDateTime.now().getMonthValue()==myPetLeader.getMypetBirthday().getMonthValue()) {
-					if(LocalDateTime.now().getDayOfMonth()==myPetLeader.getMypetBirthday().getDayOfMonth()) {
-						birthCoupon.setUserinfo(userinfo);
-						couponService.Create(birthCoupon);
+				// 2022년 != 올해 -> 주겟지>? , null 주겟지?
+				if(userinfo.getUserCouponYear()==null || LocalDateTime.now().getYear()!=userinfo.getUserCouponYear()) {
+					if(LocalDateTime.now().getMonthValue()==myPetLeader.getMypetBirthday().getMonthValue()) {
+						if(LocalDateTime.now().getDayOfMonth()==myPetLeader.getMypetBirthday().getDayOfMonth()) {
+							birthCoupon.setUserinfo(userinfo);
+							couponService.Create(birthCoupon);
+							userinfo.setUserCouponYear(LocalDateTime.now().getYear());
+							userInfoService.update(userinfo);
+						}
 					}
 				}
 			}

@@ -69,8 +69,7 @@ public class ReportRestController {
 		
 		return new ResponseEntity<ReportBoardInsertDto>(httpHeaders, HttpStatus.OK);
 
-}
-	
+	}
 	
 	@Operation(summary = "신고업데이트")
 	@PutMapping("/{boardNo}")

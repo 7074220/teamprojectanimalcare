@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,16 +36,16 @@ public class MyPetRestController {
 	
 	// 로그인 상태에서 펫 등록 누름
 	 @Operation(summary = "마이펫등록")
-	 @GetMapping("/create")
-	 public ResponseEntity<List<MypetDto>> MypetCreate(MyPetCreateDto myPetCreateDto , HttpSession session) throws Exception{
+	 @PostMapping("/create")
+	 public ResponseEntity<List<MypetDto>> MypetCreate(@RequestBody MyPetCreateDto myPetCreateDto , HttpSession session) throws Exception{
 		 	Long userNo = (Long)session.getAttribute("userNo");	
-		 	
 		 	if(userNo==null) {
 		 		throw new Exception("로그인을 해주세요");
 		 	}
-		 	
 		 	List<MypetDto> mypetDtos = myPetCreateDto.getMyPets();
-			
+		 	for (MypetDto mypetDto : mypetDtos) {
+		 		myPetService.Create(MypetDto.toEntity(mypetDto));
+			}
 			HttpHeaders httpHeaders = new HttpHeaders();
 			httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 			

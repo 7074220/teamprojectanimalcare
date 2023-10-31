@@ -43,14 +43,16 @@ public class Userinfo {
 	private String userId;
 	private String userPassword;
 	private String userName;
-	private Integer userGender;
+	private String userGender;
 	private String userAddress;
 	@Column(unique = true)
 	private String userPhoneNumber;
 	@Column(unique = true)
 	private String userResidentNumber;
-	private Date userRegisterDate;
+	@CreationTimestamp
+	private LocalDateTime userRegisterDate;
 	private Integer userPoint;
+	private Integer userCouponYear;
 	
 	@OneToMany(mappedBy = "userinfo", cascade ={CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY,orphanRemoval = true)
 	@Builder.Default

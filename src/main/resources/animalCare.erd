@@ -2363,8 +2363,13 @@
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>user_gender</columnName>
           <logicalName>user_gender</logicalName>
-          <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[3]/columnType"/>
-          <size>10</size>
+          <columnType class="net.java.amateras.db.dialect.ColumnType">
+            <name>VARCHAR2</name>
+            <logicalName>String</logicalName>
+            <supportSize>true</supportSize>
+            <type>12</type>
+          </columnType>
+          <size>50</size>
           <notNull>false</notNull>
           <primaryKey>false</primaryKey>
           <description></description>
@@ -2424,12 +2429,12 @@
           <columnName>user_register_date</columnName>
           <logicalName>user_register_date</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType">
-            <name>DATE</name>
+            <name>TIMESTAMP</name>
             <logicalName>Date</logicalName>
-            <supportSize>false</supportSize>
-            <type>91</type>
+            <supportSize>true</supportSize>
+            <type>93</type>
           </columnType>
-          <size>100</size>
+          <size>9</size>
           <notNull>false</notNull>
           <primaryKey>false</primaryKey>
           <description></description>
@@ -2441,6 +2446,22 @@
           <logicalName>user_name</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/columns/net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
           <size>50</size>
+          <notNull>false</notNull>
+          <primaryKey>false</primaryKey>
+          <description></description>
+          <autoIncrement>false</autoIncrement>
+          <defaultValue></defaultValue>
+        </net.java.amateras.db.visual.model.ColumnModel>
+        <net.java.amateras.db.visual.model.ColumnModel>
+          <columnName>user_coupon_year</columnName>
+          <logicalName>user_coupon_year</logicalName>
+          <columnType class="net.java.amateras.db.dialect.ColumnType">
+            <name>NUMBER</name>
+            <logicalName>Numeric</logicalName>
+            <supportSize>true</supportSize>
+            <type>2</type>
+          </columnType>
+          <size>10</size>
           <notNull>false</notNull>
           <primaryKey>false</primaryKey>
           <description></description>
