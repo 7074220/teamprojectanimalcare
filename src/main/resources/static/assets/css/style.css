@@ -8265,6 +8265,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .login_submit a:hover {
   color: #40A944;
 }
+
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .login_submit a {
     float: none;
