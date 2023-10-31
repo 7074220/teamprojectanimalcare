@@ -138,6 +138,8 @@ public class OrderController {
 			model.addAttribute("cartList",cartDtos);
 			
 			
+			
+			
 			return "orderView";
 		}
 		//orderitemList 조회
