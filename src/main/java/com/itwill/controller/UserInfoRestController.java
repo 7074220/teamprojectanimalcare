@@ -47,8 +47,8 @@ public class UserInfoRestController {
 	// 회원가입
 	@Operation(summary = "회원가입")
 	@PostMapping()
-	public ResponseEntity<UserWriteActionDto> user_write_action(UserWriteActionDto dto) throws Exception {
-		
+	public ResponseEntity<UserWriteActionDto> user_write_action(@RequestBody UserWriteActionDto dto) throws Exception {
+		System.out.println("오긴해?");
 		Userinfo createUserinfo = userInfoService.create(UserWriteActionDto.toEntity(dto));
 		List<MyPet> myPets = dto.getMyPets();
 		for (MyPet myPet : myPets) {
@@ -72,8 +72,8 @@ public class UserInfoRestController {
 
 	// 로그인
 	@Operation(summary = "로그인")
-	@GetMapping("/login")
-	public ResponseEntity<UserLoginActionDto> user_login_action(UserLoginActionDto dto,
+	@PostMapping("/login")
+	public ResponseEntity<UserLoginActionDto> user_login_action(@RequestBody UserLoginActionDto dto,
 			HttpSession session) throws Exception {
 
 		Userinfo loginUserCheck = userInfoService.login(dto.getUserId(), dto.getUserPassword());

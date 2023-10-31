@@ -43,7 +43,7 @@ export function user_write_form(responseJsonObject = {}) {
                             
                             <p>   
                                 <label>아이디 <span>*</span></label>
-                                <input type="text" id="userId">
+                                <input type="text" id="userId" value="{{userId}}">
                                 <span id="userIdError" style="color:red;"></span>
                              </p>
                 
@@ -100,14 +100,14 @@ export function user_write_form(responseJsonObject = {}) {
                 <!--register area start-->
                 <div class="col-lg-6 col-md-6">
                     <div class="account_form register">
-                        <h2 th:text="MyPet">Register</h2>
+                        <h2 th:text="MyPet">MyPet</h2>
                         <form action="#">
                             <p>   
-                                <label th:text="이름">Email address  <span>*</span></label>
+                                <label th:text="이름">이름  <span>*</span></label>
                                 <input type="text">
                              </p>
                              <p>   
-                                <label th:text="생일">Passwords <span>*</span></label>
+                                <label th:text="생일">생일 <span>*</span></label>
                                 <input type="text">
                              </p>
                               <p>
@@ -136,7 +136,6 @@ export function user_write_form(responseJsonObject = {}) {
     <!--footer area start-->
     
     <!--footer area end-->`;
-	
 	
 	let bindTemplate = Handlebars.compile(htmlTemplate);
 	let resultTemplate = bindTemplate(responseJsonObject);

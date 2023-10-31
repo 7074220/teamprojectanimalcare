@@ -27,7 +27,7 @@ public class UserWriteActionDto {
 	private String userId;
 	private String userPassword;
 	private String userName;
-	private Integer userGender;
+	private String userGender;
 	private String userAddress;
 	private String userPhoneNumber;
 	private String userResidentNumber;
