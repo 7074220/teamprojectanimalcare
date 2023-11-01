@@ -71,7 +71,7 @@ public ResponseEntity<Map> petDelete(@PathVariable(name = "petNo") Long petNo) t
 @PutMapping("/{petNo}")
 public ResponseEntity<PetDto> petUpdate(@PathVariable(name = "petNo") Long petNo,@RequestBody PetDto petdto) throws Exception{
 	Optional<Pet> petOptional = Optional.of(petService.petFindById(petNo));
-	Center center = centerService.findByCenterNo(petdto.getCenterNo());
+	Center center = centerService.findByCenterNo(petdto.getCenter().getCenterNo());
 	if(petOptional.isPresent()) {
 		Pet pet1 = petOptional.get();
 		pet1.setPetLocal(petdto.getPetLocal());

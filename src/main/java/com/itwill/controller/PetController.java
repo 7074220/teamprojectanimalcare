@@ -79,7 +79,7 @@ PetService petService;
 			pet1.setPetRegisterDate(updatepetDto.getPetRegisterDate());
 			pet1.setPetFindPlace(updatepetDto.getPetFindPlace());
 			pet1.setPetCharacter(updatepetDto.getPetCharacter());
-			pet1.setCenter(Center.builder().centerNo(updatepetDto.getCenterNo()).build());
+			pet1.setCenter(updatepetDto.getCenter());
 			
 			
 			petService.petUpdate(pet1);
