@@ -62,7 +62,13 @@ export function user_write_form(responseJsonObject = {}) {
                                 <input type="text" name="name" id="name" value="{{userName}}">
                                 <span id="nameError" style="color:red;"></span>
                              </p>
-                
+                			
+                			<p>   
+                                <label>주민등록번호 <span>*</span></label>
+                                <input type="text" name="residentNumber" id="residentNumber" value="{{userResidentNumber}}">
+                                <span id="residentNumberError" style="color:red;"></span>
+                            </p>
+                			
                              <p>
                                 <label>성별  <span>*</span></label>
                                 <select id="gender" name="gender">
@@ -85,7 +91,7 @@ export function user_write_form(responseJsonObject = {}) {
                                 
                                 <span id="addressError" style="color:red;"></span>
                             </p>
-                
+                			
                             <div class="login_submit">
                                 <button type="button" data-navigate="/user_write_action">확인</button>
                             </div>

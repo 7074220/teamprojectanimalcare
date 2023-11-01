@@ -17,7 +17,11 @@ jQuery.validator.addMethod("phone", function(phone_number, element) {
     phone_number.match(/010-\d{4}-\d{4}$/);
 }, "핸드폰 번호 형식으로 써주세요");
 
-
+jQuery.validator.addMethod("resident", function(resident_number, element) {
+    resident_number = resident_number.replace(/\s+/g, "");
+    return this.optional(element) || resident_number.length > 9 && 
+    resident_number.match(/010-\d{4}-\d{4}$/);
+}, "주민등록번호 형식으로 써주세요");
 
 
 
