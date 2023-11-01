@@ -49,8 +49,8 @@
             $(event.target).find('.owl-item').removeClass('last').eq(event.item.index + event.page.size - 1).addClass('last')}).owlCarousel({
             loop: true,
             nav: true,
-            autoplay: false,
-            autoplayTimeout: 8000,
+            autoplay: true,
+            autoplayTimeout: 2000,
             items: 5,
             margin: 20,
             dots:false,
@@ -442,9 +442,9 @@
         $('.single-product-active').owlCarousel({
             loop: true,
             nav: true,
-            autoplay: false,
-            autoplayTimeout: 8000,
-            items: 4,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            items: 2,
             margin:15,
             dots:false,
             navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
@@ -587,14 +587,14 @@
     $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
        " - $" + $( "#slider-range" ).slider( "values", 1 ) );
     
-    /*---elevateZoom---*/
+   /* ---elevateZoom---
     $("#zoom1").elevateZoom({
         gallery:'gallery_01', 
         responsive : true,
         cursor: 'crosshair',
         zoomType : 'inner'
     
-    });  
+    });  */
     
     /*---portfolio Isotope activation---*/
       $('.portfolio_gallery').imagesLoaded( function() {
