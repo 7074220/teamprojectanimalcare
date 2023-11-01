@@ -55,6 +55,8 @@ public class PetDto {
 			.petRegisterDate(petEntity.getPetRegisterDate())
 			.petCharacter(petEntity.getPetCharacter())
 	         .petImage(petEntity.getPetImage())
+	         .petType(petEntity.getPetType())
+	         .petFindPlace(petEntity.getPetFindPlace())
 	         .center(petEntity.getCenter())
 			.build();
 		  
