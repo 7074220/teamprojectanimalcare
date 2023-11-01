@@ -12,10 +12,16 @@ let html = '';
 const initialize=createInitializer();
 initialize.addCustomFunctionHandlebars();
 jQuery.validator.addMethod("phone", function(phone_number, element) {
-    //phone_number = phone_number.replace(/\s+/g, "");
-    return this.optional(element) || phone_number.length == 13 && 
-    phone_number.match(/^\\d{3}-\\d{3,4}-\\d{4}$/);
+    phone_number = phone_number.replace(/\s+/g, "");
+    return this.optional(element) || phone_number.length > 9 && 
+    phone_number.match(/010-\d{4}-\d{4}$/);
 }, "핸드폰 번호 형식으로 써주세요");
+
+
+
+
+
+
 
 function init() {
 	
@@ -44,6 +50,23 @@ function registEvent() {
 			// 해쉬 변경
 			window.location.hash = e.target.getAttribute('data-navigate');
 		}
+		
+		if (e.target.getAttribute('data-navigate') == '/user_write_action' || e.target.getAttribute('data-navigate') == '/user_login_action') {
+		
+			if (window.location.hash.substring(1) == e.target.getAttribute('data-navigate')) {
+				// 현재 hash 값과 button data-navigate 속성값이 같은 경우(hashchange 이벤트 발생 안함)
+				 navigate();
+			} else {
+				// 현재 hash 값과 button data-navigate 속성값이 다른 경우(hashchange 이벤트 발생)
+				window.location.hash = e.target.getAttribute('data-navigate');
+			}
+			
+		} else {
+			if(e.target.getAttribute('data-navigate')!=null){
+				window.location.hash = e.target.getAttribute('data-navigate');
+			}
+		}
+		
 	});
 }
 
@@ -70,16 +93,7 @@ function navigate() {
 					userAddress: document.f.address.value
 			}
 			const responseJsonObject = ajaxRequest('POST','user',sendJsonObject);
-			
-			if(responseJsonObject.msg!=null){
-				window.location.href = 'login';
-			}else {
-				html = user_write_form(responseJsonObject);
-				$('#content').html(html);
-				initialize.validatorUserWriteFormSetDefault();
-				let validator = $('#user_write_form').validate();
-				initialize.setValidator(validator);
-			}
+			window.location.href = 'index';
 		}
 		
 	}

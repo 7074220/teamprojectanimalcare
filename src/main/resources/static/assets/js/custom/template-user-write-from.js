@@ -39,10 +39,10 @@ export function user_write_form(responseJsonObject = {}) {
                 <div class="col-lg-6 col-md-6">
                     <div class="account_form register">
                         <h2 th:text="Register">회원가입</h2>
-                        <form name="f" id="user_write_form" action="my-account.html" method="post" >
+                        <form name="f" id="user_write_form" action="#" method="post" >
                             
                             <p>   
-                                <label>아이디 <span>*</span></label>
+                                <label>아이디(이메일 형식으로 작성하세요) <span>*</span></label>
                                 <input type="text" name="userId" id="userId" value="{{userId}}">
                                 <span id="userIdError" style="color:red;"></span>
                              </p>
@@ -74,7 +74,7 @@ export function user_write_form(responseJsonObject = {}) {
                              </p>
                 
                              <p>   
-                                <label>핸드폰번호  <span>*</span></label>
+                                <label>핸드폰번호(ex:010-####-####)  <span>*</span></label>
                                 <input type="text" name="phone" id="phone" value="{{userPhoneNumber}}">
                                 <span id="phoneError" style="color:red;"></span>
                              </p>
@@ -97,7 +97,9 @@ export function user_write_form(responseJsonObject = {}) {
              
                  <!--login area start-->
 
-                <!--register area start-->
+              
+              <!--register area start-->
+              <!--
                 <div class="col-lg-6 col-md-6">
                     <div class="account_form register">
                         <h2 th:text="MyPet">MyPet</h2>
@@ -126,6 +128,7 @@ export function user_write_form(responseJsonObject = {}) {
                         </form>
                     </div>    
                 </div>
+                -->
                 <!--register area end-->
             </div>
         </div>   

@@ -59,8 +59,7 @@ function createInitializer() {
 		rules: {
 			userId: {
 				required: true,
-				minlength: 3,
-				maxlength: 6,
+				email : true,
 				remote: {
 					url: 'user/idcheck',
 					type: 'GET',
@@ -68,6 +67,7 @@ function createInitializer() {
 						userId: function() {
 							return $('#userId').val();
 						}
+					
 					}
 				}
 			},
@@ -84,15 +84,11 @@ function createInitializer() {
 			phone :{
 				required: true,
 				phone : true
-           	 	//regex: "^(010|011)[-\\s]?\\d{3,4}[-\\s]?\\d{4}$"
-           	 	//regex: "^\\d{3}-\\d{3,4}-\\d{4}$" //이게 핸드폰 양식
 			}
 		},
 		messages: {
 			userId: {
 				required: '아이디를 입력하세요.',
-				minlength: '아이디는 {0}글자 이상입니다.',
-				maxlength: '아이디는 {0}글자 이하입니다.',
 				remote: '{0}는 중복된 아이디입니다.'
 			},
 			password: {
