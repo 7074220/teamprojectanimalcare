@@ -81,7 +81,10 @@ function createInitializer() {
 			name: {
 				required: true
 			},
-			
+			phone :{
+				required: true,
+           	 	regex: "^(010|011)[-\\s]?\\d{3,4}[-\\s]?\\d{4}$"
+			}
 		},
 		messages: {
 			userId: {
@@ -100,6 +103,10 @@ function createInitializer() {
 			name: {
 				required: '이름을 입력하세요.'
 			},
+			phone :{
+				required: '휴대폰 번호를 입력하세요.',
+           	 	regex: "휴대폰 번호 형식으로 입력하세요."
+			}
 		},
 		errorClass: 'error',
 		validClass: 'valid'
