@@ -7,27 +7,10 @@ export function user_write_form(responseJsonObject = {}) {
     
     <!--header area end-->
 
-    <!--breadcrumbs area start-->
-    <th:block layout:fragment="content">
-    <div class="breadcrumbs_area">
-        <div class="container">   
-            <div class="row">
-                <div class="col-12">
-                    <div class="breadcrumb_content">
-                       <h3>Login</h3>
-                        <ul>
-                            <li><a href="index.html">home</a></li>
-                            <li>Login</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>         
-    </div>
-    <!--breadcrumbs area end-->
     
     <!-- customer login start -->
-    
+    <th:block layout:fragment="content">
+    <div id="content">
     <div class="customer_login">
         <div class="container">
             <div class="row">
@@ -64,7 +47,7 @@ export function user_write_form(responseJsonObject = {}) {
                              </p>
                 			
                 			<p>   
-                                <label>주민등록번호 <span>*</span></label>
+                                <label>주민등록번호(ex:######-#######) <span>*</span></label>
                                 <input type="text" name="residentNumber" id="residentNumber" value="{{userResidentNumber}}">
                                 <span id="residentNumberError" style="color:red;"></span>
                             </p>
@@ -139,6 +122,7 @@ export function user_write_form(responseJsonObject = {}) {
             </div>
         </div>   
             </div> 
+    </div>
     </th:block>
     <!-- customer login end -->
 

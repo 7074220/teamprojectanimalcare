@@ -42,11 +42,14 @@
     
     <!--modernizr min js here-->
     <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
-
+    <script>
+		function chageLangSelect(){
+			alert('ㅇㅇ');
+		}
+	</script>
 </head>
 
 <body>
-	
     <!--header area start-->
     <th layout:fragment="content">
 	<div id="content">
@@ -182,11 +185,7 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-    </div>-->
-=======
     </div> -->
->>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
     <!--offcanvas menu area end-->
     
    <!-- <header>
@@ -767,8 +766,7 @@
                         <div class=" niceselect_option" >
                             <form class="select_option" action="#">
                             
-                                <select name="orderby" id="short">
-
+                                <select name="orderby" id="short" onchange="chageLangSelect()">
                                     <option selected value="1">별점순</option>
                                     <option  value="2">낮은가격순</option>
                                     <option value="3" >높은가격순</option>

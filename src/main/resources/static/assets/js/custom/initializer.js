@@ -84,6 +84,13 @@ function createInitializer() {
 			phone :{
 				required: true,
 				phone : true
+			},
+			residentNumber :{
+				required: true,
+				resident : true
+			},
+			address:{
+				required : true
 			}
 		},
 		messages: {
@@ -103,7 +110,12 @@ function createInitializer() {
 			},
 			phone :{
 				required: '휴대폰 번호를 입력하세요.',
-           	 	regex: "휴대폰 번호 형식으로 입력하세요."
+			},
+			residentNumber :{
+				required: '주민등록번호를 입력하세요.',
+			},
+			address :{
+				required: '주소를 입력하세요.',
 			}
 		},
 		errorClass: 'error',
