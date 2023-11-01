@@ -11,7 +11,7 @@ public class Controller1 {
 	public String main() {
 		return "layout/sample";
 	}
-	
+
 	@GetMapping(value = "/index")
 	public String index() {
 		return "index";
