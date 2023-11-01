@@ -799,7 +799,7 @@
                                         <h4 class="product_name"><a href="product-details.html" th:text="${product.productName}" th:href="@{productDetail(productNo=${product.productNo})}">상품 이름</a></h4>
                                         <p><a href="#" th:text="${product.productPetCategory}" >펫 카테고리</a></p>
                                         <div class="price_box"> 
-                                            <span class="current_price" th:text="${product.productPrice}">$26.00</span>
+                                            <span class="current_price" th:text="${product.productPrice}">상품 가격</span>
                                            <!-- <span class="old_price">$362.00</span>-->
                                         </div>
                                     </div>
@@ -811,7 +811,7 @@
                                     
                                 <div class="product_content list_content">
                                     <h4 class="product_name"><a href="product-details.html" th:text="${product.productName}">상품 이름</a></h4>	
-                                    <p><a href="#">Fruits</a></p>
+                                    <p><a href="#" th:text="${product.productPetCategory}">펫 카테고리</a></p>
                                     <div class="price_box"> 
                                         <span class="current_price" th:text="${product.productPrice}">$26.00</span>
                                         <!--<span class="old_price">$362.00</span>-->
