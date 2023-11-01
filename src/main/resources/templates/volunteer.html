@@ -1,7 +1,8 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
-	   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-       layout:decorate="layout/layout(title='')">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='')">
+
+
 
 <head>
     <meta charset="utf-8">
@@ -50,38 +51,42 @@
     <!--header area start-->
     
     <!--offcanvas menu area start-->
-    
+     
+              
     <!--offcanvas menu area end-->
-   
+    
+    
     <!--header area end-->
 
     <!--breadcrumbs area start-->
-    <th:block layout:fragment="content" />
+
     <!--breadcrumbs area end-->
-    
+    <th:block layout:fragment="content">
     <!--contact map start-->
-    <div class="contact_map mt-70">
+   <!-- <div class="contact_map mt-70">
        <div class="map-area">
           <div id="googleMap"></div>
        </div>
-    </div>
+    </div>-->
     <!--contact map end-->
     
     <!--contact area start-->
     <div class="contact_area">
         <div class="container">   
             <div class="row">
+                
                 <div class="col-lg-6 col-md-6">
                    <div class="contact_message content">
                         <h3>center name</h3>    
                          <p>Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram anteposuerit litterarum formas human. qui sequitur mutationem consuetudium lectorum. Mirum est notare quam</p>
                         <ul>
-                            <li><i class="fa fa-fax"></i>  Address : 서울특별시 강남구</li>
+                            <li><i class="fa fa-fax"></i>  Address : No 40 Baria Sreet 133/2 NewYork City</li>
                             <li><i class="fa fa-phone"></i> <a href="#">Infor@roadthemes.com</a></li>
                             <li><i class="fa fa-envelope-o"></i><a href="tel:0(1234)567890">0(1234) 567 890</a>  </li>
                         </ul>             
                     </div> 
                 </div>
+                
                 <div class="col-lg-6 col-md-6">
                    <div class="contact_message form">
                         <h3>Tell us your project</h3>   
@@ -89,16 +94,47 @@
                             <input type="datetime-local" name="starttime">
                            
                          
-                            <button type="submit"> 선택</button>  
+                            <button type="submit"> 확인</button>  
+                            <p class="form-messege"></p>
+                        </form> 
+                    </div> 
+                </div>
+                
+                
+                
+                <div class="col-lg-6 col-md-6">
+                   <div class="contact_message form">
+                        <h3>Tell us your project</h3>   
+                        <form id="contact-form" method="POST"  action="assets/mail.php">
+                            <p>  
+                               <label> Your Name (required)</label>
+                                <input name="name" placeholder="Name *" type="text"> 
+                            </p>
+                            <p>       
+                               <label>  Your Email (required)</label>
+                                <input name="email" placeholder="Email *" type="email">
+                            </p>
+                            <p>          
+                               <label>  Subject</label>
+                                <input name="subject" placeholder="Subject *" type="text">
+                            </p>    
+                            <div class="contact_textarea">
+                                <label>  Your Message</label>
+                                <textarea placeholder="Message *" name="message"  class="form-control2" ></textarea>     
+                            </div>   
+                            <button type="submit"> Send</button>  
                             <p class="form-messege"></p>
                         </form> 
 
                     </div> 
                 </div>
+                       
+                
+                
             </div>
         </div>    
     </div>
-    </th:block>
+</th:block>
     <!--contact area end-->
 
     <!--footer area start-->

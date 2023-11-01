@@ -118,7 +118,7 @@ public class VolunteerRestController {
 		return new ResponseEntity<List<VolunteerDto>>(volunteerDtoList, httpHeaders, HttpStatus.OK);
 	} // userNo 로 VolunteerList 조회
 	
-	
+	/*
 	@Operation(summary = "봉사리스트") 
 	@GetMapping("/volunteers")
 	public ResponseEntity<List<VolunteerDto>> findAllVolunteers() {
@@ -132,6 +132,6 @@ public class VolunteerRestController {
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));				
 		return new ResponseEntity<List<VolunteerDto>>(volunteerDtoList, httpHeaders, HttpStatus.OK);
 	} // 목록 전체 조회
-	
+	*/
 	
 }
