@@ -33,13 +33,27 @@ public class VolunteerController {
 		return "volunteer";
 	}
 	
+	@GetMapping("/volunteerList") 
+	public String volunteerList(Model model) {
+	    List<VolunteerDto> volunteerDtoList = new ArrayList<>();
+	    List<Volunteer> volunteerList = volunteerService.findAllVolunteers();
+
+	    for (Volunteer volunteer : volunteerList) {
+	        volunteerDtoList.add(VolunteerDto.toDto(volunteer));
+	    }
+	    
+	    model.addAttribute("volunteerList", volunteerDtoList); // "volunteerList" 변수를 템플릿에 추가
+
+	    return "volunteer"; // HTML 템플릿의 경로를 지정
+	}
+	
 	/*
 	@GetMapping("/volunteer") // 봉사 신청
 	public String insert_action(@RequestBody VolunteerDto dto) throws Exception {		
 		volunteerService.insertVolunteer(dto.toEntity(dto));		
 		return "volunteer";
 	}
-	*/
+	
 	
 	// 봉사 전체 리스트 조회. 관리자?
 	@GetMapping("/volunteerList") 
@@ -51,9 +65,9 @@ public class VolunteerController {
 			volunteerDtoList.add(VolunteerDto.toDto(volunteer));
 		}
 		model.addAttribute("volunteerList", volunteerDtoList);
-		return "volunteerList"; // 일반적으로 뷰 템플릿의 경로를 지정. 링크수정하기
+		return "my-account"; // 일반적으로 뷰 템플릿의 경로를 지정. 링크수정하기
 	}
-
+	*/
 	
 	// userNo 로 봉사 목록 조회. 로그인한 회원
 	@GetMapping("/volunteerList/{userNo}")

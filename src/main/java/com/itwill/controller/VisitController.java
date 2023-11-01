@@ -29,8 +29,8 @@ public class VisitController {
 	// 관리자 견학리스트 전체출력
 	@GetMapping("/visitList")
 	public String centerList(Model model) {
-		List<Visit> visitList = visitService.selectAllVisits();
-		model.addAttribute("visiits", visitList);
+		List<Visit> visits  = visitService.selectAllVisits();
+		model.addAttribute("visits", visits);
 		return "my-account";
 	}
 
