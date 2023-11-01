@@ -63,5 +63,6 @@ public class ReportBoardServiceImpl implements ReportBoardService{
 		return reportBoardDao.findAll();
 	}
 	
+	
 
 }

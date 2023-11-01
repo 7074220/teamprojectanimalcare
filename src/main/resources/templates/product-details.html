@@ -600,6 +600,7 @@
     <!-- 상품 디테일 시작 -->
     
     
+    <!-- 상품 디테일 대표이미지 -->
     <div class="product_details mt-70 mb-70">
         <div class="container">
             <div class="row">
@@ -607,25 +608,37 @@
                     <div class="product-details-tab">
                         <div id="img-1" class="zoomWrapper single-zoom">
                             <a href="#">
-                                <img id="zoom1" src="assets/img/product/productbig4.jpg" data-zoom-image="assets/img/product/productbig4.jpg" alt="big-1">
+                                <img id="zoom1" src="assets/img/product/productbig4.jpg" data-zoom-image="assets/img/product/productbig4.jpg" alt="big-1" th:src="@{/image/product/} + ${product.getProductImage}">
                             </a>
                         </div>
                         
+     <!-- 상품 디테일 대표이미지 -->
+                        
+                        
+                        
+                        
+                        
+                        
+                       <!--  상품 이미지 밑에 4개... -->
+                       
+                       
                         <div class="single-zoom-thumb" >
                         
                             <ul class="s-tab-zoom owl-carousel single-product-active" id="gallery_01" >
-                                <li th:each="product:${productName}">
-                                    <a href="#" class="elevatezoom-gallery active" data-update="" data-image="assets/img/product/productbig4.jpg" data-zoom-image="assets/img/product/productbig4.jpg">
-                                        <img src="#" alt="zo-th-1" th:src="@{/image/product/} + ${product.getProductImage}"/>
+                               <li th:each="product:${productName}">
+                                    <a href="#" class="elevatezoom-gallery active" data-update="" data-image="assets/img/product/productbig4.jpg" data-zoom-image="assets/img/product/productbig4.jpg" th:href="@{productDetail(productNo=${product.productNo})}">
+                                        <img src="#" alt="zo-th-1" th:src="@{/image/product/} + ${product.getProductImage}" />
                                     </a>
 
-                                </li>
-                                <!-- <li >
+                                </li> 
+                                <!-- 
+                                 <li >
                                     <a href="#" class="elevatezoom-gallery active" data-update="" data-image="assets/img/product/productbig1.jpg" data-zoom-image="assets/img/product/productbig1.jpg">
                                         <img src="assets/img/product/productbig1.jpg" alt="zo-th-1"/>
                                     </a>
 
                                 </li>
+                                
                                 <li >
                                     <a href="#" class="elevatezoom-gallery active" data-update="" data-image="assets/img/product/productbig2.jpg" data-zoom-image="assets/img/product/productbig2.jpg">
                                         <img src="assets/img/product/productbig2.jpg" alt="zo-th-1"/>
@@ -640,19 +653,42 @@
                                 </li> -->
                             </ul>
                         </div>
+                        
+                        
+                         <!--  상품 이미지 밑에 4개... -->
+                        
+                        
+                        
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="product_d_right">
                        <form action="#">
                            
-                            <h1><a href="#">commodo augue nisi</a></h1>
+                            <h1><a href="#" th:text="${product.productName}" th:href="@{productDetail(productNo=${product.productNo})}">상품 디테일 이름</a></h1>
+                            
+                            
+                            
+                           <!--  상품 디테일 이름 옆에 화살표 두개 -->
+                            
+                            
+                            
+                          <!--   "<" 화살표 누르면 앞 상품으로 이동, ">" 화살표 누르면 뒷 상품으로 이동 -->
+                            
                             <div class="product_nav">
                                 <ul>
-                                    <li class="prev"><a href="product-details.html"><i class="fa fa-angle-left"></i></a></li>
-                                    <li class="next"><a href="variable-product.html"><i class="fa fa-angle-right"></i></a></li>
+                                    <li class="prev"><a href="product-details.html" th:href="@{productDetail(productNo=${(product.productNo)+1})}"><i class="fa fa-angle-left"></i></a></li>
+                                    <li class="next"><a href="variable-product.html" th:href="@{productDetail(productNo=${(product.productNo)-1})}"><i class="fa fa-angle-right"></i></a></li>
                                 </ul>
                             </div>
+                           <!--   "<" 화살표 누르면 앞 상품으로 이동, ">" 화살표 누르면 뒷 상품으로 이동 끝 -->  
+                            
+                            
+                            
+                            
+                            <!--  상품 디테일 이름 옆에 화살표 두개 -->
+                            
+                            
                             <div class=" product_ratting">
                                 <ul>
                                     <li><a href="#"><i class="icon-star"></i></a></li>
@@ -660,19 +696,18 @@
                                    <li><a href="#"><i class="icon-star"></i></a></li>
                                    <li><a href="#"><i class="icon-star"></i></a></li>
                                    <li><a href="#"><i class="icon-star"></i></a></li>
-                                    <li class="review"><a href="#"> (customer review ) </a></li>
+                                    <li class="review"><a href="#">(고객 리뷰)</a></li>
                                 </ul>
-                                
                             </div>
                             <div class="price_box">
-                                <span class="current_price">£70.00</span>
-                                <span class="old_price">£80.00</span>
+                                <span class="current_price" th:text="${product.productPrice}">상품 가격</span>
+                               <!--  <span class="old_price">£80.00</span> -->
                                 
                             </div>
-                            <div class="product_desc">
+                           <!--  <div class="product_desc">
                                 <p>eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in </p>
-                            </div>
-                            <div class="product_variant color">
+                            </div> -->
+                            <!-- <div class="product_variant color">
                                 <h3>Available Options</h3>
                                 <label>color</label>
                                 <ul>
@@ -681,9 +716,17 @@
                                     <li class="color3"><a href="#"></a></li>
                                     <li class="color4"><a href="#"></a></li>
                                 </ul>
-                            </div>
+                            </div> -->
+                            
+                            
+                            
+                            
+                            <!-- 상품 디테일 부가기능 -->
+                            
+                            
+                            
                             <div class="product_variant quantity">
-                                <label>quantity</label>
+                                <label>수량</label>
                                 <input min="1" max="100" value="1" type="number">
                                 <button class="button" type="submit">add to cart</button>  
                                 
@@ -691,12 +734,19 @@
                             <div class=" product_d_action">
                                <ul>
                                    <li><a href="#" title="Add to wishlist">+ Add to Wishlist</a></li>
-                                   <li><a href="#" title="Add to wishlist">+ Compare</a></li>
+                                   <!-- <li><a href="#" title="Add to wishlist">+ Compare</a></li> -->
                                </ul>
                             </div>
                             <div class="product_meta">
-                                <span>Category: <a href="#">Clothing</a></span>
+                                <span>Category: <a href="#" th:text="${product.productCategory}">펫 카테고리</a></span>
                             </div>
+                            
+                            
+                            
+                            <!-- 상품 디테일 설명 -->
+                            
+                            
+                            
                             
                         </form>
                        <!--  <div class="priduct_social">
@@ -725,27 +775,37 @@
                         <div class="product_info_button">    
                             <ul class="nav" role="tablist">
                                 <li >
-                                    <a class="active" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Description</a>
+                                    <a class="active" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">상품 설명</a>
                                 </li>
-                                <li>
+                               <!--  <li>
                                      <a data-toggle="tab" href="#sheet" role="tab" aria-controls="sheet" aria-selected="false">Specification</a>
-                                </li>
+                                </li> -->
                                 <li>
-                                   <a data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews (1)</a>
+                                   <a data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">리뷰</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="info" role="tabpanel" >
+                            
+                            
+                            
+                            <!-- 상품 디테일 이미지  -->
+                            
+                            
                                 <div class="product_info_content">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla.</p>
-                                    <p>Pellentesque aliquet, sem eget laoreet ultrices, ipsum metus feugiat sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in accumsan elit odio quis mi. Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus, in imperdiet ligula euismod eget.</p>
-                                </div>    
+                                	<img src="#" alt="" th:src="@{/image/product/} + ${product.getProductDetailImage}">
+                                </div>  
+                                
+                               
+                             <!-- 상품 디테일 이미지  -->
+                                
+                                  
                             </div>
                             <div class="tab-pane fade" id="sheet" role="tabpanel" >
                                 <div class="product_d_table">
                                    <form action="#">
-                                        <table>
+                                       <!--  <table>
                                             <tbody>
                                                 <tr>
                                                     <td class="first_child">Compositions</td>
@@ -760,7 +820,7 @@
                                                     <td>Short Dress</td>
                                                 </tr>
                                             </tbody>
-                                        </table>
+                                        </table> -->
                                     </form>
                                 </div>
                                 <div class="product_info_content">
@@ -860,7 +920,7 @@
                         <article class="single_product" th:each="product:${products}">
                             <figure>
                                 <div class="product_thumb">
-                                    <a class="primary_img" href="product-details.html"><img src="#" alt="" th:src="@{/image/product/} + ${product.getProductImage}" ></a>
+                                    <a class="primary_img" href="product-details.html" th:href="@{productDetail(productNo=${product.productNo})}"><img src="#" alt="" th:src="@{/image/product/} + ${product.getProductImage}" ></a>
                                    <!--  <a class="secondary_img" href="product-details.html"><img src="assets/img/product/product21.jpg" alt=""></a> -->
                                    <!--  <div class="label_product">
                                         <span class="label_sale">Sale</span>
@@ -1044,7 +1104,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section_title">
-                        <h2>Upsell Products	</h2>
+                        <h2>별점순 상품</h2>
                     </div>
                 </div>
             </div> 

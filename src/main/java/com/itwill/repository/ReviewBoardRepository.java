@@ -34,5 +34,8 @@ public interface ReviewBoardRepository extends JpaRepository<ReviewBoard, Long> 
 	@Query(value = "SELECT * FROM ReviewBoard WHERE user_no = ?1", nativeQuery = true)
 	List<ReviewBoard> findByUserNo(Long no); // 선택된 userId 리뷰 리스트만 나오기
 	
+	@Query("SELECT AVG(r.boardStar) FROM ReviewBoard r WHERE r.product.productNo = :productNo")
+    Double calculateAverageStarRating(@Param("productNo") Long productNo); //상품 번호를 사용하여 별점 평균계산
+
 
 }

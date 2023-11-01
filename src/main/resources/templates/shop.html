@@ -613,20 +613,20 @@
                                 <ul>
                                     <li class="widget_sub_categories sub_categories1"><a href="javascript:void(0)">고양이</a>
                                         <ul class="widget_dropdown_categories dropdown_categories1">
-                                            <li><a href="#">Document</a></li>
-                                            <li><a href="#">Dropcap</a></li>
-                                            <li><a href="#">Dummy Image</a></li>
-                                            <li><a href="#">Dummy Text</a></li>
-                                            <li><a href="#">Fancy Text</a></li>
+                                            <li><a href="#">사료</a></li>
+                                            <li><a href="#">간식</a></li>
+                                            <li><a href="#">캔</a></li>
+                                            <li><a href="#">모래</a></li>
+                                            <li><a href="#">미용</a></li>
                                         </ul>
                                     </li>
                                     <li class="widget_sub_categories sub_categories2"><a href="javascript:void(0)">강아지</a>
                                         <ul class="widget_dropdown_categories dropdown_categories2">
-                                            <li><a href="#">Flickr</a></li>
-                                            <li><a href="#">Flip Box</a></li>
-                                            <li><a href="#">Cocktail</a></li>
-                                            <li><a href="#">Frame</a></li>
-                                            <li><a href="#">Flickrq</a></li>
+                                            <li><a href="#">사료</a></li>
+                                            <li><a href="#">간식</a></li>
+                                            <li><a href="#">캔</a></li>
+                                            <li><a href="#">위생</a></li>
+                                            <li><a href="#">미용</a></li>
                                         </ul>
                                     </li>
                                    <!-- <li class="widget_sub_categories sub_categories3"><a href="javascript:void(0)">Clothing</a>
@@ -740,25 +740,40 @@
                     <div class="shop_toolbar_wrapper">
                         <div class="shop_toolbar_btn">
 
-                            <button data-role="grid_3" type="button" class="active btn-grid-3" data-toggle="tooltip" title="3"></button>
+                           <!--  <button data-role="grid_3" type="button" class="active btn-grid-3" data-toggle="tooltip" title="3"></button> -->
 
                             <!--<button data-role="grid_4" type="button"  class=" btn-grid-4" data-toggle="tooltip" title="4"></button>-->
 
-                            <button data-role="grid_list" type="button"  class="btn-list" data-toggle="tooltip" title="List"></button>
+                            <!-- <button data-role="grid_list" type="button"  class="btn-list" data-toggle="tooltip" title="List"></button> -->
                         </div>
-                        <!--<div class=" niceselect_option">
+                         <div class="product_tab_btn">
+                            <ul class="nav" role="tablist">
+                                <li>
+                                    <a class="active" data-toggle="tab" href="#plant1" role="tab" aria-controls="plant1" aria-selected="true"> 
+                                       강아지
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#plant2" role="tab" aria-controls="plant2" aria-selected="false">
+                                       고양이
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class=" niceselect_option">
                             <form class="select_option" action="#">
+                            
                                 <select name="orderby" id="short">
 
-                                    <option selected value="1">Sort by average rating</option>
-                                    <option  value="2">Sort by popularity</option>
-                                    <option value="3">Sort by newness</option>
-                                    <option value="4">Sort by price: low to high</option>
-                                    <option value="5">Sort by price: high to low</option>
-                                    <option value="6">Product Name: Z</option>
+                                    <option selected value="1">별점순</option>
+                                    <option  value="2">낮은가격순</option>
+                                    <option value="3">높은가격순</option>
+                                    <option value="4">등록일순</option>
+                                 <!--    <option value="5">Sort by price: high to low</option>
+                                    <option value="6">Product Name: Z</option> -->
                                 </select>
                             </form>
-                        </div>-->
+                        </div>
                        <!-- <div class="page_amount">
                             <p>Showing 1–9 of 21 results</p>
                         </div>-->
@@ -796,10 +811,10 @@
                                     
                                     
                                 <div class="product_content grid_content">
-                                        <h4 class="product_name"><a href="product-details.html" th:text="${product.productName}">상품 이름</a></h4>
-                                        <p><a href="#" th:text="${product.productPetCategory}">Fruits</a></p>
+                                        <h4 class="product_name"><a href="product-details.html" th:text="${product.productName}" th:href="@{productDetail(productNo=${product.productNo})}">상품 이름</a></h4>
+                                        <p><a href="#" th:text="${product.productPetCategory}" >펫 카테고리</a></p>
                                         <div class="price_box"> 
-                                            <span class="current_price" th:text="${product.productPrice}">$26.00</span>
+                                            <span class="current_price" th:text="${product.productPrice}">상품 가격</span>
                                            <!-- <span class="old_price">$362.00</span>-->
                                         </div>
                                     </div>
@@ -811,14 +826,14 @@
                                     
                                 <div class="product_content list_content">
                                     <h4 class="product_name"><a href="product-details.html" th:text="${product.productName}">상품 이름</a></h4>	
-                                    <p><a href="#">Fruits</a></p>
+                                    <p><a href="#" th:text="${product.productPetCategory}">펫 카테고리</a></p>
                                     <div class="price_box"> 
                                         <span class="current_price" th:text="${product.productPrice}">$26.00</span>
                                         <!--<span class="old_price">$362.00</span>-->
                                     </div>
-                                    <div class="product_desc">
+                                   <!--  <div class="product_desc">
                                         <p>Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Viva..</p>
-                                    </div>
+                                    </div> -->
                                     <div class="action_links list_action_right">
                                         <ul>
                                             <li class="add_to_cart"><a href="cart.html" title="Add to cart">Add to Cart</a></li>
@@ -1342,7 +1357,7 @@
                                         </div>-->
                                         <!--<div class="product_desc">
                                             <p>Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Viva..</p>
-                                        </div>-->
+                                        </div>
                                         <div class="action_links list_action_right">
                                             <ul>
                                                 <li class="add_to_cart"><a href="cart.html" title="Add to cart">Add to Cart</a></li>
@@ -1350,7 +1365,8 @@
                                                  <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>  
                                                 <li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li>
                                             </ul>
-                                        </div>
+                                        </div>-->
+                                        
                                     </div>
                             </div>
                         </div>

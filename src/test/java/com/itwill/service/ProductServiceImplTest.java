@@ -68,9 +68,16 @@ class ProductServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 	}
 	
 	@Test
-	//@Disabled
+	@Disabled
 	void findAllProductByCategory() {
 		List<Product> find = productService.findAllProductByCategory("간식", "고양이");
+		System.out.println(find);
+	}
+	
+	@Test
+	@Disabled
+	void findAllProductByPetCategory() {
+		List<Product> find = productService.findAllProductByPetCategory("고양이");
 		System.out.println(find);
 	}
 	

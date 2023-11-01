@@ -42,6 +42,7 @@ function registEvent() {
 */
 function navigate() {
 	if (path == '/user_write_form') {
+		window.location.href='register'
 		html = user_write_form();
 		$('#content').html(html);
 	}
