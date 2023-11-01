@@ -87,5 +87,14 @@ public class UserInfoServiceImpl implements UserInfoService{
 		
 		return userinfo;
 	}
+	@Override
+	public boolean countByUserId(String userId) throws Exception {
+		int count = userInfoDao.countByUserId(userId);
+		if(count > 0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 	
 }

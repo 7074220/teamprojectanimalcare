@@ -45,6 +45,7 @@ PetService petService;
 		return "pet-list";
 	}
 	//펫 리스트
+	//center dto가져와야함.
 	@GetMapping("/petList")
 	public String petList(Model model) {
 		List<PetDto> petDtoList = new ArrayList<>();
@@ -53,6 +54,8 @@ PetService petService;
 			petDtoList.add(PetDto.toDto(pet));
 		}
 		
+		
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>"+petDtoList.get(0).getPetType());
 		model.addAttribute("petList",petDtoList);
 		return "pet-list" ;
 	}
@@ -79,7 +82,7 @@ PetService petService;
 			pet1.setPetRegisterDate(updatepetDto.getPetRegisterDate());
 			pet1.setPetFindPlace(updatepetDto.getPetFindPlace());
 			pet1.setPetCharacter(updatepetDto.getPetCharacter());
-			pet1.setCenter(Center.builder().centerNo(updatepetDto.getCenterNo()).build());
+			pet1.setCenter(updatepetDto.getCenter());
 			
 			
 			petService.petUpdate(pet1);

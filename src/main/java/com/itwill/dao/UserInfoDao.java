@@ -20,8 +20,6 @@ public interface UserInfoDao {
 	//아이디 중복체크 
 	public Integer countByUserId(String userId); //이게 필요한가?
 	
-	
-
 	public Userinfo findByUserPhone(String userPhoneNumber);
 	
 	public Userinfo findPasswordByUserIdPhoneNumber(String userId , String userPhoneNumber);
