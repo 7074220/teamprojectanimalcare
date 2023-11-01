@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
-	   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-       layout:decorate="layout/layout(title='')>
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='')">
+
 
 
 <head>
@@ -61,13 +61,13 @@
     <!--breadcrumbs area start-->
 
     <!--breadcrumbs area end-->
-    
+    <th:block layout:fragment="content">
     <!--contact map start-->
-    <div class="contact_map mt-70">
+   <!-- <div class="contact_map mt-70">
        <div class="map-area">
           <div id="googleMap"></div>
        </div>
-    </div>
+    </div>-->
     <!--contact map end-->
     
     <!--contact area start-->
