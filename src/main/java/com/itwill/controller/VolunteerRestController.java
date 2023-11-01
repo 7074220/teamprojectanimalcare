@@ -89,7 +89,7 @@ public class VolunteerRestController {
 	} // UPDATE
 
 
-	/*
+	
 	@Operation(summary = "volunteerNo로 봉사신청 보기") 
 	@GetMapping("/{volunteerNo}") 
 	public ResponseEntity<VolunteerDto> findByVolunteerNo(@PathVariable(name = "volunteerNo") Long no,  HttpSession httpSession) throws Exception{		
@@ -102,7 +102,7 @@ public class VolunteerRestController {
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));		
 		return new ResponseEntity<VolunteerDto>(volunteerDto, httpHeaders, HttpStatus.OK);
 	} // 봉사 목록 찾기
-	
+
 	
 	@Operation(summary = "userNo로 봉사목록 조회") 
 	@GetMapping("/user/{userNo}")
@@ -132,6 +132,6 @@ public class VolunteerRestController {
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));				
 		return new ResponseEntity<List<VolunteerDto>>(volunteerDtoList, httpHeaders, HttpStatus.OK);
 	} // 목록 전체 조회
-	*/
+	
 	
 }
