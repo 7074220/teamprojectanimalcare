@@ -46,15 +46,15 @@
 </head>
 
 <body>
-
+	
     <!--header area start-->
     <th layout:fragment="content">
 		
     <!--offcanvas menu area start-->
-    <div class="off_canvars_overlay">
+    <div class="off_canvars_overlay" id="content">
                 
     </div>
-    <div class="offcanvas_menu">
+    <!-- <div class="offcanvas_menu">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -182,7 +182,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--offcanvas menu area end-->
     
    <!-- <header>
@@ -777,7 +777,7 @@
                    
                    
                    
-                     <div class="row shop_wrapper">
+                     <div class="row shop_wrapper" id="listContent">
                         <div class="col-lg-4 col-md-4 col-sm-6 col-12" th:each="product:${productList}">
                             <div class="single_product">
                                 <div class="product_thumb">
