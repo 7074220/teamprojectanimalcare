@@ -43,6 +43,12 @@ public class ProductDaoImpl implements ProductDao {
 		return productRepository.findByContains(productName);
 	}
 
+	@Override
+	// 선택된 상품의 카테고리와 펫카테고리가 일치하는 모든 상품 출력
+	public List<Product> findAllProductByCategory(String productCategory, String productPetCategory) {
+		return productRepository.findAllProductByCategory(productCategory, productPetCategory);
+	}
+
 	// 높은 가격순 정렬
 	@Override
 	public List<Product> findAllByOrderByProductPriceDesc() {
@@ -72,4 +78,7 @@ public class ProductDaoImpl implements ProductDao {
 	public List<Product> findAllByOrderByProductNoAsc() {
 		return productRepository.findAllByOrderByProductNoAsc();
 	}
+	
+	
+
 }

@@ -1,7 +1,5 @@
 package com.itwill.dto;
 
-import java.util.List;
-
 import com.itwill.entity.Product;
 
 import lombok.AllArgsConstructor;
@@ -10,11 +8,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
-public class ProductListDto {
-
+public class ProductNameDto {
 	private Long productNo;
 	private Integer productPrice;
 	private String productImage;
@@ -34,8 +31,8 @@ public class ProductListDto {
 		return product;
 	}
 	
-	public static ProductListDto toDto(Product product) {
-		ProductListDto productListDto = ProductListDto.builder()
+	public static ProductNameDto toDto(Product product) {
+		ProductNameDto dto = ProductNameDto.builder()
 				.productNo(product.getProductNo())
 				.productPrice(product.getProductPrice())
 				.productImage(product.getProductImage())
@@ -43,6 +40,6 @@ public class ProductListDto {
 				.productCategory(product.getProductCategory())
 				.productPetCategory(product.getProductPetCategory())
 				.build();
-		return productListDto;
+		return dto;
 	}
 }

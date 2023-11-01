@@ -7,24 +7,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.itwill.entity.Center;
+
 import com.itwill.entity.Visit;
-import com.itwill.service.CenterService;
+
 import com.itwill.service.VisitService;
 
 @Controller
-@RequestMapping()
 public class VisitController {
 
 	@Autowired
 	VisitService visitService;
 
 	// 견학신청
-	@GetMapping("/visitApply")
+	@GetMapping("/visit")
 	public String apply(Model model) throws Exception {
-		return "my-account";
+		return "visit";
 	}
 
 
@@ -43,4 +41,5 @@ public class VisitController {
 		model.addAttribute("memberVisits", memberVisitList);
 		return "my-account";
 	}
+	
 }

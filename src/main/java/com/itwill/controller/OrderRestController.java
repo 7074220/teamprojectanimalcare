@@ -96,11 +96,12 @@ public class OrderRestController {
 			
 		}
 		orderDto.setOrderItemDtos(orderItemDtos);
+		orderDto.setUserNo(userNo);
 		orderDto.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+(carts.size()-1)+"개 상품");
-		insertOrder.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+(carts.size()-1)+"개 상품");
-		insertOrder.setOrderAddress(orderDto.getOrderAddress());
+		//insertOrder.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+(carts.size()-1)+"개 상품");
+		//insertOrder.setOrderAddress(orderDto.getOrderAddress());
 		
-		orderService.insertOrder(insertOrder);
+		orderService.insertOrder(orderDto.toEntity(orderDto));
 		cartService.deleteByUserId(userNo);
 		
 		return new ResponseEntity<OrdersDto>(orderDto,httpHeaders,HttpStatus.CREATED);
@@ -125,44 +126,42 @@ public class OrderRestController {
 	}
 	
 	
-	
-	@Operation(summary = "주문 전체 조회 , 관리자전용")
-	@GetMapping("/ordersList")
-	public ResponseEntity<List<OrdersDto>> findOrders() {
-		List<Orders> orderList = orderService.findOrders();
-		List<OrdersDto> ordersDto = new ArrayList<OrdersDto>();
-		
-		for (Orders orders : orderList) {
-			ordersDto.add(OrdersDto.toDto(orders));
-		}
-		
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-
-		return new ResponseEntity<List<OrdersDto>>(ordersDto, httpHeaders, HttpStatus.OK);
-	}
-	
+	/*
+	 * @Operation(summary = "주문 전체 조회 , 관리자전용")
+	 * 
+	 * @GetMapping("/ordersList") public ResponseEntity<List<OrdersDto>>
+	 * findOrders() { List<Orders> orderList = orderService.findOrders();
+	 * List<OrdersDto> ordersDto = new ArrayList<OrdersDto>();
+	 * 
+	 * for (Orders orders : orderList) { ordersDto.add(OrdersDto.toDto(orders)); }
+	 * 
+	 * HttpHeaders httpHeaders = new HttpHeaders(); httpHeaders.setContentType(new
+	 * MediaType("application", "json", Charset.forName("UTF-8")));
+	 * 
+	 * return new ResponseEntity<List<OrdersDto>>(ordersDto, httpHeaders,
+	 * HttpStatus.OK); }
+	 */
 	
 	
-	@Operation(summary = "회원아이디로 주문조회")
-	@GetMapping("/ordersList/{userNo}")
-	public ResponseEntity<List<OrdersDto>> findOrderById(@PathVariable(name = "userNo") Long no, HttpSession session) throws Exception {
-		if (session.getAttribute("userNo") == null) {
-			throw new Exception("로그인 하세요.");
-		}
-		
-		List<Orders> orderList = orderService.findOrderById(no);
-		List<OrdersDto> ordersDto = new ArrayList<OrdersDto>();
-		
-		for (Orders orders : orderList) {
-			ordersDto.add(OrdersDto.toDto(orders));
-		}
-		
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-
-		return new ResponseEntity<List<OrdersDto>>(ordersDto, httpHeaders, HttpStatus.OK);
-	}
+	/*
+	 * @Operation(summary = "회원아이디로 주문조회")
+	 * 
+	 * @GetMapping("/ordersList/{userNo}") public ResponseEntity<List<OrdersDto>>
+	 * findOrderById(@PathVariable(name = "userNo") Long no, HttpSession session)
+	 * throws Exception { if (session.getAttribute("userNo") == null) { throw new
+	 * Exception("로그인 하세요."); }
+	 * 
+	 * List<Orders> orderList = orderService.findOrderById(no); List<OrdersDto>
+	 * ordersDto = new ArrayList<OrdersDto>();
+	 * 
+	 * for (Orders orders : orderList) { ordersDto.add(OrdersDto.toDto(orders)); }
+	 * 
+	 * HttpHeaders httpHeaders = new HttpHeaders(); httpHeaders.setContentType(new
+	 * MediaType("application", "json", Charset.forName("UTF-8")));
+	 * 
+	 * return new ResponseEntity<List<OrdersDto>>(ordersDto, httpHeaders,
+	 * HttpStatus.OK); }
+	 */
 		
 	
 	
@@ -284,27 +283,26 @@ public class OrderRestController {
 		return new  ResponseEntity<List<OrderItemDto>>(orderItemDtos, httpHeaders, HttpStatus.OK);
 	}
 	
-	//controller로 옮길 예정
-	@Operation(summary = "오더insert form view")
-	@GetMapping("orderView")
-	public void orderView(HttpSession session,Model model) throws Exception{
-		if (session.getAttribute("userNo") == null) {
-			throw new Exception("로그인 하세요.");
-		}
-		Long userNo=(Long)session.getAttribute("userNo");
-		List<Cart> carts=cartService.findAllCartByUserId(userNo);
-		List<CartDto> cartDtos=new ArrayList<>();
-		for (Cart cart : carts) {
-			cartDtos.add(CartDto.toDto(cart));
-		}
-		//model.addAttribute("user",userinfodto);//userinfo는 서비스로 찾는지 의문
-		model.addAttribute("cartList",cartDtos);
-		
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		
-		//return new  ResponseEntity<List<OrderItemDto>>(orderItemDtos, httpHeaders, HttpStatus.OK);
-	}
+	/*
+	 * //controller로 옮길 예정
+	 * 
+	 * @Operation(summary = "오더insert form view")
+	 * 
+	 * @GetMapping("orderView") public void orderView(HttpSession session,Model
+	 * model) throws Exception{ if (session.getAttribute("userNo") == null) { throw
+	 * new Exception("로그인 하세요."); } Long
+	 * userNo=(Long)session.getAttribute("userNo"); List<Cart>
+	 * carts=cartService.findAllCartByUserId(userNo); List<CartDto> cartDtos=new
+	 * ArrayList<>(); for (Cart cart : carts) { cartDtos.add(CartDto.toDto(cart)); }
+	 * //model.addAttribute("user",userinfodto);//userinfo는 서비스로 찾는지 의문
+	 * model.addAttribute("cartList",cartDtos);
+	 * 
+	 * HttpHeaders httpHeaders = new HttpHeaders(); httpHeaders.setContentType(new
+	 * MediaType("application", "json", Charset.forName("UTF-8")));
+	 * 
+	 * //return new ResponseEntity<List<OrderItemDto>>(orderItemDtos, httpHeaders,
+	 * HttpStatus.OK); }
+	 */
 	
 	
 	

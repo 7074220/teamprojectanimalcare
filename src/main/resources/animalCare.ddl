@@ -17,16 +17,17 @@ DROP TABLE ReportBoard CASCADE CONSTRAINTS;
 DROP TABLE Coupon CASCADE CONSTRAINTS;
 DROP TABLE UserInfo CASCADE CONSTRAINTS;
 
+
 CREATE TABLE UserInfo(
 		user_no                       		NUMBER(10)		 NULL ,
 		user_password                 		VARCHAR2(50)		 NULL ,
 		user_point                    		NUMBER(10)		 NULL ,
-		user_gender                   		NUMBER(10)		 NULL ,
+		user_gender                   		VARCHAR2(50)		 NULL ,
 		user_address                  		VARCHAR2(50)		 NULL ,
 		user_phone_number             		VARCHAR2(50)		 NULL ,
 		user_id                       		VARCHAR2(50)		 NULL ,
 		user_resident_number          		VARCHAR2(50)		 NULL ,
-		user_register_date            		DATE		 NULL ,
+		user_register_date            		TIMESTAMP(9)		 NULL ,
 		user_name                     		VARCHAR2(50)		 NULL ,
         user_coupon_year              		NUMBER(10)		 NULL
 );

@@ -35,7 +35,7 @@ class ProductServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 	}
 	
 	@Test
-	//@Disabled
+	@Disabled
 	void findByProductNo() {
 		Product findProduct = productService.findByProductNo(2L);
 		System.out.println(findProduct);
@@ -65,6 +65,13 @@ class ProductServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 	void findByContainsTest() {
 		List<Product> findProduct = productService.findByContains("닭");
 		System.out.println(findProduct);
+	}
+	
+	@Test
+	//@Disabled
+	void findAllProductByCategory() {
+		List<Product> find = productService.findAllProductByCategory("간식", "고양이");
+		System.out.println(find);
 	}
 	
 	@Test
