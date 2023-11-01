@@ -50,11 +50,18 @@
 		th:remove="tag"></div>
 	<!-- -------------------- common-top.html end      -----------------------  -->
 	
+	<!-- Page Title(메인페이지는 타이틀을사용하지않음)-->
+	<!--  slider area start -->
+	<th:block th:if="${title!=''}">
+		<div class="page-title"
+			th:insert="~{/fragment/page-title::page-title(${title})}"
+			th:remove="tag"></div>
+	</th:block>	
+	<!--  slider area end -->
+	
 	<!-- Page Content-->
 	<!--Content 내용 영역 시작-->
 	<th:block layout:fragment="content" />
-	
-	
 	
 	<!-- common-footer.html start -->
 	<footer class="site-footer" th:insert="~{fragment/common-footer::common-footer}"></footer>
