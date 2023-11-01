@@ -49,6 +49,11 @@ public class ProductDaoImpl implements ProductDao {
 		return productRepository.findAllProductByCategory(productCategory, productPetCategory);
 	}
 
+	@Override
+	public List<Product> findAllProductByPetCategory(String productPetCategory) {
+		return productRepository.findAllProductByPetCategory(productPetCategory);
+	}
+	
 	// 높은 가격순 정렬
 	@Override
 	public List<Product> findAllByOrderByProductPriceDesc() {
@@ -78,6 +83,8 @@ public class ProductDaoImpl implements ProductDao {
 	public List<Product> findAllByOrderByProductNoAsc() {
 		return productRepository.findAllByOrderByProductNoAsc();
 	}
+
+
 	
 	
 
