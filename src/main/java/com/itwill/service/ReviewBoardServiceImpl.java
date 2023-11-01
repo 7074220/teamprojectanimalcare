@@ -101,4 +101,10 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 	public ReviewBoard findByBoardNo(Long BoardNo) {
 		return reviewBoardDao.findByBoardNo(BoardNo);
 	}
+	
+	@Override
+	public double calculateAverageStarRating(Long productNo) {
+		//상품 번호를 사용하여 별점 평균계산
+		return reviewBoardRepository.calculateAverageStarRating(productNo);
+	}
 }

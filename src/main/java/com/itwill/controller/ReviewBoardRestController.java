@@ -333,5 +333,17 @@ public class ReviewBoardRestController {
 	    }
 	}
 	
+	@Operation(summary = "해당상품 평균별점")
+	@GetMapping("/averageRating/{productNo}")
+	public ResponseEntity<ReviewBoardDto> calculateAverageStarRating(@PathVariable(value = "productNo") Long productNo) {
+	    double averageRating = reviewBoardService.calculateAverageStarRating(productNo);
+
+	    // 새로운 ReviewBoardDto 생성
+	    ReviewBoardDto reviewBoardDto = new ReviewBoardDto();
+	    reviewBoardDto.setAverageRating(averageRating);
+
+	    return ResponseEntity.ok(reviewBoardDto);
+	}
+
 	
 }

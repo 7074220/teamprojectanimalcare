@@ -19,6 +19,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 	@Query(value = "select * from product where product_category = ?1 and product_pet_category = ?2", nativeQuery = true)
 	List<Product> findAllProductByCategory(String productCategory, String productPetCategory);
 	
+	// 펫카테고리별로 상품 출력
+	@Query(value = "select * from product where product_pet_category = ?1", nativeQuery = true)
+	List<Product> findAllProductByPetCategory(String productPetCategory);
+	
 	// 높은 가격순 정렬
 	//@Query(value = "select * from product order by product_price desc", nativeQuery = true)
 	List<Product> findAllByOrderByProductPriceDesc();
