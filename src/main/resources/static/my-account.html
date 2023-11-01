@@ -417,7 +417,20 @@
                                                 <th>Status</th>              
                                             </tr>
                                         </thead>
-                                        <tbody>
+
+											<tbody>
+												<tr th:each="volunteer: ${volunteerList}">
+													<td th:text="${volunteer.no}">1</td>
+													<td th:text="${volunteer.time}">11:00</td>
+													<td th:text="${volunteer.date}">Jun 10, 2018</td>
+													<td th:text="${volunteer.center}">하하보호소</td>
+													<td><span
+														th:class="${volunteer.status == '봉사완료'} ? 'success' : ''"
+														th:text="${volunteer.status}">봉사완료</span></td>
+												</tr>
+											</tbody>
+
+											<!-- <tbody>
                                             <tr>
                                                 <td>1</td>
                                                 <td>11:00</td>
@@ -432,7 +445,9 @@
                                                 <td>안녕보호소 </td>
                                                 <td><span class="success">봉사신청</span></td>
                                             </tr>
-                                        </tbody>
+                                        </tbody> -->
+                                        
+                                        
                                     </table>
                                 </div>
                             </div>

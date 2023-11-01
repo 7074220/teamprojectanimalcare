@@ -77,13 +77,26 @@
                 <div class="col-lg-6 col-md-6">
                    <div class="contact_message content">
 					   <img src=""/> <!-- 센터 위치 이미지로 등록 -->
-                        <h4>센터이름</h4>   
+					   <h4>센터이름</h4>   
                          <p>주의사항</p>
                         <ul>
                             <li><i class="fa fa-fax"></i>  주소 : 서울시 강남구</li>
                             <li><i class="fa fa-phone"></i> <a href="#">Infor@roadthemes.com</a></li>
                             <li><i class="fa fa-envelope-o"></i><a href="tel:0(1234)567890">0(1234) 567 890</a>  </li>
-                        </ul>             
+                        </ul>
+					   <!--
+                        <h4 class="contact_name">
+                        	<a th:href="@{/center-details(centerNo=${center.centerNo})}" th:text="${center.centerName}">센터이름</a>
+                        </h4>   
+                         <p>주의사항</p>
+                         <p th:text="${center.centerPhoneNumber}">전화번호</p>
+                		 <p th:text="${center.centerLocal}">지역</p>
+                		 <p th:text="${center.centerOpenCloseTime}">운영 시간</p>
+                         <ul>
+                            <li><i class="fa fa-fax"></i>  주소 : 서울시 강남구</li>
+                            <li><i class="fa fa-phone"></i> <a href="#">Infor@roadthemes.com</a></li>
+                            <li><i class="fa fa-envelope-o"></i><a href="tel:0(1234)567890">0(1234) 567 890</a>  </li>
+                        </ul> -->             
                     </div> 
                 </div>
                 <div class="col-lg-6 col-md-6">
