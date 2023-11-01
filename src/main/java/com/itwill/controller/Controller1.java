@@ -16,6 +16,5 @@ public class Controller1 {
 	public String index() {
 		return "index";
 	}
-	
 
 }

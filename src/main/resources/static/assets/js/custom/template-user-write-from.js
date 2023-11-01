@@ -49,17 +49,17 @@ export function user_write_form(responseJsonObject = {}) {
                 
                              <p>
                                 <label>비밀번호 <span>*</span></label>
-                                <input type="password" id="password">
+                                <input type="password" id="password" value="{{userPassword}}">
                                 <span id="passwordError" style="color:red;"></span>
                             </p>
                             <p>
                                 <label>비밀번호 확인 <span>*</span></label>
-                                <input type="password" id="confirmPassword">
+                                <input type="password" id="confirmPassword" value="{{userPassword}}">
                                 <span id="confirmPasswordError" style="color:red;"></span>
                             </p>
                             <p>   
                                 <label>이름  <span>*</span></label>
-                                <input type="text" id="name">
+                                <input type="text" id="name" value="{{userName}}">
                                 <span id="nameError" style="color:red;"></span>
                              </p>
                 
@@ -75,13 +75,13 @@ export function user_write_form(responseJsonObject = {}) {
                 
                              <p>   
                                 <label>핸드폰번호  <span>*</span></label>
-                                <input type="text" id="phone">
+                                <input type="text" id="phone" value="{{userPhoneNumber}}">
                                 <span id="phoneError" style="color:red;"></span>
                              </p>
 
                              <p>   
                                 <label>주소  <span>*</span></label>
-                                <input type="text" id="address">
+                                <input type="text" id="address" value="{{userAddress}}">
                                 
                                 <span id="addressError" style="color:red;"></span>
                             </p>
