@@ -386,11 +386,11 @@
                                         </thead>
                                         <tbody>
                                             <tr th:each="adoption : ${adoptDtoList}" >
-                                                <td th:text="${adoption.adoptNo}"></td>
-                                                <td th:text="${adoption.adoptTime}"></td>
-                                                <td th:text="${adoption.adoptDate}"></td>
-                                                <td th:text="${adoption.petNo}"></td>
-                                                <td th:text="${adoption.adoptStatus}"></td>
+                                                <td th:text="${adoption.no}"></td>
+                                                <td th:text="${adoption.time}">11:00</td>
+                                                <td th:text="${adoption.date}">May 10, 2018</span></td>
+                                                <td th:text="${adoption.pet}">포메라니안</td>
+                                                <td th:text="${adoption.status}"><span class="success">입양신청</span></td>
                                             </tr>
                                             <!-- <tr>
                                                 <td>2</td>
