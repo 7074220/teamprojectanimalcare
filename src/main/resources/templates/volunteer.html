@@ -74,63 +74,46 @@
     <div class="contact_area">
         <div class="container">   
             <div class="row">
-                
                 <div class="col-lg-6 col-md-6">
                    <div class="contact_message content">
-                        <h3>center name</h3>    
-                         <p>Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram anteposuerit litterarum formas human. qui sequitur mutationem consuetudium lectorum. Mirum est notare quam</p>
+					   <img src=""/> <!-- 센터 위치 이미지로 등록 -->
+                        <h4>센터이름</h4>   
+                         <p>주의사항</p>
                         <ul>
-                            <li><i class="fa fa-fax"></i>  Address : No 40 Baria Sreet 133/2 NewYork City</li>
+                            <li><i class="fa fa-fax"></i>  주소 : 서울시 강남구</li>
                             <li><i class="fa fa-phone"></i> <a href="#">Infor@roadthemes.com</a></li>
                             <li><i class="fa fa-envelope-o"></i><a href="tel:0(1234)567890">0(1234) 567 890</a>  </li>
                         </ul>             
                     </div> 
                 </div>
-                
                 <div class="col-lg-6 col-md-6">
-                   <div class="contact_message form">
-                        <h3>Tell us your project</h3>   
-                        <form id="contact-form" method="POST"  action="assets/mail.php">
-                            <input type="datetime-local" name="starttime">
-                           
-                         
-                            <button type="submit"> 확인</button>  
-                            <p class="form-messege"></p>
-                        </form> 
-                    </div> 
-                </div>
-                
-                
-                
-                <div class="col-lg-6 col-md-6">
-                   <div class="contact_message form">
-                        <h3>Tell us your project</h3>   
-                        <form id="contact-form" method="POST"  action="assets/mail.php">
-                            <p>  
-                               <label> Your Name (required)</label>
-                                <input name="name" placeholder="Name *" type="text"> 
-                            </p>
-                            <p>       
-                               <label>  Your Email (required)</label>
-                                <input name="email" placeholder="Email *" type="email">
-                            </p>
-                            <p>          
-                               <label>  Subject</label>
-                                <input name="subject" placeholder="Subject *" type="text">
-                            </p>    
-                            <div class="contact_textarea">
-                                <label>  Your Message</label>
-                                <textarea placeholder="Message *" name="message"  class="form-control2" ></textarea>     
-                            </div>   
-                            <button type="submit"> Send</button>  
-                            <p class="form-messege"></p>
-                        </form> 
+						<div class="contact_message form">
+							<h3>신청 양식</h3>
+							<!-- 달력 -->
+							<form id="contact-form" method="POST" action="assets/mail.php">
+								<p>
+									<label> 이름 </label> <input name="name" placeholder="Name *" type="text">
+								</p>
+								<p>
+									<label> 연락처 </label> <input name="email" placeholder="Phone *" type="text" >
+								</p>
+								<p>
+									<label> 주소 </label> <input name="subject" placeholder="Subject *" type="text">
+								</p>
+								<div class="contact_textarea">
+									<label> 하고싶은 말</label>
+									<textarea placeholder="Message *" name="message" class="form-control2"></textarea>
+								</div>
+								<p>
+									<label>방문예약</label> <input type="datetime-local" name="starttime">
+								</p>
 
-                    </div> 
-                </div>
-                       
-                
-                
+								<button type="submit">확인</button>
+								<p class="form-messege"></p>
+							</form>
+
+						</div>
+					</div>
             </div>
         </div>    
     </div>
