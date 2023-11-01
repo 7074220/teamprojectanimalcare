@@ -25,7 +25,7 @@
  *	http://en.wikipedia.org/wiki/GNU_General_Public_License
  */
 
-
+/*
 if ( typeof Object.create !== 'function' ) {
 	Object.create = function( obj ) {
 		function F() {};
@@ -328,7 +328,12 @@ if ( typeof Object.create !== 'function' ) {
 				if(self.options.zoomType == "inner") {
 					self.zoomWindow.css({ backgroundImage: "url('" + self.imageSrc + "')" }); 
 				}
-				/*-------------------END THE ZOOM WINDOW AND LENS----------------------------------*/
+				//-------------------END THE ZOOM WINDOW AND LENS----------------------------------
+				
+				
+				
+				
+				
 				//touch events
 				self.$elem.bind('touchmove', function(e){    
 					e.preventDefault();
@@ -1044,7 +1049,9 @@ if ( typeof Object.create !== 'function' ) {
 
 										}
 
-										/*
+										
+										
+										// 주석
              if(!self.bgxp){self.bgxp = self.largeWidth/self.newvalue;}
 						if(!self.bgyp){self.bgyp = self.largeHeight/self.newvalue ;}  
                  if (!self.bgloop){   
@@ -1059,7 +1066,10 @@ if ( typeof Object.create !== 'function' ) {
                   }, 16);
 
                  }
-										 */
+                 // 주석
+										 
+										
+										
 										self.changeBgSize = false;
 									}
 
@@ -1768,3 +1778,4 @@ if ( typeof Object.create !== 'function' ) {
 })( jQuery, window, document );
 
 
+*/
