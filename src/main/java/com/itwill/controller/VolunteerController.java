@@ -45,7 +45,7 @@ public class VolunteerController {
 			volunteerDtoList.add(VolunteerDto.toDto(volunteer));
 		}
 		model.addAttribute("volunteerDtoList", volunteerDtoList);
-		return "forward:volunteer_list.html"; // 일반적으로 뷰 템플릿의 경로를 지정. 링크수정하기
+		return "volunteerList"; // 일반적으로 뷰 템플릿의 경로를 지정. 링크수정하기
 	}
 
 	
@@ -59,16 +59,16 @@ public class VolunteerController {
 			volunteerDtoUserNoList.add(VolunteerDto.toDto(volunteer));
 		}
 		model.addAttribute("volunteerDtoUserNoList", volunteerDtoUserNoList);
-		return "redirect:volunteer_list.html"; // 링크수정하기	
+		return "my-account"; 
 	}
 	
-	
+	/*
 	// volunteerNo 로 봉사 목록 조회. 관리자?
 	@GetMapping("/volunteerList/{volunteerNo}")
 	public String findByVolunteerNoVolunteer(Model model, @PathVariable(name = "volunteerNo") Long volunteerNo) throws Exception{
 		Volunteer volunteer = volunteerService.findByVolunteerNo(volunteerNo);
 		model.addAttribute("volunteer", volunteer);
-		return "redirect:volunteer_list.html"; // 링크수정하기	
+		return "redirect:volunteer_list"; // 링크수정하기	
 	}
-	
+	*/
 }
