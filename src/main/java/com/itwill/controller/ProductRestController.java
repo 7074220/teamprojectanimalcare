@@ -217,11 +217,32 @@ public class ProductRestController {
 		return new ResponseEntity<List<ProductListDto>>(productListDto, httpHeaders, HttpStatus.OK);
 	}
 	
+	
+	
 	@Operation(summary = "선택된 상품의 카테고리와 펫카테고리가 일치하는 모든 상품 출력")
 	@PostMapping("/products/categorySearch")
 	public ResponseEntity<List<ProductListDto>> categorySearch(@RequestBody ProductListDto dto) {
 		List<ProductListDto> productListDto = new ArrayList<>();
 		List<Product> findList = productService.findAllProductByCategory(dto.getProductCategory(), dto.getProductPetCategory());
+		
+		for (Product product : findList) {
+			ProductListDto productDto = ProductListDto.toDto(product);
+			productListDto.add(productDto);
+		}
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<List<ProductListDto>>(productListDto, httpHeaders, HttpStatus.OK);
+	}
+	
+	
+	
+	@Operation(summary = "펫카테고리별로 상품 출력")
+	@PostMapping("/products/petCategoryFind")
+	public ResponseEntity<List<ProductListDto>> petCategoryFind(@RequestBody ProductListDto dto){
+		List<ProductListDto> productListDto = new ArrayList<>();
+		List<Product> findList = productService.findAllProductByPetCategory(dto.getProductPetCategory());
 		
 		for (Product product : findList) {
 			ProductListDto productDto = ProductListDto.toDto(product);
