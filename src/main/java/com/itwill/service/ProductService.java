@@ -23,6 +23,9 @@ public interface ProductService {
 	// 선택된 상품의 카테고리와 펫카테고리가 일치하는 모든 상품 출력
 	List<Product> findAllProductByCategory(String productCategory, String productPetCategory);
 	
+	// 펫카테고리별로 상품 출력
+	List<Product> findAllProductByPetCategory(String productPetCategory);
+	
 	// 높은 가격순 정렬
 	List<Product> findAllByOrderByProductPriceDesc();
 
@@ -38,4 +41,7 @@ public interface ProductService {
 	
 	// 낮은번호순 정렬
 	List<Product> findAllByOrderByProductNoAsc();
+	
+	
+	
 }

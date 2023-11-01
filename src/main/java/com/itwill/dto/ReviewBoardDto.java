@@ -31,6 +31,7 @@ public class ReviewBoardDto {
 	private Date boardDate;
 	private Integer boardStar;
 	private Long productNo;
+	   private double averageRating;
 	
 	public static ReviewBoard toEntity(ReviewBoardDto dto) {
 		ReviewBoard reviewBoard = ReviewBoard.builder()
@@ -53,7 +54,7 @@ public class ReviewBoardDto {
 									.boardContent(reviewBoard.getBoardContent())
 									.boardDate(reviewBoard.getBoardDate())
 									.boardStar(reviewBoard.getBoardStar())
-									.productNo(reviewBoard.getProduct().getProductNo())
+									.productNo(reviewBoard.getProduct().getProductNo())							
 									.build(); 		
 		return reviewBoardDto;
 	}

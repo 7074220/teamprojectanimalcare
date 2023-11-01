@@ -8,7 +8,7 @@ public interface ReviewBoardService {
 	public ReviewBoard create(ReviewBoard reviewBoard);
 
 	public ReviewBoard findByBoardNo(Long boardNo);
-	
+
 	public ReviewBoard update(ReviewBoard reviewBoard);
 
 	public void deleteById(Long boardNo);
@@ -32,4 +32,7 @@ public interface ReviewBoardService {
 	public List<ReviewBoard> findByOrderByBoardStarDescBoardDateDesc();// 별점 높은순,최신순
 
 	public List<ReviewBoard> findByOrderByBoardStarAscBoardDateDesc();// 별점 낮은순,최신순
+
+	public double calculateAverageStarRating(Long productNo);// 상품 번호를 사용하여 별점 평균계산
+
 }
