@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itwill.dto.ProductInsertDto;
 import com.itwill.dto.ProductListDto;
 import com.itwill.dto.ProductNameDto;
+import com.itwill.dto.ProductPetCategoryDto;
+import com.itwill.dto.ProductPriceDescDto;
 import com.itwill.entity.Product;
 import com.itwill.service.ProductService;
 
@@ -42,14 +44,26 @@ public class ProductController {
 	@GetMapping("/productList")
 	public String ProductList(Model model) {
 		List<ProductListDto> productListDto = new ArrayList<>();
+		List<ProductPriceDescDto> productPriceDescDto = new ArrayList<>();
+		
+		// 상품번호 큰것부터(최신등록순)
 		List<Product> productList = productService.findAllByOrderByProductNoDesc();
+		// 상품가격 비싼 것부터
+		List<Product> productPriceDescList = productService.findAllByOrderByProductPriceDesc();
+
 		
 		for (Product product : productList) {
 			productListDto.add(ProductListDto.toDto(product));
 		}
 		
+		for (Product productPrice : productPriceDescList) {
+			productPriceDescDto.add(ProductPriceDescDto.toDto(productPrice));
+		}
+		
 		model.addAttribute("productList", productListDto);
-		System.out.println(productList.get(0).getProductPetCategory());
+		model.addAttribute("productPriceDescList", productPriceDescDto);
+		
+		//System.out.println(productList.get(0).getProductPetCategory());
 		return "shop";
 	}
 	
