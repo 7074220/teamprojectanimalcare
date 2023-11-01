@@ -83,7 +83,9 @@ function createInitializer() {
 			},
 			phone :{
 				required: true,
-           	 	regex: "^(010|011)[-\\s]?\\d{3,4}[-\\s]?\\d{4}$"
+				phone : true
+           	 	//regex: "^(010|011)[-\\s]?\\d{3,4}[-\\s]?\\d{4}$"
+           	 	//regex: "^\\d{3}-\\d{3,4}-\\d{4}$" //이게 핸드폰 양식
 			}
 		},
 		messages: {

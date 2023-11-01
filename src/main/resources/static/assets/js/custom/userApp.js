@@ -11,6 +11,11 @@ let html = '';
 */
 const initialize=createInitializer();
 initialize.addCustomFunctionHandlebars();
+jQuery.validator.addMethod("phone", function(phone_number, element) {
+    //phone_number = phone_number.replace(/\s+/g, "");
+    return this.optional(element) || phone_number.length == 13 && 
+    phone_number.match(/^\\d{3}-\\d{3,4}-\\d{4}$/);
+}, "핸드폰 번호 형식으로 써주세요");
 
 function init() {
 	
