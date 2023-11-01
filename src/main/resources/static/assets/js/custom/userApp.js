@@ -1,5 +1,6 @@
 import {user_write_form} from './template-user-write-from.js';
 import {ajaxRequest} from './request.js';
+import {createInitializer} from "./initializer.js";
 
 let hash = window.location.hash
 let path = hash.substring(1);
@@ -8,7 +9,11 @@ let html = '';
 /*
 초기실행메쏘드
 */
+const initialize=createInitializer();
+initialize.addCustomFunctionHandlebars();
+
 function init() {
+	
 	registEvent();
 	navigate();
 }
@@ -42,23 +47,36 @@ function registEvent() {
 */
 function navigate() {
 	if (path == '/user_write_form') {
-		window.location.href='register'
 		html = user_write_form();
 		$('#content').html(html);
+		initialize.validatorUserWriteFormSetDefault();
+		let validator = $('#user_write_form').validate();
+		initialize.setValidator(validator);
 	}
 	if (path == '/user_write_action') {
 		/**************** /user_write_action******************/
-		let sendJsonObject = {
-				userId: document.f.userId.value,
-				userPassword: document.f.password.value,
-				userName: document.f.name.value,
-				userGender: document.f.gender.value,
-				userPhoneNumber: document.f.phone.value,
-				userAddress: document.f.address.value
+		if (initialize.getValidator().form()) {
+			let sendJsonObject = {
+					userId: document.f.userId.value,
+					userPassword: document.f.password.value,
+					userName: document.f.name.value,
+					userGender: document.f.gender.value,
+					userPhoneNumber: document.f.phone.value,
+					userAddress: document.f.address.value
+			}
+			const responseJsonObject = ajaxRequest('POST','user',sendJsonObject);
+			
+			if(responseJsonObject.msg!=null){
+				window.location.href = 'login';
+			}else {
+				html = user_write_form(responseJsonObject);
+				$('#content').html(html);
+				initialize.validatorUserWriteFormSetDefault();
+				let validator = $('#user_write_form').validate();
+				initialize.setValidator(validator);
+			}
 		}
-		const responseJsonObject = ajaxRequest('POST','user',sendJsonObject);
-		html = user_write_form(responseJsonObject);
-		$('#content').html(html);
+		
 	}
 }
 

@@ -39,33 +39,33 @@ export function user_write_form(responseJsonObject = {}) {
                 <div class="col-lg-6 col-md-6">
                     <div class="account_form register">
                         <h2 th:text="Register">회원가입</h2>
-                        <form name="f" action="my-account.html" method="post" >
+                        <form name="f" id="user_write_form" action="my-account.html" method="post" >
                             
                             <p>   
                                 <label>아이디 <span>*</span></label>
-                                <input type="text" id="userId" value="{{userId}}">
+                                <input type="text" name="userId" id="userId" value="{{userId}}">
                                 <span id="userIdError" style="color:red;"></span>
                              </p>
                 
                              <p>
                                 <label>비밀번호 <span>*</span></label>
-                                <input type="password" id="password" value="{{userPassword}}">
+                                <input type="password" name="password" id="password" value="{{userPassword}}">
                                 <span id="passwordError" style="color:red;"></span>
                             </p>
                             <p>
                                 <label>비밀번호 확인 <span>*</span></label>
-                                <input type="password" id="confirmPassword" value="{{userPassword}}">
+                                <input type="password" name="confirmPassword" id="confirmPassword" value="{{userPassword}}">
                                 <span id="confirmPasswordError" style="color:red;"></span>
                             </p>
                             <p>   
                                 <label>이름  <span>*</span></label>
-                                <input type="text" id="name" value="{{userName}}">
+                                <input type="text" name="name" id="name" value="{{userName}}">
                                 <span id="nameError" style="color:red;"></span>
                              </p>
                 
                              <p>
                                 <label>성별  <span>*</span></label>
-                                <select id="gender">
+                                <select id="gender" name="gender">
                                     <option value="">성별 선택</option>
                                     <option value="남">남</option>
                                     <option value="여">여</option>
@@ -75,13 +75,13 @@ export function user_write_form(responseJsonObject = {}) {
                 
                              <p>   
                                 <label>핸드폰번호  <span>*</span></label>
-                                <input type="text" id="phone" value="{{userPhoneNumber}}">
+                                <input type="text" name="phone" id="phone" value="{{userPhoneNumber}}">
                                 <span id="phoneError" style="color:red;"></span>
                              </p>
 
                              <p>   
                                 <label>주소  <span>*</span></label>
-                                <input type="text" id="address" value="{{userAddress}}">
+                                <input type="text" name="address" id="address" value="{{userAddress}}">
                                 
                                 <span id="addressError" style="color:red;"></span>
                             </p>
