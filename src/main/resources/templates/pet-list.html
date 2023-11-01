@@ -154,12 +154,16 @@
                                     </div>
                                     
                                 <div class="product_content list_content">
-                                    <h4 class="pet_type"><a href="product-details.html" >Aliquam Consequat</a></h4>
-                                    <p><a href="#" >Fruits</a></p>
+                                    <!-- <h4 class="pet_type"><a href="product-details.html" th:text="${pet.petType}" >Aliquam Consequat</a></h4>
+                                    <p><a href="#" >Fruits</a></p> -->
+                                    
+                                    
                                     <div class="price_box"> 
                                     	
                                        <!--  <span class="current_price">$26.00</span>
                                         <span class="old_price">$362.00</span><br> -->
+                                              <span class="type" >종 류 : </span>
+                                        <span class="pettype" th:text="${pet.petType}">$26.00</span><br>
                                         <span class="Local" >지 역 : </span>
                                         <span class="petLocal" th:text="${pet.petLocal}">$26.00</span><br>
                                            <span class="Gender">성 별 :</span>

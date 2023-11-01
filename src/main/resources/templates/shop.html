@@ -42,16 +42,20 @@
     
     <!--modernizr min js here-->
     <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
-
+    <script>
+		function chageLangSelect(){
+			alert('ㅇㅇ');
+			window.location.href="맵핑";
+		}
+	</script>
 </head>
 
 <body>
-	
     <!--header area start-->
     <th layout:fragment="content">
-		
+	<div id="content">
     <!--offcanvas menu area start-->
-    <div class="off_canvars_overlay" id="content">
+
                 
     </div>
     <!-- <div class="offcanvas_menu">
@@ -763,8 +767,7 @@
                         <div class=" niceselect_option">
                             <form class="select_option" action="#">
                             
-                                <select name="orderby" id="short">
-
+                                <select name="orderby" id="short" onchange="chageLangSelect()">
                                     <option selected value="1">별점순</option>
                                     <option  value="2">낮은가격순</option>
                                     <option value="3">높은가격순</option>
@@ -791,6 +794,7 @@
                    <!--  상품 시작-->
                    
                    
+
                    
                      <div class="row shop_wrapper" id="listContent">
                         <div class="col-lg-4 col-md-4 col-sm-6 col-12" th:each="product:${productList}">
@@ -1390,6 +1394,7 @@
         </div>
     </div>
     <!--shop  area end-->
+    </div>
     </th:block>
     
   <!--footer area start-->

@@ -45,6 +45,7 @@ PetService petService;
 		return "pet-list";
 	}
 	//펫 리스트
+	//center dto가져와야함.
 	@GetMapping("/petList")
 	public String petList(Model model) {
 		List<PetDto> petDtoList = new ArrayList<>();
@@ -53,6 +54,8 @@ PetService petService;
 			petDtoList.add(PetDto.toDto(pet));
 		}
 		
+		
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>"+petDtoList.get(0).getPetType());
 		model.addAttribute("petList",petDtoList);
 		return "pet-list" ;
 	}
