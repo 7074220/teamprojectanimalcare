@@ -665,13 +665,30 @@
                     <div class="product_d_right">
                        <form action="#">
                            
-                            <h1><a href="#">commodo augue nisi</a></h1>
+                            <h1><a href="#" th:text="${product.productName}" th:href="@{productDetail(productNo=${product.productNo})}">상품 디테일 이름</a></h1>
+                            
+                            
+                            
+                           <!--  상품 디테일 이름 옆에 화살표 두개 -->
+                            
+                            
+                            
+                          <!--   "<" 화살표 누르면 앞 상품으로 이동, ">" 화살표 누르면 뒷 상품으로 이동 -->
+                            
                             <div class="product_nav">
                                 <ul>
-                                    <li class="prev"><a href="product-details.html"><i class="fa fa-angle-left"></i></a></li>
-                                    <li class="next"><a href="variable-product.html"><i class="fa fa-angle-right"></i></a></li>
+                                    <li class="prev"><a href="product-details.html" th:href="@{productDetail(productNo=${(product.productNo)+1})}"><i class="fa fa-angle-left"></i></a></li>
+                                    <li class="next"><a href="variable-product.html" th:href="@{productDetail(productNo=${(product.productNo)-1})}"><i class="fa fa-angle-right"></i></a></li>
                                 </ul>
                             </div>
+                           <!--   "<" 화살표 누르면 앞 상품으로 이동, ">" 화살표 누르면 뒷 상품으로 이동 끝 -->  
+                            
+                            
+                            
+                            
+                            <!--  상품 디테일 이름 옆에 화살표 두개 -->
+                            
+                            
                             <div class=" product_ratting">
                                 <ul>
                                     <li><a href="#"><i class="icon-star"></i></a></li>
@@ -679,12 +696,11 @@
                                    <li><a href="#"><i class="icon-star"></i></a></li>
                                    <li><a href="#"><i class="icon-star"></i></a></li>
                                    <li><a href="#"><i class="icon-star"></i></a></li>
-                                    <li class="review"><a href="#"> (customer review ) </a></li>
+                                    <li class="review"><a href="#"> (고객 리뷰) </a></li>
                                 </ul>
-                                
                             </div>
                             <div class="price_box">
-                                <span class="current_price">£70.00</span>
+                                <span class="current_price" th:text="${product.productPrice}">상품 가격</span>
                                <!--  <span class="old_price">£80.00</span> -->
                                 
                             </div>
@@ -701,8 +717,16 @@
                                     <li class="color4"><a href="#"></a></li>
                                 </ul>
                             </div> -->
+                            
+                            
+                            
+                            
+                            <!-- 상품 디테일 부가기능 -->
+                            
+                            
+                            
                             <div class="product_variant quantity">
-                                <label>quantity</label>
+                                <label>수량</label>
                                 <input min="1" max="100" value="1" type="number">
                                 <button class="button" type="submit">add to cart</button>  
                                 
@@ -714,8 +738,15 @@
                                </ul>
                             </div>
                             <div class="product_meta">
-                                <span>Category: <a href="#">Clothing</a></span>
+                                <span>Category: <a href="#" th:text="${product.productCategory}">펫 카테고리</a></span>
                             </div>
+                            
+                            
+                            
+                            <!-- 상품 디테일 설명 -->
+                            
+                            
+                            
                             
                         </form>
                        <!--  <div class="priduct_social">
@@ -744,13 +775,13 @@
                         <div class="product_info_button">    
                             <ul class="nav" role="tablist">
                                 <li >
-                                    <a class="active" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Description</a>
+                                    <a class="active" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">상품 설명</a>
                                 </li>
                                <!--  <li>
                                      <a data-toggle="tab" href="#sheet" role="tab" aria-controls="sheet" aria-selected="false">Specification</a>
                                 </li> -->
                                 <li>
-                                   <a data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews (1)</a>
+                                   <a data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">리뷰</a>
                                 </li>
                             </ul>
                         </div>
@@ -1073,7 +1104,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section_title">
-                        <h2>Upsell Products	</h2>
+                        <h2>별점순 상품</h2>
                     </div>
                 </div>
             </div> 
