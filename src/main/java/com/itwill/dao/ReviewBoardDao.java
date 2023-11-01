@@ -36,6 +36,7 @@ public interface ReviewBoardDao {
 	
 	public List<ReviewBoard> findByOrderByBoardStarAscBoardDateDesc();//별점 낮은순,최신순
 
+	 public double calculateAverageStarRating(Long productNo);//상품 번호를 사용하여 별점 평균계산
 	
 	
 }		
