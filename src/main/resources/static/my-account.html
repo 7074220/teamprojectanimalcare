@@ -226,8 +226,10 @@
                                 <li><a href="#account-details" data-toggle="tab" class="nav-link">내정보</a></li>
                                 <li><a href="#mypet" data-toggle="tab" class="nav-link">마이펫</a></li>
                                 <li><a href="#cuponpage" data-toggle="tab" class="nav-link">쿠폰</a></li>
-                                <li><a href="#adoptVo" data-toggle="tab" class="nav-link">입양 봉사 견학</a></li>
-                                <li> <a href="#orders" data-toggle="tab" class="nav-link">상품주문</a></li>
+                                <li><a href="#adopt" data-toggle="tab" class="nav-link">입양</a></li>
+                                <li><a href="#volunteer" data-toggle="tab" class="nav-link">봉사</a></li>
+                                <li><a href="#visit" data-toggle="tab" class="nav-link">견학</a></li>
+                                <li> <a href="#orders" data-toggle="tab" class="nav-link">주문목록</a></li>
                                 <li><a href="login.html" class="nav-link">로그아웃</a></li>
                                 <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li>
 
@@ -370,38 +372,111 @@
 
 
 
-                            <div class="tab-pane fade" id="adoptVo">
-                                <h3>입양 봉사 견학</h3>
+                            <div class="tab-pane fade" id="adopt">
+                                <h3>입양</h3>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>Order</th>
+                                                <th>No</th>
+                                                <th>Time</th>
                                                 <th>Date</th>
-                                                <th>Status</th>
-                                                <th>Total</th>
-                                                <th>Actions</th>                 
+                                                <th>Pet</th>
+                                                <th>Status</th>                 
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>May 10, 2018</td>
-                                                <td><span class="success">Completed</span></td>
-                                                <td>$25.00 for 1 item </td>
-                                                <td><a href="cart.html" class="view">view</a></td>
+                                                <td>11:00</td>
+                                                <td>May 10, 2018</span></td>
+                                                <td>포메라니안</td>
+                                                <td><span class="success">입양신청</span></td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
-                                                <td>May 10, 2018</td>
-                                                <td>Processing</td>
-                                                <td>$17.00 for 1 item </td>
-                                                <td><a href="cart.html" class="view">view</a></td>
+                                                <td>12:00</td>
+                                                <td>Jun 10, 2018</td>
+                                                <td>골든리트리버 </td>
+                                                <td><span class="success">입양완료</span></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
+                            
+                            <div class="tab-pane fade" id="volunteer">
+                                <h3>봉사</h3>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Time</th>
+                                                <th>Date</th>
+                                                <th>Center</th>
+                                                <th>Status</th>              
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>11:00</td>
+                                                <td>Jun 10, 2018</td>
+                                                <td>하하보호소 </td>
+                                                <td><span class="success">봉사완료</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>12:00</td>
+                                                <td>Jun 10, 2018</td>
+                                                <td>안녕보호소 </td>
+                                                <td><span class="success">봉사신청</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="tab-pane fade" id="visit">
+                                <h3>견학</h3>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Time</th>
+                                                <th>Date</th>
+                                                <th>Center</th>
+                                                <th>Status</th>                   
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>11:00</td>
+                                                <td>Jun 10, 2018</td>
+                                                <td>하하보호소 </td>
+                                                <td><span class="success">견학완료</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>12:00</td>
+                                                <td>Jun 10, 2018</td>
+                                                <td>안녕보호소 </td>
+                                                <td><span class="success">견학신청</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
             
                             <div class="tab-pane fade" id="mypet">
                                 <h3>마이펫</h3>

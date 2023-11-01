@@ -41,6 +41,11 @@ function registEvent() {
 	이벤트발생시 처리메쏘드
 */
 function navigate() {
+	if (path == '/user_write_form') {
+		window.location.href='register'
+		html = user_write_form();
+		$('#content').html(html);
+	}
 	if (path == '/user_write_action') {
 		/**************** /user_write_action******************/
 		let sendJsonObject = {
