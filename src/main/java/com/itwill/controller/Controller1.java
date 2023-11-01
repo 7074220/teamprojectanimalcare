@@ -9,7 +9,7 @@ public class Controller1 {
 	
 	@GetMapping(value = "/")
 	public String main() {
-		return "layout/sample";
+		return "index";
 	}
 
 	@GetMapping(value = "/index")

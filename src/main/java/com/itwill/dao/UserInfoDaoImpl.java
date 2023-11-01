@@ -41,6 +41,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		return userinfoRepository.save(userinfo);
 	}
 	
+	/* 아이디 중복체크 */
 	@Override
 	public Integer countByUserId(String userId) {
 		return userinfoRepository.countByUserId(userId);

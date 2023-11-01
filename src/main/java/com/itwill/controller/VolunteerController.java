@@ -44,13 +44,13 @@ public class VolunteerController {
 	// 봉사 전체 리스트 조회. 관리자?
 	@GetMapping("/volunteerList") 
 	public String volunteerList(Model model) {
-		List<Volunteer> volunteerList = volunteerService.findAllVolunteers();
 		List<VolunteerDto> volunteerDtoList = new ArrayList<>();
+		List<Volunteer> volunteerList = volunteerService.findAllVolunteers();
 		
 		for (Volunteer volunteer : volunteerList) {
 			volunteerDtoList.add(VolunteerDto.toDto(volunteer));
 		}
-		model.addAttribute("volunteerDtoList", volunteerDtoList);
+		model.addAttribute("volunteerList", volunteerDtoList);
 		return "volunteerList"; // 일반적으로 뷰 템플릿의 경로를 지정. 링크수정하기
 	}
 
