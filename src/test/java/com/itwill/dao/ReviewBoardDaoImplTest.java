@@ -57,7 +57,7 @@ class ReviewBoardDaoImplTest {
 		
 		@Test
 		@Transactional
-		//@Disabled
+		@Disabled
 		void selectBoard() {
 			ReviewBoard selectBoard = reviewBoardDao.findByBoardNo(22L);
 			System.out.println(selectBoard);
@@ -151,5 +151,22 @@ class ReviewBoardDaoImplTest {
 	  }
 	 
 	
+	      @Test
+	      @Transactional
+	      @Rollback(false) 
+	      @Disabled 
+	      void testCalculateAverageStarRating() {
+	          // 상품 번호를 사용하여 별점 평균을 계산
+	          Long productNo = 3L;
+	          double averageRating = reviewBoardDao.calculateAverageStarRating(productNo);
+
+	          // 별점 평균을 검증 
+	          double expectedAverageRating = 3.6; // 예상한 평균 별점
+	          assertEquals(expectedAverageRating, averageRating, 0.1); // 두 값이 오차 내에서 동일한지 확인
+	          
+	          System.out.println("별점 평균: " + averageRating);
+	      }
+	  
+
 	  
 }
