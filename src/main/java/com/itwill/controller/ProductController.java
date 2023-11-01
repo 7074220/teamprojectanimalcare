@@ -44,26 +44,34 @@ public class ProductController {
 	@GetMapping("/productList")
 	public String ProductList(Model model) {
 		List<ProductListDto> productListDto = new ArrayList<>();
-		List<ProductPriceDescDto> productPriceDescDto = new ArrayList<>();
+		
 		
 		// 상품번호 큰것부터(최신등록순)
 		List<Product> productList = productService.findAllByOrderByProductNoDesc();
-		// 상품가격 비싼 것부터
-		List<Product> productPriceDescList = productService.findAllByOrderByProductPriceDesc();
-
 		
 		for (Product product : productList) {
 			productListDto.add(ProductListDto.toDto(product));
 		}
 		
+		model.addAttribute("productList", productListDto);
+		
+		//System.out.println(productList.get(0).getProductPetCategory());
+		return "shop";
+	}
+	
+	
+	@GetMapping("/productPriceDesc")
+	public String ProductPriceDesc(Model model) {
+		List<ProductPriceDescDto> productPriceDescDto = new ArrayList<>();
+		// 상품가격 비싼 것부터
+		List<Product> productPriceDescList = productService.findAllByOrderByProductPriceDesc();
+		
 		for (Product productPrice : productPriceDescList) {
 			productPriceDescDto.add(ProductPriceDescDto.toDto(productPrice));
 		}
 		
-		model.addAttribute("productList", productListDto);
 		model.addAttribute("productPriceDescList", productPriceDescDto);
 		
-		//System.out.println(productList.get(0).getProductPetCategory());
 		return "shop";
 	}
 	
