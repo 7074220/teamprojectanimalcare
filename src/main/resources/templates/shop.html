@@ -42,19 +42,23 @@
     
     <!--modernizr min js here-->
     <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
-
+    <script>
+		function chageLangSelect(){
+			alert('ㅇㅇ');
+			window.location.href="맵핑";
+		}
+	</script>
 </head>
 
 <body>
-
     <!--header area start-->
     <th layout:fragment="content">
-		
+	<div id="content">
     <!--offcanvas menu area start-->
-    <div class="off_canvars_overlay">
+
                 
     </div>
-    <div class="offcanvas_menu">
+    <!-- <div class="offcanvas_menu">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -182,7 +186,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--offcanvas menu area end-->
     
    <!-- <header>
@@ -740,25 +744,39 @@
                     <div class="shop_toolbar_wrapper">
                         <div class="shop_toolbar_btn">
 
-                            <button data-role="grid_3" type="button" class="active btn-grid-3" data-toggle="tooltip" title="3"></button>
+                           <!--  <button data-role="grid_3" type="button" class="active btn-grid-3" data-toggle="tooltip" title="3"></button> -->
 
                             <!--<button data-role="grid_4" type="button"  class=" btn-grid-4" data-toggle="tooltip" title="4"></button>-->
 
-                            <button data-role="grid_list" type="button"  class="btn-list" data-toggle="tooltip" title="List"></button>
+                            <!-- <button data-role="grid_list" type="button"  class="btn-list" data-toggle="tooltip" title="List"></button> -->
                         </div>
-                        <!--<div class=" niceselect_option">
+                         <div class="product_tab_btn">
+                            <ul class="nav" role="tablist">
+                                <li>
+                                    <a class="active" data-toggle="tab" href="#plant1" role="tab" aria-controls="plant1" aria-selected="true"> 
+                                       강아지
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#plant2" role="tab" aria-controls="plant2" aria-selected="false">
+                                       고양이
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class=" niceselect_option">
                             <form class="select_option" action="#">
-                                <select name="orderby" id="short">
-
-                                    <option selected value="1">Sort by average rating</option>
-                                    <option  value="2">Sort by popularity</option>
-                                    <option value="3">Sort by newness</option>
-                                    <option value="4">Sort by price: low to high</option>
-                                    <option value="5">Sort by price: high to low</option>
-                                    <option value="6">Product Name: Z</option>
+                            
+                                <select name="orderby" id="short" onchange="chageLangSelect()">
+                                    <option selected value="1">별점순</option>
+                                    <option  value="2">낮은가격순</option>
+                                    <option value="3">높은가격순</option>
+                                    <option value="4">등록일순</option>
+                                 <!--    <option value="5">Sort by price: high to low</option>
+                                    <option value="6">Product Name: Z</option> -->
                                 </select>
                             </form>
-                        </div>-->
+                        </div>
                        <!-- <div class="page_amount">
                             <p>Showing 1–9 of 21 results</p>
                         </div>-->
@@ -776,8 +794,9 @@
                    <!--  상품 시작-->
                    
                    
+
                    
-                     <div class="row shop_wrapper">
+                     <div class="row shop_wrapper" id="listContent">
                         <div class="col-lg-4 col-md-4 col-sm-6 col-12" th:each="product:${productList}">
                             <div class="single_product">
                                 <div class="product_thumb">
@@ -1375,6 +1394,7 @@
         </div>
     </div>
     <!--shop  area end-->
+    </div>
     </th:block>
     
   <!--footer area start-->

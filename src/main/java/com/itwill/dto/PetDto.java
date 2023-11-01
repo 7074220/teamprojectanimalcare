@@ -29,7 +29,7 @@ public class PetDto {
 	 private String petImage;
 	 
 	 
-	 private Long centerNo;
+	 private Center center;
 	 
 	 
 	 public static Pet toEntity(PetDto petDto) {
@@ -41,7 +41,7 @@ public class PetDto {
 		 .petFindPlace(petDto.getPetFindPlace())
          .petCharacter(petDto.getPetCharacter())
          .petImage(petDto.getPetImage())
-         .center(Center.builder().centerNo(petDto.getCenterNo()).build())
+         .center(petDto.getCenter())
          //.center()
          
 		 .build();
@@ -55,7 +55,9 @@ public class PetDto {
 			.petRegisterDate(petEntity.getPetRegisterDate())
 			.petCharacter(petEntity.getPetCharacter())
 	         .petImage(petEntity.getPetImage())
-	         .centerNo(petEntity.getCenter().getCenterNo())
+	         .petType(petEntity.getPetType())
+	         .petFindPlace(petEntity.getPetFindPlace())
+	         .center(petEntity.getCenter())
 			.build();
 		  
 	 }
