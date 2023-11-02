@@ -71,13 +71,13 @@ public class AdoptController {
 	@GetMapping("/adopt/user/{userNo}")
 	public String findByUserNoAdoptList(Model model, @PathVariable(name = "userNo") Long userNo) {
 		List<Adopt> adoptList = adoptService.findAdoptsByUserNo(userNo);
-		// List<AdoptDto> adoptDtoUserNoList = new ArrayList<>();
-		/*
-		 * for (Adopt adopt : adoptList) {
-		 * adoptDtoUserNoList.add(AdoptDto.fromEntity(adopt)); }
-		 */
-		model.addAttribute("adoptList", adoptList);
-		return "my-account";
+		 List<AdoptDto> adoptDtoUserNoList = new ArrayList<>();
+		
+			 for (Adopt adopt : adoptList) {
+			 adoptDtoUserNoList.add(AdoptDto.fromEntity(adopt)); 
+			 }
+		model.addAttribute("adoptList", adoptDtoUserNoList);
+		return "my-account-adopt";
 	}
 
 	// adoptNo 입양 조회

@@ -186,7 +186,7 @@
                                 <li><a href="userinfo" class="nav-link">내정보</a></li>
                                 <li><a href="#mypet"  class="nav-link">마이펫</a></li>
                                 <li><a href="#cuponpage"  class="nav-link">쿠폰</a></li>
-                                <li><a href="#adopt"  class="nav-link">입양</a></li>
+                                <li><a th:href="@{/adopt/user/{userNo}(userNo=${userNo})}" class="nav-link">입양</a></li>
                                 <li><a href="#volunteer"  class="nav-link">봉사</a></li>
                                 <li><a href="#visit" class="nav-link">견학</a></li>
                                 <li> <a href="#orders" class="nav-link">주문목록</a></li>
