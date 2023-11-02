@@ -145,7 +145,7 @@ public class AdoptRestController {
 	
 	
 	@Operation(summary = "전체 리스트 보기")
-	@GetMapping("/find/all")
+	@GetMapping("/all")
 	public ResponseEntity<List<AdoptDto>> findAllAdopts() {
 		List<Adopt> adoptList = adoptService.findAdoptList();
 		List<AdoptDto> adoptDtoList = new ArrayList<>();

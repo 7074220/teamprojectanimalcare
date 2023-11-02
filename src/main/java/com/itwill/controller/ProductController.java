@@ -15,10 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itwill.dto.ProductCatListDto;
+import com.itwill.dto.ProductDogListDto;
 import com.itwill.dto.ProductInsertDto;
 import com.itwill.dto.ProductListDto;
 import com.itwill.dto.ProductNameDto;
 import com.itwill.dto.ProductPetCategoryDto;
+import com.itwill.dto.ProductPriceAscDto;
 import com.itwill.dto.ProductPriceDescDto;
 import com.itwill.entity.MyPet;
 import com.itwill.entity.Product;
@@ -66,20 +69,90 @@ public class ProductController {
 	 */
 	
 	
+	/*
+	 * @GetMapping("/productPriceDesc") public String ProductPriceDesc(Model model)
+	 * { List<ProductPriceDescDto> productPriceDescDto = new ArrayList<>(); // 상품가격
+	 * 비싼 것부터 List<Product> productPriceDescList =
+	 * productService.findAllByOrderByProductPriceDesc();
+	 * 
+	 * for (Product productPrice : productPriceDescList) {
+	 * productPriceDescDto.add(ProductPriceDescDto.toDto(productPrice)); }
+	 * 
+	 * model.addAttribute("productList", productPriceDescDto);
+	 * 
+	 * return "shop"; }
+	 */
+	
 	@GetMapping("/productPriceDesc")
-	public String ProductPriceDesc(Model model) {
+	// 상품가격 비싼 것부터 --> user의 myPetKind 사용
+	public String ProductPriceDesc(Model model, HttpSession session) {
 		List<ProductPriceDescDto> productPriceDescDto = new ArrayList<>();
 		// 상품가격 비싼 것부터
-		List<Product> productPriceDescList = productService.findAllByOrderByProductPriceDesc();
+		List<Product> productList = productService.findAllByOrderByProductPriceDesc();
 		
-		for (Product productPrice : productPriceDescList) {
-			productPriceDescDto.add(ProductPriceDescDto.toDto(productPrice));
+		Long userNo = (Long) session.getAttribute("userNo");
+		MyPet myPet = MyPet.builder().build();
+
+		if(userNo != null) {
+			myPet = myPetService.findLeaderMyPet(userNo);
+			if (myPet == null) {
+				myPet = MyPet.builder().build();
+				productList = productService.findAllByOrderByProductPriceDesc();
+			} else {
+				productList = productService.findAllByOrderByProductByPetCategoryPriceDesc(myPet.getMypetKind());
+				
+			}
+		} else {
+			productList = productService.findAllByOrderByProductPriceDesc();
+			myPet = MyPet.builder().build();
+		}
+		
+		for (Product product : productList) {
+			productPriceDescDto.add(ProductPriceDescDto.toDto(product));
 		}
 		
 		model.addAttribute("productList", productPriceDescDto);
-		
+		model.addAttribute("myPet", myPet);
+		// System.out.println(productList.get(0).getProductPetCategory());
 		return "shop";
 	}
+	
+	
+	@GetMapping("/productPriceAsc")
+	// 상품가격 싼 것부터 --> user의 myPetKind 사용
+	public String ProductPriceAsc(Model model, HttpSession session) {
+		List<ProductPriceAscDto> productPriceAscDto = new ArrayList<>();
+		// 상품가격 비싼 것부터
+		List<Product> productList = productService.findAllByOrderByProductPriceAsc();
+		
+		Long userNo = (Long) session.getAttribute("userNo");
+		MyPet myPet = MyPet.builder().build();
+		
+		if(userNo != null) {
+			myPet = myPetService.findLeaderMyPet(userNo);
+			if (myPet == null) {
+				myPet = MyPet.builder().build();
+				productList = productService.findAllByOrderByProductPriceDesc();
+			} else {
+				productList = productService.findAllProductByPetCategory(myPet.getMypetKind());
+				
+			}
+		} else {
+			productList = productService.findAllByOrderByProductPriceDesc();
+			myPet = MyPet.builder().build();
+		}
+		
+		for (Product product : productList) {
+			productPriceAscDto.add(ProductPriceAscDto.toDto(product));
+		}
+		
+		model.addAttribute("productList", productPriceAscDto);
+		model.addAttribute("myPet", myPet);
+		// System.out.println(productList.get(0).getProductPetCategory());
+		return "shop";
+	}
+	
+	
 	
 	/*
 	@PostMapping("/delete/{productNo}")
@@ -152,6 +225,77 @@ public class ProductController {
 		}
 		
 		model.addAttribute("productList", productListDto);
+		model.addAttribute("myPet", myPet);
+		// System.out.println(productList.get(0).getProductPetCategory());
+		return "shop";
+	}
+	
+	
+	
+	
+	
+	// 펫카테고리별로 구분 --> 상품 리스트 출력
+	@GetMapping("/productDogList")
+	public String productDogList(Model model, HttpSession session) {
+		List<ProductDogListDto> productDogListDto = new ArrayList<>();
+		List<Product> productList = new ArrayList<>();
+		
+		Long userNo = (Long) session.getAttribute("userNo");
+		MyPet myPet = MyPet.builder().build();
+		
+		if(userNo != null) {
+			myPet = myPetService.findLeaderMyPet(userNo);
+			if (myPet == null) {
+				myPet = MyPet.builder().build();
+				productList = productService.findAllByOrderByProductNoDesc();
+			} else {
+				productList = productService.findAllProductByPetCategory("강아지");
+			}
+		} else {
+			productList = productService.findAllByOrderByProductNoDesc();
+			myPet = MyPet.builder().build();
+		}
+		
+		for (Product product : productList) {
+			productDogListDto.add(ProductDogListDto.toDto(product));
+		}
+		
+		model.addAttribute("productList", productDogListDto);
+		model.addAttribute("myPet", myPet);
+		// System.out.println(productList.get(0).getProductPetCategory());
+		return "shop";
+	}
+	
+	
+	
+	
+	// 펫카테고리별로 구분 --> 상품 리스트 출력
+	@GetMapping("/productCatList")
+	public String productCatList(Model model, HttpSession session) {
+		List<ProductCatListDto> productCatListDto = new ArrayList<>();
+		List<Product> productList = new ArrayList<>();
+		
+		Long userNo = (Long) session.getAttribute("userNo");
+		MyPet myPet = MyPet.builder().build();
+		
+		if(userNo != null) {
+			myPet = myPetService.findLeaderMyPet(userNo);
+			if (myPet == null) {
+				myPet = MyPet.builder().build();
+				productList = productService.findAllByOrderByProductNoDesc();
+			} else {
+				productList = productService.findAllProductByPetCategory("고양이");
+			}
+		} else {
+			productList = productService.findAllByOrderByProductNoDesc();
+			myPet = MyPet.builder().build();
+		}
+		
+		for (Product product : productList) {
+			productCatListDto.add(ProductCatListDto.toDto(product));
+		}
+		
+		model.addAttribute("productList", productCatListDto);
 		model.addAttribute("myPet", myPet);
 		// System.out.println(productList.get(0).getProductPetCategory());
 		return "shop";

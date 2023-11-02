@@ -385,11 +385,11 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="adoption : ${adoptDtoList}" >
+                                            <tr th:each="adoption : ${adoptList}" >
                                                 <td th:text="${adoption.adoptNo}"></td>
                                                 <td th:text="${adoption.adoptTime}"></td>
                                                 <td th:text="${adoption.adoptDate}"></td>
-                                                <td th:text="${adoption.petNo}"></td>
+                                                <td th:text="${adoption.Pet.petName}"></td>
                                                 <td th:text="${adoption.adoptStatus}"></td>
                                             </tr>
                                             <!-- <tr>
