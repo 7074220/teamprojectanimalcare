@@ -33,7 +33,7 @@ public class ReportController {
 		return "reportList";
 	}
 	
-	
+	/*
 	@Operation(summary = "신고게시판 상세보기")
 	@GetMapping("/{boardNo}")
 	public String ReportView(Model model,@RequestParam(name = "boardNo") Long boardNo) {
@@ -53,7 +53,7 @@ public class ReportController {
 		model.addAttribute("reportBoard", reportBoard);
 		return "reportBoardUpdateForm";
 	}
-	
+	*/
 	
 	
 	

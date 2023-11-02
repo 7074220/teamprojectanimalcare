@@ -83,7 +83,6 @@ public class UserInfoRestController {
 	@PostMapping("/login")
 	public ResponseEntity<UserLoginActionDto> user_login_action(@RequestBody UserLoginActionDto dto,
 			HttpSession session) throws Exception {
-
 		Userinfo loginUserCheck = userInfoService.login(dto.getUserId(), dto.getUserPassword());
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
