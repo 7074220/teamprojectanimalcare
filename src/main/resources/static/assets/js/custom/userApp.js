@@ -55,7 +55,7 @@ function registEvent() {
 			// 해쉬 변경
 			//window.location.hash = e.target.getAttribute('data-navigate');
 		//}
-		if (e.target.getAttribute('data-navigate') == '/user_write_action' || e.target.getAttribute('data-navigate') == '/user_login_action') {
+		if (e.target.getAttribute('data-navigate') == '/user_write_action' || e.target.getAttribute('data-navigate') == '/login') {
 		
 			if (window.location.hash.substring(1) == e.target.getAttribute('data-navigate')) {
 				// 현재 hash 값과 button data-navigate 속성값이 같은 경우(hashchange 이벤트 발생 안함)
@@ -104,20 +104,17 @@ function navigate() {
 			window.location.href = 'index';
 		}
 	}
+	if (path == '/login_form') {
+		html = user_login_form();
+		$('#content').html(html);
+	}
 	if (path == '/login') {
 		let sendJsonObject = {
 				userId: document.f.loginUserId.value,
 				userPassword: document.f.loginPassword.value,
 		}
-		ajaxRequest('POST','user/login',sendJsonObject);
+		let responseJsonObject = ajaxRequest('POST','user/login',sendJsonObject);
 		
-		//console.log(responseJsonObject);
-		
-		window.location.href='index';	
-		
-		
-		
-		/*
 		if(responseJsonObject.status == 1000){
 			window.location.href='index';	
 		}
@@ -125,8 +122,8 @@ function navigate() {
 		if((responseJsonObject.status == 1001) || (responseJsonObject.status == 1002)) {
 			html = user_login_form(responseJsonObject);
 			$('#content').html(html);
+			alert('아이디 혹은 비밀번호를 잘못 입력 하셨습니다. ');
 		}
-		*/
 		
 	}
 }

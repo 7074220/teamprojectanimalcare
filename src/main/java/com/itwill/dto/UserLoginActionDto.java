@@ -20,6 +20,7 @@ public class UserLoginActionDto {
 	private Long userNo;
 	private String userId;
 	private String userPassword;
+	private int status;
 		
 	public static Userinfo toEntity(UserLoginActionDto dto) {
 		Userinfo userinfo = Userinfo.builder()
