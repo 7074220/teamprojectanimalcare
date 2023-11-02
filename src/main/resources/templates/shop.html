@@ -710,7 +710,21 @@
 								<!-- <button data-role="grid_list" type="button"  class="btn-list" data-toggle="tooltip" title="List"></button> -->
 							</div>
 							<div class="product_tab_btn">
-								<ul class="nav" role="tablist">
+								<ul class="nav" role="tablist" th:if="${myPet.mypetKind} == null">
+									<li>
+										<a class="active" data-toggle="tab" href="#plant1" role="tab"
+											aria-controls="plant1" aria-selected="false">
+											강아지
+										</a>
+									</li>
+									<li>
+										<a data-toggle="tab" href="#plant2" role="tab" aria-controls="plant2"
+											aria-selected="false">
+											고양이
+										</a>
+									</li>
+								</ul>
+								<ul class="nav" role="tablist" th:if="${myPet.mypetKind == '강아지'}">
 									<li>
 										<a class="active" data-toggle="tab" href="#plant1" role="tab"
 											aria-controls="plant1" aria-selected="true">
@@ -720,6 +734,20 @@
 									<li>
 										<a data-toggle="tab" href="#plant2" role="tab" aria-controls="plant2"
 											aria-selected="false">
+											고양이
+										</a>
+									</li>
+								</ul>
+								<ul class="nav" role="tablist" th:if="${myPet.mypetKind == '고양이'}">
+									<li>
+										<a class="active" data-toggle="tab" href="#plant1" role="tab"
+											aria-controls="plant1" aria-selected="false">
+											강아지
+										</a>
+									</li>
+									<li>
+										<a data-toggle="tab" href="#plant2" role="tab" aria-controls="plant2"
+											aria-selected="true">
 											고양이
 										</a>
 									</li>
