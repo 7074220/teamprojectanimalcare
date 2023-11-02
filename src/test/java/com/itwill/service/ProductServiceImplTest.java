@@ -120,4 +120,37 @@ class ProductServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 		List<Product> products = productService.findAllByOrderByProductNoAsc();
 		System.out.println(products);
 	}
+	
+	/*************** 펫 카테고리별 정렬 ****************/
+	@Test
+	@Disabled
+	// 높은 가격순 정렬
+	void findAllByOrderByProductByPetCategoryPriceDesc() {
+		List<Product> products = productService.findAllByOrderByProductByPetCategoryPriceDesc("고양이");
+		System.out.println(products);
+	}
+	
+	@Test
+	@Disabled
+	// 낮은 가격순 정렬
+	void findAllByOrderByProductByPetCategoryPriceAsc() {
+		List<Product> products = productService.findAllByOrderByProductByPetCategoryPriceAsc("고양이");
+		System.out.println(products);
+	}
+	
+	@Test
+	@Disabled
+	// 평점높은순 정렬
+	void findAllByOrderByProductByPetCategoryStarAvgDesc() {
+		List<Product> products = productService.findAllByOrderByProductByPetCategoryStarAvgDesc("고양이");
+		System.out.println(products);
+	}
+	
+	@Test
+	//@Disabled
+	// 최신번호순 정렬
+	void findAllByOrderByProductByPetCategoryNoDesc() {
+		List<Product> products = productService.findAllByOrderByProductByPetCategoryNoDesc("고양이");
+		System.out.println(products);
+	}
 }
