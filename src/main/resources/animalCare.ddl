@@ -143,7 +143,6 @@ CREATE TABLE Pet(
 		pet_find_place                		VARCHAR2(50)		 NULL ,
 		pet_character                 		VARCHAR2(50)		 NULL ,
 		center_no                     		NUMBER(10)		 NULL ,
-		local_no                      		NUMBER(10)		 NULL ,
 		pet_image                     		VARCHAR2(50)		 NULL 
 );
 
@@ -176,7 +175,7 @@ CREATE TABLE Product(
 		product_pet_category          		VARCHAR2(10)		 NULL ,
 		product_qty                   		NUMBER(10)		 NULL ,
 		product_image                 		VARCHAR2(100)		 NULL ,
-		product_detail_image          		VARCHAR2(4000)		 NULL ,
+		product_detail_image          		VARCHAR2(100)		 NULL ,
 		product_star_avg              		NUMBER(10)		 NULL 
 );
 
