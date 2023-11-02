@@ -264,7 +264,7 @@ public class ProductController {
 		return "shop";
 	}
 	// 펫카테고리별로 구분 --> 상품 리스트 출력
-	@GetMapping("/producCattList")
+	@GetMapping("/productCatList")
 	public String productCatList(Model model, HttpSession session) {
 		List<ProductListDto> productListDto = new ArrayList<>();
 		List<Product> productList = new ArrayList<>();
