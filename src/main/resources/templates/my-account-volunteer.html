@@ -1,25 +1,25 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='마이페이지')">
-
+	   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorate="layout/layout(title='마이페이지')">
 <head>
-	<title>Safira - my account</title>
-	<style>
-		.modal-dialog {
-			margin: auto;
-			margin-top: 20vh;
-			/* 회원탈퇴창 가운데 정도로 떨어트림 */
-		}
-	</style>
+    <title>Safira - my account</title>
+    <style>
+        .modal-dialog {
+        margin: auto;
+        margin-top: 20vh; /* 회원탈퇴창 가운데 정도로 떨어트림 */
+    }
+
+    </style>
 
 </head>
 
 <body>
 
-	<!--header area start-->
-	<th:block layout:fragment="content">
-		<!--offcanvas menu area start-->
-		<!-- <div class="off_canvars_overlay">
+   <!--header area start-->
+    <th:block layout:fragment="content">
+    <!--offcanvas menu area start-->
+    <!-- <div class="off_canvars_overlay">
                 
     </div>
     <div class="offcanvas_menu">
@@ -151,13 +151,13 @@
             </div>
         </div>
     </div> -->
-		<!--offcanvas menu area end-->
+    <!--offcanvas menu area end-->
+    
 
-
-		<!--header area end-->
-
-		<!--breadcrumbs area start-->
-		<!-- <div class="breadcrumbs_area">
+    <!--header area end-->
+    
+    <!--breadcrumbs area start-->
+    <!-- <div class="breadcrumbs_area">
         <div class="container">   
             <div class="row">
                 <div class="col-12">
@@ -172,81 +172,105 @@
             </div>
         </div>         
     </div> -->
-		<!--breadcrumbs area end-->
+    <!--breadcrumbs area end-->
+    
+    <!-- my account start  -->
+    <section class="main_content_area">
+        <div class="container">   
+            <div class="account_dashboard">
+                <div class="row">
+                    <div class="col-sm-12 col-md-3 col-lg-3">
+                        <!-- Nav tabs -->
+                        <div class="dashboard_tab_button">
+                            <ul role="tablist" class="nav flex-column dashboard-list">
+                                <li><a href="userinfo" class="nav-link">내정보</a></li>
+                                <li><a href="#mypet"  class="nav-link">마이펫</a></li>
+                                <li><a href="#cuponpage"  class="nav-link">쿠폰</a></li>
+                                <li><a href="adoptByUserNo"  class="nav-link">입양</a></li>
+								<li><a href="volunteerByUserNo" class="nav-link">봉사</a></li>   
+								<li><a href="visitByUserNo" class="nav-link">견학</a></li>
+                                <li> <a href="#orders" class="nav-link">주문목록</a></li>
+                                <li><a href="logout" class="nav-link">로그아웃</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li>
 
-		<!-- my account start  -->
-		<section class="main_content_area">
-			<div class="container">
-				<div class="account_dashboard">
-					<div class="row">
-						<div class="col-sm-12 col-md-3 col-lg-3">
-							<!-- Nav tabs -->
-							<div class="dashboard_tab_button">
-								<ul role="tablist" class="nav flex-column dashboard-list">
-									<li><a href="userinfo" class="nav-link">내정보</a></li>
-									<li><a href="#mypet" class="nav-link">마이펫</a></li>
-									<li><a href="#cuponpage" class="nav-link">쿠폰</a></li>
-									<li><a href="#adopt" class="nav-link">입양</a></li>
-									
-									<li><a th:href="@{'/volunteerList/' + ${userNo}}#volunteer" class="nav-link">봉사</a></li>
+                            </ul>
+                        </div>    
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9">
+                        <!-- Tab panes -->
+                        <div class="tab-content dashboard_content">
+                        
+		                 <!--<div class="tab-pane fade" id="volunteer">-->
+                                <h3>봉사</h3>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Time</th>
+                                                <th>Date</th>
+                                                <th>Center</th>
+                                                <th>Status</th>              
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+											
+											<tr th:each="volunteer: ${volunteerList}">
+												<td th:text="${volunteer.volunteerNo}"></td>
+												<td th:text="${volunteer.volunteerTime}"></td>
+												<td th:text="${volunteer.volunteerDate}"></td>
+												<td th:text="${volunteer.center.centerNo}"></td>
+												<td th:text="${volunteer.volunteerStatus}"><span class="success">봉사신청</span></td>
+											</tr>
 
-									
-									<li><a href="visitByUserNo" class="nav-link">견학</a></li>
-									<li> <a href="#orders" class="nav-link">주문목록</a></li>
-									<li><a href="logout" class="nav-link">로그아웃</a></li>
-									<li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-sm-12 col-md-9 col-lg-9">
-							<!-- Tab panes -->
-							<div class="tab-content dashboard_content">
-								<div class="tab-pane fade" id="volunteer">
-									<h3>봉사</h3>
-									<div class="table-responsive">
-										<table class="table">
-											<thead>
-												<tr>
-													<th>No</th>
-													<th>Time</th>
-													<th>Date</th>
-													<th>Center</th>
-													<th>Status</th>
-												</tr>
-											</thead>
-											<tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!--</div>-->
+                            
+                            <!--<div class="tab-pane fade" id="account-details">-->
+                          
+                           <!--   </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>        	
+    </section>	
+    
+    <!-- my account end   --> 
+>>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 
-												<tr th:each="volunteer, rowStat : ${volunteers}">
-													<td th:text="${volunteer.volunteerNo}">1</td>
-													<td th:text="${volunteer.time}">11:00</td>
-													<td th:text="${#dates.format(volunteer.date, 'MMM dd, yyyy')}">Jun 10, 2018</td>
-													<td th:text="${volunteer.center}">하하보호소</td>
-													<td>
-														<span th:class="${volunteer.status == '봉사완료'} ? 'success' : 'warning'" th:text="${volunteer.status}">봉사완료</span>
-													</td>
-												</tr>
-
-											</tbody>
-										</table>
-									</div>
-								</div>
-								
-								<!--   </div>-->
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- my account end   -->
-
-		<!--footer area start-->
+      <!--footer area start-->
+  
+ 
+    <!--footer area end-->
 
 
-		<!--footer area end-->
 
-	</th:block>
+ 
+
+
+<!--주문한 상품 리뷰쓰기 
+<script>
+
+    // 마이페이지 상품주문 완료된 항목에서 주문상세를 누르면 창이 뜨고 이 창에서만 리뷰를 쓸수 있음
+    // 주문 상세 링크를 클릭할 때 이벤트 핸들러
+    document.querySelector('.table').addEventListener('click', function(e) {
+    if (e.target.classList.contains('view')) {
+        e.preventDefault();
+        
+        // 주문상세 정보를 로드 하기
+        
+
+        // 모달창 표시
+        $('#orderDetailsModal').modal('show');
+    }
+    });
+
+</script> -->
+</th:block>		
 
 
 
