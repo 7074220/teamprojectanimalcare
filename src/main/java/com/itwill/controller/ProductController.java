@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itwill.dto.ProductCatListDto;
+import com.itwill.dto.ProductDogListDto;
 import com.itwill.dto.ProductInsertDto;
 import com.itwill.dto.ProductListDto;
 import com.itwill.dto.ProductNameDto;
@@ -235,7 +237,7 @@ public class ProductController {
 	// 펫카테고리별로 구분 --> 상품 리스트 출력
 	@GetMapping("/productDogList")
 	public String productDogList(Model model, HttpSession session) {
-		List<ProductListDto> productListDto = new ArrayList<>();
+		List<ProductDogListDto> productDogListDto = new ArrayList<>();
 		List<Product> productList = new ArrayList<>();
 		
 		Long userNo = (Long) session.getAttribute("userNo");
@@ -255,18 +257,22 @@ public class ProductController {
 		}
 		
 		for (Product product : productList) {
-			productListDto.add(ProductListDto.toDto(product));
+			productDogListDto.add(ProductDogListDto.toDto(product));
 		}
 		
-		model.addAttribute("productList", productListDto);
+		model.addAttribute("productList", productDogListDto);
 		model.addAttribute("myPet", myPet);
 		// System.out.println(productList.get(0).getProductPetCategory());
 		return "shop";
 	}
+	
+	
+	
+	
 	// 펫카테고리별로 구분 --> 상품 리스트 출력
 	@GetMapping("/productCatList")
 	public String productCatList(Model model, HttpSession session) {
-		List<ProductListDto> productListDto = new ArrayList<>();
+		List<ProductCatListDto> productCatListDto = new ArrayList<>();
 		List<Product> productList = new ArrayList<>();
 		
 		Long userNo = (Long) session.getAttribute("userNo");
@@ -286,10 +292,10 @@ public class ProductController {
 		}
 		
 		for (Product product : productList) {
-			productListDto.add(ProductListDto.toDto(product));
+			productCatListDto.add(ProductCatListDto.toDto(product));
 		}
 		
-		model.addAttribute("productList", productListDto);
+		model.addAttribute("productList", productCatListDto);
 		model.addAttribute("myPet", myPet);
 		// System.out.println(productList.get(0).getProductPetCategory());
 		return "shop";
