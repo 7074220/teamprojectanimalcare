@@ -7,21 +7,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
-
+import com.itwill.entity.Center;
 import com.itwill.entity.Visit;
-
+import com.itwill.service.CenterService;
 import com.itwill.service.VisitService;
 
 @Controller
 public class VisitController {
 
 	@Autowired
-	VisitService visitService;
+	private VisitService visitService;
+	@Autowired
+	private CenterService centerService;
 
 	// 견학신청
-	@GetMapping("/visit")
-	public String apply(Model model) throws Exception {
+	@GetMapping(value = "/visit", params = "centerNo")
+	public String apply(Model model,@RequestParam Long centerNo) throws Exception {
+		Center center = centerService.findByCenterNo(centerNo);
+		model.addAttribute("center", center);
 		return "visit";
 	}
 

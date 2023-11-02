@@ -38,6 +38,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-6 col-md-6">
+					
 						<div class="contact_message content">
 							<div class="zoomWrapper single-zoom">
 								<a href="#"> 
@@ -45,15 +46,24 @@
 									data-zoom-image="image/volunteer/center_name1.png" alt="센터이미지">
 								</a>
 							</div>
-							<h4>센터이름</h4>
-							<p>주의사항</p>
-							<ul>
+							
+							<h2>센터 정보</h2>
+							<p>센터 번호: <span th:text="${center.centerNo}">10</span></p>
+							<p>센터 이름: <span th:text="${center.centerName}">10</span></p>
+							<p>전화번호: <span th:text="${center.centerPhoneNumber}">10</span></p>
+							<p>로컬: <span th:text="${center.centerLocal}">10</span></p>
+							<p>오픈/클로즈 시간: <span th:text="${center.centerOpenCloseTime}">10</span></p>
+
+							<!-- <ul>
 								<li><i class="fa fa-fax"></i> 주소 : 서울시 강남구</li>
 								<li><i class="fa fa-phone"></i> <a href="#">Infor@roadthemes.com</a></li>
 								<li><i class="fa fa-envelope-o"></i><a href="tel:0(1234)567890">0(1234) 567 890</a></li>
-							</ul>
+							</ul> -->
+							
 						</div>
 					</div>
+					
+					
 					<div class="col-lg-6 col-md-6">
 						<div class="contact_message form">
 							<h3>신청 양식</h3>
