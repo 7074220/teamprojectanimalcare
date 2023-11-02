@@ -46,6 +46,7 @@ public class VolunteerController {
 		return "volunteer";
 	}
 	
+	// 봉사버튼 클릭시 센터정보 보여줌
 	@PostMapping("/create-volunteer")
 	public String createVolunteer(@RequestParam("volunteerDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date volunteerDate, 
 			@RequestParam("volunteerTime") int selectedHour, @RequestParam Long centerNo, Model model) {
@@ -76,8 +77,8 @@ public class VolunteerController {
 	    return "my-account";
 	}
 	
-	
-	/* userNo 로 봉사 목록 조회. 로그인한 회원
+	/*
+	// userNo 로 봉사 목록 조회. 로그인한 회원
 	@GetMapping("/volunteerList/{userNo}")
 	public String findByUserNoVolunteerList(Model model, HttpSession httpSession, @PathVariable(name = "userNo") Long userNo) throws Exception{		
 		List<Volunteer> volunteerList = volunteerService.findVolunteertByUserNo(userNo);
@@ -94,8 +95,8 @@ public class VolunteerController {
 	
 	// userNo 로 봉사 리스트 조회. 로그인한 회원
 	@GetMapping("/volunteerByUserNo")
-	public String findByVolunteerListUserNo(Model model, HttpSession httpSession) throws Exception {
-		Long userNo=(Long)httpSession.getAttribute("userNo");
+	public String findByVolunteerListUserNo(Model model, HttpSession session) throws Exception {
+		Long userNo=(Long)session.getAttribute("userNo");
 		Userinfo user=userInfoService.findUserByNo(userNo);
 		
 		List<Volunteer> volunteerList = volunteerService.findVolunteertByUserNo(user.getUserNo());
