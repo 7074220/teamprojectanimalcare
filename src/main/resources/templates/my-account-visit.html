@@ -152,7 +152,7 @@
         </div>
     </div> -->
     <!--offcanvas menu area end-->
-    
+  
 
     <!--header area end-->
     
@@ -187,21 +187,25 @@
                                 <li><a href="#mypet"  class="nav-link">마이펫</a></li>
                                 <li><a href="#cuponpage"  class="nav-link">쿠폰</a></li>
                                 <li><a href="adoptByUserNo"  class="nav-link">입양</a></li>
-								<li><a href="volunteerByUserNo" class="nav-link">봉사</a></li>   
-								<li><a href="visitByUserNo" class="nav-link">견학</a></li>
-                                <li> <a href="#orders" class="nav-link">주문목록</a></li>
-                                <li><a href="logout" class="nav-link">로그아웃</a></li>
+                                <li><a href="#volunteer"  class="nav-link">봉사</a></li>
+                                <li><a href="visitByUserNo"  class="nav-link">견학</a></li>
+                                <li> <a href="#orders"  class="nav-link">주문목록</a></li>
+                               <li><a href="logout" class="nav-link">로그아웃</a></li>
                                 <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li>
 
                             </ul>
                         </div>    
                     </div>
-                    <div class="col-sm-12 col-md-9 col-lg-9">
+      	         <div class="col-sm-12 col-md-9 col-lg-9">
                         <!-- Tab panes -->
                         <div class="tab-content dashboard_content">
-                        
-		                 <!--<div class="tab-pane fade" id="volunteer">-->
-                                <h3>봉사</h3>
+                            
+         
+
+             
+                            
+                          <!--  <div class="tab-pane fade" id="visit">-->
+                                <h3>견학</h3>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
@@ -210,37 +214,29 @@
                                                 <th>Time</th>
                                                 <th>Date</th>
                                                 <th>Center</th>
-                                                <th>Status</th>              
+                                                <th>Status</th>                   
                                             </tr>
                                         </thead>
                                         <tbody>
-											
-											<tr th:each="volunteer: ${volunteerList}">
-												<td th:text="${volunteer.volunteerNo}"></td>
-												<td th:text="${volunteer.volunteerTime}"></td>
-												<td th:text="${volunteer.volunteerDate}"></td>
-												<td th:text="${volunteer.center.centerNo}"></td>
-												<td th:text="${volunteer.volunteerStatus}"><span class="success">봉사신청</span></td>
-											</tr>
-
+                                            <tr th:each="visit:${visitList}">
+                                                <td th:text="${visit.visitNo}"></td>
+                                                <td th:text="${visit.visitTime}"></td>
+                                                <td th:text="${visit.visitDate}"></span></td>
+                                                <td th:text="${visit.Center.centerName}"></td>
+                                                <td th:text="${visit.visitStatus}"><span class="success">견학신청</span></td>
+                                            </tr>
                                         </tbody>
                                     </table>
+								</div>
                                 </div>
                             </div>
-                            <!--</div>-->
+                            </div>
+                            </div>
+                            </div>
+                            </section>	
                             
-                            <!--<div class="tab-pane fade" id="account-details">-->
-                          
-                           <!--   </div>-->
-                        </div>
-                    </div>
-                </div>
-            </div>  
-        </div>        	
-    </section>	
     
     <!-- my account end   --> 
->>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 
       <!--footer area start-->
   
@@ -248,11 +244,23 @@
     <!--footer area end-->
 
 
+<!-- 회원탈퇴  -->
+<!-- <script>
+    $('#confirmDelete').on('click', function() {
+        const selectedReason = $('input[name="reason"]:checked').val();
+        if (selectedReason) {
+            console.log("회원탈퇴 이유:", selectedReason);
+            // 여기에 탈퇴 로직 
+            // 탈퇴가 완료되면 index.html로 리다이렉트
+        window.location.href = 'index.html';
+        } else {
+            alert("탈퇴하시려면 이유를 선택해주세요.");
+        }
+    });
+</script>
 
- 
 
-
-<!--주문한 상품 리뷰쓰기 
+주문한 상품 리뷰쓰기 
 <script>
 
     // 마이페이지 상품주문 완료된 항목에서 주문상세를 누르면 창이 뜨고 이 창에서만 리뷰를 쓸수 있음
@@ -276,4 +284,10 @@
 
 </body>
 
-</html>
+</html>    
+                            
+                            
+                            
+                            
+            
+                          
