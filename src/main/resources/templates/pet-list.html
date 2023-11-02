@@ -4,6 +4,16 @@
        layout:decorate="layout/layout(title='petList')">
 
 <head>
+<script>
+function deletePet() {
+    var confirmDelete = confirm("삭제하시겠습니까?");
+    if (confirmDelete) {
+        document.getElementById("deleteForm").submit(); // 폼 제출
+    }
+	
+	
+}
+</script>
     <title>Safira - shop fullwidth list</title>
    
 </head>
@@ -32,7 +42,7 @@
                     <div class="shop_toolbar_wrapper">
                         <div class="shop_toolbar_btn">
 								
-                            <button data-role="grid_3" type="button" class=" btn-grid-3" data-toggle="tooltip" title="3"></button>
+                           <button data-role="grid_3" type="button" class=" btn-grid-3" data-toggle="tooltip" title="3"></button>
 
                             <button data-role="grid_4" type="button"  class=" btn-grid-4" data-toggle="tooltip" title="4"></button>
 
@@ -150,7 +160,10 @@
                                     <div class="action_links list_action_right">
                                         <ul>
                                             <li class="add_to_cart"><a th:href="@{/adopt(petNo=${pet.petNo})}" title="입양하기">입양하기</a></li>
-                                            
+                                            <form id="deleteForm" action="deletepet" method="post">
+                                             <input type="hidden" th:name="petNo" th:value="${pet.petNo}" /> 
+                                              <input type="button" value="삭제" onclick="deletePet()" />
+                                                </form>
                                         </ul>
                                     </div>
                                 </div>

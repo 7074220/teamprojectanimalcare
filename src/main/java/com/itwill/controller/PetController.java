@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.sym.Name;
 import com.itwill.dto.PetDto;
@@ -60,15 +61,15 @@ PetService petService;
 		return "pet-list" ;
 	}
 	//펫 삭제 관리자만
-	@PostMapping("/delete_action")
-	public String delete_action(@PathVariable(name = "petNo") Long petNo) throws Exception{
+	@PostMapping("/deletepet")
+	public String delete_action(@RequestParam(name = "petNo") Long petNo) throws Exception{
 		Optional<Pet> petOptional = Optional.of(petService.petFindById(petNo));
 		if(petOptional.isEmpty()) {
 			throw new Exception("존재하지 않는 동물입니다.");
 		
 			}
 			petService.petRemove(petNo);
-		return "pet-list";
+			 return "redirect:/petList";
 	}
 	//펫 업데이트
 	@PostMapping("/update_action")
