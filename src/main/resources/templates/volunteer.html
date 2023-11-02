@@ -1,67 +1,70 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='volunteer')">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout/layout(title='volunteer')">
 
 
 
 <head>
-    <title>Safira - contact page</title>
+<title>Safira - contact page</title>
 </head>
 
 <body>
 
-    <!--header area start-->
-    
-    <!--offcanvas menu area start-->
-     
-              
-    <!--offcanvas menu area end-->
-    
-    
-    <!--header area end-->
+	<!--header area start-->
 
-    <!--breadcrumbs area start-->
+	<!--offcanvas menu area start-->
 
-    <!--breadcrumbs area end-->
-    <th:block layout:fragment="content">
-    <!--contact map start-->
-   <!-- <div class="contact_map mt-70">
+
+	<!--offcanvas menu area end-->
+
+
+	<!--header area end-->
+
+	<!--breadcrumbs area start-->
+
+	<!--breadcrumbs area end-->
+	<th:block layout:fragment="content">
+		<!--contact map start-->
+		<!-- <div class="contact_map mt-70">
        <div class="map-area">
           <div id="googleMap"></div>
        </div>
     </div>-->
-    <!--contact map end-->
-    
-    <!--contact area start-->
-    <div class="contact_area">
-        <div class="container">   
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                   <div class="contact_message content">
-					   <img src=""/> <!-- 센터 위치 이미지로 등록 -->
-					   <h4>센터이름</h4>   
-                         <p>주의사항</p>
-                        <ul>
-                            <li><i class="fa fa-fax"></i>  주소 : 서울시 강남구</li>
-                            <li><i class="fa fa-phone"></i> <a href="#">Infor@roadthemes.com</a></li>
-                            <li><i class="fa fa-envelope-o"></i><a href="tel:0(1234)567890">0(1234) 567 890</a>  </li>
-                        </ul>
-					   <!--
-                        <h4 class="contact_name">
-                        	<a th:href="@{/center-details(centerNo=${center.centerNo})}" th:text="${center.centerName}">센터이름</a>
-                        </h4>   
-                         <p>주의사항</p>
-                         <p th:text="${center.centerPhoneNumber}">전화번호</p>
-                		 <p th:text="${center.centerLocal}">지역</p>
-                		 <p th:text="${center.centerOpenCloseTime}">운영 시간</p>
-                         <ul>
-                            <li><i class="fa fa-fax"></i>  주소 : 서울시 강남구</li>
-                            <li><i class="fa fa-phone"></i> <a href="#">Infor@roadthemes.com</a></li>
-                            <li><i class="fa fa-envelope-o"></i><a href="tel:0(1234)567890">0(1234) 567 890</a>  </li>
-                        </ul> -->             
-                    </div> 
-                </div>
-                <div class="col-lg-6 col-md-6">
+		<!--contact map end-->
+
+		<!--contact area start-->
+		<div class="contact_area">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 col-md-6">
+					
+						<div class="contact_message content">
+							<div class="zoomWrapper single-zoom">
+								<a href="#"> 
+								<img id="zoom1" src="image/volunteer/center_name1.png"
+									data-zoom-image="image/volunteer/center_name1.png" alt="센터이미지">
+								</a>
+							</div>
+							
+							<h2>센터 정보</h2>
+							<p>센터 번호: <span th:text="${center.centerNo}">10</span></p>
+							<p>센터 이름: <span th:text="${center.centerName}">10</span></p>
+							<p>전화번호: <span th:text="${center.centerPhoneNumber}">10</span></p>
+							<p>로컬: <span th:text="${center.centerLocal}">10</span></p>
+							<p>오픈/클로즈 시간: <span th:text="${center.centerOpenCloseTime}">10</span></p>
+
+							<!-- <ul>
+								<li><i class="fa fa-fax"></i> 주소 : 서울시 강남구</li>
+								<li><i class="fa fa-phone"></i> <a href="#">Infor@roadthemes.com</a></li>
+								<li><i class="fa fa-envelope-o"></i><a href="tel:0(1234)567890">0(1234) 567 890</a></li>
+							</ul> -->
+							
+						</div>
+					</div>
+					
+					
+					<div class="col-lg-6 col-md-6">
 						<div class="contact_message form">
 							<h3>신청 양식</h3>
 							<!-- 달력 -->
@@ -70,7 +73,7 @@
 									<label> 이름 </label> <input name="name" placeholder="Name *" type="text">
 								</p>
 								<p>
-									<label> 연락처 </label> <input name="email" placeholder="Phone *" type="text" >
+									<label> 연락처 </label> <input name="email" placeholder="Email *" type="email">
 								</p>
 								<p>
 									<label> 주소 </label> <input name="subject" placeholder="Subject *" type="text">
@@ -89,25 +92,26 @@
 
 						</div>
 					</div>
-            </div>
-        </div>    
-    </div>
-</th:block>
-    <!--contact area end-->
+				</div>
+			</div>
+		</div>
+	</th:block>
+	<!--contact area end-->
 
-    <!--footer area start-->
-    
-    <!--footer area end-->
+	<!--footer area start-->
+
+	<!--footer area end-->
 
 
 
-<!-- JS
+	<!-- JS
 ============================================ -->
 
-<!--map js code here-->
-<script src="https://maps.google.com/maps/api/js?sensor=false&amp;libraries=geometry&amp;v=3.22&amp;key=AIzaSyChs2QWiAhnzz0a4OEhzqCXwx_qA9ST_lE"></script>
-<script  src="https://www.google.com/jsapi"></script>
-<script src="assets/js/map.js"></script>
+	<!--map js code here-->
+	<script
+		src="https://maps.google.com/maps/api/js?sensor=false&amp;libraries=geometry&amp;v=3.22&amp;key=AIzaSyChs2QWiAhnzz0a4OEhzqCXwx_qA9ST_lE"></script>
+	<script src="https://www.google.com/jsapi"></script>
+	<script src="assets/js/map.js"></script>
 
 </body>
 
