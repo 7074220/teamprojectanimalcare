@@ -79,7 +79,7 @@
 							<div class=" niceselect_option">
 								<form class="select_option" action="#">
 
-									 <select name="orderby" id="short">
+									<select name="orderby" id="short">
 
 										<option selected value="1">Sort by average rating</option>
 										<option value="2">Sort by popularity</option>
@@ -96,64 +96,72 @@
 						</div>
 						<!--shop toolbar end-->
 						<div class="row shop_wrapper grid_list">
-    <div class="col-12" th:each="center: ${centers}">
-        <div class="single_product">
-            <div class="product_thumb">
-              
-             <!-- 
+							<div class="col-12" th:each="center: ${centers}">
+								<div class="single_product">
+									<div class="product_thumb">
+
+										<!-- 
                 <div class="label_product">
                     <span class="label_sale">Sale</span>
                     <span class="label_new">New</span>
                 </div>-->
-                <div class="action_links">
-                    <ul>
-                        <li class="add_to_cart">
-                            <a href="visit" title="Add to cart">견학신청</a>
-                        </li>
-                        <li class="add_to_cart">
-                            <a href="visit" title="Add to cart">봉사신청</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="product_content grid_content">
-                <h4 class="product_name">
-                    <a th:href="@{/center-details(centerNo=${center.centerNo})}" th:text="${center.centerName}">센터명</a>
-                </h4>
-                <p th:text="${center.centerLocal}">지역</p>
-                <p th:text="${centerOpenCloseTime}">운영 시간</p>
-               <!-- <div class="price_box">
+										<div class="action_links">
+											<ul>
+												<li class="add_to_cart">
+													<a href="visit" title="Add to cart">견학신청</a>
+												</li>
+												<li class="add_to_cart">
+													<a href="visit" title="Add to cart">봉사신청</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="product_content grid_content">
+										<h4 class="product_name">
+											<a th:href="@{/center-details(centerNo=${center.centerNo})}"
+												th:text="${center.centerName}">센터명</a>
+										</h4>
+										<p th:text="${center.centerLocal}">지역</p>
+										<p th:text="${centerOpenCloseTime}">운영 시간</p>
+										<!-- <div class="price_box">
                     <span class="current_price">$26.00</span>
                     <span class="old_price">$362.00</span>
                 </div>-->
-            </div>
-            <div class="product_content list_content">
-                <h4 class="product_name">
-                    <a th:href="@{/center-details(centerNo=${center.centerNo})}" th:text="${center.centerName}">센터명</a>
-                </h4>    
-                <p th:text="${center.centerPhoneNumber}">전화번호</p>
-                <p th:text="${center.centerLocal}">지역</p>
-                <p th:text="${center.centerOpenCloseTime}">운영 시간</p>
-              <!--  <div class="price_box">
+									</div>
+									<div class="product_content list_content">
+										<h4 class="product_name">
+											<a th:href="@{/center-details(centerNo=${center.centerNo})}"
+												th:text="${center.centerName}">센터명</a>
+										</h4>
+										<p th:text="${center.centerPhoneNumber}">전화번호</p>
+										<p th:text="${center.centerLocal}">지역</p>
+										<p th:text="${center.centerOpenCloseTime}">운영 시간</p>
+										<!--  <div class="price_box">
                     <span class="current_price">$26.00</span>
                     <span class="old_price">$362.00</span>
                 </div>-->
-            </div>
-            <div class="action_links list_action_right">
-                <ul>
-                    <li class="add_to_cart">
-                        <a href="visit" title="Add to cart">견학신청</a>
-                    </li>
-                    <li class="add_to_cart">
-                        <a href="visit" title="Add to cart">봉사신청</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+									</div>
+									<div class="action_links list_action_right">
+										<ul>
+											<li class="add_to_cart">
+												<a th:href="@{'/visit?centerNo=' + ${center.centerNo} + '&centerName=' + ${center.centerName}}"
+													title="견학신청">견학신청</a>
 
-								<!--    <div class="col-12 ">
+											</li>
+
+
+
+
+											<li class="add_to_cart">
+												<a href="visit" title="Add to cart">봉사신청</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!--    <div class="col-12 ">
                             <div class="single_product">
                                 <div class="product_thumb">
                                         <a class="primary_img" href="product-details.html"><img src="assets/img/product/productbig3.jpg" alt=""></a>
@@ -666,23 +674,23 @@
                         </div>
                     </div>
 -->
-								<div class="shop_toolbar t_bottom">
-									<div class="pagination">
-										<ul>
-											<li class="current">1</li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li class="next"><a href="#">next</a></li>
-											<li><a href="#">>></a></li>
-										</ul>
-									</div>
-								</div>
-								<!--shop toolbar end-->
-								<!--shop wrapper end-->
+						<div class="shop_toolbar t_bottom">
+							<div class="pagination">
+								<ul>
+									<li class="current">1</li>
+									<li><a href="#">2</a></li>
+									<li><a href="#">3</a></li>
+									<li class="next"><a href="#">next</a></li>
+									<li><a href="#">>></a></li>
+								</ul>
 							</div>
 						</div>
+						<!--shop toolbar end-->
+						<!--shop wrapper end-->
 					</div>
 				</div>
+			</div>
+		</div>
 	</th:block>
 	<!--shop  area end-->
 
