@@ -69,24 +69,33 @@
 						<div class="contact_message form">
 							<h3>신청 양식</h3>
 							<!-- 달력 -->
-							<form id="contact-form" method="POST" action="assets/mail.php">
+							<form th:action="@{/create-volunteer}" method="post" th:object="${volunteer}">
+								
+								<input type="hidden" name="centerNo" th:value="${center.centerNo}" />
+								
 								<p>
-									<label> 이름 </label> <input name="name" placeholder="Name *" type="text">
+									<label>방문예약</label> 
+									<input type="date" name="volunteerDate">
 								</p>
+								
 								<p>
-									<label> 연락처 </label> <input name="email" placeholder="Email *" type="email">
+									<label>방문 시간</label>
+									<select name="volunteerTime">
+										<option value="09">09 AM</option>
+										<option value="10">10 AM</option>
+										<option value="11">11 AM</option>
+										<option value="12">12 PM</option>
+										<option value="13">13 PM</option>
+										<option value="14">14 PM</option>
+										<option value="15">15 PM</option>
+										<option value="16">16 PM</option>
+										<option value="17">17 PM</option>
+										<option value="18">18 PM</option>
+										<option value="19">19 PM</option>
+									</select>
 								</p>
-								<p>
-									<label> 주소 </label> <input name="subject" placeholder="Subject *" type="text">
-								</p>
-								<div class="contact_textarea">
-									<label> 하고싶은 말</label>
-									<textarea placeholder="Message *" name="message" class="form-control2"></textarea>
-								</div>
-								<p>
-									<label>방문예약</label> <input type="datetime-local" name="starttime">
-								</p>
-
+								
+								
 								<button type="submit">확인</button>
 								<p class="form-messege"></p>
 							</form>

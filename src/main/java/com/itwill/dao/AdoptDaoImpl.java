@@ -54,8 +54,8 @@ public class AdoptDaoImpl implements AdoptDao{
 
 	
 	@Override
-	public List<Adopt> findAdoptsByUserNo(Long no) {
-		List<Adopt> adoptList=adoptRepository.findAdoptsByUserNo(no);
+	public List<Adopt> findAdoptsByUserNo(Long userNo) {
+		List<Adopt> adoptList=adoptRepository.findAdoptsByUserNo(userNo);
 		return adoptList;
 	
 	}

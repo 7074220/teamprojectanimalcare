@@ -716,14 +716,14 @@
 							<!-- 마이펫이 없을 때 강아지x 고양이x -->
 								<ul class="nav" role="tablist" th:if="${myPet.mypetKind} == null">
 									<li>
-											<a data-toggle="tab" href="#plant1" role="tab" aria-controls="plant1"
-											aria-selected="false">
+											<a href="/productDogList" role="tab" aria-controls="plant1"
+											aria-selected="false" th:href="@{productDogList}">
 											강아지
 										</a>
 									</li>
 									<li>
-										<a data-toggle="tab" href="#plant2" role="tab" aria-controls="plant2"
-											aria-selected="false">
+										<a href="/productCatList" role="tab" aria-controls="plant2"
+											aria-selected="false" th:href="@{productCatList}">
 											고양이
 										</a>
 									</li>
@@ -736,13 +736,13 @@
 								<!-- 마이펫이 강아지o 고양이x -->
 								 <ul class="nav" role="tablist" th:if="${myPet.mypetKind == '강아지'}">
 									<li>
-										<a class="active" data-toggle="tab" href="#plant1" role="tab"
+										<a class="active"  href="/productDogList" role="tab"
 											aria-controls="plant1" aria-selected="true" th:href="@{productDogList}">
 											강아지
 										</a>
 									</li>
 									<li>
-										<a data-toggle="tab" href="#plant2" role="tab" aria-controls="plant2"
+										<a  href="/productCatList" role="tab" aria-controls="plant2"
 											aria-selected="false" th:href="@{productCatList}">
 											고양이
 										</a>
@@ -756,14 +756,14 @@
 								<!-- 마이펫이 강아지x 고양이o -->
 								<ul class="nav" role="tablist" th:if="${myPet.mypetKind == '고양이'}">
 									<li>
-										<a data-toggle="tab" href="#plant1" role="tab" aria-controls="plant1"
-											aria-selected="false">
+										<a href="/productDogList" role="tab" aria-controls="plant1"
+											aria-selected="false" th:href="@{productDogList}">
 											강아지
 										</a>
 									</li>
 									<li>
-										<a class="active" data-toggle="tab" href="#plant2" role="tab"
-											aria-controls="plant2" aria-selected="true">
+										<a class="active" href="/productCatList" role="tab"
+											aria-controls="plant2" aria-selected="true" th:href="@{productCatList}">
 											고양이
 										</a>
 									</li>
@@ -1420,7 +1420,28 @@
 
 		<script>
 			function a() {
-				window.location.href="productPriceDesc";
+				var select = document.getElementById("short");
+		        var selectedValue = select.value;
+		        var redirectPath;
+
+		        switch (selectedValue) {
+		            case "1":
+		                redirectPath = "productStarDesc";
+		                break;
+		            case "2":
+		                redirectPath = "productPriceAsc";
+		                break;
+		            case "3":
+		                redirectPath = "productPriceDesc";
+		                break;
+		            case "4":
+		                redirectPath = "productDateDesc";
+		                break;
+		            default:
+		                redirectPath = "defaultPath"; // Default path if the value is not recognized
+		        }
+
+		        window.location.href = redirectPath;
 			}
 		</script>
 
