@@ -712,8 +712,8 @@
 							<div class="product_tab_btn">
 								<ul class="nav" role="tablist" th:if="${myPet.mypetKind} == null">
 									<li>
-										<a class="active" data-toggle="tab" href="#plant1" role="tab"
-											aria-controls="plant1" aria-selected="false">
+											<a data-toggle="tab" href="#plant1" role="tab" aria-controls="plant1"
+											aria-selected="false">
 											강아지
 										</a>
 									</li>
@@ -740,14 +740,14 @@
 								</ul>
 								<ul class="nav" role="tablist" th:if="${myPet.mypetKind == '고양이'}">
 									<li>
-										<a class="active" data-toggle="tab" href="#plant1" role="tab"
-											aria-controls="plant1" aria-selected="false">
+										<a data-toggle="tab" href="#plant1" role="tab" aria-controls="plant1"
+											aria-selected="false">
 											강아지
 										</a>
 									</li>
 									<li>
-										<a data-toggle="tab" href="#plant2" role="tab" aria-controls="plant2"
-											aria-selected="true">
+										<a class="active" data-toggle="tab" href="#plant2" role="tab"
+											aria-controls="plant2" aria-selected="true">
 											고양이
 										</a>
 									</li>
@@ -1399,7 +1399,7 @@
 
 		<script>
 			function a() {
-				window.location.href="/teamproject_animalcare/productPriceDesc";
+				window.location.href="productPriceDesc";
 			}
 		</script>
 
