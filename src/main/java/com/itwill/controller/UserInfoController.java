@@ -49,7 +49,7 @@ public class UserInfoController {
 		Userinfo userinfo = userInfoService.findUserByNo(userNo);
 		model.addAttribute("userinfo", userinfo);
 		
-		return "my-account";
+		return "my-account-userinfo";
 		
 	}
 
