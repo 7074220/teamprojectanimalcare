@@ -27,6 +27,8 @@ import com.itwill.entity.Coupon;
 import com.itwill.entity.MyPet;
 import com.itwill.entity.Userinfo;
 import com.itwill.exception.ExistedUserException;
+import com.itwill.exception.PasswordMismatchException;
+import com.itwill.exception.UserNotFoundException;
 import com.itwill.service.CouponService;
 import com.itwill.service.MyPetService;
 import com.itwill.service.UserInfoService;
@@ -79,21 +81,22 @@ public class UserInfoRestController {
 	}
 
 	// 로그인
-	@Operation(summary = "로그인")
+	@Operation(summary = "로그인 성공")
 	@PostMapping("/login")
-	public ResponseEntity<UserLoginActionDto> user_login_action(@RequestBody UserLoginActionDto dto,
+	public ResponseEntity<UserInfoResponse> user_login_action(@RequestBody UserLoginActionDto dto,
 			HttpSession session) throws Exception {
 		Userinfo loginUserCheck = userInfoService.login(dto.getUserId(), dto.getUserPassword());
+		session.setAttribute("userNo", loginUserCheck.getUserNo());
+		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		if (loginUserCheck == null) {
-			dto.setUserId("");
-			dto.setUserPassword("");
-		} else {
-			session.setAttribute("userNo", loginUserCheck.getUserNo());
-		}
+		
+		UserInfoResponse response=new UserInfoResponse();
+		response.setMessage("로그인 성공");
+		response.setData(loginUserCheck);
+		response.setStatus(1000);
 
-		return new ResponseEntity<UserLoginActionDto>(dto, httpHeaders, HttpStatus.OK);
+		return new ResponseEntity<UserInfoResponse>(response, httpHeaders, HttpStatus.OK);
 	}
 
 	// 회원탈퇴
@@ -215,5 +218,30 @@ public class UserInfoRestController {
 		return new ResponseEntity<ExistedUserException>(e, httpHeaders, HttpStatus.OK);
 	}
 	
+	@ExceptionHandler(value = UserNotFoundException.class)
+	public ResponseEntity<UserInfoResponse> user_not_found_exception_handler(UserNotFoundException e) throws Exception{
+		
+		UserInfoResponse response=new UserInfoResponse();
+		response.setMessage("존재하지않는 아이디입니다.");
+		response.setData(e.getData());
+		response.setStatus(1001);
+		
+		HttpHeaders httpHeaders=new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application","json",Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<UserInfoResponse>(response,httpHeaders,HttpStatus.OK);
+	}
+	
+	@ExceptionHandler(value = PasswordMismatchException.class)
+	public ResponseEntity<UserInfoResponse> user_password_mismatch_handler(PasswordMismatchException e) throws Exception{
+		UserInfoResponse response=new UserInfoResponse();
+		response.setMessage("비밀번호가 일치하지않습니다.");
+		response.setData(e.getData());
+		response.setStatus(1002);
+		
+		HttpHeaders httpHeaders=new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application","json",Charset.forName("UTF-8")));
+		return new ResponseEntity<UserInfoResponse>(response,httpHeaders,HttpStatus.OK);
+	}
 	
 }

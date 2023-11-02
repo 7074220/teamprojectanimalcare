@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.dto.VolunteerDto;
 import com.itwill.entity.Center;
 import com.itwill.entity.Volunteer;
+import com.itwill.service.CenterService;
 import com.itwill.service.VolunteerService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,24 +28,26 @@ public class VolunteerController {
 	
 	@Autowired
 	private VolunteerService volunteerService;
-
+	@Autowired
+	private CenterService centerService;
 	
-	@GetMapping("/volunteer") // 봉사 신청
-	public String insert_action(Model model) throws Exception {				
+	
+	@GetMapping(value = "/volunteer", params = "centerNo") // 봉사 신청
+	public String insert_action(Model model, @RequestParam Long centerNo) throws Exception {				
+		Center center = centerService.findByCenterNo(centerNo);
+		model.addAttribute("center", center);
 		return "volunteer";
 	}
+	
 	
 	@GetMapping("/volunteerList") 
 	public String volunteerList(Model model) {
 	    List<VolunteerDto> volunteerDtoList = new ArrayList<>();
 	    List<Volunteer> volunteerList = volunteerService.findAllVolunteers();
-
 	    for (Volunteer volunteer : volunteerList) {
 	        volunteerDtoList.add(VolunteerDto.toDto(volunteer));
-	    }
-	    
+	    }	    
 	    model.addAttribute("volunteerList", volunteerDtoList);
-
 	    return "volunteer";
 	}
 	
