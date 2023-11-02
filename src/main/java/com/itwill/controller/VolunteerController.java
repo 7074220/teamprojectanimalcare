@@ -83,7 +83,7 @@ public class VolunteerController {
 		}
 		*/
 		model.addAttribute("volunteerList", volunteerList);
-		return "my-account"; 
+		return "my-account-volunteer"; 
 	}
 	
 }

@@ -199,35 +199,44 @@
                     <div class="col-sm-12 col-md-9 col-lg-9">
                         <!-- Tab panes -->
                         <div class="tab-content dashboard_content">
-							
-                            <!--<div class="tab-pane fade" id="account-details">-->
-                                <h3>내정보 </h3>
-                                <div class="login">
-                                    <div class="login_form_container">
-                                        <div class="account_login_form">
-                                            <form name="f" action="userUpdate">
-                                                <p><a href="#"></a></p>
-                                                <div class="input-select"></div>
-                                                
-                                                <label>이름</label>
-                                                <input type="text" name="userName" th:value="${userinfo.userName}">
-                                                <label>비밀번호</label>
-                                                <input type="password"  value=""name="userPassword" th:value="${userinfo.userPassword}">
-                                                <label>핸드폰번호</label>
-                                                <input type="text" value=""name="userPhoneNumber" th:value="${userinfo.userPhoneNumber}">
-                                                <label>주소</label>
-                                                <input type="text"  value="" name="userAddress" th:value="${userinfo.userAddress}">
-                                                
-                                                
-                                                <br>
-                                               
-                                                <div class="save_button primary_btn default_button">
-                                                   <button type="submit">Save</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
+                            
+                            
+
+                            <!--<div class="tab-pane fade" id="adopt">-->
+                                <h3>입양</h3>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Time</th>
+                                                <th>Date</th>
+                                                <th>PetNo</th>
+                                                <th>Status</th>                 
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="adopt:${adoptList}">
+                                                <td th:text="${adopt.adoptNo}">1</td>
+                                                <td th:text="${adopt.adoptTime}"></td>
+                                                <td th:text="${adopt.adoptDate}"></span></td>
+                                                <td th:text="${adopt.Pet.petNo}"></td>
+                                                <td th:text="${adopt.adoptStatus}"><span class="success">입양신청</span></td>
+                                            </tr>
+                                            <!-- <tr>
+                                                <td>2</td>
+                                                <td>12:00</td>
+                                                <td>Jun 10, 2018</td>
+                                                <td>골든리트리버 </td>
+                                                <td><span class="success">입양완료</span></td>
+                                            </tr> -->
+                                        </tbody>
+                                    </table>
                                 </div>
+                            <!--</div>-->
+                            
+                            <!--<div class="tab-pane fade" id="account-details">-->
+                          
                            <!--   </div>-->
                         </div>
                     </div>
@@ -244,23 +253,11 @@
     <!--footer area end-->
 
 
-<!-- 회원탈퇴  -->
-<!-- <script>
-    $('#confirmDelete').on('click', function() {
-        const selectedReason = $('input[name="reason"]:checked').val();
-        if (selectedReason) {
-            console.log("회원탈퇴 이유:", selectedReason);
-            // 여기에 탈퇴 로직 
-            // 탈퇴가 완료되면 index.html로 리다이렉트
-        window.location.href = 'index.html';
-        } else {
-            alert("탈퇴하시려면 이유를 선택해주세요.");
-        }
-    });
-</script>
+
+ 
 
 
-주문한 상품 리뷰쓰기 
+<!--주문한 상품 리뷰쓰기 
 <script>
 
     // 마이페이지 상품주문 완료된 항목에서 주문상세를 누르면 창이 뜨고 이 창에서만 리뷰를 쓸수 있음
