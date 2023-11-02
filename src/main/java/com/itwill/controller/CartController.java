@@ -15,8 +15,10 @@ import com.itwill.dto.CartDto;
 import com.itwill.dto.OrdersDto;
 import com.itwill.entity.Cart;
 import com.itwill.entity.Product;
+import com.itwill.entity.Userinfo;
 import com.itwill.service.CartService;
 import com.itwill.service.ProductService;
+import com.itwill.service.UserInfoService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -27,6 +29,8 @@ public class CartController {
 	private CartService cartService;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private UserInfoService userinfoService;
 	
 	@GetMapping("/cartList")
 	// 카트 리스트 보기 (유저)
@@ -55,14 +59,19 @@ public class CartController {
 			throw new Exception("로그인 하세요.");
 		}
 		
+		// session에서 userNo가져오기
 		Long userNo=(Long)session.getAttribute("userNo");
-		
+		// userNo로 user 찾기
+		Userinfo user = userinfoService.findUserByNo(userNo);
 		// productNo로 product 정보 가져오기
 		Product product = productService.findByProductNo(productNo);
-		// 
+		
 		Cart selectCart = new Cart();
+		selectCart.setUserinfo(user);
 		selectCart.setProduct(product);
 		selectCart.setCartQty(product.getProductQty());
+		
+		model.addAttribute("cart", selectCart);
 		
 		return "cart";
 	}
