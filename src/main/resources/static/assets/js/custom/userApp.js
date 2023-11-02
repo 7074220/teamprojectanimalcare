@@ -1,4 +1,5 @@
 import {user_write_form} from './template-user-write-from.js';
+import {user_login_form} from './template-user-login-from.js';
 import {ajaxRequest} from './request.js';
 import {createInitializer} from "./initializer.js";
 
@@ -102,7 +103,15 @@ function navigate() {
 			
 			window.location.href = 'index';
 		}
-		
+	}
+	if (path == '/login') {
+		let sendJsonObject = {
+				userId: document.f.loginUserId.value,
+				userPassword: document.f.loginPassword.value,
+		}
+		const responseJsonObject = ajaxRequest('POST','user/login',sendJsonObject);
+		html = user_login_form(responseJsonObject);
+		$('#content').html(html);
 	}
 }
 

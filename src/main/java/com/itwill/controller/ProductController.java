@@ -67,7 +67,7 @@ public class ProductController {
 	}
 	
 	
-	@GetMapping("/productPriceDesc")
+	@GetMapping("/teamproject_animalcare/productPriceDesc")
 	public String ProductPriceDesc(Model model) {
 		List<ProductPriceDescDto> productPriceDescDto = new ArrayList<>();
 		// 상품가격 비싼 것부터
