@@ -1,11 +1,12 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='adopt')">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout/layout(title='adopt')">
 
 
 
 <head>
-	<title>Safira - contact page</title>
+<title>Safira - contact page</title>
 
 </head>
 
@@ -39,13 +40,20 @@
 				<div class="row">
 					<div class="col-lg-6 col-md-6">
 						<div class="contact_message content">
-							<h3 style="font-weight:bold">펫 정보</h3>
-							<p>펫 종류: <span th:text="${pet.petType}"></span></p>
-							<p>펫 성별: <span th:text="${pet.petGender}"></span></p>
-							<p>펫 특징: <span th:text="${pet.petCharacter}"></span></p>
-							<img src="#" th:src="@{/image/pet/}+${pet.getPetImage}" style="width:400px">
-						
-						<!--	<ul>
+							<h3 style="font-weight: bold">펫 정보</h3>
+							<p>
+								펫 종류: <span th:text="${pet.petType}"></span>
+							</p>
+							<p>
+								펫 성별: <span th:text="${pet.petGender}"></span>
+							</p>
+							<p>
+								펫 특징: <span th:text="${pet.petCharacter}"></span>
+							</p>
+							<img src="#" th:src="@{/image/pet/}+${pet.getPetImage}"
+								style="width: 400px">
+
+							<!--	<ul>
 								<li><i class="fa fa-fax"></i> 주소 : 서울시 강남구</li>
 								<li><i class="fa fa-phone"></i> <a href="#">Infor@roadthemes.com</a></li>
 								<li><i class="fa fa-envelope-o"></i><a href="tel:0(1234)567890">0(1234) 567 890</a>
@@ -55,31 +63,62 @@
 					</div>
 					<div class="col-lg-6 col-md-6">
 						<div class="contact_message form">
-							<h3 style="font-weight:bold">신청 양식</h3>
-							<form id="contact-form" method="POST" action="assets/mail.php">
-								<p>
-									<label> 이름 </label>
-									<input name="name" placeholder="Name *" type="text">
+							<h3 style="font-weight: bold">신청 양식</h3>
+							<form id="contact-form" method="POST"
+								th:action="@{/create-adopt}" th:object="${adopt}">
+
+								<input type="hidden" name="petNo" th:value="${pet.petNo}" />
+
+								<!-- <p>
+									<label> 이름 </label> <input name="name" placeholder="Name *"
+										type="text">
 								</p>
 								<p>
-									<label> 연락처 </label>
-									<input name="email" placeholder="Email *" type="email">
+									<label> 연락처 </label> <input name="email" placeholder="Email *"
+										type="email">
 								</p>
 								<p>
-									<label> 주소 </label>
-									<input name="subject" placeholder="Subject *" type="text">
-								</p>
-								<div class="contact_textarea">
+									<label> 주소 </label> <input name="subject"
+										placeholder="Subject *" type="text">
+								</p> -->
+								<!-- <div class="contact_textarea">
 									<label> 하고싶은 말</label>
 									<textarea placeholder="Message *" name="message" class="form-control2"></textarea>
-								</div>
+								</div> -->
 								<p>
-									<label>방문예약</label>
-									<input type="datetime-local" name="starttime">
+									<label>방문 날짜</label> <input type="date" name="adoptDate">
+								</p>
+								<p>
+									<label>방문 시간</label> <select name="adoptTime">
+										<option value="09">09 AM</option>
+
+										<option value="10">10 AM</option>
+
+										<option value="11">11 AM</option>
+
+										<option value="12">12 PM</option>
+
+										<option value="13">13 PM</option>
+
+										<option value="14">14 PM</option>
+
+										<option value="15">15 PM</option>
+
+										<option value="16">16 PM</option>
+
+										<option value="17">17 PM</option>
+
+										<option value="18">18 PM</option>
+
+										<option value="19">19 PM</option>
+									</select>
 								</p>
 
-								<button type="submit"> submit</button>
-								<p class="form-messege"></p>
+								<button type="submit">submit</button>
+								<!-- <p class="form-messege"></p> -->
+								<!-- <div th:if="${msg!=null}">
+									<p th:text="${msg}" class="success-message"></p>
+								</div> -->
 							</form>
 
 						</div>

@@ -49,12 +49,15 @@ public class UserInfoController {
 		Userinfo userinfo = userInfoService.findUserByNo(userNo);
 		model.addAttribute("userinfo", userinfo);
 		
-		return "userview";
+		return "my-account";
 		
 	}
 
-	
-	
+	@GetMapping(value="/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "index";
+	}
 	
 	
 	
