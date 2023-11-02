@@ -28,8 +28,8 @@ public class PetDto {
 	 private String petCharacter;
 	 private String petImage;
 	 
-	 
 	 private Center center;
+	 
 	 
 	 
 	 public static Pet toEntity(PetDto petDto) {
@@ -43,10 +43,10 @@ public class PetDto {
          .petImage(petDto.getPetImage())
          .center(petDto.getCenter())
          //.center()
-         
 		 .build();
 		  
 	 }
+	 
 	 public static PetDto toDto(Pet petEntity) {
 	return PetDto.builder()
 			.petNo(petEntity.getPetNo())
