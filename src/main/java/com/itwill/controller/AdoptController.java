@@ -50,8 +50,8 @@ public class AdoptController {
 		Pet pet = petService.petFindById(petNo);
 		adopt.setPet(pet);
 		adoptService.insertAdopt(adopt);
-
-		return "adopt";
+		model.addAttribute("msg", "신청이 완료되었습니다.");
+		return "pet-list";
 	}
 
 	// 입양 리스트 조회(관리자)

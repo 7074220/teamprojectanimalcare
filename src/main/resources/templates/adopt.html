@@ -66,9 +66,9 @@
 							<h3 style="font-weight: bold">신청 양식</h3>
 							<form id="contact-form" method="POST"
 								th:action="@{/create-adopt}" th:object="${adopt}">
-								
-							<input type="hidden" name="petNo" th:value="${pet.petNo}" />	
-								
+
+								<input type="hidden" name="petNo" th:value="${pet.petNo}" />
+
 								<!-- <p>
 									<label> 이름 </label> <input name="name" placeholder="Name *"
 										type="text">
@@ -86,12 +86,10 @@
 									<textarea placeholder="Message *" name="message" class="form-control2"></textarea>
 								</div> -->
 								<p>
-									<label>방문 날짜</label> 
-									<input type="date" name="adoptDate">
+									<label>방문 날짜</label> <input type="date" name="adoptDate">
 								</p>
 								<p>
-									<label>방문 시간</label> 
-									<select name="adoptTime">
+									<label>방문 시간</label> <select name="adoptTime">
 										<option value="09">09 AM</option>
 
 										<option value="10">10 AM</option>
@@ -117,7 +115,10 @@
 								</p>
 
 								<button type="submit">submit</button>
-								<p class="form-messege"></p>
+								<!-- <p class="form-messege"></p> -->
+								<!-- <div th:if="${msg!=null}">
+									<p th:text="${msg}" class="success-message"></p>
+								</div> -->
 							</form>
 
 						</div>
