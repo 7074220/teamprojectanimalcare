@@ -139,10 +139,10 @@ public class ProductController {
 			if (myPet == null) {
 				myPet = MyPet.builder().build();
 				productList = productService.findAllByOrderByProductNoDesc();
-			}else {
+			} else {
 				productList = productService.findAllProductByPetCategory(myPet.getMypetKind());
 			}
-		}else {
+		} else {
 			productList = productService.findAllByOrderByProductNoDesc();
 			myPet = MyPet.builder().build();
 		}
