@@ -42,9 +42,9 @@ public class VolunteerController {
 	        volunteerDtoList.add(VolunteerDto.toDto(volunteer));
 	    }
 	    
-	    model.addAttribute("volunteerList", volunteerDtoList); // "volunteerList" 변수를 템플릿에 추가
+	    model.addAttribute("volunteerList", volunteerDtoList);
 
-	    return "volunteer"; // HTML 템플릿의 경로를 지정
+	    return "volunteer";
 	}
 	
 	/*
@@ -65,7 +65,7 @@ public class VolunteerController {
 			volunteerDtoList.add(VolunteerDto.toDto(volunteer));
 		}
 		model.addAttribute("volunteerList", volunteerDtoList);
-		return "my-account"; // 일반적으로 뷰 템플릿의 경로를 지정. 링크수정하기
+		return "volunteer"; // 일반적으로 뷰 템플릿의 경로를 지정. 링크수정하기
 	}
 	*/
 	
