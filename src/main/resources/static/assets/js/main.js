@@ -541,8 +541,9 @@
     });
     
     /*--- niceSelect---*/
+    /*
      $('.select_option').niceSelect();
-    
+    */
     /*---  Accordion---*/
     $(".faequently-accordion").collapse({
         accordion:true,

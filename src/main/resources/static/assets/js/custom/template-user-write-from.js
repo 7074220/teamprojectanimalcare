@@ -85,40 +85,6 @@ export function user_write_form(responseJsonObject = {}) {
             
              
                  <!--login area start-->
-
-              
-              <!--register area start-->
-              <!--
-                <div class="col-lg-6 col-md-6">
-                    <div class="account_form register">
-                        <h2 th:text="MyPet">MyPet</h2>
-                        <form action="#">
-                            <p>   
-                                <label th:text="이름">이름  <span>*</span></label>
-                                <input type="text">
-                             </p>
-                             <p>   
-                                <label th:text="생일">생일 <span>*</span></label>
-                                <input type="text">
-                             </p>
-                              <p>
-                                <label>종류  <span>*</span></label>
-                                <select id="kind">
-                                    <option value="">종류 선택</option>
-                                    <option value="남" th:text="강아지" th:value="강아지">남</option>
-                                    <option value="여" th:text="고양이" th:value="고양이">여</option>
-                                </select>
-                                <span id="kindError" style="color:red;"></span>
-                             </p>
-                
-                            <!--<div class="login_submit">
-                                <button type="submit" th:text="등록">Register</button>
-                            </div>-->
-                        </form>
-                    </div>    
-                </div>
-                -->
-                <!--register area end-->
             </div>
         </div>   
             </div> 
