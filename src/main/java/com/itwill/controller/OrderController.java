@@ -123,24 +123,17 @@ public class OrderController {
 	//orderform
 		@GetMapping("orderView")
 		public String orderView(HttpSession session,Model model) throws Exception{
-			if (session.getAttribute("userNo") == null) {
-				throw new Exception("로그인 하세요.");
-			}
-			Long userNo=(Long)session.getAttribute("userNo");
-			List<Cart> carts=cartService.findAllCartByUserId(userNo);
-			List<CartDto> cartDtos=new ArrayList<>();
-			for (Cart cart : carts) {
-				cartDtos.add(CartDto.toDto(cart));
-			}
-			//user정보가지고있는 dto 필요
-			Userinfo userinfo=userInfoService.findUserByNo(userNo);
-			model.addAttribute("user",userinfo);//userinfo는 서비스로 찾는지 의문
-			model.addAttribute("cartList",cartDtos);
-			
-			
-			
-			
-			return "orderView";
+			/*
+			 * if (session.getAttribute("userNo") == null) { throw new
+			 * Exception("로그인 하세요."); } Long userNo=(Long)session.getAttribute("userNo");
+			 * List<Cart> carts=cartService.findAllCartByUserId(userNo); List<CartDto>
+			 * cartDtos=new ArrayList<>(); for (Cart cart : carts) {
+			 * cartDtos.add(CartDto.toDto(cart)); } //user정보가지고있는 dto 필요 Userinfo
+			 * userinfo=userInfoService.findUserByNo(userNo);
+			 * model.addAttribute("user",userinfo);//userinfo는 서비스로 찾는지 의문
+			 * model.addAttribute("cartList",cartDtos);
+			 */
+			return "my-account";
 		}
 		//orderitemList 조회
 		@GetMapping("orderItemiew")

@@ -1,22 +1,7 @@
-<!doctype html>
-<html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
-	   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-       layout:decorate="layout/layout(title='Login')">
 
-<head>
-    <title>Safira - login</title>
-</head>
-
-<body>
-
-     <!--header area start-->
-    
-    <!--offcanvas menu area start-->
-    
-    <!--header area end-->
-
-    <!--breadcrumbs area start-->
-    <th:block layout:fragment="content">
+export function user_login_form(responseJsonObject = {}) {
+	let htmlTemplate =
+	`<th:block layout:fragment="content">
 	<div id="content">
     <!--breadcrumbs area end-->
     
@@ -58,15 +43,9 @@
             </div>
         </div>    
     </div>
-	</div>
-    </th:block>
-    <!-- customer login end -->
-
-    <!--footer area start-->
-    
-    <!--footer area end-->
-
-</body>
-
-
-</html>
+    </th:block>`;
+	
+	let bindTemplate = Handlebars.compile(htmlTemplate);
+	let resultTemplate = bindTemplate(responseJsonObject);
+	return resultTemplate;
+}

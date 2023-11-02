@@ -14,7 +14,6 @@ export function petList(responseJsonObject = {}) {
     <!--breadcrumbs area end-->
     
     <!--shop  area start-->
-    
     <div class="shop_area shop_fullwidth mt-70 mb-70">
         <div class="container">
             <div class="row">
@@ -71,13 +70,13 @@ export function petList(responseJsonObject = {}) {
                         </div> -->
                     </div>
                      <!--shop toolbar end-->
-                     
+                     {{#each data}}
                      <!--펫 시작  -->
                      <div class="row shop_wrapper grid_list" th:each="pet:${petList}">
                         <div class="col-12 ">
                             <div class="single_product">
                                 <div class="product_thumb">
-                                        <!--  --><a class="primary_img" ><img src="image/pet/강아지2.jpeg"  alt=""  th:src="@{/image/pet/} + ${pet.getPetImage}"></a>
+                                        <!--  --><a class="primary_img" ><img src="image/pet/{{petImage}}"  alt=""></a>
                                       <!--    <a class="secondary_img" ><img src="image/pet/강아지2.jpeg" alt=""></a>-->
                                         
                                         
@@ -116,21 +115,21 @@ export function petList(responseJsonObject = {}) {
                                        <!--  <span class="current_price">$26.00</span>
                                         <span class="old_price">$362.00</span><br> -->
                                         <span class="Local" >지 역 : </span>
-                                        <span class="petLocal" th:text="${pet.petLocal}">$26.00</span><br>
+                                        <span class="petLocal" >{{petLocal}}</span><br>
                                            <span class="Gender">성 별 :</span>
-                                        <span class="petGender" th:text="${pet.petGender}">$26.00</span><br>
+                                        <span class="petGender">{{petGender}}</span><br>
                                            <span class="registerDate">등록날짜 :</span>
-                                        <span class="petRegisterDate" th:text="${pet.petRegisterDate}">$26.00</span><br>
+                                        <span class="petRegisterDate">{{petRegisterDate}}</span><br>
                                            <span class="findPlace">발견장소 :</span>
-                                        <span class="petFindPlace" th:text="${pet.petFindPlace}">$26.00</span><br>
+                                        <span class="petFindPlace">{{petRegisterDate}}</span><br>
                                            <span class="character" >설 명 :</span>
-                                        <span class="petCharacter" th:text="${pet.petCharacter}">$26.00</span><br>
+                                        <span class="petCharacter">{{petRegisterDate}}</span><br>
                                            <span class="center">센터이름 :</span>
-                                        <span class="pet_center" th:text="${pet.center.getCenterName}">$26.00</span><br>
+                                        <span class="pet_center">{{center.getCenterName}}</span><br>
                                         
                                         
                                         <br>
-                                        
+                                          {{/each}}
                                     </div>
                                     <!-- <div class="product_desc">
                                         <p>Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Viva..</p>
