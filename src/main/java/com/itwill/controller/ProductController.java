@@ -89,6 +89,8 @@ public class ProductController {
 		List<ProductPriceDescDto> productPriceDescDto = new ArrayList<>();
 		// 상품가격 비싼 것부터
 		List<Product> productList = productService.findAllByOrderByProductPriceDesc();
+		Product products = new Product();
+		String category = products.getProductCategory();
 		
 		Long userNo = (Long) session.getAttribute("userNo");
 		MyPet myPet = MyPet.builder().build();
@@ -100,8 +102,8 @@ public class ProductController {
 				productList = productService.findAllByOrderByProductPriceDesc();
 			} else {
 				productList = productService.findAllByOrderByProductByPetCategoryPriceDesc(myPet.getMypetKind());
-				
 			}
+			
 		} else {
 			productList = productService.findAllByOrderByProductPriceDesc();
 			myPet = MyPet.builder().build();
