@@ -38,4 +38,21 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 	
 	// 낮은번호순 정렬
 	List<Product> findAllByOrderByProductNoAsc();
+	
+	/*************** 펫 카테고리별 정렬 ****************/
+	// 높은 가격순 정렬
+	@Query(value = "SELECT * FROM Product p WHERE p.product_pet_category = ?1 ORDER BY p.product_price DESC", nativeQuery = true)
+	List<Product> findAllByOrderByProductByPetCategoryPriceDesc(String productPetCategory);
+	
+	// 낮은 가격순 정렬
+	@Query(value = "SELECT * FROM Product p WHERE p.product_pet_category = ?1 ORDER BY p.product_price ASC", nativeQuery = true)
+	List<Product> findAllByOrderByProductByPetCategoryPriceAsc(String productPetCategory);
+	
+	// 평점높은순 정렬
+	@Query(value = "SELECT * FROM Product p WHERE p.product_pet_category = ?1 ORDER BY p.product_star_avg DESC", nativeQuery = true)
+	List<Product> findAllByOrderByProductByPetCategoryStarAvgDesc(String productPetCategory);
+	
+	// 최신번호순 정렬
+	@Query(value = "SELECT * FROM Product p WHERE p.product_pet_category = ?1 ORDER BY p.product_no DESC", nativeQuery = true)
+	List<Product> findAllByOrderByProductByPetCategoryNoDesc(String productPetCategory);
 }

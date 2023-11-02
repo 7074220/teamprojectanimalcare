@@ -35,9 +35,9 @@ class VisitDaoImplTest {
 	void insetVisit() {
 		Visit visit = Visit.builder()
 
-				.visitDate(new Date())
+				.visitDate(null)
 				.visitStatus("방문완료")
-				.visitTime(7)
+				.visitTime(null)
 				.userinfo(userInfoDao.findByNo(2L))
 				.center(centerDao.findByCenterNo(2L))
 				.build();
