@@ -43,6 +43,7 @@ public class WishController {
 	}
 	
 	
+	
 	/*
 	@GetMapping("/wishList/{userNo}")
 	// 위시리스트
