@@ -34,25 +34,28 @@
 		<!--contact map end-->
 
 		<!--contact area start-->
-		<div class="contact_area">
+		<div class="contact_area" style="margin-top: 100px;">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-6 col-md-6">
 						<div class="contact_message content">
-							<img src="" />
-							<h4>센터이름</h4>
-							<p>입양 주의사항</p>
-							<ul>
+							<h3 style="font-weight:bold">펫 정보</h2>
+							<p>펫 종류: <span th:text="${pet.petType}"></span></p>
+							<p>펫 성별: <span th:text="${pet.petGender}"></span></p>
+							<p>펫 특징: <span th:text="${pet.petCharacter}"></span></p>
+							<img src="#" th:src="@{/image/pet/}+${pet.getPetImage}" style="width:400px">
+						
+						<!--	<ul>
 								<li><i class="fa fa-fax"></i> 주소 : 서울시 강남구</li>
 								<li><i class="fa fa-phone"></i> <a href="#">Infor@roadthemes.com</a></li>
 								<li><i class="fa fa-envelope-o"></i><a href="tel:0(1234)567890">0(1234) 567 890</a>
 								</li>
-							</ul>
+							</ul>-->
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6">
 						<div class="contact_message form">
-							<h3>신청 양식</h3>
+							<h3 style="font-weight:bold">신청 양식</h3>
 							<form id="contact-form" method="POST" action="assets/mail.php">
 								<p>
 									<label> 이름 </label>
