@@ -41,9 +41,8 @@ function registEvent() {
         var selectedValue = $(this).val();  // 선택된 값을 가져옵니다.
 
         // 선택된 값을 기반으로 새로운 해시를 설정합니다.
-        window.location.hash = selectedValue;
+        window.location.hash = 'pet/'+selectedValue;
         
-        path = hash.substring(1);
     });
 });
 		
@@ -54,23 +53,14 @@ function registEvent() {
 	이벤트발생시 처리메쏘드
 */
 function navigate() {
-	if (path == '/user_write_form') {
-		window.location.href='register'
-		html = user_write_form();
-		$('#content').html(html);
-	}
-	if (path == '/user_write_action') {
+	
+	if (path.startsWith('/guest_write_form')) {
 		/**************** /user_write_action******************/
 		let sendJsonObject = {
-				userId: document.f.userId.value,
-				userPassword: document.f.password.value,
-				userName: document.f.name.value,
-				userGender: document.f.gender.value,
-				userPhoneNumber: document.f.phone.value,
-				userAddress: document.f.address.value
+			petType:$("#short").val(),
 		}
-		const responseJsonObject = ajaxRequest('POST','user',sendJsonObject);
-		html = user_write_form(responseJsonObject);
+		const responseJsonObject = ajaxRequest('GET','pet/'+'강아지',sendJsonObject);
+		html = petList(responseJsonObject);
 		$('#content').html(html);
 	}
 }
