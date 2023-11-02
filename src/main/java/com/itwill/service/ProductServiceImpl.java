@@ -102,6 +102,27 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 
+	/*************** 펫 카테고리별 정렬 ****************/
+	@Override
+	public List<Product> findAllByOrderByProductByPetCategoryPriceDesc(String productPetCategory) {
+		return productDao.findAllByOrderByProductByPetCategoryPriceDesc(productPetCategory);
+	}
+
+	@Override
+	public List<Product> findAllByOrderByProductByPetCategoryPriceAsc(String productPetCategory) {
+		return productDao.findAllByOrderByProductByPetCategoryPriceAsc(productPetCategory);
+	}
+
+	@Override
+	public List<Product> findAllByOrderByProductByPetCategoryStarAvgDesc(String productPetCategory) {
+		return productDao.findAllByOrderByProductByPetCategoryStarAvgDesc(productPetCategory);
+	}
+
+	@Override
+	public List<Product> findAllByOrderByProductByPetCategoryNoDesc(String productPetCategory) {
+		return productDao.findAllByOrderByProductByPetCategoryNoDesc(productPetCategory);
+	}
+
 
 	
 	

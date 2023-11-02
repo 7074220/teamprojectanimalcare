@@ -84,6 +84,28 @@ public class ProductDaoImpl implements ProductDao {
 		return productRepository.findAllByOrderByProductNoAsc();
 	}
 
+	
+	/*************** 펫 카테고리별 정렬 ****************/
+	@Override
+	public List<Product> findAllByOrderByProductByPetCategoryPriceDesc(String productPetCategory) {
+		return productRepository.findAllByOrderByProductByPetCategoryPriceDesc(productPetCategory);
+	}
+
+	@Override
+	public List<Product> findAllByOrderByProductByPetCategoryPriceAsc(String productPetCategory) {
+		return productRepository.findAllByOrderByProductByPetCategoryPriceAsc(productPetCategory);
+	}
+
+	@Override
+	public List<Product> findAllByOrderByProductByPetCategoryStarAvgDesc(String productPetCategory) {
+		return productRepository.findAllByOrderByProductByPetCategoryStarAvgDesc(productPetCategory);
+	}
+
+	@Override
+	public List<Product> findAllByOrderByProductByPetCategoryNoDesc(String productPetCategory) {
+		return productRepository.findAllByOrderByProductByPetCategoryNoDesc(productPetCategory);
+	}
+
 
 	
 	

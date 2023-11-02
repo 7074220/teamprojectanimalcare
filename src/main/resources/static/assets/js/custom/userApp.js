@@ -109,9 +109,25 @@ function navigate() {
 				userId: document.f.loginUserId.value,
 				userPassword: document.f.loginPassword.value,
 		}
-		const responseJsonObject = ajaxRequest('POST','user/login',sendJsonObject);
-		html = user_login_form(responseJsonObject);
-		$('#content').html(html);
+		ajaxRequest('POST','user/login',sendJsonObject);
+		
+		//console.log(responseJsonObject);
+		
+		window.location.href='index';	
+		
+		
+		
+		/*
+		if(responseJsonObject.status == 1000){
+			window.location.href='index';	
+		}
+		
+		if((responseJsonObject.status == 1001) || (responseJsonObject.status == 1002)) {
+			html = user_login_form(responseJsonObject);
+			$('#content').html(html);
+		}
+		*/
+		
 	}
 }
 
