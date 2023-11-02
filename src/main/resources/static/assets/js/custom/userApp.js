@@ -122,6 +122,7 @@ function navigate() {
 		if((responseJsonObject.status == 1001) || (responseJsonObject.status == 1002)) {
 			html = user_login_form(responseJsonObject);
 			$('#content').html(html);
+			alert('아이디 혹은 비밀번호를 잘못 입력 하셨습니다. ');
 		}
 		
 	}
