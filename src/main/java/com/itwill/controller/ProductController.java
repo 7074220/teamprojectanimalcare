@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itwill.dto.ProductCatListDto;
+import com.itwill.dto.ProductDogListDto;
 import com.itwill.dto.ProductInsertDto;
 import com.itwill.dto.ProductListDto;
 import com.itwill.dto.ProductNameDto;
@@ -223,6 +225,77 @@ public class ProductController {
 		}
 		
 		model.addAttribute("productList", productListDto);
+		model.addAttribute("myPet", myPet);
+		// System.out.println(productList.get(0).getProductPetCategory());
+		return "shop";
+	}
+	
+	
+	
+	
+	
+	// 펫카테고리별로 구분 --> 상품 리스트 출력
+	@GetMapping("/productDogList")
+	public String productDogList(Model model, HttpSession session) {
+		List<ProductDogListDto> productDogListDto = new ArrayList<>();
+		List<Product> productList = new ArrayList<>();
+		
+		Long userNo = (Long) session.getAttribute("userNo");
+		MyPet myPet = MyPet.builder().build();
+		
+		if(userNo != null) {
+			myPet = myPetService.findLeaderMyPet(userNo);
+			if (myPet == null) {
+				myPet = MyPet.builder().build();
+				productList = productService.findAllByOrderByProductNoDesc();
+			} else {
+				productList = productService.findAllProductByPetCategory("강아지");
+			}
+		} else {
+			productList = productService.findAllByOrderByProductNoDesc();
+			myPet = MyPet.builder().build();
+		}
+		
+		for (Product product : productList) {
+			productDogListDto.add(ProductDogListDto.toDto(product));
+		}
+		
+		model.addAttribute("productList", productDogListDto);
+		model.addAttribute("myPet", myPet);
+		// System.out.println(productList.get(0).getProductPetCategory());
+		return "shop";
+	}
+	
+	
+	
+	
+	// 펫카테고리별로 구분 --> 상품 리스트 출력
+	@GetMapping("/productCatList")
+	public String productCatList(Model model, HttpSession session) {
+		List<ProductCatListDto> productCatListDto = new ArrayList<>();
+		List<Product> productList = new ArrayList<>();
+		
+		Long userNo = (Long) session.getAttribute("userNo");
+		MyPet myPet = MyPet.builder().build();
+		
+		if(userNo != null) {
+			myPet = myPetService.findLeaderMyPet(userNo);
+			if (myPet == null) {
+				myPet = MyPet.builder().build();
+				productList = productService.findAllByOrderByProductNoDesc();
+			} else {
+				productList = productService.findAllProductByPetCategory("고양이");
+			}
+		} else {
+			productList = productService.findAllByOrderByProductNoDesc();
+			myPet = MyPet.builder().build();
+		}
+		
+		for (Product product : productList) {
+			productCatListDto.add(ProductCatListDto.toDto(product));
+		}
+		
+		model.addAttribute("productList", productCatListDto);
 		model.addAttribute("myPet", myPet);
 		// System.out.println(productList.get(0).getProductPetCategory());
 		return "shop";

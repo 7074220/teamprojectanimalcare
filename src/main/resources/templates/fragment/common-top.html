@@ -190,7 +190,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-2 col-md-3 col-sm-3 col-3">
                             <div class="logo">
-                                <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
+                                <a href="index"><img src="assets/img/logo/logo.png" alt=""></a>
                             </div>
                         </div>
                         <div class="col-lg-10 col-md-6 col-sm-7 col-8">
@@ -228,10 +228,12 @@
                                         <ul th:if="${session.userNo}==null">
                                             <li><a href="#/user_write_form">Register</a></li>
                                             <li><span>/</span></li>
-                                            <li><a href="login">Login</a></li>
+                                            <li><a href="#/login_form">Login</a></li>
                                         </ul>
                                         <ul th:if="${session.userNo}!=null">
                                             <li><a href="userinfo" th:text="my-account">Login</a></li>
+                                            <li><span>/</span></li>
+                                            <li><a href="logout" th:text="Logout">Log</a></li>
                                         </ul>
                                     </div>
                                     <div class="header_account_list header_wishlist">

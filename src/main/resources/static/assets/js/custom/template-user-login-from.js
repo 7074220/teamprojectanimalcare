@@ -32,8 +32,8 @@ export function user_login_form(responseJsonObject = {}) {
                            Remember me
                         </label>
                      </div>
-                     <button class="btn btn-success w-100 py-1" type="button" data-navigate="#/login" >Sign in</button>
-                     <!--<button type="button" data-navigate="#/login">Sign in</button>-->
+                     <button class="btn btn-success w-100 py-1" type="button" data-navigate="/login" >Sign in</button>
+                     <!--<button type="button" data-navigate="/login">Sign in</button>-->
                   </div>
                   </form>
                </div>
