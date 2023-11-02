@@ -56,7 +56,7 @@ public class VisitController {
 		visit.setVisitDate(visitDate);
 		visit.setVisitStatus("접수중");
 		visit.setVisitTime(selectedHour);
-		
+		 
 		Center center = centerService.findByCenterNo(centerNo);
 		Userinfo userinfo = userInfoService.findUserByNo(userNo);
 		visit.setUserinfo(userinfo);
@@ -75,11 +75,11 @@ public class VisitController {
 	}
 
 	// 회원의 견학 리스트 출력
-	@GetMapping("/visitList/{userNo}")
+	@GetMapping("/userVisitList")
 	public String memberVisitList(@PathVariable("userNo") Long userNo, Model model) {
 		List<Visit> memberVisitList = visitService.getVisitsByUserNo(userNo);
 		model.addAttribute("memberVisits", memberVisitList);
-		return "my-account";
+		return "my-account-visit";
 	}
 
 }
