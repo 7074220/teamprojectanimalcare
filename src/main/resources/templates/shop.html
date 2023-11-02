@@ -710,6 +710,10 @@
 								<!-- <button data-role="grid_list" type="button"  class="btn-list" data-toggle="tooltip" title="List"></button> -->
 							</div>
 							<div class="product_tab_btn">
+							
+							
+							
+							<!-- 마이펫이 없을 때 강아지x 고양이x -->
 								<ul class="nav" role="tablist" th:if="${myPet.mypetKind} == null">
 									<li>
 											<a data-toggle="tab" href="#plant1" role="tab" aria-controls="plant1"
@@ -724,20 +728,32 @@
 										</a>
 									</li>
 								</ul>
+								
+								
+								
+								
+								
+								<!-- 마이펫이 강아지o 고양이x -->
 								 <ul class="nav" role="tablist" th:if="${myPet.mypetKind == '강아지'}">
 									<li>
 										<a class="active" data-toggle="tab" href="#plant1" role="tab"
-											aria-controls="plant1" aria-selected="true">
+											aria-controls="plant1" aria-selected="true" th:href="@{productDogList}">
 											강아지
 										</a>
 									</li>
 									<li>
 										<a data-toggle="tab" href="#plant2" role="tab" aria-controls="plant2"
-											aria-selected="false">
+											aria-selected="false" th:href="@{productCatList}">
 											고양이
 										</a>
 									</li>
 								</ul>
+								
+								
+								
+								
+								
+								<!-- 마이펫이 강아지x 고양이o -->
 								<ul class="nav" role="tablist" th:if="${myPet.mypetKind == '고양이'}">
 									<li>
 										<a data-toggle="tab" href="#plant1" role="tab" aria-controls="plant1"
@@ -753,6 +769,11 @@
 									</li>
 								</ul>
 							</div>
+							
+							
+							
+							
+							
 							<div class="niceselect_option">
 								<form class="select_option" action="#">
 
