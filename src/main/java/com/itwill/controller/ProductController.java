@@ -20,14 +20,21 @@ import com.itwill.dto.ProductListDto;
 import com.itwill.dto.ProductNameDto;
 import com.itwill.dto.ProductPetCategoryDto;
 import com.itwill.dto.ProductPriceDescDto;
+import com.itwill.entity.MyPet;
 import com.itwill.entity.Product;
+import com.itwill.service.MyPetService;
 import com.itwill.service.ProductService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private MyPetService myPetService;
 	
 	/*
 	// 상품 등록
@@ -116,6 +123,32 @@ public class ProductController {
 		model.addAttribute("productName", productNameDto);
 		
 		return "product-details";
+	}
+	
+	
+	// 펫카테고리별로 구분 --> 상품 리스트 출력
+	@GetMapping("/productList")
+	public String ProductList(Model model, HttpSession session) {
+		List<ProductListDto> productListDto = new ArrayList<>();
+		List<Product> productList = productService.findAllByOrderByProductNoDesc();
+
+		Long userNo = (Long) session.getAttribute("userNo");
+		MyPet myPet = myPetService.findLeaderMyPet(userNo);
+
+		if (myPet == null) {
+			for (Product product : productList) {
+				productListDto.add(ProductListDto.toDto(product));
+			}
+		} else {
+			productList = productService.findAllProductByPetCategory(myPet.getMypetKind());
+			for (Product product : productList) {
+				productListDto.add(ProductListDto.toDto(product));
+			}
+		}
+
+		model.addAttribute("productList", productListDto);
+		// System.out.println(productList.get(0).getProductPetCategory());
+		return "shop";
 	}
 	
 }
