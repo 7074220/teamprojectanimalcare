@@ -75,10 +75,12 @@ public class VisitController {
 	}
 
 	// 회원의 견학 리스트 출력
-	@GetMapping("/userVisitList")
-	public String memberVisitList(@PathVariable("userNo") Long userNo, Model model) {
-		List<Visit> memberVisitList = visitService.getVisitsByUserNo(userNo);
-		model.addAttribute("memberVisits", memberVisitList);
+	@GetMapping("/visitByUserNo")
+	public String findByUserNoVisitList(Model model, HttpSession session) throws Exception {
+		Long userNo=(Long)session.getAttribute("userNo");
+		Userinfo user=userInfoService.findUserByNo(userNo);
+		List<Visit> visitList = visitService.getVisitsByUserNo(user.getUserNo());
+		model.addAttribute("visitList", visitList);
 		return "my-account-visit";
 	}
 
