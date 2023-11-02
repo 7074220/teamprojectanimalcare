@@ -83,7 +83,7 @@ public class UserInfoRestController {
 	// 로그인
 	@Operation(summary = "로그인 성공")
 	@PostMapping("/login")
-	public ResponseEntity<UserInfoResponse> user_login_action(@RequestBody UserLoginActionDto dto,
+	public ResponseEntity<UserLoginActionDto> user_login_action(@RequestBody UserLoginActionDto dto,
 			HttpSession session) throws Exception {
 		Userinfo loginUserCheck = userInfoService.login(dto.getUserId(), dto.getUserPassword());
 		session.setAttribute("userNo", loginUserCheck.getUserNo());
@@ -91,12 +91,9 @@ public class UserInfoRestController {
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		
-		UserInfoResponse response=new UserInfoResponse();
-		response.setMessage("로그인 성공");
-		response.setData(loginUserCheck);
-		response.setStatus(1000);
+		dto.setStatus(1000);
 
-		return new ResponseEntity<UserInfoResponse>(response, httpHeaders, HttpStatus.OK);
+		return new ResponseEntity<UserLoginActionDto>(dto, httpHeaders, HttpStatus.OK);
 	}
 
 	// 회원탈퇴
