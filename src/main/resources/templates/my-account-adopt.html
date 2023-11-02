@@ -211,17 +211,17 @@
                                                 <th>No</th>
                                                 <th>Time</th>
                                                 <th>Date</th>
-                                                <th>Pet</th>
+                                                <th>PetNo</th>
                                                 <th>Status</th>                 
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr th:each="adopt:${adoptList}">
                                                 <td th:text="${adopt.adoptNo}">1</td>
-                                                <td>11:00</td>
-                                                <td>May 10, 2018</span></td>
-                                                <td>포메라니안</td>
-                                                <td><span class="success">입양신청</span></td>
+                                                <td th:text="${adopt.adoptTime}"></td>
+                                                <td th:text="${adopt.adoptDate}"></span></td>
+                                                <td th:text="${adopt.Pet.petNo}"></td>
+                                                <td th:text="${adopt.adoptStatus}"><span class="success">입양신청</span></td>
                                             </tr>
                                             <!-- <tr>
                                                 <td>2</td>
