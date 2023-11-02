@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.entity.Userinfo;
 import com.itwill.service.UserInfoService;
@@ -52,7 +53,23 @@ public class UserInfoController {
 		return "my-account-userinfo";
 		
 	}
-
+	
+	@GetMapping(value = "userUpdate")
+	public String update(Model model , HttpSession session , @RequestParam String userName , @RequestParam String userPassword,
+			@RequestParam String userPhoneNumber,@RequestParam String userAddress) throws Exception{
+		Long userNo = (Long)session.getAttribute("userNo");
+		Userinfo userinfo = userInfoService.findUserByNo(userNo);
+		userinfo.setUserName(userName);
+		userinfo.setUserPassword(userPassword);
+		userinfo.setUserPhoneNumber(userPhoneNumber);
+		userinfo.setUserAddress(userAddress);
+		userInfoService.update(userinfo);
+		
+		model.addAttribute("userinfo", userinfo);
+		
+		return "my-account-userinfo";
+	}
+	
 	@GetMapping(value="/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();

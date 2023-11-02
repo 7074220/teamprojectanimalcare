@@ -205,18 +205,18 @@
                                 <div class="login">
                                     <div class="login_form_container">
                                         <div class="account_login_form">
-                                            <form name="f">
+                                            <form name="f" action="userUpdate">
                                                 <p><a href="#"></a></p>
                                                 <div class="input-select"></div>
                                                 
                                                 <label>이름</label>
-                                                <input type="text" name="last-name" th:value="${userinfo.userName}">
+                                                <input type="text" name="userName" th:value="${userinfo.userName}">
                                                 <label>비밀번호</label>
-                                                <input type="password"  value=""name="user-password">
+                                                <input type="password"  value=""name="userPassword" th:value="${userinfo.userPassword}">
                                                 <label>핸드폰번호</label>
-                                                <input type="text" value=""name="user-password" th:value="${userinfo.userPhoneNumber}">
+                                                <input type="text" value=""name="userPhoneNumber" th:value="${userinfo.userPhoneNumber}">
                                                 <label>주소</label>
-                                                <input type="text"  value="" name="address" th:value="${userinfo.userAddress}">
+                                                <input type="text"  value="" name="userAddress" th:value="${userinfo.userAddress}">
                                                 
                                                 
                                                 <br>
