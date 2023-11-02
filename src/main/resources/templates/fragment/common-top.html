@@ -228,10 +228,12 @@
                                         <ul th:if="${session.userNo}==null">
                                             <li><a href="#/user_write_form">Register</a></li>
                                             <li><span>/</span></li>
-                                            <li><a href="login">Login</a></li>
+                                            <li><a href="#/login_form">Login</a></li>
                                         </ul>
                                         <ul th:if="${session.userNo}!=null">
                                             <li><a href="userinfo" th:text="my-account">Login</a></li>
+                                            <li><span>/</span></li>
+                                            <li><a href="logout" th:text="Logout">Log</a></li>
                                         </ul>
                                     </div>
                                     <div class="header_account_list header_wishlist">
