@@ -127,7 +127,7 @@ public class ProductController {
 	
 	
 	// 펫카테고리별로 구분 --> 상품 리스트 출력
-	@GetMapping("/productList")
+	@GetMapping("/productPetCategoryList")
 	public String ProductList(Model model, HttpSession session) {
 		List<ProductListDto> productListDto = new ArrayList<>();
 		List<Product> productList = productService.findAllByOrderByProductNoDesc();
