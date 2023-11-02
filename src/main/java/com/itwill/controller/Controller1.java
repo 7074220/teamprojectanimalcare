@@ -16,5 +16,10 @@ public class Controller1 {
 	public String index() {
 		return "index";
 	}
-
+	
+	@GetMapping(value = "/myAccount")
+	public String myAccount() {
+		return "my-account";
+	}
+	
 }

@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
 	   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-       layout:decorate="layout/layout(title='orderview')">
+       layout:decorate="layout/layout(title='마이페이지')">
 <head>
     <title>Safira - my account</title>
     <style>
@@ -17,9 +17,9 @@
 <body>
 
    <!--header area start-->
-    <th layout:fragment="content">
+    <th:block layout:fragment="content">
     <!--offcanvas menu area start-->
-    <div class="off_canvars_overlay">
+    <!-- <div class="off_canvars_overlay">
                 
     </div>
     <div class="offcanvas_menu">
@@ -150,14 +150,14 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--offcanvas menu area end-->
     
 
     <!--header area end-->
     
     <!--breadcrumbs area start-->
-    <div class="breadcrumbs_area">
+    <!-- <div class="breadcrumbs_area">
         <div class="container">   
             <div class="row">
                 <div class="col-12">
@@ -171,7 +171,7 @@
                 </div>
             </div>
         </div>         
-    </div>
+    </div> -->
     <!--breadcrumbs area end-->
     
     <!-- my account start  -->
@@ -346,12 +346,12 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="adoption : ${adoptDtoList}" >
-                                                <td th:text="${adoption.no}"></td>
-                                                <td th:text="${adoption.time}">11:00</td>
-                                                <td th:text="${adoption.date}">May 10, 2018</span></td>
-                                                <td th:text="${adoption.pet}">포메라니안</td>
-                                                <td th:text="${adoption.status}"><span class="success">입양신청</span></td>
+                                            <tr th:each="adoption: ${adoptList}" >
+                                                <td th:text="${adoption.adoptNo}">1</td>
+                                                <td th:text="${adoption.adoptTime}">11:00</td>
+                                                <td th:text="${adoption.adoptDate}">May 10, 2018</span></td>
+                                                <td th:text="${adoption.pet.petName}">포메라니안</td>
+                                                <td th:text="${adoption.adoptStatus}"><span class="success">입양신청</span></td>
                                             </tr>
                                             <!-- <tr>
                                                 <td>2</td>
@@ -379,20 +379,27 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+
+												<tr th:each="volunteer : ${volunteers}">
+													<td th:text="${volunteer.volunteerNo}">1</td>
+													<td th:text="${volunteer.time}">11:00</td>
+													<td th:text="${volunteer.date}">Jun 10, 2018</td>
+													<td th:text="${volunteer.center}">하하보호소</td>
+													<td>
+													<span th:class="${volunteer.status == '봉사완료' ? 'success' : 'warning'}"
+														th:text="${volunteer.status}">봉사완료</span>
+													</td>
+												</tr>
+
+												<!-- <tr>
                                                 <td>1</td>
                                                 <td>11:00</td>
                                                 <td>Jun 10, 2018</td>
                                                 <td>하하보호소 </td>
                                                 <td><span class="success">봉사완료</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>12:00</td>
-                                                <td>Jun 10, 2018</td>
-                                                <td>안녕보호소 </td>
-                                                <td><span class="success">봉사신청</span></td>
-                                            </tr>
+                                            </tr> -->
+                                           
+                                           
                                         </tbody>
                                     </table>
                                 </div>
@@ -514,7 +521,7 @@
             </div>  
         </div>        	
     </section>	
-    </th:block>		
+    
     <!-- my account end   --> 
 
       <!--footer area start-->
@@ -524,7 +531,7 @@
 
 
 <!-- 회원탈퇴  -->
-<script>
+<!-- <script>
     $('#confirmDelete').on('click', function() {
         const selectedReason = $('input[name="reason"]:checked').val();
         if (selectedReason) {
@@ -539,7 +546,7 @@
 </script>
 
 
-<!-- 주문한 상품 리뷰쓰기  -->
+주문한 상품 리뷰쓰기 
 <script>
 
     // 마이페이지 상품주문 완료된 항목에서 주문상세를 누르면 창이 뜨고 이 창에서만 리뷰를 쓸수 있음
@@ -556,8 +563,8 @@
     }
     });
 
-</script>
-
+</script> -->
+</th:block>		
 
 
 
