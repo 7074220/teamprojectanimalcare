@@ -19,27 +19,29 @@ import com.itwill.entity.Adopt;
 import com.itwill.service.AdoptService;
 
 @Controller
-@RequestMapping("/adopt")
 public class AdoptController {
 
 	@Autowired
 	private AdoptService adoptService;
-/*
+
 	// 입양신청
-	@GetMapping("/re/insert_action")
-	public String insert_action(@RequestBody AdoptDto dto) {
-		return "my-account";
+	@GetMapping("/adopt")
+	public String apply(Model model) {
+		return "adopt";
 	}
-*/
-	// 입양 리스트 조회
+
+	// 입양 리스트 조회(관리자)
 	@GetMapping("/adoptList")
 	public String adoptList(Model model) {
 		List<AdoptDto> adoptDtoList = new ArrayList<>();
 		List<Adopt> adoptList = adoptService.findAdoptList();
+		/*
 		for (Adopt adopt : adoptList) {
 			adoptDtoList.add(AdoptDto.fromEntity(adopt));
 		}
 		model.addAttribute("adoptDtoList", adoptDtoList);
+		*/
+		model.addAttribute("adoptList", adoptList);
 		return "my-account";
 	}
 
