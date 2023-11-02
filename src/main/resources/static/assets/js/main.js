@@ -835,6 +835,7 @@
     
     
     /*instagram activation*/
+    /*
     $.instagramFeed({
         'username': 'portfolio.devitems',
         'container': "#instagramFeed",
@@ -879,7 +880,7 @@
             })
         }
     });
-    
+    */
     
     
     
