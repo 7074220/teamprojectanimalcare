@@ -77,7 +77,7 @@ public class VolunteerController {
 	    return "my-account";
 	}
 	
-	
+	/*
 	// userNo 로 봉사 목록 조회. 로그인한 회원
 	@GetMapping("/volunteerList/{userNo}")
 	public String findByUserNoVolunteerList(Model model, HttpSession httpSession, @PathVariable(name = "userNo") Long userNo) throws Exception{		
@@ -91,7 +91,7 @@ public class VolunteerController {
 		model.addAttribute("volunteerList", volunteerList);
 		return "my-account-volunteer"; 
 	}
-	
+	*/
 	
 	// userNo 로 봉사 리스트 조회. 로그인한 회원
 	@GetMapping("/volunteerByUserNo")
