@@ -49,7 +49,8 @@ public class VolunteerController {
 	// 봉사버튼 클릭시 센터정보 보여줌
 	@PostMapping("/create-volunteer")
 	public String createVolunteer(@RequestParam("volunteerDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date volunteerDate, 
-			@RequestParam("volunteerTime") int selectedHour, @RequestParam Long centerNo, Model model) {
+			@RequestParam("volunteerTime") int selectedHour, @RequestParam Long centerNo, HttpSession session, Model model) throws Exception{
+		Long userNo = (Long) session.getAttribute("userNo");
 		
 		Volunteer volunteer = new Volunteer();
 		volunteer.setVolunteerDate(volunteerDate);
@@ -57,22 +58,18 @@ public class VolunteerController {
 		volunteer.setVolunteerTime(selectedHour);
 		
 		Center center = centerService.findByCenterNo(centerNo);
+		Userinfo userinfo = userInfoService.findUserByNo(userNo);
+		volunteer.setUserinfo(userinfo);
 		volunteer.setCenter(center);
 		volunteerService.insertVolunteer(volunteer);
-		
+		model.addAttribute("userinfo", userinfo);
 		return "center-list";
 	}
 	
 	
 	@GetMapping("/volunteerList") // 봉사 목록 전체 조회. 관리자
 	public String volunteerList(Model model) {
-		List<Volunteer> volunteers = volunteerService.findAllVolunteers();
-		/*
-		List<VolunteerDto> volunteerDtoList = new ArrayList<>();
-	    for (Volunteer volunteer : volunteerList) {
-	        volunteerDtoList.add(VolunteerDto.toDto(volunteer));
-	    }
-	    */	    
+		List<Volunteer> volunteers = volunteerService.findAllVolunteers();    
 	    model.addAttribute("volunteers", volunteers);
 	    return "my-account";
 	}
