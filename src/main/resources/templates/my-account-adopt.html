@@ -186,7 +186,7 @@
                                 <li><a href="userinfo" class="nav-link">내정보</a></li>
                                 <li><a href="#mypet"  class="nav-link">마이펫</a></li>
                                 <li><a href="#cuponpage"  class="nav-link">쿠폰</a></li>
-                                <li><a href="#adopt"  class="nav-link">입양</a></li>
+                                <li><a href="adoptByUserNo"  class="nav-link">입양</a></li>
                                 <li><a href="#volunteer"  class="nav-link">봉사</a></li>
                                 <li><a href="#visit" class="nav-link">견학</a></li>
                                 <li> <a href="#orders" class="nav-link">주문목록</a></li>
@@ -202,7 +202,7 @@
                             
                             
 
-                            <div class="tab-pane fade" id="adopt">
+                            <!--<div class="tab-pane fade" id="adopt">-->
                                 <h3>입양</h3>
                                 <div class="table-responsive">
                                     <table class="table">
@@ -216,12 +216,12 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="adoption: ${adoptList}" >
-                                                <td th:text="${adoption.adoptNo}">1</td>
-                                                <td th:text="${adoption.adoptTime}">11:00</td>
-                                                <td th:text="${adoption.adoptDate}">May 10, 2018</span></td>
-                                                <td th:text="${adoption.pet.petName}">포메라니안</td>
-                                                <td th:text="${adoption.adoptStatus}"><span class="success">입양신청</span></td>
+                                            <tr th:each="adopt:${adoptList}">
+                                                <td th:text="${adopt.adoptNo}">1</td>
+                                                <td>11:00</td>
+                                                <td>May 10, 2018</span></td>
+                                                <td>포메라니안</td>
+                                                <td><span class="success">입양신청</span></td>
                                             </tr>
                                             <!-- <tr>
                                                 <td>2</td>
@@ -233,7 +233,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
+                            <!--</div>-->
                             
                             <!--<div class="tab-pane fade" id="account-details">-->
                           
