@@ -13,6 +13,17 @@ function deletePet() {
 	
 	
 }
+
+
+</script>
+<script>
+function petType() {
+    var selectedValue = document.getElementById("short").value;
+    if (selectedValue) {
+        var newUrl = '/teamproject_animalcare/pets?petType=' + selectedValue;
+        window.location.href = newUrl;
+    }
+}
 </script>
     <title>Safira - shop fullwidth list</title>
    
@@ -49,10 +60,10 @@ function deletePet() {
                             <button data-role="grid_list" type="button"  class="active btn-list" data-toggle="tooltip" title="List"></button>
                         </div>
                         <div class=" niceselect_option">
-                            <form class="select_option" action="#" name="pet" data-navigate="/guest_write_form">
-                                <select name="orderby" id="short">
+                            <form class="select_option" action="#" name="pet" data-navigate="/guest_write_form" >
+                                <select name="orderby" id="short" onchange="petType()" >
 
-                                    <option selected value="1">동물선택 </option>
+                                   <!----> <option selected value="1">동물선택 </option>
                                     <option  value="강아지">강아지</option>
                                     <option value="고양이">고양이</option>
                                    <!--  <option value="4">Sort by price: low to high</option>

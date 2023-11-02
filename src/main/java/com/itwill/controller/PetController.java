@@ -91,6 +91,20 @@ PetService petService;
 		return "pet-list";
 	
 	}
+	
+	@Operation(summary = "펫타입 리스트")	
+	@GetMapping("/pets")
+	public String petTypeList(@RequestParam(name = "petType")String petType,Model model){
+			List<PetDto> petDtoList = new ArrayList<>();
+			List<Pet> petList = petService.findAllByOrderBypetType(petType);
+			for (Pet pet : petList) {
+				petDtoList.add(PetDto.toDto(pet));
+			}
+
+		model.addAttribute("petList",petDtoList);
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>"+petDtoList);
+		return "pet-list";
+	}
 
 	
 
