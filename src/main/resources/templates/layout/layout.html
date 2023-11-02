@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>Safira – Organic food HTML Template </title>
+	<title>Safira - shop fullwidth list</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Favicon -->
@@ -12,54 +12,39 @@
 
 	<!-- CSS 
     ========================= -->
-	<!--bootstrap min css-->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-	<!--owl carousel min css-->
-	<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-	<!--slick min css-->
-	<link rel="stylesheet" href="assets/css/slick.css">
-	<!--magnific popup min css-->
-	<link rel="stylesheet" href="assets/css/magnific-popup.css">
-	<!--font awesome css-->
-	<link rel="stylesheet" href="assets/css/font.awesome.css">
-	<!--ionicons css-->
-	<link rel="stylesheet" href="assets/css/ionicons.min.css">
-	<!--linearicons css-->
-	<link rel="stylesheet" href="assets/css/linearicons.css">
-	<!--animate css-->
-	<link rel="stylesheet" href="assets/css/animate.css">
-	<!--jquery ui min css-->
-	<link rel="stylesheet" href="assets/css/jquery-ui.min.css">
-	<!--slinky menu css-->
-	<link rel="stylesheet" href="assets/css/slinky.menu.css">
-	<!--plugins css-->
-	<link rel="stylesheet" href="assets/css/plugins.css">
-
-	<!-- Main Style CSS -->
-	<link rel="stylesheet" href="assets/css/style.css">
+	<!-- all css here -->	     
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/font.awesome.css">
+    <link rel="stylesheet" href="assets/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/linearicons.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="assets/css/slinky.menu.css">
+    <link rel="stylesheet" href="assets/css/plugins.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
 	<!--modernizr min js here-->
-	<script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
-	<script>
-		function chageLangSelect(){
-			alert('ㅇㅇ');
+	<script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
+	<script defer type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
+
+	<style>
+		.valid {
+			border: 1px solid green;
 		}
-	</script>
-<style>
-	.valid {
-		border: 1px solid green;
-	}
 
-	label.error {
-		color: red;
-		margin-left: 10px;
-	}
+		label.error {
+			color: red;
+			margin-left: 10px;
+		}
 
-	input.error {
-		border: 1px solid red;
-	}
-</style>
-	
+		input.error {
+			border: 1px solid red;
+		}
+	</style>
+
 </head>
 
 <body>
@@ -67,26 +52,41 @@
 	<div class="offcanvas-container" id="shop-categories" th:insert="~{/fragment/common-top::common-top}"
 		th:remove="tag"></div>
 	<!-- -------------------- common-top.html end      -----------------------  -->
-	
+
 	<!-- Page Title(메인페이지는 타이틀을사용하지않음)-->
 	<!--  slider area start -->
 	<th:block th:if="${title!=''}">
-		<div class="page-title"
-			th:insert="~{/fragment/page-title::page-title(${title})}"
-			th:remove="tag"></div>
-	</th:block>	
+		<div class="page-title" th:insert="~{/fragment/page-title::page-title(${title})}" th:remove="tag"></div>
+	</th:block>
 	<!--  slider area end -->
-	
+
 	<!-- Page Content-->
 	<!--Content 내용 영역 시작-->
 	<th:block layout:fragment="content" />
-	
+
 	<!-- common-footer.html start -->
 	<footer class="site-footer" th:insert="~{fragment/common-footer::common-footer}"></footer>
 	<!-- common-footer.html end -->
+
+	<!-- JS
+	============================================ -->
+	<script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
+    <script src="assets/js/popper.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/slick.min.js"></script>
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/jquery.instagramFeed.min.js"></script>
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <script src="assets/js/jquery.countdown.js"></script>
+    <script src="assets/js/jquery.ui.js"></script>
+    <script src="assets/js/jquery.elevatezoom.js"></script>
+    <script src="assets/js/isotope.pkgd.min.js"></script>
+    <script src="assets/js/slinky.menu.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/main.js"></script>
+
 	
-	<script src="assets/js/vendor/jquery-3.5.0.min.js" defer="defer"></script>
-	<script src="assets/js/vendor/modernizr-3.7.1.min.js" defer="defer"></script>
 	<script defer type="text/javascript" src="assets/js/vendor/jquery.validate.js"></script>
 	<script defer src="assets/js/custom/userApp.js" type="module"></script>
 </body>
