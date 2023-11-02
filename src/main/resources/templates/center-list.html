@@ -92,12 +92,11 @@
 									</div>
 									<div class="product_content list_content">
 										<h4 class="product_name">
-											<a th:href="@{/center-details(centerNo=${center.centerNo})}"
-												th:text="${center.centerName}">센터명</a>
+											<p>센터 이름: <span th:text="${center.centerName}"></span></p>
 										</h4>
-										<p th:text="${center.centerPhoneNumber}">전화번호</p>
-										<p th:text="${center.centerLocal}">지역</p>
-										<p th:text="${center.centerOpenCloseTime}">운영 시간</p>
+										<p>전화번호: <span th:text="${center.centerPhoneNumber}"></span></p>
+										<p>지역: <span th:text="${center.centerLocal}"></span></p>
+										<p>오픈/클로즈 시간: <span th:text="${center.centerOpenCloseTime}"></span></p>
 										<!--  <div class="price_box">
                     <span class="current_price">$26.00</span>
                     <span class="old_price">$362.00</span>
@@ -106,8 +105,12 @@
 									<div class="action_links list_action_right">
 										<ul>
 											<li class="add_to_cart">
-												<a th:href="@{'/visit?centerNo=' + ${center.centerNo} + '&centerName=' + ${center.centerName}}"
-													title="견학신청">견학신청</a>
+												<a th:href="@{/visit(centerNo=${center.centerNo})}">
+													견학하기
+												</a>
+
+
+
 
 											</li>
 
