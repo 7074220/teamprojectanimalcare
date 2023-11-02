@@ -228,4 +228,71 @@ public class ProductController {
 		return "shop";
 	}
 	
+	
+	
+	
+	
+	// 펫카테고리별로 구분 --> 상품 리스트 출력
+	@GetMapping("/productDogList")
+	public String productDogList(Model model, HttpSession session) {
+		List<ProductListDto> productListDto = new ArrayList<>();
+		List<Product> productList = new ArrayList<>();
+		
+		Long userNo = (Long) session.getAttribute("userNo");
+		MyPet myPet = MyPet.builder().build();
+		
+		if(userNo != null) {
+			myPet = myPetService.findLeaderMyPet(userNo);
+			if (myPet == null) {
+				myPet = MyPet.builder().build();
+				productList = productService.findAllByOrderByProductNoDesc();
+			} else {
+				productList = productService.findAllProductByPetCategory("강아지");
+			}
+		} else {
+			productList = productService.findAllByOrderByProductNoDesc();
+			myPet = MyPet.builder().build();
+		}
+		
+		for (Product product : productList) {
+			productListDto.add(ProductListDto.toDto(product));
+		}
+		
+		model.addAttribute("productList", productListDto);
+		model.addAttribute("myPet", myPet);
+		// System.out.println(productList.get(0).getProductPetCategory());
+		return "shop";
+	}
+	// 펫카테고리별로 구분 --> 상품 리스트 출력
+	@GetMapping("/producCattList")
+	public String productCatList(Model model, HttpSession session) {
+		List<ProductListDto> productListDto = new ArrayList<>();
+		List<Product> productList = new ArrayList<>();
+		
+		Long userNo = (Long) session.getAttribute("userNo");
+		MyPet myPet = MyPet.builder().build();
+		
+		if(userNo != null) {
+			myPet = myPetService.findLeaderMyPet(userNo);
+			if (myPet == null) {
+				myPet = MyPet.builder().build();
+				productList = productService.findAllByOrderByProductNoDesc();
+			} else {
+				productList = productService.findAllProductByPetCategory("고양이");
+			}
+		} else {
+			productList = productService.findAllByOrderByProductNoDesc();
+			myPet = MyPet.builder().build();
+		}
+		
+		for (Product product : productList) {
+			productListDto.add(ProductListDto.toDto(product));
+		}
+		
+		model.addAttribute("productList", productListDto);
+		model.addAttribute("myPet", myPet);
+		// System.out.println(productList.get(0).getProductPetCategory());
+		return "shop";
+	}
+	
 }
