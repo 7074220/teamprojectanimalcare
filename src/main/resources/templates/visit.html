@@ -50,7 +50,7 @@
 						<div class="contact_message form">
 							<h3>신청 양식</h3>
 							<!-- 달력 -->
-							<form id="contact-form" method="POST" action="assets/mail.php">
+							<form id="contact-form" method="POST" action="/create-visit">
 								<p>
 									<label> 이름 </label>
 									<input name="name" placeholder="Name *" type="text">
@@ -61,20 +61,18 @@
 								</p>
 								<p>
 									<label> 주소 </label>
-									<input name="subject" placeholder="Subject *" type="text">
+									<input name="address" placeholder="Address *" type="text">
 								</p>
-								<div class="contact_textarea">
-									<label> 하고싶은 말</label>
-									<textarea placeholder="Message *" name="message" class="form-control2"></textarea>
-								</div>
+								
 								<p>
 									<label>방문예약</label>
 									<input type="datetime-local" name="starttime">
 								</p>
 
 								<button type="submit"> submit</button>
-								<p class="form-messege"></p>
+								<p class="form-message"></p>
 							</form>
+
 
 						</div>
 					</div>

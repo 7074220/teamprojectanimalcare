@@ -29,7 +29,7 @@ public class VisitController {
 		model.addAttribute("center", center);
 		return "visit";
 	}
-
+	
 
 	// 관리자 견학리스트 전체출력
 	@GetMapping("/visitList")

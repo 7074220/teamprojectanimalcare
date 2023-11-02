@@ -43,11 +43,13 @@ public class VIsitRestController {
 	public ResponseEntity<VisitDto> createVisit(@RequestBody VisitDto dto, HttpSession session) {
 		//견학 생성
 		Visit visitEntity = VisitDto.toEntity(dto);
+		 visitEntity.setVisitStatus("신청중");
 		visitService.createVisit(visitEntity);
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		return new ResponseEntity<>(dto, httpHeaders, HttpStatus.CREATED);
-	}
+	}	
+
 	@Operation(summary = "견학리스트조회")
 	@GetMapping("/visits")
 	public ResponseEntity<List<VisitDto>> visitList() {
