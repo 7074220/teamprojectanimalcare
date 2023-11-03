@@ -35,12 +35,12 @@ class ReviewBoardServiceImplTest {
 
 		ReviewBoard reviewBoard = ReviewBoard.builder()
 			
-				.boardTitle("service 테스트 타이틀111")
-				.boardContent("service 테스트 내용111")
+				.boardTitle("별로네요")
+				.boardContent("별로에요")
 				.boardDate(new Date())
-				.boardStar(4)
+				.boardStar(1)
 				.userinfo(userInfoService.findUserByNo(14L))
-				.product(productService.findByProductNo(12L))
+				.product(productService.findByProductNo(15L))
 				.build();
 
 		reviewBoardService.create(reviewBoard);

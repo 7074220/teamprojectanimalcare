@@ -829,8 +829,8 @@
 									</div>
 								</div>
 
-								<div class="tab-pane fade" id="reviews" role="tabpanel" th:each="review:${reviewList}">
-									<div class="reviews_wrapper">
+								<div class="tab-pane fade" id="reviews" role="tabpanel">
+									<div class="reviews_wrapper" th:each="review:${reviewList}">
 										<h2 th:text="${review.boardDate}">roadthemes</h2>
 										<div class="reviews_comment_box">
 											<div class="comment_thmb">
