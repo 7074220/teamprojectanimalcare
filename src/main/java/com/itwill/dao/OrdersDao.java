@@ -15,7 +15,7 @@ public interface OrdersDao {
 	// 주문변경
 	Orders updateOrder(Orders updateOrder) ;
 	//주문삭제
-	void deleteOrder(Long orderNo) ;
+	void deleteOrderByOrderNo(Long orderNo) ;
 
 
 	//모든주문 찾기
