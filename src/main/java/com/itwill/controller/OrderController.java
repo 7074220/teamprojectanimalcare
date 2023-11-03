@@ -102,7 +102,7 @@ public class OrderController {
 		return "orderList";
 	}
 	//회원 주문목록
-	@GetMapping("/uordersList")
+	@GetMapping("/orders")
 	public String findOrderByUser( HttpSession session,Model model) throws Exception {
 		if (session.getAttribute("userNo") == null) {
 			throw new Exception("로그인 하세요.");
@@ -117,7 +117,7 @@ public class OrderController {
 		}
 		
 		model.addAttribute("uOrderList",ordersDto);
-		return "uOrderList";
+		return "my-account-orders";
 	}
 	
 	//orderform

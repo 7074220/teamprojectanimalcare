@@ -106,9 +106,9 @@ void test2() {
 
 	//펫 타입리스트
 	@Test
-	@Disabled
+	//@Disabled
 	void findallPetType() {
-		List<Pet> pet = petDao.findAllByOrderByPetType("퍼");
+		List<Pet> pet = petDao.findAllByOrderByPetType("강아지");
 	System.out.println(pet);
 	}
 }
