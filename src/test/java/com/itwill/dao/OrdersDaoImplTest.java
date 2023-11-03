@@ -115,7 +115,7 @@ void update() {
 @Rollback(false)
 void delete() {
 	
-	ordersDao.deleteOrder(4L);
+	ordersDao.deleteOrderByOrderNo(4L);
 }
 
 @Test

@@ -90,16 +90,15 @@ public class OrderController {
 	}
 	//관리자전용
 	@GetMapping("/ordersList")
-	public String findOrders(Model model) {
+	public String findOrders(Model model,HttpSession session) throws Exception {
 		List<Orders> orderList = orderService.findOrders();
 		List<OrdersDto> ordersDto = new ArrayList<OrdersDto>();
+			for (Orders orders : orderList) {
+				ordersDto.add(OrdersDto.toDto(orders));
+			}
+			model.addAttribute("ordersList",ordersDto);
+			return "my-account-orders";
 		
-		for (Orders orders : orderList) {
-			ordersDto.add(OrdersDto.toDto(orders));
-		}
-		model.addAttribute("ordersList",ordersDto);
-
-		return "orderList";
 	}
 	//회원 주문목록
 	@GetMapping("/orders")
@@ -110,13 +109,15 @@ public class OrderController {
 		Long userNo=(Long)session.getAttribute("userNo");
 		
 		List<Orders> orderList = orderService.findOrderById(userNo);
-		List<OrdersDto> ordersDto = new ArrayList<OrdersDto>();
+		List<OrdersDto> ordersDtoList = new ArrayList<OrdersDto>();
 		
 		for (Orders orders : orderList) {
-			ordersDto.add(OrdersDto.toDto(orders));
+			ordersDtoList.add(OrdersDto.toDto(orders));
+			
 		}
 		
-		model.addAttribute("uOrderList",ordersDto);
+		
+		model.addAttribute("ordersList",ordersDtoList);
 		return "my-account-orders";
 	}
 	

@@ -30,6 +30,8 @@ public class ReportBoardInsertDto {
 	private Date boardFindDate;
 	private String boardFindName;
 	private String boardFindPhone;
+	private String boardImage;
+
 	
 	private Long userNo;
 	
@@ -41,6 +43,7 @@ public class ReportBoardInsertDto {
 											.boardFindPhone(reportBoardInsertDto.getBoardFindPhone())
 											.boardRegisterDate(reportBoardInsertDto.getBoardRegisterDate())
 											.boardTitle(reportBoardInsertDto.getBoardTitle())
+											.boardImage(reportBoardInsertDto.getBoardImage())
 											.build();
 
 		return reportBoard;
@@ -54,6 +57,7 @@ public class ReportBoardInsertDto {
 											.boardFindPhone(reportBoard.getBoardFindPhone())
 											.boardRegisterDate(reportBoard.getBoardRegisterDate())
 											.boardTitle(reportBoard.getBoardTitle())
+											.boardImage(reportBoard.getBoardImage())
 											.build();
 
 		return reportBoardInsertDto;

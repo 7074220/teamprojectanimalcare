@@ -29,6 +29,7 @@ public class ReportController {
 	@GetMapping("/reportlist")
 	public String ReportList(Model model) {
 		List<ReportBoard> reportBoards = reportBoardService.findAll();
+		System.out.println(">>>>>>"+reportBoards);
 		model.addAttribute("reportBoardList", reportBoards);
 		return "reportList";
 	}

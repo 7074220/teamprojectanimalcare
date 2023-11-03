@@ -230,6 +230,40 @@
 										</div>
 									</div>
 								</div>
+							
+							<div class="modal fade" id="deleteModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <!-- 모달 헤더 -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">회원탈퇴 이유 선택</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                            
+                                        <!-- 회원탈퇴 모달 본문 -->
+                                        <div class="modal-body">
+                                            <form id="deleteReasonForm">
+                                                <!-- 탈퇴 이유 선택 -->
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="reason" id="reason1" value="Not satisfied">
+                                                    <label class="form-check-label" for="reason1">서비스에 만족하지 않음</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="reason" id="reason2" value="Found alternative">
+                                                    <label class="form-check-label" for="reason2">다른 서비스를 사용</label>
+                                                </div>
+                                                <!-- ... 다른 이유들도 추가 가능 ... -->
+                                            </form>
+                                        </div>
+                            
+                                        <!-- 모달 푸터 -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" id="confirmDelete">탈퇴하기</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>	
+							
                            <!--   </div>-->
                         </div>
                     </div>
@@ -272,7 +306,25 @@
 		}
 
 	</script>
-
+	
+<!-- 회원탈퇴  -->
+<script type="text/javascript">
+	function userDelete(){
+		window.location.href = 'userDelete';
+	}
+    $('#confirmDelete').on('click', function() {
+        const selectedReason = $('input[name="reason"]:checked').val();
+        if (selectedReason) {
+            console.log("회원탈퇴 이유:", selectedReason);
+            // 여기에 탈퇴 로직
+            userDelete(); 
+            // 탈퇴가 완료되면 index.html로 리다이렉트
+        	//window.location.href = 'index';
+        } else {
+            alert("탈퇴하시려면 이유를 선택해주세요.");
+        }
+    });
+</script>
 
 </th:block>		
 
