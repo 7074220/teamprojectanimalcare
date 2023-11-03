@@ -686,16 +686,30 @@
                             <!-- 상품 디테일 부가기능 -->
                             
                             
-                            
+                            <!-- 
                             <div class="product_variant quantity">
                                 <label>수량</label>
                                 <input min="1" max="100" value="1" type="number">
-                                <button class="button" type="submit" th:href="@{cart(productNo=${product.productNo})}">add to cart</button>  
-                            </div>
-                            
-                            
-                            
-                            <div class=" product_d_action">
+                                <button class="button" type="submit">add to cart</button>  
+                            </div> -->
+
+
+								<!-- <div class="product_variant quantity">
+									<label>수량</label> <input min="1" max="100" value="1"
+										type="number"> <input type="hidden" id="productNo"
+										value="${product.productNo})}"> <a href="#"
+										class="button" onclick="addToCart()">add to cart</a>
+								</div> -->
+
+								<div class="product_variant quantity">
+									<label>수량</label> <input min="1" max="100" value="1"
+										type="number"> <a
+										th:href="@{cartList(productNo=${product.productNo})}"
+										class="button">add to cart</a>
+								</div>
+
+
+								<div class=" product_d_action">
                                <ul>
                                    <li><a href="#" title="Add to wishlist">+ Add to Wishlist</a></li>
                                    <!-- <li><a href="#" title="Add to wishlist">+ Compare</a></li> -->
@@ -1247,6 +1261,23 @@
         </div>
     </section>
     <!--product area end-->
+    
+    
+    
+    
+<!--     
+ <script>
+    function addToCart() {
+        var productNo = document.getElementById("productNo").value;
+        window.location.href = "cart?productNo=" + productNo;
+    }
+</script> -->
+    
+    
+    
+    
+    
+    
     </th:block>
 
    <!--footer area start-->

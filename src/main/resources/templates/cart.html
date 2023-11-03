@@ -590,11 +590,12 @@
                            
                                 <tr th:each="cart:${cartList}">
                                    <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                    <td class="product_thumb"><a href="#"><img src="#" alt="" th:src="@{/image/product/} + ${product.getProductImage}"></a></td>
-                                    <td class="product_name"><a href="#" th:text="${product.productName}">상품명</a></td>
-                                    <td class="product-price" th:text="${product.productPrice}">가격</td>
+                                    <td class="product_thumb"><a href="#" th:href="@{productDetail(productNo=${cart.product.productNo})}"><img src="#" alt="" th:src="@{/image/product/} + ${cart.product.getProductImage}"></a></td>
+                                    <td class="product_name"><a href="#" th:text="${cart.product.productName}" th:href="@{productDetail(productNo=${cart.product.productNo})}">상품명</a></td>
+                                    <td class="product-price" th:text="${cart.product.productPrice}">가격</td>
                                     <td class="product_quantity"><label>수량</label> <input min="1" max="100" value="1" type="number"></td>
-                                    <td class="product_total">총금액</td>
+                                    <!--  상품가격 X 수량 = 총금액 수정해야댐 -->
+                                    <td class="product_total" th:text="(${cart.product.productPrice})*(${cart.product.productQty})">총금액</td>
 
 
                                 </tr>
