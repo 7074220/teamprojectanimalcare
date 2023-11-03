@@ -56,5 +56,11 @@ private PetDao petDao;
 	public List<Pet> findAllByOrderBypetType(String petType) {
 		return petDao.findAllByOrderByPetType(petType);
 	}
-
+	
+	@Override
+	public List<Pet> findAllByPetLocal(String petLocal) {
+		
+		return petDao.findAllByPetLocal(petLocal);
+	}
+	
 }

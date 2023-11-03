@@ -24,6 +24,7 @@ import com.itwill.service.UserInfoService;
 import com.itwill.service.VisitService;
 
 import groovy.transform.AutoImplement;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class VisitController {
@@ -48,17 +49,20 @@ public class VisitController {
 
 	@PostMapping("/create-visit")
 	public String createVisit(@RequestParam("visitDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date visitDate,
-			@RequestParam("visitTime") int selectedHour, @RequestParam Long centerNo, Model model) {
-
-		Visit visit = new Visit();
+			@RequestParam("visitTime") int selectedHour, @RequestParam Long centerNo,HttpSession session, Model model) throws Exception {
+		 Long userNo = (Long) session.getAttribute("userNo");
+		
+		 Visit visit = new Visit();
 		visit.setVisitDate(visitDate);
 		visit.setVisitStatus("접수중");
 		visit.setVisitTime(selectedHour);
-
+		 
 		Center center = centerService.findByCenterNo(centerNo);
+		Userinfo userinfo = userInfoService.findUserByNo(userNo);
+		visit.setUserinfo(userinfo);
 	    visit.setCenter(center);
 		visitService.createVisit(visit);
-
+		model.addAttribute("userinfo", userinfo);
 		return "center-list";
 	}
 
@@ -71,11 +75,13 @@ public class VisitController {
 	}
 
 	// 회원의 견학 리스트 출력
-	@GetMapping("/visitList/{userNo}")
-	public String memberVisitList(@PathVariable("userNo") Long userNo, Model model) {
-		List<Visit> memberVisitList = visitService.getVisitsByUserNo(userNo);
-		model.addAttribute("memberVisits", memberVisitList);
-		return "my-account";
+	@GetMapping("/visitByUserNo")
+	public String findByUserNoVisitList(Model model, HttpSession session) throws Exception {
+		Long userNo=(Long)session.getAttribute("userNo");
+		Userinfo user=userInfoService.findUserByNo(userNo);
+		List<Visit> visitList = visitService.getVisitsByUserNo(user.getUserNo());
+		model.addAttribute("visitList", visitList);
+		return "my-account-visit";
 	}
 
 }
