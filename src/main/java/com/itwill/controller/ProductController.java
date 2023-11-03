@@ -18,14 +18,25 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itwill.dto.ProductInsertDto;
 import com.itwill.dto.ProductListDto;
 import com.itwill.dto.ProductNameDto;
+import com.itwill.dto.ProductPetCategoryDto;
+import com.itwill.entity.MyPet;
 import com.itwill.entity.Product;
+import com.itwill.entity.Userinfo;
+import com.itwill.service.MyPetService;
 import com.itwill.service.ProductService;
+import com.itwill.service.UserInfoService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private UserInfoService userInfoService;
+	@Autowired 
+	private MyPetService myPetService;
 	
 	/*
 	// 상품 등록
@@ -40,19 +51,41 @@ public class ProductController {
 	
 	// 상품 리스트
 	@GetMapping("/productList")
-	public String ProductList(Model model) {
+	public String ProductList(Model model, HttpSession session) {
 		List<ProductListDto> productListDto = new ArrayList<>();
 		List<Product> productList = productService.findAllByOrderByProductNoDesc();
 		
-		for (Product product : productList) {
-			productListDto.add(ProductListDto.toDto(product));
+		Long userNo = (Long)session.getAttribute("userNo");
+		MyPet myPet = myPetService.findLeaderMyPet(userNo);
+		
+		if(myPet == null) {
+			for (Product product : productList) {
+				productListDto.add(ProductListDto.toDto(product));
+			}
+		} else {
+			productList = productService.findAllProductByPetCategory(myPet.getMypetKind());
+			for (Product product : productList) {
+				productListDto.add(ProductListDto.toDto(product));
+			}
 		}
 		
 		model.addAttribute("productList", productListDto);
-		System.out.println(productList.get(0).getProductPetCategory());
+		//System.out.println(productList.get(0).getProductPetCategory());
 		return "shop";
 	}
 	
+	/*
+	 * @GetMapping("/productPetCategoryList") public String
+	 * productPetCategoryList(Model model, String productPetCategory) {
+	 * List<ProductListDto> productListDto = new ArrayList<>(); List<Product>
+	 * productList = productService.findAllProductByPetCategory(productPetCategory);
+	 * 
+	 * for (Product product : productList) {
+	 * productListDto.add(ProductListDto.toDto(product)); }
+	 * 
+	 * return ""; }
+	 */
+
 	/*
 	@PostMapping("/delete/{productNo}")
 	public String deleteProduct(@PathVariable(name = "productNo") Long productNo) throws Exception{
