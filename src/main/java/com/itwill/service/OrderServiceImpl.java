@@ -20,18 +20,18 @@ import com.itwill.entity.Orderstatus;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Userinfo;
 import com.itwill.repository.OrderStatusRepository;
+
+@Transactional
 @Service
 public class OrderServiceImpl implements OrderService{
 	@Autowired 
-	OrdersDao ordersDao;
+	private OrdersDao ordersDao;
 	@Autowired 
-	CartDao cartDao;
+	private CartDao cartDao;
 	@Autowired 
-	OrderItemDao orderItemDao;
+	private OrderItemDao orderItemDao;
 	@Autowired
-	ProductDao productDao;
-	@Autowired
-	OrderStatusRepository orderStatusRepository;
+	private ProductDao productDao;
 	
 	@Override
 	public Orders insertOrder(Orders order) {
