@@ -21,4 +21,5 @@ Pet petFindById(Long petNo); //pk로 찾기
 	List<Pet> findAllByOrderBypetNoDesc();// 펫 no순으로 최신등록순 정렬
 	
 	List<Pet> findAllByOrderBypetType(String petType);// 펫 no순으로 최신등록순 정렬
+	 List<Pet> findAllByPetLocal(String petLocal);
 }

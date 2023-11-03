@@ -55,4 +55,17 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 	// 최신번호순 정렬
 	@Query(value = "SELECT * FROM Product p WHERE p.product_pet_category = ?1 ORDER BY p.product_no DESC", nativeQuery = true)
 	List<Product> findAllByOrderByProductByPetCategoryNoDesc(String productPetCategory);
+	
+	/*************** 펫 카테고리 및 프로덕트별 정렬 ****************/
+	@Query(value = "select * from product where product_pet_category = ?1 and product_category = ?2 order by product_price desc", nativeQuery = true)
+	List<Product> findAllByOrderByProductByPetCategoryByProductCategoryPriceDesc(String productPetCategory, String productCategory);
+	
+	@Query(value = "select * from product where product_pet_category = ?1 and product_category = ?2 order by product_price asc", nativeQuery = true)
+	List<Product> findAllByOrderByProductByPetCategoryByProductCategoryPriceAsc(String productPetCategory, String productCategory);
+	
+	@Query(value = "select * from product where product_pet_category = ?1 and product_category = ?2 order by product_star_avg desc", nativeQuery = true)
+	List<Product> findAllByOrderByProductByPetCategoryByProductCategoryStarAvgDesc(String productPetCategory, String productCategory);
+	
+	@Query(value = "select * from product where product_pet_category = ?1 and product_category = ?2 order by product_no desc", nativeQuery = true)
+	List<Product> findAllByOrderByProductByPetCategoryByProductCategoryNoDesc(String productPetCategory, String productCategory);
 }

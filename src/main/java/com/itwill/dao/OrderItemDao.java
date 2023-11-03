@@ -11,7 +11,7 @@ public interface OrderItemDao {
 	
 	public OrderItem updateOrderItem(OrderItem orderItem);
 	
-	public OrderItem deleteOrderItem(OrderItem orderItem);
+	public void deleteOrderItem(OrderItem orderItem);
 	
 	public List<OrderItem> findAll();
 	

@@ -9,7 +9,7 @@
 <body>
 	<!--header area start-->
 	<th layout:fragment="content">
-		<div id="content">
+<div id="content">
 			<!--offcanvas menu area start-->
 
 		</div>
@@ -575,21 +575,21 @@
 										<li class="widget_sub_categories sub_categories1"><a
 												href="javascript:void(0)">고양이</a>
 											<ul class="widget_dropdown_categories dropdown_categories1">
-												<li><a href="#">사료</a></li>
-												<li><a href="#">간식</a></li>
-												<li><a href="#">캔</a></li>
-												<li><a href="#">모래</a></li>
-												<li><a href="#">미용</a></li>
+												<li><a href="#" th:href="@{productCatList?category=사료}">사료</a></li>
+												<li><a href="#" th:href="@{productCatList?category=간식}">간식</a></li>
+												<li><a href="#" th:href="@{productCatList?category=캔}">캔</a></li>
+												<li><a href="#" th:href="@{productCatList?category=모래}">모래</a></li>
+												<li><a href="#" th:href="@{productCatList?category=미용}">미용</a></li>
 											</ul>
 										</li>
 										<li class="widget_sub_categories sub_categories2"><a
 												href="javascript:void(0)">강아지</a>
 											<ul class="widget_dropdown_categories dropdown_categories2">
-												<li><a href="#">사료</a></li>
-												<li><a href="#">간식</a></li>
-												<li><a href="#">캔</a></li>
-												<li><a href="#">위생</a></li>
-												<li><a href="#">미용</a></li>
+												<li><a href="#" th:href="@{productDogList?category=사료}">사료</a></li>
+												<li><a href="#" th:href="@{productDogList?category=간식}">간식</a></li>
+												<li><a href="#" th:href="@{productDogList?category=캔}">캔</a></li>
+												<li><a href="#" th:href="@{productDogList?category=위생}">위생</a></li>
+												<li><a href="#" th:href="@{productDogList?category=미용}">미용</a></li>
 											</ul>
 										</li>
 										<!-- <li class="widget_sub_categories sub_categories3"><a href="javascript:void(0)">Clothing</a>
@@ -717,13 +717,13 @@
 								<ul class="nav" role="tablist" th:if="${myPet.mypetKind} == null">
 									<li>
 										<a href="/productDogList" role="tab" aria-controls="plant1"
-											aria-selected="false" th:href="@{productDogList}" id="selectDog">
+											aria-selected="false" th:href="@{productDogList?category=All}" id="selectDog">
 											강아지
 										</a>
 									</li>
 									<li>
 										<a href="/productCatList" role="tab" aria-controls="plant2"
-											aria-selected="false" th:href="@{productCatList}" id="selectCat">
+											aria-selected="false" th:href="@{productCatList?category=All}" id="selectCat">
 											고양이
 										</a>
 									</li>
@@ -737,13 +737,13 @@
 								 <ul class="nav" role="tablist" th:if="${myPet.mypetKind == '강아지'}">
 									<li>
 										<a class="active"  href="/productDogList" role="tab"
-											aria-controls="plant1" aria-selected="true" th:href="@{productDogList}" id="selectDog">
+											aria-controls="plant1" aria-selected="true" th:href="@{productDogList?category=All}" id="selectDog">
 											강아지
 										</a>
 									</li>
 									<li>
 										<a  href="/productCatList" role="tab" aria-controls="plant2"
-											aria-selected="false" th:href="@{productCatList}" id="selectCat">
+											aria-selected="false" th:href="@{productCatList?category=All}" id="selectCat">
 											고양이
 										</a>
 									</li>
@@ -757,13 +757,13 @@
 								<ul class="nav" role="tablist" th:if="${myPet.mypetKind == '고양이'}">
 									<li>
 										<a href="/productDogList" role="tab" aria-controls="plant1"
-											aria-selected="false" th:href="@{productDogList}" id="selectDog">
+											aria-selected="false" th:href="@{productDogList?category=All}" id="selectDog">
 											강아지
 										</a>
 									</li>
 									<li>
 										<a class="active" href="/productCatList" role="tab"
-											aria-controls="plant2" aria-selected="true" th:href="@{productCatList}" id="selectCat">
+											aria-controls="plant2" aria-selected="true" th:href="@{productCatList?category=All}" id="selectCat">
 											고양이
 										</a>
 									</li>
@@ -1427,21 +1427,21 @@
 		        var dogBool = $('#selectDog').attr('aria-selected');
 		        var catBool = $('#selectCat').attr('aria-selected');
 		        var location = window.location.href;
-		        var path = location.substring(location.lastIndexOf("/") + 1)
-		        alert(location.substring(location.lastIndexOf("/") + 1));
+		        var path = "/"+location.substring(location.lastIndexOf("/") + 1)
+		        alert("/"+location.substring(location.lastIndexOf("/") + 1));
 		        
 		        switch (selectedValue) {
 		            case "1":
-		                redirectPath = "productStarDesc";
+		                redirectPath = "productStarDesc?path=" + path;
 		                break;
 		            case "2":
-		                redirectPath = "productPriceAsc";
+		                redirectPath = "productPriceAsc?path=" + path;
 		                break;
 		            case "3":
-		                redirectPath = "productPriceDesc?path="+path;
+		                redirectPath = "productPriceDesc?path=" + path;
 		                break;
 		            case "4":
-		                redirectPath = "productDateDesc";
+		                redirectPath = "productDateDesc?path=" + path;
 		                break;
 		            default:
 		                redirectPath = "defaultPath"; // Default path if the value is not recognized
@@ -1449,8 +1449,8 @@
 
 		        window.location.href = redirectPath;
 			}
+			
 		</script>
-
 		</th:block>
 
 		<!--footer area start-->
