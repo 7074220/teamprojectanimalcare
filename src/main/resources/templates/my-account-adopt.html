@@ -187,7 +187,7 @@
                                 <li><a href="#mypet"  class="nav-link">마이펫</a></li>
                                 <li><a href="#cuponpage"  class="nav-link">쿠폰</a></li>
                                 <li><a href="adoptByUserNo"  class="nav-link">입양</a></li>
-                                <li><a href="volunteerByUserNo"  class="nav-link">봉사</a></li>
+								<li><a href="volunteerByUserNo"  class="nav-link">봉사</a></li>
                                 <li><a href="visitByUserNo" class="nav-link">견학</a></li>
                                 <li> <a href="#orders" class="nav-link">주문목록</a></li>
                                 <li><a href="logout" class="nav-link">로그아웃</a></li>
@@ -199,37 +199,44 @@
                     <div class="col-sm-12 col-md-9 col-lg-9">
                         <!-- Tab panes -->
                         <div class="tab-content dashboard_content">
-							
+                            
+                            
+
+                            <!--<div class="tab-pane fade" id="adopt">-->
+                                <h3>입양</h3>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Time</th>
+                                                <th>Date</th>
+                                                <th>PetNo</th>
+                                                <th>Status</th>                 
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="adopt:${adoptList}">
+                                                <td th:text="${adopt.adoptNo}">1</td>
+                                                <td th:text="${adopt.adoptTime}"></td>
+                                                <td th:text="${adopt.adoptDate}"></span></td>
+                                                <td th:text="${adopt.Pet.petNo}"></td>
+                                                <td th:text="${adopt.adoptStatus}"><span class="success">입양신청</span></td>
+                                            </tr>
+                                            <!-- <tr>
+                                                <td>2</td>
+                                                <td>12:00</td>
+                                                <td>Jun 10, 2018</td>
+                                                <td>골든리트리버 </td>
+                                                <td><span class="success">입양완료</span></td>
+                                            </tr> -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            <!--</div>-->
+                            
                             <!--<div class="tab-pane fade" id="account-details">-->
-                                <h3>내정보 </h3>
-								<div class="login">
-									<div class="login_form_container">
-										<div class="account_login_form">
-											<form name="f" action="userUpdate">
-												<p><a href="#"></a></p>
-												<div class="input-select"></div>
-
-												<label>이름</label>
-												<input type="text" name="userName" th:value="${userinfo.userName}">
-												<label>비밀번호</label>
-												<input type="password" value="" name="userPassword"
-													th:value="${userinfo.userPassword}">
-												<label>핸드폰번호</label>
-												<input type="text" value="" name="userPhoneNumber"
-													th:value="${userinfo.userPhoneNumber}">
-												<label>주소</label>
-												<input type="text" value="" name="userAddress"
-													th:value="${userinfo.userAddress}">
-
-												<br>
-
-												<div class="save_button primary_btn default_button">
-													<button type="button" onclick="a()">Save</button>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div>
+                          
                            <!--   </div>-->
                         </div>
                     </div>
@@ -244,37 +251,32 @@
   
  
     <!--footer area end-->
-	<script>
-		function a() {
-			var userNameInput = document.querySelector('input[name="userName"]');
-			var userPasswordInput = document.querySelector('input[name="userPassword"]');
-			var userPhoneNumberInput = document.querySelector('input[name="userPhoneNumber"]');
-			var userAddressInput = document.querySelector('input[name="userAddress"]');
-
-			var userName = userNameInput.value.trim();
-			var userPassword = userPasswordInput.value.trim();
-			var userPhoneNumber = userPhoneNumberInput.value.trim();
-			var userAddress = userAddressInput.value.trim();
-
-			if (userName === '') {
-				alert('이름을 입력해주세요.');
-			} else if (userPassword === '') {
-				alert('비밀번호를 입력해주세요.');
-			} else if (userPhoneNumber === '') {
-				alert('핸드폰번호를 입력해주세요.');
-			} else if (userAddress === '') {
-				alert('주소를 입력해주세요.');
-			} else {
-				window.location.href=
-				'userUpdate?userName='+userName+'&userPassword='+userPassword+'&userPhoneNumber='+userPhoneNumber+'&userAddress='+userAddress;
-			}
-			
-		}
-
-	</script>
 
 
+
+ 
+
+
+<!--주문한 상품 리뷰쓰기 
+<script>
+
+    // 마이페이지 상품주문 완료된 항목에서 주문상세를 누르면 창이 뜨고 이 창에서만 리뷰를 쓸수 있음
+    // 주문 상세 링크를 클릭할 때 이벤트 핸들러
+    document.querySelector('.table').addEventListener('click', function(e) {
+    if (e.target.classList.contains('view')) {
+        e.preventDefault();
+        
+        // 주문상세 정보를 로드 하기
+        
+
+        // 모달창 표시
+        $('#orderDetailsModal').modal('show');
+    }
+    });
+
+</script> -->
 </th:block>		
+
 
 
 </body>
