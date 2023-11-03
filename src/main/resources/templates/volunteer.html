@@ -44,7 +44,85 @@
 }
 </style>
 
+<script>
+	// 현재 날짜를 가져오는 함수
+	function getCurrentDate() {
+		var currentDate = new Date();
+		var year = currentDate.getFullYear();
+		var month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+		var day = currentDate.getDate().toString().padStart(2, '0');
+		return year + '-' + month + '-' + day;
+	}
 
+	// 페이지 로드 시 실행
+	window.onload = function() {
+		var volunteerDate = document.getElementById('volunteerDate');
+		// 현재 날짜로 설정
+		volunteerDate.setAttribute('min', getCurrentDate());
+	};
+</script>
+
+<!-- 
+<script>  //시간날짜함수
+    // 현재 날짜를 가져오는 함수
+    function getCurrentDate() {
+        var currentDate = new Date();
+        var year = currentDate.getFullYear();
+        var month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+        var day = currentDate.getDate().toString().padStart(2, '0');
+        return year + '-' + month + '-' + day;
+    }
+
+    // 현재 시간을 가져오는 함수
+    function getCurrentTime() {
+        var now = new Date();
+        var hour = now.getHours();
+        var minute = now.getMinutes();
+
+        // 현재 시간을 정수로 반환
+        return hour * 100 + minute;
+    }
+
+    // 페이지 로드 시 실행
+    window.onload = function () {
+        var volunteerDate = document.getElementById('volunteerDate');
+        var volunteerTimeSelect = document.getElementById('volunteerTime');
+        var currentDate = getCurrentDate();
+        var currentTime = getCurrentTime();
+
+        // 현재 날짜로 설정
+        volunteerDate.setAttribute('min', currentDate);
+
+        // 현재 시간부터 23:00까지의 옵션 생성
+        for (var hour = 9; hour <= 23; hour++) {
+            var option = document.createElement('option');
+            var timeValue = hour * 100;
+            option.value = timeValue;
+            option.textContent = (hour % 12).toString().padStart(2, '0') + ':00 ' + (hour < 12 ? 'AM' : 'PM');
+            volunteerTimeSelect.appendChild(option);
+        }
+
+        // 현재 시간 선택
+        volunteerTimeSelect.value = currentTime;
+
+        // 현재 날짜 이전의 날짜를 비활성화
+        volunteerDate.addEventListener('input', function () {
+            if (volunteerDate.value < currentDate) {
+                volunteerDate.value = currentDate;
+            }
+        });
+
+        // 현재 시간 이전의 시간을 비활성화
+        for (var i = 0; i < volunteerTimeSelect.options.length; i++) {
+            if (volunteerTimeSelect.options[i].value < currentTime) {
+                volunteerTimeSelect.options[i].disabled = true;
+            }
+        }
+    };
+</script>
+ -->
+ 
+ 
 </head>
 
 <body>
@@ -154,25 +232,6 @@
 
 	<!-- JS
 ============================================ -->
-	
-<script>
-	// 현재 날짜를 가져오는 함수
-	function getCurrentDate() {
-		var currentDate = new Date();
-		var year = currentDate.getFullYear();
-		var month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-		var day = currentDate.getDate().toString().padStart(2, '0');
-		return year + '-' + month + '-' + day;
-	}
-
-	// 페이지 로드 시 실행
-	window.onload = function() {
-		var volunteerDate = document.getElementById('volunteerDate');
-		// 현재 날짜로 설정
-		volunteerDate.setAttribute('min', getCurrentDate());
-	};
-</script>
-
 
 	<!--map js code here-->
 	<script

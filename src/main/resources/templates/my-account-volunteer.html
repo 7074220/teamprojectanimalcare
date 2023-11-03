@@ -220,8 +220,9 @@
 												<!-- <td th:text="${rowStat.index + 1}"></td> 오름차순임-->
 												<td th:text="${volunteerList.size() - rowStat.index}"></td>
 												
-												<!-- <td th:text="${volunteer.volunteerTime}"></td> -->
-												<td th:text="${#strings.substring(volunteer.volunteerTime, 0, 2)}"></td>
+												<td th:text="${volunteer.volunteerTime}"></td>
+												<!-- !!!!! <td th:text="${#strings.substring(volunteer.volunteerTime.toString(), 0, 2)}"></td> -->
+
 												
 												<!-- <td th:text="${volunteer.volunteerDate}"></td> -->
 												<!-- 시간전체를 잘라서 날짜만 나올수있게 yyyy-mm-dd -->
