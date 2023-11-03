@@ -136,19 +136,19 @@ public class ProductController {
 			if(category.equals("All")) {
 				productList = productService.findAllProductByPetCategory("고양이");
 			}
-			if(category.equals("사료")) {
+			if(category.equals("1")) {
 				productList = productService.findAllProductByCategory("사료", "고양이");
 			}
-			if(category.equals("간식")) {
+			if(category.equals("2")) {
 				productList = productService.findAllProductByCategory("간식", "고양이");
 			}
-			if(category.equals("캔")) {
+			if(category.equals("3")) {
 				productList = productService.findAllProductByCategory("캔", "고양이");
 			}
-			if(category.equals("모래")) {
+			if(category.equals("4")) {
 				productList = productService.findAllProductByCategory("모래", "고양이");
 			}
-			if(category.equals("미용")) {
+			if(category.equals("5")) {
 				productList = productService.findAllProductByCategory("미용", "고양이");
 			}
 			
@@ -172,7 +172,15 @@ public class ProductController {
 		List<Product> productList = productService.findAllByOrderByProductPriceDesc();
 		Long userNo = (Long) session.getAttribute("userNo");
 		MyPet myPet = MyPet.builder().build();
-
+		
+		String kindPath = path.substring(1,path.lastIndexOf("?"));
+		String orderPath = "";
+		
+		path.lastIndexOf("?");
+		path.lastIndexOf("=");
+		
+		System.out.println(">>>>>>>>>>>>>>>>"+path);
+		
 		if (path.equals("/productDogList")) {
 			myPet.setMypetKind("강아지");
 			productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("강아지");

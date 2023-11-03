@@ -575,21 +575,21 @@
 										<li class="widget_sub_categories sub_categories1"><a
 												href="javascript:void(0)">고양이</a>
 											<ul class="widget_dropdown_categories dropdown_categories1">
-												<li><a href="#" th:href="@{productCatList?category=사료}">사료</a></li>
-												<li><a href="#" th:href="@{productCatList?category=간식}">간식</a></li>
-												<li><a href="#" th:href="@{productCatList?category=캔}">캔</a></li>
-												<li><a href="#" th:href="@{productCatList?category=모래}">모래</a></li>
-												<li><a href="#" th:href="@{productCatList?category=미용}">미용</a></li>
+												<li><a href="#" th:href="@{productCatList?category=1}">사료</a></li>
+												<li><a href="#" th:href="@{productCatList?category=2}">간식</a></li>
+												<li><a href="#" th:href="@{productCatList?category=3}">캔</a></li>
+												<li><a href="#" th:href="@{productCatList?category=4}">모래</a></li>
+												<li><a href="#" th:href="@{productCatList?category=5}">미용</a></li>
 											</ul>
 										</li>
 										<li class="widget_sub_categories sub_categories2"><a
 												href="javascript:void(0)">강아지</a>
 											<ul class="widget_dropdown_categories dropdown_categories2">
-												<li><a href="#" th:href="@{productDogList?category=사료}">사료</a></li>
-												<li><a href="#" th:href="@{productDogList?category=간식}">간식</a></li>
-												<li><a href="#" th:href="@{productDogList?category=캔}">캔</a></li>
-												<li><a href="#" th:href="@{productDogList?category=위생}">위생</a></li>
-												<li><a href="#" th:href="@{productDogList?category=미용}">미용</a></li>
+												<li><a href="#" th:href="@{productDogList?category=1}">사료</a></li>
+												<li><a href="#" th:href="@{productDogList?category=2}">간식</a></li>
+												<li><a href="#" th:href="@{productDogList?category=3}">캔</a></li>
+												<li><a href="#" th:href="@{productDogList?category=4}">위생</a></li>
+												<li><a href="#" th:href="@{productDogList?category=5}">미용</a></li>
 											</ul>
 										</li>
 										<!-- <li class="widget_sub_categories sub_categories3"><a href="javascript:void(0)">Clothing</a>
@@ -1426,9 +1426,13 @@
 		        
 		        var dogBool = $('#selectDog').attr('aria-selected');
 		        var catBool = $('#selectCat').attr('aria-selected');
+		        
 		        var location = window.location.href;
-		        var path = "/"+location.substring(location.lastIndexOf("/") + 1)
-		        alert("/"+location.substring(location.lastIndexOf("/") + 1));
+		        
+		        var path = location.substring(location.lastIndexOf("/"))
+		        
+		        alert(location.substring(location.lastIndexOf("/")));
+		        alert(path.indexOf('?'));
 		        
 		        switch (selectedValue) {
 		            case "1":
