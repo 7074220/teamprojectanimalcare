@@ -232,6 +232,57 @@
                                 </div>
                             </div>
                            <!--   </div>-->
+                           
+                              <div class="modal fade" id="orderDetailsModal" tabindex="-1" 
+                                 aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content" style="width: 800px; height: 500px;">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="orderDetailsModalLabel">주문 상세</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="border: none; padding: 7px;">X
+                                        <!--<span aria-hidden="true">&times;</span>-->
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <!-- 주문 상세 내용이 여기에 로드됩니다 -->
+                                    
+                                      <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+												<th>번호</th>
+												<th>구입날짜</th>
+												<th>상품명</th>
+												<!--<th>총가격</th>-->
+												<th>주문상태</th>
+												<th>리뷰</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>May 10, 2018</td>
+                                                <td><span class="success">고양이캔조림</span></td>
+                                               <!-- <td>$25.00 for 1 item </td>-->
+                                                <td>배송완료 </td>
+                                                <td><a href="cart.html" class="view">리뷰쓰기</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                    
+                                    </div>
+                                    <div class="modal-footer">
+                                 <!--   <button type="button" class="btn btn-primary">리뷰 저장</button>-->
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                                    
+                                    </div>
+                                </div>
+                                </div>
+                            </div>   
+                            
+                           
+                           
                         </div>
                     </div>
                 </div>
@@ -250,7 +301,7 @@
  
 
 
-<!--주문한 상품 리뷰쓰기 
+<!--주문한 상품 리뷰쓰기 -->
 <script>
 
     // 마이페이지 상품주문 완료된 항목에서 주문상세를 누르면 창이 뜨고 이 창에서만 리뷰를 쓸수 있음
@@ -265,9 +316,9 @@
         // 모달창 표시
         $('#orderDetailsModal').modal('show');
     }
-    }
+    });
 
-</script> -->
+</script> 
 </th:block>		
 
 
