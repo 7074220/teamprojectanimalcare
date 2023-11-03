@@ -77,7 +77,6 @@ class ReportBoardServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	}
 	
 	@Test
-	
 	 @Transactional
 	 @Rollback(false)
 	 //@Disabled

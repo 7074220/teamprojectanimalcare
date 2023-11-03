@@ -28,6 +28,9 @@ import com.itwill.entity.MyPet;
 import com.itwill.entity.Product;
 import com.itwill.service.MyPetService;
 import com.itwill.service.ProductService;
+import com.itwill.service.UserInfoService;
+
+import jakarta.servlet.http.HttpSession;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -36,8 +39,9 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
-	
 	@Autowired
+	private UserInfoService userInfoService;
+	@Autowired 
 	private MyPetService myPetService;
 	
 	/*
