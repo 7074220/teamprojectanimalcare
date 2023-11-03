@@ -46,16 +46,20 @@ public class AdoptController {
 
 	@PostMapping("/create-adopt")
 	public String createAdopt(@RequestParam("adoptDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date adoptDate,
-			@RequestParam("adoptTime") int selectedHour, @RequestParam Long petNo, Model model) {
+			@RequestParam("adoptTime") int selectedHour, @RequestParam Long petNo, Model model, HttpSession session) throws Exception {
+		Long userNo = (Long)session.getAttribute("userNo");
+		
 		Adopt adopt = new Adopt();
 		adopt.setAdoptDate(adoptDate);
 		adopt.setAdoptTime(selectedHour);
 		adopt.setAdoptStatus("입양신청접수");
 
 		Pet pet = petService.petFindById(petNo);
+		Userinfo userinfo=userInfoService.findUserByNo(userNo);
+		adopt.setUserinfo(userinfo);
 		adopt.setPet(pet);
 		adoptService.insertAdopt(adopt);
-		model.addAttribute("msg", "신청이 완료되었습니다.");
+		model.addAttribute("userinfo", userinfo);
 		return "pet-list";
 	}
 
@@ -79,13 +83,9 @@ public class AdoptController {
 		Userinfo user=userInfoService.findUserByNo(userNo);
 		
 		List<Adopt> adoptList = adoptService.findAdoptsByUserNo(user.getUserNo());
-		/*
-		 * List<AdoptDto> adoptDtoUserNoList = new ArrayList<>();
-		 * 
-		 * for (Adopt adopt : adoptList) {
-		 * adoptDtoUserNoList.add(AdoptDto.fromEntity(adopt)); }
-		 */
-	
+		adoptList.sort((v1,v2)->v2.getAdoptDate().compareTo(v1.getAdoptDate()));
+		
+		
 		model.addAttribute("adoptList", adoptList);
 		return "my-account-adopt";
 	}
