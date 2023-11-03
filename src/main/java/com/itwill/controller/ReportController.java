@@ -40,7 +40,7 @@ public class ReportController {
 		ReportBoard reportBoard = reportBoardService.findByBoardNo(boardNo);
 		
 		System.out.println(">>>>>>>>>>>>>>>>"+reportBoard);
-		
+		System.out.println(">>>>>>>>>>>>>>>>"+reportBoard.getBoardImage());
 		model.addAttribute("reportBoard", reportBoard);
 		
 		return "reportBoardView";
