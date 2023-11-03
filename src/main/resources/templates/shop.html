@@ -9,7 +9,7 @@
 <body>
 	<!--header area start-->
 	<th layout:fragment="content">
-		<div id="content">
+<div id="content">
 			<!--offcanvas menu area start-->
 
 		</div>
@@ -1432,16 +1432,16 @@
 		        
 		        switch (selectedValue) {
 		            case "1":
-		                redirectPath = "productStarDesc";
+		                redirectPath = "productStarDesc?path=" + path;
 		                break;
 		            case "2":
-		                redirectPath = "productPriceAsc";
+		                redirectPath = "productPriceAsc?path=" + path;
 		                break;
 		            case "3":
-		                redirectPath = "productPriceDesc?path="+path;
+		                redirectPath = "productPriceDesc?path=" + path;
 		                break;
 		            case "4":
-		                redirectPath = "productDateDesc";
+		                redirectPath = "productDateDesc?path=" + path;
 		                break;
 		            default:
 		                redirectPath = "defaultPath"; // Default path if the value is not recognized

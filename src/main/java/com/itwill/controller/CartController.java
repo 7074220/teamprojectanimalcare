@@ -41,18 +41,22 @@ public class CartController {
 		
 		Long userNo=(Long)session.getAttribute("userNo");
 		
-		List<CartDto> cartListDto = new ArrayList<>();
+		//List<CartDto> cartListDto = new ArrayList<>();
 		List<Cart> cartList = cartService.findAllCartByUserId(userNo); 
 		
+		/*
 		for (Cart cart : cartList) {
 			cartListDto.add(CartDto.toDto(cart));
 		}
+		*/
+		
 		model.addAttribute("cartList", cartList);
+		
 		return "cart";
 	}
 	
 	
-	@GetMapping(value = "/cart", params = "productNo")
+	@GetMapping(value = "/cartList", params = "productNo")
 	// 카트에 담기
 	public String insertCart(Model model, HttpSession session, @RequestParam Long productNo) throws Exception{
 		if (session.getAttribute("userNo") == null) {
@@ -66,12 +70,17 @@ public class CartController {
 		// productNo로 product 정보 가져오기
 		Product product = productService.findByProductNo(productNo);
 		
-		Cart selectCart = new Cart();
+		Cart selectCart = Cart.builder().build();
 		selectCart.setUserinfo(user);
 		selectCart.setProduct(product);
 		selectCart.setCartQty(product.getProductQty());
 		
+		cartService.updateOverlapCart(selectCart);
+		
+		List<Cart> cartList = cartService.findAllCartByUserId(userNo); 
+		
 		model.addAttribute("cart", selectCart);
+		model.addAttribute("cartList", cartList);
 		
 		return "cart";
 	}
