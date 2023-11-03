@@ -46,4 +46,7 @@ public interface UserInfoService {
 	 */
 	List<Userinfo> findUserList() throws Exception;
 	
+	/* 아이디 중복체크 */
+	boolean countByUserId(String userId) throws Exception;
+	
 }

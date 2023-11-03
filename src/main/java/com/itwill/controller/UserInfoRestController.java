@@ -11,12 +11,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.UserLoginActionDto;
@@ -24,6 +26,9 @@ import com.itwill.dto.UserWriteActionDto;
 import com.itwill.entity.Coupon;
 import com.itwill.entity.MyPet;
 import com.itwill.entity.Userinfo;
+import com.itwill.exception.ExistedUserException;
+import com.itwill.exception.PasswordMismatchException;
+import com.itwill.exception.UserNotFoundException;
 import com.itwill.service.CouponService;
 import com.itwill.service.MyPetService;
 import com.itwill.service.UserInfoService;
@@ -44,17 +49,22 @@ public class UserInfoRestController {
 	@Autowired
 	private MyPetService myPetService;
 	
+	// 아이디 중복체크
+	@GetMapping("/idcheck")
+	public boolean user_id_check(@RequestParam(name="userId") String userId) throws Exception{
+		System.out.println(">>>>> user_id_check: " + userId);
+		return !userInfoService.countByUserId(userId);
+	}
+	
 	// 회원가입
 	@Operation(summary = "회원가입")
 	@PostMapping()
 	public ResponseEntity<UserWriteActionDto> user_write_action(@RequestBody UserWriteActionDto dto) throws Exception {
-		System.out.println("오긴해?");
 		Userinfo createUserinfo = userInfoService.create(UserWriteActionDto.toEntity(dto));
 		List<MyPet> myPets = dto.getMyPets();
 		for (MyPet myPet : myPets) {
 			myPetService.Create(myPet);
 		}
-		
 		Coupon coupon=Coupon.builder()
 				.couponName("가입쿠폰")
 				.couponDiscount(30)
@@ -71,20 +81,17 @@ public class UserInfoRestController {
 	}
 
 	// 로그인
-	@Operation(summary = "로그인")
+	@Operation(summary = "로그인 성공")
 	@PostMapping("/login")
 	public ResponseEntity<UserLoginActionDto> user_login_action(@RequestBody UserLoginActionDto dto,
 			HttpSession session) throws Exception {
-
 		Userinfo loginUserCheck = userInfoService.login(dto.getUserId(), dto.getUserPassword());
+		session.setAttribute("userNo", loginUserCheck.getUserNo());
+		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		if (loginUserCheck == null) {
-			dto.setUserId("");
-			dto.setUserPassword("");
-		} else {
-			session.setAttribute("userNo", loginUserCheck.getUserNo());
-		}
+		
+		dto.setStatus(1000);
 
 		return new ResponseEntity<UserLoginActionDto>(dto, httpHeaders, HttpStatus.OK);
 	}
@@ -197,6 +204,41 @@ public class UserInfoRestController {
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		
 		return new ResponseEntity<List<Userinfo>>(userinfos, httpHeaders, HttpStatus.OK);
+	}
+	
+	@ExceptionHandler(value = ExistedUserException.class)
+	public ResponseEntity<ExistedUserException> user_existed_exception_handler(ExistedUserException e) throws Exception {
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<ExistedUserException>(e, httpHeaders, HttpStatus.OK);
+	}
+	
+	@ExceptionHandler(value = UserNotFoundException.class)
+	public ResponseEntity<UserInfoResponse> user_not_found_exception_handler(UserNotFoundException e) throws Exception{
+		
+		UserInfoResponse response=new UserInfoResponse();
+		response.setMessage("존재하지않는 아이디입니다.");
+		response.setData(e.getData());
+		response.setStatus(1001);
+		
+		HttpHeaders httpHeaders=new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application","json",Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<UserInfoResponse>(response,httpHeaders,HttpStatus.OK);
+	}
+	
+	@ExceptionHandler(value = PasswordMismatchException.class)
+	public ResponseEntity<UserInfoResponse> user_password_mismatch_handler(PasswordMismatchException e) throws Exception{
+		UserInfoResponse response=new UserInfoResponse();
+		response.setMessage("비밀번호가 일치하지않습니다.");
+		response.setData(e.getData());
+		response.setStatus(1002);
+		
+		HttpHeaders httpHeaders=new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application","json",Charset.forName("UTF-8")));
+		return new ResponseEntity<UserInfoResponse>(response,httpHeaders,HttpStatus.OK);
 	}
 	
 }

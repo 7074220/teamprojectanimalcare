@@ -541,8 +541,9 @@
     });
     
     /*--- niceSelect---*/
+    /*
      $('.select_option').niceSelect();
-    
+    */
     /*---  Accordion---*/
     $(".faequently-accordion").collapse({
         accordion:true,
@@ -835,6 +836,7 @@
     
     
     /*instagram activation*/
+    /*
     $.instagramFeed({
         'username': 'portfolio.devitems',
         'container': "#instagramFeed",
@@ -879,7 +881,7 @@
             })
         }
     });
-    
+    */
     
     
     

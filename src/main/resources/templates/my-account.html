@@ -1,48 +1,9 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
 	   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-       layout:decorate="layout/layout(title='')">
-
-
+       layout:decorate="layout/layout(title='마이페이지')">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Safira - my account</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-    
-    <!-- CSS 
-    ========================= -->
-    <!--bootstrap min css-->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <!--owl carousel min css-->
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <!--slick min css-->
-    <link rel="stylesheet" href="assets/css/slick.css">
-    <!--magnific popup min css-->
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <!--font awesome css-->
-    <link rel="stylesheet" href="assets/css/font.awesome.css">
-    <!--ionicons css-->
-    <link rel="stylesheet" href="assets/css/ionicons.min.css">
-    <!--linearicons css-->
-    <link rel="stylesheet" href="assets/css/linearicons.css">
-    <!--animate css-->
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <!--jquery ui min css-->
-    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
-    <!--slinky menu css-->
-    <link rel="stylesheet" href="assets/css/slinky.menu.css">
-    <!--plugins css-->
-    <link rel="stylesheet" href="assets/css/plugins.css">
-    
-    <!-- Main Style CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    
-    <!--modernizr min js here-->
-    <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
     <style>
         .modal-dialog {
         margin: auto;
@@ -56,9 +17,9 @@
 <body>
 
    <!--header area start-->
-    <th layout:fragment="content">
+    <th:block layout:fragment="content">
     <!--offcanvas menu area start-->
-    <div class="off_canvars_overlay">
+    <!-- <div class="off_canvars_overlay">
                 
     </div>
     <div class="offcanvas_menu">
@@ -189,14 +150,14 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--offcanvas menu area end-->
     
 
     <!--header area end-->
     
     <!--breadcrumbs area start-->
-    <div class="breadcrumbs_area">
+    <!-- <div class="breadcrumbs_area">
         <div class="container">   
             <div class="row">
                 <div class="col-12">
@@ -210,7 +171,7 @@
                 </div>
             </div>
         </div>         
-    </div>
+    </div> -->
     <!--breadcrumbs area end-->
     
     <!-- my account start  -->
@@ -222,16 +183,15 @@
                         <!-- Nav tabs -->
                         <div class="dashboard_tab_button">
                             <ul role="tablist" class="nav flex-column dashboard-list">
-                                <li><a href="#account-details" data-toggle="tab" class="nav-link">내정보</a></li>
+                                <li><a href="userinfo" class="nav-link">내정보</a></li>
                                 <li><a href="#mypet" data-toggle="tab" class="nav-link">마이펫</a></li>
                                 <li><a href="#cuponpage" data-toggle="tab" class="nav-link">쿠폰</a></li>
-                                <li><a href="#adopt" data-toggle="tab" class="nav-link">입양</a></li>
-                                <li><a href="#volunteer" data-toggle="tab" class="nav-link">봉사</a></li>
-                                <li><a href="#visit" data-toggle="tab" class="nav-link">견학</a></li>
+                                <li><a href="adoptByUserNo" class="nav-link">입양</a></li>
+                                <li><a href="volunteerByUserNo" data-toggle="tab" class="nav-link">봉사</a></li>
+                                <li><a href="visitByUserNo" data-toggle="tab" class="nav-link">견학</a></li>
                                 <li> <a href="#orders" data-toggle="tab" class="nav-link">주문목록</a></li>
-                                <li><a href="login.html" class="nav-link">로그아웃</a></li>
+                                <li><a href="logout" class="nav-link">로그아웃</a></li>
                                 <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li>
-
                             </ul>
                         </div>    
                     </div>
@@ -385,12 +345,12 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="adoption : ${adoptDtoList}" >
-                                                <td th:text="${adoption.no}"></td>
-                                                <td th:text="${adoption.time}">11:00</td>
-                                                <td th:text="${adoption.date}">May 10, 2018</span></td>
-                                                <td th:text="${adoption.pet}">포메라니안</td>
-                                                <td th:text="${adoption.status}"><span class="success">입양신청</span></td>
+                                            <tr th:each="adoption: ${adoptList}" >
+                                                <td th:text="${adoption.adoptNo}">1</td>
+                                                <td th:text="${adoption.adoptTime}">11:00</td>
+                                                <td th:text="${adoption.adoptDate}">May 10, 2018</span></td>
+                                                <td th:text="${adoption.pet.petName}">포메라니안</td>
+                                                <td th:text="${adoption.adoptStatus}"><span class="success">입양신청</span></td>
                                             </tr>
                                             <!-- <tr>
                                                 <td>2</td>
@@ -418,20 +378,27 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+
+												<tr th:each="volunteer : ${volunteers}">
+													<td th:text="${volunteer.volunteerNo}">1</td>
+													<td th:text="${volunteer.time}">11:00</td>
+													<td th:text="${volunteer.date}">Jun 10, 2018</td>
+													<td th:text="${volunteer.center}">하하보호소</td>
+													<td>
+													<span th:class="${volunteer.status == '봉사완료' ? 'success' : 'warning'}"
+														th:text="${volunteer.status}">봉사완료</span>
+													</td>
+												</tr>
+
+												<!-- <tr>
                                                 <td>1</td>
                                                 <td>11:00</td>
                                                 <td>Jun 10, 2018</td>
                                                 <td>하하보호소 </td>
                                                 <td><span class="success">봉사완료</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>12:00</td>
-                                                <td>Jun 10, 2018</td>
-                                                <td>안녕보호소 </td>
-                                                <td><span class="success">봉사신청</span></td>
-                                            </tr>
+                                            </tr> -->
+                                           
+                                           
                                         </tbody>
                                     </table>
                                 </div>
@@ -516,7 +483,7 @@
             
 
                             
-                            <div class="tab-pane fade" id="account-details">
+                            <!--<div class="tab-pane fade" id="account-details">-->
                                 <h3>내정보 </h3>
                                 <div class="login">
                                     <div class="login_form_container">
@@ -546,14 +513,14 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                           <!--   </div>-->
                         </div>
                     </div>
                 </div>
             </div>  
         </div>        	
     </section>	
-    </th:block>		
+    
     <!-- my account end   --> 
 
       <!--footer area start-->
@@ -561,42 +528,9 @@
  
     <!--footer area end-->
 
-<!-- JS
-============================================ -->
-<!--jquery min js-->
-<script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
-<!--popper min js-->
-<script src="assets/js/popper.js"></script>
-<!--bootstrap min js-->
-<script src="assets/js/bootstrap.min.js"></script>
-<!--owl carousel min js-->
-<script src="assets/js/owl.carousel.min.js"></script>
-<!--slick min js-->
-<script src="assets/js/slick.min.js"></script>
-<!--magnific popup min js-->
-<script src="assets/js/jquery.magnific-popup.min.js"></script>
-<!--counterup min js-->
-<script src="assets/js/jquery.counterup.min.js"></script>
-<!--jquery countdown min js-->
-<script src="assets/js/jquery.countdown.js"></script>
-<!--jquery ui min js-->
-<script src="assets/js/jquery.ui.js"></script>
-<!--jquery elevatezoom min js-->
-<script src="assets/js/jquery.elevatezoom.js"></script>
-<!--isotope packaged min js-->
-<script src="assets/js/isotope.pkgd.min.js"></script>
-<!--slinky menu js-->
-<script src="assets/js/slinky.menu.js"></script>
-<!--instagramfeed menu js-->
-<script src="assets/js/jquery.instagramFeed.min.js"></script>
-<!-- Plugins JS -->
-<script src="assets/js/plugins.js"></script>
-
-<!-- Main JS -->
-<script src="assets/js/main.js"></script>
 
 <!-- 회원탈퇴  -->
-<script>
+<!-- <script>
     $('#confirmDelete').on('click', function() {
         const selectedReason = $('input[name="reason"]:checked').val();
         if (selectedReason) {
@@ -611,7 +545,7 @@
 </script>
 
 
-<!-- 주문한 상품 리뷰쓰기  -->
+주문한 상품 리뷰쓰기 
 <script>
 
     // 마이페이지 상품주문 완료된 항목에서 주문상세를 누르면 창이 뜨고 이 창에서만 리뷰를 쓸수 있음
@@ -628,8 +562,8 @@
     }
     });
 
-</script>
-
+</script> -->
+</th:block>		
 
 
 

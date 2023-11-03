@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.sym.Name;
 import com.itwill.dto.PetDto;
@@ -45,6 +46,7 @@ PetService petService;
 		return "pet-list";
 	}
 	//펫 리스트
+	//center dto가져와야함.
 	@GetMapping("/petList")
 	public String petList(Model model) {
 		List<PetDto> petDtoList = new ArrayList<>();
@@ -53,19 +55,21 @@ PetService petService;
 			petDtoList.add(PetDto.toDto(pet));
 		}
 		
+		
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>"+petDtoList.get(0).getPetType());
 		model.addAttribute("petList",petDtoList);
 		return "pet-list" ;
 	}
 	//펫 삭제 관리자만
-	@PostMapping("/delete_action")
-	public String delete_action(@PathVariable(name = "petNo") Long petNo) throws Exception{
+	@PostMapping("/deletepet")
+	public String delete_action(@RequestParam(name = "petNo") Long petNo) throws Exception{
 		Optional<Pet> petOptional = Optional.of(petService.petFindById(petNo));
 		if(petOptional.isEmpty()) {
 			throw new Exception("존재하지 않는 동물입니다.");
 		
 			}
 			petService.petRemove(petNo);
-		return "pet-list";
+			 return "redirect:/petList";
 	}
 	//펫 업데이트
 	@PostMapping("/update_action")
@@ -79,13 +83,27 @@ PetService petService;
 			pet1.setPetRegisterDate(updatepetDto.getPetRegisterDate());
 			pet1.setPetFindPlace(updatepetDto.getPetFindPlace());
 			pet1.setPetCharacter(updatepetDto.getPetCharacter());
-			pet1.setCenter(Center.builder().centerNo(updatepetDto.getCenterNo()).build());
+			pet1.setCenter(updatepetDto.getCenter());
 			
 			
 			petService.petUpdate(pet1);
 	}
 		return "pet-list";
 	
+	}
+	
+	@Operation(summary = "펫타입 리스트")	
+	@GetMapping("/pets")
+	public String petTypeList(@RequestParam(name = "petType")String petType,Model model){
+			List<PetDto> petDtoList = new ArrayList<>();
+			List<Pet> petList = petService.findAllByOrderBypetType(petType);
+			for (Pet pet : petList) {
+				petDtoList.add(PetDto.toDto(pet));
+			}
+
+		model.addAttribute("petList",petDtoList);
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>"+petDtoList);
+		return "pet-list";
 	}
 
 	

@@ -37,8 +37,8 @@ class VisitServiceImplTest {
 		Visit insertVisit = Visit.builder()
 				.visitNo(null)
 				.userinfo(userInfoService.findUserByNo(3L))
-				.visitTime(3)
-				.visitDate(new Date())
+				.visitTime(null)
+				.visitDate(null)
 				.center(centerService.findByCenterNo(3L))
 				.visitStatus("접수중")
 				.build();

@@ -1,54 +1,17 @@
 <!doctype html>
-<html class="no-js" lang="kr">
+<html class="no-js" lang="kr" xmlns:th="https://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='wishlist')">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Safira - wishlist page</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-    
-    <!-- CSS 
-    ========================= -->
-    <!--bootstrap min css-->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <!--owl carousel min css-->
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <!--slick min css-->
-    <link rel="stylesheet" href="assets/css/slick.css">
-    <!--magnific popup min css-->
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <!--font awesome css-->
-    <link rel="stylesheet" href="assets/css/font.awesome.css">
-    <!--ionicons css-->
-    <link rel="stylesheet" href="assets/css/ionicons.min.css">
-    <!--linearicons css-->
-    <link rel="stylesheet" href="assets/css/linearicons.css">
-    <!--animate css-->
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <!--jquery ui min css-->
-    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
-    <!--slinky menu css-->
-    <link rel="stylesheet" href="assets/css/slinky.menu.css">
-    <!--plugins css-->
-    <link rel="stylesheet" href="assets/css/plugins.css">
-    
-    <!-- Main Style CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    
-    <!--modernizr min js here-->
-    <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
-
 </head>
 
 <body>
 
    <!--header area start-->
-    
+    <th layout:fragment="content">
     <!--offcanvas menu area start-->
-    <div class="off_canvars_overlay">
+   <!--  <div class="off_canvars_overlay">
                 
     </div>
     <div class="offcanvas_menu">
@@ -179,10 +142,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--offcanvas menu area end-->
     
-    <header>
+    <!-- <header>
         <div class="main_header">
             <div class="header_top">
                 <div class="container">
@@ -272,7 +235,7 @@
                                     </div>
                                     <div class="header_account_list  mini_cart_wrapper">
                                        <a href="javascript:void(0)"><span class="lnr lnr-cart"></span><span class="item_count">2</span></a>
-                                        <!--mini cart-->
+                                        mini cart
                                         <div class="mini_cart">
                                             <div class="cart_gallery">
                                                 <div class="cart_close">
@@ -330,7 +293,7 @@
 
                                             </div>
                                         </div>
-                                        <!--mini cart end-->
+                                        mini cart end
                                    </div>
                                 </div>
                             </div>
@@ -497,7 +460,7 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <!--main menu start-->
+                            main menu start
                             <div class="main_menu menu_position"> 
                                 <nav>  
                                     <ul>
@@ -564,7 +527,7 @@
                                     </ul>  
                                 </nav> 
                             </div>
-                            <!--main menu end-->
+                            main menu end
                         </div>
                         <div class="col-lg-3">
                             <div class="call-support">
@@ -575,11 +538,11 @@
                 </div>
             </div>
         </div> 
-    </header>
+    </header> -->
     <!--header area end-->
     
     <!--breadcrumbs area start-->
-    <div class="breadcrumbs_area">
+    <!-- <div class="breadcrumbs_area">
         <div class="container">   
             <div class="row">
                 <div class="col-12">
@@ -593,8 +556,12 @@
                 </div>
             </div>
         </div>         
-    </div>
+    </div> -->
     <!--breadcrumbs area end-->
+    
+    
+    
+   <!--  위시리스트 페이지 시작 -->
     
     
     <!--wishlist area start -->
@@ -608,11 +575,11 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th class="product_remove">삭제</th>
-                                            <th class="product_thumb">사진</th>
+                                            <th class="product_remove">Delete</th>
+                                            <th class="product_thumb">Image</th>
                                             <th class="product_name">Product</th>
                                             <th class="product-price">Price</th>
-                                            <th class="product_quantity">Stock Status</th>
+                                            <th class="product_quantity">Category</th>
                                             <th class="product_total">Add To Cart</th>
                                         </tr>
                                     </thead>
@@ -628,7 +595,7 @@
 
                                         </tr>
 
-                                        <tr>
+                                        <!-- <tr>
                                            <td class="product_remove"><a href="#">X</a></td>
                                             <td class="product_thumb"><a href="#"><img src="assets/img/product/productbig2.jpg" alt=""></a></td>
                                             <td class="product_name"><a href="#">Handbags justo</a></td>
@@ -647,7 +614,7 @@
                                             <td class="product_total"><a href="#">Add To Cart</a></td>
 
 
-                                        </tr>
+                                        </tr> -->
 
                                     </tbody>
                                 </table>   
@@ -677,8 +644,11 @@
     </div>
     <!--wishlist area end -->
     
+    <!--  위시리스트 페이지 끝 -->
+    
+    </th:block>
      <!--footer area start-->
-    <footer class="footer_widgets footer_border">
+    <!-- <footer class="footer_widgets footer_border">
         <div class="container">
             <div class="footer_top">
                 <div class="row">
@@ -733,12 +703,12 @@
                                         <input id="mc-email" type="email" autocomplete="off" placeholder="Enter you email" />
                                         <button id="mc-submit">Subscribe</button>
                                     </form>
-                                    <!-- mailchimp-alerts Start -->
+                                    mailchimp-alerts Start
                                     <div class="mailchimp-alerts text-centre">
-                                        <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-                                        <div class="mailchimp-success"></div><!-- mailchimp-success end -->
-                                        <div class="mailchimp-error"></div><!-- mailchimp-error end -->
-                                    </div><!-- mailchimp-alerts end -->
+                                        <div class="mailchimp-submitting"></div>mailchimp-submitting end
+                                        <div class="mailchimp-success"></div>mailchimp-success end
+                                        <div class="mailchimp-error"></div>mailchimp-error end
+                                    </div>mailchimp-alerts end
                                 </div>
                             </div>
                         </div>
@@ -766,46 +736,8 @@
                 </div>
              </div>   
         </div>  
-    </footer>
+    </footer> -->
     <!--footer area end-->
-
-
-<!-- JS
-============================================ -->
-<!--jquery min js-->
-<script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
-<!--popper min js-->
-<script src="assets/js/popper.js"></script>
-<!--bootstrap min js-->
-<script src="assets/js/bootstrap.min.js"></script>
-<!--owl carousel min js-->
-<script src="assets/js/owl.carousel.min.js"></script>
-<!--slick min js-->
-<script src="assets/js/slick.min.js"></script>
-<!--magnific popup min js-->
-<script src="assets/js/jquery.magnific-popup.min.js"></script>
-<!--counterup min js-->
-<script src="assets/js/jquery.counterup.min.js"></script>
-<!--jquery countdown min js-->
-<script src="assets/js/jquery.countdown.js"></script>
-<!--jquery ui min js-->
-<script src="assets/js/jquery.ui.js"></script>
-<!--jquery elevatezoom min js-->
-<script src="assets/js/jquery.elevatezoom.js"></script>
-<!--isotope packaged min js-->
-<script src="assets/js/isotope.pkgd.min.js"></script>
-<!--slinky menu js-->
-<script src="assets/js/slinky.menu.js"></script>
-<!--instagramfeed menu js-->
-<script src="assets/js/jquery.instagramFeed.min.js"></script>
-<!-- Plugins JS -->
-<script src="assets/js/plugins.js"></script>
-
-<!-- Main JS -->
-<script src="assets/js/main.js"></script>
-
-
-
 </body>
 
 </html>
