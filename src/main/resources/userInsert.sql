@@ -141,14 +141,15 @@ values(Volunteer_volunteer_no_SEQ.nextval, 18, sysdate, '봉사완료',  3, 3);
 
 -- report board
 
-insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_readcount,board_register_date,board_title,user_no) 
-VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),'전아현','1111',0,sysdate,'토토어디갓어',2);
+insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_readcount,board_register_date,board_title,user_no,board_image) 
+VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),'전아현','1111',0,sysdate,'토토어디갓어',2,'dog1.jpg');
 
-insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_readcount,board_register_date,board_title,user_no) 
-VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),'장희주','1111',0,sysdate,'토토어디갓어2',3);
+insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_readcount,board_register_date,board_title,user_no,board_image) 
+VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),'장희주','1111',0,sysdate,'토토어디갓어2',3,'dog2.jpg');
 
-insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_readcount,board_register_date,board_title,user_no) 
-VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),'박서진','1111',0,sysdate,'토토어디갓어3',1);
+insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_readcount,board_register_date,board_title,user_no,board_image) 
+VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),'박서진','1111',0,sysdate,'토토어디갓어3',5,'dog3.jpg');
+
 
 
 -- review board

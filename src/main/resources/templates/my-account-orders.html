@@ -197,7 +197,7 @@
                     </div>
                     <div class="col-sm-12 col-md-9 col-lg-9">
                         <!-- Tab panes -->
-                        <div class="tab-content dashboard_content">
+                        <div class="tab-content dashboard_content" >
 							
                                 <div  id="orders">
                                 <h3>주문목록</h3>
@@ -213,24 +213,27 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>May 10, 2018</td>
-                                                <td><span class="success">고양이캔조림</span></td>
-                                                <td>$25.00 for 1 item </td>
+                                            <tr th:each="orders:${ordersList}" th:if="orders!=null">
+                                                <td th:text="${orders.orderNo}">1</td>
+                                                <td th:text="${orders.orderDate}">May 10, 2018</td>
+                                                <td th:text="${orders.orderDesc}"><span class="success">고양이캔조림</span></td>
+                                                <td th:text="${orders.orderPrice}">$25.00 for 1 item </td>
                                                 <td><a href="cart.html" class="view">주문상세</a></td>
                                             </tr>
-                                            <tr>
+                                            <!-- <tr>
                                                 <td>2</td>
                                                 <td>May 10, 2018</td>
                                                 <td>강아지닭가슴살사료</td>
                                                 <td>$17.00 for 1 item </td>
                                                 <td><a href="cart.html" class="view">주문상세</a></td>
-                                            </tr>
+                                            </tr> -->
                                         </tbody>
                                     </table>
                                 </div>
+                                
                             </div>
+                            
+                            
                            <!--   </div>-->
                         </div>
                     </div>

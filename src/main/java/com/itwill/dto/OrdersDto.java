@@ -36,7 +36,9 @@ public class OrdersDto {
 	public static OrdersDto toDto(Orders entity) {
 		OrdersDto orderDto = OrdersDto.builder().orderNo(entity.getOrderNo()).orderDate(entity.getOrderDate())
 				.orderAddress(entity.getOrderAddress()).orderDesc(entity.getOrderDesc())
-				.userNo(entity.getUserinfo().getUserNo()).build();
+				.userNo(entity.getUserinfo().getUserNo())
+				.orderPrice(entity.getOrderPrice())
+				.build();
 
 		List<OrderItemDto> orderItemDtoList = new ArrayList<>();
 		for (OrderItem orderItem : entity.getOrderItems()) {
