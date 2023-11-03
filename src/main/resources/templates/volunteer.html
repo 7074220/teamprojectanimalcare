@@ -7,6 +7,61 @@
 
 <head>
 <title>Safira - contact page</title>
+
+<style type="text/css">
+#volunteerDate {
+	border: 1px solid black;
+	position: relative;
+	width: 100%;
+	padding: 10px;
+	background-color: transparent;
+	border-radius: 8px;
+	text-align: center;
+	font-size: 100%;
+	margin-bottom: 20px;
+	
+}
+
+#volunteerDate::-webkit-calendar-picker-indicator {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: transparent;
+	color: transparent;
+	cursor: pointer;
+}
+
+#volunteerDate::before {
+	content: attr(placeholder);
+	width: 100%;
+	height: 100%;
+}
+
+#volunteerDate:valid::before {
+	display: none;
+}
+</style>
+
+<script>
+	// 현재 날짜를 가져오는 함수
+	function getCurrentDate() {
+		var currentDate = new Date();
+		var year = currentDate.getFullYear();
+		var month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+		var day = currentDate.getDate().toString().padStart(2, '0');
+		return year + '-' + month + '-' + day;
+	}
+
+	// 페이지 로드 시 실행
+	window.onload = function() {
+		var volunteerDate = document.getElementById('volunteerDate');
+		// 현재 날짜로 설정
+		volunteerDate.setAttribute('min', getCurrentDate());
+	};
+</script>
+
 </head>
 
 <body>
@@ -34,7 +89,7 @@
 		<!--contact map end-->
 
 		<!--contact area start-->
-		<div class="contact_area">
+		<div class="contact_area" style="margin-top: 100px;">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-6 col-md-6">
@@ -54,12 +109,6 @@
 							<p>전화번호: <span th:text="${center.centerPhoneNumber}">10</span></p>
 							<p>로컬: <span th:text="${center.centerLocal}">10</span></p>
 							<p>오픈/클로즈 시간: <span th:text="${center.centerOpenCloseTime}">10</span></p>
-
-							<!-- <ul>
-								<li><i class="fa fa-fax"></i> 주소 : 서울시 강남구</li>
-								<li><i class="fa fa-phone"></i> <a href="#">Infor@roadthemes.com</a></li>
-								<li><i class="fa fa-envelope-o"></i><a href="tel:0(1234)567890">0(1234) 567 890</a></li>
-							</ul> -->
 							
 						</div>
 					</div>
@@ -67,7 +116,7 @@
 					
 					<div class="col-lg-6 col-md-6">
 						<div class="contact_message form">
-							<h3>신청 양식</h3>
+							<h3 style="font-weight: bold">신청 양식</h3>
 							<!-- 달력 -->
 							<form th:action="@{/create-volunteer}" method="post" th:object="${volunteer}">
 								
@@ -76,13 +125,16 @@
 								<p>
 									<label>방문예약</label> 
 									<!-- <input type="date" name="volunteerDate"> -->
-									<!-- th:value 에 설정함. 현재 날짜를 "yyyy-MM-dd" 형식으로 형식화한 문자열을 반환 -->
-									<input type="date" name="volunteerDate" id="volunteerDate" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" min="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
-								
+									<!--  th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" 이 코드 추가시 현재 날짜 보여줌 -->
+									<input type="date" name="volunteerDate"
+										id="volunteerDate" placeholder="날짜를 선택해주세요"  required="required"
+										th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" > 
 								</p>
 								
 								<p>
 									<label>방문 시간</label>
+									
+									<!-- <input type="time" name="volunteerTime" > -->
 									<select name="volunteerTime">
 										<option value="09">09 AM</option>
 										<option value="10">10 AM</option>
@@ -119,7 +171,7 @@
 
 	<!-- JS
 ============================================ -->
-
+	
 	<!--map js code here-->
 	<script
 		src="https://maps.google.com/maps/api/js?sensor=false&amp;libraries=geometry&amp;v=3.22&amp;key=AIzaSyChs2QWiAhnzz0a4OEhzqCXwx_qA9ST_lE"></script>
