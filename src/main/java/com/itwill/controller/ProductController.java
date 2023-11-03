@@ -86,49 +86,33 @@ public class ProductController {
 	
 	@GetMapping("/productPriceDesc")
 	// 상품가격 비싼 것부터 --> user의 myPetKind 사용
-	public String ProductPriceDesc(Model model, HttpSession session) {
+	public String ProductPriceDesc(Model model, HttpSession session,@RequestParam String path) {
 		List<ProductPriceDescDto> productPriceDescDto = new ArrayList<>();
 		// 상품가격 비싼 것부터
 		List<Product> productList = productService.findAllByOrderByProductPriceDesc();
 		Long userNo = (Long) session.getAttribute("userNo");
 		MyPet myPet = MyPet.builder().build();
-		/*
-		System.out.println(">>>>>>>>>>>>>>>>>"+dogBool);
-		System.out.println(">>>>>>>>>>>>>>>>>"+catBool);
 		
-		if(dogBool==false & catBool==true) {
-			productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("고양이");
-			System.out.println(">>>>>>>>>>>>>>>>고양이");
-		}
-		
-		if(dogBool==true & catBool==false) {
+		System.out.println(">>>>>>>>>>>>>"+path);
+		if(path.equals("productDogList") ) {
+			System.out.println(">>>>>>>>>>>>>강아지");
+			myPet.setMypetKind("강아지");
 			productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("강아지");
-			System.out.println(">>>>>>>>>>>>>>>>강아지");
 		}
-		*/
-		/*
-		if(userNo != null) {
-			myPet = myPetService.findLeaderMyPet(userNo);
-			if (myPet == null) {
-				myPet = MyPet.builder().build();
-				productList = productService.findAllByOrderByProductPriceDesc();
-			} else {
-				productList = productService.findAllByOrderByProductByPetCategoryPriceDesc(myPet.getMypetKind());
-			}
-			
-		} else {
-			productList = productService.findAllByOrderByProductPriceDesc();
-			myPet = MyPet.builder().build();
+		
+		if(path.equals("productCatList")) {
+			System.out.println(">>>>>>>>>>>>>고양이");
+			myPet.setMypetKind("고양이");
+			productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("고양이");
 		}
-		*/
 		
 		for (Product product : productList) {
 			productPriceDescDto.add(ProductPriceDescDto.toDto(product));
 		}
 		
 		model.addAttribute("productList", productPriceDescDto);
-		model.addAttribute("myPet", null);
-		// System.out.println(productList.get(0).getProductPetCategory());
+		model.addAttribute("myPet", myPet);
+		
 		return "shop";
 	}
 	 
@@ -268,17 +252,15 @@ public class ProductController {
 		Long userNo = (Long) session.getAttribute("userNo");
 		MyPet myPet = MyPet.builder().build();
 		
+		productList = productService.findAllByOrderByProductNoDesc();
+		
 		if(userNo != null) {
 			myPet = myPetService.findLeaderMyPet(userNo);
 			if (myPet == null) {
 				myPet = MyPet.builder().build();
-				productList = productService.findAllByOrderByProductNoDesc();
 			} else {
 				productList = productService.findAllProductByPetCategory(myPet.getMypetKind());
 			}
-		} else {
-			productList = productService.findAllByOrderByProductNoDesc();
-			myPet = MyPet.builder().build();
 		}
 		
 		for (Product product : productList) {
@@ -291,10 +273,6 @@ public class ProductController {
 		return "shop";
 	}
 	
-	
-	
-	
-	
 	// 펫카테고리별로 구분 --> 상품 리스트 출력
 	@GetMapping("/productDogList")
 	public String productDogList(Model model, HttpSession session) {
@@ -304,6 +282,11 @@ public class ProductController {
 		Long userNo = (Long) session.getAttribute("userNo");
 		MyPet myPet = MyPet.builder().build();
 		
+		productList = productService.findAllProductByPetCategory("강아지");
+		myPet.setMypetKind("강아지");
+		
+		
+		/*
 		if(userNo != null) {
 			myPet = myPetService.findLeaderMyPet(userNo);
 			if (myPet == null) {
@@ -316,6 +299,7 @@ public class ProductController {
 			productList = productService.findAllByOrderByProductNoDesc();
 			myPet = MyPet.builder().build();
 		}
+		*/
 		
 		for (Product product : productList) {
 			productDogListDto.add(ProductDogListDto.toDto(product));
@@ -339,6 +323,10 @@ public class ProductController {
 		Long userNo = (Long) session.getAttribute("userNo");
 		MyPet myPet = MyPet.builder().build();
 		
+		productList = productService.findAllProductByPetCategory("고양이");
+		myPet.setMypetKind("고양이");
+		
+		/*
 		if(userNo != null) {
 			myPet = myPetService.findLeaderMyPet(userNo);
 			if (myPet == null) {
@@ -351,6 +339,7 @@ public class ProductController {
 			productList = productService.findAllByOrderByProductNoDesc();
 			myPet = MyPet.builder().build();
 		}
+		*/
 		
 		for (Product product : productList) {
 			productCatListDto.add(ProductCatListDto.toDto(product));

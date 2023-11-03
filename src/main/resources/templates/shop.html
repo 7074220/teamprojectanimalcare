@@ -1426,8 +1426,9 @@
 		        
 		        var dogBool = $('#selectDog').attr('aria-selected');
 		        var catBool = $('#selectCat').attr('aria-selected');
-		        var path = window.location.href;
-		        alert(path.substring(path.lastIndexOf("/") + 1));
+		        var location = window.location.href;
+		        var path = location.substring(location.lastIndexOf("/") + 1)
+		        alert(location.substring(location.lastIndexOf("/") + 1));
 		        
 		        switch (selectedValue) {
 		            case "1":
@@ -1437,7 +1438,7 @@
 		                redirectPath = "productPriceAsc";
 		                break;
 		            case "3":
-		                redirectPath = "productPriceDesc";
+		                redirectPath = "productPriceDesc?path="+path;
 		                break;
 		            case "4":
 		                redirectPath = "productDateDesc";
