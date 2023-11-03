@@ -202,32 +202,34 @@
 							
                             <!--<div class="tab-pane fade" id="account-details">-->
                                 <h3>내정보 </h3>
-                                <div class="login">
-                                    <div class="login_form_container">
-                                        <div class="account_login_form">
-                                            <form name="f" action="userUpdate">
-                                                <p><a href="#"></a></p>
-                                                <div class="input-select"></div>
-                                                
-                                                <label>이름</label>
-                                                <input type="text" name="userName" th:value="${userinfo.userName}">
-                                                <label>비밀번호</label>
-                                                <input type="password"  value=""name="userPassword" th:value="${userinfo.userPassword}">
-                                                <label>핸드폰번호</label>
-                                                <input type="text" value=""name="userPhoneNumber" th:value="${userinfo.userPhoneNumber}">
-                                                <label>주소</label>
-                                                <input type="text"  value="" name="userAddress" th:value="${userinfo.userAddress}">
-                                                
-                                                
-                                                <br>
-                                               
-                                                <div class="save_button primary_btn default_button">
-                                                   <button type="submit">Save</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="login">
+									<div class="login_form_container">
+										<div class="account_login_form">
+											<form name="f" action="userUpdate">
+												<p><a href="#"></a></p>
+												<div class="input-select"></div>
+
+												<label>이름</label>
+												<input type="text" name="userName" th:value="${userinfo.userName}">
+												<label>비밀번호</label>
+												<input type="password" value="" name="userPassword"
+													th:value="${userinfo.userPassword}">
+												<label>핸드폰번호</label>
+												<input type="text" value="" name="userPhoneNumber"
+													th:value="${userinfo.userPhoneNumber}">
+												<label>주소</label>
+												<input type="text" value="" name="userAddress"
+													th:value="${userinfo.userAddress}">
+
+												<br>
+
+												<div class="save_button primary_btn default_button">
+													<button type="button" onclick="a()">Save</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
                            <!--   </div>-->
                         </div>
                     </div>
@@ -242,44 +244,37 @@
   
  
     <!--footer area end-->
+	<script>
+		function a() {
+			var userNameInput = document.querySelector('input[name="userName"]');
+			var userPasswordInput = document.querySelector('input[name="userPassword"]');
+			var userPhoneNumberInput = document.querySelector('input[name="userPhoneNumber"]');
+			var userAddressInput = document.querySelector('input[name="userAddress"]');
+
+			var userName = userNameInput.value.trim();
+			var userPassword = userPasswordInput.value.trim();
+			var userPhoneNumber = userPhoneNumberInput.value.trim();
+			var userAddress = userAddressInput.value.trim();
+
+			if (userName === '') {
+				alert('이름을 입력해주세요.');
+			} else if (userPassword === '') {
+				alert('비밀번호를 입력해주세요.');
+			} else if (userPhoneNumber === '') {
+				alert('핸드폰번호를 입력해주세요.');
+			} else if (userAddress === '') {
+				alert('주소를 입력해주세요.');
+			} else {
+				window.location.href=
+				'userUpdate?userName='+userName+'&userPassword='+userPassword+'&userPhoneNumber='+userPhoneNumber+'&userAddress='+userAddress;
+			}
+			
+		}
+
+	</script>
 
 
-<!-- 회원탈퇴  -->
-<!-- <script>
-    $('#confirmDelete').on('click', function() {
-        const selectedReason = $('input[name="reason"]:checked').val();
-        if (selectedReason) {
-            console.log("회원탈퇴 이유:", selectedReason);
-            // 여기에 탈퇴 로직 
-            // 탈퇴가 완료되면 index.html로 리다이렉트
-        window.location.href = 'index.html';
-        } else {
-            alert("탈퇴하시려면 이유를 선택해주세요.");
-        }
-    });
-</script>
-
-
-주문한 상품 리뷰쓰기 
-<script>
-
-    // 마이페이지 상품주문 완료된 항목에서 주문상세를 누르면 창이 뜨고 이 창에서만 리뷰를 쓸수 있음
-    // 주문 상세 링크를 클릭할 때 이벤트 핸들러
-    document.querySelector('.table').addEventListener('click', function(e) {
-    if (e.target.classList.contains('view')) {
-        e.preventDefault();
-        
-        // 주문상세 정보를 로드 하기
-        
-
-        // 모달창 표시
-        $('#orderDetailsModal').modal('show');
-    }
-    });
-
-</script> -->
 </th:block>		
-
 
 
 </body>
