@@ -9,9 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.dto.ReviewBoardDto;
 import com.itwill.entity.ReviewBoard;
+import com.itwill.service.ProductService;
 import com.itwill.service.ReviewBoardService;
 
 @Controller
@@ -20,6 +22,9 @@ public class ReviewBoardController {
 
 	@Autowired
 	private ReviewBoardService reviewBoardService;
+	
+	@Autowired
+	private ProductService productService;
 	
 	// admin이 리뷰리스트 볼 때
 	@GetMapping("/admin/reviewBoardList")
@@ -47,7 +52,9 @@ public class ReviewBoardController {
 		return "reviewboard";  //링크 수정하기
 	}
 	
-	
+
+
+
 	
 	
 	

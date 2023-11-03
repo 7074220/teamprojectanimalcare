@@ -1,6 +1,7 @@
 package com.itwill.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,30 +14,37 @@ import com.itwill.repository.OrdersRepository;
 public class OrderItemDaoImpl implements OrderItemDao {
 
 	@Autowired
-	OrderItemRepository orderItemRepository;
+	private OrderItemRepository orderItemRepository;
 
 	@Override
 	public OrderItem insertOrderItem(OrderItem orderItem) {
-
 		return orderItemRepository.save(orderItem);
 	}
 
 	@Override
 	public OrderItem updateOrderItem(OrderItem orderItem) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<OrderItem> optional = orderItemRepository.findById(orderItem.getOiNo());
+		OrderItem item = optional.get();
+		
+		item.setOiNo(orderItem.getOiNo());
+		item.setOiQty(orderItem.getOiQty());
+		item.setOrders(orderItem.getOrders());
+		item.setOrderStatus(orderItem.getOrderStatus());
+		item.setProduct(orderItem.getProduct());
+		
+		OrderItem saveItem = orderItemRepository.save(item);
+		
+		return saveItem;
 	}
 
 	@Override
-	public OrderItem deleteOrderItem(OrderItem orderItem) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteOrderItem(OrderItem orderItem) {
+		orderItemRepository.delete(orderItem);
 	}
 
 	@Override
 	public List<OrderItem> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return orderItemRepository.findAll();
 	}
 	
 	/*

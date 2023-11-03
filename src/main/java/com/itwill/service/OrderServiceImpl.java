@@ -20,22 +20,21 @@ import com.itwill.entity.Orderstatus;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Userinfo;
 import com.itwill.repository.OrderStatusRepository;
+
+@Transactional
 @Service
 public class OrderServiceImpl implements OrderService{
 	@Autowired 
-	OrdersDao ordersDao;
+	private OrdersDao ordersDao;
 	@Autowired 
-	CartDao cartDao;
+	private CartDao cartDao;
 	@Autowired 
-	OrderItemDao orderItemDao;
+	private OrderItemDao orderItemDao;
 	@Autowired
-	ProductDao productDao;
-	@Autowired
-	OrderStatusRepository orderStatusRepository;
+	private ProductDao productDao;
 	
 	@Override
 	public Orders insertOrder(Orders order) {
-	
 		return ordersDao.insertOrder(order);
 	}
 	//배송지변경
@@ -54,16 +53,18 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public void removeOrder(Long orderNo)throws Exception {
-		Optional<Orders> ordersOptional = Optional.of(ordersDao.findOrderByNo(orderNo));
-		if(ordersOptional.isEmpty()) {
+	public void removeOrderByOrderNo(Long orderNo)throws Exception {
+		Orders order = ordersDao.findOrderByNo(orderNo);
+		if(order==null) {
 			throw new Exception("존재하지않습니다.");
-		
-			}
-		ordersDao.deleteOrder(orderNo);
-		
+		}
+		List<OrderItem> orderItemList = order.getOrderItems();
+		for (OrderItem orderItem : orderItemList) {
+			orderItemDao.deleteOrderItem(orderItem);
+		}
+		ordersDao.deleteOrderByOrderNo(orderNo);
 	}
-//전체주문 조회
+	//전체주문 조회
 	@Override
 	public List<Orders> findOrders() {
 	
