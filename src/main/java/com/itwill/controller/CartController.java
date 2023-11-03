@@ -66,10 +66,12 @@ public class CartController {
 		// productNo로 product 정보 가져오기
 		Product product = productService.findByProductNo(productNo);
 		
-		Cart selectCart = new Cart();
+		Cart selectCart = Cart.builder().build();
 		selectCart.setUserinfo(user);
 		selectCart.setProduct(product);
 		selectCart.setCartQty(product.getProductQty());
+		
+		cartService.insertCart(selectCart);
 		
 		model.addAttribute("cart", selectCart);
 		
