@@ -50,7 +50,7 @@
                                     </div>
                                 </div>
                                 <div class="blog_thumb">
-                                   <a href="#" th:href="@{reportBoardView(boardNo=${reportboard.boardNo})}"><img src="assets/img/blog/blog-big1.jpg" alt="" th:src="@{'/image/reportboard/' + ${reportboard.boardImage}}"></a>
+                                   <a href="#"  ><img src="assets/img/blog/blog-big1.jpg" alt="" th:src="@{/image/reportboard/} + ${reportBoard.getBoardImage}"></a>
                                	
                                </div>
                                <figcaption class="blog_content">
