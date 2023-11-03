@@ -19,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.dto.CartDto;
+import com.itwill.dto.CartOrderViewDto;
 import com.itwill.dto.OrderItemDto;
+import com.itwill.dto.OrderViewDto;
 import com.itwill.dto.OrdersDto;
+import com.itwill.dto.UserOrderViewDto;
 import com.itwill.entity.Cart;
 import com.itwill.entity.Coupon;
 import com.itwill.entity.OrderItem;
@@ -86,20 +89,19 @@ public class OrderController {
 		
 		orderService.insertOrder(orderDto.toEntity(orderDto));
 		cartService.deleteByUserId(userNo);
-		return "redirect:order_success";
+		return "index";
 	}
 	//관리자전용
 	@GetMapping("/ordersList")
-	public String findOrders(Model model) {
+	public String findOrders(Model model,HttpSession session) throws Exception {
 		List<Orders> orderList = orderService.findOrders();
 		List<OrdersDto> ordersDto = new ArrayList<OrdersDto>();
+			for (Orders orders : orderList) {
+				ordersDto.add(OrdersDto.toDto(orders));
+			}
+			model.addAttribute("ordersList",ordersDto);
+			return "my-account-orders";
 		
-		for (Orders orders : orderList) {
-			ordersDto.add(OrdersDto.toDto(orders));
-		}
-		model.addAttribute("ordersList",ordersDto);
-
-		return "orderList";
 	}
 	//회원 주문목록
 	@GetMapping("/orders")
@@ -110,31 +112,50 @@ public class OrderController {
 		Long userNo=(Long)session.getAttribute("userNo");
 		
 		List<Orders> orderList = orderService.findOrderById(userNo);
-		List<OrdersDto> ordersDto = new ArrayList<OrdersDto>();
+		List<OrdersDto> ordersDtoList = new ArrayList<OrdersDto>();
 		
 		for (Orders orders : orderList) {
-			ordersDto.add(OrdersDto.toDto(orders));
+			ordersDtoList.add(OrdersDto.toDto(orders));
+			
 		}
 		
-		model.addAttribute("uOrderList",ordersDto);
+		
+		model.addAttribute("ordersList",ordersDtoList);
 		return "my-account-orders";
 	}
 	
+	
 	//orderform
-		@GetMapping("orderView")
-		public String orderView(HttpSession session,Model model) throws Exception{
-			/*
-			 * if (session.getAttribute("userNo") == null) { throw new
-			 * Exception("로그인 하세요."); } Long userNo=(Long)session.getAttribute("userNo");
-			 * List<Cart> carts=cartService.findAllCartByUserId(userNo); List<CartDto>
-			 * cartDtos=new ArrayList<>(); for (Cart cart : carts) {
-			 * cartDtos.add(CartDto.toDto(cart)); } //user정보가지고있는 dto 필요 Userinfo
-			 * userinfo=userInfoService.findUserByNo(userNo);
-			 * model.addAttribute("user",userinfo);//userinfo는 서비스로 찾는지 의문
-			 * model.addAttribute("cartList",cartDtos);
-			 */
-			return "my-account";
+	@GetMapping("orderView")
+	public String orderView(HttpSession session,Model model) throws Exception{
+		
+		Long userNo = (Long) session.getAttribute("userNo");
+		if (userNo == null) {
+			throw new Exception("로그인 하세요.");
 		}
+		Userinfo userinfo=userInfoService.findUserByNo(userNo);
+		List<Cart> carts = cartService.findAllCartByUserId(userNo);
+		System.out.println(">>>>>>>>>>>>>>>>"+carts);
+		System.out.println(">>>>>>>>>>>>>>>>"+carts.get(0).getUserinfo());
+		System.out.println(">>>>>>>>>>>>>>>>"+carts.get(0).getProduct());
+		/*
+		List<CartOrderViewDto> cartDtos = new ArrayList<>();
+		for (Cart cart : carts) {
+			cartDtos.add(CartOrderViewDto.toDto(cart));
+		} 
+		for (CartOrderViewDto cartDto : cartDtos) {
+			System.out.println("<<<<<<<<<<<"+cartDto.getProductNameDto().getProductName());
+		}
+		*/  
+	    //user정보가지고있는 dto 필요 Userinfo
+	    
+	    //model.addAttribute("user",UserOrderViewDto.toDto(userinfo));//userinfo는 서비스로 찾는지 의문
+	    model.addAttribute("cartList",carts);
+	    model.addAttribute("user",userinfo );
+		  
+		 
+		return "checkout";
+	}
 		//orderitemList 조회
 		@GetMapping("orderItemiew")
 		public String orderItemiew(@RequestParam(name = "orderNo")Long orderNo,HttpSession session,Model model) throws Exception{

@@ -26,8 +26,13 @@ import com.itwill.dto.ProductPriceDescDto;
 import com.itwill.dto.ProductProductNoDescDto;
 import com.itwill.entity.MyPet;
 import com.itwill.entity.Product;
+import com.itwill.entity.ReviewBoard;
 import com.itwill.service.MyPetService;
 import com.itwill.service.ProductService;
+import com.itwill.service.ReviewBoardService;
+import com.itwill.service.UserInfoService;
+
+import jakarta.servlet.http.HttpSession;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -36,9 +41,12 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
-	
 	@Autowired
+	private UserInfoService userInfoService;
+	@Autowired 
 	private MyPetService myPetService;
+	@Autowired
+	private ReviewBoardService reviewBoardService;
 	
 	/*
 	// 상품 등록
@@ -318,6 +326,9 @@ public class ProductController {
 		model.addAttribute("product", product);
 		model.addAttribute("products", productListDto);
 		model.addAttribute("productName", productNameDto);
+		
+		List<ReviewBoard> reviewList = reviewBoardService.findByProductNo(product.getProductNo());
+		model.addAttribute("reviewList", reviewList);
 		
 		return "product-details";
 	}
