@@ -19,20 +19,24 @@
 		<div class="album py-5 bg-body-tertiary">
 			<div class="container">
 
-				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
 					<div class="col" th:each="reportboard : ${reportBoardList}">
                   <!--  <div class="card shadow-sm">-->
 						<div class="card shadow-sm">
-							<svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-								xmlns="http://www.w3.org/2000/svg" role="img">
+							<img class="bd-placeholder-img card-img-top" width="100%" height="225"
+								src="#" th:src="@{/image/reportboard/} + ${reportboard.boardImage}"  xmlns="http://www.w3.org/2000/svg" role="img" >
 								
-								<title>Placeholder</title>
+								<!--<a class="primary_img" href="product-details.html"
+											th:href="@{productDetail(productNo=${product.productNo})}"><img src="#"
+												alt="" th:src="@{/image/product/} + ${product.getProductImage}"></a>-->
+
+												<title>Placeholder</title>
 								
 								<rect width="100%" height="100%" fill="#55595c" />
+								<!--
+								<text x="50%" y="50%" fill="#eceeef" dy=".3em">이미지넣을공간</text>-->
 								
-								<text x="50%" y="50%" fill="#eceeef" dy=".3em">이미지넣을공간</text>
-								
-							</svg>
+							</img>
 							
 							<div class="card-body">
 									<tr>
@@ -254,7 +258,7 @@
 						</div>
 					</div>-->
 				</div>
-			</div>
+			</parent>
 		</div>
 	</th:block>
 </body>

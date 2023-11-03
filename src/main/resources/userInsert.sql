@@ -152,6 +152,8 @@ VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/
 
 
 
+
+
 -- review board
 
 INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)

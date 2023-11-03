@@ -93,16 +93,11 @@ public class OrderController {
 	public String findOrders(Model model,HttpSession session) throws Exception {
 		List<Orders> orderList = orderService.findOrders();
 		List<OrdersDto> ordersDto = new ArrayList<OrdersDto>();
-		Long userNo=(Long)session.getAttribute("userNo");
-		Userinfo admin=userInfoService.findUserByNo(userNo);
-		if(admin.getUserName().equals("admin")) {
 			for (Orders orders : orderList) {
 				ordersDto.add(OrdersDto.toDto(orders));
 			}
 			model.addAttribute("ordersList",ordersDto);
-			return "orderList";
-		}else 
-			throw new Exception("잘못된경로입니다.");
+			return "my-account-orders";
 		
 	}
 	//회원 주문목록
