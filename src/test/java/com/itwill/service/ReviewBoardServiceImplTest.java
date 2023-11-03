@@ -77,9 +77,9 @@ class ReviewBoardServiceImplTest {
 	@Test // 상품번호로 리뷰찾기
 	@Transactional
 	@Rollback(value = false)
-	@Disabled
+	//@Disabled
 	void getReviewBoardByProduct_ProductNo() {
-		List<ReviewBoard> selectReviewBoard = reviewBoardService.findByProductNo(11L);
+		List<ReviewBoard> selectReviewBoard = reviewBoardService.findByProductNo(15L);
 		System.out.println(selectReviewBoard);
 	}
 	
