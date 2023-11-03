@@ -77,7 +77,10 @@ public class CartController {
 		
 		cartService.insertCart(selectCart);
 		
+		List<Cart> cartList = cartService.findAllCartByUserId(userNo); 
+		
 		model.addAttribute("cart", selectCart);
+		model.addAttribute("cartList", cartList);
 		
 		return "cart";
 	}
