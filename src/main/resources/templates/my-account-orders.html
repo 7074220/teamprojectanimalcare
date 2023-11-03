@@ -174,8 +174,7 @@
     </div> -->
     <!--breadcrumbs area end-->
     
-    <!-- my account start  -->
-    <section class="main_content_area">
+  <section class="main_content_area">
         <div class="container">   
             <div class="account_dashboard">
                 <div class="row">
@@ -187,9 +186,9 @@
                                 <li><a href="#mypet"  class="nav-link">마이펫</a></li>
                                 <li><a href="#cuponpage"  class="nav-link">쿠폰</a></li>
                                 <li><a href="adoptByUserNo"  class="nav-link">입양</a></li>
-								<li><a href="volunteerByUserNo"  class="nav-link">봉사</a></li>
+                                <li><a href="volunteerByUserNo"  class="nav-link">봉사</a></li>
                                 <li><a href="visitByUserNo" class="nav-link">견학</a></li>
-                                <li> <a href="#orders" class="nav-link">주문목록</a></li>
+                                <li> <a href="orders" class="nav-link">주문목록</a></li>
                                 <li><a href="logout" class="nav-link">로그아웃</a></li>
                                 <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li>
 
@@ -199,44 +198,39 @@
                     <div class="col-sm-12 col-md-9 col-lg-9">
                         <!-- Tab panes -->
                         <div class="tab-content dashboard_content">
-                            
-                            
-
-                            <!--<div class="tab-pane fade" id="adopt">-->
-                                <h3>입양</h3>
+							
+                                <div  id="orders">
+                                <h3>주문목록</h3>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>No</th>
-                                                <th>Time</th>
-                                                <th>Date</th>
-                                                <th>PetNo</th>
-                                                <th>Status</th>                 
+                                                <th>번호</th>
+                                                <th>구입날짜</th>
+                                                <th>상품명</th>
+                                                <th>총가격</th>
+                                                <th>리뷰</th>	 	 	 	
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="adopt, rowStat : ${adoptList}">
-                                                <td th:text="${adoptList.size() - rowStat.index}">1</td>
-                                                <td th:text="${adopt.adoptTime}"></td>
-                                                <td th:text="${#strings.substring(adopt.adoptDate.toString(),0,10)}"></span></td>
-                                                <td th:text="${adopt.Pet.petNo}"></td>
-                                                <td th:text="${adopt.adoptStatus}"><span class="success">입양신청</span></td>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>May 10, 2018</td>
+                                                <td><span class="success">고양이캔조림</span></td>
+                                                <td>$25.00 for 1 item </td>
+                                                <td><a href="cart.html" class="view">주문상세</a></td>
                                             </tr>
-                                            <!-- <tr>
+                                            <tr>
                                                 <td>2</td>
-                                                <td>12:00</td>
-                                                <td>Jun 10, 2018</td>
-                                                <td>골든리트리버 </td>
-                                                <td><span class="success">입양완료</span></td>
-                                            </tr> -->
+                                                <td>May 10, 2018</td>
+                                                <td>강아지닭가슴살사료</td>
+                                                <td>$17.00 for 1 item </td>
+                                                <td><a href="cart.html" class="view">주문상세</a></td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                            <!--</div>-->
-                            
-                            <!--<div class="tab-pane fade" id="account-details">-->
-                          
+                            </div>
                            <!--   </div>-->
                         </div>
                     </div>
@@ -244,7 +238,6 @@
             </div>  
         </div>        	
     </section>	
-    
     <!-- my account end   --> 
 
       <!--footer area start-->
@@ -272,7 +265,7 @@
         // 모달창 표시
         $('#orderDetailsModal').modal('show');
     }
-    });
+    }
 
 </script> -->
 </th:block>		

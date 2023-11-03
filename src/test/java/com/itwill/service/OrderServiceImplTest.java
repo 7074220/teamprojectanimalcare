@@ -56,7 +56,7 @@ class OrderServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 	@Rollback(false)
 	@Disabled
 	void delete() throws Exception {
-		orderService.removeOrder(1L);
+		orderService.removeOrderByOrderNo(1L);
 	}
 
 	@Test

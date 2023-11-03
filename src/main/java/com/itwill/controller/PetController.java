@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.sym.Name;
 import com.itwill.dto.PetDto;
@@ -35,6 +36,8 @@ import jakarta.websocket.server.PathParam;
 public class PetController {
 @Autowired
 PetService petService;
+@Autowired
+UserInfoService userInfoService;
 //@Autowired
 //팻 등록
 	@PostMapping("/insert_action")
@@ -60,15 +63,23 @@ PetService petService;
 		return "pet-list" ;
 	}
 	//펫 삭제 관리자만
-	@PostMapping("/delete_action")
-	public String delete_action(@PathVariable(name = "petNo") Long petNo) throws Exception{
+	@GetMapping("/deletepet")
+	public String delete_action(@RequestParam(name = "petNo") Long petNo,HttpSession session) throws Exception{
 		Optional<Pet> petOptional = Optional.of(petService.petFindById(petNo));
+		Long userNo=(Long)session.getAttribute("userNo");
+		Userinfo userinfo=userInfoService.findUserByNo(userNo);
 		if(petOptional.isEmpty()) {
 			throw new Exception("존재하지 않는 동물입니다.");
 		
 			}
+		if(userinfo.getUserName().equals("admin")) {
+			
 			petService.petRemove(petNo);
-		return "pet-list";
+		}else {
+			throw new Exception("올바르지 않은 경로입니다.");
+		}
+		
+		return "redirect:petList";
 	}
 	//펫 업데이트
 	@PostMapping("/update_action")
@@ -89,6 +100,35 @@ PetService petService;
 	}
 		return "pet-list";
 	
+	}
+	
+	@Operation(summary = "펫타입 리스트")	
+	@GetMapping("/pets")
+	public String petTypeList(@RequestParam(name = "petType")String petType,Model model){
+			List<PetDto> petDtoList = new ArrayList<>();
+			List<Pet> petList = petService.findAllByOrderBypetType(petType);
+			for (Pet pet : petList) {
+				petDtoList.add(PetDto.toDto(pet));
+			}
+
+		model.addAttribute("petList",petDtoList);
+		model.addAttribute("petType", petType);
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>"+petDtoList);
+		return "pet-list";
+	}
+	
+	//펫 지역 리스트
+	@GetMapping("/petLocal")
+	public String petLocalList(@RequestParam(name = "petLocal")String petLocal,Model model){
+			List<PetDto> petDtoList = new ArrayList<>();
+			List<Pet> petList = petService.findAllByPetLocal(petLocal);
+			for (Pet pet : petList) {
+				petDtoList.add(PetDto.toDto(pet));
+			}
+
+		model.addAttribute("petList",petDtoList);
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>"+petDtoList);
+		return "pet-list";
 	}
 
 	

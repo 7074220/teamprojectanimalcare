@@ -147,10 +147,40 @@ class ProductServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 	}
 	
 	@Test
-	//@Disabled
+	@Disabled
 	// 최신번호순 정렬
 	void findAllByOrderByProductByPetCategoryNoDesc() {
 		List<Product> products = productService.findAllByOrderByProductByPetCategoryNoDesc("고양이");
+		System.out.println(products);
+	}
+	
+	/*************** 펫 카테고리 및 프로덕트별 정렬 ****************/
+	
+	@Test
+	@Disabled
+	void findAllByOrderByProductByPetCategoryByProductCategoryPriceDesc() {
+		List<Product> products = productService.findAllByOrderByProductByPetCategoryByProductCategoryPriceDesc("고양이", "사료");
+		System.out.println(products);
+	}
+	
+	@Test
+	@Disabled
+	void findAllByOrderByProductByPetCategoryByProductCategoryPriceAsc() {
+		List<Product> products = productService.findAllByOrderByProductByPetCategoryByProductCategoryPriceAsc("고양이", "사료");
+		System.out.println(products);
+	}
+	
+	@Test
+	@Disabled
+	void findAllByOrderByProductByPetCategoryByProductCategoryStarAvgDesc() {
+		List<Product> products = productService.findAllByOrderByProductByPetCategoryByProductCategoryStarAvgDesc("고양이", "사료");
+		System.out.println(products);
+	}
+	
+	@Test
+	//@Disabled
+	void findAllByOrderByProductByPetCategoryByProductCategoryNoDesc() {
+		List<Product> products = productService.findAllByOrderByProductByPetCategoryByProductCategoryNoDesc("고양이", "사료");
 		System.out.println(products);
 	}
 }
