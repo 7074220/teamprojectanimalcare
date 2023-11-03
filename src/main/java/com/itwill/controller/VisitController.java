@@ -80,6 +80,8 @@ public class VisitController {
 		Long userNo=(Long)session.getAttribute("userNo");
 		Userinfo user=userInfoService.findUserByNo(userNo);
 		List<Visit> visitList = visitService.getVisitsByUserNo(user.getUserNo());
+		//람다 표현식 	visitList에서 visit1,visit2두개의 요소를 나타내며 compareTo로 두개의 번호를 비교해서 정렬	
+		visitList.sort((visit1,visit2) -> visit2.getVisitDate().compareTo(visit1.getVisitDate())); 
 		model.addAttribute("visitList", visitList);
 		return "my-account-visit";
 	}

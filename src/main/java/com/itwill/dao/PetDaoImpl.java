@@ -58,6 +58,12 @@ public class PetDaoImpl implements PetDao {
 			List<Pet> petList = petRepository.findByPetType(petType);
 			return petList;
 		}
+
+		@Override
+		public List<Pet> findAllByPetLocal(String petLocal) {
+			List<Pet> petList = petRepository.findByPetLocal(petLocal);
+			return petList;
+		}
 	
 	
 

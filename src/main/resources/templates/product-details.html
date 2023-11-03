@@ -701,25 +701,12 @@
 										class="button" onclick="addToCart()">add to cart</a>
 								</div> -->
 
-							    <div class="product_variant quantity">
-									<label>수량</label> 
-									<input id="inputQty" min="1" max="100" value="1" type="number">
-									<button class="button" type="submit" onclick="addToCart()">add to cart</button>
-								</div> 
 
-
-	
-							    
-								 <script>
-										function addToCart() {
-											var productNo = document.getElementById("productNo").value;
-											 window.location.href = "/cartList?productNo=" + productNo;
-									         // "장바구니에 상품이 담겼습니다" 알림 표시
-									         alert("장바구니에 상품이 담겼습니다.");
-										}
-								 </script> 
-    
-	
+								<div class="product_variant quantity">
+									<label>수량</label> <input min="1" max="100" value="1"
+										type="number"> 
+										<button onclick="addToCart()" class="button">add to cart</button>
+								</div>
 
 
 								<div class=" product_d_action">
@@ -1279,14 +1266,13 @@
     
     
     
+     
  <script>
-		function addToCart() {
-			var productNo = document.getElementById("productNo").value;
-			 window.location.href = "/cartList?productNo=" + productNo;
-	         // "장바구니에 상품이 담겼습니다" 알림 표시
-	         alert("장바구니에 상품이 담겼습니다.");
-		}
-	</script> 
+    function addToCart(productNo) {
+        var productNo = document.getElementById("productNo").value;
+        window.location.href = "cart?productNo=" + productNo;
+    }
+</script>
     
     
     
