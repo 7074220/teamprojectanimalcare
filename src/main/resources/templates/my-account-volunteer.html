@@ -215,11 +215,17 @@
                                         </thead>
                                         <tbody>
 											
-											<tr th:each="volunteer: ${volunteerList}">
-												<td th:text="${volunteer.volunteerNo}"></td>
+											<tr th:each="volunteer, rowStat : ${volunteerList}">
+												<!-- <td th:text="${volunteer.volunteerNo}"></td> -->
+												<!-- <td th:text="${rowStat.index + 1}"></td> 오름차순임-->
+												<td th:text="${volunteerList.size() - rowStat.index}"></td>
+												
 												<td th:text="${volunteer.volunteerTime}"></td>
-												<td th:text="${volunteer.volunteerDate}"></td>
-												<td th:text="${volunteer.center.centerNo}"></td>
+												
+												<!-- <td th:text="${volunteer.volunteerDate}"></td> -->
+												<!-- 시간전체를 잘라서 날짜만 나올수있게 yyyy-mm-dd -->
+												<td th:text="${#strings.substring(volunteer.volunteerDate.toString(), 0, 10)}"></td>
+												<td th:text="${volunteer.center.centerName}"></td>
 												<td th:text="${volunteer.volunteerStatus}"><span class="success">봉사신청</span></td>
 											</tr>
 

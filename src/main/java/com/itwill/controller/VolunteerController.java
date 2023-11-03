@@ -1,6 +1,8 @@
 package com.itwill.controller;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -49,7 +51,8 @@ public class VolunteerController {
 	// 봉사버튼 클릭시 센터정보 보여줌
 	@PostMapping("/create-volunteer")
 	public String createVolunteer(@RequestParam("volunteerDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date volunteerDate, 
-			@RequestParam("volunteerTime") int selectedHour, @RequestParam Long centerNo, Model model) {
+			@RequestParam("volunteerTime") int selectedHour, @RequestParam Long centerNo, HttpSession session, Model model) throws Exception{
+		Long userNo = (Long) session.getAttribute("userNo");
 		
 		Volunteer volunteer = new Volunteer();
 		volunteer.setVolunteerDate(volunteerDate);
@@ -57,22 +60,18 @@ public class VolunteerController {
 		volunteer.setVolunteerTime(selectedHour);
 		
 		Center center = centerService.findByCenterNo(centerNo);
+		Userinfo userinfo = userInfoService.findUserByNo(userNo);
+		volunteer.setUserinfo(userinfo);
 		volunteer.setCenter(center);
 		volunteerService.insertVolunteer(volunteer);
-		
+		model.addAttribute("userinfo", userinfo);
 		return "center-list";
 	}
 	
 	
 	@GetMapping("/volunteerList") // 봉사 목록 전체 조회. 관리자
 	public String volunteerList(Model model) {
-		List<Volunteer> volunteers = volunteerService.findAllVolunteers();
-		/*
-		List<VolunteerDto> volunteerDtoList = new ArrayList<>();
-	    for (Volunteer volunteer : volunteerList) {
-	        volunteerDtoList.add(VolunteerDto.toDto(volunteer));
-	    }
-	    */	    
+		List<Volunteer> volunteers = volunteerService.findAllVolunteers();    
 	    model.addAttribute("volunteers", volunteers);
 	    return "my-account";
 	}
@@ -99,7 +98,11 @@ public class VolunteerController {
 		Long userNo=(Long)session.getAttribute("userNo");
 		Userinfo user=userInfoService.findUserByNo(userNo);
 		
-		List<Volunteer> volunteerList = volunteerService.findVolunteertByUserNo(user.getUserNo());
+		List<Volunteer> volunteerList = volunteerService.findVolunteertByUserNo(user.getUserNo());		
+		
+		// volunteerNo를 내림차순으로 정렬
+	    volunteerList.sort((v1, v2) -> v2.getVolunteerNo().compareTo(v1.getVolunteerNo()));
+	    
 		model.addAttribute("volunteerList", volunteerList);
 		return "my-account-volunteer";
 	}
