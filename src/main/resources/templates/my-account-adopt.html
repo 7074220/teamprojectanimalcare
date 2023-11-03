@@ -216,10 +216,10 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="adopt:${adoptList}">
-                                                <td th:text="${adopt.adoptNo}">1</td>
+                                            <tr th:each="adopt, rowStat : ${adoptList}">
+                                                <td th:text="${adoptList.size() - rowStat.index}">1</td>
                                                 <td th:text="${adopt.adoptTime}"></td>
-                                                <td th:text="${adopt.adoptDate}"></span></td>
+                                                <td th:text="${#strings.substring(adopt.adoptDate.toString(),0,10)}"></span></td>
                                                 <td th:text="${adopt.Pet.petNo}"></td>
                                                 <td th:text="${adopt.adoptStatus}"><span class="success">입양신청</span></td>
                                             </tr>

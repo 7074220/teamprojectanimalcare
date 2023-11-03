@@ -4,13 +4,51 @@
 	layout:decorate="layout/layout(title='adopt')">
 
 
-
 <head>
 <title>Safira - contact page</title>
+
+<style type="text/css">
+#adoptDate {
+	border: 1px solid black;
+	position: relative;
+	width: 100%;
+	padding: 10px;
+	background-color: transparent;
+	border-radius: 8px;
+	text-align: center;
+	font-size: 100%;
+	margin-bottom: 20px;
+	
+}
+
+#adoptDate::-webkit-calendar-picker-indicator {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: transparent;
+	color: transparent;
+	cursor: pointer;
+}
+
+#adoptDate::before {
+	content: attr(placeholder);
+	width: 100%;
+	height: 100%;
+}
+
+#adoptDate:valid::before {
+	display: none;
+}
+</style>
+
 
 </head>
 
 <body>
+
+
 
 	<!--header area start-->
 
@@ -86,7 +124,8 @@
 									<textarea placeholder="Message *" name="message" class="form-control2"></textarea>
 								</div> -->
 								<p>
-									<label>방문 날짜</label> <input type="date" name="adoptDate">
+									<label>방문 날짜</label> <input type="date" name="adoptDate"
+										id="adoptDate" placeholder="날짜를 선택해주세요" required="required">
 								</p>
 								<p>
 									<label>방문 시간</label> <select name="adoptTime">
