@@ -183,23 +183,23 @@
                         <div class="dashboard_tab_button">
                             <ul role="tablist" class="nav flex-column dashboard-list">
                                 <li><a href="userinfo" class="nav-link">내정보</a></li>
-                                <li><a href="#mypet" data-toggle="tab" class="nav-link">마이펫</a></li>
-                                <li><a href="#cuponpage" data-toggle="tab" class="nav-link">쿠폰</a></li>
-                                <li><a href="adoptByUserNo" class="nav-link">입양</a></li>
-                                <li><a href="volunteerByUserNo" data-toggle="tab" class="nav-link">봉사</a></li>
-                                <li><a href="visitByUserNo" data-toggle="tab" class="nav-link">견학</a></li>
-                                <li> <a href="orders" data-toggle="tab" class="nav-link">주문목록</a></li>
+                                <li><a href="#mypet"  class="nav-link">마이펫</a></li>
+                                <li><a href="#cuponpage"  class="nav-link">쿠폰</a></li>
+                                <li><a href="adoptByUserNo"  class="nav-link">입양</a></li>
+                                <li><a href="volunteerByUserNo"  class="nav-link">봉사</a></li>
+                                <li><a href="visitByUserNo" class="nav-link">견학</a></li>
+                                <li> <a href="orders" class="nav-link">주문목록</a></li>
                                 <li><a href="logout" class="nav-link">로그아웃</a></li>
                                 <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li>
+
                             </ul>
                         </div>    
                     </div>
                     <div class="col-sm-12 col-md-9 col-lg-9">
                         <!-- Tab panes -->
                         <div class="tab-content dashboard_content">
-                            
-                            
-                            <div class="tab-pane fade" id="orders">
+							
+                                <div  id="orders">
                                 <h3>주문목록</h3>
                                 <div class="table-responsive">
                                     <table class="table">
@@ -231,35 +231,13 @@
                                     </table>
                                 </div>
                             </div>
-
-
-                             <!-- 주문 상세 모달 -->
-                            <div class="modal fade" id="orderDetailsModal" tabindex="-1" 
-                                 aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                    <h5 class="modal-title" id="orderDetailsModalLabel">주문 상세</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    </div>
-                                    <div class="modal-body">
-                                    <!-- 주문 상세 내용이 여기에 로드됩니다 -->
-                                    </div>
-                                    <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">리뷰 저장</button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                                    
-                                    </div>
-                                </div>
-                                </div>
-                            </div>   
-                            
-                            
-                            
-                            
-    
+                           <!--   </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>        	
+    </section>	
     <!-- my account end   --> 
 
       <!--footer area start-->
@@ -287,7 +265,7 @@
         // 모달창 표시
         $('#orderDetailsModal').modal('show');
     }
-    });
+    }
 
 </script> -->
 </th:block>		

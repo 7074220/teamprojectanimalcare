@@ -106,11 +106,19 @@ void test2() {
 
 	//펫 타입리스트
 	@Test
-	//@Disabled
+	@Disabled
 	void findallPetType() {
 		List<Pet> pet = petDao.findAllByOrderByPetType("강아지");
 	System.out.println(pet);
 	}
+	
+	//펫 타입리스트
+		@Test
+		//@Disabled
+		void findallPetLocal() {
+			List<Pet> pet = petDao.findAllByPetLocal("서울특별시");
+		System.out.println(pet);
+		}
 }
 
 
