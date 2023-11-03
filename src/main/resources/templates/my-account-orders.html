@@ -205,7 +205,7 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>번호</th>
+                                                <th>주문번호</th>
                                                 <th>구입날짜</th>
                                                 <th>상품명</th>
                                                 <th>총가격</th>
@@ -215,9 +215,9 @@
                                         <tbody>
                                             <tr th:each="orders:${ordersList}" th:if="orders!=null">
                                                 <td th:text="${orders.orderNo}">1</td>
-                                                <td th:text="${orders.orderDate}">May 10, 2018</td>
+                                               <td th:text="${#dates.format(orders.orderDate, 'yyyy-MM-dd')}">2018-05-10</td>
                                                 <td th:text="${orders.orderDesc}"><span class="success">고양이캔조림</span></td>
-                                                <td th:text="${orders.orderPrice}">$25.00 for 1 item </td>
+                                                <td th:text="${#numbers.formatInteger(orders.orderPrice, 3, 'COMMA') + '원'}">$25.00 for 1 item </td>
                                                 <td><a href="cart.html" class="view">주문상세</a></td>
                                             </tr>
                                             <!-- <tr>
