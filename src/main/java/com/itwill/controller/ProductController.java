@@ -254,7 +254,9 @@ public class ProductController {
 
 		Long userNo = (Long) session.getAttribute("userNo");
 		MyPet myPet = MyPet.builder().build();
-
+		
+		productList = productService.findAllByOrderByProductNoDesc();
+		
 		if(userNo != null) {
 			myPet = myPetService.findLeaderMyPet(userNo);
 			if (myPet == null) {
@@ -263,9 +265,6 @@ public class ProductController {
 			} else {
 				productList = productService.findAllProductByPetCategory(myPet.getMypetKind());
 			}
-		} else {
-			productList = productService.findAllByOrderByProductNoDesc();
-			myPet = MyPet.builder().build();
 		}
 		
 		for (Product product : productList) {
