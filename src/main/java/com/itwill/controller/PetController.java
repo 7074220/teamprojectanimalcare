@@ -79,7 +79,7 @@ UserInfoService userInfoService;
 			throw new Exception("올바르지 않은 경로입니다.");
 		}
 		
-		return "redirect:pet-list";
+		return "redirect:petList";
 	}
 	//펫 업데이트
 	@PostMapping("/update_action")
