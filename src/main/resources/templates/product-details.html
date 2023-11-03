@@ -703,9 +703,8 @@
 
 								<div class="product_variant quantity">
 									<label>수량</label> <input min="1" max="100" value="1"
-										type="number"> <a
-										th:href="@{cartList(productNo=${product.productNo})}"
-										class="button">add to cart</a>
+										type="number"> 
+										<button onclick="addToCart()" class="button">add to cart</button>
 								</div>
 
 
@@ -1265,13 +1264,13 @@
     
     
     
-<!--     
+     
  <script>
-    function addToCart() {
+    function addToCart(productNo) {
         var productNo = document.getElementById("productNo").value;
         window.location.href = "cart?productNo=" + productNo;
     }
-</script> -->
+</script>
     
     
     

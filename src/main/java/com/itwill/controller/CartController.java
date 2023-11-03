@@ -75,7 +75,7 @@ public class CartController {
 		selectCart.setProduct(product);
 		selectCart.setCartQty(product.getProductQty());
 		
-		cartService.insertCart(selectCart);
+		cartService.updateOverlapCart(selectCart);
 		
 		List<Cart> cartList = cartService.findAllCartByUserId(userNo); 
 		

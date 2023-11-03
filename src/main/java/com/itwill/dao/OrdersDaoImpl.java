@@ -10,8 +10,9 @@ import com.itwill.entity.Orders;
 import com.itwill.repository.OrdersRepository;
 @Repository
 public class OrdersDaoImpl implements OrdersDao{
+	
 	@Autowired
-	OrdersRepository ordersRepository;
+	private OrdersRepository ordersRepository;
 	
 	@Override
 	public Orders insertOrder(Orders order) {
@@ -26,7 +27,7 @@ public class OrdersDaoImpl implements OrdersDao{
 	}
 
 	@Override
-	public void deleteOrder(Long orderNo) {
+	public void deleteOrderByOrderNo(Long orderNo) {
 		ordersRepository.deleteById(orderNo);
 	}
 

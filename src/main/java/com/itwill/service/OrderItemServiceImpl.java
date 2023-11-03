@@ -14,7 +14,8 @@ import com.itwill.entity.OrderItem;
 public class OrderItemServiceImpl implements OrderItemService {
 
 	@Autowired
-	OrderItemDao orderItemDao;
+	private OrderItemDao orderItemDao;
+	
 	@Override
 	public OrderItem insertOrderItem(OrderItem orderItem) {
 		return orderItemDao.insertOrderItem(orderItem);
@@ -24,8 +25,8 @@ public class OrderItemServiceImpl implements OrderItemService {
 		return orderItemDao.updateOrderItem(orderItem);
 	}
 	@Override
-	public OrderItem deleteOrderItem(OrderItem orderItem) {
-		return orderItemDao.deleteOrderItem(orderItem);
+	public void deleteOrderItem(OrderItem orderItem) {
+		orderItemDao.deleteOrderItem(orderItem);
 	}
 	@Override
 	public List<OrderItem> findAll() {

@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.dao.OrderItemDao;
+import com.itwill.entity.MyPet;
 import com.itwill.entity.OrderItem;
 import com.itwill.entity.Orders;
 import com.itwill.entity.Userinfo;
 import com.itwill.entity.Wish;
 import com.itwill.service.CartService;
+import com.itwill.service.MyPetService;
 import com.itwill.service.OrderItemService;
 import com.itwill.service.OrderService;
 import com.itwill.service.UserInfoService;
@@ -36,7 +38,8 @@ public class UserInfoController {
 	@Autowired
 	private WishService wishService;
 	@Autowired
-	private OrderItemService orderItemService;
+	private MyPetService myPetService;
+	
 	
 	@GetMapping("/login")
 	public String login(Model model) throws Exception {
@@ -89,30 +92,28 @@ public class UserInfoController {
 	@GetMapping("userDelete")
 	public String delete(HttpSession session) throws Exception {
 		Long userNo = (Long)session.getAttribute("userNo");
-		/*
+		
 		userInfoService.remove(userNo);
 		cartService.deleteByUserId(userNo);
-		*/
+		
 		List<Orders> orderList = orderService.findOrderById(userNo);
-		System.out.println(">>>>>>>>>>>>>>>>"+orderList);
 		
 		for (Orders orders : orderList) {
-		List<OrderItem> orderItemList = orders.getOrderItems();
-		System.out.println(">>>>>>>>>>>>>>>>"+orderItemList);
-			for (OrderItem orderitem : orderItemList) {
-				if(orderitem!=null) {
-					orderItemService.deleteOrderItem(orderitem);
-				}
-			}
-			//orderService.removeOrder(orders.getOrderNo());
+			orderService.removeOrderByOrderNo(orders.getOrderNo());
 		}
-		/*
+		
 		List<Wish> wishs = wishService.findAllWishByUserNo(userNo);
 		for (Wish wish : wishs) {
 			wishService.deleteWish(wish.getWishNo());
 		}
+
+		List<MyPet> myPets = myPetService.findMyPetListByuserNo(userNo);
+		for (MyPet myPet : myPets) {
+			myPetService.Delete(myPet.getMypetNo());
+		}
+		
 		session.invalidate();
-		*/
+		
 		return "index";
 	}
 	

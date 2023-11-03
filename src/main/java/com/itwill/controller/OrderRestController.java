@@ -263,7 +263,7 @@ public class OrderRestController {
 		if (session.getAttribute("userNo") == null) {
 			throw new Exception("로그인 하세요.");
 		}
-		orderService.removeOrder(orderNo);
+		orderService.removeOrderByOrderNo(orderNo);
 	}
 
 	@Operation(summary = "오더아이템 리스트 확인")
