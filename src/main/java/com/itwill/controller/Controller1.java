@@ -22,4 +22,9 @@ public class Controller1 {
 		return "my-account";
 	}
 	
+	@GetMapping(value = "/reportview")
+	public String reportview() {
+		return "reportBoardView";
+	}
+	
 }
