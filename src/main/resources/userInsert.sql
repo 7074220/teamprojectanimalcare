@@ -151,6 +151,9 @@ insert into reportboard (board_no,board_content,board_find_date,board_find_name,
 VALUES (ReportBoard_board_no_SEQ.nextval,'내용',to_date('2022/03/11','YYYY/MM/DD'),'박서진','1111',0,sysdate,'토토어디갓어3',5,'dog3.jpg');
 
 
+
+
+
 -- review board
 
 INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
