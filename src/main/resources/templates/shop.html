@@ -716,14 +716,14 @@
 							<!-- 마이펫이 없을 때 강아지x 고양이x -->
 								<ul class="nav" role="tablist" th:if="${myPet.mypetKind} == null">
 									<li>
-											<a href="/productDogList" role="tab" aria-controls="plant1"
-											aria-selected="false" th:href="@{productDogList}">
+										<a href="/productDogList" role="tab" aria-controls="plant1"
+											aria-selected="false" th:href="@{productDogList}" id="selectDog">
 											강아지
 										</a>
 									</li>
 									<li>
 										<a href="/productCatList" role="tab" aria-controls="plant2"
-											aria-selected="false" th:href="@{productCatList}">
+											aria-selected="false" th:href="@{productCatList}" id="selectCat">
 											고양이
 										</a>
 									</li>
@@ -737,13 +737,13 @@
 								 <ul class="nav" role="tablist" th:if="${myPet.mypetKind == '강아지'}">
 									<li>
 										<a class="active"  href="/productDogList" role="tab"
-											aria-controls="plant1" aria-selected="true" th:href="@{productDogList}">
+											aria-controls="plant1" aria-selected="true" th:href="@{productDogList}" id="selectDog">
 											강아지
 										</a>
 									</li>
 									<li>
 										<a  href="/productCatList" role="tab" aria-controls="plant2"
-											aria-selected="false" th:href="@{productCatList}">
+											aria-selected="false" th:href="@{productCatList}" id="selectCat">
 											고양이
 										</a>
 									</li>
@@ -757,13 +757,13 @@
 								<ul class="nav" role="tablist" th:if="${myPet.mypetKind == '고양이'}">
 									<li>
 										<a href="/productDogList" role="tab" aria-controls="plant1"
-											aria-selected="false" th:href="@{productDogList}">
+											aria-selected="false" th:href="@{productDogList}" id="selectDog">
 											강아지
 										</a>
 									</li>
 									<li>
 										<a class="active" href="/productCatList" role="tab"
-											aria-controls="plant2" aria-selected="true" th:href="@{productCatList}">
+											aria-controls="plant2" aria-selected="true" th:href="@{productCatList}" id="selectCat">
 											고양이
 										</a>
 									</li>
@@ -1418,12 +1418,17 @@
 		<!--shop  area end-->
 		</div>
 
-		<script>
+		<script type="text/javascript">
 			function a() {
 				var select = document.getElementById("short");
 		        var selectedValue = select.value;
 		        var redirectPath;
-				
+		        
+		        var dogBool = $('#selectDog').attr('aria-selected');
+		        var catBool = $('#selectCat').attr('aria-selected');
+		        var path = window.location.href;
+		        alert(path.substring(path.lastIndexOf("/") + 1));
+		        
 		        switch (selectedValue) {
 		            case "1":
 		                redirectPath = "productStarDesc";
