@@ -123,6 +123,32 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.findAllByOrderByProductByPetCategoryNoDesc(productPetCategory);
 	}
 
+	
+	/*************** 펫 카테고리 및 프로덕트별 정렬 ****************/
+	@Override
+	public List<Product> findAllByOrderByProductByPetCategoryByProductCategoryPriceDesc(String productPetCategory,
+			String productCategory) {
+		return productDao.findAllByOrderByProductByPetCategoryByProductCategoryPriceDesc(productPetCategory, productCategory);
+	}
+
+	@Override
+	public List<Product> findAllByOrderByProductByPetCategoryByProductCategoryPriceAsc(String productPetCategory,
+			String productCategory) {
+		return productDao.findAllByOrderByProductByPetCategoryByProductCategoryPriceAsc(productPetCategory, productCategory);
+	}
+
+	@Override
+	public List<Product> findAllByOrderByProductByPetCategoryByProductCategoryStarAvgDesc(String productPetCategory,
+			String productCategory) {
+		return productDao.findAllByOrderByProductByPetCategoryByProductCategoryStarAvgDesc(productPetCategory, productCategory);
+	}
+
+	@Override
+	public List<Product> findAllByOrderByProductByPetCategoryByProductCategoryNoDesc(String productPetCategory,
+			String productCategory) {
+		return productDao.findAllByOrderByProductByPetCategoryByProductCategoryNoDesc(productPetCategory, productCategory);
+	}
+
 
 	
 	
