@@ -79,13 +79,6 @@ public class AdoptController {
 		Userinfo user=userInfoService.findUserByNo(userNo);
 		
 		List<Adopt> adoptList = adoptService.findAdoptsByUserNo(user.getUserNo());
-		/*
-		 * List<AdoptDto> adoptDtoUserNoList = new ArrayList<>();
-		 * 
-		 * for (Adopt adopt : adoptList) {
-		 * adoptDtoUserNoList.add(AdoptDto.fromEntity(adopt)); }
-		 */
-	
 		model.addAttribute("adoptList", adoptList);
 		return "my-account-adopt";
 	}
