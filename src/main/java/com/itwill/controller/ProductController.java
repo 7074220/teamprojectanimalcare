@@ -83,54 +83,26 @@ public class ProductController {
 	 * return "shop"; }
 	 */
 	
-	/*
-	@GetMapping("/productPriceDesc")
-	// 상품가격 비싼 것부터 --> user의 myPetKind 사용
-	public String ProductPriceDesc(Model model, HttpSession session) {
-		List<ProductPriceDescDto> productPriceDescDto = new ArrayList<>();
-		// 상품가격 비싼 것부터
-		List<Product> productList = productService.findAllByOrderByProductPriceDesc();
-		
-		Long userNo = (Long) session.getAttribute("userNo");
-		MyPet myPet = MyPet.builder().build();
-
-		if(userNo != null) {
-			myPet = myPetService.findLeaderMyPet(userNo);
-			if (myPet == null) {
-				myPet = MyPet.builder().build();
-				productList = productService.findAllByOrderByProductPriceDesc();
-			} else {
-				productList = productService.findAllByOrderByProductByPetCategoryPriceDesc(myPet.getMypetKind());
-			}
-			
-		} else {
-			productList = productService.findAllByOrderByProductPriceDesc();
-			myPet = MyPet.builder().build();
-		}
-		
-		for (Product product : productList) {
-			productPriceDescDto.add(ProductPriceDescDto.toDto(product));
-		}
-		
-		model.addAttribute("productList", productPriceDescDto);
-		model.addAttribute("myPet", myPet);
-		// System.out.println(productList.get(0).getProductPetCategory());
-		return "shop";
-	}
-	 */
 	
 	@GetMapping("/productPriceDesc")
 	// 상품가격 비싼 것부터 --> user의 myPetKind 사용
-	public String ProductDogPriceDesc(Model model, HttpSession session) {
+	public String ProductPriceDesc(Model model, HttpSession session,@RequestParam String path) {
 		List<ProductPriceDescDto> productPriceDescDto = new ArrayList<>();
 		// 상품가격 비싼 것부터
 		List<Product> productList = productService.findAllByOrderByProductPriceDesc();
-		Product products = new Product();
-		String category = products.getProductCategory();
+		Long userNo = (Long) session.getAttribute("userNo");
+		MyPet myPet = MyPet.builder().build();
 		
-		if (category == "강아지") {
+		System.out.println(">>>>>>>>>>>>>"+path);
+		if(path.equals("productDogList") ) {
+			System.out.println(">>>>>>>>>>>>>강아지");
+			myPet.setMypetKind("강아지");
 			productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("강아지");
-		} else if (category == "고양이") {
+		}
+		
+		if(path.equals("productCatList")) {
+			System.out.println(">>>>>>>>>>>>>고양이");
+			myPet.setMypetKind("고양이");
 			productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("고양이");
 		}
 		
@@ -139,9 +111,33 @@ public class ProductController {
 		}
 		
 		model.addAttribute("productList", productPriceDescDto);
+		model.addAttribute("myPet", myPet);
+		
+		return "shop";
+	}
+	 
+	
+	/*
+	@GetMapping("/productPriceDesc")
+	// 상품가격 비싼 것부터 --> user의 myPetKind 사용
+	public String ProductDogPriceDesc(Model model, HttpSession session) {
+		List<ProductPriceDescDto> productPriceDescDto = new ArrayList<>();
+		// 상품가격 비싼 것부터
+		//List<Product> productList = productService.findAllByOrderByProductPriceDesc();
+		
+	
+		List<Product> productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("강아지");
+		
+		
+		for (Product product : productList) {
+			productPriceDescDto.add(ProductPriceDescDto.toDto(product));
+		}
+		
+		model.addAttribute("productList", productPriceDescDto);
 		// System.out.println(productList.get(0).getProductPetCategory());
 		return "shop";
 	}
+	*/
 	
 	@GetMapping("/productCatPriceDesc")
 	// 상품가격 비싼 것부터 --> user의 myPetKind 사용
@@ -164,6 +160,7 @@ public class ProductController {
 		// System.out.println(productList.get(0).getProductPetCategory());
 		return "shop";
 	}
+	
 	
 	
 	@GetMapping("/productPriceAsc")
@@ -251,7 +248,7 @@ public class ProductController {
 	public String productList(Model model, HttpSession session) {
 		List<ProductListDto> productListDto = new ArrayList<>();
 		List<Product> productList = new ArrayList<>();
-
+		
 		Long userNo = (Long) session.getAttribute("userNo");
 		MyPet myPet = MyPet.builder().build();
 		
@@ -261,7 +258,6 @@ public class ProductController {
 			myPet = myPetService.findLeaderMyPet(userNo);
 			if (myPet == null) {
 				myPet = MyPet.builder().build();
-				productList = productService.findAllByOrderByProductNoDesc();
 			} else {
 				productList = productService.findAllProductByPetCategory(myPet.getMypetKind());
 			}
@@ -277,10 +273,6 @@ public class ProductController {
 		return "shop";
 	}
 	
-	
-	
-	
-	
 	// 펫카테고리별로 구분 --> 상품 리스트 출력
 	@GetMapping("/productDogList")
 	public String productDogList(Model model, HttpSession session) {
@@ -290,6 +282,11 @@ public class ProductController {
 		Long userNo = (Long) session.getAttribute("userNo");
 		MyPet myPet = MyPet.builder().build();
 		
+		productList = productService.findAllProductByPetCategory("강아지");
+		myPet.setMypetKind("강아지");
+		
+		
+		/*
 		if(userNo != null) {
 			myPet = myPetService.findLeaderMyPet(userNo);
 			if (myPet == null) {
@@ -302,6 +299,7 @@ public class ProductController {
 			productList = productService.findAllByOrderByProductNoDesc();
 			myPet = MyPet.builder().build();
 		}
+		*/
 		
 		for (Product product : productList) {
 			productDogListDto.add(ProductDogListDto.toDto(product));
@@ -325,6 +323,10 @@ public class ProductController {
 		Long userNo = (Long) session.getAttribute("userNo");
 		MyPet myPet = MyPet.builder().build();
 		
+		productList = productService.findAllProductByPetCategory("고양이");
+		myPet.setMypetKind("고양이");
+		
+		/*
 		if(userNo != null) {
 			myPet = myPetService.findLeaderMyPet(userNo);
 			if (myPet == null) {
@@ -337,6 +339,7 @@ public class ProductController {
 			productList = productService.findAllByOrderByProductNoDesc();
 			myPet = MyPet.builder().build();
 		}
+		*/
 		
 		for (Product product : productList) {
 			productCatListDto.add(ProductCatListDto.toDto(product));
