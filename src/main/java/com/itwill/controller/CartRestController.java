@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -184,8 +185,26 @@ public class CartRestController {
 		return new ResponseEntity<CartTotalPriceDto>(total, httpHeaders, HttpStatus.OK);
 	}
 	
-	
-	
+	/*
+	@Operation(summary = "카트에 있는 모든 상품 가격")
+	@PostMapping("/updateCart")
+	public ResponseEntity<Cart> updateCart(HttpSession session,@RequestBody Integer cartQty) throws Exception{
+		Long userNo = (Long)session.getAttribute("userNo");
+		
+		if (userNo == null) {
+			throw new Exception("로그인 하세요.");
+		}
+		
+		System.out.println(">>>>>>>cartqty"+cartQty);
+		 000
+		Integer totalPrice = cartService.cartTotalPrice(userNo);
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+		return new ResponseEntity<Cart>(total, httpHeaders, HttpStatus.OK);
+	}
+	*/
 	
 	
 	
