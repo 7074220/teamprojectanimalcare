@@ -23,6 +23,7 @@ import com.itwill.dto.ProductNameDto;
 import com.itwill.dto.ProductPetCategoryDto;
 import com.itwill.dto.ProductPriceAscDto;
 import com.itwill.dto.ProductPriceDescDto;
+import com.itwill.dto.ProductProductNoDescDto;
 import com.itwill.entity.MyPet;
 import com.itwill.entity.Product;
 import com.itwill.service.MyPetService;
@@ -86,36 +87,130 @@ public class ProductController {
 	
 	@GetMapping("/productPriceDesc")
 	// 상품가격 비싼 것부터 --> user의 myPetKind 사용
-	public String ProductPriceDesc(Model model, HttpSession session,@RequestParam String path) {
+	public String ProductPriceDesc(Model model, HttpSession session, @RequestParam String path) {
 		List<ProductPriceDescDto> productPriceDescDto = new ArrayList<>();
 		// 상품가격 비싼 것부터
 		List<Product> productList = productService.findAllByOrderByProductPriceDesc();
 		Long userNo = (Long) session.getAttribute("userNo");
 		MyPet myPet = MyPet.builder().build();
-		
-		System.out.println(">>>>>>>>>>>>>"+path);
-		if(path.equals("productDogList") ) {
-			System.out.println(">>>>>>>>>>>>>강아지");
+
+		if (path.equals("productDogList")) {
 			myPet.setMypetKind("강아지");
 			productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("강아지");
 		}
-		
-		if(path.equals("productCatList")) {
-			System.out.println(">>>>>>>>>>>>>고양이");
+
+		if (path.equals("productCatList")) {
 			myPet.setMypetKind("고양이");
 			productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("고양이");
+		}
+
+		if (path.equals("productList")) {
+			myPet = myPetService.findLeaderMyPet(userNo);
+			if (myPet == null) {
+				myPet = MyPet.builder().build();
+			} else {
+				if (myPet.getMypetKind().equals("강아지")) {
+					productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("강아지");
+				}
+				if (myPet.getMypetKind().equals("고양이")) {
+					productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("고양이");
+				}
+			}
 		}
 		
 		for (Product product : productList) {
 			productPriceDescDto.add(ProductPriceDescDto.toDto(product));
 		}
-		
+
 		model.addAttribute("productList", productPriceDescDto);
 		model.addAttribute("myPet", myPet);
+
+		return "shop";
+	}
+	
+	@GetMapping("/productPriceAsc")
+	public String productPriceAsc(Model model, HttpSession session, @RequestParam String path) {
+		List<ProductPriceAscDto> productPriceAscDto = new ArrayList<>();
+		// 상품가격 싼 것부터
+		List<Product> productList = productService.findAllByOrderByProductPriceAsc();
+		Long userNo = (Long) session.getAttribute("userNo");
+		MyPet myPet = MyPet.builder().build();
+
+		if (path.equals("productDogList")) {
+			myPet.setMypetKind("강아지");
+			productList = productService.findAllByOrderByProductByPetCategoryPriceAsc("강아지");
+		}
+
+		if (path.equals("productCatList")) {
+			myPet.setMypetKind("고양이");
+			productList = productService.findAllByOrderByProductByPetCategoryPriceAsc("고양이");
+		}
+
+		if (path.equals("productList")) {
+			myPet = myPetService.findLeaderMyPet(userNo);
+			if (myPet == null) {
+				myPet = MyPet.builder().build();
+			} else {
+				if (myPet.getMypetKind().equals("강아지")) {
+					productList = productService.findAllByOrderByProductByPetCategoryPriceAsc("강아지");
+				}
+				if (myPet.getMypetKind().equals("고양이")) {
+					productList = productService.findAllByOrderByProductByPetCategoryPriceAsc("고양이");
+				}
+			}
+		}
 		
+		for (Product product : productList) {
+			productPriceAscDto.add(ProductPriceAscDto.toDto(product));
+		}
+
+		model.addAttribute("productList", productPriceAscDto);
+		model.addAttribute("myPet", myPet);
+
 		return "shop";
 	}
 	 
+	@GetMapping("/productDateDesc")
+	public String productDateDesc(Model model, HttpSession session, @RequestParam String path) {
+		List<ProductProductNoDescDto> productProductNoDescDto = new ArrayList<>();
+		// 상품가격 싼 것부터
+		List<Product> productList = productService.findAllByOrderByProductNoDesc();
+		Long userNo = (Long) session.getAttribute("userNo");
+		MyPet myPet = MyPet.builder().build();
+
+		if (path.equals("productDogList")) {
+			myPet.setMypetKind("강아지");
+			productList = productService.findAllByOrderByProductByPetCategoryNoDesc("강아지");
+		}
+
+		if (path.equals("productCatList")) {
+			myPet.setMypetKind("고양이");
+			productList = productService.findAllByOrderByProductByPetCategoryNoDesc("고양이");
+		}
+
+		if (path.equals("productList")) {
+			myPet = myPetService.findLeaderMyPet(userNo);
+			if (myPet == null) {
+				myPet = MyPet.builder().build();
+			} else {
+				if (myPet.getMypetKind().equals("강아지")) {
+					productList = productService.findAllByOrderByProductByPetCategoryNoDesc("강아지");
+				}
+				if (myPet.getMypetKind().equals("고양이")) {
+					productList = productService.findAllByOrderByProductByPetCategoryNoDesc("고양이");
+				}
+			}
+		}
+		
+		for (Product product : productList) {
+			productProductNoDescDto.add(ProductProductNoDescDto.toDto(product));
+		}
+
+		model.addAttribute("productList", productProductNoDescDto);
+		model.addAttribute("myPet", myPet);
+
+		return "shop";
+	}
 	
 	/*
 	@GetMapping("/productPriceDesc")
@@ -139,6 +234,7 @@ public class ProductController {
 	}
 	*/
 	
+	/*
 	@GetMapping("/productCatPriceDesc")
 	// 상품가격 비싼 것부터 --> user의 myPetKind 사용
 	public String ProductCatPriceDesc(Model model, HttpSession session) {
@@ -160,44 +256,7 @@ public class ProductController {
 		// System.out.println(productList.get(0).getProductPetCategory());
 		return "shop";
 	}
-	
-	
-	
-	@GetMapping("/productPriceAsc")
-	// 상품가격 싼 것부터 --> user의 myPetKind 사용
-	public String ProductPriceAsc(Model model, HttpSession session) {
-		List<ProductPriceAscDto> productPriceAscDto = new ArrayList<>();
-		// 상품가격 비싼 것부터
-		List<Product> productList = productService.findAllByOrderByProductPriceAsc();
-		
-		Long userNo = (Long) session.getAttribute("userNo");
-		MyPet myPet = MyPet.builder().build();
-		
-		if(userNo != null) {
-			myPet = myPetService.findLeaderMyPet(userNo);
-			if (myPet == null) {
-				myPet = MyPet.builder().build();
-				productList = productService.findAllByOrderByProductPriceDesc();
-			} else {
-				productList = productService.findAllProductByPetCategory(myPet.getMypetKind());
-				
-			}
-		} else {
-			productList = productService.findAllByOrderByProductPriceDesc();
-			myPet = MyPet.builder().build();
-		}
-		
-		for (Product product : productList) {
-			productPriceAscDto.add(ProductPriceAscDto.toDto(product));
-		}
-		
-		model.addAttribute("productList", productPriceAscDto);
-		model.addAttribute("myPet", myPet);
-		// System.out.println(productList.get(0).getProductPetCategory());
-		return "shop";
-	}
-	
-	
+	*/
 	
 	/*
 	@PostMapping("/delete/{productNo}")
