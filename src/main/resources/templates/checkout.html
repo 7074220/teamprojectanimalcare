@@ -1,5 +1,7 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="kr" xmlns:th="https://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='order')">
+
 
 <head>
     <title>Safira - checkout page</title>
@@ -8,9 +10,9 @@
 <body>
 
    <!--header area start-->
-    
+     <th layout:fragment="content">
     <!--offcanvas menu area start-->
-    <div class="off_canvars_overlay">
+   <!--  <div class="off_canvars_overlay">
                 
     </div>
     <div class="offcanvas_menu">
@@ -142,7 +144,7 @@
             </div>
         </div>
     </div>
-    <!--offcanvas menu area end-->
+    offcanvas menu area end
     
     <header>
         <div class="main_header">
@@ -234,7 +236,7 @@
                                     </div>
                                     <div class="header_account_list  mini_cart_wrapper">
                                        <a href="javascript:void(0)"><span class="lnr lnr-cart"></span><span class="item_count">2</span></a>
-                                        <!--mini cart-->
+                                        mini cart
                                         <div class="mini_cart">
                                             <div class="cart_gallery">
                                                 <div class="cart_close">
@@ -292,7 +294,7 @@
 
                                             </div>
                                         </div>
-                                        <!--mini cart end-->
+                                        mini cart end
                                    </div>
                                 </div>
                             </div>
@@ -459,7 +461,7 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <!--main menu start-->
+                            main menu start
                             <div class="main_menu menu_position"> 
                                 <nav>  
                                     <ul>
@@ -526,7 +528,7 @@
                                     </ul>  
                                 </nav> 
                             </div>
-                            <!--main menu end-->
+                            main menu end
                         </div>
                         <div class="col-lg-3">
                             <div class="call-support">
@@ -538,9 +540,9 @@
             </div>
         </div> 
     </header>
-    <!--header area end-->
+    header area end
 
-    <!--breadcrumbs area start-->
+    breadcrumbs area start
     <div class="breadcrumbs_area">
         <div class="container">   
             <div class="row">
@@ -556,9 +558,9 @@
             </div>
         </div>         
     </div>
-    <!--breadcrumbs area end-->
+    breadcrumbs area end
     
-    <!--Checkout page section-->
+    Checkout page section
     <div class="Checkout_section mt-70">
        <div class="container">
             <div class="row">
@@ -593,7 +595,7 @@
                                 </form>          
                             </div>
                         </div>    
-                    </div>
+                    </div> -->
                     <div class="user-actions">
                         <h3> 
                             <i class="fa fa-file-o" aria-hidden="true"></i>
@@ -612,22 +614,24 @@
                     </div>    
                </div>
             </div>
+            
+            <!--주문 폼 시작  -->
             <div class="checkout_form">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <form action="#">
-                            <h3>Billing Details</h3>
+                        <form action="orderInsert">
+                            <h3>주문자정보</h3>
                             <div class="row">
 
                                 <div class="col-lg-6 mb-20">
-                                    <label>First Name <span>*</span></label>
-                                    <input type="text">    
+                                    <label>주문자명 <span>*</span></label>
+                                    <input type="text"  th:value="${user.userName}">    
                                 </div>
-                                <div class="col-lg-6 mb-20">
+                                <!-- <div class="col-lg-6 mb-20">
                                     <label>Last Name  <span>*</span></label>
                                     <input type="text"> 
-                                </div>
-                                <div class="col-12 mb-20">
+                                </div> -->
+                                <!-- <div class="col-12 mb-20">
                                     <label>Company Name</label>
                                     <input type="text">     
                                 </div>
@@ -644,34 +648,34 @@
                                         <option value="9">Dominican Republic</option>   
 
                                     </select>
-                                </div>
+                                </div> -->
 
                                 <div class="col-12 mb-20">
-                                    <label>Street address  <span>*</span></label>
-                                    <input placeholder="House number and street name" type="text">     
+                                    <label>주소  <span>*</span></label>
+                                    <input placeholder="기본주소" type="text" id="orderAddress" th:value="${user.userAddress}" >     
                                 </div>
                                 <div class="col-12 mb-20">
-                                    <input placeholder="Apartment, suite, unit etc. (optional)" type="text">     
+                                    <input placeholder="상세주소" type="text" th:value="${user.userAddress}">     
                                 </div>
                                 <div class="col-12 mb-20">
-                                    <label>Town / City <span>*</span></label>
-                                    <input  type="text">    
+                                    <label>휴대폰 번호 <span>*</span></label>
+                                    <input  type="text" th:value="${user.userPhoneNumber}" >    
                                 </div> 
-                                 <div class="col-12 mb-20">
+                                <!--  <div class="col-12 mb-20">
                                     <label>State / County <span>*</span></label>
                                     <input type="text">    
-                                </div> 
+                                </div>  -->
                                 <div class="col-lg-6 mb-20">
-                                    <label>Phone<span>*</span></label>
+                                    <label>전화 번호<span></span></label>
                                     <input type="text"> 
 
                                 </div> 
                                  <div class="col-lg-6 mb-20">
-                                    <label> Email Address   <span>*</span></label>
+                                    <label> Email   <span></span></label>
                                       <input type="text"> 
-
+								
                                 </div> 
-                                <div class="col-12 mb-20">
+                               <!--  <div class="col-12 mb-20">
                                     <input id="account" type="checkbox" data-target="createp_account" />
                                     <label for="account" data-toggle="collapse" data-target="#collapseOne" aria-controls="collapseOne">Create an account?</label>
 
@@ -744,7 +748,7 @@
                                             </div> 
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-12">
                                     <div class="order-notes">
                                          <label for="order_note">Order Notes</label>
@@ -752,12 +756,13 @@
                                     </div>    
                                 </div>     	    	    	    	    	    	    
                             </div>
-                        </form>    
+                        <!--  </form>   -->
+                         
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <form action="#">    
+                       <!--   <form action="#"> -->   
                             <h3>Your order</h3> 
-                            <div class="order_table table-responsive">
+                            <div class="order_table table-responsive" th:each="cart:${cartList}">
                                 <table>
                                     <thead>
                                         <tr>
@@ -766,7 +771,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                       <!--  <tr>
                                             <td> Handbag  fringilla <strong> × 2</strong></td>
                                             <td> $165.00</td>
                                         </tr>
@@ -777,9 +782,10 @@
                                         <tr>
                                             <td>  Handbag elit	<strong> × 2</strong></td>
                                             <td> $50.00</td>
-                                        </tr>
+                                        </tr> -->
                                         <tr>
-                                            <td> Handbag Rutrum	 <strong> × 1</strong></td>
+                                          	
+                                            <td th:text="${cart.productNameDto.productName}"> Handbag Rutrum	 <strong> × 1</strong></td>
                                             <td> $50.00</td>
                                         </tr>
                                     </tbody>
@@ -824,7 +830,8 @@
                                     <button  type="submit">Proceed to PayPal</button> 
                                 </div>    
                             </div> 
-                        </form>         
+                        <!--  </form>  -->
+                        </form>        
                     </div>
                 </div> 
             </div> 
