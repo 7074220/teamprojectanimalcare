@@ -63,7 +63,7 @@ public class VisitController {
 	    visit.setCenter(center);
 		visitService.createVisit(visit);
 		model.addAttribute("userinfo", userinfo);
-		return "center-list";
+		return "reviewBoardDetail";
 	}
 
 	// 관리자 견학리스트 전체출력
