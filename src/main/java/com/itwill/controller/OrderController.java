@@ -114,13 +114,15 @@ public class OrderController {
 		Long userNo=(Long)session.getAttribute("userNo");
 		
 		List<Orders> orderList = orderService.findOrderById(userNo);
-		List<OrdersDto> ordersDto = new ArrayList<OrdersDto>();
+		List<OrdersDto> ordersDtoList = new ArrayList<OrdersDto>();
 		
 		for (Orders orders : orderList) {
-			ordersDto.add(OrdersDto.toDto(orders));
+			ordersDtoList.add(OrdersDto.toDto(orders));
+			
 		}
 		
-		model.addAttribute("ordersList",ordersDto);
+		
+		model.addAttribute("ordersList",ordersDtoList);
 		return "my-account-orders";
 	}
 	
