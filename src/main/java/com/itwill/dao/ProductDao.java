@@ -58,7 +58,14 @@ public interface ProductDao {
 	List<Product> findAllByOrderByProductByPetCategoryNoDesc(String productPetCategory);
 	
 
+	/*************** 펫 카테고리 및 프로덕트별 정렬 ****************/
+	List<Product> findAllByOrderByProductByPetCategoryByProductCategoryPriceDesc(String productPetCategory, String productCategory);
 	
+	List<Product> findAllByOrderByProductByPetCategoryByProductCategoryPriceAsc(String productPetCategory, String productCategory);
+	
+	List<Product> findAllByOrderByProductByPetCategoryByProductCategoryStarAvgDesc(String productPetCategory, String productCategory);
+	
+	List<Product> findAllByOrderByProductByPetCategoryByProductCategoryNoDesc(String productPetCategory, String productCategory);
 }
 
 

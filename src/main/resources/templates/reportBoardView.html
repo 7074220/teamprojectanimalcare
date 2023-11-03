@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
 	   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-       layout:decorate="layout/layout(title='')">
+       layout:decorate="layout/layout(title='ReportBoardView')">
 
 <head>
     <title>Safira - blog details</title>
@@ -17,7 +17,7 @@
     
     <!--breadcrumbs area start-->
     <th:block layout:fragment="content">
-    <div class="breadcrumbs_area">
+    <!--<div class="breadcrumbs_area">
         <div class="container">   
             <div class="row">
                 <div class="col-12">
@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>         
-    </div>
+    </div>-->
     <!--breadcrumbs area end-->
     
     <!--blog body area start-->
@@ -46,11 +46,12 @@
                                <div class="post_header">
                                    <h3 class="post_title">Aypi non habent claritatem insitam</h3>
                                     <div class="blog_meta">   
-                                       <p>Posted by : <a href="#">admin</a> / On : <a href="#">April 10, 2019</a> / In : <a href="#">Company, Image, Travel</a></p>                                     
+                                       <p>Posted by : <a href="#" th:text="${reportBoard.boardFindName}">admin</a> / On : <a href="#">April 10, 2019</a> / In : <a href="#">Company, Image, Travel</a></p>                                     
                                     </div>
                                 </div>
                                 <div class="blog_thumb">
-                                   <a href="#"><img src="assets/img/blog/blog-big1.jpg" alt=""></a>
+                                   <a href="#" th:href="@{reportBoardView(boardNo=${reportboard.boardNo})}"><img src="assets/img/blog/blog-big1.jpg" alt="" th:src="@{'/image/reportboard/' + ${reportboard.boardImage}}"></a>
+                               	
                                </div>
                                <figcaption class="blog_content">
                                     <div class="post_content">
@@ -83,6 +84,7 @@
                                </figcaption>
                             </figure>
                         </article>
+                        <!-- 
                         <div class="related_posts">
                            <h3>Related posts</h3>
                             <div class="row">
@@ -136,7 +138,7 @@
                                 </div>
                             </div>
                        </div> 
-                       
+                       -->
                        <!--댓글리스트 시작-->
                         <div class="comments_box">
                             <h3>3 Comments	</h3>

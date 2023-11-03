@@ -5,10 +5,10 @@
 
 <head>
 <script>
-function deletePet() {
+function confirmDelete(petNo) {
     var confirmDelete = confirm("삭제하시겠습니까?");
     if (confirmDelete) {
-        document.getElementById("deleteForm").submit(); // 폼 제출
+        window.location.href = '/teamproject_animalcare/deletepet?petNo=' + petNo;
     }
 }
 
@@ -17,12 +17,14 @@ function petType() {
     if (selectedValue) {
         var newUrl = '/teamproject_animalcare/pets?petType=' + selectedValue;
         window.location.href = newUrl;
+        sessionStorage.setItem('selectedPetType', selectedValue);
+        if(selectedValue==1){
+        	window.location.href = '/teamproject_animalcare/petList';
+        }
     }
 }
 
-
-
-/* function petLocal() {
+function petLocal() {
     var selectElement = document.getElementById('local');
     var selectedValue = selectElement.value;
     if (selectedValue) {
@@ -30,15 +32,21 @@ function petType() {
         window.location.href = newUrl;
     sessionStorage.setItem('selectedPetLocal', selectedValue);
     }
+    if(selectedValue==1){
+    	window.location.href = '/teamproject_animalcare/petList';
+    }
 }
 
  document.addEventListener('DOMContentLoaded', function() {
-    var selectedValue = sessionStorage.getItem('selectedPetLocal');
-    if (selectedValue) {
-        var selectElement = document.getElementById('local');
-        selectElement.value = selectedValue;
+    var selectedValue1 = sessionStorage.getItem('selectedPetLocal');
+    var selectedValue2 = sessionStorage.getItem('selectedPetType');
+    if (selectedValue1||selectedValue2) {
+        var selectElement1 = document.getElementById('local');
+        var selectElement2 = document.getElementById('short');
+        selectElement1.value = selectedValue1;
+        selectElement2.value=selectedValue2;
     }
-}); */
+}); 
 
 </script>
 
@@ -81,7 +89,7 @@ function petType() {
                             <form class="select_option" action="#" name="pet" data-navigate="/guest_write_form" >
                                 <select name="orderby" id="short" onchange="petType()">
 
-                                   <!----> <option selected value="1">동물선택 </option>
+                                   <!----> <option selected value="1">동물전체 </option>
                                     <option value="강아지">강아지</option>
                                     <option value="고양이">고양이</option>
                                    <!--  <option value="4">Sort by price: low to high</option>
@@ -96,7 +104,7 @@ function petType() {
                             <form class="select_option" action="#" name="">
                                 <select name="orderby" id="local" onchange="petLocal()">
 
-                                    <option selected value="1">지역선택 </option>
+                                    <option selected value="1">지역전체 </option>
                                     <option  value="서울특별시">서울특별시</option>
                                     <option value="경기도">경기도</option>
                                     <option  value="강원도">강원도</option>
@@ -189,7 +197,8 @@ function petType() {
                                     <div class="action_links list_action_right">
                                         <ul>
                                             <li class="add_to_cart"><a th:href="@{/adopt(petNo=${pet.petNo})}" title="입양하기">입양하기</a></li>
-                                            <li class="add_to_cart"><a th:href="@{/deletepet(petNo=${pet.petNo})}" title="입양하기" onclick="deletePet()">삭제</a></li>
+                                            <!-- admin 계정 57번 admin계정에서만 삭제버튼 활성화 -->
+                                            <li class="add_to_cart"> <a href="#" th:onclick="'return confirmDelete(\'' + ${pet.petNo} + '\');'" title="삭제하기" th:if="${session.userNo == 57}">삭제</a></li>
                                        
                                         </ul>
                                     </div>

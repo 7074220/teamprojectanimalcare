@@ -29,9 +29,24 @@ public class ReportController {
 	@GetMapping("/reportlist")
 	public String ReportList(Model model) {
 		List<ReportBoard> reportBoards = reportBoardService.findAll();
+		System.out.println(">>>>>>"+reportBoards);
 		model.addAttribute("reportBoardList", reportBoards);
 		return "reportList";
 	}
+	
+	@GetMapping(value="/reportBoardView",params="boardNo")
+	public String ReportView(Model model,@RequestParam Long boardNo) {
+		
+		ReportBoard reportBoard = reportBoardService.findByBoardNo(boardNo);
+		
+		System.out.println(">>>>>>>>>>>>>>>>"+reportBoard);
+		
+		model.addAttribute("reportBoard", reportBoard);
+		
+		return "reportBoardView";
+	}
+	
+	
 	
 	/*
 	@Operation(summary = "신고게시판 상세보기")
