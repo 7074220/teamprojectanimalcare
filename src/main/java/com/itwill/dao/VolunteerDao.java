@@ -18,7 +18,7 @@ public interface VolunteerDao {
 	public List<Volunteer> findVolunteerList();
 
 	// userNo 로 Volunteer 조회
-	public List<Volunteer> findVolunteertByUserNo(Long no);	
+	public List<Volunteer> findVolunteertByUserNo(Long userNo);	
 	
 	
 }

@@ -16,5 +16,5 @@ public interface AdoptDao {
 
 	public List<Adopt> findAdoptList();
 
-	public List<Adopt> findAdoptsByUserNo(Long no);
+	public List<Adopt> findAdoptsByUserNo(Long userNo);
 }

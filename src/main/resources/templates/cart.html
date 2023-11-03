@@ -1,5 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="kr" xmlns:th="https://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='cart')">
 
 <head>
     <title>Safira - cart page</title>
@@ -9,9 +10,9 @@
 
 
    <!--header area start-->
-    
+    <th layout:fragment="content">
     <!--offcanvas menu area start-->
-    <div class="off_canvars_overlay">
+   <!--  <div class="off_canvars_overlay">
                 
     </div>
     <div class="offcanvas_menu">
@@ -142,10 +143,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--offcanvas menu area end-->
     
-    <header>
+    <!-- <header>
         <div class="main_header">
             <div class="header_top">
                 <div class="container">
@@ -235,7 +236,7 @@
                                     </div>
                                     <div class="header_account_list  mini_cart_wrapper">
                                        <a href="javascript:void(0)"><span class="lnr lnr-cart"></span><span class="item_count">2</span></a>
-                                        <!--mini cart-->
+                                        mini cart
                                         <div class="mini_cart">
                                             <div class="cart_gallery">
                                                 <div class="cart_close">
@@ -293,7 +294,7 @@
 
                                             </div>
                                         </div>
-                                        <!--mini cart end-->
+                                        mini cart end
                                    </div>
                                 </div>
                             </div>
@@ -460,7 +461,7 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <!--main menu start-->
+                            main menu start
                             <div class="main_menu menu_position"> 
                                 <nav>  
                                     <ul>
@@ -527,7 +528,7 @@
                                     </ul>  
                                 </nav> 
                             </div>
-                            <!--main menu end-->
+                            main menu end
                         </div>
                         <div class="col-lg-3">
                             <div class="call-support">
@@ -538,11 +539,11 @@
                 </div>
             </div>
         </div> 
-    </header>
+    </header> -->
     <!--header area end-->
     
     <!--breadcrumbs area start-->
-    <div class="breadcrumbs_area">
+   <!--  <div class="breadcrumbs_area">
         <div class="container">   
             <div class="row">
                 <div class="col-12">
@@ -556,7 +557,7 @@
                 </div>
             </div>
         </div>         
-    </div>
+    </div> -->
     <!--breadcrumbs area end-->
     
      <!--shopping cart area start -->
@@ -579,17 +580,31 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                            
+                            
+                            
+                            
+                           <!--  카트 상품 -->
+                           
+                           
+                           
+                                <tr th:each="cart:${cartList}">
                                    <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                    <td class="product_thumb"><a href="#"><img src="assets/img/product/productbig1.jpg" alt=""></a></td>
-                                    <td class="product_name"><a href="#">Handbag fringilla</a></td>
-                                    <td class="product-price">£65.00</td>
-                                    <td class="product_quantity"><label>Quantity</label> <input min="1" max="100" value="1" type="number"></td>
-                                    <td class="product_total">£130.00</td>
+                                    <td class="product_thumb"><a href="#"><img src="#" alt="" th:src="@{/image/product/} + ${product.getProductImage}"></a></td>
+                                    <td class="product_name"><a href="#" th:text="${product.productName}">상품명</a></td>
+                                    <td class="product-price" th:text="${product.productPrice}">가격</td>
+                                    <td class="product_quantity"><label>수량</label> <input min="1" max="100" value="1" type="number"></td>
+                                    <td class="product_total">총금액</td>
 
 
                                 </tr>
-
+                                
+                                
+                           <!--  카트 상품 -->
+                                
+                                
+                                
+<!-- 
                                 <tr>
                                    <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
                                     <td class="product_thumb"><a href="#"><img src="assets/img/product/productbig2.jpg" alt=""></a></td>
@@ -610,7 +625,7 @@
 
 
                                 </tr>
-
+ -->
                             </tbody>
                         </table>   
                             </div>  
@@ -664,9 +679,9 @@
         </div>     
     </div>
      <!--shopping cart area end -->
-    
+     </th:block>
     <!--footer area start-->
-    <footer class="footer_widgets footer_border">
+   <!--  <footer class="footer_widgets footer_border">
         <div class="container">
             <div class="footer_top">
                 <div class="row">
@@ -721,12 +736,12 @@
                                         <input id="mc-email" type="email" autocomplete="off" placeholder="Enter you email" />
                                         <button id="mc-submit">Subscribe</button>
                                     </form>
-                                    <!-- mailchimp-alerts Start -->
+                                    mailchimp-alerts Start
                                     <div class="mailchimp-alerts text-centre">
-                                        <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-                                        <div class="mailchimp-success"></div><!-- mailchimp-success end -->
-                                        <div class="mailchimp-error"></div><!-- mailchimp-error end -->
-                                    </div><!-- mailchimp-alerts end -->
+                                        <div class="mailchimp-submitting"></div>mailchimp-submitting end
+                                        <div class="mailchimp-success"></div>mailchimp-success end
+                                        <div class="mailchimp-error"></div>mailchimp-error end
+                                    </div>mailchimp-alerts end
                                 </div>
                             </div>
                         </div>
@@ -754,7 +769,7 @@
                 </div>
              </div>   
         </div>  
-    </footer>
+    </footer> -->
     <!--footer area end-->
 
 

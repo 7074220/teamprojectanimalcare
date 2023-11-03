@@ -64,8 +64,8 @@ public class VolunteerDaoImpl implements VolunteerDao{
 
 	
 	@Override
-	public List<Volunteer> findVolunteertByUserNo(Long no) {
-		return volunteerRepository.findVolunteertByUserNo(no);
+	public List<Volunteer> findVolunteertByUserNo(Long userNo) {
+		return volunteerRepository.findVolunteertByUserNo(userNo);
 	}
 	
 	
