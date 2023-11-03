@@ -33,6 +33,7 @@ public class CartRestController {
 	@Autowired
 	private CartService cartService;
 
+	/*
 	@Operation(summary = "카트 추가")
 	@GetMapping
 	public ResponseEntity<CartDto> insertCart(CartDto dto, HttpSession session) throws Exception{
@@ -53,7 +54,7 @@ public class CartRestController {
 
 		return new ResponseEntity<CartDto>(dto, httpHeaders, HttpStatus.CREATED);
 	}
-
+	*/
 	
 	@Operation(summary = "카트 번호로 한 개 삭제")
 	@DeleteMapping("/delete/{cartNo}")

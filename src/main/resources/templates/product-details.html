@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
 	   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-       layout:decorate="layout/layout(title='')">
+       layout:decorate="layout/layout(title='product details')">
 
 <head>
     <title>Safira - product details</title>
@@ -10,9 +10,10 @@
 <body>
 
   <!--header area start-->
-    <th layout:fragment="content">
+    <th:block layout:fragment="content">
+    <div id="content">
     <!--offcanvas menu area start-->
-    <div class="off_canvars_overlay">
+    <!-- <div class="off_canvars_overlay">
                 
     </div>
     <div class="offcanvas_menu">
@@ -143,7 +144,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--offcanvas menu area end-->
     
    <!-- <header>
@@ -543,7 +544,7 @@
     <!--header area end-->
 
     <!--breadcrumbs area start-->
-    <div class="breadcrumbs_area">
+    <!-- <div class="breadcrumbs_area">
         <div class="container">   
             <div class="row">
                 <div class="col-12">
@@ -556,7 +557,7 @@
                 </div>
             </div>
         </div>         
-    </div>
+    </div> -->
     <!--breadcrumbs area end-->
     
     <!-- 상품 디테일 시작 -->
@@ -686,12 +687,12 @@
                             <!-- 상품 디테일 부가기능 -->
                             
                             
-                            <!-- 
+                            
                             <div class="product_variant quantity">
                                 <label>수량</label>
-                                <input min="1" max="100" value="1" type="number">
-                                <button class="button" type="submit">add to cart</button>  
-                            </div> -->
+                                <input min="1" max="100" value="1" type="number" id="productQty">
+                                <button class="button" type="button" onclick="addCart()">add to cart</button>  
+                            </div> 
 
 
 								<!-- <div class="product_variant quantity">
@@ -702,11 +703,6 @@
 								</div> -->
 
 
-								<div class="product_variant quantity">
-									<label>수량</label> <input min="1" max="100" value="1"
-										type="number"> 
-										<button onclick="addToCart()" class="button">add to cart</button>
-								</div>
 
 
 								<div class=" product_d_action">
@@ -1262,22 +1258,19 @@
     </section>
     <!--product area end-->
     
+    <script type="text/javascript">
+    	function addCart(){
+    		var url = window.location.href;
+    		var productNo = url.substring(url.lastIndexOf("=") + 1);
+            var productQty = document.getElementById("productQty").value;
+            window.location.href = "cart?productNo="+productNo+"&productQty="+productQty;
+            alert("장바구니에 상품이 담겼습니다.");
+    	}
+    </script>
     
     
     
-    
-     
- <script>
-    function addToCart(productNo) {
-        var productNo = document.getElementById("productNo").value;
-        window.location.href = "cart?productNo=" + productNo;
-    }
-</script>
-    
-    
-    
-    
-    
+    </div>
     
     </th:block>
 
