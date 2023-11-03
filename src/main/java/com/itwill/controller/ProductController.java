@@ -83,17 +83,30 @@ public class ProductController {
 	 * return "shop"; }
 	 */
 	
-	/*
+	
 	@GetMapping("/productPriceDesc")
 	// 상품가격 비싼 것부터 --> user의 myPetKind 사용
 	public String ProductPriceDesc(Model model, HttpSession session) {
 		List<ProductPriceDescDto> productPriceDescDto = new ArrayList<>();
 		// 상품가격 비싼 것부터
 		List<Product> productList = productService.findAllByOrderByProductPriceDesc();
-		
 		Long userNo = (Long) session.getAttribute("userNo");
 		MyPet myPet = MyPet.builder().build();
-
+		/*
+		System.out.println(">>>>>>>>>>>>>>>>>"+dogBool);
+		System.out.println(">>>>>>>>>>>>>>>>>"+catBool);
+		
+		if(dogBool==false & catBool==true) {
+			productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("고양이");
+			System.out.println(">>>>>>>>>>>>>>>>고양이");
+		}
+		
+		if(dogBool==true & catBool==false) {
+			productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("강아지");
+			System.out.println(">>>>>>>>>>>>>>>>강아지");
+		}
+		*/
+		/*
 		if(userNo != null) {
 			myPet = myPetService.findLeaderMyPet(userNo);
 			if (myPet == null) {
@@ -107,32 +120,30 @@ public class ProductController {
 			productList = productService.findAllByOrderByProductPriceDesc();
 			myPet = MyPet.builder().build();
 		}
+		*/
 		
 		for (Product product : productList) {
 			productPriceDescDto.add(ProductPriceDescDto.toDto(product));
 		}
 		
 		model.addAttribute("productList", productPriceDescDto);
-		model.addAttribute("myPet", myPet);
+		model.addAttribute("myPet", null);
 		// System.out.println(productList.get(0).getProductPetCategory());
 		return "shop";
 	}
-	 */
+	 
 	
+	/*
 	@GetMapping("/productPriceDesc")
 	// 상품가격 비싼 것부터 --> user의 myPetKind 사용
 	public String ProductDogPriceDesc(Model model, HttpSession session) {
 		List<ProductPriceDescDto> productPriceDescDto = new ArrayList<>();
 		// 상품가격 비싼 것부터
-		List<Product> productList = productService.findAllByOrderByProductPriceDesc();
-		Product products = new Product();
-		String category = products.getProductCategory();
+		//List<Product> productList = productService.findAllByOrderByProductPriceDesc();
 		
-		if (category == "강아지") {
-			productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("강아지");
-		} else if (category == "고양이") {
-			productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("고양이");
-		}
+	
+		List<Product> productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("강아지");
+		
 		
 		for (Product product : productList) {
 			productPriceDescDto.add(ProductPriceDescDto.toDto(product));
@@ -142,6 +153,7 @@ public class ProductController {
 		// System.out.println(productList.get(0).getProductPetCategory());
 		return "shop";
 	}
+	*/
 	
 	@GetMapping("/productCatPriceDesc")
 	// 상품가격 비싼 것부터 --> user의 myPetKind 사용
@@ -164,6 +176,7 @@ public class ProductController {
 		// System.out.println(productList.get(0).getProductPetCategory());
 		return "shop";
 	}
+	
 	
 	
 	@GetMapping("/productPriceAsc")
@@ -251,10 +264,10 @@ public class ProductController {
 	public String productList(Model model, HttpSession session) {
 		List<ProductListDto> productListDto = new ArrayList<>();
 		List<Product> productList = new ArrayList<>();
-
+		
 		Long userNo = (Long) session.getAttribute("userNo");
 		MyPet myPet = MyPet.builder().build();
-
+		
 		if(userNo != null) {
 			myPet = myPetService.findLeaderMyPet(userNo);
 			if (myPet == null) {
