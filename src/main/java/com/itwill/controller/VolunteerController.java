@@ -1,6 +1,8 @@
 package com.itwill.controller;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -96,7 +98,11 @@ public class VolunteerController {
 		Long userNo=(Long)session.getAttribute("userNo");
 		Userinfo user=userInfoService.findUserByNo(userNo);
 		
-		List<Volunteer> volunteerList = volunteerService.findVolunteertByUserNo(user.getUserNo());
+		List<Volunteer> volunteerList = volunteerService.findVolunteertByUserNo(user.getUserNo());		
+		
+		// volunteerNo를 내림차순으로 정렬
+	    volunteerList.sort((v1, v2) -> v2.getVolunteerNo().compareTo(v1.getVolunteerNo()));
+	    
 		model.addAttribute("volunteerList", volunteerList);
 		return "my-account-volunteer";
 	}
