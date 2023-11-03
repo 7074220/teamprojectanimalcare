@@ -218,10 +218,11 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="visit:${visitList}">
-                                                <td th:text="${visit.visitNo}"></td>
+                                            <tr th:each="visit,visitLatest : ${visitList}">
+                                               <!-- <td th:text="${visit.visitNo}"></td>-->
+                                                <td th:text="${visitList.size() - visitLatest.index}"></td>
                                                 <td th:text="${visit.visitTime}"></td>
-                                                <td th:text="${visit.visitDate}"></span></td>
+                                                <td th:text="${#strings.substring(visit.visitDate.toString(), 0, 10)}"></td>
                                                 <td th:text="${visit.Center.centerName}"></td>
                                                 <td th:text="${visit.visitStatus}"><span class="success">견학신청</span></td>
                                             </tr>
