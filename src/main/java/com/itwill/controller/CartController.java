@@ -56,7 +56,7 @@ public class CartController {
 	}
 	
 	
-	@GetMapping(value = "/cartList", params = "productNo")
+	@GetMapping(value = "/cart", params = "productNo")
 	// 카트에 담기
 	public String insertCart(Model model, HttpSession session, @RequestParam Long productNo) throws Exception{
 		if (session.getAttribute("userNo") == null) {
@@ -77,12 +77,12 @@ public class CartController {
 		
 		cartService.insertCart(selectCart);
 		
-		List<Cart> cartList = cartService.findAllCartByUserId(userNo); 
+		//List<Cart> cartList = cartService.findAllCartByUserId(userNo); 
 		
 		model.addAttribute("cart", selectCart);
-		model.addAttribute("cartList", cartList);
+		//model.addAttribute("cartList", cartList);
 		
-		return "cart";
+		return "product-details";
 	}
 	
 	
