@@ -66,14 +66,15 @@ public class VisitController {
 		return "reviewBoardDetail";
 	}
 
-	// 관리자 견학리스트 전체출력
-	@GetMapping("/visitList")
-	public String centerList(Model model) {
-		List<Visit> visits = visitService.selectAllVisits();
-		model.addAttribute("visits", visits);
-		return "my-account";
-	}
-
+	/*
+	 * // 관리자 견학리스트 전체출력
+	 * 
+	 * @GetMapping("/visitList") public String centerList(Model model) { List<Visit>
+	 * visits = visitService.selectAllVisits(); model.addAttribute("visits",
+	 * visits); return "my-account"; }
+	 */
+	
+	// 관리자,유저 견학리스트 전체출력
 	@GetMapping("/visitByUserNo")
 	public String findByUserNoVisitList(Model model, HttpSession session) throws Exception {
 	    Long userNo = (Long) session.getAttribute("userNo");
@@ -81,10 +82,10 @@ public class VisitController {
 	    List<Visit> visitList;
 
 	    if (user.getUserNo().equals(57L)) {
-	        // userNo가 57인 경우, 관리자 계정이므로 전체 견학 리스트를 가져옴
+	        // userNo가 57인 경우 전체 견학 리스트를 가져옴
 	        visitList = visitService.selectAllVisits();
 	    } else {
-	        // 그 외의 경우, 해당 사용자의 견학 리스트를 가져옴
+	        // 그 외의 경우 로그인한 회원의 견학 리스트를 가져옴
 	        visitList = visitService.getVisitsByUserNo(user.getUserNo());
 	    }
 
