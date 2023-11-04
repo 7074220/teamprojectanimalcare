@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.dto.CartDto;
 import com.itwill.dto.CartOrderViewDto;
+import com.itwill.dto.CouponDto;
 import com.itwill.dto.OrderItemDto;
 import com.itwill.dto.OrderViewDto;
 import com.itwill.dto.OrdersDto;
@@ -134,6 +135,15 @@ public class OrderController {
 			throw new Exception("로그인 하세요.");
 		}
 		Userinfo userinfo=userInfoService.findUserByNo(userNo);
+		List<Coupon> coupons = userinfo.getCoupons();
+		List<CouponDto> couponDtos=new ArrayList<>();  
+		for (Coupon coupon : coupons) {
+			couponDtos.add(CouponDto.toDto(coupon));
+		}
+		
+		
+		//System.out.println("?????"+couponDtos);
+		
 		List<Cart> carts = cartService.findAllCartByUserId(userNo);
 		System.out.println(">>>>>>>>>>>>>>>>"+carts);
 		System.out.println(">>>>>>>>>>>>>>>>"+carts.get(0).getUserinfo());
@@ -152,9 +162,10 @@ public class OrderController {
 	    //model.addAttribute("user",UserOrderViewDto.toDto(userinfo));//userinfo는 서비스로 찾는지 의문
 	    model.addAttribute("cartList",carts);
 	    model.addAttribute("user",userinfo );
+	    model.addAttribute("coupons",couponDtos);
 		  
 		 
-		return "checkout";
+		return "checkout2";
 	}
 		//orderitemList 조회
 		@GetMapping("orderItemiew")
