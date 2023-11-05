@@ -32,12 +32,14 @@ public class WishController {
 		Long userNo=(Long)session.getAttribute("userNo");
 		
 		List<Wish> wishlist = wishService.findAllWishByUserNo(userNo);
-		List<WishlistInsertDto> wishlistDto = new ArrayList<WishlistInsertDto>();
-		
-		for (Wish wish : wishlist) {
-			wishlistDto.add(WishlistInsertDto.toDto(wish));
-		}
-		model.addAttribute("wishlist", wishlistDto);
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>"+wishlist);
+		/*
+		  List<WishlistInsertDto> wishlistDto = new ArrayList<WishlistInsertDto>();
+		  
+		  for (Wish wish : wishlist) { wishlistDto.add(WishlistInsertDto.toDto(wish));
+		  }
+		 */
+		model.addAttribute("wishList", wishlist);
 		
 		return "wishlist";
 	}

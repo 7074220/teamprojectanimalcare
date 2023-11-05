@@ -23,7 +23,7 @@ class WishDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	ProductDao productDao;
 	
 	@Test
-	//@Disabled
+	@Disabled
 	@Transactional
 	@Rollback(false)
 	void insert() {
@@ -45,11 +45,11 @@ class WishDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	}
 	
 	@Test
-	@Disabled
+	//@Disabled
 	@Transactional
 	@Rollback(false)
 	void findAll() {
-		List<Wish> wishList = wishDao.findAllWishByUserNo(2L);
+		List<Wish> wishList = wishDao.findAllWishByUserNo(15L);
 		System.out.println(wishList);
 	}
 	

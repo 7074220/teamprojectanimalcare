@@ -704,12 +704,23 @@
 
 
 
+							<!--상품 디테일에서 위시리스트 추가 기능-->
+							
+							
+							
 								<div class=" product_d_action">
                                <ul>
-                                   <li><a href="#" title="Add to wishlist">+ Add to Wishlist</a></li>
+                                   <li><a href="#" title="Add to wishlist"">+ Add to Wishlist</a></li>
                                    <!-- <li><a href="#" title="Add to wishlist">+ Compare</a></li> -->
                                </ul>
                             </div>
+                            
+                            
+                            
+                            <!--상품 디테일에서 위시리스트 추가 기능-->
+                            
+                            
+                            
                             <div class="product_meta">
                                 <span>Category: <a href="#" th:text="${product.productCategory}">펫 카테고리</a></span>
                             </div>
@@ -1276,6 +1287,8 @@
     <!--product area end-->
     
     <script type="text/javascript">
+		
+		
     	function addCart(){
     		var url = window.location.href;
     		var productNo = url.substring(url.lastIndexOf("=") + 1);
@@ -1283,6 +1296,43 @@
             alert("장바구니에 상품이 담겼습니다.");
             window.location.href = "cart?productNo="+productNo+"&productQty="+productQty;
     	}
+    	
+    	
+    	/*
+    	function addToWishlist(){
+    		var url = window.location.href;
+    		var productNo = url.substring(url.lastIndexOf("=") + 1);
+            var productQty = 1;
+            alert("위시리스트에 상품이 담겼습니다.");
+            
+            
+		    var xhr = new XMLHttpRequest();
+		    xhr.open("POST", "/wish"); 
+		    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+		
+		    var requestData = {
+		        productNo: productNo,
+		        productQty: productQty
+		    };
+		
+		    xhr.onreadystatechange = function() {
+		        if (xhr.readyState === 4) {
+		            if (xhr.status === 200) {
+		                alert("위시리스트에 추가되었습니다.");
+		            } else {
+		                alert("위시리스트 추가 중 오류가 발생했습니다.");
+		            }
+		        }
+		    };
+		
+		    xhr.send(JSON.stringify(requestData));
+}
+          */  
+            
+            //window.location.href = "wish?productNo="+productNo+"&productQty="+productQty;
+    	
+    	
+    	
     </script>
     
     

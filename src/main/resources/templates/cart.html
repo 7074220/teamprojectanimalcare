@@ -589,7 +589,7 @@
                            
                            
                                 <tr th:each="cart:${cartList}">
-                                   <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                                    <td class="product_remove"><a href="#" class="deleteCart" data-cart-no="{cart.cartNo}"><i class="fa fa-trash-o"></i></a></td>
                                     <td class="product_thumb"><a href="#" th:href="@{productDetail(productNo=${cart.product.productNo})}"><img src="#" alt="" th:src="@{/image/product/} + ${cart.product.getProductImage}"></a></td>
                                     <td class="product_name"><a href="#" th:text="${cart.product.productName}" th:href="@{productDetail(productNo=${cart.product.productNo})}">상품명</a></td>
                                     <td class="product-price" th:text="${cart.product.productPrice}">가격</td>
@@ -747,8 +747,33 @@
     		       // });
     		    });
     		});
-    		
-    		 
+
+
+				
+				$(document).ready(function() {
+				  // 프로덕트 삭제 버튼 클릭 이벤트 처리
+				  $('.deleteCart').on('click', function(event) {
+				    event.preventDefault(); // 기본 이벤트 방지
+				
+				    var cartNo = $(this).data('cartNo'); // data-cart-no에서 카트 번호 가져오기
+				
+				    // AJAX 요청 보내기
+				    $.ajax({
+				      type: 'DELETE',
+				      url: 'delete/' + cartNo, // RESTful 엔드포인트
+				      success: function(data) {
+				        // 성공적으로 삭제된 경우 실행할 코드
+				        alert('카트 항목이 성공적으로 삭제되었습니다.');
+				        // 페이지 새로고침 또는 카트 항목을 업데이트하는 추가 동작을 수행할 수 있습니다.
+				      },
+				      error: function(xhr, status, error) {
+				        // 오류 처리
+				        alert('삭제 중 오류가 발생했습니다: ' + error);
+				      }
+				    });
+				  });
+				});
+				    		 
     		
     </script>
       
