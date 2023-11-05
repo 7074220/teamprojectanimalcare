@@ -227,12 +227,12 @@
                                     <div class="header_account_list register">
                                         <ul th:if="${session.userNo}==null">
 											<!--index가 없으면 reportList에서 resigter누르면 페이지를 부르지 못함 그래서 앞에 index붙임-->
-                                            <li><a href="index#/user_write_form">Register</a></li>
+                                            <li><a href="#/user_write_form">Register</a></li>
                                             <li><span>/</span></li>
-                                            <li><a href="index#/login_form">Login</a></li>
+                                            <li><a href="#/login_form">Login</a></li>
                                         </ul>
                                         <ul th:if="${session.userNo}!=null">
-                                            <li><a href="userinfo" th:text="my-account">Login</a></li>
+                                            <li><a href="userinfo" th:text="${session.userName} 님">Login</a></li>
                                             <li><span>/</span></li>
                                             <li><a href="logout" th:text="Logout">Log</a></li>
                                         </ul>

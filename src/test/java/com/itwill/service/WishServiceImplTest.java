@@ -25,7 +25,7 @@ class WishServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	WishService wishService;
 	
 	@Test
-	//@Disabled
+	@Disabled
 	@Transactional
 	@Rollback(false)
 	void insert() {
@@ -46,11 +46,11 @@ class WishServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	}
 	
 	@Test
-	@Disabled
+	//@Disabled
 	@Transactional
 	@Rollback(false)
 	void findAll() {
-		List<Wish> wishList = wishService.findAllWishByUserNo(2L);
+		List<Wish> wishList = wishService.findAllWishByUserNo(15L);
 		System.out.println(wishList);
 	}
 

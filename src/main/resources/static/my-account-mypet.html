@@ -184,88 +184,45 @@
                         <div class="dashboard_tab_button">
                             <ul role="tablist" class="nav flex-column dashboard-list">
                                 <li><a href="userinfo" class="nav-link">내정보</a></li>
-                                <li><a href="userinfo/mypet"  class="nav-link">마이펫</a></li>
-                                <li><a href="#cuponpage"  class="nav-link">쿠폰</a></li>
-                                <li><a href="adoptByUserNo"  class="nav-link">입양</a></li>
-                                <li><a href="volunteerByUserNo"  class="nav-link">봉사</a></li>
-                                <li><a href="visitByUserNo" class="nav-link">견학</a></li>
-                                <li> <a th:if="${session.userNo == 57}" href="ordersList" class="nav-link">관리자 전용주문목록</a></li>
-                                <li> <a th:if="${session.userNo!= 57}" href="orders" class="nav-link">주문목록</a></li>
+                                <li><a href="userinfo/mypet" data-toggle="tab" class="nav-link">마이펫</a></li>
+                                <li><a href="#cuponpage" data-toggle="tab" class="nav-link">쿠폰</a></li>
+                                <li><a href="adoptByUserNo" class="nav-link">입양</a></li>
+                                <li><a href="volunteerByUserNo" data-toggle="tab" class="nav-link">봉사</a></li>
+                                <li><a href="visitByUserNo" data-toggle="tab" class="nav-link">견학</a></li>
+                                <li> <a href="#orders" data-toggle="tab" class="nav-link">주문목록</a></li>
                                 <li><a href="logout" class="nav-link">로그아웃</a></li>
                                 <li><a href="userDelete" class="nav-link">회원탈퇴</a></li>
-
                             </ul>
                         </div>    
                     </div>
                     <div class="col-sm-12 col-md-9 col-lg-9">
                         <!-- Tab panes -->
                         <div class="tab-content dashboard_content">
-							
-                            <!--<div class="tab-pane fade" id="account-details">-->
-                                <h3>내정보 </h3>
-								<div class="login">
-									<div class="login_form_container">
-										<div class="account_login_form">
-											<form name="f" action="userUpdate">
-												<p><a href="#"></a></p>
-												<div class="input-select"></div>
-
-												<label>이름</label>
-												<input type="text" name="userName" th:value="${userinfo.userName}">
-												<label>비밀번호</label>
-												<input type="password" value="" name="userPassword"
-													th:value="${userinfo.userPassword}">
-												<label>핸드폰번호</label>
-												<input type="text" value="" name="userPhoneNumber"
-													th:value="${userinfo.userPhoneNumber}">
-												<label>주소</label>
-												<input type="text" value="" name="userAddress"
-													th:value="${userinfo.userAddress}">
-
-												<br>
-
-												<div class="save_button primary_btn default_button">
-													<button type="button" onclick="a()">Save</button>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div>
-							
-							<div class="modal fade" id="deleteModal">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <!-- 모달 헤더 -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">회원탈퇴 이유 선택</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                            
-                                        <!-- 회원탈퇴 모달 본문 -->
-                                        <div class="modal-body">
-                                            <form id="deleteReasonForm">
-                                                <!-- 탈퇴 이유 선택 -->
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="reason" id="reason1" value="Not satisfied">
-                                                    <label class="form-check-label" for="reason1">서비스에 만족하지 않음</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="reason" id="reason2" value="Found alternative">
-                                                    <label class="form-check-label" for="reason2">다른 서비스를 사용</label>
-                                                </div>
-                                                <!-- ... 다른 이유들도 추가 가능 ... -->
-                                            </form>
-                                        </div>
-                            
-                                        <!-- 모달 푸터 -->
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" id="confirmDelete">탈퇴하기</button>
-                                        </div>
-                                    </div>
+                            <div class="tab-pane fade" id="mypet">
+                                <h3>마이펫</h3>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>이름</th>
+                                                <th>생일</th>
+                                                <th>종류</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="mypet:${myPetList}">
+                                                <td th:text="${mypet.mypetNo}">1</td>
+                                                <td th:text="${mypet.mypetName}">바둑이</td>
+                                                <td th:text="${mypet.mypetBirthday}">Jan 10, 2020</td>
+                                                <td th:text="${mypet.mypetKind}">강아지</td>
+                                                <td><a href="#" class="view">view</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </div>	
-							
-                           <!--   </div>-->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -279,55 +236,44 @@
   
  
     <!--footer area end-->
-	<script>
-		function a() {
-			var userNameInput = document.querySelector('input[name="userName"]');
-			var userPasswordInput = document.querySelector('input[name="userPassword"]');
-			var userPhoneNumberInput = document.querySelector('input[name="userPhoneNumber"]');
-			var userAddressInput = document.querySelector('input[name="userAddress"]');
 
-			var userName = userNameInput.value.trim();
-			var userPassword = userPasswordInput.value.trim();
-			var userPhoneNumber = userPhoneNumberInput.value.trim();
-			var userAddress = userAddressInput.value.trim();
 
-			if (userName === '') {
-				alert('이름을 입력해주세요.');
-			} else if (userPassword === '') {
-				alert('비밀번호를 입력해주세요.');
-			} else if (userPhoneNumber === '') {
-				alert('핸드폰번호를 입력해주세요.');
-			} else if (userAddress === '') {
-				alert('주소를 입력해주세요.');
-			} else {
-				window.location.href=
-				'userUpdate?userName='+userName+'&userPassword='+userPassword+'&userPhoneNumber='+userPhoneNumber+'&userAddress='+userAddress;
-			}
-			
-		}
-
-	</script>
-	
 <!-- 회원탈퇴  -->
-<script type="text/javascript">
-	function userDelete(){
-		window.location.href = 'userDelete';
-	}
+<!-- <script>
     $('#confirmDelete').on('click', function() {
         const selectedReason = $('input[name="reason"]:checked').val();
         if (selectedReason) {
             console.log("회원탈퇴 이유:", selectedReason);
-            // 여기에 탈퇴 로직
-            userDelete(); 
+            // 여기에 탈퇴 로직 
             // 탈퇴가 완료되면 index.html로 리다이렉트
-        	//window.location.href = 'index';
+        window.location.href = 'index.html';
         } else {
             alert("탈퇴하시려면 이유를 선택해주세요.");
         }
     });
 </script>
 
+
+주문한 상품 리뷰쓰기 
+<script>
+
+    // 마이페이지 상품주문 완료된 항목에서 주문상세를 누르면 창이 뜨고 이 창에서만 리뷰를 쓸수 있음
+    // 주문 상세 링크를 클릭할 때 이벤트 핸들러
+    document.querySelector('.table').addEventListener('click', function(e) {
+    if (e.target.classList.contains('view')) {
+        e.preventDefault();
+        
+        // 주문상세 정보를 로드 하기
+        
+
+        // 모달창 표시
+        $('#orderDetailsModal').modal('show');
+    }
+    });
+
+</script> -->
 </th:block>		
+
 
 
 </body>

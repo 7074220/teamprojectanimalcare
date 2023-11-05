@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Slf4j
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/userinfo")
@@ -39,7 +38,7 @@ public class MyPetController {
     public String updateMyPet(@PathVariable(value = "mypetNo") Long myPetNo, @RequestBody MypetDto mypetDto, HttpSession session) {
 
         Long userNo=(Long)session.getAttribute("userNo");
-        //MyPet updatePet = MyP
+        //MyPet updatePet = MyPet
 
         return "redirect:/userinfo/mypet";
     }

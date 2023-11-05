@@ -22,8 +22,14 @@ public interface UserInfoDao {
 	
 	public Userinfo findByUserPhone(String userPhoneNumber);
 	
-	public Userinfo findPasswordByUserIdPhoneNumber(String userId , String userPhoneNumber);
+	//비밀번호 찾기 
+	public String findPasswordByUserIdPhoneNumber(String userId , String userPhoneNumber);
 	
 	public Userinfo findByUserId(String userId);
+	
+	//아이디찾기
+	public String findUserIdByNameAndPhoneNumber(String userName,String userPhoneNumber);
+	
+
 	
 }

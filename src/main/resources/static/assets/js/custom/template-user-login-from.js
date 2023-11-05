@@ -24,14 +24,12 @@ export function user_login_form(responseJsonObject = {}) {
                         <input type="password" class="form-control" id="loginPassword"
                            placeholder="Password">
                      </div>
-
-                     <div class="form-check text-start my-3">
-                        <input class="form-check-input" type="checkbox" value="remember-me"
-                           id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                           Remember me
-                        </label>
-                     </div>
+                     <a></a>
+                     <a></a>
+                     <a></a>
+                     <a></a>
+	  				<a class="navi-link" href="finduserinfo">아이디/비밀번호 찾기</a>
+                     
                      <button class="btn btn-success w-100 py-1" type="button" data-navigate="/login" >Sign in</button>
                      <!--<button type="button" data-navigate="/login">Sign in</button>-->
                   </div>

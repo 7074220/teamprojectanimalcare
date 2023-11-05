@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itwill.dto.UserInfoFindDto;
 import com.itwill.dto.UserLoginActionDto;
 import com.itwill.dto.UserWriteActionDto;
 import com.itwill.entity.Coupon;
@@ -87,6 +88,7 @@ public class UserInfoRestController {
 			HttpSession session) throws Exception {
 		Userinfo loginUserCheck = userInfoService.login(dto.getUserId(), dto.getUserPassword());
 		session.setAttribute("userNo", loginUserCheck.getUserNo());
+		session.setAttribute("userName", loginUserCheck.getUserName());
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
@@ -239,6 +241,19 @@ public class UserInfoRestController {
 		HttpHeaders httpHeaders=new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application","json",Charset.forName("UTF-8")));
 		return new ResponseEntity<UserInfoResponse>(response,httpHeaders,HttpStatus.OK);
+	}
+		
+	@Operation(summary = "아이디 찾기")
+	@PostMapping("/findIdUserInfo")
+	public ResponseEntity<String> findIdUserInfo(UserInfoFindDto dto) throws Exception {
+		
+		String result = userInfoService.findUserIdByNameAndPhoneNumber(dto.getUserName(), dto.getUserPhoneNumber());
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+		return new ResponseEntity<String>(result,httpHeaders, HttpStatus.OK);
+
 	}
 	
 }
