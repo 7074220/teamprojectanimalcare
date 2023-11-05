@@ -13,14 +13,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.dto.CartDto;
 import com.itwill.dto.OrdersDto;
+import com.itwill.dto.ProductListDto;
+import com.itwill.dto.ProductNameDto;
 import com.itwill.entity.Cart;
+import com.itwill.entity.MyPet;
 import com.itwill.entity.Product;
 import com.itwill.entity.Userinfo;
 import com.itwill.service.CartService;
+import com.itwill.service.MyPetService;
 import com.itwill.service.ProductService;
 import com.itwill.service.UserInfoService;
 
 import jakarta.servlet.http.HttpSession;
+import oracle.net.aso.b;
 
 @Controller
 public class CartController {
@@ -31,6 +36,8 @@ public class CartController {
 	private ProductService productService;
 	@Autowired
 	private UserInfoService userinfoService;
+	@Autowired
+	private MyPetService myPetService;
 	
 	@GetMapping("/cartList")
 	// 카트 리스트 보기 (유저)
@@ -42,7 +49,8 @@ public class CartController {
 		Long userNo=(Long)session.getAttribute("userNo");
 		
 		//List<CartDto> cartListDto = new ArrayList<>();
-		List<Cart> cartList = cartService.findAllCartByUserId(userNo); 
+		List<Cart> cartList = cartService.findAllCartByUserId(userNo);
+		
 		
 		/*
 		for (Cart cart : cartList) {
@@ -56,9 +64,9 @@ public class CartController {
 	}
 	
 	
-	@GetMapping(value = "/cart", params = "productNo")
-	// 카트에 담기
-	public String insertCart(Model model, HttpSession session, @RequestParam Long productNo) throws Exception{
+	@GetMapping(value = "/cart")
+	// 상품디테일에서 카트에 담기
+	public String insertCart(Model model, HttpSession session, @RequestParam Long productNo, @RequestParam Integer productQty) throws Exception{
 		if (session.getAttribute("userNo") == null) {
 			throw new Exception("로그인 하세요.");
 		}
@@ -73,22 +81,106 @@ public class CartController {
 		Cart selectCart = Cart.builder().build();
 		selectCart.setUserinfo(user);
 		selectCart.setProduct(product);
-		selectCart.setCartQty(product.getProductQty());
+		selectCart.setCartQty(productQty);
+		//selectCart.setCartQty(product.getProductQty());
 		
 		cartService.updateOverlapCart(selectCart);
 		
 		//List<Cart> cartList = cartService.findAllCartByUserId(userNo); 
 		
+		
 		model.addAttribute("cart", selectCart);
+		
 		//model.addAttribute("cartList", cartList);
+		
+		
+		product = productService.findByProductNo(productNo);
+		String findProductName = productService.findByProductNo(productNo).getProductName();
+		int firstSpaceIndex = findProductName.indexOf(" ");
+		
+		
+		if (firstSpaceIndex >= 0) {
+			findProductName = findProductName.substring(0, firstSpaceIndex);// 첫 번째 공백까지 잘라내기
+		}
+		List<Product> productNameList = productService.findByContains(findProductName);
+
+		List<ProductListDto> productListDto = new ArrayList<>();
+		List<ProductNameDto> productNameDto = new ArrayList<>();
+		List<Product> products = productService.findAllProductByCategory(product.getProductCategory(), product.getProductPetCategory());
+		
+		for (Product productCategory : products) {
+			productListDto.add(ProductListDto.toDto(productCategory));
+		}
+
+		for (Product productName : productNameList) {
+			productNameDto.add(ProductNameDto.toDto(productName));
+		}
+		
+		model.addAttribute("product", product);
+		model.addAttribute("products", productListDto);
+		model.addAttribute("productName", productNameDto);
+		
 		
 		return "product-details";
 	}
 	
 	
 	
-	
-	
+	@GetMapping(value = "/insertCartMain")
+	// 상품리스트에서 카트에 담기
+	public String insertCartMain(Model model, HttpSession session, @RequestParam Long productNo, @RequestParam Integer productQty) throws Exception{
+		if (session.getAttribute("userNo") == null) {
+			throw new Exception("로그인 하세요.");
+		}
+		
+		// session에서 userNo가져오기
+		Long userNo=(Long)session.getAttribute("userNo");
+		// userNo로 user 찾기
+		Userinfo user = userinfoService.findUserByNo(userNo);
+		// productNo로 product 정보 가져오기
+		Product product = productService.findByProductNo(productNo);
+		
+		Cart selectCart = Cart.builder().build();
+		selectCart.setUserinfo(user);
+		selectCart.setProduct(product);
+		selectCart.setCartQty(productQty);
+		//selectCart.setCartQty(product.getProductQty());
+		
+		cartService.updateOverlapCart(selectCart);
+		
+		//List<Cart> cartList = cartService.findAllCartByUserId(userNo); 
+		
+		
+		model.addAttribute("cart", selectCart);
+		
+		
+		
+		List<ProductListDto> productListDto = new ArrayList<>();
+		List<Product> productList = new ArrayList<>();
+		
+		MyPet myPet = MyPet.builder().build();
+		
+		productList = productService.findAllByOrderByProductNoDesc();
+		
+		if(userNo != null) {
+			myPet = myPetService.findLeaderMyPet(userNo);
+			if (myPet == null) {
+				myPet = MyPet.builder().build();
+			} else {
+				productList = productService.findAllProductByPetCategory(myPet.getMypetKind());
+			}
+		}
+		
+		for (Product products : productList) {
+			productListDto.add(ProductListDto.toDto(products));
+		}
+		
+		model.addAttribute("productList", productListDto);
+		model.addAttribute("myPet", myPet);
+		
+		
+		return "shop";
+	}
 	
 	
 	

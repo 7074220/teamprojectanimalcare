@@ -42,7 +42,23 @@
 	display: none;
 }
 </style>
+<script>
+	// 현재 날짜를 가져오는 함수
+	function getCurrentDate() {
+		var currentDate = new Date();
+		var year = currentDate.getFullYear();
+		var month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+		var day = currentDate.getDate().toString().padStart(2, '0');
+		return year + '-' + month + '-' + day;
+	}
 
+	// 페이지 로드 시 실행
+	window.onload = function() {
+		var adoptDate = document.getElementById('adoptDate');
+		// 현재 날짜로 설정
+		adoptDate.setAttribute('min', getCurrentDate());
+	};
+</script>
 
 </head>
 
@@ -125,7 +141,7 @@
 								</div> -->
 								<p>
 									<label>방문 날짜</label> <input type="date" name="adoptDate"
-										id="adoptDate" placeholder="날짜를 선택해주세요" required="required">
+										id="adoptDate" placeholder="날짜를 선택해주세요" required="required" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
 								</p>
 								<p>
 									<label>방문 시간</label> <select name="adoptTime">

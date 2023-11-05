@@ -34,6 +34,20 @@ public class ReportController {
 		return "reportList";
 	}
 	
+	@GetMapping(value="/reportBoardView",params="boardNo")
+	public String ReportView(Model model,@RequestParam Long boardNo) {
+		
+		ReportBoard reportBoard = reportBoardService.findByBoardNo(boardNo);
+		
+		System.out.println(">>>>>>>>>>>>>>>>"+reportBoard);
+		System.out.println(">>>>>>>>>>>>>>>>"+reportBoard.getBoardImage());
+		model.addAttribute("reportBoard", reportBoard);
+		
+		return "reportBoardView";
+	}
+	
+	
+	
 	/*
 	@Operation(summary = "신고게시판 상세보기")
 	@GetMapping("/{boardNo}")

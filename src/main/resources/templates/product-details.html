@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
 	   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-       layout:decorate="layout/layout(title='')">
+       layout:decorate="layout/layout(title='product details')">
 
 <head>
     <title>Safira - product details</title>
@@ -10,9 +10,10 @@
 <body>
 
   <!--header area start-->
-    <th layout:fragment="content">
+    <th:block layout:fragment="content">
+    <div id="content">
     <!--offcanvas menu area start-->
-    <div class="off_canvars_overlay">
+    <!-- <div class="off_canvars_overlay">
                 
     </div>
     <div class="offcanvas_menu">
@@ -41,7 +42,6 @@
                                         <li><a href="#">£ Pound Sterling</a></li>
                                         <li><a href="#">$ US Dollar</a></li>
                                     </ul>
-                                </li>
                             </ul>
                         </div>
                         <div class="header_social text-right">
@@ -143,7 +143,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--offcanvas menu area end-->
     
    <!-- <header>
@@ -543,7 +543,7 @@
     <!--header area end-->
 
     <!--breadcrumbs area start-->
-    <div class="breadcrumbs_area">
+    <!-- <div class="breadcrumbs_area">
         <div class="container">   
             <div class="row">
                 <div class="col-12">
@@ -556,7 +556,7 @@
                 </div>
             </div>
         </div>         
-    </div>
+    </div> -->
     <!--breadcrumbs area end-->
     
     <!-- 상품 디테일 시작 -->
@@ -686,12 +686,12 @@
                             <!-- 상품 디테일 부가기능 -->
                             
                             
-                            <!-- 
+                            
                             <div class="product_variant quantity">
                                 <label>수량</label>
-                                <input min="1" max="100" value="1" type="number">
-                                <button class="button" type="submit">add to cart</button>  
-                            </div> -->
+                                <input min="1" max="100" value="1" type="number" id="productQty">
+                                <button class="button" type="button" onclick="addCart()">add to cart</button>  
+                            </div> 
 
 
 								<!-- <div class="product_variant quantity">
@@ -702,11 +702,6 @@
 								</div> -->
 
 
-								<div class="product_variant quantity">
-									<label>수량</label> <input min="1" max="100" value="1"
-										type="number"> 
-										<button onclick="addToCart()" class="button">add to cart</button>
-								</div>
 
 
 								<div class=" product_d_action">
@@ -807,30 +802,48 @@
                                 </div>    
                             </div>
 
-                            <div class="tab-pane fade" id="reviews" role="tabpanel" >
-                                <div class="reviews_wrapper">
-                                    
-                                    <div class="reviews_comment_box">
-                                        <div class="comment_thmb">
-                                            <img src="assets/img/blog/comment2.jpg" alt="">
-                                        </div>
-                                        <div class="comment_text">
-                                            <div class="reviews_meta">
-                                                <div class="star_rating">
-                                                    <ul>
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                                       <li><a href="#"><i class="icon-star"></i></a></li>
-                                                       <li><a href="#"><i class="icon-star"></i></a></li>
-                                                       <li><a href="#"><i class="icon-star"></i></a></li>
-                                                       <li><a href="#"><i class="icon-star"></i></a></li>
-                                                    </ul>   
-                                                </div>
-                                                <p><strong>admin </strong>- September 12, 2018</p>
-                                                <span>roadthemes</span>
-                                            </div>
-                                        </div>
-                                        
+                               <div class="tab-pane fade" id="reviews" role="tabpanel">
+                           <label for="sortOrder">정렬 순서:</label>
+                           <select id="sortOrder" name="sortOrder">
+                              <option value="latest">최신순</option>
+                              <option value="rating">별점순</option>
+                           </select>
+                           <div class="reviews_wrapper" th:each="review:${reviewList}">
+                              <h2 th:text="${review.boardDate}">roadthemes</h2>
+                              <div class="reviews_comment_box">
+                                 <div class="comment_thmb">
+                                    <p><strong th:text="${review.userinfo.userName}">adm </strong></p>
+                                    <!-- <img src="assets/img/blog/comment2.jpg" alt="">-->
+                                 </div>
+                                 <div class="comment_text">
+                                    <div class="reviews_meta">
+                                       <div class="star_rating">
+
+                                          <ul>
+                                             <li th:each="starNumber: ${#numbers.sequence(1, 5)}">
+                                                <a href="#">
+                                                   <img th:if="${starNumber <= review.boardStar}"
+                                                      src="assets/img/icon/star-icon2.png"
+                                                      alt="Filled Star">
+                                                   <img th:unless="${starNumber <= review.boardStar}"
+                                                      src="assets/img/icon/star-icon.png"
+                                                      alt="Empty Star">
+                                                </a>
+                                             </li>
+                                          </ul>
+
+                                       </div>
+                                       <!-- <p><strong th:text="${review.userinfo.userName}">adm </strong>- September 12, 2018</p>-->
+
+
+                                       <h2>
+                                          <p th:text="${review.boardTitle}"></p>
+                                       </h2>
+                                       <p th:text="${review.boardContent}">roadthemes</p>
                                     </div>
+                                 </div>
+                              </div>
+                           </div>
                                    <!--	 <div class="comment_title">
                                         <h2>Add a review </h2>
                                         <p>Your email address will not be published.  Required fields are marked </p>
@@ -1262,22 +1275,19 @@
     </section>
     <!--product area end-->
     
+    <script type="text/javascript">
+    	function addCart(){
+    		var url = window.location.href;
+    		var productNo = url.substring(url.lastIndexOf("=") + 1);
+            var productQty = document.getElementById("productQty").value;
+            alert("장바구니에 상품이 담겼습니다.");
+            window.location.href = "cart?productNo="+productNo+"&productQty="+productQty;
+    	}
+    </script>
     
     
     
-    
-     
- <script>
-    function addToCart(productNo) {
-        var productNo = document.getElementById("productNo").value;
-        window.location.href = "cart?productNo=" + productNo;
-    }
-</script>
-    
-    
-    
-    
-    
+    </div>
     
     </th:block>
 
