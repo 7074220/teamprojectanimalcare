@@ -580,31 +580,32 @@
                                             <th class="product_name">Product</th>
                                             <th class="product-price">Price</th>
                                             <th class="product_quantity">Category</th>
-                                            <th class="product_total">Add To Cart</th>
+                                            <!--<th class="product_total">Add To Cart</th>-->
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr th:each="wish:${wishList}">
                                            <td class="product_remove"><a href="#">X</a></td>
-                                            <td class="product_thumb"><a href="#"><img src="assets/img/product/productbig1.jpg" alt=""></a></td>
-                                            <td class="product_name"><a href="#">Handbag fringilla</a></td>
-                                            <td class="product-price">£65.00</td>
-                                            <td class="product_quantity">In Stock</td>
-                                            <td class="product_total"><a href="#">Add To Cart</a></td>
+                                            <td class="product_thumb"><a href="#" th:href="@{productDetail(productNo=${wish.product.productNo})}"><img src="#" alt="" th:src="@{/image/product/} + ${wish.product.getProductImage}"></a></td>
+                                            <td class="product_name"><a href="#" th:text="${wish.product.productName}" th:href="@{productDetail(productNo=${wish.product.productNo})}">상품명</a></td>
+                                            <td class="product-price" th:text="${wish.product.productPrice}">가격</td>
+                                            <td class="product_quantity" th:text="${wish.product.productCategory}">In Stock</td>
+                                            <!--<td class="product_total"><a href="#">Add To Cart</a></td>-->
 
 
                                         </tr>
-
-                                        <!-- <tr>
+										<!--
+                                         <tr>
                                            <td class="product_remove"><a href="#">X</a></td>
                                             <td class="product_thumb"><a href="#"><img src="assets/img/product/productbig2.jpg" alt=""></a></td>
                                             <td class="product_name"><a href="#">Handbags justo</a></td>
                                             <td class="product-price">£90.00</td>
                                             <td class="product_quantity">In Stock</td>
-                                            <td class="product_total"><a href="#">Add To Cart</a></td>
+                                           <td class="product_total"><a href="#">Add To Cart</a></td>
 
 
                                         </tr>
+                                        
                                         <tr>
                                            <td class="product_remove"><a href="#">X</a></td>
                                             <td class="product_thumb"><a href="#"><img src="assets/img/product/productbig3.jpg" alt=""></a></td>
