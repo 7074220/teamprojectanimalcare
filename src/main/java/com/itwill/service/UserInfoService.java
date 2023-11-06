@@ -49,8 +49,8 @@ public interface UserInfoService {
 	/* 아이디 중복체크 */
 	boolean countByUserId(String userId) throws Exception;
 	
-	Userinfo findUserIdByNameAndPhoneNumber(String userName,String userPhoneNumber);
+	public Userinfo findUserIdByNameAndPhoneNumber(String userName,String userPhoneNumber);
 	
-	public String findPasswordByUserIdPhoneNumber(String userId, String userPhoneNumber);
+	public Userinfo findPasswordByUserIdPhoneNumber(String userId, String userPhoneNumber);
 	
 }

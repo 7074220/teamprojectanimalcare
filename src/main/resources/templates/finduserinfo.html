@@ -35,15 +35,16 @@
                 <div class="col-lg-6 col-md-6">
                  <div class="account_form register">
                         <h2>아이디 찾기</h2>
-                        <form name="findIdform" action="#">
+                        <form name="f" action="#">
                             <p>   
                                 <label>이름 <span>*</span></label>
-                                <input type="text" id="name">
+                                <input type="text" id="findName">
                              </p>
                              <p>   
                                 <label>전화번호 <span>*</span></label>
-                                <input type="text" id="phoneNumber">
+                                <input type="text" id="findPhoneNumber">
                              </p>
+                             <label id="findIdText" style="color: green"></label>
                             <div class="login_submit">
                                 <button type="button" onclick="findId()">확인</button>
                             </div>
@@ -56,20 +57,17 @@
                 <div class="col-lg-6 col-md-6">
 					          <div class="account_form">
                         <h2>비밀번호 찾기</h2>
-                        <form action="#">
+                        <form name="f2" action="#">
                             <p>   
                                 <label>아이디<span>*</span></label>
-                                <input type="text" id="userId">
+                                <input type="text" id="findUserId">
                              </p>
                              <p>   
                                 <label>전화번호<span>*</span></label>
-                                <input type="text" id="phoneNumber">
+                                <input type="text" id="findPhoneNumber2">
                              </p>   
-                             
                             <div class="login_submit">
-                               
                                 <button type="button" onclick="findPassword()">확인</button>
-                                
                             </div>
 
                         </form>
@@ -101,30 +99,30 @@
 		
 		function findId(){
 			let sendObject={
-				userName : document.findIdform.name.value,
-				userPhoneNumber : document.findIdform.phoneNumber.value
+				userName : document.f.findName.value,
+				userPhoneNumber : document.f.findPhoneNumber.value
 			}
 			const responseJsonObject = ajaxRequest('POST','user/findIdUserInfo',sendObject);
-			//alert(responseJsonObject.userName);
-			/*
-			if(responseJsonObject){
+			
+			if(responseJsonObject.status == 1){
 				alert('일치하는 아이디가 없습니다.');
 			}else{
 				alert('찾으신 아이디:'+responseJsonObject.userId);
+				$('#findUserId').val(responseJsonObject.userId);
+				$('#findIdText').html('* 찾으신 아이디 : ' + responseJsonObject.userId);
 			}
-			*/
+			
 		}
-		
 		function findPassword(){
 			let sendObject={
-				userId : document.findIdform.userId.value,
-				userPhoneNumber : document.findIdform.phoneNumber.value
+				userName : document.f2.findUserId.value,
+				userPhoneNumber : document.f2.findPhoneNumber2.value
 			}
-			const responseJsonObject = ajaxRequest('POST',user/findPasswordUserInfo,sendObject);
-			if(responseJsonObject=="1"){
+			const responseJsonObject = ajaxRequest('POST','user/findPasswordUserInfo',sendObject);
+			if(responseJsonObject.status == 1){
 				alert('일치하는 비밀번호가 없습니다.');
 			}else{
-				alert('찾으신 비밀번호:'+responseJsonObject);
+				alert('찾으신 비밀번호:'+responseJsonObject.userPassword);
 			}
 		}
 		
