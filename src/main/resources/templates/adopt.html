@@ -102,7 +102,7 @@
 						<div class="contact_message form">
 							<h3 style="font-weight: bold">신청 양식</h3>
 							<form id="contact-form" method="POST"
-								th:action="@{/create-adopt}" th:object="${adopt}">
+								th:action="@{/create-adopt}" th:object="${adopt}" style="margin: 20px 0;">
 
 								<input type="hidden" name="petNo" th:value="${pet.petNo}" />
 
@@ -245,7 +245,7 @@
 		*/
 		
 		
-
+/*
 			// 현재 날짜를 가져오는 함수
 			function getCurrentDate() {
 				var currentDate = new Date();
@@ -263,28 +263,32 @@
 			};
 		
 
-			// 현재 시간을 가져오는 함수
-			function getCurrentTime() {
-				const now = new Date();
-				const hours = now.getHours();
-				return hours < 10 ? '0' + hours : hours;
-			}
+	*/
+	
+	
+	// 현재 날짜를 가져오는 함수
+function getCurrentDate() {
+  var currentDate = new Date();
+  var year = currentDate.getFullYear();
+  var month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+  var day = currentDate.getDate().toString().padStart(2, '0');
+  return year + '-' + month + '-' + day;
+}
 
-			// 현재 시간을 가져옵니다.
-			const currentTime = getCurrentTime();
+// 페이지 로드 시 실행
+window.onload = function () {
+  var adoptDate = document.getElementById('adoptDate');
+  // 현재 날짜로 설정
+  adoptDate.min = getCurrentDate(); // Set the min attribute
+};	
 
-			// select 요소 가져오기
-			const select = document.getElementById('adoptTimeSelect');
 
-			// 각 option 요소를 반복하면서 현재 시간보다 작은 시간을 비활성화합니다.
-			for (let i = 0; i < select.options.length; i++) {
-				const option = select.options[i];
-				const optionValue = parseInt(option.value);
 
-				if (optionValue < currentTime) {
-					option.disabled = true;
-				}
-			}
+
+
+
+
+			
 </script>
 		
 		
