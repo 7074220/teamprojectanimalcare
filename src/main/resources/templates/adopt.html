@@ -8,7 +8,7 @@
 <title>Safira - contact page</title>
 
 <style type="text/css">
-#adoptDate {
+#adoptDate,#adoptTime {
 	border: 1px solid black;
 	position: relative;
 	width: 100%;
@@ -21,7 +21,8 @@
 	
 }
 
-#adoptDate::-webkit-calendar-picker-indicator {
+#adoptDate::-webkit-calendar-picker-indicator,
+#adoptTime::-webkit-calendar-picker-indicator {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -144,7 +145,8 @@
 										id="adoptDate" placeholder="날짜를 선택해주세요" required="required" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
 								</p>
 								<p>
-									<label>방문 시간</label> <select name="adoptTime">
+									<label>방문 시간</label> 
+									 <select name="adoptTime" id="adoptTimeSelect">
 										<option value="09">09 AM</option>
 
 										<option value="10">10 AM</option>
@@ -166,10 +168,12 @@
 										<option value="18">18 PM</option>
 
 										<option value="19">19 PM</option>
-									</select>
+									</select> 
+									<!-- <input type="time" name="adoptTime" id="adoptTime" required="required"> -->
+									
 								</p>
 
-								<button type="submit">submit</button>
+								<button type="submit" class="submit">submit</button>
 								<!-- <p class="form-messege"></p> -->
 								<!-- <div th:if="${msg!=null}">
 									<p th:text="${msg}" class="success-message"></p>
@@ -181,6 +185,65 @@
 				</div>
 			</div>
 		</div>
+		
+		<script>
+		function ajaxRequest(method, url, sendJsonObject) {
+			let returnResultJsonObject={};
+			$.ajax({
+				async:false,
+				method: method,
+				url: url,
+				contentType: 'application/json;UTF-8',
+				data: JSON.stringify(sendJsonObject),
+				type: 'json',
+				success: function(resultJsonObject) {
+					returnResultJsonObject = resultJsonObject;
+				}
+			});
+			return returnResultJsonObject;
+		}
+		
+		$(document).ready(function() {
+		    // 신청 버튼 클릭 이벤트 처리
+		    $('.submit').on('click', function(event) {
+		        event.preventDefault();
+
+		        let petNo = $(this).data('petNo');
+		        let adoptDate = $('#adoptDate').val(); // 선택한 날짜 가져오기
+		        let adoptTime = $('#adoptTimeSelect').val(); // 선택한 시간 가져오기
+
+		        let sendJsonObject = {
+		            petNo: petNo,
+		            adoptDate: adoptDate,
+		            adoptTime: adoptTime
+		        };
+
+		        // AJAX 요청 보내기
+		        $.ajax({
+		            type: 'POST',
+		            url: '/create-adopt',
+		            contentType: 'application/x-www-form-urlencoded',
+		            data: JSON.stringify(sendJsonObject),
+		            success: function(data) {
+		                alert('입양신청이 완료되었습니다.');
+		                // 페이지 새로고침 또는 다른 동작을 수행할 수 있습니다.
+		            },
+		            error: function(xhr, status, error) {
+		                alert('신청 중 오류가 발생했습니다: ' + error);
+		            }
+		        });
+		    });
+		});
+		
+		
+		
+		
+		
+		</script>
+		
+		
+		
+		
 	</th:block>
 	<!--contact area end-->
 

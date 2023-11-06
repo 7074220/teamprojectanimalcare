@@ -3,6 +3,7 @@ package com.itwill.dao;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 import org.junit.jupiter.api.Disabled;
@@ -70,11 +71,11 @@ class AdoptDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		petDao.petInsert(pet2);
 		
 		*/
-		
+		//LocalTime customTime = LocalTime.of(12, 30); // 12:30:00
 		
 		Adopt adopt1 = Adopt.builder() 
 							.adoptDate(new Date())
-							.adoptTime(11)
+							.adoptTime(8)
 							.pet(pet1)
 							.adoptStatus("입양중")
 							.userinfo(userinfo1)

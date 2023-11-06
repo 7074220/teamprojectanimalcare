@@ -217,7 +217,7 @@
                                         </thead>
                                         <tbody>
                                             <tr th:each="adopt, rowStat : ${adoptList}">
-                                                <td th:text="${adoptList.size() - rowStat.index}">1</td>
+                                                <td th:text="${adoptList.size() - rowStat.index}"></td>
                                                 <td th:text="${adopt.adoptTime}"></td>
                                                 <td th:text="${#strings.substring(adopt.adoptDate.toString(),0,10)}"></span></td>
                                                 <td th:text="${adopt.Pet.petNo}"></td>
