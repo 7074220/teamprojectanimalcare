@@ -1,13 +1,13 @@
 -- userinfo insert
 
 insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
-VALUES (userinfo_user_no_seq.nextval,'김창섭','1017','분당','남','010-7777-1111',0,'1111',sysdate, '김창섭');
+VALUES (userinfo_user_no_seq.nextval,'aaa@naver.com','1017','분당','남','010-7777-1111',0,'1111',sysdate, '김창섭');
 
 insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
-VALUES (userinfo_user_no_seq.nextval,'박태환','1011','서울','남','010-7111-1111',0,'2222',sysdate, '박태환');
+VALUES (userinfo_user_no_seq.nextval,'111@naver.com','1011','서울','남','010-7111-1111',0,'2222',sysdate, '박태환');
 
 insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
-VALUES (userinfo_user_no_seq.nextval,'전아현','0707','부산','여','010-1234-1111',0,'3333',sysdate, '전아현');
+VALUES (userinfo_user_no_seq.nextval,'222@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '전아현');
 
 
 -- dog product insert

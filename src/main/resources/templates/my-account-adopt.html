@@ -185,7 +185,7 @@
                             <ul role="tablist" class="nav flex-column dashboard-list">
                                 <li><a href="userinfo" class="nav-link">내정보</a></li>
                                 <li><a href="mypet"  class="nav-link">마이펫</a></li>
-                                <li><a href="#cuponpage"  class="nav-link">쿠폰</a></li>
+                                <li><a href="couponList"  class="nav-link">쿠폰</a></li>
                                 <li><a href="adoptByUserNo"  class="nav-link">입양</a></li>
 								<li><a href="volunteerByUserNo"  class="nav-link">봉사</a></li>
                                 <li><a href="visitByUserNo" class="nav-link">견학</a></li>
@@ -217,7 +217,7 @@
                                         </thead>
                                         <tbody>
                                             <tr th:each="adopt, rowStat : ${adoptList}">
-                                                <td th:text="${adoptList.size() - rowStat.index}">1</td>
+                                                <td th:text="${adoptList.size() - rowStat.index}"></td>
                                                 <td th:text="${adopt.adoptTime}"></td>
                                                 <td th:text="${#strings.substring(adopt.adoptDate.toString(),0,10)}"></span></td>
                                                 <td th:text="${adopt.Pet.petNo}"></td>
