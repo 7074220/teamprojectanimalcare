@@ -2,8 +2,12 @@ package com.itwill.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.itwill.dao.ProductDao;
 import com.itwill.entity.Product;
 
 @Transactional
@@ -64,4 +68,7 @@ public interface ProductService {
 	List<Product> findAllByOrderByProductByPetCategoryByProductCategoryStarAvgDesc(String productPetCategory, String productCategory);
 	
 	List<Product> findAllByOrderByProductByPetCategoryByProductCategoryNoDesc(String productPetCategory, String productCategory);
+	
+	/**************** 페이징 **************/
+	public Page<Product> findProductList(Pageable pageable) throws Exception;
 }
