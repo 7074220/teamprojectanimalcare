@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.itwill.dao.AdoptDao;
 import com.itwill.entity.Adopt;
 
-@Transactional
+
 @Service
 public class AdoptServiceImpl implements AdoptService{
 	@Autowired

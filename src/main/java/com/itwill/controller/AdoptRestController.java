@@ -41,18 +41,24 @@ public class AdoptRestController {
 
 	@Autowired
 	private AdoptService adoptService;
+	@Autowired
+	private PetService petService;
+	@Autowired
+	private UserInfoService userInfoService;
 	
 	@Operation(summary = "입양신청")
 	@PostMapping("/create-adopt")
 	public ResponseEntity<AdoptDto> insertAdopt(@RequestBody AdoptDto dto, HttpSession session) throws Exception {
 		Long userNo = (Long)session.getAttribute("userNo");
 		Integer status = 0;
+		
 		if(userNo==null) {
 			status = 1;
 		}
-		Adopt adopt = adoptService.insertAdopt(AdoptDto.toEntity(dto));
-		System.out.println(">>>>>>>>>>>>>>>>>"+adopt);
-		//dto.setStatus(status);
+		
+		dto.setUserNo(userNo);
+		Adopt adopt = AdoptDto.toEntity(dto);
+		adoptService.insertAdopt(adopt);
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
