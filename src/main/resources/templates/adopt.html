@@ -11,10 +11,9 @@
 #adoptDate,#adoptTime {
 	border: 1px solid black;
 	position: relative;
-	width: 100%;
+	width: 200px;
 	padding: 10px;
 	background-color: transparent;
-	border-radius: 8px;
 	text-align: center;
 	font-size: 100%;
 	margin-bottom: 20px;
@@ -123,13 +122,13 @@
 									<label> 하고싶은 말</label>
 									<textarea placeholder="Message *" name="message" class="form-control2"></textarea>
 								</div> -->
-								<p>
-									<label>방문 날짜</label> <input type="date" name="adoptDate"
+								<div>
+									<span>방문 날짜</span> <input type="date" name="adoptDate"
 										id="adoptDate" placeholder="날짜를 선택해주세요" required="required" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
-								</p>
-								<p>
-									<label>방문 시간</label> 
-									 <select name="adoptTime" id="adoptTimeSelect">
+								</div>
+								<div>
+									<span>방문 시간</span> 
+									 <select name="adoptTime" id="adoptTimeSelect" style="width: 200px; padding: 10px;">
 										<option value="09">09 AM</option>
 
 										<option value="10">10 AM</option>
@@ -171,6 +170,7 @@
 		
 		
  	<script>
+		 
 	 	function ajaxRequest(method, url, sendJsonObject) {
 	 		let returnResultJsonObject={};
 	 		$.ajax({
@@ -187,6 +187,7 @@
 	 		return returnResultJsonObject;
 	 	}
 		
+	
 		$('.submit').on('click', function(event) {
 	        event.preventDefault();
 	        let petNo = $(this).data('petNo');
@@ -199,28 +200,98 @@
 	            adoptTime: adoptTime
 	        };
 			
-	        responseObject=ajaxRequest('POST','adopt/create-adopt',sendJsonObject);
+	       let responseObject=ajaxRequest('POST','adopt/create-adopt',sendJsonObject);
 	  		if(responseObject.status ==1){
+				alert('로그인이 필요합니다.');
 				window.location.href = 'index';	// 로그인 창으로 이동
+			}else{
+				alert("입양신청이 완료되었습니다.");
 			}
 	  		
 	    });
 		
-		// 현재 날짜를 가져오는 함수
-		function getCurrentDate() {
-			var currentDate = new Date();
-			var year = currentDate.getFullYear();
-			var month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-			var day = currentDate.getDate().toString().padStart(2, '0');
-			return year + '-' + month + '-' + day;
-		}
+		/*
+		$('.submit').on('click', function(event) {
+    event.preventDefault();
+    let petNo = $(this).data('petNo');
+    let adoptDate = $('#adoptDate').val();
+    let adoptTime = $('#adoptTimeSelect').val();
 
-		// 페이지 로드 시 실행
-		window.onload = function() {
-			var adoptDate = document.getElementById('adoptDate');
-			// 현재 날짜로 설정
-			adoptDate.setAttribute('min', getCurrentDate());
-		};
+    let sendJsonObject = {
+        petNo: petNo,
+        adoptDate: adoptDate,
+        adoptTime: adoptTime
+    };
+
+    $.ajax({
+        type: 'POST',
+        url: 'adopt/create-adopt', // 요청 URL을 상대 경로로 수정
+        contentType: 'application/json;UTF-8',
+        data: JSON.stringify(sendJsonObject),
+        dataType: 'json', // 서버에서 반환하는 데이터 형식을 JSON으로 설정
+        success: function(responseObject) {
+            if (responseObject.status === 1) {
+                alert('로그인이 필요합니다.'); // 로그인이 필요한 경우 알림
+            } else {
+                alert('입양신청이 완료되었습니다.');
+                window.location.href = 'index'; // 성공적인 신청 후 이동할 페이지 설정
+            }
+        },
+        error: function(xhr, status, error) {
+            alert('오류가 발생했습니다');
+        }
+    });
+});
+		*/
+		
+		
+
+			// 현재 날짜를 가져오는 함수
+			function getCurrentDate() {
+				var currentDate = new Date();
+				var year = currentDate.getFullYear();
+				var month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+				var day = currentDate.getDate().toString().padStart(2, '0');
+				return year + '-' + month + '-' + day;
+			}
+
+			// 페이지 로드 시 실행
+			window.onload = function () {
+				var adoptDate = document.getElementById('adoptDate');
+				// 현재 날짜로 설정
+				adoptDate.setAttribute('min', getCurrentDate());
+			};
+		
+
+			// 현재 시간을 가져오는 함수
+			function getCurrentTime() {
+				const now = new Date();
+				const hours = now.getHours();
+				return hours < 10 ? '0' + hours : hours;
+			}
+
+			// 현재 시간을 가져옵니다.
+			const currentTime = getCurrentTime();
+
+			// select 요소 가져오기
+			const select = document.getElementById('adoptTimeSelect');
+
+			// 각 option 요소를 반복하면서 현재 시간보다 작은 시간을 비활성화합니다.
+			for (let i = 0; i < select.options.length; i++) {
+				const option = select.options[i];
+				const optionValue = parseInt(option.value);
+
+				if (optionValue < currentTime) {
+					option.disabled = true;
+				}
+			}
+</script>
+		
+		
+		
+		
+		
+		
 	</script>
 		
 	</th:block>

@@ -44,7 +44,7 @@ public class AdoptRestController {
 	
 	
 	@Operation(summary = "입양신청")
-	@PostMapping("create-adopt")
+	@PostMapping("/create-adopt")
 	public ResponseEntity<AdoptDto> insertAdopt(@RequestBody AdoptDto dto, HttpSession session) throws Exception {
 		Long userNo = (Long)session.getAttribute("userNo");
 		Integer status = 0;

@@ -73,6 +73,8 @@ public class AdoptController {
 			adopt.setPet(pet);
 			adoptService.insertAdopt(adopt);
 			model.addAttribute("userinfo", userinfo);
+		}else {
+			throw new Exception("로그인을 해주세요.");
 		}
 		return "pet-list";
 	}
