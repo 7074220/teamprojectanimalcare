@@ -571,12 +571,13 @@
                                 <table>
                             <thead>
                                 <tr>
-                                    <th class="product_remove">Delete</th>
+									<th class="product_check">Check</th>
                                     <th class="product_thumb">Image</th>
                                     <th class="product_name">Product</th>
                                     <th class="product-price">Price</th>
                                     <th class="product_quantity">Quantity</th>
                                     <th class="product_total">Total</th>
+                                    <th class="product_remove">Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -589,13 +590,14 @@
                            
                            
                                 <tr th:each="cart:${cartList}">
-                                    <td class="product_remove" th:id="${cart.cartNo}"><a class="deleteCart"><i class="fa fa-trash-o" th:id="${cart.cartNo}"></i></a></td>
+                                    <td class="product_total" th:id="${cart.cartNo}"><input type="checkbox" name="cartCheckbox"></td>
                                     <td class="product_thumb" th:id="${cart.cartNo}"><a href="#" th:href="@{productDetail(productNo=${cart.product.productNo})}"><img src="#" alt="" th:src="@{/image/product/} + ${cart.product.getProductImage}"></a></td>
                                     <td class="product_name" th:id="${cart.cartNo}"><a href="#" th:text="${cart.product.productName}" th:href="@{productDetail(productNo=${cart.product.productNo})}">상품명</a></td>
                                     <td class="product-price" th:id="${cart.cartNo}" th:text="${cart.product.productPrice}">가격</td>
                                     <td class="product_quantity" th:id="${cart.cartNo}"><label>수량</label> <input min="1" max="100" value="1" type="number" th:value="${cart.cartQty}" th:id="${cart.cartNo}"></td>
                                     <!--  상품가격 X 수량 = 총금액 수정해야댐 -->
                                     <td class="product_total" th:id="${cart.cartNo}" th:text="(${cart.product.productPrice})*(${cart.cartQty})">총금액</td>
+                                    <td class="product_remove" th:id="${cart.cartNo}"><a class="deleteCart"><i class="fa fa-trash-o" th:id="${cart.cartNo}"></i></a></td>
                                 </tr>
                                 
                                 
@@ -631,6 +633,7 @@
                         </table>   
                             </div>  
                             <div class="cart_submit">
+                                <button type="submit">delete</button>
                                 <button type="submit">update cart</button>
                             </div>      
                         </div>
