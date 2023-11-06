@@ -63,7 +63,22 @@ public class ReviewBoardController {
    return "product-details";
    
    }
+	   //최신순
+	   @GetMapping("/productNoReviewDateDesc")
+	   public String productNoReviewDateDesc(Model model, @RequestParam Long productNo) throws Exception {
+	       Product product = productService.findByProductNo(productNo);
+	       List<ReviewBoard> reviewList = reviewBoardService.findAllByOrderByBoardDateDesc(); 
+	       model.addAttribute("reviewList", reviewList);
+	       return "product-details";
+	   }
 
-   
+	   //별점순
+	   @GetMapping("/productNoReviewRatingDesc")
+	   public String productNoReviewRatingDesc(Model model, @RequestParam Long productNo) throws Exception {
+	       Product product = productService.findByProductNo(productNo);
+	       List<ReviewBoard> reviewList = reviewBoardService.findAllByOrderByBoardStarDesc(); 
+	       model.addAttribute("reviewList", reviewList);
+	       return "product-details";
+	   }
 
 }
