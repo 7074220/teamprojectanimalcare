@@ -104,7 +104,7 @@
 							<form id="contact-form" method="POST"
 								th:action="@{/create-adopt}" th:object="${adopt}" style="margin: 20px 0;">
 
-								<input type="hidden" name="petNo" th:value="${pet.petNo}" />
+								<input type="hidden" id="petid" name="petNo" th:value="${pet.petNo}"/>
 
 								<!-- <p>
 									<label> 이름 </label> <input name="name" placeholder="Name *"
@@ -190,22 +190,24 @@
 	
 		$('.submit').on('click', function(event) {
 	        event.preventDefault();
-	        let petNo = $(this).data('petNo');
+	        let petNo = $('#petid').val();
 	        let adoptDate = $('#adoptDate').val(); // 선택한 날짜 가져오기
 	        let adoptTime = $('#adoptTimeSelect').val(); // 선택한 시간 가져오기
-			
+	        
 	        let sendJsonObject = {
 	            petNo: petNo,
 	            adoptDate: adoptDate,
-	            adoptTime: adoptTime
+	            adoptTime: adoptTime,
+	            adoptStatus:"입양신청접수"
 	        };
 			
 	       let responseObject=ajaxRequest('POST','adopt/create-adopt',sendJsonObject);
-	  		if(responseObject.status ==1){
+	  		if(responseObject.userNo == null){
 				alert('로그인이 필요합니다.');
 				window.location.href = 'index';	// 로그인 창으로 이동
 			}else{
 				alert("입양신청이 완료되었습니다.");
+				window.location.href='index'; // 메인페이지로 이동
 			}
 	  		
 	    });
@@ -275,11 +277,6 @@
 </script>
 		
 		
-		
-		
-		
-		
-	</script>
 		
 	</th:block>
 		<!--map js code here-->
