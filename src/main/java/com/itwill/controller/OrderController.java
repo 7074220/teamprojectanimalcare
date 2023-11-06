@@ -63,6 +63,8 @@ public class OrderController {
 		 Exception("로그인 하세요."); 
 		  
 		  }
+		  
+		  
 		Long userNo = (Long) session.getAttribute("userNo");
 		Orderstatus orderstatus= orderStatusRepository.findById(1L).get();
 		Long osNo = orderstatus.getOsNo();
