@@ -34,6 +34,9 @@ public class WishRestController {
 	@Autowired
 	private WishService wishService;
 	
+	
+	
+	
 	@Operation(summary = "위시리스트 추가")
 	@PostMapping
 	// insert
@@ -52,11 +55,18 @@ public class WishRestController {
 		return new ResponseEntity<WishlistInsertDto>(dto, httpHeaders, HttpStatus.CREATED);
 	}
 	
+	
+	
+	
+	
+	
 	@Operation(summary = "위시리스트 삭제")
 	@DeleteMapping("/{no}")
 	// delete
 	public void deleteWish(@PathVariable(name = "no") Long no) throws Exception{
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>실행1");
 		wishService.deleteWish(no);
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>실행2");
 	}
 	
 	@Operation(summary = "위시리스트 보기")
