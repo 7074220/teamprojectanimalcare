@@ -50,24 +50,28 @@ public class VolunteerController {
 	
 	// 봉사버튼 클릭시 센터정보 보여줌
 	@PostMapping("/create-volunteer")
-	public String createVolunteer(@RequestParam("volunteerDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date volunteerDate, 
-			@RequestParam("volunteerTime") int selectedHour, @RequestParam Long centerNo, HttpSession session, Model model) throws Exception{
+	public String createVolunteer(@RequestParam("volunteerDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date volunteerDate,
+			@RequestParam("volunteerTime") int selectedHour, @RequestParam Long centerNo, HttpSession session, Model model) throws Exception {
 		Long userNo = (Long) session.getAttribute("userNo");
 		
-		Volunteer volunteer = new Volunteer();
-		volunteer.setVolunteerDate(volunteerDate);
-		volunteer.setVolunteerStatus("접수중");
-		volunteer.setVolunteerTime(selectedHour);
-		
-		Center center = centerService.findByCenterNo(centerNo);
-		Userinfo userinfo = userInfoService.findUserByNo(userNo);
-		volunteer.setUserinfo(userinfo);
-		volunteer.setCenter(center);
-		volunteerService.insertVolunteer(volunteer);
-		model.addAttribute("userinfo", userinfo);
-		 // return "center-list"; 이게 원본임
-	      return "order-list"; // 오더리스트 연결
-	   }
+		if (userNo != null) {
+			Volunteer volunteer = new Volunteer();
+			volunteer.setVolunteerDate(volunteerDate);
+			volunteer.setVolunteerStatus("접수중");
+			volunteer.setVolunteerTime(selectedHour);
+
+			Center center = centerService.findByCenterNo(centerNo);
+			Userinfo userinfo = userInfoService.findUserByNo(userNo);
+			volunteer.setUserinfo(userinfo);
+			volunteer.setCenter(center);
+			volunteerService.insertVolunteer(volunteer);
+			model.addAttribute("userinfo", userinfo);
+		} else {
+			throw new Exception("로그인이 필요합니다.");
+		}
+		return "center-list"; // 이게 원본임
+		// return "order-list"; // 오더리스트 연결
+	}
 
 	
 	

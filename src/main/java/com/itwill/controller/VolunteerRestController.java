@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itwill.dto.AdoptDto;
 import com.itwill.dto.VolunteerDto;
 import com.itwill.entity.Center;
 import com.itwill.entity.Volunteer;
@@ -40,6 +41,56 @@ public class VolunteerRestController {
 	@Autowired
 	private CenterService centerService;
 	
+	
+	
+	@Operation(summary = "봉사신청")
+	@PostMapping("/create-volunteer")
+	public ResponseEntity<VolunteerDto> insertVolunteer(@RequestBody VolunteerDto dto, HttpSession session) throws Exception {
+        Long userNo = (Long) session.getAttribute("userNo");
+        
+        Integer status = 0;
+        
+        if (userNo == null) {
+            // 로그인하지 않은 사용자에 대한 처리
+            //return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        	status = 1;
+        }
+        
+        dto.setUserNo(userNo);
+        Volunteer volunteer = VolunteerDto.toEntity(dto);
+        volunteerService.insertVolunteer(volunteer);
+        
+        HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		return new ResponseEntity<VolunteerDto>(dto, httpHeaders, HttpStatus.CREATED);
+    }
+
+	
+	
+	
+	/*
+	@Operation(summary = "봉사신청")
+	@PostMapping("/create-volunteer")
+	public ResponseEntity<VolunteerDto> insertVolunteer(@RequestBody VolunteerDto dto, HttpSession session) throws Exception {
+	    Long userNo = (Long) session.getAttribute("userNo");
+
+	    Integer status = 0;
+
+	    if (userNo == null) {
+	        // 비회원에 대한 처리를 여기에 추가
+	        // 예를 들어, 로그인을 유도하는 메시지를 반환
+	        VolunteerDto responseDto = new VolunteerDto();
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseDto);
+	    }
+
+	    dto.setUserNo(userNo);
+	    Volunteer volunteer = VolunteerDto.toEntity(dto);
+	    volunteerService.insertVolunteer(volunteer);
+
+	    dto.setVolunteerStatus("봉사신청"); // 수정된 부분
+	    return ResponseEntity.status(HttpStatus.CREATED).body(dto);
+	}
+	
 	@Operation(summary = "봉사신청") 
 	@PostMapping
 	public ResponseEntity<VolunteerDto> insertVolunteer(@RequestBody VolunteerDto dto, HttpSession httpSession) throws Exception{
@@ -49,7 +100,7 @@ public class VolunteerRestController {
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));		
 		return new ResponseEntity<>(dto, httpHeaders, HttpStatus.CREATED);		
 	} // INSERT
-	
+	*/
 
 	
 	@Operation(summary = "봉사삭제")

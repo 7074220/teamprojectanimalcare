@@ -62,52 +62,7 @@ window.onload = function() {
 </script>
 
 
-<!-- <script>
-	// AJAX 요청을 비동기로 보내는 함수
-	function ajaxRequest(method, url, sendJsonObject) {
-		let returnResultJsonObject = {};
-		$.ajax({
-			async : true,
-			method : method,
-			url : url,
-			contentType : 'application/json; charset=UTF-8',
-			data : JSON.stringify(sendJsonObject),
-			dataType : 'json',
-			success : function(resultJsonObject) {
-				returnResultJsonObject = resultJsonObject;
-			}
-		});
-		return returnResultJsonObject;
-	}
 
-	// .submit 버튼 클릭 이벤트 처리
-	$('.submit').on('click', function(event) {
-			event.preventDefault();
-			let centerName = $(this).data('centerName'); // .submit 버튼의 데이터 속성 처리 필요
-
-			let volunteerDate = $('#volunteerDate').val();
-			let volunteerTime = $('#volunteerTime').val();
-
-			let sendJsonObject = {
-				centerName : centerName,
-				volunteerDate : volunteerDate,
-				volunteerTime : volunteerTime
-			};
-
-			try {
-				let responseObject = ajaxRequest('POST', 'volunteer/create-volunteer', sendJsonObject);
-				if (responseObject.status === 1) {
-					alert('로그인이 필요합니다.');
-					window.location.href = 'index'; // 로그인 페이지로 이동
-				} else {
-					alert('입양 신청이 완료되었습니다.');
-				}
-			} catch (error) {
-				console.error('AJAX 요청 실패:', error);
-				alert('입양 신청 중 오류가 발생했습니다.');
-			}
-		});
-</script> -->
 
 
 
@@ -142,13 +97,8 @@ window.onload = function() {
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-6 col-md-6">
-						<!-- 이미지 추가 -->
 						<div class="contact_message content">
-							<div class="zoomWrapper single-zoom">
-								<a href="#"> 
-								<img id="zoom1" src="image/volunteer/center_name1.png"
-									data-zoom-image="image/volunteer/center_name1.png" alt="센터이미지">
-								</a>
+							<div class="zoomWrapper single-zoom">								
 							</div>
 							
 							<!-- 센터 정보 -->
@@ -166,13 +116,14 @@ window.onload = function() {
 					<div class="col-lg-6 col-md-6">
 						<div class="contact_message form">
 							<h3 style="font-weight: bold">신청 양식</h3>
-							<!-- 달력 -->
+							
 							<form th:action="@{/create-volunteer}" method="post" th:object="${volunteer}">
+							
 								
-								<input type="hidden" name="centerNo" th:value="${center.centerNo}" />
+								<input type="hidden" id="centerNo" name="centerNo" th:value="${center.centerNo}" />
 								
 								<p>
-									<label>방문예약</label> 
+									<span>방문예약</span> 
 									<!-- <input type="date" name="volunteerDate"> -->
 									<!--  th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" 이 코드 추가시 현재 날짜 보여줌 -->
 									<input type="date" name="volunteerDate"
@@ -184,10 +135,10 @@ window.onload = function() {
 								</p>
 								
 								<p>
-									<label>방문 시간</label>
+									<span>방문 시간</span>
 									
 									<!-- <input type="time" name="volunteerTime" > -->
-									<select name="volunteerTime">
+									<select name="volunteerTime" id="volunteerTime">
 										<option value="09">09 AM</option>
 										<option value="10">10 AM</option>
 										<option value="11">11 AM</option>
@@ -204,7 +155,7 @@ window.onload = function() {
 								
 								
 								<button type="submit" class="submit">submit</button>
-								<p class="form-messege"></p>
+								<!-- <p class="form-messege"></p> -->
 							</form>
 
 						</div>
@@ -212,9 +163,74 @@ window.onload = function() {
 				</div>
 			</div>
 		</div>
+	
+	
+	
+<script>
+
+function ajaxRequest(method, url, sendJsonObject) {
+		let returnResultJsonObject={};
+		$.ajax({
+			async:false,
+			method: method,
+			url: url,
+			contentType: 'application/json;UTF-8',
+			data: JSON.stringify(sendJsonObject),
+			type: 'json',
+			success: function(resultJsonObject) {
+				returnResultJsonObject = resultJsonObject;
+			}
+		});
+		return returnResultJsonObject;
+	}
 
 
 
+$('.submit').on('click', function (event) {
+    event.preventDefault();
+    let centerNo = $('#centerNo').val(); // 센터 번호를 정의
+    let volunteerDate = $('#volunteerDate').val();
+    let volunteerTime = $('#volunteerTime').val();
+
+    let sendJsonObject = {
+        centerNo: centerNo,
+        volunteerDate: volunteerDate,
+        volunteerTime: volunteerTime
+    };
+    let responseObject=ajaxRequest('POST','volunteer/create-volunteer',sendJsonObject);
+		if(responseObject.status ==1){
+		alert('로그인이 필요합니다.');
+		window.location.href = 'index';	// 로그인 창으로 이동
+	}else{
+		alert("봉사신청이 완료되었습니다.");
+	}
+    
+});   
+    // AJAX 요청
+    /* $.ajax({
+        method: 'POST',
+        url: '/volunteer/create-volunteer',
+        contentType: 'application/json; charset=UTF-8',
+        data: JSON.stringify(sendJsonObject),
+        dataType: 'json',
+        success: function(responseObject) {
+            if (responseObject.status === 401) {
+                alert('로그인이 필요합니다.');
+                window.location.href = '/index/login.html'; // 수정된 로그인 페이지 URL로 이동
+            } else if (responseObject.status === 201) {
+                alert('봉사 신청이 완료되었습니다.');
+            }
+        }, 
+         error: function(error) {
+            console.error('AJAX 요청 실패:', error);
+            alert('로그인이 필요합니다.');
+        }
+    });*/
+
+
+</script> 
+	
+	
 	</th:block>
 	<!--contact area end-->
 
