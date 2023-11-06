@@ -8,6 +8,8 @@
 <head>
 <title>Safira - contact page</title>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <style type="text/css">
 #volunteerDate {
 	border: 1px solid black;
@@ -58,8 +60,57 @@ window.onload = function() {
     volunteerDate.setAttribute('min', tomorrowString);
 };
 </script>
- 
- 
+
+
+<!-- <script>
+	// AJAX 요청을 비동기로 보내는 함수
+	function ajaxRequest(method, url, sendJsonObject) {
+		let returnResultJsonObject = {};
+		$.ajax({
+			async : true,
+			method : method,
+			url : url,
+			contentType : 'application/json; charset=UTF-8',
+			data : JSON.stringify(sendJsonObject),
+			dataType : 'json',
+			success : function(resultJsonObject) {
+				returnResultJsonObject = resultJsonObject;
+			}
+		});
+		return returnResultJsonObject;
+	}
+
+	// .submit 버튼 클릭 이벤트 처리
+	$('.submit').on('click', function(event) {
+			event.preventDefault();
+			let centerName = $(this).data('centerName'); // .submit 버튼의 데이터 속성 처리 필요
+
+			let volunteerDate = $('#volunteerDate').val();
+			let volunteerTime = $('#volunteerTime').val();
+
+			let sendJsonObject = {
+				centerName : centerName,
+				volunteerDate : volunteerDate,
+				volunteerTime : volunteerTime
+			};
+
+			try {
+				let responseObject = ajaxRequest('POST', 'volunteer/create-volunteer', sendJsonObject);
+				if (responseObject.status === 1) {
+					alert('로그인이 필요합니다.');
+					window.location.href = 'index'; // 로그인 페이지로 이동
+				} else {
+					alert('입양 신청이 완료되었습니다.');
+				}
+			} catch (error) {
+				console.error('AJAX 요청 실패:', error);
+				alert('입양 신청 중 오류가 발생했습니다.');
+			}
+		});
+</script> -->
+
+
+
 </head>
 
 <body>
@@ -152,7 +203,7 @@ window.onload = function() {
 								</p>
 								
 								
-								<button type="submit">확인</button>
+								<button type="submit" class="submit">submit</button>
 								<p class="form-messege"></p>
 							</form>
 
@@ -161,6 +212,9 @@ window.onload = function() {
 				</div>
 			</div>
 		</div>
+
+
+
 	</th:block>
 	<!--contact area end-->
 
