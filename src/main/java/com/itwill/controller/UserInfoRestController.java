@@ -208,6 +208,23 @@ public class UserInfoRestController {
 		return new ResponseEntity<List<Userinfo>>(userinfos, httpHeaders, HttpStatus.OK);
 	}
 	
+	@Operation(summary = "아이디 찾기")
+	@PostMapping("/findIdUserInfo")
+	public ResponseEntity<UserInfoFindDto> findIdUserInfo(UserInfoFindDto dto) throws Exception {
+		Userinfo userinfo = userInfoService.findUserIdByNameAndPhoneNumber(dto.getUserName(), dto.getUserPhoneNumber());
+		Integer status = 0;
+		if(userinfo==null) {
+			
+		}
+		UserInfoFindDto findDto = UserInfoFindDto.toDto(userinfo);
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+		return new ResponseEntity<UserInfoFindDto>(findDto,httpHeaders, HttpStatus.OK);
+
+	}
+	
 	@ExceptionHandler(value = ExistedUserException.class)
 	public ResponseEntity<ExistedUserException> user_existed_exception_handler(ExistedUserException e) throws Exception {
 		
@@ -241,19 +258,6 @@ public class UserInfoRestController {
 		HttpHeaders httpHeaders=new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application","json",Charset.forName("UTF-8")));
 		return new ResponseEntity<UserInfoResponse>(response,httpHeaders,HttpStatus.OK);
-	}
-		
-	@Operation(summary = "아이디 찾기")
-	@PostMapping("/findIdUserInfo")
-	public ResponseEntity<String> findIdUserInfo(UserInfoFindDto dto) throws Exception {
-		
-		String result = userInfoService.findUserIdByNameAndPhoneNumber(dto.getUserName(), dto.getUserPhoneNumber());
-		
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-
-		return new ResponseEntity<String>(result,httpHeaders, HttpStatus.OK);
-
 	}
 	
 }

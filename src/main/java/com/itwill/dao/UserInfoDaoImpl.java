@@ -67,7 +67,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	
 	// 이름과 폰번호로 아이디 찾기
 	@Override
-	public String findUserIdByNameAndPhoneNumber(String userName, String userPhoneNumber) {
+	public Userinfo findUserIdByNameAndPhoneNumber(String userName, String userPhoneNumber) {
 		return userinfoRepository.findUserIdByNameAndPhoneNumber(userName, userPhoneNumber);
 	}
 	
