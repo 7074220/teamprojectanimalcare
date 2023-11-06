@@ -177,7 +177,7 @@ CREATE TABLE Product(
 		product_qty                   		NUMBER(10)		 NULL ,
 		product_image                 		VARCHAR2(100)		 NULL ,
 		product_detail_image          		VARCHAR2(100)		 NULL ,
-		product_star_avg              		NUMBER(10)		 NULL 
+		product_star_avg              		DOUBLE PRECISION		 NULL 
 );
 
 DROP SEQUENCE Product_product_no_SEQ;
