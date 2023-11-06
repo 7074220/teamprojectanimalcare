@@ -48,4 +48,8 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
 	// 카트에 담긴 모든 상품 출력 (아이디 별)
 	@Query(value = "select * from cart where user_no=?1 order by cart_no asc", nativeQuery = true)
 	List<Cart> findAllCartByUserNo(Long userNo);
+	
+	// 카트에 있는 갯수 출력 (userNo)
+	@Query(value = "select count(*) from cart where user_no=?1", nativeQuery = true)
+	Integer countCart(Long userNo);
 }
