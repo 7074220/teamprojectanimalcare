@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='Register')">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='registerMyPet')">
 
 <head>
 	<title>Register</title>
@@ -83,6 +83,60 @@
 				</div>
 			</div>
 		</div>
+		<script>
+		 
+	 	function ajaxRequest(method, url, sendJsonObject) {
+	 		let returnResultJsonObject={};
+	 		$.ajax({
+	 			async:false,
+	 			method: method,
+	 			url: url,
+	 			contentType: 'application/json;UTF-8',
+	 			data: JSON.stringify(sendJsonObject),
+	 			type: 'json',
+	 			success: function(resultJsonObject) {
+	 				returnResultJsonObject = resultJsonObject;
+	 			}
+	 		});
+	 		return returnResultJsonObject;
+	 	}
+		
+	
+		$('.submit').on('click', function(event) {
+	        event.preventDefault();
+	        let petNo = $('#petid').val();
+	        let adoptDate = $('#adoptDate').val(); // 선택한 날짜 가져오기
+	        let adoptTime = $('#adoptTimeSelect').val(); // 선택한 시간 가져오기
+	        
+	        let sendJsonObject = {
+	            petNo: petNo,
+	            adoptDate: adoptDate,
+	            adoptTime: adoptTime,
+	            adoptStatus:"입양신청접수"
+	        };
+			
+	       let responseObject=ajaxRequest('POST','adopt/create-adopt',sendJsonObject);
+	  		if(responseObject.userNo == null){
+				alert('로그인이 필요합니다.');
+				window.location.href = 'index';	// 로그인 창으로 이동
+			}else{
+				alert("입양신청이 완료되었습니다.");
+				window.location.href='index'; // 메인페이지로 이동
+			}
+	  		
+	    });
+	    	
+			
+	
+	
+
+
+
+
+
+
+			
+</script>
 	</th:block>
 	
 </body>

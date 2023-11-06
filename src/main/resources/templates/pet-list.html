@@ -194,6 +194,15 @@ function petLocal() {
                                     <!-- <div class="product_desc">
                                         <p>Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Viva..</p>
                                     </div> -->
+                                    
+                                     <div class="action_links list_action_right">
+                                        <ul>
+                                            <li class="add_to_cart"><a th:href="@{/adopt(petNo=${pet.petNo})}" title="입양하기">입양하기</a></li>
+                                            <!-- admin 계정 57번 admin계정에서만 삭제버튼 활성화 -->
+                                            <li class="add_to_cart"> <a href="#" th:onclick="'return confirmDelete(\'' + ${pet.petNo} + '\');'" title="삭제하기" th:if="${session.userNo == 57}">삭제</a></li>
+
+                                        </ul>
+                                    </div>
                                  
                                     
                                 </div>
