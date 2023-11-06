@@ -3,130 +3,139 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='cart')">
 
 <head>
-    <title>Safira - cart page</title>
-    
-    
-    <!-- 별점 css 위치 -->
-
-<style>
-
-.rating_box {
-  display: flex;
-}
-
-.rating {
-  position: relative;
-  color: #ddd;
-  font-size: 30px;
-  text-align: center;
-}
-
-.rating input {
-  position: absolute;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.rating_star {
-  width: 0;
-  color: #ffc107;
-  position: absolute;
-  left: 0;
-  right: 0;
-  overflow: hidden;
-  pointer-events: none;
-  transition: width 0.2s;
-}
+	<title>Safira - cart page</title>
 
 
-</style>
+	<!-- 별점 css 위치 -->
 
-    
+	<style>
+		@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+		.rate {
+			display: inline-block;
+			border: 0;
+			margin: 0 auto;
+			text-align: left;
+			direction: rtl;
+		}
+		.rate>input {
+			display: none;
+		}
+		.rate>label {
+			font-size: 3em;
+			color: #ddd;
+			position: relative;
+			display: inline-block;
+		}
+		.rate>label:before {
+			display: inline-block;
+			font-size: 1rem;
+			padding: .3rem .2rem;
+			margin: 0;
+			cursor: pointer;
+			font-family: FontAwesome;
+			content: "\f005 ";
+			text-align: left;
+		}
+		.rate .half:before {
+			content: "\f089 ";
+			position: absolute;
+			padding-right: 0;
+			left: 0;
+			/* 왼쪽에서 시작하도록 위치 조정 */
+		}
+		.rate input:checked~label,
+		.rate label:hover,
+		.rate label:hover~label {
+			width: auto;
+			color: #f73c32 !important;
+		}
+		.rate input:checked+.rate label:hover,
+		.rate input input:checked~label:hover,
+		.rate input:checked~.rate label:hover~label,
+		.rate label:hover~input:checked~label {
+			width: auto;
+			color: #f73c32 !important;
+		}
+	</style>
+
 </head>
+
 
 <body>
 
-
-   <!--header area start-->
-    <th layout:fragment="content">
-    <!--offcanvas menu area start-->
-   <!--  <div class="off_canvars_overlay">
+	<!--header area start-->
+	<th layout:fragment="content">
+		<!--offcanvas menu area start-->
+		<!--  <div class="off_canvars_overlay">
                 
    
     <!--offcanvas menu area end-->
-    
-    <!-- <header>
 
-    <!--header area end-->
-    
-    <!--breadcrumbs area start-->
-   <!--  <div class="breadcrumbs_area">
+		<!-- <header> -->
+
+		<!--header area end-->
+
+		<!--breadcrumbs area start-->
+		<!--  <div class="breadcrumbs_area">
        
     <!--breadcrumbs area end-->
-    
-     <!--shopping cart area start -->
-    <div class="shopping_cart_area mt-70">
-        <div class="container">  
-            <form action="#"> 
-                <div class="row">
-                    <div class="col-12">
-                        <div class="table_desc">
-                            <div class="cart_page">
-                             <table>
-                            <thead>
-                                <tr>
-                                    <!--<th class="product_remove">Delete</th>-->
-                                    <th class="order_no">주문번호</th>
-                                    <th class="order_date">주문날짜</th>
-                                    <th class="product_thumb">사진</th>
-                                    <th class="product_name">상품이름</th>
-                                    <th class="product-price">가격</th>
-                                    <th class="product_quantity">수량</th>
-                                    <th class="product_total">총가격</th>
-                                    <th class="review_write_butten">리뷰쓰기</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+
+		<!--shopping cart area start -->
+		<div class="shopping_cart_area mt-70">
+			<div class="container">
+				<form action="#">
+					<div class="row">
+						<div class="col-12">
+							<div class="table_desc">
+								<div class="cart_page">
+									<table>
+										<thead>
+											<tr>
+												<!--<th class="product_remove">Delete</th>-->
+												<th class="order_no">주문번호</th>
+												<th class="order_date">주문날짜</th>
+												<th class="product_thumb">사진</th>
+												<th class="product_name">상품이름</th>
+												<th class="product-price">가격</th>
+												<th class="product_quantity">수량</th>
+												<th class="product_total">총가격</th>
+												<th class="review_write_butten">리뷰쓰기</th>
+											</tr>
+										</thead>
+										<tbody>
+											
+										</tbody>
+									</table>
+								</div>
+
+								<div class="cart_submit view">
+									<button type="submit">리뷰작성</button>
+								</div>
 
 
+							</div>
+						</div>
+					</div>
 
-                            </tbody>
-                            
-                            
-                        </table>   
-                            </div>  
-                            
-                            <div class="cart_submit view" >
-                                <button type="submit">리뷰작성</button>
-                            </div>
-                            
-                                 
-                        </div>
-                     </div>
-                 </div>
-                 
-                 
-                 <div class="modal fade" id="orderDetailsModal" tabindex="-1" 
-                                 aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                <div class="modal-content" style="height:500px">
-                                    <div class="modal-header">
-                                    <h5 class="modal-title" id="orderDetailsModalLabel">리뷰 작성</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="border: none; padding: 7px;">X
-                                        <!--<span aria-hidden="true">&times;</span>-->
-                                    </button>
-                                    </div>
-                                    <div class="modal-body">
-                                    <!-- 주문 상세 내용이 여기에 로드됩니다 -->
-                                    
-                                      <div >
-                                      <!--class="table-responsive"-->
-                                      
-                                    <!--<table class="table">
+
+					<div class="modal fade" id="orderDetailsModal" tabindex="-1"
+						aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content" style="height:500px">
+								<div class="modal-header">
+									<h5 class="modal-title" id="orderDetailsModalLabel">리뷰 작성</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+										style="border: none; padding: 7px;">X
+										<!--<span aria-hidden="true">&times;</span>-->
+									</button>
+								</div>
+								<div class="modal-body">
+									<!-- 주문 상세 내용이 여기에 로드됩니다 -->
+
+									<div>
+										<!--class="table-responsive"-->
+
+										<!--<table class="table">
                                         <thead>
                                             <tr>
 												<th>번호</th>
@@ -148,120 +157,97 @@
                                             </tr>
                                         </tbody>
                                     </table>-->
-                                    
-                                    
-                            <!--<h3>리뷰작성</h3>-->
-                                    <div class="comments_form">
-                            
-                     <form action="#" class="mb-3" name="myform" id="myform" method="post">
-                                
-                            <p>별점과 후기를 남겨주세요.</p>
-                            
-                            
-                            
-                            
-                            
 
-								<div class="row" style="flex-direction: column;">
-						
-									<div>별점</div>
-									
-									<!-- 별점 위치 -->
-									
-									<div class="rating_box">
-										<div class="rating">
-											★★★★★
-											<span class="rating_star">★★★★★</span>
-											<input type="range" value="1" step="1" min="0" max="10">
+
+										<!--<h3>리뷰작성</h3>-->
+										<div class="comments_form">
+
+											<form action="#" class="mb-3" name="myform" id="myform" method="post">
+
+												<p>별점과 후기를 남겨주세요.</p>
+
+
+												<div class="row" style="flex-direction: column;">
+
+													<div>별점</div>
+
+													<!-- 별점 위치 -->
+
+													<div class="rate">
+														<input type="radio" id="star1" name="rate" value="1">
+														<label for="star1"></label>
+														<input type="radio" id="star2" name="rate" value="2">
+														<label for="star2"></label>
+														<input type="radio" id="star3" name="rate" value="3">
+														<label for="star3"></label>
+														<input type="radio" id="star4" name="rate" value="4">
+														<label for="star4"></label>
+														<input type="radio" id="star5" name="rate" value="5">
+														<label for="star5"></label>
+													</div>
+
+													<div class="col-12">
+														<label for="review_comment">Comment </label>
+														<div> <textarea name="comment" id="review_comment"></textarea>
+														</div>
+
+													</div>
+												</div>
+												<!--<button class="button" type="submit">Post Comment</button>-->
+												<div class="modal-footer">
+													<!--   <button type="button" class="btn btn-primary">리뷰 저장</button>-->
+													<button type="button" class="btn btn-secondary"
+														data-dismiss="modal">작성 완료</button>
+												</div>
+											</form>
 										</div>
 									</div>
-									
-									
-									
-									
-                                    <div class="col-12">
-                                        <label for="review_comment">Comment </label>
-                                        <div> <textarea name="comment" id="review_comment" ></textarea></div>
-                                       
-                                    </div> 
-                                </div>
-                                <!--<button class="button" type="submit">Post Comment</button>-->
-                     </form>   
-                              
-                        </div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                </div>
-                                    
-                                    </div>
-                                    <div class="modal-footer">
-                                 <!--   <button type="button" class="btn btn-primary">리뷰 저장</button>-->
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">작성 완료</button>
-                                    
-                                    </div>
-                                </div>
-                                </div>
-                            </div>   
-                            
-                 
-                 
-                 
-                 
-                 <!--coupon code area start-->
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--coupon code area start-->
 
-                <!--coupon code area end-->
-            </form> 
-        </div>     
-    </div>
-     <!--shopping cart area end -->
-     
-     
-     <!--주문한 상품 리뷰쓰기 -->
-	<script>
-		// 주문 상세 모달 표시 이벤트 핸들러
-		document.querySelector('.cart_submit button').addEventListener('click', function (e) {
-			e.preventDefault();
+					<!--coupon code area end-->
+				</form>
+			</div>
+		</div>
+		<!--shopping cart area end -->
 
-			// 모달창 표시
-			$('#orderDetailsModal').modal('show');
-		});
-	</script>
-	
-	
-	
-	<!-- 별점 js 위치 -->
-	
-	<script>
-		const rating = document.querySelector('.rating');
-    const rating_input = document.querySelector('.rating input');
-    const rating_star = document.querySelector('.rating_star');
 
-    rating.addEventListener('mousemove', (event) => {
-        const boundingRect = rating.getBoundingClientRect();
-        const offsetX = event.clientX - boundingRect.left;
-        const ratingValue = Math.min(10, Math.ceil((offsetX / boundingRect.width) * 10));
-        rating_input.value = ratingValue;
-        rating_star.style.width = `${ratingValue * 10}%`;
-    });
+		<!--주문한 상품 리뷰쓰기 -->
+		<script>
+			// 주문 상세 모달 표시 이벤트 핸들러
+			document.querySelector('.cart_submit button').addEventListener('click', function (e) {
+				e.preventDefault();
 
-	</script>
-	
-     
-     
-     
+				// 모달창 표시
+				$('#orderDetailsModal').modal('show');
+			});
+		</script>
 
-      
-      
-     </th:block>
-     
-     
-     
-    <!--footer area start-->
 
-    <!--footer area end-->
+
+		<!-- 별점 js 위치 -->
+
+		<script>
+
+
+		</script>
+
+
+
+
+
+
+
+		</th:block>
+
+
+
+		<!--footer area start-->
+
+		<!--footer area end-->
 
 
 
