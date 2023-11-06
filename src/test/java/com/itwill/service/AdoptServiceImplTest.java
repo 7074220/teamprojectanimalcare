@@ -3,6 +3,7 @@ package com.itwill.service;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 import org.junit.jupiter.api.Disabled;
@@ -34,9 +35,12 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 		Pet pet1=petService.petFindById(1L);
 		Pet pet2=petService.petFindById(2L);
 		
+		LocalTime customTime1 = LocalTime.of(12, 30);
+		LocalTime customTime2 = LocalTime.of(10, 30);
+		
 		Adopt insertAdopt1 = Adopt.builder()
 				.adoptDate(new Date())
-				.adoptTime(13)
+				.adoptTime(11)
 				.adoptStatus("입양신청")
 				.pet(pet1)
 				.userinfo(user)
@@ -44,7 +48,7 @@ class AdoptServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 		adoptService.insertAdopt(insertAdopt1);
 		Adopt insertAdopt2 = Adopt.builder()
 				.adoptDate(new Date())
-				.adoptTime(16)
+				.adoptTime(12)
 				.adoptStatus("입양완료")
 				.pet(pet2)
 				.userinfo(user)
