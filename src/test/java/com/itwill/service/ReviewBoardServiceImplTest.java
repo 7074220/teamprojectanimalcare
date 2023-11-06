@@ -38,7 +38,7 @@ class ReviewBoardServiceImplTest {
 				.boardTitle("별로네요")
 				.boardContent("별로에요")
 				.boardDate(new Date())
-				//.boardStar(1)
+				.boardStar((double) 1)
 				.userinfo(userInfoService.findUserByNo(14L))
 				.product(productService.findByProductNo(15L))
 				.build();
