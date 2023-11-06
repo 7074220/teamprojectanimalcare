@@ -5,6 +5,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +24,7 @@ import com.itwill.dto.ProductCatListDto;
 import com.itwill.dto.ProductDogListDto;
 import com.itwill.dto.ProductInsertDto;
 import com.itwill.dto.ProductListDto;
+import com.itwill.dto.ProductListPageDto;
 import com.itwill.dto.ProductNameDto;
 import com.itwill.dto.ProductPetCategoryDto;
 import com.itwill.dto.ProductPriceAscDto;
@@ -58,6 +64,7 @@ public class ProductController {
 	}
 	*/
 	
+	/*
 	// 펫카테고리별로 구분 --> 상품 리스트 출력
 		@GetMapping("/productList")
 		public String productList(Model model, HttpSession session) {
@@ -83,6 +90,45 @@ public class ProductController {
 			}
 			
 			model.addAttribute("productList", productListDto);
+			model.addAttribute("myPet", myPet);
+			// System.out.println(productList.get(0).getProductPetCategory());
+			return "shop";
+		}
+		*/
+		// 펫카테고리별로 구분 --> 상품 리스트 출력
+		@GetMapping("/productList")
+		public String productList(@PageableDefault(page = 1, size = 5) Pageable p, Model model, HttpSession session) throws Exception {
+			List<ProductListDto> productListDto = new ArrayList<>();
+			List<Product> productList = new ArrayList<>();
+			
+			Long userNo = (Long) session.getAttribute("userNo");
+			MyPet myPet = MyPet.builder().build();
+			
+			productList = productService.findAllByOrderByProductNoDesc();
+			
+			if(userNo != null) {
+				myPet = myPetService.findLeaderMyPet(userNo);
+				if (myPet == null) {
+					myPet = MyPet.builder().build();
+				} else {
+					productList = productService.findAllProductByPetCategory(myPet.getMypetKind());
+				}
+			}
+			
+			for (Product product : productList) {
+				productListDto.add(ProductListDto.toDto(product));
+			}
+			
+			int page = p.getPageNumber();
+			int size = p.getPageSize();
+			int blockSize = 5;
+			Pageable pageable = PageRequest.of(page - 1, size);
+			
+			Page<Product> productListPage = productService.findProductList(pageable);
+			//ProductListPageDto productListPageDto = new ProductListPageDto(productListPage, blockSize);
+			
+			//model.addAttribute("productList", productListDto);
+			model.addAttribute("productList", productListPage);
 			model.addAttribute("myPet", myPet);
 			// System.out.println(productList.get(0).getProductPetCategory());
 			return "shop";
