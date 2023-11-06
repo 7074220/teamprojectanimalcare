@@ -96,7 +96,6 @@ public class ProductController {
 			
 			Long userNo = (Long) session.getAttribute("userNo");
 			MyPet myPet = MyPet.builder().build();
-			System.out.println(">>>>>>>>>>>>>>"+category);
 			productList = productService.findAllProductByPetCategory("강아지");
 			
 			if(category.equals("All")) {
@@ -181,36 +180,60 @@ public class ProductController {
 		Long userNo = (Long) session.getAttribute("userNo");
 		MyPet myPet = MyPet.builder().build();
 		
-		/*
-		String kindPath = path.substring(1,path.lastIndexOf("?"));
-		String orderPath = "";
+		String kindPath = "";
+		String categoryPath = "";
 		
-		path.lastIndexOf("?");
-		path.lastIndexOf("=");
+		if(path.equals("/productList")) {
+			myPet.setMypetKind(myPetService.findLeaderMyPet(userNo).getMypetKind());
+			productList = productService.findAllByOrderByProductByPetCategoryPriceDesc(myPet.getMypetKind());
+		}else {
+			kindPath = path.substring(1,path.lastIndexOf("?"));
+			categoryPath = path.substring(path.lastIndexOf("=")+1);
+		}
 		
-		System.out.println(">>>>>>>>>>>>>>>>"+path);
-		*/
-		if (path.equals("/productDogList")) {
+		if(kindPath.equals("productDogList")) {
 			myPet.setMypetKind("강아지");
-			productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("강아지");
+			productList = productService.findAllProductByPetCategory("강아지");
+			if(categoryPath.equals("All")) {
+				productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("강아지");
+			}
+			if(categoryPath.equals("1")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryPriceDesc("강아지", "사료");
+			}
+			if(categoryPath.equals("2")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryPriceDesc("강아지", "간식");
+			}
+			if(categoryPath.equals("3")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryPriceDesc("강아지", "캔");
+			}
+			if(categoryPath.equals("4")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryPriceDesc("강아지", "위생");
+			}
+			if(categoryPath.equals("5")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryPriceDesc("강아지", "미용");
+			}
 		}
-
-		if (path.equals("/productCatList")) {
+		
+		if(kindPath.equals("productCatList")) {
 			myPet.setMypetKind("고양이");
-			productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("고양이");
-		}
-
-		if (path.equals("/productList")) {
-			myPet = myPetService.findLeaderMyPet(userNo);
-			if (myPet == null) {
-				myPet = MyPet.builder().build();
-			} else {
-				if (myPet.getMypetKind().equals("강아지")) {
-					productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("강아지");
-				}
-				if (myPet.getMypetKind().equals("고양이")) {
-					productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("고양이");
-				}
+			productList = productService.findAllProductByPetCategory("고양이");
+			if(categoryPath.equals("All")) {
+				productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("고양이");
+			}
+			if(categoryPath.equals("1")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryPriceDesc("고양이", "사료");
+			}
+			if(categoryPath.equals("2")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryPriceDesc("고양이", "간식");
+			}
+			if(categoryPath.equals("3")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryPriceDesc("고양이", "캔");
+			}
+			if(categoryPath.equals("4")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryPriceDesc("고양이", "모래");
+			}
+			if(categoryPath.equals("5")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryPriceDesc("고양이", "미용");
 			}
 		}
 		
@@ -232,27 +255,60 @@ public class ProductController {
 		Long userNo = (Long) session.getAttribute("userNo");
 		MyPet myPet = MyPet.builder().build();
 
-		if (path.equals("/productDogList")) {
+		String kindPath = "";
+		String categoryPath = "";
+		
+		if(path.equals("/productList")) {
+			myPet.setMypetKind(myPetService.findLeaderMyPet(userNo).getMypetKind());
+			productList = productService.findAllByOrderByProductByPetCategoryPriceAsc(myPet.getMypetKind());
+		}else {
+			kindPath = path.substring(1,path.lastIndexOf("?"));
+			categoryPath = path.substring(path.lastIndexOf("=")+1);
+		}
+		
+		if(kindPath.equals("productDogList")) {
 			myPet.setMypetKind("강아지");
-			productList = productService.findAllByOrderByProductByPetCategoryPriceAsc("강아지");
+			productList = productService.findAllProductByPetCategory("강아지");
+			if(categoryPath.equals("All")) {
+				productList = productService.findAllByOrderByProductByPetCategoryPriceAsc("강아지");
+			}
+			if(categoryPath.equals("1")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryPriceAsc("강아지", "사료");
+			}
+			if(categoryPath.equals("2")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryPriceAsc("강아지", "간식");
+			}
+			if(categoryPath.equals("3")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryPriceAsc("강아지", "캔");
+			}
+			if(categoryPath.equals("4")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryPriceAsc("강아지", "위생");
+			}
+			if(categoryPath.equals("5")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryPriceAsc("강아지", "미용");
+			}
 		}
-
-		if (path.equals("/productCatList")) {
+		
+		if(kindPath.equals("productCatList")) {
 			myPet.setMypetKind("고양이");
-			productList = productService.findAllByOrderByProductByPetCategoryPriceAsc("고양이");
-		}
-
-		if (path.equals("/productList")) {
-			myPet = myPetService.findLeaderMyPet(userNo);
-			if (myPet == null) {
-				myPet = MyPet.builder().build();
-			} else {
-				if (myPet.getMypetKind().equals("강아지")) {
-					productList = productService.findAllByOrderByProductByPetCategoryPriceAsc("강아지");
-				}
-				if (myPet.getMypetKind().equals("고양이")) {
-					productList = productService.findAllByOrderByProductByPetCategoryPriceAsc("고양이");
-				}
+			productList = productService.findAllProductByPetCategory("고양이");
+			if(categoryPath.equals("All")) {
+				productList = productService.findAllByOrderByProductByPetCategoryPriceAsc("고양이");
+			}
+			if(categoryPath.equals("1")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryPriceAsc("고양이", "사료");
+			}
+			if(categoryPath.equals("2")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryPriceAsc("고양이", "간식");
+			}
+			if(categoryPath.equals("3")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryPriceAsc("고양이", "캔");
+			}
+			if(categoryPath.equals("4")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryPriceAsc("고양이", "모래");
+			}
+			if(categoryPath.equals("5")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryPriceAsc("고양이", "미용");
 			}
 		}
 		
@@ -274,27 +330,60 @@ public class ProductController {
 		Long userNo = (Long) session.getAttribute("userNo");
 		MyPet myPet = MyPet.builder().build();
 
-		if (path.equals("/productDogList")) {
+		String kindPath = "";
+		String categoryPath = "";
+		
+		if(path.equals("/productList")) {
+			myPet.setMypetKind(myPetService.findLeaderMyPet(userNo).getMypetKind());
+			productList = productService.findAllByOrderByProductByPetCategoryNoDesc(myPet.getMypetKind());
+		}else {
+			kindPath = path.substring(1,path.lastIndexOf("?"));
+			categoryPath = path.substring(path.lastIndexOf("=")+1);
+		}
+		
+		if(kindPath.equals("productDogList")) {
 			myPet.setMypetKind("강아지");
-			productList = productService.findAllByOrderByProductByPetCategoryNoDesc("강아지");
+			productList = productService.findAllProductByPetCategory("강아지");
+			if(categoryPath.equals("All")) {
+				productList = productService.findAllByOrderByProductByPetCategoryNoDesc("강아지");
+			}
+			if(categoryPath.equals("1")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryNoDesc("강아지", "사료");
+			}
+			if(categoryPath.equals("2")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryNoDesc("강아지", "간식");
+			}
+			if(categoryPath.equals("3")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryNoDesc("강아지", "캔");
+			}
+			if(categoryPath.equals("4")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryNoDesc("강아지", "위생");
+			}
+			if(categoryPath.equals("5")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryNoDesc("강아지", "미용");
+			}
 		}
-
-		if (path.equals("/productCatList")) {
+		
+		if(kindPath.equals("productCatList")) {
 			myPet.setMypetKind("고양이");
-			productList = productService.findAllByOrderByProductByPetCategoryNoDesc("고양이");
-		}
-
-		if (path.equals("/productList")) {
-			myPet = myPetService.findLeaderMyPet(userNo);
-			if (myPet == null) {
-				myPet = MyPet.builder().build();
-			} else {
-				if (myPet.getMypetKind().equals("강아지")) {
-					productList = productService.findAllByOrderByProductByPetCategoryNoDesc("강아지");
-				}
-				if (myPet.getMypetKind().equals("고양이")) {
-					productList = productService.findAllByOrderByProductByPetCategoryNoDesc("고양이");
-				}
+			productList = productService.findAllProductByPetCategory("고양이");
+			if(categoryPath.equals("All")) {
+				productList = productService.findAllByOrderByProductByPetCategoryNoDesc("고양이");
+			}
+			if(categoryPath.equals("1")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryNoDesc("고양이", "사료");
+			}
+			if(categoryPath.equals("2")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryNoDesc("고양이", "간식");
+			}
+			if(categoryPath.equals("3")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryNoDesc("고양이", "캔");
+			}
+			if(categoryPath.equals("4")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryNoDesc("고양이", "모래");
+			}
+			if(categoryPath.equals("5")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryNoDesc("고양이", "미용");
 			}
 		}
 		
