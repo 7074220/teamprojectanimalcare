@@ -174,9 +174,9 @@ public class ReviewBoardRestController {
 		
 	
 	@Operation(summary = "높은 평점순 정렬")
-	@GetMapping("reviewBoards/BoardStarDesc")
-	public ResponseEntity<List<ReviewBoardDto>> findAllByOrderByBoardStarDesc() {
-	    List<ReviewBoard> reviewBoards = reviewBoardService.findAllByOrderByBoardStarDesc();
+	@GetMapping("/productDetail")
+	public ResponseEntity<List<ReviewBoardDto>> findByProductProductNoOrderByBoardStarDesc(@PathVariable(value = "productNo") Long productNo) {
+	    List<ReviewBoard> reviewBoards = reviewBoardService.findByProductProductNoOrderByBoardStarDesc(productNo);
 	    List<ReviewBoardDto> reviewBoardDtos = new ArrayList<>();
 
 	    for (ReviewBoard reviewBoard : reviewBoards) {
