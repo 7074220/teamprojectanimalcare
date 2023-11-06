@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itwill.dto.CartDto;
 import com.itwill.dto.WishlistDto;
 import com.itwill.dto.WishlistInsertDto;
 import com.itwill.entity.Wish;
@@ -56,8 +57,16 @@ public class WishRestController {
 	}
 	
 	
-	
-	
+	@Operation(summary = "위시리스트에 담긴 갯수 출력")
+	@GetMapping("/countWishlist/{userNo}")
+	public ResponseEntity<Integer> countWishlist(@PathVariable(name = "userNo") Long userNo, HttpSession session) {
+		Integer count = wishService.countWishlist(userNo);
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<>(count, httpHeaders, HttpStatus.OK);
+	}
 	
 	
 	@Operation(summary = "위시리스트 삭제")
@@ -68,6 +77,9 @@ public class WishRestController {
 		wishService.deleteWish(no);
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>실행2");
 	}
+	
+	
+	
 	
 	@Operation(summary = "위시리스트 보기")
 	@GetMapping("/find/{userNo}")

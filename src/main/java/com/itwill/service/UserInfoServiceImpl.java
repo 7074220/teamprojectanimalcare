@@ -109,10 +109,10 @@ public class UserInfoServiceImpl implements UserInfoService{
 	
 	// 비밀번호 찾기
 	@Override
-	public String findPasswordByUserIdPhoneNumber(String userId, String userPhoneNumber) {
-		String userPassword= userInfoDao.findPasswordByUserIdPhoneNumber(userId, userPhoneNumber);
+	public Userinfo findPasswordByUserIdPhoneNumber(String userId, String userPhoneNumber) {
+		Userinfo userPassword= userInfoDao.findPasswordByUserIdPhoneNumber(userId, userPhoneNumber);
 		if(userPassword==null) {
-			return "1";
+			Userinfo.builder().userPassword("").build();
 		}
 		return userPassword;
 	}

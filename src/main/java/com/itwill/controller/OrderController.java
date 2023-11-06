@@ -140,7 +140,7 @@ public class OrderController {
 		for (Coupon coupon : coupons) {
 			couponDtos.add(CouponDto.toDto(coupon));
 		}
-		
+		Integer totalPrice=cartService.cartTotalPrice(userNo);
 		
 		//System.out.println("?????"+couponDtos);
 		
@@ -163,6 +163,7 @@ public class OrderController {
 	    model.addAttribute("cartList",carts);
 	    model.addAttribute("user",userinfo );
 	    model.addAttribute("coupons",couponDtos);
+	    model.addAttribute("cartTotalPrice",totalPrice);
 		  
 		 
 		return "checkout2";

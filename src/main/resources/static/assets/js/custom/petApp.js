@@ -36,15 +36,7 @@ function registEvent() {
 			window.location.hash = e.target.getAttribute('data-navigate');
 		}
 		
-	$(document).ready(function(){
-    $('#short').change(function(){
-        var selectedValue = $(this).val();  // 선택된 값을 가져옵니다.
-
-        // 선택된 값을 기반으로 새로운 해시를 설정합니다.
-        window.location.hash = 'pet/'+selectedValue;
-        
-    });
-});
+	
 		
 	});
 }

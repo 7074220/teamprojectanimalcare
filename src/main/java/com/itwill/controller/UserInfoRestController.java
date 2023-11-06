@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.UserInfoFindDto;
+import com.itwill.dto.UserInfoPassFindDto;
 import com.itwill.dto.UserLoginActionDto;
 import com.itwill.dto.UserWriteActionDto;
 import com.itwill.entity.Coupon;
@@ -210,18 +211,35 @@ public class UserInfoRestController {
 	
 	@Operation(summary = "아이디 찾기")
 	@PostMapping("/findIdUserInfo")
-	public ResponseEntity<UserInfoFindDto> findIdUserInfo(UserInfoFindDto dto) throws Exception {
+	public ResponseEntity<UserInfoFindDto> findIdUserInfo(@RequestBody UserInfoFindDto dto) throws Exception {
 		Userinfo userinfo = userInfoService.findUserIdByNameAndPhoneNumber(dto.getUserName(), dto.getUserPhoneNumber());
 		Integer status = 0;
 		if(userinfo==null) {
-			
+			status = 1;
 		}
-		UserInfoFindDto findDto = UserInfoFindDto.toDto(userinfo);
+		UserInfoFindDto findDto = UserInfoFindDto.builder().userId(userinfo.getUserId()).status(status).build();
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
 		return new ResponseEntity<UserInfoFindDto>(findDto,httpHeaders, HttpStatus.OK);
+
+	}
+	
+	@Operation(summary = "비밀번호 찾기")
+	@PostMapping("/findPasswordUserInfo")
+	public ResponseEntity<UserInfoPassFindDto> findPasswordUserInfo(@RequestBody UserInfoPassFindDto dto) throws Exception {
+		Userinfo userinfo = userInfoService.findUserIdByNameAndPhoneNumber(dto.getUserName(), dto.getUserPhoneNumber());
+		Integer status = 0;
+		if(userinfo==null) {
+			status = 1;
+		}
+		UserInfoPassFindDto findDto = UserInfoPassFindDto.builder().userPassword(userinfo.getUserPassword()).status(status).build();
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+		return new ResponseEntity<UserInfoPassFindDto>(findDto,httpHeaders, HttpStatus.OK);
 
 	}
 	

@@ -44,6 +44,6 @@ public class Product {
 	// 제품 상세이미지
 	private String productDetailImage;
 	
-	private Integer productStarAvg;
+	private Double productStarAvg;
 
 }

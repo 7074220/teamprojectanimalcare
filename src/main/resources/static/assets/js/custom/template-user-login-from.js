@@ -7,12 +7,12 @@ export function user_login_form(responseJsonObject = {}) {
 
          <!-- customer login start -->
 
-         <div class="customer_login" id="content">
+         <div class="customer_login">
             <div class="container">
                <div class="row">
                   <!--login area start-->
                   <div class="col-lg-6 col-md-6">
-                     <form name="f">
+                     <form name="f" id = "loginForm">
                      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
                      <div class="form-floating">
                         <label>Id</label>
@@ -30,7 +30,7 @@ export function user_login_form(responseJsonObject = {}) {
                      <a></a>
 	  				<a class="navi-link" href="finduserinfo">아이디/비밀번호 찾기</a>
                      
-                     <button class="btn btn-success w-100 py-1" type="button" data-navigate="/login" >Sign in</button>
+                     <button class="btn btn-success w-100 py-1" type="button" data-navigate="/login">Sign in</button>
                      <!--<button type="button" data-navigate="/login">Sign in</button>-->
                   </div>
                   </form>
@@ -45,6 +45,13 @@ export function user_login_form(responseJsonObject = {}) {
       </div>
       </div>
       </div>
+      <script>
+		  	$('#loginForm').keypress(function(e){
+				  if(e.keyCode==13){
+					  window.location.hash = '/login'
+				  }
+			  });
+		</script>
    </th:block>`;
 	
 	let bindTemplate = Handlebars.compile(htmlTemplate);

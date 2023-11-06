@@ -29,7 +29,7 @@ public class ReviewBoardDto {
 	//@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'") 
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'") 
 	private Date boardDate;
-	private Integer boardStar;
+	private Double boardStar;
 	private Long productNo;
 	   private double averageRating;
 	
