@@ -574,7 +574,7 @@
 									<!--<th class="product_check">Check</th>-->
 									<th>
 										<label class="checkbox-inline">
-										<input type="checkbox" id="allCheckBox" onclick="allChecked()">
+										<input type="checkbox" id="allCheckBox" onclick="allChecked()" checked="true">
 										</label>
 									</th>
                                     <th class="product_thumb">Image</th>
@@ -598,7 +598,7 @@
                                     <!--<td class="product_checkbox" th:id="${cart.cartNo}"><input type="checkbox" name="cartCheckbox"></td>-->
                                     <td>
 										<label class="checkbox-inline">
-											<input type="checkbox" name="chk" class="chk" onclick="chkClicked()" value="" th:id="${cart.cartNo}">
+											<input type="checkbox" name="chk" class="chk" onclick="chkClicked()" value="" th:value="(${cart.product.productPrice})*(${cart.cartQty})" th:id="${cart.cartNo}" checked="true">
 										</label>
 									</td>
                                     <td class="product_thumb" th:id="${cart.cartNo}"><a href="#" th:href="@{productDetail(productNo=${cart.product.productNo})}"><img src="#" alt="" th:src="@{/image/product/} + ${cart.product.getProductImage}"></a></td>
@@ -666,19 +666,20 @@
                             <div class="coupon_code right">
                                 <h3>Cart Totals</h3>
                                 <div class="coupon_inner">
+									<!--
                                    <div class="cart_subtotal">
                                        <p>Subtotal</p>
-                                       <p class="cart_amount">£215.00</p>
+                                       <p class="cart_amount1" th:text='${totalPrice+"원"}'>£215.00</p>
                                    </div>
                                    <div class="cart_subtotal ">
                                        <p>Shipping</p>
-                                       <p class="cart_amount"><span>Flat Rate:</span> £255.00</p>
+                                       <p class="cart_amount2"><span>Flat Rate:</span> £255.00</p>
                                    </div>
                                    <a href="#">Calculate shipping</a>
-
+									-->
                                    <div class="cart_subtotal">
                                        <p>Total</p>
-                                       <p class="cart_amount">£215.00</p>
+                                       <p class="cart_amount1" th:text='${totalPrice+"원"}'>£215.00</p>
                                    </div>
                                    <div class="checkout_btn">
                                        <a href="orderView">Proceed to Checkout</a>
@@ -724,7 +725,7 @@
     		            cartNo : cartNo,
     		            cartQty: qty
     		        };
-					
+					$(e.target).parent().parent().find(".chk").val(price*qty);
 					ajaxRequest("PUT","cart/"+cartNo,sendJsonObject);	
 					
     		        // AJAX 요청을 통해 장바구니 수량 업데이트
@@ -732,6 +733,12 @@
     		            // 필요한대로 응답을 처리할 수 있습니다. 예를 들어 UI를 업데이트할 수 있습니다.
     		            // resultJsonObject에는 업데이트된 장바구니 정보가 포함됩니다.
     		       // });
+    		       	let totalprice = 0;
+					document.querySelectorAll('input[name="chk"]:checked').forEach(function (v, i) {
+						let price = parseInt(v.value);
+						totalprice = totalprice + price;
+					});
+					$('.cart_amount1').html(totalprice+"원");
     		    });
     		});
     		
@@ -764,9 +771,7 @@
 				if (is_checked) {
 					//체크박스 전체 체크
 					chkAllChecked()
-				}
-
-				else {
+				}else {
 					//체크박스 전체 해제
 					chkAllUnChecked()
 				}
@@ -792,13 +797,28 @@
 				else {
 					document.getElementById('allCheckBox').checked = false;
 				}
+				
+				let totalprice = 0;
+				document.querySelectorAll('input[name="chk"]:checked').forEach(function (v, i) {
+					let price = parseInt(v.value);
+					totalprice = totalprice + price;
+				});
+				$('.cart_amount1').html(totalprice+"원");
+				
 			}
 
 			//체크박스 전체 체크
 			function chkAllChecked() {
 				document.querySelectorAll(".chk").forEach(function (v, i) {
 					v.checked = true;
+
 				});
+				let totalprice = 0;
+				document.querySelectorAll('input[name="chk"]:checked').forEach(function (v, i) {
+					let price = parseInt(v.value);
+					totalprice = totalprice + price;
+				});
+				$('.cart_amount1').html(totalprice+"원");
 			}
 
 			//체크박스 전체 체크 해제
@@ -806,6 +826,12 @@
 				document.querySelectorAll(".chk").forEach(function (v, i) {
 					v.checked = false;
 				});
+				let totalprice = 0;
+				document.querySelectorAll('input[name="chk"]:checked').forEach(function (v, i) {
+					let price = parseInt(v.value);
+					totalprice = totalprice + price;
+				});
+				$('.cart_amount1').html(totalprice+"원");
 			}
 
 			//글삭제
@@ -824,11 +850,8 @@
 
 				else {
 					if (confirm("정말로 삭제하시겠습니까?")) {
-						//배열생성
-						const arr = new Array(selectedElementsCnt);
-
 						document.querySelectorAll('input[name="chk"]:checked').forEach(function (v, i) {
-							arr[i] = v.value;
+							ajaxRequest("DELETE","cart/delete/"+v.id);
 						});
 
 					}
