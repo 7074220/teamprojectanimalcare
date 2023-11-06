@@ -20,10 +20,9 @@ public interface UserinfoRepository extends JpaRepository<Userinfo, Long>{
 	@Query(value="select * from userInfo where user_id=?1",nativeQuery = true)
 	Userinfo findByUserId(String userId);
 	
-	//아이디 찾기
-	/*
-	 * @Query(value =
-	 * "select * from userinfo where user_name=?1 and user_phone_number=?2;") String
-	 * findUserIdByNameAndPhoneNumber(String userName,String userPhoneNumber);
-	 */
+	//아이디 찾기	
+	
+	@Query(value ="select * from userinfo where user_name=?1 and user_phone_number=?2;",nativeQuery = true) 
+	String findUserIdByNameAndPhoneNumber(String userName,String userPhoneNumber);
+	 
 }
