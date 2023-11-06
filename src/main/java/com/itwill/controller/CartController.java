@@ -52,15 +52,19 @@ public class CartController {
 		
 		//List<CartDto> cartListDto = new ArrayList<>();
 		List<Cart> cartList = cartService.findAllCartByUserId(userNo);
-		
+		Integer totalPrice = 0;
 		
 		/*
 		for (Cart cart : cartList) {
 			cartListDto.add(CartDto.toDto(cart));
 		}
 		*/
+		for (Cart cart : cartList) {
+			totalPrice = totalPrice + cart.getProduct().getProductPrice() * cart.getCartQty();
+		}
 		
 		model.addAttribute("cartList", cartList);
+		model.addAttribute("totalPrice", totalPrice);
 		
 		return "cart";
 	}
