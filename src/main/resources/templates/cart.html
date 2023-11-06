@@ -733,7 +733,7 @@
     		        let price = parseInt($(e.target).parent().parent().find(".product-price").text());
     		        let qty = parseInt($(e.target).val());
     		        $(e.target).parent().parent().find(".product_total").html(price*qty);
-    		        let cartNo = $(".product_quantity input[type='number']").attr('id')
+    		        let cartNo = $(e.target).attr('id');
     		        
     		        // 서버로 보낼 JSON 데이터를 준비합니다.
     		        var sendJsonObject = {

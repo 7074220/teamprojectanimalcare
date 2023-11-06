@@ -90,7 +90,7 @@ public class CartRestController {
 		if (session.getAttribute("userNo") == null) {
 			throw new Exception("로그인 하세요.");
 		}
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>업뎃");
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>업뎃"+cartNo);
 		Cart findCart = cartService.findByCartNo(cartNo);
 
 		findCart.setCartQty(dto.getCartQty());
