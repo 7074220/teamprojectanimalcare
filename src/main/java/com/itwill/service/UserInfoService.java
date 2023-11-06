@@ -49,7 +49,7 @@ public interface UserInfoService {
 	/* 아이디 중복체크 */
 	boolean countByUserId(String userId) throws Exception;
 	
-	String findUserIdByNameAndPhoneNumber(String userName,String userPhoneNumber);
+	Userinfo findUserIdByNameAndPhoneNumber(String userName,String userPhoneNumber);
 	
 	public String findPasswordByUserIdPhoneNumber(String userId, String userPhoneNumber);
 	

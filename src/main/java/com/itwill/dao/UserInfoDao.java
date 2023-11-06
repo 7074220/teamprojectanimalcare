@@ -28,7 +28,7 @@ public interface UserInfoDao {
 	public Userinfo findByUserId(String userId);
 	
 	//아이디찾기
-	public String findUserIdByNameAndPhoneNumber(String userName,String userPhoneNumber);
+	public Userinfo findUserIdByNameAndPhoneNumber(String userName,String userPhoneNumber);
 	
 
 	

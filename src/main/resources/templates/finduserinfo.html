@@ -101,23 +101,24 @@
 		
 		function findId(){
 			let sendObject={
-				"userName" : document.findIdform.name.value,
-				"userPhoneNumber" : document.findIdform.phoneNumber.value
+				userName : document.findIdform.name.value,
+				userPhoneNumber : document.findIdform.phoneNumber.value
 			}
-			const responseJsonObject = ajaxRequest('POST',user/findIdUserInfo,sendObject);
-			if(responseJsonObject=="1"){
+			const responseJsonObject = ajaxRequest('POST','user/findIdUserInfo',sendObject);
+			//alert(responseJsonObject.userName);
+			/*
+			if(responseJsonObject){
 				alert('일치하는 아이디가 없습니다.');
 			}else{
-				alert('찾으신 아이디:'+responseJsonObject);
+				alert('찾으신 아이디:'+responseJsonObject.userId);
 			}
+			*/
 		}
-	</script>
-	
-    <script>
+		
 		function findPassword(){
 			let sendObject={
-				"userId" : document.findIdform.userId.value,
-				"userPhoneNumber" : document.findIdform.phoneNumber.value
+				userId : document.findIdform.userId.value,
+				userPhoneNumber : document.findIdform.phoneNumber.value
 			}
 			const responseJsonObject = ajaxRequest('POST',user/findPasswordUserInfo,sendObject);
 			if(responseJsonObject=="1"){
@@ -127,13 +128,7 @@
 			}
 		}
 		
-		
-		
 	</script>
-    
-    
-    
-    
     </th:block>
     <!-- customer login end -->
 
