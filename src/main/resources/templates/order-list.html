@@ -6,77 +6,45 @@
     <title>Safira - cart page</title>
     
     
+    <!-- 별점 css 위치 -->
+
 <style>
+
+.rating_box {
+  display: flex;
+}
+
 .rating {
-display: inline-block;
-cursor: pointer;
-font-size: 24px;
+  position: relative;
+  color: #ddd;
+  font-size: 30px;
+  text-align: center;
 }
 
-.rating__star {
-    color: #dabd18b2;
-    transition: color 0.2s;
+.rating input {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
 }
 
-.rating__star:hover,
-.rating__star.active {
-    color: #dabd18;
-}
- </style>
-    
-    
-<!--<style>    
-    #myform fieldset{
-    display: inline-block;
-    direction: rtl;
-    border:0;
-}
-#myform fieldset legend{
-    text-align: right;
-}
-#myform input[type=radio]{
-    display: none;
-}
-#myform label{
-    font-size: 3em;
-    color: transparent;
-    text-shadow: 0 0 0 #f0f0f0;
-}
-#myform label:hover{
-    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-}
-#myform label:hover ~ label{
-    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-}
-#myform input[type=radio]:checked ~ label{
-    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-}
-#reviewContents {
-    width: 100%;
-    height: 150px;
-    padding: 10px;
-    box-sizing: border-box;
-    border: solid 1.5px #D3D3D3;
-    border-radius: 5px;
-    font-size: 16px;
-    resize: none;
-}  
-    </style>-->
-    
-<!--   별점 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-    
-     <style>
-    .rating {
-   width: 180px;
+.rating_star {
+  width: 0;
+  color: #ffc107;
+  position: absolute;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transition: width 0.2s;
 }
 
-.rating__star {
-   cursor: pointer;
-   color: #dabd18b2;
-}
-    
-    </style>-->
+
+</style>
+
     
 </head>
 
@@ -185,63 +153,31 @@ font-size: 24px;
                             <!--<h3>리뷰작성</h3>-->
                                     <div class="comments_form">
                             
-                            <form action="#" class="mb-3" name="myform" id="myform" method="post">
+                     <form action="#" class="mb-3" name="myform" id="myform" method="post">
                                 
                             <p>별점과 후기를 남겨주세요.</p>
-                                
-                                    <!--<div class="col-lg-4 col-md-4">
-                                        <label for="author">Name</label>
-                                        <input id="author"  type="text">
+                            
+                            
+                            
+                            
+                            
 
-                                    </div> 
-                                    <div class="col-lg-4 col-md-4">
-                                        <label for="email">Email </label>
-                                        <input id="email"  type="text">
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <label for="website">Website </label>
-                                        <input id="website"  type="text">
-                                    </div> -->  
-                                    
-                                    
-                                    
-                                    
-                                    
-                                   
-									
-						
-								
 								<div class="row" style="flex-direction: column;">
 						
 									<div>별점</div>
 									
-									<div class="rating">
-    									<span class="rating__result"></span> 
-    									<i class="rating__star far fa-star"></i>
-    									<i class="rating__star far fa-star"></i>
-    									<i class="rating__star far fa-star"></i>
-    									<i class="rating__star far fa-star"></i>
-    									<i class="rating__star far fa-star"></i>
+									<!-- 별점 위치 -->
+									
+									<div class="rating_box">
+										<div class="rating">
+											★★★★★
+											<span class="rating_star">★★★★★</span>
+											<input type="range" value="1" step="1" min="0" max="10">
+										</div>
 									</div>
 									
-									<!--<fieldset>
-									<span class="text-bold">별점을 선택해주세요</span>
-									<input type="radio" name="reviewStar" value="5" id="rate1"><label
-											for="rate1">★</label>
-									<input type="radio" name="reviewStar" value="4" id="rate2"><label
-											for="rate2">★</label>
-									<input type="radio" name="reviewStar" value="3" id="rate3"><label
-											for="rate3">★</label>
-									<input type="radio" name="reviewStar" value="2" id="rate4"><label
-											for="rate4">★</label>
-									<input type="radio" name="reviewStar" value="1" id="rate5"><label
-											for="rate5">★</label>
-									</fieldset>-->
-								<div>
-									<textarea class="col-auto form-control" type="text" id="reviewContents"
-				  					placeholder="좋은 수강평을 남겨주시면 Cocolo에 큰 힘이 됩니다! 포인트 5000p도 지급!!"></textarea>
-								</div>
-						<!--</form>-->	
+									
+									
 									
                                     <div class="col-12">
                                         <label for="review_comment">Comment </label>
@@ -250,7 +186,8 @@ font-size: 24px;
                                     </div> 
                                 </div>
                                 <!--<button class="button" type="submit">Post Comment</button>-->
-                             </form>    
+                     </form>   
+                              
                         </div>
                                     
                                     
@@ -283,84 +220,39 @@ font-size: 24px;
      
      
      <!--주문한 상품 리뷰쓰기 -->
-     <script>
-     // 주문 상세 모달 표시 이벤트 핸들러
-document.querySelector('.cart_submit button').addEventListener('click', function(e) {
-    e.preventDefault();
-    
-    // 모달창 표시
-    $('#orderDetailsModal').modal('show');
-});
-</script>
+	<script>
+		// 주문 상세 모달 표시 이벤트 핸들러
+		document.querySelector('.cart_submit button').addEventListener('click', function (e) {
+			e.preventDefault();
+
+			// 모달창 표시
+			$('#orderDetailsModal').modal('show');
+		});
+	</script>
+	
+	
+	
+	<!-- 별점 js 위치 -->
+	
+	<script>
+		const rating = document.querySelector('.rating');
+    const rating_input = document.querySelector('.rating input');
+    const rating_star = document.querySelector('.rating_star');
+
+    rating.addEventListener('mousemove', (event) => {
+        const boundingRect = rating.getBoundingClientRect();
+        const offsetX = event.clientX - boundingRect.left;
+        const ratingValue = Math.min(10, Math.ceil((offsetX / boundingRect.width) * 10));
+        rating_input.value = ratingValue;
+        rating_star.style.width = `${ratingValue * 10}%`;
+    });
+
+	</script>
+	
      
      
-     <!-- 별점  <script>
-     const ratingStars = [...document.getElementsByClassName("rating__star")];
+     
 
-function executeRating(stars) {
-  const starClassActive = "rating__star fas fa-star";
-  const starClassInactive = "rating__star far fa-star";
-  const starsLength = stars.length;
-  let i;
-
-  stars.map((star) => {
-    star.onclick = () => {
-      i = stars.indexOf(star);
-
-      if (star.className===starClassInactive) {
-        for (i; i >= 0; --i) stars[i].className = starClassActive;
-      } else {
-        for (i; i < starsLength; ++i) stars[i].className = starClassInactive;
-      }
-    };
-  });
-}
-
-executeRating(ratingStars);
-     </script>-->
-      
-      
-      
-      <script>
-      
-      const ratingStars = document.querySelectorAll(".rating__star");
-const result = document.querySelector(".rating__result");
-
-ratingStars.forEach((star) => {
-    star.addEventListener("mouseover", function () {
-        const rating = this.getAttribute("data-rating");
-        result.textContent = rating;
-        highlightStars(rating);
-    });
-
-    star.addEventListener("mouseout", function () {
-        resetStars();
-    });
-
-    star.addEventListener("click", function () {
-        const rating = this.getAttribute("data-rating");
-        result.textContent = rating;
-        highlightStars(rating);
-    });
-});
-
-function highlightStars(rating) {
-    ratingStars.forEach((star) => {
-        if (star.getAttribute("data-rating") <= rating) {
-            star.classList.add("active");
-        } else {
-            star.classList.remove("active");
-        }
-    });
-}
-
-function resetStars() {
-    ratingStars.forEach((star) => {
-        star.classList.remove("active");
-    });
-}
-      
-      </script>
       
       
      </th:block>
