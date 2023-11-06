@@ -96,25 +96,25 @@ public class ProductController {
 			
 			Long userNo = (Long) session.getAttribute("userNo");
 			MyPet myPet = MyPet.builder().build();
-			
+			System.out.println(">>>>>>>>>>>>>>"+category);
 			productList = productService.findAllProductByPetCategory("강아지");
 			
 			if(category.equals("All")) {
 				productList = productService.findAllProductByPetCategory("강아지");
 			}
-			if(category.equals("사료")) {
+			if(category.equals("1")) {
 				productList = productService.findAllProductByCategory("사료", "강아지");
 			}
-			if(category.equals("간식")) {
+			if(category.equals("2")) {
 				productList = productService.findAllProductByCategory("간식", "강아지");
 			}
-			if(category.equals("캔")) {
+			if(category.equals("3")) {
 				productList = productService.findAllProductByCategory("캔", "강아지");
 			}
-			if(category.equals("위생")) {
+			if(category.equals("4")) {
 				productList = productService.findAllProductByCategory("위생", "강아지");
 			}
-			if(category.equals("미용")) {
+			if(category.equals("5")) {
 				productList = productService.findAllProductByCategory("미용", "강아지");
 			}
 			

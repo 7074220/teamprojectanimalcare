@@ -87,7 +87,7 @@ function registEvent() {
 	이벤트발생시 처리메쏘드
 */
 function navigate() {
-	if (path == '/use_point') {
+	if (path == '/user_write_form') {
 		html = user_write_form();
 		$('#content').html(html);
 		initialize.validatorUserWriteFormSetDefault();
