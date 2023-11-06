@@ -10,6 +10,9 @@
         margin-top: 20vh; /* 회원탈퇴창 가운데 정도로 떨어트림 */
     }
 
+	#adoptTable{
+		width: 1000px;
+	}
     </style>
 
 </head>
@@ -204,15 +207,16 @@
 
                             <!--<div class="tab-pane fade" id="adopt">-->
                                 <h3>입양</h3>
-                                <div class="table-responsive">
+                                <div class="table-responsive" id="adoptTable">
                                     <table class="table">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Time</th>
-                                                <th>Date</th>
-                                                <th>PetNo</th>
-                                                <th>Status</th>                 
+                                                <th>시간</th>
+                                                <th>날짜</th>
+                                                <th>펫번호</th>
+                                                <th>처리상태</th>
+                                                <th>변경/취소</th>                 
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -221,7 +225,10 @@
                                                 <td th:text="${adopt.adoptTime}"></td>
                                                 <td th:text="${#strings.substring(adopt.adoptDate.toString(),0,10)}"></span></td>
                                                 <td th:text="${adopt.Pet.petNo}"></td>
-                                                <td th:text="${adopt.adoptStatus}"><span class="success">입양신청</span></td>
+                                                <td th:text="${adopt.adoptStatus}"><!--<span class="success">입양신청</span>--></td>
+                                                <td><button type="submit" class="updateBtn" data-adopt-no="${adopt.adoptNo}">수정</button>
+                                                	<button type="submit" class="deleteBtn" data-adopt-no="${adopt.adoptNo}">취소</button>
+                                                </td>
                                             </tr>
                                             <!-- <tr>
                                                 <td>2</td>
@@ -252,29 +259,70 @@
  
     <!--footer area end-->
 
+<script>
+	
+	function ajaxRequest(method, url, sendJsonObject) {
+			let returnResultJsonObject = {};
+			$.ajax({
+				async: true,
+				method: method,
+				url: url,
+				contentType: 'application/json;UTF-8',
+				data: JSON.stringify(sendJsonObject),
+				type: 'json',
+				success: function (resultJsonObject) {
+					returnResultJsonObject = resultJsonObject;
+				}
+			});
+			return returnResultJsonObject;
+		}
+	 	
+	 $('.deleteBtn').on('click', function(e) {
+    e.preventDefault();
 
+    let no = $(this).data('adopt-no'); // 해당 행의 adoptNo 가져오기
+    let sendJsonObject = { adoptNo: no }; // 삭제 요청에 사용할 객체 생성
+
+    // 삭제 요청을 서버로 보내는 코드
+    $.ajax({
+        type: 'DELETE',
+        url: 'adopt/' + no,
+        data: JSON.stringify(sendJsonObject),
+        contentType: 'application/json;UTF-8',
+        success: function(response) {
+            if (response.adoptNo == null) {
+                alert('신청내역이 존재하지 않습니다.');
+            } else {
+                alert('취소가 완료되었습니다.');
+                window.location.href = "index";
+            }
+        },
+        error: function() {
+            alert('입양 취소 요청 중 오류가 발생했습니다.');
+        }
+    });
+});
+	 	
+	 	
+	 	
+	 	
+	
+	
+</script>
 
  
 
 
-<!--주문한 상품 리뷰쓰기 
-<script>
 
-    // 마이페이지 상품주문 완료된 항목에서 주문상세를 누르면 창이 뜨고 이 창에서만 리뷰를 쓸수 있음
-    // 주문 상세 링크를 클릭할 때 이벤트 핸들러
-    document.querySelector('.table').addEventListener('click', function(e) {
-    if (e.target.classList.contains('view')) {
-        e.preventDefault();
-        
-        // 주문상세 정보를 로드 하기
-        
 
-        // 모달창 표시
-        $('#orderDetailsModal').modal('show');
-    }
-    });
 
-</script> -->
+
+
+
+
+
+
+
 </th:block>		
 
 

@@ -50,7 +50,6 @@ public class AdoptRestController {
 	@PostMapping("/create-adopt")
 	public ResponseEntity<AdoptDto> insertAdopt(@RequestBody AdoptDto dto, HttpSession session) throws Exception {
 		Long userNo = (Long)session.getAttribute("userNo");
-		Integer status = 0;
 		
 		if(userNo==null) {
 			throw new Exception("로그인 해주세요");
@@ -58,7 +57,6 @@ public class AdoptRestController {
 		
 		dto.setUserNo(userNo);
 		Adopt adopt = AdoptDto.toEntity(dto);
-		//dto.setStatus(status);
 		adoptService.insertAdopt(adopt);
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
@@ -104,6 +102,7 @@ public class AdoptRestController {
 	@DeleteMapping("/{no}")
 	public ResponseEntity<Map> deleteAdopt(@PathVariable(value  = "no") Long no) throws Exception {
 		adoptService.deleteAdopt(no);
+		
 		return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>());
 	}
 
