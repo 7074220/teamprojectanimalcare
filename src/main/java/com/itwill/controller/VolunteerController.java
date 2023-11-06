@@ -65,8 +65,10 @@ public class VolunteerController {
 		volunteer.setCenter(center);
 		volunteerService.insertVolunteer(volunteer);
 		model.addAttribute("userinfo", userinfo);
-		return "center-list";
-	}
+		 // return "center-list"; 이게 원본임
+	      return "order-list"; // 오더리스트 연결
+	   }
+
 	
 	
 	@GetMapping("/volunteerList") // 봉사 목록 전체 조회. 관리자
