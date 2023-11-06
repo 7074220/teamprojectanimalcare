@@ -1,6 +1,7 @@
 package com.itwill.controller;
 
 import java.nio.charset.Charset;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +36,11 @@ public class CouponController {
 		
 		List<Coupon> coupons = couponService.findAllByUserNo(userNo);
 		List<CouponDto> couponList = new ArrayList<CouponDto>();
+		
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate1 = couponService.findAllByUserNo(userNo).get(0).getCouponPayday().format(formatter);
+        String formattedDate2 = couponService.findAllByUserNo(userNo).get(0).getCouponExpirationDate().format(formatter);
 
 		for (Coupon coupon : coupons) {
 			CouponDto couponDto = CouponDto.toDto(coupon);
@@ -42,6 +48,8 @@ public class CouponController {
 		}
 		
 		model.addAttribute("couponList", couponList);
+		model.addAttribute("formattedDate1", formattedDate1);
+		model.addAttribute("formattedDate2", formattedDate2);
 		
 		return "my-account-coupon";
 

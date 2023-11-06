@@ -19,10 +19,14 @@ $(document).ready(function(){
         	alert('적립금이 상품금액을 초과합니다.');
         	
         	if(userPointsValue<loyaltyPointsValue){
-        		alert('보유적립금을 초과합니다.')
+        		alert('보유적립금을 초과합니다1.')
         		return;
         	}
         }
+        if(userPointsValue<loyaltyPointsValue){
+    		alert('보유적립금을 초과합니다2.')
+    		return;
+    	}
     	
         
         
@@ -41,7 +45,24 @@ $(document).ready(function(){
        $('#totprice').val(total);
         
     });
+    
+    $('#insert').click(function() {
+        var orderAddress = $('#ordersAddress').val();
+        var orderPrice = $('#total').val();
+        var userPoint = $('#discount').val();
+        
+        $('#orderAddress').val(orderAddress);
+        $('#orderPrice').val(orderPrice);
+        $('#userPoint').val(userPoint);
+
+        // '#f'를 사용하여 폼을 선택합니다.
+        $('#f').attr('action', 'orderInsert');
+        $('#f').attr('method', 'POST');
+        $('#f').submit();
+    });
 });
+
+
 
 
 </script>
@@ -54,8 +75,7 @@ $(document).ready(function(){
 	<form id="f">
 	 <input type="hidden" name=orderAddress value="" id="orderAddress">
 	 <input type="hidden" name="orderPrice" value="" id="orderPrice">
-	 <input type="hidden" name="totprice" value="" id="totprice">
-	 <input type="hidden" name="totprice" value="" id="totprice">
+	 <input type="hidden" name="userPoint" value="" id="userPoint">
 	</form>
     
     
@@ -665,8 +685,7 @@ $(document).ready(function(){
             <div class="checkout_form">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <form action="#"><!--폼시작-->
-                        	<input type="hidden" name="totprice" value="" id="totprice">
+                        <form action=""><!--폼시작-->
                         	
                         	
                             <h3>주문자 정보</h3>
@@ -723,14 +742,14 @@ $(document).ready(function(){
                                 <div class="col-lg-6 mb-20">
                                    <label>사용 적립금<span> *0원부터 사용가능</span></label>
                                     <input type="text" id="loyaltyPoints">  
-                                    <button type="button" class="btn btn-primary" id="useLoyaltyPoints"><a href="#/use_point">사용하기</a></button>
+                                    <button type="button" class="btn btn-primary" id="useLoyaltyPoints"><a href="">사용하기</a></button>
                                 </div> 
 									
 									
 	
                                 <div class="col-12 mb-20">
                                     <label>주소  <span>*</span></label>
-                                    <input placeholder="기본주소" type="text" id="orderAddress" th:value="${user.userAddress}" >      
+                                    <input placeholder="기본주소" type="text" id="ordersAddress" th:value="${user.userAddress}" >      
                                 </div>
                                 <div class="col-12 mb-20">
                                       <input placeholder="상세주소" type="text" th:value="${user.userAddress}">        
@@ -916,7 +935,7 @@ $(document).ready(function(){
                                     </div>
                                 </div>
                                 <div class="order_button">
-                                    <button  type="submit">Proceed to PayPal</button> 
+                                    <button  type="submit" id="insert">Proceed to PayPal</button> 
                                 </div>    
                             </div> 
                         </form> <!--orderform-->        
