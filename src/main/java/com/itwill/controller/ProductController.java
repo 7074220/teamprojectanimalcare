@@ -309,11 +309,10 @@ public class ProductController {
 	}
 	
 	@GetMapping(value = "/productDetail", params = "productNo")
-	public String productDetail(@RequestParam Long productNo, Model model) {
+	public String productDetail(@RequestParam Long productNo,Model model) {
 		Product product = productService.findByProductNo(productNo);
 		String findProductName = productService.findByProductNo(productNo).getProductName();
 		int firstSpaceIndex = findProductName.indexOf(" ");
-		
 		
 		if (firstSpaceIndex >= 0) {
 			findProductName = findProductName.substring(0, firstSpaceIndex);// 첫 번째 공백까지 잘라내기

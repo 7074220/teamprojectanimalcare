@@ -107,4 +107,16 @@ public class ReviewBoardDaoImpl implements ReviewBoardDao {
 		return reviewBoardRepository.calculateAverageStarRating(productNo);
 	}
 
+	@Override
+	public List<ReviewBoard> findAllByProductNoAndOrderByBoardStarDesc(Long productNo) {
+		// 별점높음
+		return reviewBoardRepository.findByProductProductNoOrderByBoardStarDesc(productNo);
+	}
+
+	@Override
+	public List<ReviewBoard> findByProductProductNoOrderByBoardDateDesc(Long productNo) {
+		// 최신
+		return reviewBoardRepository.findByProductProductNoOrderByBoardDateDesc(productNo);
+	}
+
 }
