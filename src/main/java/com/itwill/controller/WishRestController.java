@@ -34,6 +34,9 @@ public class WishRestController {
 	@Autowired
 	private WishService wishService;
 	
+	
+	
+	
 	@Operation(summary = "위시리스트 추가")
 	@PostMapping
 	// insert
@@ -51,6 +54,11 @@ public class WishRestController {
 		
 		return new ResponseEntity<WishlistInsertDto>(dto, httpHeaders, HttpStatus.CREATED);
 	}
+	
+	
+	
+	
+	
 	
 	@Operation(summary = "위시리스트 삭제")
 	@DeleteMapping("/{no}")
