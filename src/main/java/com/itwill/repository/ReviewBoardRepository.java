@@ -29,7 +29,7 @@ public interface ReviewBoardRepository extends JpaRepository<ReviewBoard, Long> 
 
 
 	
-	public List<ReviewBoard> findAllByBoardStar(Long star);
+	public List<ReviewBoard> findAllByBoardStar(Double star);
 	
 	@Query(value = "SELECT * FROM ReviewBoard WHERE user_no = ?1", nativeQuery = true)
 	List<ReviewBoard> findByUserNo(Long no); // 선택된 userId 리뷰 리스트만 나오기

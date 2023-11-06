@@ -11,13 +11,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-//@RequestMapping("/userinfo"
+//@RequestMapping("/userinfo")
 public class MyPetController {
 
+	
     private final MyPetService myPetService;
     private final UserInfoService userInfoService;
 
@@ -29,10 +31,15 @@ public class MyPetController {
         Long userNo=(Long)session.getAttribute("userNo");
 
         List<MyPet> myPetList = myPetService.findMyPetListByuserNo(userNo);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate = myPetService.findMyPetListByuserNo(userNo).get(0).getMypetBirthday().format(formatter);
+        Long formatNumber=myPetService.findMyPetListByuserNo(userNo).get(0).getMypetNo();
+        
+        
+        model.addAttribute("formattedDate", formattedDate);
+        model.addAttribute("formatNumber", formatNumber);
         model.addAttribute("myPetList",myPetList);
-        for (MyPet myPet : myPetList) {
-			System.out.println(myPet);
-		}
+        
         return "my-account-mypet";
       
     }

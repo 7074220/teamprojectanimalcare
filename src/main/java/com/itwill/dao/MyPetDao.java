@@ -24,4 +24,6 @@ public interface MyPetDao {
      
      //대표 동물 뽑아오기 
      public MyPet findLeaderMyPet(Long userNo);
+     
+     
 }

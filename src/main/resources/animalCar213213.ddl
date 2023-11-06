@@ -17,7 +17,6 @@ DROP TABLE ReportBoard CASCADE CONSTRAINTS;
 DROP TABLE Coupon CASCADE CONSTRAINTS;
 DROP TABLE UserInfo CASCADE CONSTRAINTS;
 
-
 CREATE TABLE UserInfo(
 		user_no                       		NUMBER(10)		 NULL ,
 		user_password                 		VARCHAR2(50)		 NULL ,
@@ -29,22 +28,29 @@ CREATE TABLE UserInfo(
 		user_resident_number          		VARCHAR2(50)		 NULL ,
 		user_register_date            		TIMESTAMP(9)		 NULL ,
 		user_name                     		VARCHAR2(50)		 NULL ,
-        user_coupon_year              		NUMBER(10)		 NULL
+		user_coupon_year              		NUMBER(10)		 NULL 
 );
 
 DROP SEQUENCE UserInfo_user_no_SEQ;
 
 CREATE SEQUENCE UserInfo_user_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-
+CREATE TRIGGER UserInfo_user_no_TRG
+BEFORE INSERT ON UserInfo
+FOR EACH ROW
+BEGIN
+IF :NEW.user_no IS NOT NULL THEN
+  SELECT UserInfo_user_no_SEQ.NEXTVAL INTO :NEW.user_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE Coupon(
 		coupon_id                     		NUMBER(10)		 NULL ,
 		coupon_name                   		VARCHAR2(50)		 NULL ,
 		coupon_discount               		NUMBER(10)		 NULL ,
-		coupon_expiration_date        		TIMESTAMP(9)		 NULL ,
-		coupon_payday                 		TIMESTAMP(9)		 NULL ,
+		coupon_expiration_date        		TIMESTAMP(10)		 NULL ,
+		coupon_payday                 		TIMESTAMP(10)		 NULL ,
 		user_no                       		NUMBER(10)		 NULL 
 );
 
@@ -52,7 +58,14 @@ DROP SEQUENCE Coupon_coupon_id_SEQ;
 
 CREATE SEQUENCE Coupon_coupon_id_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-
+CREATE TRIGGER Coupon_coupon_id_TRG
+BEFORE INSERT ON Coupon
+FOR EACH ROW
+BEGIN
+IF :NEW.coupon_id IS NOT NULL THEN
+  SELECT Coupon_coupon_id_SEQ.NEXTVAL INTO :NEW.coupon_id FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE ReportBoard(
@@ -64,7 +77,7 @@ CREATE TABLE ReportBoard(
 		board_readCount               		NUMBER(10)		 NULL ,
 		board_find_name               		VARCHAR2(50)		 NULL ,
 		board_find_phone              		VARCHAR2(50)		 NULL ,
-		user_no                       		NUMBER(10)		 NULL,
+		user_no                       		NUMBER(10)		 NULL ,
 		board_image                   		VARCHAR2(50)		 NULL 
 );
 
@@ -72,6 +85,14 @@ DROP SEQUENCE ReportBoard_board_no_SEQ;
 
 CREATE SEQUENCE ReportBoard_board_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+CREATE TRIGGER ReportBoard_board_no_TRG
+BEFORE INSERT ON ReportBoard
+FOR EACH ROW
+BEGIN
+IF :NEW.board_no IS NOT NULL THEN
+  SELECT ReportBoard_board_no_SEQ.NEXTVAL INTO :NEW.board_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE Local(
@@ -84,7 +105,14 @@ DROP SEQUENCE Local_local_no_SEQ;
 
 CREATE SEQUENCE Local_local_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-
+CREATE TRIGGER Local_local_no_TRG
+BEFORE INSERT ON Local
+FOR EACH ROW
+BEGIN
+IF :NEW.local_no IS NOT NULL THEN
+  SELECT Local_local_no_SEQ.NEXTVAL INTO :NEW.local_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE Center(
@@ -100,7 +128,14 @@ DROP SEQUENCE Center_center_no_SEQ;
 
 CREATE SEQUENCE Center_center_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-
+CREATE TRIGGER Center_center_no_TRG
+BEFORE INSERT ON Center
+FOR EACH ROW
+BEGIN
+IF :NEW.center_no IS NOT NULL THEN
+  SELECT Center_center_no_SEQ.NEXTVAL INTO :NEW.center_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE Volunteer(
@@ -116,7 +151,14 @@ DROP SEQUENCE Volunteer_volunteer_no_SEQ;
 
 CREATE SEQUENCE Volunteer_volunteer_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-
+CREATE TRIGGER Volunteer_volunteer_no_TRG
+BEFORE INSERT ON Volunteer
+FOR EACH ROW
+BEGIN
+IF :NEW.volunteer_no IS NOT NULL THEN
+  SELECT Volunteer_volunteer_no_SEQ.NEXTVAL INTO :NEW.volunteer_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE Visit(
@@ -132,7 +174,14 @@ DROP SEQUENCE Visit_visit_no_SEQ;
 
 CREATE SEQUENCE Visit_visit_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-
+CREATE TRIGGER Visit_visit_no_TRG
+BEFORE INSERT ON Visit
+FOR EACH ROW
+BEGIN
+IF :NEW.visit_no IS NOT NULL THEN
+  SELECT Visit_visit_no_SEQ.NEXTVAL INTO :NEW.visit_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE Pet(
@@ -144,6 +193,7 @@ CREATE TABLE Pet(
 		pet_find_place                		VARCHAR2(50)		 NULL ,
 		pet_character                 		VARCHAR2(50)		 NULL ,
 		center_no                     		NUMBER(10)		 NULL ,
+		local_no                      		NUMBER(10)		 NULL ,
 		pet_image                     		VARCHAR2(50)		 NULL 
 );
 
@@ -151,7 +201,14 @@ DROP SEQUENCE Pet_pet_no_SEQ;
 
 CREATE SEQUENCE Pet_pet_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-
+CREATE TRIGGER Pet_pet_no_TRG
+BEFORE INSERT ON Pet
+FOR EACH ROW
+BEGIN
+IF :NEW.pet_no IS NOT NULL THEN
+  SELECT Pet_pet_no_SEQ.NEXTVAL INTO :NEW.pet_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE Adopt(
@@ -167,16 +224,25 @@ DROP SEQUENCE Adopt_adopt_no_SEQ;
 
 CREATE SEQUENCE Adopt_adopt_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+CREATE TRIGGER Adopt_adopt_no_TRG
+BEFORE INSERT ON Adopt
+FOR EACH ROW
+BEGIN
+IF :NEW.adopt_no IS NOT NULL THEN
+  SELECT Adopt_adopt_no_SEQ.NEXTVAL INTO :NEW.adopt_no FROM DUAL;
+END IF;
+END;
+
 
 CREATE TABLE Product(
 		product_no                    		NUMBER(10)		 NULL ,
-		product_name                  		VARCHAR2(100)		 NULL ,
+		product_name                  		VARCHAR2(50)		 NULL ,
 		product_price                 		NUMBER(10)		 NULL ,
 		product_category              		VARCHAR2(50)		 NULL ,
 		product_pet_category          		VARCHAR2(10)		 NULL ,
 		product_qty                   		NUMBER(10)		 NULL ,
-		product_image                 		VARCHAR2(100)		 NULL ,
-		product_detail_image          		VARCHAR2(100)		 NULL ,
+		product_image                 		VARCHAR2(50)		 NULL ,
+		product_detail_image          		VARCHAR2(1000)		 NULL ,
 		product_star_avg              		DOUBLE PRECISION		 NULL 
 );
 
@@ -184,7 +250,14 @@ DROP SEQUENCE Product_product_no_SEQ;
 
 CREATE SEQUENCE Product_product_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-
+CREATE TRIGGER Product_product_no_TRG
+BEFORE INSERT ON Product
+FOR EACH ROW
+BEGIN
+IF :NEW.product_no IS NOT NULL THEN
+  SELECT Product_product_no_SEQ.NEXTVAL INTO :NEW.product_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE Orders(
@@ -200,6 +273,15 @@ DROP SEQUENCE Orders_order_no_SEQ;
 
 CREATE SEQUENCE Orders_order_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+CREATE TRIGGER Orders_order_no_TRG
+BEFORE INSERT ON Orders
+FOR EACH ROW
+BEGIN
+IF :NEW.order_no IS NOT NULL THEN
+  SELECT Orders_order_no_SEQ.NEXTVAL INTO :NEW.order_no FROM DUAL;
+END IF;
+END;
+
 
 CREATE TABLE OrderStatus(
 		os_no                         		NUMBER(10)		 NULL ,
@@ -211,7 +293,14 @@ DROP SEQUENCE OrderStatus_os_no_SEQ;
 
 CREATE SEQUENCE OrderStatus_os_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-
+CREATE TRIGGER OrderStatus_os_no_TRG
+BEFORE INSERT ON OrderStatus
+FOR EACH ROW
+BEGIN
+IF :NEW.os_no IS NOT NULL THEN
+  SELECT OrderStatus_os_no_SEQ.NEXTVAL INTO :NEW.os_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE Order_item(
@@ -226,7 +315,14 @@ DROP SEQUENCE Order_item_oi_no_SEQ;
 
 CREATE SEQUENCE Order_item_oi_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-
+CREATE TRIGGER Order_item_oi_no_TRG
+BEFORE INSERT ON Order_item
+FOR EACH ROW
+BEGIN
+IF :NEW.oi_no IS NOT NULL THEN
+  SELECT Order_item_oi_no_SEQ.NEXTVAL INTO :NEW.oi_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE Cart(
@@ -239,6 +335,15 @@ CREATE TABLE Cart(
 DROP SEQUENCE Cart_cart_no_SEQ;
 
 CREATE SEQUENCE Cart_cart_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+
+CREATE TRIGGER Cart_cart_no_TRG
+BEFORE INSERT ON Cart
+FOR EACH ROW
+BEGIN
+IF :NEW.cart_no IS NOT NULL THEN
+  SELECT Cart_cart_no_SEQ.NEXTVAL INTO :NEW.cart_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE MyPet(
@@ -253,7 +358,14 @@ DROP SEQUENCE MyPet_mypet_no_SEQ;
 
 CREATE SEQUENCE MyPet_mypet_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-
+CREATE TRIGGER MyPet_mypet_no_TRG
+BEFORE INSERT ON MyPet
+FOR EACH ROW
+BEGIN
+IF :NEW.mypet_no IS NOT NULL THEN
+  SELECT MyPet_mypet_no_SEQ.NEXTVAL INTO :NEW.mypet_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE ReviewBoard(
@@ -269,6 +381,15 @@ CREATE TABLE ReviewBoard(
 DROP SEQUENCE ReviewBoard_board_no_SEQ;
 
 CREATE SEQUENCE ReviewBoard_board_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+
+CREATE TRIGGER ReviewBoard_board_no_TRG
+BEFORE INSERT ON ReviewBoard
+FOR EACH ROW
+BEGIN
+IF :NEW.board_no IS NOT NULL THEN
+  SELECT ReviewBoard_board_no_SEQ.NEXTVAL INTO :NEW.board_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE ReplyBoard(
@@ -286,7 +407,14 @@ DROP SEQUENCE ReplyBoard_reply_board_no_SEQ;
 
 CREATE SEQUENCE ReplyBoard_reply_board_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-
+CREATE TRIGGER ReplyBoard_reply_board_no_TRG
+BEFORE INSERT ON ReplyBoard
+FOR EACH ROW
+BEGIN
+IF :NEW.reply_board_no IS NOT NULL THEN
+  SELECT ReplyBoard_reply_board_no_SEQ.NEXTVAL INTO :NEW.reply_board_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE Wish(
@@ -299,7 +427,14 @@ DROP SEQUENCE Wish_wish_no_SEQ;
 
 CREATE SEQUENCE Wish_wish_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-
+CREATE TRIGGER Wish_wish_no_TRG
+BEFORE INSERT ON Wish
+FOR EACH ROW
+BEGIN
+IF :NEW.wish_no IS NOT NULL THEN
+  SELECT Wish_wish_no_SEQ.NEXTVAL INTO :NEW.wish_no FROM DUAL;
+END IF;
+END;
 
 
 

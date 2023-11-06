@@ -95,7 +95,7 @@ class ReviewBoardServiceImplTest {
 	@Transactional
 	@Disabled
 	void findAllByBoardStar() {
-		List<ReviewBoard> findAllByBoardStar = reviewBoardService.findByStarAll(5L);
+		List<ReviewBoard> findAllByBoardStar = reviewBoardService.findByStarAll((double) 5L);
 		System.out.println(findAllByBoardStar);
 	}
 	@Test//별점 높은순
