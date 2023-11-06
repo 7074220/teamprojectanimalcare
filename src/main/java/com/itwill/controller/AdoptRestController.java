@@ -53,11 +53,12 @@ public class AdoptRestController {
 		Integer status = 0;
 		
 		if(userNo==null) {
-			status = 1;
+			throw new Exception("로그인 해주세요");
 		}
 		
 		dto.setUserNo(userNo);
 		Adopt adopt = AdoptDto.toEntity(dto);
+		//dto.setStatus(status);
 		adoptService.insertAdopt(adopt);
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
