@@ -30,14 +30,19 @@ public class MyPetController {
         }
         Long userNo=(Long)session.getAttribute("userNo");
 
-        List<MyPet> myPetList = myPetService.findMyPetListByuserNo(userNo);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedDate = myPetService.findMyPetListByuserNo(userNo).get(0).getMypetBirthday().format(formatter);
-        Long formatNumber=myPetService.findMyPetListByuserNo(userNo).get(0).getMypetNo();
+        List<MyPet> myPetList = myPetService.findMyPetListByuserNo(userNo); // 애왔 목록을 가져옴
+        int sequentialNumber=0;
+        for (int i = 0; i < myPetList.size(); i++) {
+            MyPet myPet = myPetList.get(i);
+            long formatNo = myPet.getMypetNo();
+            sequentialNumber = i + 1;// 현재 애왔의 번호를 가져옴
+            // mypetNo를 사용할 수 있음, 여기에서는 i+1가 해당 애왔의 순번입니다.
+        }
         
-        
+        model.addAttribute("sequentialNumber", sequentialNumber);
         model.addAttribute("formattedDate", formattedDate);
-        model.addAttribute("formatNumber", formatNumber);
         model.addAttribute("myPetList",myPetList);
         
         return "my-account-mypet";
