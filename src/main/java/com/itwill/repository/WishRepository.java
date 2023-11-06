@@ -17,6 +17,8 @@ public interface WishRepository extends JpaRepository<Wish, Long>{
 	@Query(value = "select * from wish where wish.user_no=?1 and wish.product_no=?2", nativeQuery = true)
 	Wish findByUserNoProductNo(Long userNo, Long productNo);
 	
-
+	// 위시리스트에 있는 갯수 출력 (userNo)
+	@Query(value = "select count(*) from wish where user_no=?1", nativeQuery = true)
+	Integer countWishlist(Long userNo);
 	
 }

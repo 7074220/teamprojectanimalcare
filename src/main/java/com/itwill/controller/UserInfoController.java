@@ -118,5 +118,10 @@ public class UserInfoController {
 		return "finduserinfo";
 	}
 	
+	//아이디 찾은 리스트 폼 이동
+	@GetMapping("/findId")
+	public String findId() {
+		return "findId";
+	}
 	
 }

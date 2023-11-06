@@ -46,7 +46,7 @@ class WishServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	}
 	
 	@Test
-	//@Disabled
+	@Disabled
 	@Transactional
 	@Rollback(false)
 	void findAll() {
@@ -70,6 +70,15 @@ class WishServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	void findByUserNoProductNo() {
 		Wish wish = wishService.findByUserNoProductNo(8L, 1L);
 		System.out.println(wish);	
+	}
+	
+	@Test
+	@Disabled
+	@Transactional
+	@Rollback(false)
+	void countWishlist() {
+		Integer count = wishService.countWishlist(14L);
+		System.out.println(count);
 	}
 }
 
