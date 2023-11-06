@@ -42,7 +42,6 @@ public class AdoptRestController {
 	@Autowired
 	private AdoptService adoptService;
 	
-	
 	@Operation(summary = "입양신청")
 	@PostMapping("/create-adopt")
 	public ResponseEntity<AdoptDto> insertAdopt(@RequestBody AdoptDto dto, HttpSession session) throws Exception {
@@ -51,15 +50,14 @@ public class AdoptRestController {
 		if(userNo==null) {
 			status = 1;
 		}
-		Adopt adoptEntity = AdoptDto.toEntity(dto);
-		adoptService.insertAdopt(adoptEntity);
-		dto.setStatus(status);
+		Adopt adopt = adoptService.insertAdopt(AdoptDto.toEntity(dto));
+		System.out.println(">>>>>>>>>>>>>>>>>"+adopt);
+		//dto.setStatus(status);
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-
-		return new ResponseEntity<>(dto, httpHeaders, HttpStatus.CREATED);
-	}
+		return new ResponseEntity<AdoptDto>(dto, httpHeaders, HttpStatus.CREATED);
+}
 
 	@Operation(summary = "no로 입양신청 보기")
 	@GetMapping("/{no}")
@@ -76,20 +74,23 @@ public class AdoptRestController {
 	}
 
 	@Operation(summary = "userNo로 입양신청 찾기")
-	@GetMapping("/find/{userNo}")
+	@GetMapping("/{userNo}")
 	public ResponseEntity<List<AdoptDto>> findAdoptsByUserNo(@PathVariable(name = "userNo") Long userNo) {
 		List<Adopt> findAdopt = adoptService.findAdoptsByUserNo(userNo);
 		if (findAdopt.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
 		}
-		List<AdoptDto> adoptDtoList = new ArrayList<>();
+		List<AdoptDto> adoptDtoList = new ArrayList<AdoptDto>();
 
 		for (Adopt adopt : findAdopt) {
 			AdoptDto adoptDto = AdoptDto.fromEntity(adopt);
 			adoptDtoList.add(adoptDto);
 		}
 
-		return ResponseEntity.status(HttpStatus.OK).body(adoptDtoList);
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<List<AdoptDto>>(adoptDtoList,httpHeaders, HttpStatus.OK);
 	}
 
 	@Operation(summary = "no로 삭제")

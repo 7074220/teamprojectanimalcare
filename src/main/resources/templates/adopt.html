@@ -104,7 +104,7 @@
 							<form id="contact-form" method="POST"
 								th:action="@{/create-adopt}" th:object="${adopt}" style="margin: 20px 0;">
 
-								<input type="hidden" name="petNo" th:value="${pet.petNo}" />
+								<input type="hidden" id="petid" name="petNo" th:value="${pet.petNo}"/>
 
 								<!-- <p>
 									<label> 이름 </label> <input name="name" placeholder="Name *"
@@ -155,7 +155,7 @@
 									
 								</p>
 
-								<button type="submit" class="submit">submit</button>
+								<button type="button" class="submit">submit</button>
 								<!-- <p class="form-messege"></p> -->
 								<!-- <div th:if="${msg!=null}">
 									<p th:text="${msg}" class="success-message"></p>
@@ -190,10 +190,9 @@
 	
 		$('.submit').on('click', function(event) {
 	        event.preventDefault();
-	        let petNo = $(this).data('petNo');
+	        let petNo = $('#petid').val();
 	        let adoptDate = $('#adoptDate').val(); // 선택한 날짜 가져오기
 	        let adoptTime = $('#adoptTimeSelect').val(); // 선택한 시간 가져오기
-			
 	        let sendJsonObject = {
 	            petNo: petNo,
 	            adoptDate: adoptDate,
@@ -275,11 +274,6 @@
 </script>
 		
 		
-		
-		
-		
-		
-	</script>
 		
 	</th:block>
 		<!--map js code here-->

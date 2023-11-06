@@ -54,17 +54,13 @@ public class AdoptController {
 			@RequestParam("adoptTime") int selectedHour, @RequestParam Long petNo, Model model, HttpSession session) throws Exception {
 		Long userNo = (Long)session.getAttribute("userNo");
 		
-		// 시간 문자열을 LocalTime으로 파싱
-	   // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-	    //LocalTime adoptTime = LocalTime.parse(selectedHour, formatter);
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>시작");
+	
 		if(userNo!=null) {
 		
 			Adopt adopt = new Adopt();
 			adopt.setAdoptDate(adoptDate);
 			adopt.setAdoptTime(selectedHour);
-			// adopt.setAdoptTime(adoptTime);
-			 
+			
 			adopt.setAdoptStatus("입양신청접수");
 	
 			Pet pet = petService.petFindById(petNo);
@@ -100,10 +96,11 @@ public class AdoptController {
 		Userinfo user=userInfoService.findUserByNo(userNo);
 		
 		List<Adopt> adoptList = adoptService.findAdoptsByUserNo(user.getUserNo());
+		
 		adoptList.sort((v1,v2)->v2.getAdoptDate().compareTo(v1.getAdoptDate()));
 		
-		
 		model.addAttribute("adoptList", adoptList);
+		System.out.println(">>>>>>>>"+adoptList);
 		return "my-account-adopt";
 	}
 
