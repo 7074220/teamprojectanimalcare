@@ -824,7 +824,7 @@
 											<!-- 상품리스트에서 장바구니 추가하기 -->
 											
 											
-												<li class="add_to_cart"><a href="#" title="Add to cart" th:href="@{'insertCartMain?productNo=' + ${product.productNo} + '&productQty=1'}"><span
+												<li class="add_to_cart"><a href="#" title="Add to cart" th:href="@{'insertCartMain?productNo=' + ${product.productNo} + '&productQty=1'}" th:id="${product.productNo}"><span
 															class="lnr lnr-cart" ></span></a></li>
 															
 															

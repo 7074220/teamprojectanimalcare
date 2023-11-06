@@ -96,15 +96,18 @@ public class UserInfoServiceImpl implements UserInfoService{
 			return false;
 		}
 	}
+	
 	// 아이디 찾기
 	@Override
-	public String findUserIdByNameAndPhoneNumber(String userName, String userPhoneNumber) {
-		String userId = userInfoDao.findUserIdByNameAndPhoneNumber(userName, userPhoneNumber);
-		if(userId==null) {
-			return "1";
+	public Userinfo findUserIdByNameAndPhoneNumber(String userName, String userPhoneNumber) {
+		Userinfo userinfo = userInfoDao.findUserIdByNameAndPhoneNumber(userName, userPhoneNumber);
+		if(userinfo==null) {
+			userinfo = Userinfo.builder().userId("").build();
 		}
-		return userId;
+		return userinfo;
 	}
+	
+	// 비밀번호 찾기
 	@Override
 	public String findPasswordByUserIdPhoneNumber(String userId, String userPhoneNumber) {
 		String userPassword= userInfoDao.findPasswordByUserIdPhoneNumber(userId, userPhoneNumber);
