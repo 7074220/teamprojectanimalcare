@@ -56,7 +56,9 @@ public class WishRestController {
 	@DeleteMapping("/{no}")
 	// delete
 	public void deleteWish(@PathVariable(name = "no") Long no) throws Exception{
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>실행1");
 		wishService.deleteWish(no);
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>실행2");
 	}
 	
 	@Operation(summary = "위시리스트 보기")

@@ -32,7 +32,6 @@ public class WishController {
 		Long userNo=(Long)session.getAttribute("userNo");
 		
 		List<Wish> wishlist = wishService.findAllWishByUserNo(userNo);
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>"+wishlist);
 		/*
 		  List<WishlistInsertDto> wishlistDto = new ArrayList<WishlistInsertDto>();
 		  
