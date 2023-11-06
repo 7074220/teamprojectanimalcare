@@ -233,7 +233,7 @@
                                         </ul>
                                         <ul th:if="${session.userNo}!=null">
                                             <!--<li><a href="userinfo" th:text="${session.userName} 님">Login</a></li>-->
-                                            <li><a href="userinfo" th:text=`${session.userName}`>Login</a></li>
+                                            <li><a href="userinfo" th:text='${session.userName}'>Login</a></li>
                                             <li><span>/</span></li>
                                             <li><a href="logout" th:text="Logout">Log</a></li>
                                         </ul>
