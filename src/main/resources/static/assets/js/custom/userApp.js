@@ -72,6 +72,15 @@ function registEvent() {
 		}
 		
 	});
+	
+	$(document).on('keypress', function(e){
+		if(e.keyCode==13){
+			if(window.location.hash.substring(1)=='/login'){
+				navigate();
+			}	
+		}
+	})
+	
 }
 
 /*
@@ -122,6 +131,11 @@ function navigate() {
 		if((responseJsonObject.status == 1001) || (responseJsonObject.status == 1002)) {
 			html = user_login_form(responseJsonObject);
 			$('#content').html(html);
+			$('#loginForm').keypress(function(e){
+				  if(e.keyCode==13){
+					  window.location.hash = '#/login'
+				  }
+			  });
 			alert('아이디 혹은 비밀번호를 잘못 입력 하셨습니다. ');
 		}
 		
