@@ -107,7 +107,7 @@ public class ReviewBoardRestController {
 	*/
 	@Operation(summary = "별점으로 review 찾기")     //restController 예상..
 	@GetMapping("/{boardStar}")
-	public ResponseEntity<List<ReviewBoardDto>> findByStarAll(@PathVariable(value = "boardStar") Long star) {
+	public ResponseEntity<List<ReviewBoardDto>> findByStarAll(@PathVariable(value = "boardStar") Double star) {
 		// 선택한 별점으로 찾기
 		List<ReviewBoard> reviewBoardList = reviewBoardService.findByStarAll(star);
 		if(reviewBoardList.isEmpty()) {
