@@ -208,7 +208,6 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>쿠폰아이디</th>
                                                 <th>쿠폰이름</th>
                                                 <th>쿠폰할인가</th>
                                                 <th>쿠폰지급일</th>
@@ -217,10 +216,11 @@
                                         </thead>
                                         <tbody>
                                             <tr th:each="coupon : ${couponList}">
-                                                <td th:text="${coupon.couponId}">1</td>
+                                                <!--<td th:text="${coupon.couponId}">1</td>-->
                                                 <td th:text="${coupon.couponName}"></td>
-                                                <td th:text="${coupon.couponPayday}"></span></td>
-                                                <td th:text="${coupon.couponExpirationDate}"></td>
+                                                <td th:text="${coupon.couponDiscount}"></td>
+                                                <td th:text="${formattedDate1}"></span></td>
+                                                <td th:text="${formattedDate2}"></td>
                                             </tr>
                                             <!-- <tr>
                                                 <td>2</td>
