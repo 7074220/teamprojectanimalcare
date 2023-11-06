@@ -1,6 +1,7 @@
 package com.itwill.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -50,15 +52,19 @@ public class CartController {
 		
 		//List<CartDto> cartListDto = new ArrayList<>();
 		List<Cart> cartList = cartService.findAllCartByUserId(userNo);
-		
+		Integer totalPrice = 0;
 		
 		/*
 		for (Cart cart : cartList) {
 			cartListDto.add(CartDto.toDto(cart));
 		}
 		*/
+		for (Cart cart : cartList) {
+			totalPrice = totalPrice + cart.getProduct().getProductPrice() * cart.getCartQty();
+		}
 		
 		model.addAttribute("cartList", cartList);
+		model.addAttribute("totalPrice", totalPrice);
 		
 		return "cart";
 	}
@@ -180,6 +186,17 @@ public class CartController {
 		
 		
 		return "shop";
+	}
+	
+	@PostMapping("/delete")
+	public String delete(@RequestParam List<String> cartNo) throws Exception {
+		
+		for (int i = 0; i < cartNo.size(); i++) {
+			Long no = Long.valueOf(cartNo.get(i));
+			cartService.deleteById(no);
+		}
+		
+		return "cart";
 	}
 	
 	

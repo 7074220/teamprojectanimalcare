@@ -1,5 +1,7 @@
 package com.itwill.controller;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,6 +9,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,34 +48,47 @@ public class AdoptController {
 		return "adopt";
 	}
 
+
 	@PostMapping("/create-adopt")
 	public String createAdopt(@RequestParam("adoptDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date adoptDate,
 			@RequestParam("adoptTime") int selectedHour, @RequestParam Long petNo, Model model, HttpSession session) throws Exception {
 		Long userNo = (Long)session.getAttribute("userNo");
 		
-		Adopt adopt = new Adopt();
-		adopt.setAdoptDate(adoptDate);
-		adopt.setAdoptTime(selectedHour);
-		adopt.setAdoptStatus("입양신청접수");
-
-		Pet pet = petService.petFindById(petNo);
-		Userinfo userinfo=userInfoService.findUserByNo(userNo);
-		adopt.setUserinfo(userinfo);
-		adopt.setPet(pet);
-		adoptService.insertAdopt(adopt);
-		model.addAttribute("userinfo", userinfo);
+		// 시간 문자열을 LocalTime으로 파싱
+	   // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+	    //LocalTime adoptTime = LocalTime.parse(selectedHour, formatter);
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>시작");
+		if(userNo!=null) {
+		
+			Adopt adopt = new Adopt();
+			adopt.setAdoptDate(adoptDate);
+			adopt.setAdoptTime(selectedHour);
+			// adopt.setAdoptTime(adoptTime);
+			 
+			adopt.setAdoptStatus("입양신청접수");
+	
+			Pet pet = petService.petFindById(petNo);
+			Userinfo userinfo=userInfoService.findUserByNo(userNo);
+			adopt.setUserinfo(userinfo);
+			adopt.setPet(pet);
+			adoptService.insertAdopt(adopt);
+			model.addAttribute("userinfo", userinfo);
+		}else {
+			throw new Exception("로그인을 해주세요.");
+		}
 		return "pet-list";
 	}
-
+	
+	
+	
+	
+	
 	// 입양 리스트 조회(관리자)
 	@GetMapping("/adoptList")
 	public String adoptList(Model model) {
-		// List<AdoptDto> adoptDtoList = new ArrayList<>();
+		
 		List<Adopt> adoptList = adoptService.findAdoptList();
-		/*
-		 * for (Adopt adopt : adoptList) { adoptDtoList.add(AdoptDto.fromEntity(adopt));
-		 * } model.addAttribute("adoptDtoList", adoptDtoList);
-		 */
+		
 		model.addAttribute("adoptList", adoptList);
 		return "my-account";
 	}

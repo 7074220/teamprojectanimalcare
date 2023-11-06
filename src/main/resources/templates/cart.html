@@ -571,7 +571,12 @@
                                 <table>
                             <thead>
                                 <tr>
-									<th class="product_check">Check</th>
+									<!--<th class="product_check">Check</th>-->
+									<th>
+										<label class="checkbox-inline">
+										<input type="checkbox" id="allCheckBox" onclick="allChecked()" checked="true">
+										</label>
+									</th>
                                     <th class="product_thumb">Image</th>
                                     <th class="product_name">Product</th>
                                     <th class="product-price">Price</th>
@@ -590,7 +595,12 @@
                            
                            
                                 <tr th:each="cart:${cartList}">
-                                    <td class="product_total" th:id="${cart.cartNo}"><input type="checkbox" name="cartCheckbox"></td>
+                                    <!--<td class="product_checkbox" th:id="${cart.cartNo}"><input type="checkbox" name="cartCheckbox"></td>-->
+                                    <td>
+										<label class="checkbox-inline">
+											<input type="checkbox" name="chk" class="chk" onclick="chkClicked()" value="" th:value="(${cart.product.productPrice})*(${cart.cartQty})" th:id="${cart.cartNo}" checked="true">
+										</label>
+									</td>
                                     <td class="product_thumb" th:id="${cart.cartNo}"><a href="#" th:href="@{productDetail(productNo=${cart.product.productNo})}"><img src="#" alt="" th:src="@{/image/product/} + ${cart.product.getProductImage}"></a></td>
                                     <td class="product_name" th:id="${cart.cartNo}"><a href="#" th:text="${cart.product.productName}" th:href="@{productDetail(productNo=${cart.product.productNo})}">상품명</a></td>
                                     <td class="product-price" th:id="${cart.cartNo}" th:text="${cart.product.productPrice}">가격</td>
@@ -633,15 +643,16 @@
                         </table>   
                             </div>  
                             <div class="cart_submit">
-                                <button type="submit">delete</button>
-                                <button type="submit">update cart</button>
+                                <button type="submit" onclick="cartDelete()">delete</button>
+                                <!--<button type="submit">update cart</button>-->
                             </div>      
                         </div>
                      </div>
                  </div>
                  <!--coupon code area start-->
+                 
                 <div class="coupon_area">
-                    <div class="row">
+                   <!-- <div class="row">
                         <div class="col-lg-6 col-md-6">
                             <div class="coupon_code left">
                                 <h3>Coupon</h3>
@@ -651,24 +662,24 @@
                                     <button type="submit">Apply coupon</button>
                                 </div>    
                             </div>
-                        </div>
+                        </div>-->
                         <div class="col-lg-6 col-md-6">
                             <div class="coupon_code right">
                                 <h3>Cart Totals</h3>
                                 <div class="coupon_inner">
-                                   <div class="cart_subtotal">
+									
+                                   <!--<div class="cart_subtotal">
                                        <p>Subtotal</p>
-                                       <p class="cart_amount">£215.00</p>
-                                   </div>
-                                   <div class="cart_subtotal ">
+                                       <p class="cart_amount1" th:text='${totalPrice+"원"}'>£215.00</p>
+                                   </div>-->
+                                   <!--<div class="cart_subtotal ">
                                        <p>Shipping</p>
-                                       <p class="cart_amount"><span>Flat Rate:</span> £255.00</p>
-                                   </div>
-                                   <a href="#">Calculate shipping</a>
-
+                                       <p class="cart_amount2"><span>Flat Rate:</span> £255.00</p>
+                                   </div>-->
+                                   <!--<a href="#">Calculate shipping</a>-->
                                    <div class="cart_subtotal">
                                        <p>Total</p>
-                                       <p class="cart_amount">£215.00</p>
+                                       <p class="cart_amount1" th:text='${totalPrice+"원"}'>£215.00</p>
                                    </div>
                                    <div class="checkout_btn">
                                        <a href="orderView">Proceed to Checkout</a>
@@ -683,7 +694,6 @@
         </div>     
     </div>
      <!--shopping cart area end -->
-     
      
      <script type="text/javascript">
     		// 카트 총액 계산 ~~~~~~~~~~~~~
@@ -715,7 +725,7 @@
     		            cartNo : cartNo,
     		            cartQty: qty
     		        };
-					
+					$(e.target).parent().parent().find(".chk").val(price*qty);
 					ajaxRequest("PUT","cart/"+cartNo,sendJsonObject);	
 					
     		        // AJAX 요청을 통해 장바구니 수량 업데이트
@@ -723,15 +733,18 @@
     		            // 필요한대로 응답을 처리할 수 있습니다. 예를 들어 UI를 업데이트할 수 있습니다.
     		            // resultJsonObject에는 업데이트된 장바구니 정보가 포함됩니다.
     		       // });
+    		       	let totalprice = 0;
+					document.querySelectorAll('input[name="chk"]:checked').forEach(function (v, i) {
+						let price = parseInt(v.value);
+						totalprice = totalprice + price;
+					});
+					$('.cart_amount1').html(totalprice+"원");
     		    });
     		});
-		
     		
     		
     		
 		  // 프로덕트 삭제 버튼 클릭 이벤트 처리
-		  
-		  
 		  $(".product_remove").on('click', function(e) {
 		    //e.preventDefault(); // 기본 이벤트 방지
 		    let cartNo = $(e.target).attr('id');
@@ -745,14 +758,112 @@
 	        });
 		    
 		  });
-		
-				    		 
+		  
+		  function allChecked(target) {
+
+				//전체 체크박스 버튼
+				const checkbox = document.getElementById('allCheckBox');
+
+				//전체 체크박스 버튼 체크 여부
+				const is_checked = checkbox.checked;
+
+				//전체 체크박스 제외한 모든 체크박스
+				if (is_checked) {
+					//체크박스 전체 체크
+					chkAllChecked()
+				}else {
+					//체크박스 전체 해제
+					chkAllUnChecked()
+				}
+			}
+
+			//자식 체크박스 클릭 이벤트
+			function chkClicked() {
+
+				//체크박스 전체개수
+				const allCount = document.querySelectorAll(".chk").length;
+
+				//체크된 체크박스 전체개수
+				const query = 'input[name="chk"]:checked'
+				const selectedElements = document.querySelectorAll(query)
+				const selectedElementsCnt = selectedElements.length;
+
+				//체크박스 전체개수와 체크된 체크박스 전체개수가 같으면 전체 체크박스 체크
+				if (allCount == selectedElementsCnt) {
+					document.getElementById('allCheckBox').checked = true;
+				}
+
+				//같지않으면 전체 체크박스 해제
+				else {
+					document.getElementById('allCheckBox').checked = false;
+				}
+				
+				let totalprice = 0;
+				document.querySelectorAll('input[name="chk"]:checked').forEach(function (v, i) {
+					let price = parseInt(v.value);
+					totalprice = totalprice + price;
+				});
+				$('.cart_amount1').html(totalprice+"원");
+				
+			}
+
+			//체크박스 전체 체크
+			function chkAllChecked() {
+				document.querySelectorAll(".chk").forEach(function (v, i) {
+					v.checked = true;
+
+				});
+				let totalprice = 0;
+				document.querySelectorAll('input[name="chk"]:checked').forEach(function (v, i) {
+					let price = parseInt(v.value);
+					totalprice = totalprice + price;
+				});
+				$('.cart_amount1').html(totalprice+"원");
+			}
+
+			//체크박스 전체 체크 해제
+			function chkAllUnChecked() {
+				document.querySelectorAll(".chk").forEach(function (v, i) {
+					v.checked = false;
+				});
+				let totalprice = 0;
+				document.querySelectorAll('input[name="chk"]:checked').forEach(function (v, i) {
+					let price = parseInt(v.value);
+					totalprice = totalprice + price;
+				});
+				$('.cart_amount1').html(totalprice+"원");
+			}
+
+			//글삭제
+			function cartDelete() {
+				//체크박스 체크된 항목
+				const query = 'input[name="chk"]:checked'
+				const selectedElements = document.querySelectorAll(query)
+
+				//체크박스 체크된 항목의 개수
+				const selectedElementsCnt = selectedElements.length;
+
+				if (selectedElementsCnt == 0) {
+					alert("삭제할 항목을 선택해주세요.");
+					return false;
+				}
+
+				else {
+					if (confirm("정말로 삭제하시겠습니까?")) {
+						document.querySelectorAll('input[name="chk"]:checked').forEach(function (v, i) {
+							ajaxRequest("DELETE","cart/delete/"+v.id);
+						});
+
+					}
+				}
+			}    		 
     		
     </script>
       
      </th:block>
-    <!--footer area start-->
-   <!--  <footer class="footer_widgets footer_border">
+   
+   <!--
+   <footer class="footer_widgets footer_border">
         <div class="container">
             <div class="footer_top">
                 <div class="row">
@@ -840,9 +951,8 @@
                 </div>
              </div>   
         </div>  
-    </footer> -->
-    <!--footer area end-->
-
+    </footer>
+     -->
 
 </body>
 
