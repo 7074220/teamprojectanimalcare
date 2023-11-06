@@ -824,11 +824,8 @@
 
 				else {
 					if (confirm("정말로 삭제하시겠습니까?")) {
-						//배열생성
-						const arr = new Array(selectedElementsCnt);
-
 						document.querySelectorAll('input[name="chk"]:checked').forEach(function (v, i) {
-							arr[i] = v.value;
+							ajaxRequest("DELETE","cart/delete/"+v.id);
 						});
 
 					}
