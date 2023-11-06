@@ -1,25 +1,25 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
-	   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-       layout:decorate="layout/layout(title='마이페이지')">
-<head>
-    <title>Safira - my account</title>
-    <style>
-        .modal-dialog {
-        margin: auto;
-        margin-top: 20vh; /* 회원탈퇴창 가운데 정도로 떨어트림 */
-    }
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='마이페이지')">
 
-    </style>
+<head>
+	<title>Safira - my account</title>
+	<style>
+		.modal-dialog {
+			margin: auto;
+			margin-top: 20vh;
+			/* 회원탈퇴창 가운데 정도로 떨어트림 */
+		}
+	</style>
 
 </head>
 
 <body>
 
-   <!--header area start-->
-    <th:block layout:fragment="content">
-    <!--offcanvas menu area start-->
-    <!-- <div class="off_canvars_overlay">
+	<!--header area start-->
+	<th:block layout:fragment="content">
+		<!--offcanvas menu area start-->
+		<!-- <div class="off_canvars_overlay">
                 
     </div>
     <div class="offcanvas_menu">
@@ -151,13 +151,13 @@
             </div>
         </div>
     </div> -->
-    <!--offcanvas menu area end-->
-    
+		<!--offcanvas menu area end-->
 
-    <!--header area end-->
-    
-    <!--breadcrumbs area start-->
-    <!-- <div class="breadcrumbs_area">
+
+		<!--header area end-->
+
+		<!--breadcrumbs area start-->
+		<!-- <div class="breadcrumbs_area">
         <div class="container">   
             <div class="row">
                 <div class="col-12">
@@ -172,100 +172,102 @@
             </div>
         </div>         
     </div> -->
-    <!--breadcrumbs area end-->
-    
-    <!-- my account start  -->
-    <section class="main_content_area">
-        <div class="container">   
-            <div class="account_dashboard">
-                <div class="row">
-                    <div class="col-sm-12 col-md-3 col-lg-3">
-                        <!-- Nav tabs -->
-                        <div class="dashboard_tab_button">
-                            <ul role="tablist" class="nav flex-column dashboard-list">
-                                <li><a href="userinfo" class="nav-link">내정보</a></li>
-                                <li><a href="mypet"  class="nav-link">마이펫</a></li>
-                                <li><a href="couponList"  class="nav-link">쿠폰</a></li>
-                                <li><a href="adoptByUserNo"  class="nav-link">입양</a></li>
-								<li><a href="volunteerByUserNo"  class="nav-link">봉사</a></li>
-                                <li><a href="visitByUserNo" class="nav-link">견학</a></li>
-                                <li> <a href="orders" class="nav-link">주문목록</a></li>
-                                <li><a href="logout" class="nav-link">로그아웃</a></li>
-                                <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li>
+		<!--breadcrumbs area end-->
 
-                            </ul>
-                        </div>    
-                    </div>
-                    <div class="col-sm-12 col-md-9 col-lg-9">
-                        <!-- Tab panes -->
-                            
-                        <div class="tab-content dashboard_content">
-                     <form name="f" id="user_write_form" action="register.html" method="post" >
-                            
+		<!-- my account start  -->
+		<section class="main_content_area">
+			<div class="container">
+				<div class="account_dashboard">
+					<div class="row">
+						<div class="col-sm-12 col-md-3 col-lg-3">
+							<!-- Nav tabs -->
+							<div class="dashboard_tab_button">
+								<ul role="tablist" class="nav flex-column dashboard-list">
+									<li><a href="userinfo" class="nav-link">내정보</a></li>
+									<li><a href="mypet" class="nav-link">마이펫</a></li>
+									<li><a href="couponList" class="nav-link">쿠폰</a></li>
+									<li><a href="adoptByUserNo" class="nav-link">입양</a></li>
+									<li><a href="volunteerByUserNo" class="nav-link">봉사</a></li>
+									<li><a href="visitByUserNo" class="nav-link">견학</a></li>
+									<li> <a href="orders" class="nav-link">주문목록</a></li>
+									<li><a href="logout" class="nav-link">로그아웃</a></li>
+									<li><a href="#" data-toggle="modal" data-target="#deleteModal"
+											class="nav-link">회원탈퇴</a></li>
 
-                            <!--<div class="tab-pane fade" id="adopt">-->
-                                <h3>마이펫</h3>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>이름</th>
-                                                <th>생일</th>
-                                                <th>종류</th>
-                                                <th>대표동물</th>                 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr th:each="mypet : ${myPetList}">
-                                                <!--<td th:text="${mypet.mypetNo}">1</td>-->
-                                                
-                                                <td th:text="${sequentialNumber}"></td>
-                                                <td th:text="${mypet.mypetName}"></td>
-                                                <td th:text="${formattedDate}"></span></td>
-                                                <td th:text="${mypet.mypetKind}"></td>
-                                                <td th:text="${Name}"></td>
-                                                
+								</ul>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-9 col-lg-9">
+							<!-- Tab panes -->
 
-                                            </tr>
-                                            <!-- <tr>
+							<div class="tab-content dashboard_content">
+								<form name="f" id="user_write_form" action="register.html" method="post">
+
+
+									<!--<div class="tab-pane fade" id="adopt">-->
+									<h3>마이펫</h3>
+									<div class="table-responsive">
+										<table class="table">
+											<thead>
+												<tr>
+													<th>No</th>
+													<th>이름</th>
+													<th>생일</th>
+													<th>종류</th>
+													<th>대표동물</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="mypet : ${myPetList}">
+													<!--<td th:text="${mypet.mypetNo}">1</td>-->
+
+													<td th:text="${sequentialNumber}"></td>
+													<td th:text="${mypet.mypetName}"></td>
+													<td th:text="${formattedDate}"></span></td>
+													<td th:text="${mypet.mypetKind}"></td>
+													<td th:text="${Name}"></td>
+
+
+												</tr>
+												<!-- <tr>
                                                 <td>2</td>
                                                 <td>12:00</td>
                                                 <td>Jun 10, 2018</td>
                                                 <td>골든리트리버 </td>
                                                 <td><span class="success">입양완료</span></td>
                                             </tr> -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            <!--</div>-->
-                            
-                            <!--<div class="tab-pane fade" id="account-details">-->
-                            <div class="login_submit">
-                                <button type="button" data-navigate="#/user_write_action">등록</button>
-                            </div>
-						</form>
-                           <!--   </div>-->
-                        </div>
-                    </div>
-                </div>
-            </div>  
-        </div>        	
-    </section>	
-    
-    <!-- my account end   --> 
+											</tbody>
+										</table>
+									</div>
+									<!--</div>-->
 
-      <!--footer area start-->
-  
- 
-    <!--footer area end-->
+									<!--<div class="tab-pane fade" id="account-details">-->
+									<div class="login_submit">
+										<button id="registerButton" type="button">등록</button>
+									</div>
+									
+								</form>
+								<!--   </div>-->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- my account end   -->
+
+		<!--footer area start-->
 
 
+		<!--footer area end-->
 
- 
 
 
-<!--주문한 상품 리뷰쓰기 
+
+
+
+		<!--주문한 상품 리뷰쓰기 
 <script>
 
     // 마이페이지 상품주문 완료된 항목에서 주문상세를 누르면 창이 뜨고 이 창에서만 리뷰를 쓸수 있음
@@ -283,8 +285,13 @@
     });
 
 </script> -->
-</th:block>		
-
+	<script>
+		document.getElementById("registerButton").addEventListener("click", function () {
+			// 버튼 클릭 시 실행할 코드
+			window.location.href = "registerMyPet.html"; // 페이지 이동
+		});
+	</script>
+	</th:block>
 
 </body>
 
