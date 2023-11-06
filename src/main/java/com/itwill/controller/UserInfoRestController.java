@@ -212,7 +212,10 @@ public class UserInfoRestController {
 	@PostMapping("/findIdUserInfo")
 	public ResponseEntity<UserInfoFindDto> findIdUserInfo(UserInfoFindDto dto) throws Exception {
 		Userinfo userinfo = userInfoService.findUserIdByNameAndPhoneNumber(dto.getUserName(), dto.getUserPhoneNumber());
-		
+		Integer status = 0;
+		if(userinfo==null) {
+			
+		}
 		UserInfoFindDto findDto = UserInfoFindDto.toDto(userinfo);
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
