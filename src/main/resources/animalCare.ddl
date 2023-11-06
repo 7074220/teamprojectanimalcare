@@ -261,7 +261,7 @@ CREATE TABLE ReviewBoard(
 		board_title                   		VARCHAR2(100)		 NULL ,
 		board_content                 		VARCHAR2(100)		 NULL ,
 		board_date                    		DATE		 NULL ,
-		board_star                    		NUMBER(10)		 NULL ,
+		board_star                    		DOUBLE PRECISION		 NULL ,
 		product_no                    		NUMBER(10)		 NULL ,
 		user_no                       		NUMBER(10)		 NULL 
 );
