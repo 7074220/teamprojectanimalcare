@@ -1,0 +1,140 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='FindUserInfo')">
+
+<head>
+    
+    <title>Safira - login</title>
+   
+
+</head>
+
+<body>
+
+
+     <!--header area start-->
+    
+    <!--offcanvas menu area start-->
+
+    <!--offcanvas menu area end-->
+    
+    
+    <!--header area end-->
+
+    <!--breadcrumbs area start-->
+    
+    <!--breadcrumbs area end-->
+    
+    <!-- customer login start -->
+    <th:block layout:fragment="content">
+	<div id="content">
+    <div class="customer_login">
+        <div class="container">
+            <div class="row">
+               <!--login area start-->
+                <div class="col-lg-6 col-md-6">
+                 <div class="account_form register">
+                        <h2>아이디 찾기</h2>
+                        <form name="findIdform" action="#">
+                            <p>   
+                                <label>이름 <span>*</span></label>
+                                <input type="text" id="name">
+                             </p>
+                             <p>   
+                                <label>전화번호 <span>*</span></label>
+                                <input type="text" id="phoneNumber">
+                             </p>
+                            <div class="login_submit">
+                                <button type="button" onclick="findId()">확인</button>
+                            </div>
+                        </form>
+                    </div>  
+                </div>
+                <!--login area start-->
+
+                <!--register area start-->
+                <div class="col-lg-6 col-md-6">
+					          <div class="account_form">
+                        <h2>비밀번호 찾기</h2>
+                        <form action="#">
+                            <p>   
+                                <label>아이디<span>*</span></label>
+                                <input type="text" id="userId">
+                             </p>
+                             <p>   
+                                <label>전화번호<span>*</span></label>
+                                <input type="text" id="phoneNumber">
+                             </p>   
+                             
+                            <div class="login_submit">
+                               
+                                <button type="button" onclick="findPassword()">확인</button>
+                                
+                            </div>
+
+                        </form>
+                     </div>  
+                 
+                </div>
+                <!--register area end-->
+            </div>
+        </div>    
+    </div>
+    </div>
+    
+    <script>
+		function ajaxRequest(method, url, sendJsonObject) {
+			let returnResultJsonObject={};
+			$.ajax({
+				async:false,
+				method: method,
+				url: url,
+				contentType: 'application/json;UTF-8',
+				data: JSON.stringify(sendJsonObject),
+				type: 'json',
+				success: function(resultJsonObject) {
+					returnResultJsonObject = resultJsonObject;
+				}
+			});
+			return returnResultJsonObject;
+		}
+		
+		function findId(){
+			let sendObject={
+				userName : document.findIdform.name.value,
+				userPhoneNumber : document.findIdform.phoneNumber.value
+			}
+			const responseJsonObject = ajaxRequest('POST','user/findIdUserInfo',sendObject);
+			//alert(responseJsonObject.userName);
+			/*
+			if(responseJsonObject){
+				alert('일치하는 아이디가 없습니다.');
+			}else{
+				alert('찾으신 아이디:'+responseJsonObject.userId);
+			}
+			*/
+		}
+		
+		function findPassword(){
+			let sendObject={
+				userId : document.findIdform.userId.value,
+				userPhoneNumber : document.findIdform.phoneNumber.value
+			}
+			const responseJsonObject = ajaxRequest('POST',user/findPasswordUserInfo,sendObject);
+			if(responseJsonObject=="1"){
+				alert('일치하는 비밀번호가 없습니다.');
+			}else{
+				alert('찾으신 비밀번호:'+responseJsonObject);
+			}
+		}
+		
+	</script>
+    </th:block>
+    <!-- customer login end -->
+
+    <!--footer area start-->
+    
+    <!--footer area end-->
+</body>
+
+</html>

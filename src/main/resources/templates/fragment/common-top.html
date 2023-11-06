@@ -226,12 +226,14 @@
                                 <div class="header_account_area">
                                     <div class="header_account_list register">
                                         <ul th:if="${session.userNo}==null">
+											<!--index가 없으면 reportList에서 resigter누르면 페이지를 부르지 못함 그래서 앞에 index붙임-->
                                             <li><a href="#/user_write_form">Register</a></li>
                                             <li><span>/</span></li>
                                             <li><a href="#/login_form">Login</a></li>
                                         </ul>
                                         <ul th:if="${session.userNo}!=null">
-                                            <li><a href="userinfo" th:text="my-account">Login</a></li>
+                                            <!--<li><a href="userinfo" th:text="${session.userName} 님">Login</a></li>-->
+                                            <li><a href="userinfo" th:text='${session.userName+"님"}'>Login</a></li>
                                             <li><span>/</span></li>
                                             <li><a href="logout" th:text="Logout">Log</a></li>
                                         </ul>
@@ -252,7 +254,7 @@
                                     <div class="header_account_list  mini_cart_wrapper">
                                        <a href="cartList"><span class="lnr lnr-cart"></span><span class="item_count">2</span></a>
                                         <!--mini cart-->
-                                        <div class="mini_cart">
+                                    <!--    <div class="mini_cart">
                                             <div class="cart_gallery">
                                                 <div class="cart_close">
                                                 	<div class="cart_text">
@@ -308,7 +310,7 @@
                                                 </div>
 
                                             </div>
-                                        </div>
+                                        </div>-->
                                         <!--mini cart end-->
                                    </div>
                                 </div>

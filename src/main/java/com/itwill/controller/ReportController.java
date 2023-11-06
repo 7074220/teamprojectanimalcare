@@ -38,11 +38,12 @@ public class ReportController {
 	public String ReportView(Model model,@RequestParam Long boardNo) {
 		
 		ReportBoard reportBoard = reportBoardService.findByBoardNo(boardNo);
+		List<ReplyBoard> replyBoardList= replyBoardService.findAllByReportBoardNo(boardNo);
 		
 		System.out.println(">>>>>>>>>>>>>>>>"+reportBoard);
 		System.out.println(">>>>>>>>>>>>>>>>"+reportBoard.getBoardImage());
 		model.addAttribute("reportBoard", reportBoard);
-		
+		model.addAttribute("replyBoardList", replyBoardList);
 		return "reportBoardView";
 	}
 	

@@ -40,7 +40,7 @@ public class CouponRestController {
 	@PutMapping("/{userNo}")
 	public ResponseEntity<CouponDto> insertCoupon(@PathVariable(name = "userNo") Long userNo) throws Exception {
 
-		// 생일 스캐쥴링 하는 방법 아직 생각즁 ㅋ ㅈㅅ
+		
 		Userinfo findUserinfo = userInfoService.findUserByNo(userNo);
 		Coupon coupon = Coupon.builder().couponName("생일쿠폰").couponDiscount(30).userinfo(findUserinfo).build();
 		coupon.setCouponDate(30L);

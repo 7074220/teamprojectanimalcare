@@ -580,31 +580,32 @@
                                             <th class="product_name">Product</th>
                                             <th class="product-price">Price</th>
                                             <th class="product_quantity">Category</th>
-                                            <th class="product_total">Add To Cart</th>
+                                            <!--<th class="product_total">Add To Cart</th>-->
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                           <td class="product_remove"><a href="#">X</a></td>
-                                            <td class="product_thumb"><a href="#"><img src="assets/img/product/productbig1.jpg" alt=""></a></td>
-                                            <td class="product_name"><a href="#">Handbag fringilla</a></td>
-                                            <td class="product-price">£65.00</td>
-                                            <td class="product_quantity">In Stock</td>
-                                            <td class="product_total"><a href="#">Add To Cart</a></td>
+                                        <tr th:each="wish:${wishList}">
+                                           <td class="product_remove" th:id="${wish.wishNo}"><a class="deleteWish"><i class="fa fa-trash-o" th:id="${wish.wishNo}"></i></a></td>
+                                            <td class="product_thumb" th:id="${wish.wishNo}"><a href="#" th:href="@{productDetail(productNo=${wish.product.productNo})}"><img src="#" alt="" th:src="@{/image/product/} + ${wish.product.getProductImage}"></a></td>
+                                            <td class="product_name" th:id="${wish.wishNo}"><a href="#" th:text="${wish.product.productName}" th:href="@{productDetail(productNo=${wish.product.productNo})}">상품명</a></td>
+                                            <td class="product-price"  th:id="${wish.wishNo}" th:text="${wish.product.productPrice}">가격</td>
+                                            <td class="product_quantity" th:id="${wish.wishNo}" th:text="${wish.product.productCategory}">In Stock</td>
+                                            <!--<td class="product_total"><a href="#">Add To Cart</a></td>-->
 
 
                                         </tr>
-
-                                        <!-- <tr>
+										<!--
+                                         <tr>
                                            <td class="product_remove"><a href="#">X</a></td>
                                             <td class="product_thumb"><a href="#"><img src="assets/img/product/productbig2.jpg" alt=""></a></td>
                                             <td class="product_name"><a href="#">Handbags justo</a></td>
                                             <td class="product-price">£90.00</td>
                                             <td class="product_quantity">In Stock</td>
-                                            <td class="product_total"><a href="#">Add To Cart</a></td>
+                                           <td class="product_total"><a href="#">Add To Cart</a></td>
 
 
                                         </tr>
+                                        
                                         <tr>
                                            <td class="product_remove"><a href="#">X</a></td>
                                             <td class="product_thumb"><a href="#"><img src="assets/img/product/productbig3.jpg" alt=""></a></td>
@@ -645,6 +646,40 @@
     <!--wishlist area end -->
     
     <!--  위시리스트 페이지 끝 -->
+    
+    <script>
+		
+		function ajaxRequest(method, url, sendJsonObject) {
+				let returnResultJsonObject={};
+				$.ajax({
+					async:false,
+					method: method,
+					url: url,
+					contentType: 'application/json;UTF-8',
+					data: JSON.stringify(sendJsonObject),
+					type: 'json',
+					success: function(resultJsonObject) {
+						returnResultJsonObject = resultJsonObject;
+					}
+				});
+				return returnResultJsonObject;
+			}
+		
+		$(".product_remove").on('click', function (e) {
+		    //e.preventDefault(); // 기본 이벤트 방지
+		    let wishNo = $(e.target).attr('id');
+		    // AJAX 요청 보내기
+			ajaxRequest("DELETE", "wish" + wishNo);
+		    
+		    $(".product_remove, .product_thumb, .product_name, .product-price, .product_quantity, .product_total").each(function() {
+	            if ($(this).attr("id") === wishNo) {
+	                $(this).remove();
+	            }
+	        });
+		    
+		  });
+		
+	</script>
     
     </th:block>
      <!--footer area start-->

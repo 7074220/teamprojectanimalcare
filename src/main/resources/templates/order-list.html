@@ -1,0 +1,273 @@
+<!doctype html>
+<html class="no-js" lang="kr" xmlns:th="https://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='cart')">
+
+<head>
+    <title>Safira - cart page</title>
+    
+    
+    <!-- 별점 css 위치 -->
+
+<style>
+
+.rating_box {
+  display: flex;
+}
+
+.rating {
+  position: relative;
+  color: #ddd;
+  font-size: 30px;
+  text-align: center;
+}
+
+.rating input {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.rating_star {
+  width: 0;
+  color: #ffc107;
+  position: absolute;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transition: width 0.2s;
+}
+
+
+</style>
+
+    
+</head>
+
+<body>
+
+
+   <!--header area start-->
+    <th layout:fragment="content">
+    <!--offcanvas menu area start-->
+   <!--  <div class="off_canvars_overlay">
+                
+   
+    <!--offcanvas menu area end-->
+    
+    <!-- <header>
+
+    <!--header area end-->
+    
+    <!--breadcrumbs area start-->
+   <!--  <div class="breadcrumbs_area">
+       
+    <!--breadcrumbs area end-->
+    
+     <!--shopping cart area start -->
+    <div class="shopping_cart_area mt-70">
+        <div class="container">  
+            <form action="#"> 
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table_desc">
+                            <div class="cart_page">
+                             <table>
+                            <thead>
+                                <tr>
+                                    <!--<th class="product_remove">Delete</th>-->
+                                    <th class="order_no">주문번호</th>
+                                    <th class="order_date">주문날짜</th>
+                                    <th class="product_thumb">사진</th>
+                                    <th class="product_name">상품이름</th>
+                                    <th class="product-price">가격</th>
+                                    <th class="product_quantity">수량</th>
+                                    <th class="product_total">총가격</th>
+                                    <th class="review_write_butten">리뷰쓰기</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+
+                            </tbody>
+                            
+                            
+                        </table>   
+                            </div>  
+                            
+                            <div class="cart_submit view" >
+                                <button type="submit">리뷰작성</button>
+                            </div>
+                            
+                                 
+                        </div>
+                     </div>
+                 </div>
+                 
+                 
+                 <div class="modal fade" id="orderDetailsModal" tabindex="-1" 
+                                 aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content" style="height:500px">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="orderDetailsModalLabel">리뷰 작성</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="border: none; padding: 7px;">X
+                                        <!--<span aria-hidden="true">&times;</span>-->
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <!-- 주문 상세 내용이 여기에 로드됩니다 -->
+                                    
+                                      <div >
+                                      <!--class="table-responsive"-->
+                                      
+                                    <!--<table class="table">
+                                        <thead>
+                                            <tr>
+												<th>번호</th>
+												<th>구입날짜</th>
+												<th>상품명</th>
+												<th>총가격</th>
+												<th>주문상태</th>
+												<th>리뷰</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>May 10, 2018</td>
+                                                <td><span class="success">고양이캔조림</span></td>
+                                                <td>$25.00 for 1 item </td>
+                                                <td>배송완료 </td>
+                                                <td><a href="cart.html" class="view">리뷰쓰기</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>-->
+                                    
+                                    
+                            <!--<h3>리뷰작성</h3>-->
+                                    <div class="comments_form">
+                            
+                     <form action="#" class="mb-3" name="myform" id="myform" method="post">
+                                
+                            <p>별점과 후기를 남겨주세요.</p>
+                            
+                            
+                            
+                            
+                            
+
+								<div class="row" style="flex-direction: column;">
+						
+									<div>별점</div>
+									
+									<!-- 별점 위치 -->
+									
+									<div class="rating_box">
+										<div class="rating">
+											★★★★★
+											<span class="rating_star">★★★★★</span>
+											<input type="range" value="1" step="1" min="0" max="10">
+										</div>
+									</div>
+									
+									
+									
+									
+                                    <div class="col-12">
+                                        <label for="review_comment">Comment </label>
+                                        <div> <textarea name="comment" id="review_comment" ></textarea></div>
+                                       
+                                    </div> 
+                                </div>
+                                <!--<button class="button" type="submit">Post Comment</button>-->
+                     </form>   
+                              
+                        </div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                </div>
+                                    
+                                    </div>
+                                    <div class="modal-footer">
+                                 <!--   <button type="button" class="btn btn-primary">리뷰 저장</button>-->
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">작성 완료</button>
+                                    
+                                    </div>
+                                </div>
+                                </div>
+                            </div>   
+                            
+                 
+                 
+                 
+                 
+                 <!--coupon code area start-->
+
+                <!--coupon code area end-->
+            </form> 
+        </div>     
+    </div>
+     <!--shopping cart area end -->
+     
+     
+     <!--주문한 상품 리뷰쓰기 -->
+	<script>
+		// 주문 상세 모달 표시 이벤트 핸들러
+		document.querySelector('.cart_submit button').addEventListener('click', function (e) {
+			e.preventDefault();
+
+			// 모달창 표시
+			$('#orderDetailsModal').modal('show');
+		});
+	</script>
+	
+	
+	
+	<!-- 별점 js 위치 -->
+	
+	<script>
+		const rating = document.querySelector('.rating');
+    const rating_input = document.querySelector('.rating input');
+    const rating_star = document.querySelector('.rating_star');
+
+    rating.addEventListener('mousemove', (event) => {
+        const boundingRect = rating.getBoundingClientRect();
+        const offsetX = event.clientX - boundingRect.left;
+        const ratingValue = Math.min(10, Math.ceil((offsetX / boundingRect.width) * 10));
+        rating_input.value = ratingValue;
+        rating_star.style.width = `${ratingValue * 10}%`;
+    });
+
+	</script>
+	
+     
+     
+     
+
+      
+      
+     </th:block>
+     
+     
+     
+    <!--footer area start-->
+
+    <!--footer area end-->
+
+
+
+
+
+
+</body>
+
+</html>
