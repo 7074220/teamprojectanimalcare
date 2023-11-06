@@ -710,7 +710,9 @@
 							
 								<div class=" product_d_action">
                                <ul>
-                                   <li><a href="#" title="Add to wishlist"">+ Add to Wishlist</a></li>
+                                   <li><a href="#" title="Add to wishlist">
+                                   <button class="button" type="button" onclick="addToWish()">+ Add to Wishlist</button>
+                                   </a></li>
                                    <!-- <li><a href="#" title="Add to wishlist">+ Compare</a></li> -->
                                </ul>
                             </div>
@@ -1297,6 +1299,14 @@
             window.location.href = "cart?productNo="+productNo+"&productQty="+productQty;
     	}
     	
+    	function addToWish(){
+    		var url = window.location.href;
+    		var productNo = url.substring(url.lastIndexOf("=") + 1);
+            //var productQty = document.getElementById("productQty").value;
+            alert("장바구니에 상품이 담겼습니다.");
+            window.location.href = "wish?productNo="+productNo+"&productQty="+1;
+    	}
+    	
     	
     	/*
     	function addToWishlist(){
@@ -1336,8 +1346,8 @@
     </script>
     
     
-    
     </div>
+    
     
     </th:block>
 
