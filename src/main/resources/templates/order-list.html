@@ -236,16 +236,16 @@
 	
 	<script>
 		const rating = document.querySelector('.rating');
-		const rating_input = document.querySelector('.rating input');
-		const rating_star = document.querySelector('.rating_star');
+    const rating_input = document.querySelector('.rating input');
+    const rating_star = document.querySelector('.rating_star');
 
-		rating.addEventListener('mousemove', (event) => {
-			const boundingRect = rating.getBoundingClientRect();
-			const offsetX = event.clientX - boundingRect.left;
-			const ratingValue = Math.min(10, Math.max(0, Math.round((offsetX / boundingRect.width) * 10)));
-			rating_input.value = ratingValue;
-			rating_star.style.width = `${ratingValue * 10}%`;
-		});
+    rating.addEventListener('mousemove', (event) => {
+        const boundingRect = rating.getBoundingClientRect();
+        const offsetX = event.clientX - boundingRect.left;
+        const ratingValue = Math.min(10, Math.ceil((offsetX / boundingRect.width) * 10));
+        rating_input.value = ratingValue;
+        rating_star.style.width = `${ratingValue * 10}%`;
+    });
 
 	</script>
 	
