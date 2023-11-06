@@ -55,7 +55,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	
 	// 아이디,폰번호로 비밀번호찾기
 	@Override
-	public String findPasswordByUserIdPhoneNumber(String userId, String userPhoneNumber) {
+	public Userinfo findPasswordByUserIdPhoneNumber(String userId, String userPhoneNumber) {
 		return userinfoRepository.findPasswordByUserIdPhoneNumber(userId, userPhoneNumber);
 	}
 	

@@ -181,6 +181,7 @@ public class ProductController {
 		Long userNo = (Long) session.getAttribute("userNo");
 		MyPet myPet = MyPet.builder().build();
 		
+		/*
 		String kindPath = path.substring(1,path.lastIndexOf("?"));
 		String orderPath = "";
 		
@@ -188,7 +189,7 @@ public class ProductController {
 		path.lastIndexOf("=");
 		
 		System.out.println(">>>>>>>>>>>>>>>>"+path);
-		
+		*/
 		if (path.equals("/productDogList")) {
 			myPet.setMypetKind("강아지");
 			productList = productService.findAllByOrderByProductByPetCategoryPriceDesc("강아지");
