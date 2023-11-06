@@ -850,7 +850,7 @@
 											<h2 th:text="${review.boardDate}">roadthemes</h2>
 											<div class="reviews_comment_box">
 												<div class="comment_thmb">
-													
+													$('#userName').html(responsejsonObject.userName);
 													<p><strong th:text="${review.userinfo.userName}">adm </strong></p>
 													<!-- <img src="assets/img/blog/comment2.jpg" alt="">-->
 												</div>
@@ -1426,7 +1426,7 @@
 
 			//window.location.href = "wish?productNo="+productNo+"&productQty="+productQty;
 
-			/*function sortReviews() {
+			function sortReviews() {
 				var select = document.getElementById("sortOrder");
 				var selectedValue = select.value;
 
@@ -1447,62 +1447,7 @@
 				}
 
 				window.location.href = redirectPath;
-			}*/
-			 function sortReviews() {
-        var selectedValue = $('#sortOrder').val();
-        var productNo = $('#productNo').val();
-
-        $.ajax({
-            url: '/reviewBoards/BoardStarDesc/' + productNo, // 원하는 URL로 변경
-            type: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                // 서버로부터 데이터를 성공적으로 받았을 때 할 일
-                // data는 서버로부터 받은 JSON 데이터입니다.
-                // 리뷰 데이터를 사용하여 리뷰 화면 업데이트
-                updateReviewUI(data);
-            },
-            error: function () {
-                // 서버 요청이 실패한 경우의 처리
-            }
-        });
-    }
-    
-    function updateReviewUI(data) {
-    var reviewWrapper = $('.reviews_wrapper'); // 리뷰를 표시할 요소
-    reviewWrapper.empty(); // 기존 리뷰 목록을 지웁니다.
-
-    // 서버에서 받은 데이터(data)를 이용하여 리뷰 목록을 업데이트
-    data.forEach(function (review) {
-        var reviewHtml = '<h2>' + review.boardDate + '</h2>' +
-            '<div class="reviews_comment_box">' +
-            '<div class="comment_thmb">' +
-            '<p><strong>' + review.userinfo.userName + '</strong></p>' +
-            '</div>' +
-            '<div class="comment_text">' +
-            '<div class="reviews_meta">' +
-            '<div class="star_rating">' +
-            '<ul>';
-
-       
-        for (var i = 1; i <= 5; i++) {
-            if (i <= review.boardStar) {
-                reviewHtml += '<li><a href="#"><img src="assets/img/icon/star-icon2.png" alt="Filled Star"></a></li>';
-            } else {
-                reviewHtml += '<li><a href="#"><img src="assets/img/icon/star-icon.png" alt="Empty Star"></a></li>';
-            }
-        }
-
-        reviewHtml += '</ul></div>' +
-            '<h2><p>' + review.boardTitle + '</p></h2>' +
-            '<p>' + review.boardContent + '</p>' +
-            '</div>' +
-            '</div>' +
-            '</div>';
-
-        reviewWrapper.append(reviewHtml);
-    });
-}
+			}
 
 		</script>
 
