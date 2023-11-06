@@ -598,7 +598,7 @@
                                     <!--<td class="product_checkbox" th:id="${cart.cartNo}"><input type="checkbox" name="cartCheckbox"></td>-->
                                     <td>
 										<label class="checkbox-inline">
-											<input type="checkbox" name="chk" class="chk" onclick="chkClicked()" value="">
+											<input type="checkbox" name="chk" class="chk" onclick="chkClicked()" value="" th:id="${cart.cartNo}">
 										</label>
 									</td>
                                     <td class="product_thumb" th:id="${cart.cartNo}"><a href="#" th:href="@{productDetail(productNo=${cart.product.productNo})}"><img src="#" alt="" th:src="@{/image/product/} + ${cart.product.getProductImage}"></a></td>
@@ -643,7 +643,7 @@
                         </table>   
                             </div>  
                             <div class="cart_submit">
-                                <button type="submit">delete</button>
+                                <button type="submit" onclick="cartDelete()">delete</button>
                                 <button type="submit">update cart</button>
                             </div>      
                         </div>
@@ -693,7 +693,6 @@
         </div>     
     </div>
      <!--shopping cart area end -->
-     
      
      <script type="text/javascript">
     		// 카트 총액 계산 ~~~~~~~~~~~~~
@@ -809,11 +808,39 @@
 				document.querySelectorAll(".chk").forEach(function (v, i) {
 					v.checked = false;
 				});
-			}	    		 
+			}
+
+			//글삭제
+			function cartDelete() {
+				//체크박스 체크된 항목
+				const query = 'input[name="chk"]:checked'
+				const selectedElements = document.querySelectorAll(query)
+
+				//체크박스 체크된 항목의 개수
+				const selectedElementsCnt = selectedElements.length;
+
+				if (selectedElementsCnt == 0) {
+					alert("삭제할 항목을 선택해주세요.");
+					return false;
+				}
+
+				else {
+					if (confirm("정말로 삭제하시겠습니까?")) {
+						//배열생성
+						const arr = new Array(selectedElementsCnt);
+
+						document.querySelectorAll('input[name="chk"]:checked').forEach(function (v, i) {
+							arr[i] = v.value;
+						});
+
+					}
+				}
+			}    		 
     		
     </script>
       
      </th:block>
+   
    <!--
    <footer class="footer_widgets footer_border">
         <div class="container">
@@ -904,7 +931,7 @@
              </div>   
         </div>  
     </footer>
--->
+     -->
 
 </body>
 
