@@ -4,6 +4,8 @@
 <head>
    <title>Safira - checkout page</title>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
@@ -638,34 +640,47 @@
                                 
                                 <!--쿠폰목록 시작 select 말고 창으로 해서 쿠폰리스트 출력하도록 변경예정-->
                                 <div class="col-12 mb-20">
-                                    <label for="country">쿠폰목록 <span></span></label>
-                                    <select class="select_option" name="cuntry" id="country"> 
+                                
+                                <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  쿠폰조회/적용
+</button>
+
+
+                                    <!-- <label for="country">쿠폰목록 <span></span></label> -->
+                                    <!-- <select class="select_option" name="cuntry" id="country"> 
                                         <option th:each="coupon:${coupons}"value="2" th:value="${coupon.couponId}" th:text="${coupon.couponName}">bangladesh</option>      
                                         
                                         
                                         
-                                     <!--  <option value="3">Algeria</option> 
+                                      <option value="3">Algeria</option> 
                                         <option value="4">Afghanistan</option>    
                                         <option value="5">Ghana</option>    
                                         <option value="6">Albania</option>    
                                         <option value="7">Bahrain</option>    
                                         <option value="8">Colombia</option>    
-                                        <option value="9">Dominican Republic</option>   -->
+                                        <option value="9">Dominican Republic</option>  
 
 
-                                    </select>
+                                    </select> -->
+                                    
+                                     
+    <!-- 모달 시작 -->
+    
                                 </div>
                                 
                                  <div class="col-12 mb-20">
                                    <label>보유 적립금<span> *0원부터 사용가능</span></label>
                                     <input readonly="readonly" th:value="${user.userPoint}" >  
                                 </div> 
-                                <div class="col-12 mb-20">
+                                <div class="col-lg-6 mb-20">
                                    <label>사용 적립금<span> *0원부터 사용가능</span></label>
-                                    <input type="text" >  
+                                    <input type="text" id="loyaltyPoints">  
+                                    <button type="button" class="btn btn-primary" id="useLoyaltyPoints">사용하기</button>
                                 </div> 
-
-
+									
+									
+	
                                 <div class="col-12 mb-20">
                                     <label>주소  <span>*</span></label>
                                     <input placeholder="기본주소" type="text" id="orderAddress" th:value="${user.userAddress}" >      
@@ -805,22 +820,22 @@
                                             <td th:text="${cart.product.productName}"> $50.00</td>
                                             <td><img src="#" alt="" th:src="@{/image/product/} + ${cart.product.getProductImage}"> </td >
                                             <td th:text="${cart.cartQty}"> $50.00</td>
-                                            <td th:text="(${cart.product.productPrice})*(${cart.cartQty})"> $50.00</td >
+                                            <td class="subtotal" th:text="(${cart.product.productPrice})*(${cart.cartQty})"> $50.00</td >
                                         </tr>
                                     </tbody >
                                     
                                     <tfoot>
                                         <tr>
                                             <th>상품 합계 금액</th>
-                                            <td>25000</td>
+                                            <td class="cart_price" th:text="${cartTotalPrice}">25000</td>
                                         </tr>
                                         <tr>
                                             <th>할인 및 적립금 사용</th>
-                                            <td><strong>-5000</strong></td>
+                                            <td id="discount"><strong>-5000</strong></td>
                                         </tr>
                                         <tr class="order_total">
-                                            <th>총 주문금액</th>
-                                            <td><strong>$220.00</strong></td>
+                                            <th >총 주문금액</th>
+                                            <td id="total"><strong>$220.00</strong></td>
                                         </tr>
                                     </tfoot>
                                     
@@ -857,6 +872,9 @@
             </div> 
         </div>       
     </div>-->
+    
+    
+   
     <!--Checkout page section end-->
     
      <!--footer area start-->
@@ -921,12 +939,7 @@
                                         <div class="mailchimp-success"></div><!-- mailchimp-success end -->
                                         <div class="mailchimp-error"></div><!-- mailchimp-error end -->
                                     </div><!-- mailchimp-alerts end -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-        </div>     -->
+                                
        <!-- <div class="footer_bottom">
             <div class="container">
                 <div class="row align-items-center">
@@ -953,7 +966,19 @@
     
   
 
-</block>
+</th:block>
+<script >
+$(document).ready(function(){
+    $('#useLoyaltyPoints').click(function() {
+        var loyaltyPointsValue = $('#loyaltyPoints').val();
+        console.log('Loyalty Points Value:'+loyaltyPointsValue);
+        
+        // Perform any additional actions with the value
+    });
+});
+
+
+</script>
 </body>
 
 </html>
