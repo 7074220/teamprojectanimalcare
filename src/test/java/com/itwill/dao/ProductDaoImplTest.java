@@ -30,7 +30,7 @@ class ProductDaoImplTest extends TeamprojectAnimalcareApplicationTest {
 				.productPrice(3000)
 				.productCategory("간식")
 				.productImage("cat.jpg")
-				.productStarAvg(3)
+				//.productStarAvg(3)
 				.productQty(2)
 				.build();
 		Product savedProduct1 = productDao.insertProduct(product1);

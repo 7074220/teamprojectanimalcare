@@ -25,7 +25,7 @@ public class ProductInsertDto {
 	private String productImage;
 	// 제품 상세이미지
 	private String productDetailImage;
-	private Integer productStarAvg;
+	private Double productStarAvg;
 	
 	public static Product toEntity(ProductInsertDto dto) {
 		Product insertProduct = Product.builder()

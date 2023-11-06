@@ -20,5 +20,8 @@ public interface WishDao {
 
 	// 위시리스트에서 userNo, productNo로 찾아오기
 	Wish findByUserNoProductNo(Long userNo, Long productNo);
+	
+	// 위시리스트에 있는 갯수 출력 (userNo)
+	Integer countWishlist(Long userNo);
 
 }
