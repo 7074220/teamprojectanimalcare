@@ -41,23 +41,31 @@ $(document).ready(function(){
        }
        
        $('#total').text(total);
-        
+         $('#loyaltyPoints').val(loyaltyPointsValue);
        $('#totprice').val(total);
         
     });
     
-    $('#insert').click(function() {
+    $('.order_button').click(function() {
         var orderAddress = $('#ordersAddress').val();
-        var orderPrice = $('#total').val();
-        var userPoint = $('#discount').val();
+        var orderPrice = $('#total').text();
+        var userPoint = $('#loyaltyPoints').val();
+        
+        console.log(orderAddress);
+       console.log(orderPrice);
+       console.log(userPoint);
         
         $('#orderAddress').val(orderAddress);
         $('#orderPrice').val(orderPrice);
         $('#userPoint').val(userPoint);
 
+
+ 		console.log( $('#orderAddress').val());
+       console.log( $('#orderPrice').val());
+       console.log( $('#userPoint').val());
         // '#f'를 사용하여 폼을 선택합니다.
-        $('#f').attr('action', 'orderInsert');
-        $('#f').attr('method', 'POST');
+        $('#f').attr('action', '/orderInsert');
+        $('#f').attr('method', 'post');
         $('#f').submit();
     });
 });
@@ -73,7 +81,7 @@ $(document).ready(function(){
    <th:block layout:fragment="content">
     <!--offcanvas menu area start-->
 	<form id="f">
-	 <input type="hidden" name=orderAddress value="" id="orderAddress">
+	 <input type="hidden" name="orderAddress" value="" id="orderAddress">
 	 <input type="hidden" name="orderPrice" value="" id="orderPrice">
 	 <input type="hidden" name="userPoint" value="" id="userPoint">
 	</form>
@@ -742,7 +750,7 @@ $(document).ready(function(){
                                 <div class="col-lg-6 mb-20">
                                    <label>사용 적립금<span> *0원부터 사용가능</span></label>
                                     <input type="text" id="loyaltyPoints">  
-                                    <button type="button" class="btn btn-primary" id="useLoyaltyPoints"><a href="">사용하기</a></button>
+                                    <button type="button" class="btn btn-primary" id="useLoyaltyPoints">사용하기</button>
                                 </div> 
 									
 									
