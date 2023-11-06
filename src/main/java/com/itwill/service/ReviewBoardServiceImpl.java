@@ -50,7 +50,7 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 	}
 
 	@Override
-	public List<ReviewBoard> findByStarAll(Long star) {
+	public List<ReviewBoard> findByStarAll(Double star) {
 		// 선택한 별점으로 찾기
 		return reviewBoardDao.findByStarAll(star);
 	}

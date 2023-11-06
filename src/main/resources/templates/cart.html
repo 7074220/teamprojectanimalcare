@@ -571,7 +571,12 @@
                                 <table>
                             <thead>
                                 <tr>
-									<th class="product_check">Check</th>
+									<!--<th class="product_check">Check</th>-->
+									<th>
+										<label class="checkbox-inline">
+										<input type="checkbox" id="allCheckBox" onclick="allChecked()">
+										</label>
+									</th>
                                     <th class="product_thumb">Image</th>
                                     <th class="product_name">Product</th>
                                     <th class="product-price">Price</th>
@@ -590,7 +595,12 @@
                            
                            
                                 <tr th:each="cart:${cartList}">
-                                    <td class="product_total" th:id="${cart.cartNo}"><input type="checkbox" name="cartCheckbox"></td>
+                                    <!--<td class="product_checkbox" th:id="${cart.cartNo}"><input type="checkbox" name="cartCheckbox"></td>-->
+                                    <td>
+										<label class="checkbox-inline">
+											<input type="checkbox" name="chk" class="chk" onclick="chkClicked()" value="" th:id="${cart.cartNo}">
+										</label>
+									</td>
                                     <td class="product_thumb" th:id="${cart.cartNo}"><a href="#" th:href="@{productDetail(productNo=${cart.product.productNo})}"><img src="#" alt="" th:src="@{/image/product/} + ${cart.product.getProductImage}"></a></td>
                                     <td class="product_name" th:id="${cart.cartNo}"><a href="#" th:text="${cart.product.productName}" th:href="@{productDetail(productNo=${cart.product.productNo})}">상품명</a></td>
                                     <td class="product-price" th:id="${cart.cartNo}" th:text="${cart.product.productPrice}">가격</td>
@@ -633,7 +643,7 @@
                         </table>   
                             </div>  
                             <div class="cart_submit">
-                                <button type="submit">delete</button>
+                                <button type="submit" onclick="cartDelete()">delete</button>
                                 <button type="submit">update cart</button>
                             </div>      
                         </div>
@@ -684,7 +694,6 @@
     </div>
      <!--shopping cart area end -->
      
-     
      <script type="text/javascript">
     		// 카트 총액 계산 ~~~~~~~~~~~~~
     		function ajaxRequest(method, url, sendJsonObject) {
@@ -725,13 +734,10 @@
     		       // });
     		    });
     		});
-		
     		
     		
     		
 		  // 프로덕트 삭제 버튼 클릭 이벤트 처리
-		  
-		  
 		  $(".product_remove").on('click', function(e) {
 		    //e.preventDefault(); // 기본 이벤트 방지
 		    let cartNo = $(e.target).attr('id');
@@ -745,14 +751,93 @@
 	        });
 		    
 		  });
-		
-				    		 
+		  
+		  function allChecked(target) {
+
+				//전체 체크박스 버튼
+				const checkbox = document.getElementById('allCheckBox');
+
+				//전체 체크박스 버튼 체크 여부
+				const is_checked = checkbox.checked;
+
+				//전체 체크박스 제외한 모든 체크박스
+				if (is_checked) {
+					//체크박스 전체 체크
+					chkAllChecked()
+				}
+
+				else {
+					//체크박스 전체 해제
+					chkAllUnChecked()
+				}
+			}
+
+			//자식 체크박스 클릭 이벤트
+			function chkClicked() {
+
+				//체크박스 전체개수
+				const allCount = document.querySelectorAll(".chk").length;
+
+				//체크된 체크박스 전체개수
+				const query = 'input[name="chk"]:checked'
+				const selectedElements = document.querySelectorAll(query)
+				const selectedElementsCnt = selectedElements.length;
+
+				//체크박스 전체개수와 체크된 체크박스 전체개수가 같으면 전체 체크박스 체크
+				if (allCount == selectedElementsCnt) {
+					document.getElementById('allCheckBox').checked = true;
+				}
+
+				//같지않으면 전체 체크박스 해제
+				else {
+					document.getElementById('allCheckBox').checked = false;
+				}
+			}
+
+			//체크박스 전체 체크
+			function chkAllChecked() {
+				document.querySelectorAll(".chk").forEach(function (v, i) {
+					v.checked = true;
+				});
+			}
+
+			//체크박스 전체 체크 해제
+			function chkAllUnChecked() {
+				document.querySelectorAll(".chk").forEach(function (v, i) {
+					v.checked = false;
+				});
+			}
+
+			//글삭제
+			function cartDelete() {
+				//체크박스 체크된 항목
+				const query = 'input[name="chk"]:checked'
+				const selectedElements = document.querySelectorAll(query)
+
+				//체크박스 체크된 항목의 개수
+				const selectedElementsCnt = selectedElements.length;
+
+				if (selectedElementsCnt == 0) {
+					alert("삭제할 항목을 선택해주세요.");
+					return false;
+				}
+
+				else {
+					if (confirm("정말로 삭제하시겠습니까?")) {
+						document.querySelectorAll('input[name="chk"]:checked').forEach(function (v, i) {
+							ajaxRequest("DELETE","cart/delete/"+v.id);
+						});
+
+					}
+				}
+			}    		 
     		
     </script>
       
      </th:block>
-    <!--footer area start-->
-   <!--  <footer class="footer_widgets footer_border">
+   
+   <!--
+   <footer class="footer_widgets footer_border">
         <div class="container">
             <div class="footer_top">
                 <div class="row">
@@ -840,9 +925,8 @@
                 </div>
              </div>   
         </div>  
-    </footer> -->
-    <!--footer area end-->
-
+    </footer>
+     -->
 
 </body>
 
