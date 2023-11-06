@@ -57,24 +57,22 @@ public class AdoptController {
 		// 시간 문자열을 LocalTime으로 파싱
 	   // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 	    //LocalTime adoptTime = LocalTime.parse(selectedHour, formatter);
-		
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>시작");
 		if(userNo!=null) {
 		
-		Adopt adopt = new Adopt();
-		adopt.setAdoptDate(adoptDate);
-		adopt.setAdoptTime(selectedHour);
-		// adopt.setAdoptTime(adoptTime);
-		 
-		adopt.setAdoptStatus("입양신청접수");
-
-		Pet pet = petService.petFindById(petNo);
-		Userinfo userinfo=userInfoService.findUserByNo(userNo);
-		adopt.setUserinfo(userinfo);
-		adopt.setPet(pet);
-		adoptService.insertAdopt(adopt);
-		model.addAttribute("userinfo", userinfo);
-		}else {
-			throw new Exception("로그인을 해주세요.");
+			Adopt adopt = new Adopt();
+			adopt.setAdoptDate(adoptDate);
+			adopt.setAdoptTime(selectedHour);
+			// adopt.setAdoptTime(adoptTime);
+			 
+			adopt.setAdoptStatus("입양신청접수");
+	
+			Pet pet = petService.petFindById(petNo);
+			Userinfo userinfo=userInfoService.findUserByNo(userNo);
+			adopt.setUserinfo(userinfo);
+			adopt.setPet(pet);
+			adoptService.insertAdopt(adopt);
+			model.addAttribute("userinfo", userinfo);
 		}
 		return "pet-list";
 	}

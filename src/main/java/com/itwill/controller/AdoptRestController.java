@@ -44,12 +44,17 @@ public class AdoptRestController {
 	
 	
 	@Operation(summary = "입양신청")
-	@PostMapping
+	@PostMapping("create-adopt")
 	public ResponseEntity<AdoptDto> insertAdopt(@RequestBody AdoptDto dto, HttpSession session) throws Exception {
+		Long userNo = (Long)session.getAttribute("userNo");
+		Integer status = 0;
+		if(userNo==null) {
+			status = 1;
+		}
 		Adopt adoptEntity = AdoptDto.toEntity(dto);
-
 		adoptService.insertAdopt(adoptEntity);
-
+		dto.setStatus(status);
+		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
