@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/userinfo")
+//@RequestMapping("/userinfo"
 public class MyPetController {
 
     private final MyPetService myPetService;
@@ -30,16 +30,21 @@ public class MyPetController {
 
         List<MyPet> myPetList = myPetService.findMyPetListByuserNo(userNo);
         model.addAttribute("myPetList",myPetList);
-        return "my-account-pet";
+        for (MyPet myPet : myPetList) {
+			System.out.println(myPet);
+		}
+        return "my-account-mypet";
+      
     }
 
 
-    @PostMapping("/myPet/{mypetNo}")
-    public String updateMyPet(@PathVariable(value = "mypetNo") Long myPetNo, @RequestBody MypetDto mypetDto, HttpSession session) {
-
-        Long userNo=(Long)session.getAttribute("userNo");
-        //MyPet updatePet = MyPet
-
-        return "redirect:/userinfo/mypet";
-    }
+	/*
+	 * @PostMapping("/myPet/{mypetNo}") public String
+	 * updateMyPet(@PathVariable(value = "mypetNo") Long myPetNo, @RequestBody
+	 * MypetDto mypetDto, HttpSession session) {
+	 * 
+	 * Long userNo=(Long)session.getAttribute("userNo"); //MyPet updatePet = MyPet
+	 * 
+	 * return "redirect:/userinfo/mypet"; }
+	 */
 }
