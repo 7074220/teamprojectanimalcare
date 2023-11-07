@@ -197,16 +197,19 @@
 	        let sendJsonObject = {
 	            petNo: petNo,
 	            adoptDate: adoptDate,
-	            adoptTime: adoptTime
-	          
+
+	            adoptTime: adoptTime,
+	            adoptStatus:"입양신청접수"
+
 	        };
 			
 	       let responseObject=ajaxRequest('POST','adopt/create-adopt',sendJsonObject);
-	  		if(responseObject.status ==1){
+	  		if(responseObject.userNo == null){
 				alert('로그인이 필요합니다.');
 				window.location.href = 'index';	// 로그인 창으로 이동
 			}else{
 				alert("입양신청이 완료되었습니다.");
+				window.location.href='index'; // 메인페이지로 이동
 			}
 	  		
 	    });

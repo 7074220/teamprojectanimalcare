@@ -1,25 +1,25 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
-	   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-       layout:decorate="layout/layout(title='마이페이지')">
-<head>
-    <title>Safira - my account</title>
-    <style>
-        .modal-dialog {
-        margin: auto;
-        margin-top: 20vh; /* 회원탈퇴창 가운데 정도로 떨어트림 */
-    }
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='마이페이지')">
 
-    </style>
+<head>
+	<title>Safira - my account</title>
+	<style>
+		.modal-dialog {
+			margin: auto;
+			margin-top: 20vh;
+			/* 회원탈퇴창 가운데 정도로 떨어트림 */
+		}
+	</style>
 
 </head>
 
 <body>
 
-   <!--header area start-->
-    <th:block layout:fragment="content">
-    <!--offcanvas menu area start-->
-    <!-- <div class="off_canvars_overlay">
+	<!--header area start-->
+	<th:block layout:fragment="content">
+		<!--offcanvas menu area start-->
+		<!-- <div class="off_canvars_overlay">
                 
     </div>
     <div class="offcanvas_menu">
@@ -151,13 +151,13 @@
             </div>
         </div>
     </div> -->
-    <!--offcanvas menu area end-->
-    
+		<!--offcanvas menu area end-->
 
-    <!--header area end-->
-    
-    <!--breadcrumbs area start-->
-    <!-- <div class="breadcrumbs_area">
+
+		<!--header area end-->
+
+		<!--breadcrumbs area start-->
+		<!-- <div class="breadcrumbs_area">
         <div class="container">   
             <div class="row">
                 <div class="col-12">
@@ -172,159 +172,175 @@
             </div>
         </div>         
     </div> -->
-    <!--breadcrumbs area end-->
-    
-  <section class="main_content_area">
-        <div class="container">   
-            <div class="account_dashboard">
-                <div class="row">
-                    <div class="col-sm-12 col-md-3 col-lg-3">
-                        <!-- Nav tabs -->
-                        <div class="dashboard_tab_button">
-                            <ul role="tablist" class="nav flex-column dashboard-list">
-                                <li><a href="userinfo" class="nav-link">내정보</a></li>
-                                <li><a href="mypet"  class="nav-link">마이펫</a></li>
-                                <li><a href="couponList"  class="nav-link">쿠폰</a></li>
-                                <li><a href="adoptByUserNo"  class="nav-link">입양</a></li>
-                                <li><a href="volunteerByUserNo"  class="nav-link">봉사</a></li>
-                                <li><a href="visitByUserNo" class="nav-link">견학</a></li>
-                                <li> <a th:if="${session.userNo == 57}" href="ordersList" class="nav-link">관리자 전용주문목록</a></li>
-                                <li> <a th:if="${session.userNo!= 57}" href="orders" class="nav-link">주문목록</a></li>
-                                <li><a href="logout" class="nav-link">로그아웃</a></li>
-                                <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li>
+		<!--breadcrumbs area end-->
 
-                            </ul>
-                        </div>    
-                    </div>
-                    <div class="col-sm-12 col-md-9 col-lg-9">
-                        <!-- Tab panes -->
-                        <div class="tab-content dashboard_content" >
-							
-                                <div  id="orders">
-                                <h3>주문목록</h3>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>주문번호</th>
-                                                <th>구입날짜</th>
-                                                <th>상품명</th>
-                                                <th>총가격</th>
-                                                <th>리뷰</th>	 	 	 	
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr th:each="orders:${ordersList}" th:if="orders!=null">
-                                                <td th:text="${orders.orderNo}">1</td>
-                                               <td th:text="${#dates.format(orders.orderDate, 'yyyy-MM-dd')}">2018-05-10</td>
-                                                <td th:text="${orders.orderDesc}"><span class="success">고양이캔조림</span></td>
-                                                <td th:text="${#numbers.formatInteger(orders.orderPrice, 3, 'COMMA') + '원'}">$25.00 for 1 item </td>
-                                                <td><a href="cart.html" class="view">주문상세</a></td>
-                                            </tr>
-                                            <!-- <tr>
+		<section class="main_content_area">
+			<div class="container">
+				<div class="account_dashboard">
+					<div class="row">
+						<div class="col-sm-12 col-md-3 col-lg-3">
+							<!-- Nav tabs -->
+							<div class="dashboard_tab_button">
+								<ul role="tablist" class="nav flex-column dashboard-list">
+									<li><a href="userinfo" class="nav-link">내정보</a></li>
+									<li><a href="mypet" class="nav-link">마이펫</a></li>
+									<li><a href="couponList" class="nav-link">쿠폰</a></li>
+									<li><a href="adoptByUserNo" class="nav-link">입양</a></li>
+									<li><a href="volunteerByUserNo" class="nav-link">봉사</a></li>
+									<li><a href="visitByUserNo" class="nav-link">견학</a></li>
+									<li> <a th:if="${session.userNo == 57}" href="ordersList" class="nav-link">관리자
+											전용주문목록</a></li>
+									<li> <a th:if="${session.userNo!= 57}" href="orders" class="nav-link">주문목록</a></li>
+									<li><a href="logout" class="nav-link">로그아웃</a></li>
+									<li><a href="#" data-toggle="modal" data-target="#deleteModal"
+											class="nav-link">회원탈퇴</a></li>
+
+								</ul>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-9 col-lg-9">
+							<!-- Tab panes -->
+							<div class="tab-content dashboard_content">
+
+								<div id="orders">
+									<h3>주문목록</h3>
+									<div class="table-responsive">
+										<table class="table">
+											<thead>
+												<tr>
+													<th>주문번호</th>
+													<th>구입날짜</th>
+													<th>상품명</th>
+													<th>총가격</th>
+													<th>리뷰</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="orders:${ordersList}" th:if="orders!=null">
+													<td th:text="${orders.orderNo}">1</td>
+													<td th:text="${#dates.format(orders.orderDate, 'yyyy-MM-dd')}">
+														2018-05-10</td>
+													<td th:text="${orders.orderDesc}"><span
+															class="success">고양이캔조림</span></td>
+													<td
+														th:text="${#numbers.formatInteger(orders.orderPrice, 3, 'COMMA') + '원'}">
+														$25.00 for 1 item </td>
+													<td><a href="cart.html" class="view">주문상세</a></td>
+												</tr>
+												<!-- <tr>
                                                 <td>2</td>
                                                 <td>May 10, 2018</td>
                                                 <td>강아지닭가슴살사료</td>
                                                 <td>$17.00 for 1 item </td>
                                                 <td><a href="cart.html" class="view">주문상세</a></td>
                                             </tr> -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                                
-                            </div>
-                            
-                            
-                           <!--   </div>-->
-                           
-                              <div class="modal fade" id="orderDetailsModal" tabindex="-1" 
-                                 aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                <div class="modal-content" style="width: 800px; height: 500px;">
-                                    <div class="modal-header">
-                                    <h5 class="modal-title" id="orderDetailsModalLabel">주문 상세</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="border: none; padding: 7px;">X
-                                        <!--<span aria-hidden="true">&times;</span>-->
-                                    </button>
-                                    </div>
-                                    <div class="modal-body">
-                                    <!-- 주문 상세 내용이 여기에 로드됩니다 -->
-                                    
-                                      <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-												<th>번호</th>
-												<th>구입날짜</th>
-												<th>상품명</th>
-												<!--<th>총가격</th>-->
-												<th>주문상태</th>
-												<th>리뷰</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>May 10, 2018</td>
-                                                <td><span class="success">고양이캔조림</span></td>
-                                               <!-- <td>$25.00 for 1 item </td>-->
-                                               
-                                                <td>배송완료 </td>
-                                                <td><a href="cart.html" class="view">리뷰쓰기</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                    
-                                    </div>
-                                    <div class="modal-footer">
-                                 <!--   <button type="button" class="btn btn-primary">리뷰 저장</button>-->
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                                    
-                                    </div>
-                                </div>
-                                </div>
-                            </div>   
-                            
-                           
-                           
-                        </div>
-                    </div>
-                </div>
-            </div>  
-        </div>        	
-    </section>	
-    <!-- my account end   --> 
+											</tbody>
+										</table>
+									</div>
 
-      <!--footer area start-->
-  
- 
-    <!--footer area end-->
+								</div>
+
+
+								<!--   </div>-->
+
+								<div class="modal fade" id="orderDetailsModal" tabindex="-1"
+									aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content" style="width: 800px; height: 500px;">
+											<div class="modal-header">
+												<h5 class="modal-title" id="orderDetailsModalLabel">주문 상세</h5>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close" style="border: none; padding: 7px;">X
+													<!--<span aria-hidden="true">&times;</span>-->
+												</button>
+											</div>
+											<div class="modal-body">
+												<!-- 주문 상세 내용이 여기에 로드됩니다 -->
+
+												<div class="table-responsive">
+													<table class="table">
+														<thead>
+															<tr>
+																<th>번호</th>
+																<th>구입날짜</th>
+																<th>상품명</th>
+																<!--<th>총가격</th>-->
+																<th>주문상태</th>
+																<th>리뷰</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>1</td>
+																<td>May 10, 2018</td>
+																<td><span class="success">고양이캔조림</span></td>
+																<!-- <td>$25.00 for 1 item </td>-->
+																<td> <select class="form-select form-select-sm"
+																		aria-label="Large select example">
+																		<option selected>주문 상태</option>
+																		<option value="1">주문확인</option>
+																		<option value="2">배송준비</option>
+																		<option value="3">배송중</option>
+																		<option value="4">배송완료</option>
+																	</select>
+																</td>
+																<td><a href="cart.html" class="view">리뷰쓰기</a></td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+
+											</div>
+											<div class="modal-footer">
+												<!--   <button type="button" class="btn btn-primary">리뷰 저장</button>-->
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">닫기</button>
+													 <button type="button" class="btn btn-primary">저장</button>
+
+											</div>
+										</div>
+									</div>
+								</div>
 
 
 
- 
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- my account end   -->
+
+		<!--footer area start-->
 
 
-<!--주문한 상품 리뷰쓰기 -->
-<script>
+		<!--footer area end-->
 
-    // 마이페이지 상품주문 완료된 항목에서 주문상세를 누르면 창이 뜨고 이 창에서만 리뷰를 쓸수 있음
-    // 주문 상세 링크를 클릭할 때 이벤트 핸들러
-    document.querySelector('.table').addEventListener('click', function(e) {
-    if (e.target.classList.contains('view')) {
-        e.preventDefault();
-        
-        // 주문상세 정보를 로드 하기
-        
 
-        // 모달창 표시
-        $('#orderDetailsModal').modal('show');
-    }
-    });
 
-</script> 
-</th:block>		
+
+
+
+		<!--주문한 상품 리뷰쓰기 -->
+		<script>
+
+			// 마이페이지 상품주문 완료된 항목에서 주문상세를 누르면 창이 뜨고 이 창에서만 리뷰를 쓸수 있음
+			// 주문 상세 링크를 클릭할 때 이벤트 핸들러
+			document.querySelector('.table').addEventListener('click', function (e) {
+				if (e.target.classList.contains('view')) {
+					e.preventDefault();
+
+					// 주문상세 정보를 로드 하기
+
+
+					// 모달창 표시
+					$('#orderDetailsModal').modal('show');
+				}
+			});
+
+		</script>
+	</th:block>
 
 
 
