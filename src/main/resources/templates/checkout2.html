@@ -90,7 +90,7 @@
 
 					$('#coupon').text(totalDiscount);
 					var cartPrice = parseInt($('.cart_price').text());
-					var couponPrice=parseInt($('#coupon').text());
+					var couponPrice = parseInt($('#coupon').text());
 					
 					var totPrice=cartPrice-couponPrice;
 					$('#total').text(totPrice);
@@ -101,12 +101,30 @@
 
 				});
 
-				$('#couponSelect').change(function() {
+				$('.couponSelect').change(function(e) {
 					var selectedDiscount = parseInt($(this).val());
 					var discountPrice =(100 - selectedDiscount) * 0.01;
 					var productPrice = parseInt($('#cprice').text());
 					var totalDiscount = productPrice * discountPrice;
+					document.querySelectorAll('.couponSelect').forEach(function (v, i) {
+						if(v!=e.target){
+							$(v).find('option').each(function(i,e){
+								
+								if($(e).text()=='생일쿠폰'){
+									$(e).remove();
+									alert('삭제1');
+								}else if($(e).text()=='가입쿠폰'){
+									$(e).remove();
+									alert('삭제2');
+								}
+								
+							});
+						}
+					});
 					
+					
+					//
+					//alert($('option [value=30]'));
 					
 					$('#couponprice').text(selectedDiscount + '%');
 					$('#coupondiscountprice').text(totalDiscount);
@@ -849,10 +867,11 @@
 																		<td th:text="${cart.product.productName}">1</td>
 																		<td th:text="${cart.product.productPrice}" id="cprice">May
 																			10, 2018</td>
-																		<td><select class="form-select form-select-sm"
-																			aria-label="Large select example" id="couponSelect">
+																		<td>
+																		<select class="form-select form-select-sm couponSelect"
+																			aria-label="Large select example" th:id="'couponSelect'+${cart.product.productNo}">
 																				<option selected>쿠폰선택</option>
-																				<option value="1" th:each="coupon:${coupons}"
+																				<option th:id="${coupon.couponDiscount}" value="1" th:each="coupon:${coupons}"
 																					th:value="${coupon.couponDiscount}"
 																					th:text="${coupon.couponName}">주문확인</option>
 
