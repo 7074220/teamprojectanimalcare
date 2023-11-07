@@ -64,14 +64,25 @@
 		
 		
 		function inserted(e){
+			
+			    // 날짜 문자열을 Date 객체로 변환
+    const mypetBirthdayStr = document.f.mypetBirthday.value;
+    const mypetBirthdayDate = new Date(mypetBirthdayStr);
+
+    // Date 객체를 LocalDateTime으로 변환
+    const mypetBirthdayLocalDateTime = new Date(
+        mypetBirthdayDate.getTime() - mypetBirthdayDate.getTimezoneOffset() * 60000
+    );
+    
 			let sendJsonObject={
 				mypetName:document.f.mypetName.value,
-				mypetBirthday:document.f.mypetBirthday.value,
+				  mypetBirthday: mypetBirthdayLocalDateTime.toISOString(),
+				//mypetBirthday:document.f.mypetBirthday.value,
 				mypetKind:document.f.kind.value
 			};               
 			
 			ajaxRequest('POST','mypet/inserted',sendJsonObject);
-			//window.location.href = "mypet"; // 페이지 이동
+			window.location.href = "mypet"; // 페이지 이동
 		}	
 		
 		/*
