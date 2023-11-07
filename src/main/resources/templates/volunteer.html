@@ -120,9 +120,9 @@ window.onload = function() {
 							<form th:action="@{/create-volunteer}" method="post" th:object="${volunteer}">
 							
 								
-								<input type="hidden" id="centerNo" name="centerNo" th:value="${center.centerNo}" />
+								<input type="hidden" id="centerid" name="centerNo" th:value="${center.centerNo}" />
 								
-								<p>
+								<div>
 									<span>방문예약</span> 
 									<!-- <input type="date" name="volunteerDate"> -->
 									<!--  th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" 이 코드 추가시 현재 날짜 보여줌 -->
@@ -132,9 +132,9 @@ window.onload = function() {
 									
 						
 
-								</p>
+								</div>
 								
-								<p>
+								<div>
 									<span>방문 시간</span>
 									
 									<!-- <input type="time" name="volunteerTime" > -->
@@ -151,11 +151,17 @@ window.onload = function() {
 										<option value="18">18 PM</option>
 										<option value="19">19 PM</option>
 									</select>
-								</p>
+								</div>
 								
 								
 								<button type="submit" class="submit">submit</button>
 								<!-- <p class="form-messege"></p> -->
+								
+								
+								<p th:text="${message}" class="success-message"></p>
+								<p th:text="${error}" class="error-message"></p>
+								
+								
 							</form>
 
 						</div>
@@ -183,31 +189,83 @@ function ajaxRequest(method, url, sendJsonObject) {
 		});
 		return returnResultJsonObject;
 	}
-
-
-
+	
+	
+	
+	
+//AJAX 요청
 $('.submit').on('click', function (event) {
     event.preventDefault();
-    let centerNo = $('#centerNo').val(); // 센터 번호를 정의
+    let centerNo = $('#centerid').val(); // 센터 번호를 정의
     let volunteerDate = $('#volunteerDate').val();
     let volunteerTime = $('#volunteerTime').val();
 
     let sendJsonObject = {
         centerNo: centerNo,
         volunteerDate: volunteerDate,
-        volunteerTime: volunteerTime
+        volunteerTime: volunteerTime,
+        volunteerStatus: "봉사신청"
+    };
+    
+    let response = ajaxRequest('POST','volunteer/create-volunteer',sendJsonObject);
+    if(response.userNo!=null){
+    	alert('신청이 완료되었습니다.');
+    	window.location.href = 'index'; // 센터 페이지로 이동
+    }else{
+    	alert('로그인이 필요합니다.');
+        window.location.href = 'index'; // 로그인 페이지로 이동
+    }
+});
+
+/*
+    $.ajax({
+        method: 'POST',
+        url: '/create-volunteer',
+        contentType: 'application/json; charset=UTF-8',
+        data: JSON.stringify(sendJsonObject),
+        dataType: 'json',
+        success: function (response) {
+        	 if (response === 1) {
+                 alert('로그인이 필요합니다.');
+                 window.location.href = '/index'; // 로그인 페이지로 이동
+             } else {
+                 alert('봉사신청이 완료되었습니다.');
+                 window.location.href = '/index'; // 센터 페이지로 이동
+             }
+         },
+        error: function (error) {
+            console.error('AJAX 요청 실패:', error);
+            alert('봉사신청 중 오류가 발생했습니다.');
+        }
+    });
+//AJAX 요청
+$('.submit').on('click', function (event) {
+    event.preventDefault();
+    let centerNo = $('#centerid').val(); // 센터 번호를 정의
+    let volunteerDate = $('#volunteerDate').val();
+    let volunteerTime = $('#volunteerTime').val();
+	
+    
+    let sendJsonObject = {
+        centerNo: centerNo,
+        volunteerDate: volunteerDate,
+        volunteerTime: volunteerTime,
+        volunteerStatus: "봉사신청"
     };
     let responseObject=ajaxRequest('POST','volunteer/create-volunteer',sendJsonObject);
-		if(responseObject.status ==1){
+	
+    if(responseObject.status == null){
 		alert('로그인이 필요합니다.');
 		window.location.href = 'index';	// 로그인 창으로 이동
 	}else{
-		alert("봉사신청이 완료되었습니다.");
+		alert('봉사신청이 완료되었습니다.');
+		window.location.href = 'center-list'; // 센터 페이지로 이동
 	}
     
 });   
+
     // AJAX 요청
-    /* $.ajax({
+     $.ajax({
         method: 'POST',
         url: '/volunteer/create-volunteer',
         contentType: 'application/json; charset=UTF-8',
@@ -225,7 +283,8 @@ $('.submit').on('click', function (event) {
             console.error('AJAX 요청 실패:', error);
             alert('로그인이 필요합니다.');
         }
-    });*/
+    });
+*/
 
 
 </script> 
