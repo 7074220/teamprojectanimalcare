@@ -24,4 +24,6 @@ public class MyPetListDto {
 	private String mypetBirthday;
 	private String mypetKind;
 	
+	private String mypetLeader;
+	
 }
