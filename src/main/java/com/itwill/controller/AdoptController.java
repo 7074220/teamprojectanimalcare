@@ -60,8 +60,9 @@ public class AdoptController {
 			Adopt adopt = new Adopt();
 			adopt.setAdoptDate(adoptDate);
 			adopt.setAdoptTime(selectedHour);
-			
+
 			adopt.setAdoptStatus("입양신청접수");
+			
 	
 			Pet pet = petService.petFindById(petNo);
 			Userinfo userinfo=userInfoService.findUserByNo(userNo);
