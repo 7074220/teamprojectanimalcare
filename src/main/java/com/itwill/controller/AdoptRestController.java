@@ -113,18 +113,18 @@ public class AdoptRestController {
 
 	@Operation(summary = "no로 입양 수정하기")
 	@PutMapping("/update-adopt")
-	public ResponseEntity<AdoptDto> updateAdopt(@RequestParam Long adoptNo,@RequestBody AdoptDto dto, HttpServletRequest request) throws Exception {
-		HttpSession session=request.getSession();
+	public ResponseEntity<AdoptDto> updateAdopt(@RequestBody AdoptDto dto, HttpServletRequest request, HttpSession session) throws Exception {
+		//HttpSession session=request.getSession();
 		Long userNo=(Long)session.getAttribute("userNo");
 		
-		 if (userNo == null) {
-		        throw new Exception("로그인이 필요합니다.");
-		    }
-
-		 dto.setUserNo(userNo);
-		 
-		Adopt findAdopt=adoptService.findByAdoptNo(adoptNo);
 		
+		/* if (userNo == null) { throw new Exception("로그인이 필요합니다."); } */
+		 
+		dto.setUserNo(userNo);
+		 
+		Adopt findAdopt=adoptService.findByAdoptNo(dto.getAdoptNo());
+		Userinfo findUser = userInfoService.findUserByNo(userNo);
+		findAdopt.setUserinfo(findUser);
 		if(findAdopt!=null) {
 			if(dto.getAdoptDate()!=null) {
 				findAdopt.setAdoptDate(dto.getAdoptDate());
@@ -141,15 +141,20 @@ public class AdoptRestController {
 			
 			
 			
-			adoptService.updateAdopt(findAdopt);
-			AdoptDto updatedDto = AdoptDto.fromEntity(findAdopt);
+			Adopt updateAdopt = adoptService.updateAdopt(findAdopt);
+			
+			
+			AdoptDto updatedDto = AdoptDto.fromEntity(updateAdopt);
+			//System.out.println(">>>>>>>>>>>>>>>>>>"+userNo);
+			
+			
 			HttpHeaders httpHeaders = new HttpHeaders();
 			httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 			
-			return new ResponseEntity<>(updatedDto, httpHeaders, HttpStatus.OK);
+			return new ResponseEntity<AdoptDto>(updatedDto, httpHeaders, HttpStatus.OK);
 			
 		}else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<AdoptDto>(HttpStatus.NOT_FOUND);
 		}
 		
 		

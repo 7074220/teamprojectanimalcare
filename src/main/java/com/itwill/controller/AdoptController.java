@@ -106,7 +106,7 @@ public class AdoptController {
 		
 		model.addAttribute("adoptList", adoptList);
 		 model.addAttribute("userNo", userNo);
-		System.out.println(">>>>>>>>"+adoptList.get(0).getAdoptNo());
+		System.out.println(">>>>>>>>"+adoptList);
 		return "my-account-adopt";
 	}
 
@@ -119,7 +119,7 @@ public class AdoptController {
         model.addAttribute("adopt", adopt);
         model.addAttribute("adoptNo", adoptNo);
         model.addAttribute("pet", pet);
-        
+      //  model.addAttribute("userNo", userNo);
         return "adoptUpdate"; // adopt.html 페이지로 이동
     }
 
@@ -129,13 +129,12 @@ public class AdoptController {
 		// 수정된 정보를 처리하고 수정 완료 페이지로 이동 또는 다시 "my-account.html"로 이동
 		Long userNo = (Long) session.getAttribute("userNo");
 		if (userNo != null) {
-
 			Adopt findAdopt = adoptService.findByAdoptNo(adoptNo);
 
 			findAdopt.setAdoptDate(adopt.getAdoptDate());
 			findAdopt.setAdoptTime(adopt.getAdoptTime());
 			adoptService.updateAdopt(findAdopt);
-			model.addAttribute("userNo",userNo);
+			//model.addAttribute("userNo",userNo);
 		}
 		return "my-account-adopt"; // 수정 완료 페이지 또는 이동할 페이지 설정
 

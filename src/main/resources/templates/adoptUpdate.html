@@ -101,9 +101,9 @@
 					<div class="col-lg-6 col-md-6">
 						<div class="contact_message form">
 							<h3 style="font-weight: bold">수정 양식</h3>
-							<form id="update-form" method="post"
+							<form id="update-form" 
 								th:action="@{/adopt/update-adopt}" th:object="${adopt}" style="margin: 20px 0;">
-								<input type="hidden" name="adoptNo" th:value="${adoptNo}" />
+								<input type="hidden" id="adoptId" name="adoptNo" th:value="${adoptNo}" />
 								<input type="hidden" id="petid" name="petNo" th:value="${pet.petNo}"/>
 
 								<!-- <p>
@@ -155,7 +155,7 @@
 									
 								</p>
 
-								<button type="submit" class="submit">수정하기</button>
+								<button type="button" class="submit">수정하기</button>
 								<!-- <p class="form-messege"></p> -->
 								<!-- <div th:if="${msg!=null}">
 									<p th:text="${msg}" class="success-message"></p>
@@ -233,38 +233,38 @@
  	<script>
 		 
 	 	function ajaxRequest(method, url, sendJsonObject) {
-	 		let returnResultJsonObject={};
-	 		$.ajax({
-	 			
-	 			method: method,
-	 			url: url,
-	 			contentType: 'application/json;UTF-8',
-	 			data: JSON.stringify(sendJsonObject),
-	 			type: 'json',
-	 			success: function(resultJsonObject) {
-	 				returnResultJsonObject = resultJsonObject;
-	 			}
-	 		});
-	 		return returnResultJsonObject;
-	 	}
-		
+			let returnResultJsonObject={};
+			$.ajax({
+				async:false,
+				method: method,
+				url: url,
+				contentType: 'application/json;UTF-8',
+				data: JSON.stringify(sendJsonObject),
+				type: 'json',
+				success: function(resultJsonObject) {
+					returnResultJsonObject = resultJsonObject;
+				}
+			});
+			return returnResultJsonObject;
+		}
 	
 		$('.submit').on('click', function(event) {
 	        event.preventDefault();
 	       
-	        let petNo = $('#petid').val();
+	        //let petNo = $('#petid').val();
 	        let adoptDate = $('#adoptDate').val(); // 선택한 날짜 가져오기
 	        let adoptTime = $('#adoptTime').val(); // 선택한 시간 가져오기
-	        
+	        let adoptNo = $('#adoptId').val();
+	       
 	        let sendJsonObject = {
-	            
-				petNo:petNo,
+				adoptNo:adoptNo,
 	            adoptDate: adoptDate,
 	            adoptTime: adoptTime,
-	            adoptStatus:"입양신청접수"
+	            //adoptStatus:"입양신청접수"
 	        };
-			
-	       let responseObject=ajaxRequest('PUT','/adopt/update-adopt',sendJsonObject);
+	        
+	       let responseObject=ajaxRequest('PUT','adopt/update-adopt',sendJsonObject);
+	      	
 	  		if(responseObject.userNo == null){
 				alert('로그인이 필요합니다.');
 				window.location.href = 'index';	// 로그인 창으로 이동
