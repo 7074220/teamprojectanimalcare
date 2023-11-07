@@ -227,8 +227,8 @@
 												<td th:text="${adopt.Pet.petNo}"></td>
 												<td th:text="${adopt.adoptStatus}"><!--<span class="success">입양신청</span>--></td>
 												<td><!--<button type="submit" class="updateBtn" th:id="'updateBtn-' + ${adopt.adoptNo}">수정</button>-->
-													<a th:href="@{'/adopt/update?adoptNo=' + ${adopt.adoptNo} + '&petNo=' + ${adopt.Pet.petNo}}">수정</a>
-													
+													<a th:href="@{'/adoptUpdate?adoptNo=' + ${adopt.adoptNo} + '&petNo=' + ${adopt.Pet.petNo}}">수정</a>
+													<!--<a th:href="@{'/adoptUpdate?adoptNo=' + ${adopt.adoptNo} + '&userNo=' + ${adopt.Userinfo.userNo} + '&petNo=' + ${adopt.Pet.petNo}}">수정</a>-->
 													<button type="submit" class="deleteBtn" th:id="'deleteBtn-' + ${adopt.adoptNo}">취소</button>
 												</td>
 											</tr>
@@ -308,7 +308,7 @@
 			});
 		});
 	 	
-	 	
+	 
 	 	
 	 	$('.updateBtn').on('click', function (e) {
 				e.preventDefault();
@@ -325,21 +325,21 @@
 				// 수정할 데이터를 이곳에서 준비, 예: input 요소에서 데이터를 가져올 수 있음
 
 				let updateData = {
-					adoptNo: adoptNo, // 수정할 입양의 adoptNo
+					adoptNo: no, // 수정할 입양의 adoptNo
 					adoptDate:adoptDate,
 					adoptTime:adoptTime
 					// 필요한 다른 수정 사항들을 추가
 					// 예: adoptDate, adoptStatus, adoptTime
 				};
 
-				// 서버로 PUT 요청 보내기
+				
 				$.ajax({
 					type: 'GET',
-					url:  '/adopt/update?adoptNo=' + adoptNo + '&petNo=' + petNo, // 서버의 엔드포인트 URL
+					url:  '/adoptUpdate?adoptNo=' + adoptNo + '&petNo=' + petNo, // 서버의 엔드포인트 URL
 					data: JSON.stringify(updateData), // 수정 데이터를 JSON으로 변환
 					contentType: 'application/json;UTF-8',
 					success: function (response) {
-						if (response.adoptNo == null) {
+						if (response && response.adoptNo == null) {
 							alert('입양 정보가 없습니다.');
 						} else {
 							 $('#adoptNo').val(response.adoptNo);
@@ -347,10 +347,6 @@
 							$('#adoptTime').val(response.adoptTime);
 							
 							
-							
-							//alert('수정이 완료되었습니다.');
-							// 성공한 경우, 필요한 화면 업데이트를 수행
-							// 예: 수정 내용을 테이블에서 업데이트
 						}
 					},
 					error: function () {
