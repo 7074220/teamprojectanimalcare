@@ -47,18 +47,30 @@ public class MyPetController {
         	formattedDate = myPetList.get(i).getMypetBirthday().format(formatter);
         	MyPetListDto tempMypet = MyPetListDto.builder().build();
         	tempMypet.setMypetBirthday(formattedDate);
+        	
+        	MyPet myPet =  myPetService.findLeaderMyPet(userNo);
+        	String Name  = myPet.getMypetName();
+        	
+        	
         	tempMypet.setMypetKind(myPetList.get(i).getMypetKind());
         	tempMypet.setMypetName(myPetList.get(i).getMypetName());
         	tempMypet.setMypetNo(i+1);
         	
+        	String leader="";
+        	
+        	if(tempMypet.getMypetName()==Name) {
+        		leader="O";
+        	}else {
+        		leader="";
+        	}
+        	tempMypet.setMypetLeader(leader);
         	myPetListDtos.add(tempMypet);
 		}
         
       
-        MyPet myPet =  myPetService.findLeaderMyPet(userNo);
-        String Name  = myPet.getMypetName();
         
-        model.addAttribute("Name", Name);
+        
+        //model.addAttribute("Name", Name);
         model.addAttribute("myPetList",myPetListDtos);
         
         return "my-account-mypet";

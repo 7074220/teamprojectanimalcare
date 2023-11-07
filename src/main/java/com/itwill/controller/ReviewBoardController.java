@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -91,40 +92,48 @@ public class ReviewBoardController {
 	}
 	
 	
+	// 로그인 후 마이페이지에서 리뷰작성
+	@PostMapping("/create-reviewBoard")
+	public String createReviewBoard(@RequestParam Double boardStar, @RequestParam String boardContent, HttpSession session, Model model) throws Exception {
+	    Long userNo = (Long) session.getAttribute("userNo");
+
+	    ReviewBoard reviewBoard = new ReviewBoard();
+	    reviewBoard.setBoardContent(boardContent);
+	    reviewBoard.setBoardStar(boardStar);
+
+	    Userinfo userinfo = userInfoService.findUserByNo(userNo);
+	    reviewBoard.setUserinfo(userinfo);
+	    reviewBoardService.create(reviewBoard);
+
+	    model.addAttribute("userinfo", userinfo);
+
+	    return "redirect:/my-account-orders";
+	}
+
+
+	
+	
 	/*
 	// 로그인 후 마이페이지에서 리뷰작성
 	@PostMapping("/create-reviewBoard")
-	public String createReviewBoard(@RequestParam Double boardStar,
-			@DateTimeFormat(pattern = "yyyy-MM-dd") Date boardDate, @RequestParam String boardContent,
-			@RequestParam Long productNo, @RequestParam String boardTitle, HttpSession session, Model model) throws Exception {
+	public String createReviewBoard(@RequestParam Double boardStar, @RequestParam String boardContent,
+			HttpSession session, Model model) throws Exception {
 		Long userNo = (Long) session.getAttribute("userNo");
 
-		if (userNo != null) {
+		ReviewBoard reviewBoard = new ReviewBoard();
+		reviewBoard.setBoardContent(boardContent);
+		reviewBoard.setBoardStar(boardStar);
 
-			ReviewBoard reviewBoard = new ReviewBoard();	
-			reviewBoard.setBoardContent(boardContent);
-			reviewBoard.setBoardStar(boardStar);
+		// Product product = productService.findByProductNo(productNo);
+		Userinfo userinfo = userInfoService.findUserByNo(userNo);
+		reviewBoard.setUserinfo(userinfo);
+		// reviewBoard.setProduct(product);
 
-			Product product = productService.findByProductNo(productNo);
-			Userinfo userinfo = userInfoService.findUserByNo(userNo);
-			reviewBoard.setUserinfo(userinfo);
-			reviewBoard.setProduct(product);
+		model.addAttribute("userinfo", userinfo);
 
-			model.addAttribute("userinfo", userinfo);
-		}
 		return "redirect:/my-account-orders";
 	}
 	*/
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 
 }
