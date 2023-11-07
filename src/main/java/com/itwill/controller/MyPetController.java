@@ -60,17 +60,17 @@ public class MyPetController {
       
     }
     
-    @GetMapping("/registerMyPet")
-    public String registerMyPet(HttpSession session, Model model) {
-    	
-    	return "registerMyPet";
-    }
-
-    
+	/*
+	 * @GetMapping("/registerMyPet") public String registerMyPet(HttpSession
+	 * session, Model model) {
+	 * 
+	 * return "registerMyPet"; }
+	 * 
+	 */
   
 
     	@GetMapping("/registerMyPet")
-        public String registerMyPet(@RequestParam("mypetBirthday") Date date, Model model) {
+        public String registerMyPet(HttpSession session,@RequestParam("mypetBirthday") Date date, Model model) {
             // Date 객체를 LocalDateTime으로 변환
             LocalDateTime localDateTime = date.toInstant()
                     .atZone(ZoneId.systemDefault())
