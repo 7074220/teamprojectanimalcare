@@ -107,4 +107,15 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 		//상품 번호를 사용하여 별점 평균계산
 		return reviewBoardRepository.calculateAverageStarRating(productNo);
 	}
+	
+	 @Override
+	    public List<ReviewBoard> findByProductProductNoOrderByBoardStarDesc(Long productNo) {
+	        return reviewBoardRepository.findByProductProductNoOrderByBoardStarDesc(productNo);
+	    }
+
+	@Override
+	public List<ReviewBoard> findByProductProductNoOrderByBoardDateDesc(Long productNo) {
+		// 최신
+		return reviewBoardRepository.findByProductProductNoOrderByBoardDateDesc(productNo);
+	}
 }

@@ -1,5 +1,6 @@
 package com.itwill.controller;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,7 +45,7 @@ public class AdoptController {
 	private UserInfoService userInfoService;
 	// 입양신청
 	@GetMapping(value = "/adopt", params = "petNo")
-	public String apply(Model model, @RequestParam Long petNo) {
+	public String apply(Model model, @RequestParam(name = "petNo") Long petNo) {
 		Pet pet = petService.petFindById(petNo);
 		model.addAttribute("pet", pet);
 		return "adopt";
@@ -60,8 +63,9 @@ public class AdoptController {
 			Adopt adopt = new Adopt();
 			adopt.setAdoptDate(adoptDate);
 			adopt.setAdoptTime(selectedHour);
-			
+
 			adopt.setAdoptStatus("입양신청접수");
+			
 	
 			Pet pet = petService.petFindById(petNo);
 			Userinfo userinfo=userInfoService.findUserByNo(userNo);
@@ -100,10 +104,42 @@ public class AdoptController {
 		adoptList.sort((v1,v2)->v2.getAdoptDate().compareTo(v1.getAdoptDate()));
 		
 		model.addAttribute("adoptList", adoptList);
-		System.out.println(">>>>>>>>"+adoptList);
+		System.out.println(">>>>>>>>"+adoptList.get(0).getAdoptNo());
 		return "my-account-adopt";
 	}
 
+	@GetMapping("/adopt/update")
+    public String getAdoptPage(@RequestParam Long adoptNo, @RequestParam Long petNo, Model model) {
+        // adoptNo를 사용하여 입양 정보를 불러와 모델에 추가
+        Adopt adopt = adoptService.findByAdoptNo(adoptNo);
+        Pet pet=petService.petFindById(petNo);
+        
+        model.addAttribute("adopt", adopt);
+        model.addAttribute("adoptNo", adoptNo);
+        model.addAttribute("pet", pet);
+        
+        return "adoptUpdate"; // adopt.html 페이지로 이동
+    }
+
+    @PostMapping("/update-adopt")
+    public String updateAdopt(@ModelAttribute Adopt adopt) {
+        // 수정된 정보를 처리하고 수정 완료 페이지로 이동 또는 다시 "my-account.html"로 이동
+        // adoptService.updateAdopt(adopt);
+        return "redirect:/my-account-adopt"; // 수정 완료 페이지 또는 이동할 페이지 설정
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// adoptNo 입양 조회
 	@GetMapping("/adopt/{adoptNo}")
 	public String findByAdoptNoAdopt(Model model, @PathVariable(name = "adoptNo") Long adoptNo) {
