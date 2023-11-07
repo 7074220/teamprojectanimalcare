@@ -50,9 +50,8 @@ public class VisitController {
 	@PostMapping("/create-visit")
 	public String createVisit(@RequestParam("visitDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date visitDate,
 			@RequestParam("visitTime") int selectedHour, @RequestParam Long centerNo,HttpSession session, Model model) throws Exception {
+	
 		 Long userNo = (Long) session.getAttribute("userNo");
-		 if (userNo != null) {
-			 
 		
 		 Visit visit = new Visit();
 		visit.setVisitDate(visitDate);
@@ -65,12 +64,7 @@ public class VisitController {
 	    visit.setCenter(center);
 		visitService.createVisit(visit);
 		model.addAttribute("userinfo", userinfo);
-		 // 봉사신청이 성공한 경우 모델에 추가
-        model.addAttribute("message", "신청이 완료되었습니다.");
-    } else {
-        // 로그인이 필요한 경우 모델에 추가
-        model.addAttribute("error", "로그인이 필요합니다.");
-    }
+	
     return "my-account-visit"; // 뷰 페이지의 이름을 반환
 	}
 
