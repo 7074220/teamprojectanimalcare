@@ -50,6 +50,7 @@ public class VisitController {
 	@PostMapping("/create-visit")
 	public String createVisit(@RequestParam("visitDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date visitDate,
 			@RequestParam("visitTime") int selectedHour, @RequestParam Long centerNo,HttpSession session, Model model) throws Exception {
+	
 		 Long userNo = (Long) session.getAttribute("userNo");
 		
 		 Visit visit = new Visit();
@@ -63,7 +64,8 @@ public class VisitController {
 	    visit.setCenter(center);
 		visitService.createVisit(visit);
 		model.addAttribute("userinfo", userinfo);
-		return "reviewBoardDetail";
+	
+    return "my-account-visit"; // 뷰 페이지의 이름을 반환
 	}
 
 	/*
