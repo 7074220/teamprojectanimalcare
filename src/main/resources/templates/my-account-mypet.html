@@ -69,7 +69,7 @@
 
 													<td th:text="${sequentialNumber}"></td>
 													<td th:text="${mypet.mypetName}"></td>
-													<td th:text="${formattedDate}"></span></td>
+													<td th:text="${mypet.mypetBirthday}"></span></td>
 													<td th:text="${mypet.mypetKind}"></td>
 													<td th:text="${Name}"></td>
 
@@ -96,9 +96,10 @@
 
 	
 	<script>
-		document.getElementById("registerButton").addEventListener("click", function () {
+		document.getElementById("registerButton").addEventListener("click", function (e) {
 			// 버튼 클릭 시 실행할 코드
-			window.location.href = "mypet/registerMyPet"; // 페이지 이동
+			//alert('클릭');
+			window.location.href = "registerMyPet"; // 페이지 이동
 		});
 	</script>
 	</th:block>

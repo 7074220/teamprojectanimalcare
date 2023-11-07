@@ -12,58 +12,17 @@
 		<div class="customer_login" id="content">
 			<div class="container">
 				<div class="row">
-					
-					<div class="col-lg-6 col-md-6">
-						<div class="account_form register">
-							<h2 th:text="Register">회원가입</h2>
-							<form name="f" id="user_write_form" action="my-account-mypet.html" method="post">
-
-								<p>
-									<label>이름 <span>*</span></label>
-									<input type="text" id="userId">
-									<span id="userIdError" style="color:red;"></span>
-								</p>
-
-								<p>
-									<label>생일 <span>*</span></label>
-									<input type="password" id="password">
-									<span id="passwordError" style="color:red;"></span>
-								</p>
-								<p>
-									<label>종류 <span>*</span></label>
-									<input type="password" id="confirmPassword">
-									<span id="confirmPasswordError" style="color:red;"></span>
-								</p>
-								<p>
-									<label>대표 동물 <span>*</span></label>
-									<input type="text" id="name">
-									<span id="nameError" style="color:red;"></span>
-								</p>
-
-								
-								
-
-								<div class="login_submit">
-									<button type="button" data-navigate="#/user_write_action">확인</button>
-								</div>
-							</form>
-						</div>
-
-					</div>
-
-
-					
 					<div class="col-lg-6 col-md-6">
 						<div class="account_form register">
 							<h2 th:text="MyPet">Register</h2>
-							<form action="#">
+							<form name="f" action="#">
 								<p>
 									<label th:text="이름">Email address <span>*</span></label>
-									<input type="text">
+									<input type="text" id="mypetName">
 								</p>
 								<p>
 									<label th:text="생일">Passwords <span>*</span></label>
-									<input type="text">
+									<input type="text" id="mypetBirthday">
 								</p>
 								<p>
 									<label>종류 <span>*</span></label>
@@ -74,8 +33,10 @@
 									</select>
 									<span id="kindError" style="color:red;"></span>
 								</p>
-
-							
+								<div class="login_submit">
+									<button id="registerMyPetButton" type="button" onclick="inserted(event)">확인</button>
+									<!--<button id="registerButton" type="button">등록</button>-->
+								</div>
 							</form>
 						</div>
 					</div>
@@ -83,60 +44,44 @@
 				</div>
 			</div>
 		</div>
-		<script>
+	<script>
 		 
 	 	function ajaxRequest(method, url, sendJsonObject) {
-	 		let returnResultJsonObject={};
-	 		$.ajax({
-	 			async:false,
-	 			method: method,
-	 			url: url,
-	 			contentType: 'application/json;UTF-8',
-	 			data: JSON.stringify(sendJsonObject),
-	 			type: 'json',
-	 			success: function(resultJsonObject) {
-	 				returnResultJsonObject = resultJsonObject;
-	 			}
-	 		});
-	 		return returnResultJsonObject;
-	 	}
+			let returnResultJsonObject={};
+			$.ajax({
+				async:false,
+				method: method,
+				url: url,
+				contentType: 'application/json;UTF-8',
+				data: JSON.stringify(sendJsonObject),
+				type: 'json',
+				success: function(resultJsonObject) {
+					returnResultJsonObject = resultJsonObject;
+				}
+			});
+			return returnResultJsonObject;
+		}
 		
-	
-		$('.submit').on('click', function(event) {
-	        event.preventDefault();
-	        let petNo = $('#petid').val();
-	        let adoptDate = $('#adoptDate').val(); // 선택한 날짜 가져오기
-	        let adoptTime = $('#adoptTimeSelect').val(); // 선택한 시간 가져오기
-	        
-	        let sendJsonObject = {
-	            petNo: petNo,
-	            adoptDate: adoptDate,
-	            adoptTime: adoptTime,
-	            adoptStatus:"입양신청접수"
-	        };
+		
+		function inserted(e){
+			let sendJsonObject={
+				mypetName:document.f.mypetName.value,
+				mypetBirthday:document.f.mypetBirthday.value,
+				mypetKind:document.f.kind.value
+			};               
 			
-	       let responseObject=ajaxRequest('POST','adopt/create-adopt',sendJsonObject);
-	  		if(responseObject.userNo == null){
-				alert('로그인이 필요합니다.');
-				window.location.href = 'index';	// 로그인 창으로 이동
-			}else{
-				alert("입양신청이 완료되었습니다.");
-				window.location.href='index'; // 메인페이지로 이동
-			}
-	  		
-	    });
-	    	
+			ajaxRequest('POST','mypet/inserted',sendJsonObject);
+			//window.location.href = "mypet"; // 페이지 이동
+		}	
+		
+		/*
+		document.getElementById("registerMyPetButton").addEventListener("click", function (e) {
+			// 버튼 클릭 시 실행할 코드
+			alert('클릭');
 			
-	
-	
-
-
-
-
-
-
-			
-</script>
+		});
+		*/
+	</script>
 	</th:block>
 	
 </body>
