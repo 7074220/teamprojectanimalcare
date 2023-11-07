@@ -101,8 +101,8 @@
 					<div class="col-lg-6 col-md-6">
 						<div class="contact_message form">
 							<h3 style="font-weight: bold">수정 양식</h3>
-							<form id="update-form" method="POST"
-								th:action="@{/update-adopt}" th:object="${adopt}" style="margin: 20px 0;">
+							<form id="update-form" method="post"
+								th:action="@{/adopt/update-adopt}" th:object="${adopt}" style="margin: 20px 0;">
 								<input type="hidden" name="adoptNo" th:value="${adoptNo}" />
 								<input type="hidden" id="petid" name="petNo" th:value="${pet.petNo}"/>
 
@@ -169,7 +169,7 @@
 		</div>
 		
 		
-		<script>
+<!--		<script>
     // 현재 날짜를 가져오는 함수
     function getCurrentDate() {
         var currentDate = new Date();
@@ -181,8 +181,8 @@
 
     $(document).ready(function () {
         // 페이지 로드 시 실행
-        var adoptDate = $('#adoptDate');
-        var adoptTime = $('#adoptTime');
+       	let adoptDate = $('#adoptDate');
+       let adoptTime = $('#adoptTime');
 
         // 현재 날짜로 설정
         adoptDate.val(getCurrentDate());
@@ -223,19 +223,19 @@
     });
 </script>
 		
+		-->
 		
 		
 		
 		
+	
 		
-		
-		
- 	<!--<script>
+ 	<script>
 		 
 	 	function ajaxRequest(method, url, sendJsonObject) {
 	 		let returnResultJsonObject={};
 	 		$.ajax({
-	 			async:false,
+	 			
 	 			method: method,
 	 			url: url,
 	 			contentType: 'application/json;UTF-8',
@@ -251,30 +251,30 @@
 	
 		$('.submit').on('click', function(event) {
 	        event.preventDefault();
+	       
 	        let petNo = $('#petid').val();
 	        let adoptDate = $('#adoptDate').val(); // 선택한 날짜 가져오기
 	        let adoptTime = $('#adoptTime').val(); // 선택한 시간 가져오기
 	        
 	        let sendJsonObject = {
-	            petNo: petNo,
+	            
+				petNo:petNo,
 	            adoptDate: adoptDate,
 	            adoptTime: adoptTime,
 	            adoptStatus:"입양신청접수"
 	        };
 			
-	       let responseObject=ajaxRequest('POST','adopt/create-adopt',sendJsonObject);
+	       let responseObject=ajaxRequest('PUT','/adopt/update-adopt',sendJsonObject);
 	  		if(responseObject.userNo == null){
 				alert('로그인이 필요합니다.');
 				window.location.href = 'index';	// 로그인 창으로 이동
 			}else{
-				alert("입양신청이 완료되었습니다.");
-				window.location.href='index'; // 메인페이지로 이동
+				alert("수정이 완료되었습니다.");
+				
 			}
 	  		
 	    });
-		
 	
-		
 		
 
 			// 현재 날짜를 가져오는 함수
@@ -298,15 +298,15 @@
 
 			
 </script>
-		-->
+		
 		
 		
 	</th:block>
 		<!--map js code here-->
-	<!--<script
+	<script
 		src="https://maps.google.com/maps/api/js?sensor=false&amp;libraries=geometry&amp;v=3.22&amp;key=AIzaSyChs2QWiAhnzz0a4OEhzqCXwx_qA9ST_lE"></script>
 	<script src="https://www.google.com/jsapi"></script>
-	<script src="assets/js/map.js"></script>-->
+	<script src="assets/js/map.js"></script>
 	<!--contact area end-->
 
 	<!--footer area start-->
