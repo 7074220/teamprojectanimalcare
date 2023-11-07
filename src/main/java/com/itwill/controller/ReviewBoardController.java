@@ -23,63 +23,63 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/reviewBoard")
 public class ReviewBoardController {
 
-   @Autowired
-   private ReviewBoardService reviewBoardService;
-   
-   @Autowired
-   private ProductService productService;
-   
-   // admin이 리뷰리스트 볼 때
-   @GetMapping("/admin/reviewBoardList")
-   public String reviewBoardList(Model model) {
-      List<ReviewBoard> reviewBoardList=reviewBoardService.findAll();
-      List<ReviewBoardDto> reviewBoardDtoList = new ArrayList<>();
-      for (ReviewBoard reviewBoard : reviewBoardList) {
-         reviewBoardDtoList.add(ReviewBoardDto.toDto(reviewBoard));
-      }
-      model.addAttribute("reviewBoardDtoList", reviewBoardDtoList);
-      return "reviewboard";    // 링크수정하기
-   }
-   
-   
-   // productNo로 리뷰리스트 볼 때
-   @GetMapping("/product/{productNo}")
-   public String findByProductNoReviewBoardList(Model model, @PathVariable(name = "productNo") Long productNo) {
-      List<ReviewBoard> reviewBoards=reviewBoardService.findByProductNo(productNo);
-      List<ReviewBoardDto> reviewBoardDtos = new ArrayList<>();
-      
-      for (ReviewBoard reviewBoard : reviewBoards) {
-         reviewBoardDtos.add(ReviewBoardDto.toDto(reviewBoard));
-      }
-      model.addAttribute("reviewBoardDtos", reviewBoardDtos);
-      return "";  //링크 수정하기
-   }
-   
-   @GetMapping("/productNoReview")
-   public String productNoReviewList(Model model, @RequestParam Long productNo) throws Exception{
-      Product product = productService.findByProductNo(productNo);
-   List<ReviewBoard> reviewList = reviewBoardService.findByProductNo(product.getProductNo());
-   model.addAttribute("reviewList",reviewList);
-   return "product-details";
-   
-   }
-	  
-//   @GetMapping("/productNoReviewSorted")
-//   public String productNoReviewSorted(Model model, @RequestParam Long productNo, @RequestParam String sort) throws Exception {
-//       Product product = productService.findByProductNo(productNo);
-//       List<ReviewBoard> reviewList;
-//
-//       if ("rating".equals(sort)) {
-//           reviewList = reviewBoardService.findAllByProductNoAndOrderByBoardStarDesc(product.getProductNo());
-//       } else {
-//           // Handle other sorting options (e.g., "latest") if needed.
-//       }
-//
-//       model.addAttribute("product", product);
-//       model.addAttribute("reviewList", reviewList);
-//       model.addAttribute("sort", sort); // Add the selected sorting option to the model.
-//       return "product-details";
-//   }   
-	  
+	@Autowired
+	private ReviewBoardService reviewBoardService;
+
+	@Autowired
+	private ProductService productService;
+
+	// admin이 리뷰리스트 볼 때
+	@GetMapping("/admin/reviewBoardList")
+	public String reviewBoardList(Model model) {
+		List<ReviewBoard> reviewBoardList = reviewBoardService.findAll();
+		List<ReviewBoardDto> reviewBoardDtoList = new ArrayList<>();
+		for (ReviewBoard reviewBoard : reviewBoardList) {
+			reviewBoardDtoList.add(ReviewBoardDto.toDto(reviewBoard));
+		}
+		model.addAttribute("reviewBoardDtoList", reviewBoardDtoList);
+		return "reviewboard"; // 링크수정하기
+	}
+
+	// productNo로 리뷰리스트 볼 때
+	@GetMapping("/product/{productNo}")
+	public String findByProductNoReviewBoardList(Model model, @PathVariable(name = "productNo") Long productNo) {
+		List<ReviewBoard> reviewBoards = reviewBoardService.findByProductNo(productNo);
+		List<ReviewBoardDto> reviewBoardDtos = new ArrayList<>();
+
+		for (ReviewBoard reviewBoard : reviewBoards) {
+			reviewBoardDtos.add(ReviewBoardDto.toDto(reviewBoard));
+		}
+		model.addAttribute("reviewBoardDtos", reviewBoardDtos);
+		return ""; // 링크 수정하기
+	}
+
+	@GetMapping("/productNoReview")
+	public String productNoReviewList(Model model, @RequestParam Long productNo) throws Exception {
+		Product product = productService.findByProductNo(productNo);
+		List<ReviewBoard> reviewList = reviewBoardService.findByProductNo(product.getProductNo());
+		model.addAttribute("reviewList", reviewList);
+		
+		return "product-details";
 
 	}
+
+	@GetMapping("/productNoReviewSort")
+	public String getProductDetails(Model model, @RequestParam Long productNo, @RequestParam String sortOrder) {
+		Product product = productService.findByProductNo(productNo);
+		model.addAttribute("product", product);
+
+		List<ReviewBoard> reviewList;
+
+		if ("별점순".equals(sortOrder)) {
+			reviewList = reviewBoardService.findByProductProductNoOrderByBoardStarDesc(productNo);
+		} else {
+			reviewList = reviewBoardService.findByProductProductNoOrderByBoardDateDesc(productNo);
+		}
+
+		model.addAttribute("reviewList", reviewList);
+
+		return "product-details";
+	}
+
+}

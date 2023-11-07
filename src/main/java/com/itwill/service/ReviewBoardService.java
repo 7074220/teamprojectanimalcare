@@ -35,4 +35,7 @@ public interface ReviewBoardService {
 
 	public double calculateAverageStarRating(Long productNo);// 상품 번호를 사용하여 별점 평균계산
 
+	
+	public List<ReviewBoard> findByProductProductNoOrderByBoardStarDesc(Long productNo);//별점높음
+	public List<ReviewBoard> findByProductProductNoOrderByBoardDateDesc(Long productNo);//최신
 }

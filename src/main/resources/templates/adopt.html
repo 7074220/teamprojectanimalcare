@@ -197,8 +197,10 @@
 	        let sendJsonObject = {
 	            petNo: petNo,
 	            adoptDate: adoptDate,
+
 	            adoptTime: adoptTime,
 	            adoptStatus:"입양신청접수"
+
 	        };
 			
 	       let responseObject=ajaxRequest('POST','adopt/create-adopt',sendJsonObject);
