@@ -58,15 +58,19 @@ $(document).ready(function(){
         $('#orderAddress').val(orderAddress);
         $('#orderPrice').val(orderPrice);
         $('#userPoint').val(userPoint);
-
-
- 		console.log( $('#orderAddress').val());
-       console.log( $('#orderPrice').val());
-       console.log( $('#userPoint').val());
+		
+ 		alert( "주소"+$('#orderAddress').val());
+ 		alert( "가격"+$('#orderPrice').val());
+ 		alert( "포인트"+$('#userPoint').val());
+ 		
+ 		window.location.href="orderInsert?orderAddress="+orderAddress+"&orderPrice="+orderPrice+"&userPoint="+userPoint;
+ 		
         // '#f'를 사용하여 폼을 선택합니다.
-        $('#f').attr('action', '/orderInsert');
+        /*
+        $('#f').attr('action', 'orderInsert');
         $('#f').attr('method', 'post');
         $('#f').submit();
+        */
     });
 });
 
@@ -998,7 +1002,7 @@ function execution_daum_address() {
                                     </div>
                                 </div>
                                 <div class="order_button">
-                                    <button  type="submit" id="insert">Proceed to PayPal</button> 
+                                    <button  type="button" id="insert">Proceed to PayPal</button> 
                                 </div>    
                             </div> 
                         </form> <!--orderform-->        

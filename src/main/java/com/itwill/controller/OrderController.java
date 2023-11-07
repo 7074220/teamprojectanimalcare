@@ -37,6 +37,7 @@ import com.itwill.service.OrderItemService;
 import com.itwill.service.OrderService;
 import com.itwill.service.UserInfoService;
 
+import groovyjarjarantlr4.v4.parse.ANTLRParser.parserRule_return;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpSession;
 
@@ -54,16 +55,15 @@ public class OrderController {
 	UserInfoService userInfoService;
 	
 	@Operation(summary = "주문 등록")
-	@Transactional
-	@PostMapping("/orderInsert")
-	public String insert_Order(@RequestBody OrdersDto orderDto, HttpSession session)throws Exception {
+	@GetMapping("/orderInsert")
+	public String insert_Order(String orderAddress,String orderPrice,String userPoint, HttpSession session)throws Exception {
 		  if (session.getAttribute("userNo") == null) {
 			  
 			  throw new
 		 Exception("로그인 하세요."); 
 		  
-		  }
-		  
+		}
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>주문등록");
 		  
 		Long userNo = (Long) session.getAttribute("userNo");
 		Orderstatus orderstatus= orderStatusRepository.findById(1L).get();
@@ -71,14 +71,17 @@ public class OrderController {
 		List<Cart> carts = cartService.findAllCartByUserId(userNo);
 		
 		System.out.println(">>>>>>>>>>>>이게cart>>>"+carts);
-		Orders insertOrder = orderService.insertOrder(OrdersDto.toEntity(orderDto));
+		Userinfo findUserinfo = userInfoService.findUserByNo(userNo);
+		Orders orders = Orders.builder().userinfo(findUserinfo).orderAddress(orderAddress).orderPrice(Integer.parseInt(orderPrice)).build();
+		Orders newOrder = orderService.insertOrder(orders);
 		
+		//Orders insertOrder = orderService.insertOrder(OrdersDto.toEntity(orderDto));
 		List<OrderItemDto> orderItemDtos = new ArrayList<OrderItemDto>();
 		
 		for (Cart cart : carts) {
 			OrderItemDto tempOrderItemDto=OrderItemDto.builder().build();
 			tempOrderItemDto.setOiQty(cart.getCartQty());
-			tempOrderItemDto.setOrderNo(insertOrder.getOrderNo());
+			tempOrderItemDto.setOrderNo(newOrder.getOrderNo());
 			tempOrderItemDto.setOsNo(osNo);
 			tempOrderItemDto.setProductNo(cart.getProduct().getProductNo());
 			
@@ -86,13 +89,16 @@ public class OrderController {
 			orderItemDtos.add(tempOrderItemDto);
 			
 		}
-		orderDto.setOrderItemDtos(orderItemDtos);
-		orderDto.setUserNo(userNo);
-		orderDto.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+(carts.size()-1)+"개 상품");
+		OrdersDto orderdto = OrdersDto.toDto(newOrder);
+		orderdto.setOrderItemDtos(orderItemDtos);
+		orderdto.setUserNo(userNo);
+		orderdto.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+(carts.size()-1)+"개 상품");
+		/*
 		//insertOrder.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+(carts.size()-1)+"개 상품");
 		//insertOrder.setOrderAddress(orderDto.getOrderAddress());
 		
-		orderService.insertOrder(orderDto.toEntity(orderDto));
+		orderService.insertOrder(OrdersDto.toEntity(orderDto));
+		 */
 		cartService.deleteByUserId(userNo);
 		return "index";
 	}

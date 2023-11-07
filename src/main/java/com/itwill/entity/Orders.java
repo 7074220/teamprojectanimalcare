@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import com.itwill.dto.OrderItemDto;
 
@@ -35,6 +36,7 @@ public class Orders {
 	@SequenceGenerator(name = "Orders_order_no_SEQ",sequenceName = "Orders_order_no_SEQ",initialValue = 1,allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Orders_order_no_SEQ")
 	private Long orderNo;
+	@CreatedDate
 	private Date orderDate;
 	private Integer orderPrice;
 	private String orderAddress;
