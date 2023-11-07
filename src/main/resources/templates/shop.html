@@ -690,7 +690,7 @@
                             </div>-->
 								<div class="widget_list banner_widget">
 									<div class="banner_thumb">
-										<a href="#"><img src="assets/img/bg/banner17.jpg" alt=""></a>
+										<a href="#" th:href="@{/petList}"><img id="randomImage" src="" alt=""></a>
 									</div>
 								</div>
 							</div>
@@ -1465,7 +1465,30 @@
 			}
 			
 			
-			
+			// shop.html 배너 이미지 랜덤
+			var imagePaths = [
+	            "image/adopt/adopt1.jpg",
+	            "image/adopt/adopt2.jpg",
+	            "image/adopt/adopt3.jpg",
+	            "image/adopt/adopt4.jpg",
+	            "image/adopt/adopt5.jpg",
+	            "image/adopt/adopt6.jpg",
+	            "image/adopt/adopt7.jpg",
+	            "image/adopt/adopt8.jpg",
+	            "image/adopt/adopt9.jpg",
+	            "image/adopt/adopt10.jpg"
+	        ];
+
+	        function updateRandomImage() {
+	            var randomIndex = Math.floor(Math.random() * imagePaths.length);
+	            var randomImagePath = imagePaths[randomIndex];
+	            var imageElement = document.getElementById("randomImage");
+	            imageElement.src = randomImagePath;
+	        }
+
+	        window.onload = function () {
+	            updateRandomImage();
+	        }
 			
 		</script>
 		</th:block>
