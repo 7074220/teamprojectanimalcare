@@ -66,6 +66,8 @@ public class OrderController {
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>주문등록");
 		  
 		Long userNo = (Long) session.getAttribute("userNo");
+		Userinfo userinfo = userInfoService.findUserByNo(userNo);
+		Integer point=Integer.parseInt(userPoint);
 		Orderstatus orderstatus= orderStatusRepository.findById(1L).get();
 		Long osNo = orderstatus.getOsNo();
 		List<Cart> carts = cartService.findAllCartByUserId(userNo);
@@ -97,6 +99,7 @@ public class OrderController {
 		OrdersDto orderdto = OrdersDto.toDto(newOrder);
 		orderdto.setOrderItemDtos(orderItemDtos);
 		orderdto.setUserNo(userNo);
+		userinfo.setUserPoint(userinfo.getUserPoint()-point);
 		/*
 		//insertOrder.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+(carts.size()-1)+"개 상품");
 		//insertOrder.setOrderAddress(orderDto.getOrderAddress());
@@ -156,7 +159,7 @@ public class OrderController {
 		}
 		Integer totalPrice=cartService.cartTotalPrice(userNo);
 		
-		//System.out.println("?????"+couponDtos);
+		System.out.println("?????"+couponDtos);
 		
 		List<Cart> carts = cartService.findAllCartByUserId(userNo);
 		System.out.println(">>>>>>>>>>>>>>>>"+carts);
