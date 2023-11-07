@@ -14,6 +14,7 @@
 					var userPointsValue = $('#userPoints').val();
 					var loyaltyPointsValue = $('#loyaltyPoints').val();
 					var cartPrice = $('.cart_price').text();
+					var couponPrice=$('#coupon').text();
 					var discountval = parseInt(loyaltyPointsValue);
 
 					if ($('.cart_price').text() < loyaltyPointsValue) {
@@ -33,9 +34,9 @@
 					$('#discount').text('-' + loyaltyPointsValue);
 					// $('#discount').text('-'+loyaltyPointsValue);
 					var cartpirce = parseInt($('.cart_price').text());
-					var total = cartpirce - discountval;
+					var total = cartpirce - discountval-couponPrice;
 					if (total > 0) {
-						total = cartpirce - discountval;
+						total = cartpirce - discountval-couponPrice;
 					} else {
 						total = 0;
 					}
@@ -88,6 +89,13 @@
 					
 
 					$('#coupon').text(totalDiscount);
+					var cartPrice = parseInt($('.cart_price').text());
+					var couponPrice=parseInt($('#coupon').text());
+					
+					var totPrice=cartPrice-couponPrice;
+					$('#total').text(totPrice);
+					
+					
 
 					$('#coupondetail').modal('hide');
 
