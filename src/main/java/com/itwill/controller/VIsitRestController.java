@@ -2,7 +2,9 @@ package com.itwill.controller;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -40,7 +42,7 @@ public class VIsitRestController {
 	@Autowired
 	private VisitService visitService ;
 	
-	// 봉사버튼 클릭시 로그인이면 저장, 비회원이면 메인 이동
+	
 		@Operation(summary = "견학신청")
 		@PostMapping("/create-VisitDto")
 		public ResponseEntity<VisitDto> insertVolunteer(@RequestBody VisitDto dto, HttpSession session) throws Exception {
@@ -77,8 +79,14 @@ public class VIsitRestController {
 
 	@Operation(summary = "견학리스트삭제")
 	@DeleteMapping("/{visitNo}")
-	public void VisitDelete(@PathVariable(name = "visitNo") Long visitNo) {
+	public ResponseEntity<Map> VisitDelete(@PathVariable(name = "visitNo") Long visitNo) {
+		
+		try {
 		visitService.deleteVisit(visitNo);
+		return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("visitNo", visitNo));
+		}catch (Exception e) {
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
 	}
 	
 	@Operation(summary = "견학리스트업데이트")
