@@ -225,7 +225,9 @@
 												
 												<!-- <td th:text="${volunteer.volunteerDate}"></td> -->
 												<!-- 시간전체를 잘라서 날짜만 나올수있게 yyyy-mm-dd -->
-												<td th:text="${#strings.substring(volunteer.volunteerDate.toString(), 0, 10)}"></td>
+												<!-- <td th:text="${#strings.substring(volunteer.volunteerDate.toString(), 0, 10)}"></td> -->
+												<td th:text="${#dates.format(volunteer.volunteerDate, 'yyyy-MM-dd')}"></td>
+												
 												<td th:text="${volunteer.center.centerName}"></td>
 												<td th:text="${volunteer.volunteerStatus}"><span class="success">봉사신청</span></td>
 											

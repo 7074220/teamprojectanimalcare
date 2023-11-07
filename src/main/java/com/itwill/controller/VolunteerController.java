@@ -73,42 +73,9 @@ public class VolunteerController {
 	        // 로그인이 필요한 경우 모델에 추가
 	        model.addAttribute("error", "로그인이 필요합니다.");
 	    }
-	    return "index"; // 이게 원본임. 뷰 페이지의 이름을 반환
+	    return "index"; // 뷰 페이지의 이름을 반환
+	    
 	}
-	
-
-/*	
-	// 봉사버튼 클릭시 센터정보 보여줌
-	@PostMapping("/create-volunteer")
-	public String createVolunteer(@RequestParam("volunteerDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date volunteerDate,
-			@RequestParam("volunteerTime") int selectedHour, @RequestParam Long centerNo, HttpSession session, Model model) throws Exception {
-		Long userNo = (Long) session.getAttribute("userNo");
-		
-		if (userNo != null) {
-			
-			Volunteer volunteer = new Volunteer();
-			volunteer.setVolunteerDate(volunteerDate);
-			volunteer.setVolunteerStatus("접수중");
-			volunteer.setVolunteerTime(selectedHour);
-
-			Center center = centerService.findByCenterNo(centerNo);
-			Userinfo userinfo = userInfoService.findUserByNo(userNo);
-			volunteer.setUserinfo(userinfo);
-			volunteer.setCenter(center);
-			volunteerService.insertVolunteer(volunteer);
-			model.addAttribute("userinfo", userinfo);
-			
-			// 봉사신청이 성공한 경우 모델에 추가
-	        model.addAttribute("message", "봉사신청이 완료되었습니다.");
-		} else {
-			// 로그인이 필요한 경우 모델에 추가
-	        model.addAttribute("error", "로그인이 필요합니다.");
-			//throw new Exception("로그인이 필요합니다.");
-		}
-		return "center-list"; // 이게 원본임. 뷰 페이지의 이름을 반환
-		// return "order-list"; // 오더리스트 연결
-	}
-*/
 	
 	
 	@GetMapping("/volunteerList") // 봉사 목록 전체 조회. 관리자
@@ -145,7 +112,8 @@ public class VolunteerController {
 	    volunteerList.sort((v1, v2) -> v2.getVolunteerNo().compareTo(v1.getVolunteerNo()));
 	    
 		model.addAttribute("volunteerList", volunteerList);
-		return "my-account-volunteer";
+		//return "my-account-volunteer"; //이게 원본임
+		return "order-list"; // 오더리스트 - 리뷰쓰기 연결
 	}
 	
 	

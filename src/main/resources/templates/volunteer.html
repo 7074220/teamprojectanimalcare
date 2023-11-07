@@ -56,6 +56,9 @@ window.onload = function() {
     var todayString = today.toISOString().slice(0, 10);
     var tomorrowString = tomorrow.toISOString().slice(0, 10);
     
+    // 현재 날짜를 기본값으로 설정
+    volunteerDate.value = tomorrowString;
+    
     // 현재 날짜를 포함한 이전 날짜를 비활성화
     volunteerDate.setAttribute('min', tomorrowString);
 };
@@ -127,8 +130,7 @@ window.onload = function() {
 									<!-- <input type="date" name="volunteerDate"> -->
 									<!--  th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" 이 코드 추가시 현재 날짜 보여줌 -->
 									<input type="date" name="volunteerDate"
-										id="volunteerDate" placeholder="날짜를 선택해주세요"  required="required"
-										th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" >  
+										id="volunteerDate" placeholder="날짜를 선택해주세요"  required="required" >  
 									
 						
 
