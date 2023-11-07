@@ -14,6 +14,7 @@
 					var userPointsValue = $('#userPoints').val();
 					var loyaltyPointsValue = $('#loyaltyPoints').val();
 					var cartPrice = $('.cart_price').text();
+					var couponPrice=$('#coupon').text();
 					var discountval = parseInt(loyaltyPointsValue);
 
 					if ($('.cart_price').text() < loyaltyPointsValue) {
@@ -33,9 +34,9 @@
 					$('#discount').text('-' + loyaltyPointsValue);
 					// $('#discount').text('-'+loyaltyPointsValue);
 					var cartpirce = parseInt($('.cart_price').text());
-					var total = cartpirce - discountval;
+					var total = cartpirce - discountval-couponPrice;
 					if (total > 0) {
-						total = cartpirce - discountval;
+						total = cartpirce - discountval-couponPrice;
 					} else {
 						total = 0;
 					}
@@ -82,11 +83,34 @@
 					$('#coupondetail').modal('show');
 
 				});
-				
-				$('#couponSelect').change(function(){
-		            var selectedDiscount = $(this).val();
-		            $('#couponprice').text(selectedDiscount+'%');
-		        });
+
+				$('#coponconfirm').click(function() {
+					var totalDiscount=$('#coupondiscountprice').text();
+					
+
+					$('#coupon').text(totalDiscount);
+					var cartPrice = parseInt($('.cart_price').text());
+					var couponPrice=parseInt($('#coupon').text());
+					
+					var totPrice=cartPrice-couponPrice;
+					$('#total').text(totPrice);
+					
+					
+
+					$('#coupondetail').modal('hide');
+
+				});
+
+				$('#couponSelect').change(function() {
+					var selectedDiscount = parseInt($(this).val());
+					var discountPrice =(100 - selectedDiscount) * 0.01;
+					var productPrice = parseInt($('#cprice').text());
+					var totalDiscount = productPrice * discountPrice;
+					
+					
+					$('#couponprice').text(selectedDiscount + '%');
+					$('#coupondiscountprice').text(totalDiscount);
+				});
 
 			});
 
@@ -798,7 +822,7 @@
 													style="width: 800px; height: 500px;">
 													<div class="modal-header">
 														<h5 class="modal-title" id="orderDetailsModalLabel">쿠폰조회
-															</h5>
+														</h5>
 														<button type="button" class="close" data-dismiss="modal"
 															aria-label="Close" style="border: none; padding: 7px;">
 															X
@@ -816,21 +840,26 @@
 																		<th>판매가</th>
 																		<th>쿠폰선택</th>
 																		<!--<th>총가격</th>-->
+																		<th>할인률</th>
 																		<th>할인금액</th>
 																	</tr>
 																</thead>
 																<tbody th:each="cart:${cartList}">
 																	<tr>
-																		<td th:text="${cart.product.productName}" >1</td>
-																		<td th:text="${cart.product.productPrice}" >May 10, 2018</td>
-																		<td >
-																		<select class="form-select form-select-sm"
-																			aria-label="Large select example" id="couponSelect" >
-																				<option selected  >쿠폰선택</option>
-																				<option value="1"  th:each="coupon:${coupons}" th:value="${coupon.couponDiscount}"th:text="${coupon.couponName}">주문확인</option>
-																				
+																		<td th:text="${cart.product.productName}">1</td>
+																		<td th:text="${cart.product.productPrice}" id="cprice">May
+																			10, 2018</td>
+																		<td><select class="form-select form-select-sm"
+																			aria-label="Large select example" id="couponSelect">
+																				<option selected>쿠폰선택</option>
+																				<option value="1" th:each="coupon:${coupons}"
+																					th:value="${coupon.couponDiscount}"
+																					th:text="${coupon.couponName}">주문확인</option>
+
 																		</select></td>
-																		<td><span class="success" id="couponprice" >0</span></td>
+																		<td><span class="success" id="couponprice">0</span></td>
+																		<td><span class="success"
+																			id="coupondiscountprice">0</span></td>
 																		<!-- <td>$25.00 for 1 item </td>-->
 																	</tr>
 																</tbody>
@@ -842,7 +871,8 @@
 														<!--   <button type="button" class="btn btn-primary">리뷰 저장</button>-->
 														<button type="button" class="btn btn-secondary"
 															data-dismiss="modal">닫기</button>
-														<button type="button" class="btn btn-primary">저장</button>
+														<button type="button" class="btn btn-primary"
+															id="coponconfirm">선택완료</button>
 
 													</div>
 												</div>
@@ -898,8 +928,8 @@
 									</div>
 									<div class="col-12 mb-20">
 										<input placeholder="기본주소" input readonly="readonly"
-											id="ordersAddress1"> <input placeholder="기본주소"
-											input readonly="readonly" id="ordersAddress2"> <input
+											id="ordersAddress1"> <input placeholder="기본주소" input
+											readonly="readonly" id="ordersAddress2"> <input
 											placeholder="상세주소" type="text" id="ordersAddress3">
 									</div>
 
