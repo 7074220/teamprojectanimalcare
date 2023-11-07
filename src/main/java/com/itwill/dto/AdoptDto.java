@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.itwill.entity.Adopt;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Userinfo;
@@ -29,7 +31,6 @@ public class AdoptDto {
 	private Date adoptDate;
 	private String adoptStatus;
 	private Long petNo;
-	private Integer status;
 	
 	public static Adopt toEntity(AdoptDto dto) {
 		Adopt adopt= Adopt.builder()
