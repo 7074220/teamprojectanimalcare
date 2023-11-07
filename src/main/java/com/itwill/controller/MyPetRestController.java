@@ -1,6 +1,10 @@
 package com.itwill.controller;
 
 import java.nio.charset.Charset;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +47,11 @@ public class MyPetRestController {
 		 	if(userNo==null) {
 		 		throw new Exception("로그인을 해주세요");
 		 	}
+		 	
+		 	
+		 	
+		 	
+		 	
 		 	myPetService.Create(MypetDto.toEntity(mypetDto));
 		 	
 			HttpHeaders httpHeaders = new HttpHeaders();

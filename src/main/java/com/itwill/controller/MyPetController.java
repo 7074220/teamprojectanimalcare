@@ -25,11 +25,11 @@ import java.util.List;
 public class MyPetController {
 
 	@Autowired
-    private  MyPetService myPetService;
+	private MyPetService myPetService;
 	@Autowired
-    private UserInfoService userInfoService;
+	private UserInfoService userInfoService;
 
-    @GetMapping("/mypet")
+	@GetMapping("/mypet")
     public String viewMyPet(HttpSession session, Model model) throws Exception {
         if (session.getAttribute("userNo") == null) {
             throw new Exception("로그인 하세요.");
@@ -59,37 +59,33 @@ public class MyPetController {
         return "my-account-mypet";
       
     }
-    
-	/*
-	 * @GetMapping("/registerMyPet") public String registerMyPet(HttpSession
-	 * session, Model model) {
-	 * 
-	 * return "registerMyPet"; }
-	 * 
-	 */
+
+
+  @GetMapping("/registerMyPet") 
+  public String registerMyPet(HttpSession session, Model model) {
   
-
-    	@GetMapping("/registerMyPet")
-        public String registerMyPet(HttpSession session,@RequestParam("mypetBirthday") Date date, Model model) {
-            // Date 객체를 LocalDateTime으로 변환
-            LocalDateTime localDateTime = date.toInstant()
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDateTime();
-
-            // 시간 부분을 자정(00:00:00)으로 설정
-            localDateTime = localDateTime.withHour(0).withMinute(0).withSecond(0);
-            model.addAttribute("localDateTime", localDateTime);
-            // 결과를 모델에 추가 (예: "resultDateTime"라는 이름으로)
-            return "my-account-mypet"; // 결과를 표시할 뷰 페이지의 이름을 반환
-        }
-    }
-	/*
-	 * @PostMapping("/myPet/{mypetNo}") public String
-	 * updateMyPet(@PathVariable(value = "mypetNo") Long myPetNo, @RequestBody
-	 * MypetDto mypetDto, HttpSession session) {
-	 * 
-	 * Long userNo=(Long)session.getAttribute("userNo"); //MyPet updatePet = MyPet
-	 * 
-	 * return "redirect:/userinfo/mypet"; }
-	 */
-
+  return "registerMyPet"; 
+  }
+  
+ 
+}
+/*
+ * @GetMapping("/registerMyPet") public String registerMyPet(HttpSession
+ * session,@RequestParam("mypetBirthday") Date date, Model model) { // Date 객체를
+ * LocalDateTime으로 변환 LocalDateTime localDateTime = date.toInstant()
+ * .atZone(ZoneId.systemDefault()) .toLocalDateTime();
+ * 
+ * // 시간 부분을 자정(00:00:00)으로 설정 localDateTime =
+ * localDateTime.withHour(0).withMinute(0).withSecond(0);
+ * model.addAttribute("localDateTime", localDateTime); // 결과를 모델에 추가 (예:
+ * "resultDateTime"라는 이름으로) return "my-account-mypet"; // 결과를 표시할 뷰 페이지의 이름을 반환
+ * } }
+ * 
+ * @PostMapping("/myPet/{mypetNo}") public String
+ * updateMyPet(@PathVariable(value = "mypetNo") Long myPetNo, @RequestBody
+ * MypetDto mypetDto, HttpSession session) {
+ * 
+ * Long userNo=(Long)session.getAttribute("userNo"); //MyPet updatePet = MyPet
+ * 
+ * return "redirect:/userinfo/mypet"; }
+ */
