@@ -4,7 +4,7 @@
 
 <head>
 	<title>Safira - cart page</title>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>	
 
 	<!-- 별점 css 위치 -->
 	<style>
@@ -87,8 +87,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											
-											
+																					
 										</tbody>
 
 									</table>
@@ -145,14 +144,14 @@
 										<!--<h3>리뷰작성</h3>-->
 										<div class="comments_form">
 
-											<form action="#" class="mb-3" name="myform" id="myform" method="post">
+											<form action="#" class="mb-3" name="reviewForm" id="reviewForm" method="post">
 
 												<p>별점과 후기를 남겨주세요.</p>
 												<div class="row" style="flex-direction: column;">
 
 													<div>별점</div>
 													<!-- 별점 위치 -->
-													<div class="rating_box">
+													<div class="rating_box" >
 														<div class="rating">
 															★★★★★
 															<span class="rating_star">★★★★★</span>
@@ -166,6 +165,7 @@
 														</div>
 
 													</div>
+													
 												</div>
 												<!--<button class="button" type="submit">Post Comment</button>-->
 											</form>
@@ -219,6 +219,57 @@
 			});
 
 		</script>
+
+<!-- 모달 정말 하기 싫은걸 
+<script>
+	
+	function ajaxRequest(method, url, sendJsonObject) {
+		let returnResultJsonObject={};
+		$.ajax({
+			async:false,
+			method: method,
+			url: url,
+			contentType: 'application/json;UTF-8',
+			data: JSON.stringify(sendJsonObject),
+			type: 'json',
+			success: function(resultJsonObject) {
+				returnResultJsonObject = resultJsonObject;
+			}
+		});
+		return returnResultJsonObject;
+	}
+
+	 
+    $('#reviewForm').submit(function (event) {
+        event.preventDefault(); 
+
+        var formData = {
+            productNo: productNo,
+            boardStar: $('#reviewForm input[type="range"]').val(),
+            boardContent: $('#review_comment').val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/create-reviewBoard', 
+            data: JSON.stringify(formData),
+            contentType: 'application/json',
+            success: function (response) {
+                // 성공 시 처리
+                console.log('리뷰 작성 성공:', response);
+            },
+            error: function (error) {
+                // 오류 시 처리
+                console.error('리뷰 작성 오류:', error);
+            }
+        });
+    });
+	
+	
+</script> -->
+
+
+
 
 		</th:block>
 
