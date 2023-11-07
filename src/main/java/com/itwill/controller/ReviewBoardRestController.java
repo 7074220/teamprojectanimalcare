@@ -194,7 +194,7 @@ public class ReviewBoardRestController {
 	    
 	    HttpHeaders httpHeaders = new HttpHeaders();
 	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-
+	    
 	    if (!reviewList.isEmpty()) {
 	        return new ResponseEntity<List<ReviewBoardDto>>(reviewList, httpHeaders, HttpStatus.OK);
 	    } else {
