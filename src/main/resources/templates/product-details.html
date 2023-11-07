@@ -839,25 +839,24 @@
 									</div>
 
 									<div class="tab-pane fade" id="reviews" role="tabpanel">
-										<input type="hidden" id="productNo" th:value="${productNo}" />
+										<input type="hidden" id="productNo" th:value="${product.productNo}" />
 										<label>정렬 순서:</label>
-										<select name="sortOrder" id="sortOrder" onchange="sortReviews()">
+										<select name="sortOrder" id="sortOrder" onchange="sortReviews(event)">
+											<option >정렬</option>
 											<option value="latest">최신순</option>
 											<option value="rating">별점순</option>
 										</select>
-
+										<div id="reviewContent">
 										<div class="reviews_wrapper" th:each="review:${reviewList}">
 											<h2 th:text="${review.boardDate}">roadthemes</h2>
 											<div class="reviews_comment_box">
 												<div class="comment_thmb">
-													$('#userName').html(responsejsonObject.userName);
 													<p><strong th:text="${review.userinfo.userName}">adm </strong></p>
 													<!-- <img src="assets/img/blog/comment2.jpg" alt="">-->
 												</div>
 												<div class="comment_text">
 													<div class="reviews_meta">
 														<div class="star_rating">
-
 															<ul>
 																<li th:each="starNumber: ${#numbers.sequence(1, 5)}">
 																	<a href="#">
@@ -882,6 +881,7 @@
 													</div>
 												</div>
 											</div>
+										</div>
 										</div>
 										<!--	 <div class="comment_title">
                                         <h2>Add a review </h2>
@@ -1426,27 +1426,27 @@
 
 			//window.location.href = "wish?productNo="+productNo+"&productQty="+productQty;
 
-			function sortReviews() {
+			function sortReviews(e) {
 				var select = document.getElementById("sortOrder");
 				var selectedValue = select.value;
-
 				var urlParams = new URLSearchParams(window.location.search);
 				var productNo = urlParams.get('productNo');
-
 				var redirectPath;
-
+				
 				switch (selectedValue) {
 					case "latest":
-						redirectPath = "productDetail?productNo=" + productNo + "&sortOrder=latest";
+						//redirectPath = "productDetails?productNo=" + productNo + "&sortOrder=latest";
+						window.location.hash="/reviewRatingDesc";
 						break;
 					case "rating":
-						redirectPath = "productDetail?productNo=" + productNo + "&sortOrder=rating";
+						//redirectPath = "productDetails?productNo=" + productNo + "&sortOrder=rating";
+						window.location.hash="/reviewStarDesc";
 						break;
 					default:
-
 				}
-
-				window.location.href = redirectPath;
+				
+				//window.location.href = redirectPath;
+				
 			}
 
 		</script>

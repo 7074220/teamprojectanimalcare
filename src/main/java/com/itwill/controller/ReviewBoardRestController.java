@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.ReviewBoardDto;
@@ -174,26 +175,28 @@ public class ReviewBoardRestController {
 		
 	
 	@Operation(summary = "높은 평점순 정렬")
-	@GetMapping("/productDetail")
-	public ResponseEntity<List<ReviewBoardDto>> findByProductProductNoOrderByBoardStarDesc(@PathVariable(value = "productNo") Long productNo) {
-	    List<ReviewBoard> reviewBoards = reviewBoardService.findByProductProductNoOrderByBoardStarDesc(productNo);
-	    List<ReviewBoardDto> reviewBoardDtos = new ArrayList<>();
-
+	@PostMapping("/productDetail")
+	public ResponseEntity<List<ReviewBoardDto>> findByProductProductNoOrderByBoardStarDesc(@RequestBody ReviewBoardDto dto) {
+	    List<ReviewBoard> reviewBoards = reviewBoardService.findByProductProductNoOrderByBoardStarDesc(dto.getProductNo());
+	    List<ReviewBoardDto> reviewList = new ArrayList<>();
+	    
 	    for (ReviewBoard reviewBoard : reviewBoards) {
-	        ReviewBoardDto dto = new ReviewBoardDto();
-	        dto.setBoardNo(reviewBoard.getBoardNo());
-	        dto.setBoardTitle(reviewBoard.getBoardTitle());
-	        dto.setBoardContent(reviewBoard.getBoardContent());
-	        dto.setBoardDate(reviewBoard.getBoardDate());
-	        dto.setBoardStar(reviewBoard.getBoardStar());
-
-	        reviewBoardDtos.add(dto);
+	        ReviewBoardDto reviewdto = new ReviewBoardDto();
+	        reviewdto.setBoardNo(reviewBoard.getBoardNo());
+	        reviewdto.setBoardTitle(reviewBoard.getBoardTitle());
+	        reviewdto.setBoardContent(reviewBoard.getBoardContent());
+	        reviewdto.setBoardDate(reviewBoard.getBoardDate());
+	        reviewdto.setBoardStar(reviewBoard.getBoardStar());
+	        reviewdto.setUserNo(reviewBoard.getUserinfo().getUserNo());
+	        reviewdto.setProductNo(reviewBoard.getProduct().getProductNo());
+	        reviewList.add(reviewdto);
 	    }
+	    
 	    HttpHeaders httpHeaders = new HttpHeaders();
 	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-	    if (!reviewBoardDtos.isEmpty()) {
-	        return new ResponseEntity<>(reviewBoardDtos, httpHeaders, HttpStatus.OK);
+	    if (!reviewList.isEmpty()) {
+	        return new ResponseEntity<List<ReviewBoardDto>>(reviewList, httpHeaders, HttpStatus.OK);
 	    } else {
 	        return new ResponseEntity<>(httpHeaders, HttpStatus.NOT_FOUND);
 	    }

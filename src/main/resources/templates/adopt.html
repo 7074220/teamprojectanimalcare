@@ -193,10 +193,12 @@
 	        let petNo = $('#petid').val();
 	        let adoptDate = $('#adoptDate').val(); // 선택한 날짜 가져오기
 	        let adoptTime = $('#adoptTimeSelect').val(); // 선택한 시간 가져오기
+	        
 	        let sendJsonObject = {
 	            petNo: petNo,
 	            adoptDate: adoptDate,
 	            adoptTime: adoptTime
+	          
 	        };
 			
 	       let responseObject=ajaxRequest('POST','adopt/create-adopt',sendJsonObject);

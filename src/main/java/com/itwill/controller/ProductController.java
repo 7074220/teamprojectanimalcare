@@ -32,6 +32,7 @@ import com.itwill.service.ProductService;
 import com.itwill.service.ReviewBoardService;
 import com.itwill.service.UserInfoService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import jakarta.servlet.http.HttpSession;
@@ -398,7 +399,8 @@ public class ProductController {
 	}
 	
 	@GetMapping(value = "/productDetail", params = "productNo")
-	public String productDetail(@RequestParam Long productNo,Model model) {
+	public String productDetail(@RequestParam Long productNo,Model model,HttpServletRequest request) {
+		System.out.println(">>>>>>>>>"+request.getRequestURI());
 		Product product = productService.findByProductNo(productNo);
 		String findProductName = productService.findByProductNo(productNo).getProductName();
 		int firstSpaceIndex = findProductName.indexOf(" ");
@@ -445,7 +447,47 @@ public class ProductController {
 		return "shop";
 	}
 	
-	
+	// 리뷰 정렬
+	@GetMapping(value = "/productDetails", params = "productNo")
+	public String productDetail(@RequestParam Long productNo,Model model,String sortOrder) {
+		Product product = productService.findByProductNo(productNo);
+		String findProductName = productService.findByProductNo(productNo).getProductName();
+		int firstSpaceIndex = findProductName.indexOf(" ");
+		
+		System.out.println(">>>>>>>>>>>>>>>>>"+sortOrder);
+		
+		if (firstSpaceIndex >= 0) {
+			findProductName = findProductName.substring(0, firstSpaceIndex);// 첫 번째 공백까지 잘라내기
+		}
+		List<Product> productNameList = productService.findByContains(findProductName);
+
+		List<ProductListDto> productListDto = new ArrayList<>();
+		List<ProductNameDto> productNameDto = new ArrayList<>();
+		List<Product> products = productService.findAllProductByCategory(product.getProductCategory(), product.getProductPetCategory());
+		
+		for (Product productCategory : products) {
+			productListDto.add(ProductListDto.toDto(productCategory));
+		}
+
+		for (Product productName : productNameList) {
+			productNameDto.add(ProductNameDto.toDto(productName));
+		}
+		
+		model.addAttribute("product", product);
+		model.addAttribute("products", productListDto);
+		model.addAttribute("productName", productNameDto);
+		List<ReviewBoard> reviewList = new ArrayList<ReviewBoard>();
+		if(sortOrder.equals("rating")) {
+			reviewList = reviewBoardService.findByProductProductNoOrderByBoardStarDesc(productNo);
+		}
+		if(sortOrder.equals("latest")) {
+			reviewList = reviewBoardService.findByProductProductNoOrderByBoardDateDesc(productNo);
+		}
+		
+		model.addAttribute("reviewList", reviewList);
+		
+		return "product-details";
+	}
 	
 	
 }
