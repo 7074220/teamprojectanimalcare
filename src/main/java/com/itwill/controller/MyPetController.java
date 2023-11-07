@@ -40,7 +40,11 @@ public class MyPetController {
             sequentialNumber = i + 1;// 현재 애왔의 번호를 가져옴
             // mypetNo를 사용할 수 있음, 여기에서는 i+1가 해당 애왔의 순번입니다.
         }
+       MyPet myPet =  myPetService.findLeaderMyPet(userNo);
+       String Name  = myPet.getMypetName();
         
+        model.addAttribute("sequentialNumber", sequentialNumber);
+        model.addAttribute("Name", Name);
         model.addAttribute("sequentialNumber", sequentialNumber);
         model.addAttribute("formattedDate", formattedDate);
         model.addAttribute("myPetList",myPetList);

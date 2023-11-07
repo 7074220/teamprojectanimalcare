@@ -4,10 +4,10 @@ insert into userinfo (user_no,user_id,user_password,user_address,user_gender,use
 VALUES (userinfo_user_no_seq.nextval,'aaa@naver.com','1017','분당','남','010-7777-1111',0,'1111',sysdate, '김창섭');
 
 insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
-VALUES (userinfo_user_no_seq.nextval,'111@naver.com','1011','서울','남','010-7111-1111',0,'2222',sysdate, '박태환');
+VALUES (userinfo_user_no_seq.nextval,'bbb@naver.com','1011','서울','남','010-7111-1111',0,'2222',sysdate, '박태환');
 
 insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
-VALUES (userinfo_user_no_seq.nextval,'222@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '전아현');
+VALUES (userinfo_user_no_seq.nextval,'ccc@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '전아현');
 
 
 -- dog product insert
@@ -63,6 +63,28 @@ insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,
 VALUES (pet_pet_no_seq.nextval,'서울특별시','온순하다','서울특별시',sysdate,'강아지','암컷',1,'강아지9.jpeg');
 insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 
 VALUES (pet_pet_no_seq.nextval,'서울특별시','온순하다','서울특별시',sysdate,'강아지','암컷',1,'강아지10.jpeg');
+
+insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 
+VALUES (pet_pet_no_seq.nextval,'서울특별시','온순하다','서울특별시',sysdate,'강아지','암컷',1,'dog101.jpg');
+insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 
+VALUES (pet_pet_no_seq.nextval,'서울특별시','온순하다','서울특별시',sysdate,'강아지','암컷',2,'dog102.jpg');
+insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 
+VALUES (pet_pet_no_seq.nextval,'서울특별시','온순하다','서울특별시',sysdate,'강아지','암컷',3,'dog103.jpg');
+insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 
+VALUES (pet_pet_no_seq.nextval,'경기도','온순하다','경기도',sysdate,'강아지','암컷',4,'dog104.jpg');
+insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 
+VALUES (pet_pet_no_seq.nextval,'경기도','온순하다','경기도',sysdate,'강아지','암컷',1,'dog105.jpg');
+insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 
+VALUES (pet_pet_no_seq.nextval,'경기도','온순하다','경기도',sysdate,'강아지','암컷',2,'dog106.jpg');
+insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 
+VALUES (pet_pet_no_seq.nextval,'경기도','온순하다','경기도',sysdate,'강아지','암컷',3,'dog107.jpg');
+
+insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 
+VALUES (pet_pet_no_seq.nextval,'서울특별시','온순하다','서울특별시',sysdate,'고양이','암컷',1,'cat100.jpg');
+insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 
+VALUES (pet_pet_no_seq.nextval,'경기도','귀엽다','경기도',sysdate,'고양이','암컷',2,'cat101.jpg');
+insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 
+VALUES (pet_pet_no_seq.nextval,'강원도','작다','강원도',sysdate,'고양이','암컷',3,'cat102.jpg');
 
 
 
@@ -125,7 +147,7 @@ VALUES (orders_order_no_seq.nextval,'서울특별시','사료외..',sysdate,'222
 -- coupon insert
 
 insert into coupon (coupon_id,coupon_name,coupon_discount,coupon_payday,coupon_expiration_date,user_no) 
-VALUES (Coupon_coupon_id_SEQ.nextval,'생일쿠폰',30,TO_DATE('2023/04/05','YYYY/MM/DD'),TO_DATE('2023/10/25','YYYY/MM/DD'),3);
+VALUES (Coupon_coupon_id_SEQ.nextval,'생일쿠폰',30,TO_DATE('2023/11/06','YYYY/MM/DD'),TO_DATE('2023/11/25','YYYY/MM/DD'),17);
 
 -- volunteer insert
 

@@ -69,6 +69,8 @@ public class OrderController {
 		Orderstatus orderstatus= orderStatusRepository.findById(1L).get();
 		Long osNo = orderstatus.getOsNo();
 		List<Cart> carts = cartService.findAllCartByUserId(userNo);
+		
+		System.out.println(">>>>>>>>>>>>이게cart>>>"+carts);
 		Orders insertOrder = orderService.insertOrder(OrdersDto.toEntity(orderDto));
 		
 		List<OrderItemDto> orderItemDtos = new ArrayList<OrderItemDto>();
