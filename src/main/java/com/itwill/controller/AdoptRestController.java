@@ -99,11 +99,14 @@ public class AdoptRestController {
 	}
 
 	@Operation(summary = "no로 삭제")
-	@DeleteMapping("/{no}")
-	public ResponseEntity<Map> deleteAdopt(@PathVariable(value  = "no") Long no) throws Exception {
-		adoptService.deleteAdopt(no);
-		
-		return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>());
+	@DeleteMapping("/{adoptNo}")
+	public ResponseEntity<Map> deleteAdopt(@PathVariable(value  = "adoptNo") Long adoptNo) throws Exception {
+		 try {
+		        adoptService.deleteAdopt(adoptNo);
+		        return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("adoptNo", adoptNo));
+		    } catch (Exception e) {
+		        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		    }
 	}
 
 	@Operation(summary = "no로 입양 수정하기")

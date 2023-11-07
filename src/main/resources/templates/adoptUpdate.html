@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="layout/layout(title='adopt')">
+	layout:decorate="layout/layout(title='adoptUpdate')">
 
 
 <head>
@@ -100,10 +100,10 @@
 					</div>
 					<div class="col-lg-6 col-md-6">
 						<div class="contact_message form">
-							<h3 style="font-weight: bold">신청 양식</h3>
-							<form id="contact-form" method="POST"
-								th:action="@{/create-adopt}" th:object="${adopt}" style="margin: 20px 0;">
-
+							<h3 style="font-weight: bold">수정 양식</h3>
+							<form id="update-form" method="POST"
+								th:action="@{/update-adopt}" th:object="${adopt}" style="margin: 20px 0;">
+								<input type="hidden" name="adoptNo" th:value="${adoptNo}" />
 								<input type="hidden" id="petid" name="petNo" th:value="${pet.petNo}"/>
 
 								<!-- <p>
@@ -124,38 +124,38 @@
 								</div> -->
 								<div>
 									<span>방문 날짜</span> <input type="date" name="adoptDate"
-										id="adoptDate" placeholder="날짜를 선택해주세요" required="required" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
+										id="adoptDate" placeholder="날짜를 선택해주세요" required="required" th:value="${#dates.format(adopt.adoptDate, 'yyyy-MM-dd')}">
 								</div>
 								<div>
 									<span>방문 시간</span> 
-									 <select name="adoptTime" id="adoptTimeSelect" style="width: 200px; padding: 10px;">
-										<option value="09">09 AM</option>
+									 <select name="adoptTime" id="adoptTime" style="width: 200px; padding: 10px;">
+										<option value="09" th:selected="${adopt.adoptTime == 9}">09 AM</option>
 
-										<option value="10">10 AM</option>
+										<option value="10" th:selected="${adopt.adoptTime == 10}">10 AM</option>
 
-										<option value="11">11 AM</option>
+										<option value="11" th:selected="${adopt.adoptTime == 11}">11 AM</option>
 
-										<option value="12">12 PM</option>
+										<option value="12" th:selected="${adopt.adoptTime == 12}">12 PM</option>
 
-										<option value="13">13 PM</option>
+										<option value="13" th:selected="${adopt.adoptTime == 13}">13 PM</option>
 
-										<option value="14">14 PM</option>
+										<option value="14" th:selected="${adopt.adoptTime == 14}">14 PM</option>
 
-										<option value="15">15 PM</option>
+										<option value="15" th:selected="${adopt.adoptTime == 15}">15 PM</option>
 
-										<option value="16">16 PM</option>
+										<option value="16" th:selected="${adopt.adoptTime == 16}">16 PM</option>
 
-										<option value="17">17 PM</option>
+										<option value="17" th:selected="${adopt.adoptTime == 17}">17 PM</option>
 
-										<option value="18">18 PM</option>
+										<option value="18" th:selected="${adopt.adoptTime == 18}">18 PM</option>
 
-										<option value="19">19 PM</option>
+										<option value="19" th:selected="${adopt.adoptTime == 19}">19 PM</option>
 									</select> 
 									<!-- <input type="time" name="adoptTime" id="adoptTime" required="required"> -->
 									
 								</p>
 
-								<button type="submit" class="submit">신청하기</button>
+								<button type="submit" class="submit">수정하기</button>
 								<!-- <p class="form-messege"></p> -->
 								<!-- <div th:if="${msg!=null}">
 									<p th:text="${msg}" class="success-message"></p>
@@ -169,7 +169,68 @@
 		</div>
 		
 		
- 	<script>
+		<script>
+    // 현재 날짜를 가져오는 함수
+    function getCurrentDate() {
+        var currentDate = new Date();
+        var year = currentDate.getFullYear();
+        var month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+        var day = currentDate.getDate().toString().padStart(2, '0');
+        return year + '-' + month + '-' + day;
+    }
+
+    $(document).ready(function () {
+        // 페이지 로드 시 실행
+        var adoptDate = $('#adoptDate');
+        var adoptTime = $('#adoptTime');
+
+        // 현재 날짜로 설정
+        adoptDate.val(getCurrentDate());
+
+        $('.submit').on('click', function (event) {
+            event.preventDefault();
+            let petNo = $('#petid').val();
+            let adoptDateValue = adoptDate.val(); // 선택한 날짜 가져오기
+            let adoptTimeValue = adoptTime.val(); // 선택한 시간 가져오기
+
+            let sendJsonObject = {
+                petNo: petNo,
+                adoptDate: adoptDateValue,
+                adoptTime: adoptTimeValue,
+                adoptStatus: "입양신청접수"
+            };
+
+            $.ajax({
+                method: 'POST',
+                url: 'adopt/create-adopt',
+                contentType: 'application/json;UTF-8',
+                data: JSON.stringify(sendJsonObject),
+                dataType: 'json',
+                success: function (responseObject) {
+                    if (responseObject.userNo == null) {
+                        alert('로그인이 필요합니다.');
+                        window.location.href = 'index';
+                    } else {
+                        alert("입양신청이 완료되었습니다.");
+                        window.location.href = 'index';
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert('오류가 발생했습니다');
+                }
+            });
+        });
+    });
+</script>
+		
+		
+		
+		
+		
+		
+		
+		
+ 	<!--<script>
 		 
 	 	function ajaxRequest(method, url, sendJsonObject) {
 	 		let returnResultJsonObject={};
@@ -192,7 +253,7 @@
 	        event.preventDefault();
 	        let petNo = $('#petid').val();
 	        let adoptDate = $('#adoptDate').val(); // 선택한 날짜 가져오기
-	        let adoptTime = $('#adoptTimeSelect').val(); // 선택한 시간 가져오기
+	        let adoptTime = $('#adoptTime').val(); // 선택한 시간 가져오기
 	        
 	        let sendJsonObject = {
 	            petNo: petNo,
@@ -212,39 +273,7 @@
 	  		
 	    });
 		
-		/*
-		$('.submit').on('click', function(event) {
-    event.preventDefault();
-    let petNo = $(this).data('petNo');
-    let adoptDate = $('#adoptDate').val();
-    let adoptTime = $('#adoptTimeSelect').val();
-
-    let sendJsonObject = {
-        petNo: petNo,
-        adoptDate: adoptDate,
-        adoptTime: adoptTime
-    };
-
-    $.ajax({
-        type: 'POST',
-        url: 'adopt/create-adopt', // 요청 URL을 상대 경로로 수정
-        contentType: 'application/json;UTF-8',
-        data: JSON.stringify(sendJsonObject),
-        dataType: 'json', // 서버에서 반환하는 데이터 형식을 JSON으로 설정
-        success: function(responseObject) {
-            if (responseObject.status === 1) {
-                alert('로그인이 필요합니다.'); // 로그인이 필요한 경우 알림
-            } else {
-                alert('입양신청이 완료되었습니다.');
-                window.location.href = 'index'; // 성공적인 신청 후 이동할 페이지 설정
-            }
-        },
-        error: function(xhr, status, error) {
-            alert('오류가 발생했습니다');
-        }
-    });
-});
-		*/
+	
 		
 		
 
@@ -266,24 +295,18 @@
 		
 
 	
-	
-
-
-
-
-
 
 			
 </script>
-		
+		-->
 		
 		
 	</th:block>
 		<!--map js code here-->
-	<script
+	<!--<script
 		src="https://maps.google.com/maps/api/js?sensor=false&amp;libraries=geometry&amp;v=3.22&amp;key=AIzaSyChs2QWiAhnzz0a4OEhzqCXwx_qA9ST_lE"></script>
 	<script src="https://www.google.com/jsapi"></script>
-	<script src="assets/js/map.js"></script>
+	<script src="assets/js/map.js"></script>-->
 	<!--contact area end-->
 
 	<!--footer area start-->
