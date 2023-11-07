@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 import com.itwill.entity.Product;
@@ -132,8 +135,19 @@ public class ProductDaoImpl implements ProductDao {
 		return productRepository.findAllByOrderByProductByPetCategoryByProductCategoryNoDesc(productPetCategory, productCategory);
 	}
 
+	
+	/*************** 페이징 ***************/
+	@Override
+	public Page<Product> findProductList(Pageable pageable) throws Exception {
+		return productRepository.findAll(pageable);
+	}
 
-	
-	
+	@Override
+	public Page<Product> findProductList(Specification<Product> specification, Pageable pageable) throws Exception {
+		return productRepository.findAll(specification, pageable);
+				
+	}
+
+		
 
 }

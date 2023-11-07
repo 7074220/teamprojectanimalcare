@@ -1,15 +1,18 @@
 package com.itwill.repository;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.itwill.entity.Product;
 import com.itwill.entity.Userinfo;
 
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpecificationExecutor<Product> {
 
 	// 일부 단어 입력으로 제품 검색
 	@Query(value = "select * from product where product_name like '%'||?1||'%'", nativeQuery = true)
@@ -68,4 +71,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 	
 	@Query(value = "select * from product where product_pet_category = ?1 and product_category = ?2 order by product_no desc", nativeQuery = true)
 	List<Product> findAllByOrderByProductByPetCategoryByProductCategoryNoDesc(String productPetCategory, String productCategory);
+	
 }
