@@ -46,8 +46,12 @@ $(document).ready(function(){
         
     });
     
+    
+    
     $('.order_button').click(function() {
-        var orderAddress = $('#ordersAddress').val();
+        var orderAddress1 = $('#ordersAddress1').text();
+        var orderAddress2 = $('#ordersAddress2').text();
+        var orderAddress3 = $('#ordersAddress3').text();
         var orderPrice = $('#total').text();
         var userPoint = $('#loyaltyPoints').val();
         
@@ -63,7 +67,7 @@ $(document).ready(function(){
  		alert( "가격"+$('#orderPrice').val());
  		alert( "포인트"+$('#userPoint').val());
  		
- 		window.location.href="orderInsert?orderAddress="+orderAddress+"&orderPrice="+orderPrice+"&userPoint="+userPoint;
+ 		window.location.href="orderInsert?orderAddress="+orderAddress1+orderAddress2+orderAddress3+"&orderPrice="+orderPrice+"&userPoint="+userPoint;
  		
         // '#f'를 사용하여 폼을 선택합니다.
         /*
@@ -108,17 +112,17 @@ function execution_daum_address() {
                         extraAddr = ' (' + extraAddr + ')';
                     }
                     // 조합된 참고항목을 해당 필드에 넣는다.
-                    document.getElementById("ordersAddress3").value = extraAddr;
+                    document.getElementById("ordersAddress2").value = extraAddr;
                 
                 } else {
-                    document.getElementById("ordersAddress3").value = '';
+                    document.getElementById("ordersAddress2").value = '';
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('postcode').value = data.zonecode;
                 document.getElementById("ordersAddress1").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("ordersAddress2").focus();
+                document.getElementById("ordersAddress3").focus();
             }
         }).open();
     }
@@ -769,6 +773,25 @@ function execution_daum_address() {
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   쿠폰조회/적용
 </button>
+<!-- Modal -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
                                     <!-- <label for="country">쿠폰목록 <span></span></label> -->
@@ -816,8 +839,8 @@ function execution_daum_address() {
                                 </div> 
                                 <div class="col-12 mb-20">
                                     <input placeholder="기본주소" input readonly="readonly"  id="ordersAddress1"  >      
-                                      <input placeholder="참고항목" input readonly="readonly"  id="ordersAddress3">        
-                                      <input placeholder="상세주소" type="text" id="ordersAddress2">        
+                                      <input placeholder="참고항목" input readonly="readonly"  id="ordersAddress2">        
+                                      <input placeholder="상세주소" type="text" id="ordersAddress3">        
                                 </div>
                                 
                                 

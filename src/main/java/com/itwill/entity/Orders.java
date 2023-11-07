@@ -36,7 +36,7 @@ public class Orders {
 	@SequenceGenerator(name = "Orders_order_no_SEQ",sequenceName = "Orders_order_no_SEQ",initialValue = 1,allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Orders_order_no_SEQ")
 	private Long orderNo;
-	@CreatedDate
+	@CreationTimestamp
 	private Date orderDate;
 	private Integer orderPrice;
 	private String orderAddress;

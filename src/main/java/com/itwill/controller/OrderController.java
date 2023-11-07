@@ -73,6 +73,11 @@ public class OrderController {
 		System.out.println(">>>>>>>>>>>>이게cart>>>"+carts);
 		Userinfo findUserinfo = userInfoService.findUserByNo(userNo);
 		Orders orders = Orders.builder().userinfo(findUserinfo).orderAddress(orderAddress).orderPrice(Integer.parseInt(orderPrice)).build();
+		if(carts.size()>1) {
+			orders.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+(carts.size()-1)+"개 상품");
+		}else {
+			orders.setOrderDesc(carts.get(0).getProduct().getProductName());
+		}
 		Orders newOrder = orderService.insertOrder(orders);
 		
 		//Orders insertOrder = orderService.insertOrder(OrdersDto.toEntity(orderDto));
@@ -92,7 +97,6 @@ public class OrderController {
 		OrdersDto orderdto = OrdersDto.toDto(newOrder);
 		orderdto.setOrderItemDtos(orderItemDtos);
 		orderdto.setUserNo(userNo);
-		orderdto.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+(carts.size()-1)+"개 상품");
 		/*
 		//insertOrder.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+(carts.size()-1)+"개 상품");
 		//insertOrder.setOrderAddress(orderDto.getOrderAddress());
