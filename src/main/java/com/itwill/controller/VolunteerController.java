@@ -65,6 +65,7 @@ public class VolunteerController {
 	        Userinfo userinfo = userInfoService.findUserByNo(userNo);
 	        volunteer.setUserinfo(userinfo);
 	        volunteer.setCenter(center);
+	        
 	        model.addAttribute("userinfo", userinfo);
 
 	        // 봉사신청이 성공한 경우 모델에 추가
@@ -73,7 +74,7 @@ public class VolunteerController {
 	        // 로그인이 필요한 경우 모델에 추가
 	        model.addAttribute("error", "로그인이 필요합니다.");
 	    }
-	    return "index"; // 뷰 페이지의 이름을 반환
+	    return "center-list"; // 뷰 페이지의 이름을 반환
 	    
 	}
 	
