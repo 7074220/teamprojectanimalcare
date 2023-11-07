@@ -231,7 +231,7 @@ $(document).ready(function () {
     $('#submit').click(function () {
         var formData = {
             userNo: $('#userid').val(),
-            boardStar: $('.rating input[name="boardStar"]').val(),
+            boardStar: $('#boardStar').val(), // boardStar: $('.rating input[name="boardStar"]').val(),
             boardContent: $('#review_comment').val()
         };
 
@@ -254,13 +254,7 @@ $(document).ready(function () {
     });
 });
 
-
-
-	
 </script> 
-
-
-
 
 		</th:block>
 
