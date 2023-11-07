@@ -1,5 +1,6 @@
 import {user_write_form} from './template-user-write-from.js';
 import {user_login_form} from './template-user-login-from.js';
+import {user_finduserinfo_form} from './template-user-finduserinfo-form.js';
 import {ajaxRequest} from './request.js';
 import {createInitializer} from "./initializer.js";
 
@@ -138,7 +139,18 @@ function navigate() {
 			  });
 			alert('아이디 혹은 비밀번호를 잘못 입력 하셨습니다. ');
 		}
-		
+	}
+	if (path == '/findUserInfo') {
+		html = user_finduserinfo_form();
+		$('#content').html(html);
+		initialize.validatorUserFindFormSetDefault();
+		let validator = $('#userFindIdForm').validate();
+		initialize.setValidator(validator);
+	}
+	if (path == '/findUserId') {
+		if (initialize.getValidator().form()) {
+			
+		}
 	}
 }
 
