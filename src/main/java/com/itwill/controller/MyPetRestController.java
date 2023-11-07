@@ -65,6 +65,10 @@ public class MyPetRestController {
 			
 			return new ResponseEntity<MypetDto>(mypetDto,httpHeaders ,HttpStatus.OK);
 		}
+	 
+	 
+	 
+	 
 	/*
 	@Operation(summary = "마이펫리스트")
 	@GetMapping("/{userNo}")
@@ -87,11 +91,11 @@ public class MyPetRestController {
 	public void MyPetAllDelete(@PathVariable(name = "userNo")Long userNo) {
 		myPetService.deleteMypetAllByUserNo(userNo);
 	}
+	 */
 	
 	@Operation(summary = "마이펫 1개 삭제")
-	@DeleteMapping("/{userNo}/{mypetNo}")
-	public void MyPetDeleteByUserNo(@PathVariable(name = "userNo")Long userNo,@PathVariable(name = "mypetNo")Long mypetNo) {
-		myPetService.deleteMypetByUserNo(userNo, mypetNo);
+	@DeleteMapping("/{mypetNo}")
+	public void MyPetDeleteByUserNo(@PathVariable(name = "mypetNo")Long mypetNo) {
+		myPetService.deleteMypetByUserNo( mypetNo);
 	}
-	*/
 }

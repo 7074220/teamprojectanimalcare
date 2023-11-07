@@ -16,8 +16,8 @@ public interface MyPetRepository extends JpaRepository<MyPet, Long>{
 	
 	// 마이펫 중 1마리 삭제
 	@Modifying
-	@Query(value="delete from mypet where user_no=?1 and mypet_no=?2",nativeQuery = true)
-	public void deleteMypetByUserNo(Long userNo,Long mypetNo);
+	@Query(value="delete from mypet where mypet_no=?1",nativeQuery = true)
+	public void deleteMypetByUserNo(Long mypetNo);
 	
 	// 마이펫 전체 삭제
 	@Modifying
