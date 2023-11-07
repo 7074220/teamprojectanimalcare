@@ -44,9 +44,9 @@ public class CartController {
 	@GetMapping("/cartList")
 	// 카트 리스트 보기 (유저)
 	public String cartList(Model model, HttpSession session) throws Exception{
-		if (session.getAttribute("userNo") == null) {
-			throw new Exception("로그인 하세요.");
-		}
+			if (session.getAttribute("userNo") == null) {
+				throw new Exception("로그인 하세요.");
+			}
 		
 		Long userNo=(Long)session.getAttribute("userNo");
 		

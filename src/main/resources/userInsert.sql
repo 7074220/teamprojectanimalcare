@@ -64,6 +64,28 @@ VALUES (pet_pet_no_seq.nextval,'서울특별시','온순하다','서울특별시
 insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 
 VALUES (pet_pet_no_seq.nextval,'서울특별시','온순하다','서울특별시',sysdate,'강아지','암컷',1,'강아지10.jpeg');
 
+insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 
+VALUES (pet_pet_no_seq.nextval,'서울특별시','온순하다','서울특별시',sysdate,'강아지','암컷',1,'dog101.jpg');
+insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 
+VALUES (pet_pet_no_seq.nextval,'서울특별시','온순하다','서울특별시',sysdate,'강아지','암컷',2,'dog102.jpg');
+insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 
+VALUES (pet_pet_no_seq.nextval,'서울특별시','온순하다','서울특별시',sysdate,'강아지','암컷',3,'dog103.jpg');
+insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 
+VALUES (pet_pet_no_seq.nextval,'경기도','온순하다','경기도',sysdate,'강아지','암컷',4,'dog104.jpg');
+insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 
+VALUES (pet_pet_no_seq.nextval,'경기도','온순하다','경기도',sysdate,'강아지','암컷',1,'dog105.jpg');
+insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 
+VALUES (pet_pet_no_seq.nextval,'경기도','온순하다','경기도',sysdate,'강아지','암컷',2,'dog106.jpg');
+insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 
+VALUES (pet_pet_no_seq.nextval,'경기도','온순하다','경기도',sysdate,'강아지','암컷',3,'dog107.jpg');
+
+insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 
+VALUES (pet_pet_no_seq.nextval,'서울특별시','온순하다','서울특별시',sysdate,'고양이','암컷',1,'cat100.jpg');
+insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 
+VALUES (pet_pet_no_seq.nextval,'경기도','귀엽다','경기도',sysdate,'고양이','암컷',2,'cat101.jpg');
+insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 
+VALUES (pet_pet_no_seq.nextval,'강원도','작다','강원도',sysdate,'고양이','암컷',3,'cat102.jpg');
+
 
 
 
