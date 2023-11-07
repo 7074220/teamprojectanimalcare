@@ -1,21 +1,27 @@
 package com.itwill.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.dto.ReviewBoardDto;
 import com.itwill.entity.Product;
 import com.itwill.entity.ReviewBoard;
+import com.itwill.entity.Userinfo;
 import com.itwill.service.ProductService;
 import com.itwill.service.ReviewBoardService;
+import com.itwill.service.UserInfoService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -28,6 +34,9 @@ public class ReviewBoardController {
 
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private UserInfoService userInfoService;
 
 	// admin이 리뷰리스트 볼 때
 	@GetMapping("/admin/reviewBoardList")
@@ -81,5 +90,50 @@ public class ReviewBoardController {
 
 		return "product-details";
 	}
+	
+	
+	// 로그인 후 마이페이지에서 리뷰작성
+	@PostMapping("/create-reviewBoard")
+	public String createReviewBoard(@RequestParam Double boardStar, @RequestParam String boardContent, HttpSession session, Model model) throws Exception {
+	    Long userNo = (Long) session.getAttribute("userNo");
+
+	    ReviewBoard reviewBoard = new ReviewBoard();
+	    reviewBoard.setBoardContent(boardContent);
+	    reviewBoard.setBoardStar(boardStar);
+
+	    Userinfo userinfo = userInfoService.findUserByNo(userNo);
+	    reviewBoard.setUserinfo(userinfo);
+	    reviewBoardService.create(reviewBoard);
+
+	    model.addAttribute("userinfo", userinfo);
+
+	    return "redirect:/my-account-orders";
+	}
+
+
+	
+	
+	/*
+	// 로그인 후 마이페이지에서 리뷰작성
+	@PostMapping("/create-reviewBoard")
+	public String createReviewBoard(@RequestParam Double boardStar, @RequestParam String boardContent,
+			HttpSession session, Model model) throws Exception {
+		Long userNo = (Long) session.getAttribute("userNo");
+
+		ReviewBoard reviewBoard = new ReviewBoard();
+		reviewBoard.setBoardContent(boardContent);
+		reviewBoard.setBoardStar(boardStar);
+
+		// Product product = productService.findByProductNo(productNo);
+		Userinfo userinfo = userInfoService.findUserByNo(userNo);
+		reviewBoard.setUserinfo(userinfo);
+		// reviewBoard.setProduct(product);
+
+		model.addAttribute("userinfo", userinfo);
+
+		return "redirect:/my-account-orders";
+	}
+	*/
+
 
 }

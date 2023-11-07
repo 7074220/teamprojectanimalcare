@@ -1,6 +1,10 @@
 package com.itwill.controller;
 
 import java.nio.charset.Charset;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +26,9 @@ import com.itwill.dto.MyPetCreateDto;
 import com.itwill.dto.MyPetListDto;
 import com.itwill.dto.MypetDto;
 import com.itwill.entity.MyPet;
+import com.itwill.entity.Userinfo;
 import com.itwill.service.MyPetService;
+import com.itwill.service.UserInfoService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpSession;
@@ -34,6 +40,9 @@ public class MyPetRestController {
 	@Autowired
 	private MyPetService myPetService;
 	
+	@Autowired 
+	private UserInfoService userInfoService;
+	
 	// 로그인 상태에서 펫 등록 누름
 	 @Operation(summary = "마이펫등록")
 	 @PostMapping("/inserted")
@@ -43,7 +52,13 @@ public class MyPetRestController {
 		 	if(userNo==null) {
 		 		throw new Exception("로그인을 해주세요");
 		 	}
-		 	myPetService.Create(MypetDto.toEntity(mypetDto));
+		 	
+		 	Userinfo userinfo=  userInfoService.findUserByNo(userNo);
+		 	
+		 	
+		 	MyPet myPet = MypetDto.toEntity(mypetDto);
+		 	myPet.setUserinfo(userinfo);
+		 	myPetService.Create(myPet);
 		 	
 			HttpHeaders httpHeaders = new HttpHeaders();
 			httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));

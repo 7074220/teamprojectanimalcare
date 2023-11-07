@@ -1,5 +1,6 @@
 package com.itwill.controller;
 
+import com.itwill.dto.MyPetListDto;
 import com.itwill.dto.MypetDto;
 import com.itwill.entity.MyPet;
 import com.itwill.service.MyPetService;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,71 +27,82 @@ import java.util.List;
 public class MyPetController {
 
 	@Autowired
-    private  MyPetService myPetService;
+	private MyPetService myPetService;
 	@Autowired
-    private UserInfoService userInfoService;
+	private UserInfoService userInfoService;
 
-    @GetMapping("/mypet")
+	@GetMapping("/mypet")
     public String viewMyPet(HttpSession session, Model model) throws Exception {
         if (session.getAttribute("userNo") == null) {
             throw new Exception("로그인 하세요.");
         }
         Long userNo=(Long)session.getAttribute("userNo");
-
 		
-		  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		  String formattedDate =
-		  myPetService.findMyPetListByuserNo(userNo).get(0).getMypetBirthday().format(formatter);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String formattedDate = "";
 		 
-        List<MyPet> myPetList = myPetService.findMyPetListByuserNo(userNo); // 애왔 목록을 가져옴
-        int sequentialNumber=0;
+        List<MyPet> myPetList = myPetService.findMyPetListByuserNo(userNo); // 애완 목록을 가져옴
+        List<MyPetListDto> myPetListDtos = new ArrayList<MyPetListDto>();
         for (int i = 0; i < myPetList.size(); i++) {
-            sequentialNumber = i + 1;// 현재 애왔의 번호를 가져옴
-            // mypetNo를 사용할 수 있음, 여기에서는 i+1가 해당 애왔의 순번입니다.
-        }
-       MyPet myPet =  myPetService.findLeaderMyPet(userNo);
-       String Name  = myPet.getMypetName();
+        	formattedDate = myPetList.get(i).getMypetBirthday().format(formatter);
+        	MyPetListDto tempMypet = MyPetListDto.builder().build();
+        	tempMypet.setMypetBirthday(formattedDate);
+        	
+        	MyPet myPet =  myPetService.findLeaderMyPet(userNo);
+        	String Name  = myPet.getMypetName();
+        	
+        	
+        	tempMypet.setMypetKind(myPetList.get(i).getMypetKind());
+        	tempMypet.setMypetName(myPetList.get(i).getMypetName());
+        	tempMypet.setMypetNo(i+1);
+        	
+        	String leader="";
+        	
+        	if(tempMypet.getMypetName()==Name) {
+        		leader="O";
+        	}else {
+        		leader="";
+        	}
+        	tempMypet.setMypetLeader(leader);
+        	myPetListDtos.add(tempMypet);
+		}
         
-        model.addAttribute("sequentialNumber", sequentialNumber);
-        model.addAttribute("Name", Name);
-        model.addAttribute("sequentialNumber", sequentialNumber);
-        model.addAttribute("formattedDate", formattedDate); 
-        model.addAttribute("myPetList",myPetList);
+      
+        
+        
+        //model.addAttribute("Name", Name);
+        model.addAttribute("myPetList",myPetListDtos);
         
         return "my-account-mypet";
       
     }
-    
-	/*
-	 * @GetMapping("/registerMyPet") public String registerMyPet(HttpSession
-	 * session, Model model) {
-	 * 
-	 * return "registerMyPet"; }
-	 * 
-	 */
+
+
+  @GetMapping("/registerMyPet") 
+  public String registerMyPet(HttpSession session, Model model) {
   
-
-    	@GetMapping("/registerMyPet")
-        public String registerMyPet(HttpSession session,@RequestParam("mypetBirthday") Date date, Model model) {
-            // Date 객체를 LocalDateTime으로 변환
-            LocalDateTime localDateTime = date.toInstant()
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDateTime();
-
-            // 시간 부분을 자정(00:00:00)으로 설정
-            localDateTime = localDateTime.withHour(0).withMinute(0).withSecond(0);
-            model.addAttribute("localDateTime", localDateTime);
-            // 결과를 모델에 추가 (예: "resultDateTime"라는 이름으로)
-            return "my-account-mypet"; // 결과를 표시할 뷰 페이지의 이름을 반환
-        }
-    }
-	/*
-	 * @PostMapping("/myPet/{mypetNo}") public String
-	 * updateMyPet(@PathVariable(value = "mypetNo") Long myPetNo, @RequestBody
-	 * MypetDto mypetDto, HttpSession session) {
-	 * 
-	 * Long userNo=(Long)session.getAttribute("userNo"); //MyPet updatePet = MyPet
-	 * 
-	 * return "redirect:/userinfo/mypet"; }
-	 */
-
+  return "registerMyPet"; 
+  }
+  
+ 
+}
+/*
+ * @GetMapping("/registerMyPet") public String registerMyPet(HttpSession
+ * session,@RequestParam("mypetBirthday") Date date, Model model) { // Date 객체를
+ * LocalDateTime으로 변환 LocalDateTime localDateTime = date.toInstant()
+ * .atZone(ZoneId.systemDefault()) .toLocalDateTime();
+ * 
+ * // 시간 부분을 자정(00:00:00)으로 설정 localDateTime =
+ * localDateTime.withHour(0).withMinute(0).withSecond(0);
+ * model.addAttribute("localDateTime", localDateTime); // 결과를 모델에 추가 (예:
+ * "resultDateTime"라는 이름으로) return "my-account-mypet"; // 결과를 표시할 뷰 페이지의 이름을 반환
+ * } }
+ * 
+ * @PostMapping("/myPet/{mypetNo}") public String
+ * updateMyPet(@PathVariable(value = "mypetNo") Long myPetNo, @RequestBody
+ * MypetDto mypetDto, HttpSession session) {
+ * 
+ * Long userNo=(Long)session.getAttribute("userNo"); //MyPet updatePet = MyPet
+ * 
+ * return "redirect:/userinfo/mypet"; }
+ */
