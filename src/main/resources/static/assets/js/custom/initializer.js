@@ -20,6 +20,15 @@ function createInitializer() {
 			Handlebars.registerHelper('toUpper', function(str) {
 				return str.toUpperCase();
 			});
+			Handlebars.registerHelper('starNumber',function(boardStar,star){
+				//assets/img/icon/star-icon2.png
+				//"assets/img/icon/star-icon.png"
+				if(boardStar >= star){
+					return "assets/img/icon/star-icon2.png";
+				}else{
+					return "assets/img/icon/star-icon.png"
+				}
+			});
 			Handlebars.registerHelper('ifCond', function(v1, operator, v2, options) {
 				switch (operator) {
 					case '==':

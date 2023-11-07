@@ -194,7 +194,7 @@ public class ReviewBoardRestController {
 	    
 	    HttpHeaders httpHeaders = new HttpHeaders();
 	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-
+	    
 	    if (!reviewList.isEmpty()) {
 	        return new ResponseEntity<List<ReviewBoardDto>>(reviewList, httpHeaders, HttpStatus.OK);
 	    } else {
@@ -229,31 +229,32 @@ public class ReviewBoardRestController {
 	}
 	
 	@Operation(summary = "최신 날짜순으로 정렬")
-	@GetMapping("reviewBoards/BoardDateDesc")
-	public ResponseEntity<List<ReviewBoardDto>> findAllByOrderByBoardDateDesc() {
-	    List<ReviewBoard> reviewBoards = reviewBoardService.findAllByOrderByBoardDateDesc();
-	    List<ReviewBoardDto> reviewBoardDtos = new ArrayList<>();
-
-	    for (ReviewBoard reviewBoard : reviewBoards) {
-	        ReviewBoardDto dto = new ReviewBoardDto();
-	        dto.setBoardNo(reviewBoard.getBoardNo());
-	        dto.setBoardTitle(reviewBoard.getBoardTitle());
-	        dto.setBoardContent(reviewBoard.getBoardContent());
-	        dto.setBoardDate(reviewBoard.getBoardDate());
-	        dto.setBoardStar(reviewBoard.getBoardStar());
-
-	        reviewBoardDtos.add(dto);
-	    }
+	@PostMapping("productDetailDate")
+	public ResponseEntity<List<ReviewBoardDto>> findByProductProductNoOrderByBoardDateDesc(@RequestBody ReviewBoardDto dto) {
+		 List<ReviewBoard> reviewBoards = reviewBoardService.findByProductProductNoOrderByBoardDateDesc(dto.getProductNo());
+		    List<ReviewBoardDto> reviewList = new ArrayList<>();
+		    
+		    for (ReviewBoard reviewBoard : reviewBoards) {
+		        ReviewBoardDto reviewdto = new ReviewBoardDto();
+		        reviewdto.setBoardNo(reviewBoard.getBoardNo());
+		        reviewdto.setBoardTitle(reviewBoard.getBoardTitle());
+		        reviewdto.setBoardContent(reviewBoard.getBoardContent());
+		        reviewdto.setBoardDate(reviewBoard.getBoardDate());
+		        reviewdto.setBoardStar(reviewBoard.getBoardStar());
+		        reviewdto.setUserNo(reviewBoard.getUserinfo().getUserNo());
+		        reviewdto.setProductNo(reviewBoard.getProduct().getProductNo());
+		        reviewList.add(reviewdto);
+		    }
 
 	    HttpHeaders httpHeaders = new HttpHeaders();
 	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-	    if (!reviewBoardDtos.isEmpty()) {
-	        return new ResponseEntity<>(reviewBoardDtos, httpHeaders, HttpStatus.OK);
+	    if (!reviewList.isEmpty()) {
+	        return new ResponseEntity<List<ReviewBoardDto>>(reviewList, httpHeaders, HttpStatus.OK);
 	    } else {
 	        return new ResponseEntity<>(httpHeaders, HttpStatus.NOT_FOUND);
 	    }
-	}
+	}	
 	
 	@Operation(summary = "오래된 날짜순으로 정렬")
 	@GetMapping("reviewBoards/BoardDateAsc")
