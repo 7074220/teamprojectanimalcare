@@ -1,5 +1,6 @@
 package com.itwill.controller;
 
+import com.itwill.dto.MyPetListDto;
 import com.itwill.dto.MypetDto;
 import com.itwill.entity.MyPet;
 import com.itwill.service.MyPetService;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,26 +37,29 @@ public class MyPetController {
             throw new Exception("로그인 하세요.");
         }
         Long userNo=(Long)session.getAttribute("userNo");
-
 		
-		  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		  String formattedDate =
-		  myPetService.findMyPetListByuserNo(userNo).get(0).getMypetBirthday().format(formatter);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String formattedDate = "";
 		 
-        List<MyPet> myPetList = myPetService.findMyPetListByuserNo(userNo); // 애왔 목록을 가져옴
-        int sequentialNumber=0;
+        List<MyPet> myPetList = myPetService.findMyPetListByuserNo(userNo); // 애완 목록을 가져옴
+        List<MyPetListDto> myPetListDtos = new ArrayList<MyPetListDto>();
         for (int i = 0; i < myPetList.size(); i++) {
-            sequentialNumber = i + 1;// 현재 애왔의 번호를 가져옴
-            // mypetNo를 사용할 수 있음, 여기에서는 i+1가 해당 애왔의 순번입니다.
-        }
-       MyPet myPet =  myPetService.findLeaderMyPet(userNo);
-       String Name  = myPet.getMypetName();
+        	formattedDate = myPetList.get(i).getMypetBirthday().format(formatter);
+        	MyPetListDto tempMypet = MyPetListDto.builder().build();
+        	tempMypet.setMypetBirthday(formattedDate);
+        	tempMypet.setMypetKind(myPetList.get(i).getMypetKind());
+        	tempMypet.setMypetName(myPetList.get(i).getMypetName());
+        	tempMypet.setMypetNo(i+1);
+        	
+        	myPetListDtos.add(tempMypet);
+		}
         
-        model.addAttribute("sequentialNumber", sequentialNumber);
+      
+        MyPet myPet =  myPetService.findLeaderMyPet(userNo);
+        String Name  = myPet.getMypetName();
+        
         model.addAttribute("Name", Name);
-        model.addAttribute("sequentialNumber", sequentialNumber);
-        model.addAttribute("formattedDate", formattedDate); 
-        model.addAttribute("myPetList",myPetList);
+        model.addAttribute("myPetList",myPetListDtos);
         
         return "my-account-mypet";
       

@@ -19,29 +19,9 @@ import oracle.net.aso.b;
 @NoArgsConstructor
 public class MyPetListDto {
 
-	private Long mypetNo;
+	private int mypetNo;
 	private String mypetName;
-	private LocalDateTime mypetBirthday;
+	private String mypetBirthday;
 	private String mypetKind;
-	
-	public static MyPet toEntity(MyPetListDto dto) {
-		MyPet myPet = MyPet.builder()
-							.mypetNo(dto.getMypetNo())
-							.mypetName(dto.getMypetName())
-							.mypetKind(dto.getMypetKind())
-							.mypetBirthday(dto.getMypetBirthday())
-							.build();
-		return myPet;
-	}
-	
-	public static MyPetListDto toDto(MyPet mypet) {
-		MyPetListDto myPetListDto = MyPetListDto.builder()
-												.mypetNo(mypet.getMypetNo())
-												.mypetName(mypet.getMypetName())
-												.mypetKind(mypet.getMypetKind())
-												.mypetBirthday(mypet.getMypetBirthday())
-												.build();
-		return myPetListDto;
-	}
 	
 }
