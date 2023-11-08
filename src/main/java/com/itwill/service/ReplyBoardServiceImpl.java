@@ -38,9 +38,9 @@ public class ReplyBoardServiceImpl implements ReplyBoardService{
 	}
 
 	@Override
-	public void deleteByReplyBoardStepBoardDepthBoardGroupNo(Integer ReplyBoardStep, Integer ReplyBoardDepth,
-			Integer ReplyBoardGroupNo) {
-		replyBoardDao.deleteByReplyBoardStepBoardDepthBoardGroupNo(ReplyBoardStep, ReplyBoardDepth, ReplyBoardGroupNo);
+	public void deleteByReplyBoardStepBoardDepthBoardGroupNo(Integer replyBoardStep, Integer replyBoardDepth,
+			Integer replyBoardGroupNo) {
+		replyBoardDao.deleteByReplyBoardStepBoardDepthBoardGroupNo(replyBoardStep, replyBoardDepth, replyBoardGroupNo);
 	}
 	
 	@Override

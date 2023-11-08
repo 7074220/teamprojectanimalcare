@@ -42,13 +42,13 @@ public class Orders {
 	private String orderAddress;
 	private String orderDesc;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@Builder.Default
 	@JoinColumn(name = "user_no")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
 	
-	@OneToMany(mappedBy = "orders",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "orders",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	@Builder.Default
 	@ToString.Exclude
 	private List<OrderItem> orderItems = new ArrayList<OrderItem>();

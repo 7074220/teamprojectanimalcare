@@ -25,7 +25,8 @@ public class CenterDto {
 	// 센터지역
 	private String centerOpenCloseTime;
 	// 센터영업시간
-
+	private String centerImage;
+	
 	public static Center toEntity(CenterDto dto) {
 		Center center = Center.builder()
 				.centerNo(dto.getCenterNo())
@@ -33,6 +34,7 @@ public class CenterDto {
 				.centerPhoneNumber(dto.getCenterPhoneNumber())
 				.centerLocal(dto.getCenterLocal())
 				.centerOpenCloseTime(dto.getCenterOpenCloseTime())
+				.centerImage(dto.getCenterImage())
 				.build();
 		return center;
 	}
@@ -44,6 +46,7 @@ public class CenterDto {
 		            .centerPhoneNumber(center.getCenterPhoneNumber())
 		            .centerLocal(center.getCenterLocal())
 		            .centerOpenCloseTime(center.getCenterOpenCloseTime())
+		            .centerImage(center.getCenterImage())
 		            .build();
 		return centerDto;
 }
