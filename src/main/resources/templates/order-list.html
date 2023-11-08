@@ -1,0 +1,381 @@
+<!doctype html>
+<html class="no-js" lang="kr" xmlns:th="https://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='cart')">
+
+<head>
+    <title>Safira - cart page</title>
+    
+    
+<style>
+.rating {
+display: inline-block;
+cursor: pointer;
+font-size: 24px;
+}
+
+.rating__star {
+    color: #dabd18b2;
+    transition: color 0.2s;
+}
+
+.rating__star:hover,
+.rating__star.active {
+    color: #dabd18;
+}
+ </style>
+    
+    
+<!--<style>    
+    #myform fieldset{
+    display: inline-block;
+    direction: rtl;
+    border:0;
+}
+#myform fieldset legend{
+    text-align: right;
+}
+#myform input[type=radio]{
+    display: none;
+}
+#myform label{
+    font-size: 3em;
+    color: transparent;
+    text-shadow: 0 0 0 #f0f0f0;
+}
+#myform label:hover{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#myform label:hover ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#myform input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#reviewContents {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: solid 1.5px #D3D3D3;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: none;
+}  
+    </style>-->
+    
+<!--   별점 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    
+     <style>
+    .rating {
+   width: 180px;
+}
+
+.rating__star {
+   cursor: pointer;
+   color: #dabd18b2;
+}
+    
+    </style>-->
+    
+</head>
+
+<body>
+
+
+   <!--header area start-->
+    <th layout:fragment="content">
+    <!--offcanvas menu area start-->
+   <!--  <div class="off_canvars_overlay">
+                
+   
+    <!--offcanvas menu area end-->
+    
+    <!-- <header>
+
+    <!--header area end-->
+    
+    <!--breadcrumbs area start-->
+   <!--  <div class="breadcrumbs_area">
+       
+    <!--breadcrumbs area end-->
+    
+     <!--shopping cart area start -->
+    <div class="shopping_cart_area mt-70">
+        <div class="container">  
+            <form action="#"> 
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table_desc">
+                            <div class="cart_page">
+                             <table>
+                            <thead>
+                                <tr>
+                                    <!--<th class="product_remove">Delete</th>-->
+                                    <th class="order_no">주문번호</th>
+                                    <th class="order_date">주문날짜</th>
+                                    <th class="product_thumb">사진</th>
+                                    <th class="product_name">상품이름</th>
+                                    <th class="product-price">가격</th>
+                                    <th class="product_quantity">수량</th>
+                                    <th class="product_total">총가격</th>
+                                    <th class="review_write_butten">리뷰쓰기</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+
+                            </tbody>
+                            
+                            
+                        </table>   
+                            </div>  
+                            
+                            <div class="cart_submit view" >
+                                <button type="submit">리뷰작성</button>
+                            </div>
+                            
+                                 
+                        </div>
+                     </div>
+                 </div>
+                 
+                 
+                 <div class="modal fade" id="orderDetailsModal" tabindex="-1" 
+                                 aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content" style="height:500px">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="orderDetailsModalLabel">리뷰 작성</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="border: none; padding: 7px;">X
+                                        <!--<span aria-hidden="true">&times;</span>-->
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <!-- 주문 상세 내용이 여기에 로드됩니다 -->
+                                    
+                                      <div >
+                                      <!--class="table-responsive"-->
+                                      
+                                    <!--<table class="table">
+                                        <thead>
+                                            <tr>
+												<th>번호</th>
+												<th>구입날짜</th>
+												<th>상품명</th>
+												<th>총가격</th>
+												<th>주문상태</th>
+												<th>리뷰</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>May 10, 2018</td>
+                                                <td><span class="success">고양이캔조림</span></td>
+                                                <td>$25.00 for 1 item </td>
+                                                <td>배송완료 </td>
+                                                <td><a href="cart.html" class="view">리뷰쓰기</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>-->
+                                    
+                                    
+                            <!--<h3>리뷰작성</h3>-->
+                                    <div class="comments_form">
+                            
+                            <form action="#" class="mb-3" name="myform" id="myform" method="post">
+                                
+                            <p>별점과 후기를 남겨주세요.</p>
+                                
+                                    <!--<div class="col-lg-4 col-md-4">
+                                        <label for="author">Name</label>
+                                        <input id="author"  type="text">
+
+                                    </div> 
+                                    <div class="col-lg-4 col-md-4">
+                                        <label for="email">Email </label>
+                                        <input id="email"  type="text">
+                                    </div>
+                                    <div class="col-lg-4 col-md-4">
+                                        <label for="website">Website </label>
+                                        <input id="website"  type="text">
+                                    </div> -->  
+                                    
+                                    
+                                    
+                                    
+                                    
+                                   
+									
+						
+								
+								<div class="row" style="flex-direction: column;">
+						
+									<div>별점</div>
+									
+									<div class="rating">
+    									<span class="rating__result"></span> 
+    									<i class="rating__star far fa-star"></i>
+    									<i class="rating__star far fa-star"></i>
+    									<i class="rating__star far fa-star"></i>
+    									<i class="rating__star far fa-star"></i>
+    									<i class="rating__star far fa-star"></i>
+									</div>
+									
+									<!--<fieldset>
+									<span class="text-bold">별점을 선택해주세요</span>
+									<input type="radio" name="reviewStar" value="5" id="rate1"><label
+											for="rate1">★</label>
+									<input type="radio" name="reviewStar" value="4" id="rate2"><label
+											for="rate2">★</label>
+									<input type="radio" name="reviewStar" value="3" id="rate3"><label
+											for="rate3">★</label>
+									<input type="radio" name="reviewStar" value="2" id="rate4"><label
+											for="rate4">★</label>
+									<input type="radio" name="reviewStar" value="1" id="rate5"><label
+											for="rate5">★</label>
+									</fieldset>-->
+								<div>
+									<textarea class="col-auto form-control" type="text" id="reviewContents"
+				  					placeholder="좋은 수강평을 남겨주시면 Cocolo에 큰 힘이 됩니다! 포인트 5000p도 지급!!"></textarea>
+								</div>
+						<!--</form>-->	
+									
+                                    <div class="col-12">
+                                        <label for="review_comment">Comment </label>
+                                        <div> <textarea name="comment" id="review_comment" ></textarea></div>
+                                       
+                                    </div> 
+                                </div>
+                                <!--<button class="button" type="submit">Post Comment</button>-->
+                             </form>    
+                        </div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                </div>
+                                    
+                                    </div>
+                                    <div class="modal-footer">
+                                 <!--   <button type="button" class="btn btn-primary">리뷰 저장</button>-->
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">작성 완료</button>
+                                    
+                                    </div>
+                                </div>
+                                </div>
+                            </div>   
+                            
+                 
+                 
+                 
+                 
+                 <!--coupon code area start-->
+
+                <!--coupon code area end-->
+            </form> 
+        </div>     
+    </div>
+     <!--shopping cart area end -->
+     
+     
+     <!--주문한 상품 리뷰쓰기 -->
+     <script>
+     // 주문 상세 모달 표시 이벤트 핸들러
+document.querySelector('.cart_submit button').addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    // 모달창 표시
+    $('#orderDetailsModal').modal('show');
+});
+</script>
+     
+     
+     <!-- 별점  <script>
+     const ratingStars = [...document.getElementsByClassName("rating__star")];
+
+function executeRating(stars) {
+  const starClassActive = "rating__star fas fa-star";
+  const starClassInactive = "rating__star far fa-star";
+  const starsLength = stars.length;
+  let i;
+
+  stars.map((star) => {
+    star.onclick = () => {
+      i = stars.indexOf(star);
+
+      if (star.className===starClassInactive) {
+        for (i; i >= 0; --i) stars[i].className = starClassActive;
+      } else {
+        for (i; i < starsLength; ++i) stars[i].className = starClassInactive;
+      }
+    };
+  });
+}
+
+executeRating(ratingStars);
+     </script>-->
+      
+      
+      
+      <script>
+      
+      const ratingStars = document.querySelectorAll(".rating__star");
+const result = document.querySelector(".rating__result");
+
+ratingStars.forEach((star) => {
+    star.addEventListener("mouseover", function () {
+        const rating = this.getAttribute("data-rating");
+        result.textContent = rating;
+        highlightStars(rating);
+    });
+
+    star.addEventListener("mouseout", function () {
+        resetStars();
+    });
+
+    star.addEventListener("click", function () {
+        const rating = this.getAttribute("data-rating");
+        result.textContent = rating;
+        highlightStars(rating);
+    });
+});
+
+function highlightStars(rating) {
+    ratingStars.forEach((star) => {
+        if (star.getAttribute("data-rating") <= rating) {
+            star.classList.add("active");
+        } else {
+            star.classList.remove("active");
+        }
+    });
+}
+
+function resetStars() {
+    ratingStars.forEach((star) => {
+        star.classList.remove("active");
+    });
+}
+      
+      </script>
+      
+      
+     </th:block>
+     
+     
+     
+    <!--footer area start-->
+
+    <!--footer area end-->
+
+
+
+
+
+
+</body>
+
+</html>

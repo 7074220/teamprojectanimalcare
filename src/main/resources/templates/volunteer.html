@@ -8,6 +8,8 @@
 <head>
 <title>Safira - contact page</title>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <style type="text/css">
 #volunteerDate {
 	border: 1px solid black;
@@ -44,85 +46,66 @@
 }
 </style>
 
-<script>
-	// 현재 날짜를 가져오는 함수
-	function getCurrentDate() {
-		var currentDate = new Date();
-		var year = currentDate.getFullYear();
-		var month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-		var day = currentDate.getDate().toString().padStart(2, '0');
-		return year + '-' + month + '-' + day;
-	}
 
-	// 페이지 로드 시 실행
-	window.onload = function() {
-		var volunteerDate = document.getElementById('volunteerDate');
-		// 현재 날짜로 설정
-		volunteerDate.setAttribute('min', getCurrentDate());
-	};
-</script>
 
-<!-- 
-<script>  //시간날짜함수
-    // 현재 날짜를 가져오는 함수
-    function getCurrentDate() {
-        var currentDate = new Date();
-        var year = currentDate.getFullYear();
-        var month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-        var day = currentDate.getDate().toString().padStart(2, '0');
-        return year + '-' + month + '-' + day;
+<script> // 오전 9시 이전에 테스트 진행하기
+// 오늘 날짜를 포함하여 이전의 날짜는 비활성화. 옵션시간 확인하기(당일예약 불가능)
+//페이지 로드 시 실행
+window.onload = function() {
+    var volunteerDate = document.getElementById('volunteerDate');
+    var today = new Date();
+    var afterTomorrow = new Date(today);
+    afterTomorrow.setDate(afterTomorrow.getDate() + 1); // 냉ㄹ 날짜 계산
+    var afterTomorrowString = afterTomorrow.toISOString().slice(0, 10);
+
+    // 내일 날짜를 기본값으로 설정
+    volunteerDate.value = afterTomorrowString;
+
+    // 오늘 날짜 오전 9시를 기준으로 이전 날짜를 계산
+    var minDate = new Date(today);
+    minDate.setHours(9, 0, 0, 0); // 오전 9시를 설정
+    if (today.getHours() >= 9) {
+        // 이미 오늘 오전 9시를 지난 경우, 모레부터 선택 가능하도록 설정
+        minDate.setDate(minDate.getDate() + 1);
     }
+    var minDateString = minDate.toISOString().slice(0, 10);
+    volunteerDate.setAttribute('min', minDateString);
 
-    // 현재 시간을 가져오는 함수
-    function getCurrentTime() {
-        var now = new Date();
-        var hour = now.getHours();
-        var minute = now.getMinutes();
-
-        // 현재 시간을 정수로 반환
-        return hour * 100 + minute;
-    }
-
-    // 페이지 로드 시 실행
-    window.onload = function () {
-        var volunteerDate = document.getElementById('volunteerDate');
-        var volunteerTimeSelect = document.getElementById('volunteerTime');
-        var currentDate = getCurrentDate();
-        var currentTime = getCurrentTime();
-
-        // 현재 날짜로 설정
-        volunteerDate.setAttribute('min', currentDate);
-
-        // 현재 시간부터 23:00까지의 옵션 생성
-        for (var hour = 9; hour <= 23; hour++) {
-            var option = document.createElement('option');
-            var timeValue = hour * 100;
-            option.value = timeValue;
-            option.textContent = (hour % 12).toString().padStart(2, '0') + ':00 ' + (hour < 12 ? 'AM' : 'PM');
-            volunteerTimeSelect.appendChild(option);
-        }
-
-        // 현재 시간 선택
-        volunteerTimeSelect.value = currentTime;
-
-        // 현재 날짜 이전의 날짜를 비활성화
-        volunteerDate.addEventListener('input', function () {
-            if (volunteerDate.value < currentDate) {
-                volunteerDate.value = currentDate;
-            }
-        });
-
-        // 현재 시간 이전의 시간을 비활성화
-        for (var i = 0; i < volunteerTimeSelect.options.length; i++) {
-            if (volunteerTimeSelect.options[i].value < currentTime) {
-                volunteerTimeSelect.options[i].disabled = true;
-            }
-        }
-    };
+    // 선택 가능한 최대 날짜를 설정하지 않음
+    volunteerDate.removeAttribute('max');
+};
 </script>
- -->
- 
- 
+<!-- <script> // 오전 9시 이전에 테스트 진행하기
+//페이지 로드 시 실행
+window.onload = function() {
+    var volunteerDate = document.getElementById('volunteerDate');
+    var today = new Date();
+    // 한국 시간대 (UTC+9)로 변경
+    today.setHours(today.getHours() + 9);
+    var afterTomorrow = new Date(today);
+    afterTomorrow.setDate(afterTomorrow.getDate() + 2); // 모레 날짜 계산
+    var afterTomorrowString = afterTomorrow.toISOString().slice(0, 10);
+
+    // 모레 날짜를 기본값으로 설정
+    volunteerDate.value = afterTomorrowString;
+
+    // 오늘 날짜 오전 9시 (한국 시간대)를 기준으로 이전 날짜를 계산
+    var minDate = new Date(today);
+    minDate.setHours(9, 0, 0, 0); // 오전 9시 (한국 시간대)를 설정
+    if (today.getHours() >= 9) {
+        // 이미 오늘 오전 9시 (한국 시간대)를 지난 경우, 모레부터 선택 가능하도록 설정
+        minDate.setDate(minDate.getDate() + 1);
+    }
+    var minDateString = minDate.toISOString().slice(0, 10);
+    volunteerDate.setAttribute('min', minDateString);
+
+    // 선택 가능한 최대 날짜를 설정하지 않음
+    volunteerDate.removeAttribute('max');
+};
+
+</script> -->
+
+
 </head>
 
 <body>
@@ -154,13 +137,8 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-6 col-md-6">
-						<!-- 이미지 추가 -->
 						<div class="contact_message content">
-							<div class="zoomWrapper single-zoom">
-								<a href="#"> 
-								<img id="zoom1" src="image/volunteer/center_name1.png"
-									data-zoom-image="image/volunteer/center_name1.png" alt="센터이미지">
-								</a>
+							<div class="zoomWrapper single-zoom">								
 							</div>
 							
 							<!-- 센터 정보 -->
@@ -178,25 +156,28 @@
 					<div class="col-lg-6 col-md-6">
 						<div class="contact_message form">
 							<h3 style="font-weight: bold">신청 양식</h3>
-							<!-- 달력 -->
+							
 							<form th:action="@{/create-volunteer}" method="post" th:object="${volunteer}">
+							
 								
-								<input type="hidden" name="centerNo" th:value="${center.centerNo}" />
+								<input type="hidden" id="centerid" name="centerNo" th:value="${center.centerNo}" />
 								
-								<p>
-									<label>방문예약</label> 
+								<div>
+									<span>방문예약</span> 
 									<!-- <input type="date" name="volunteerDate"> -->
 									<!--  th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" 이 코드 추가시 현재 날짜 보여줌 -->
 									<input type="date" name="volunteerDate"
-										id="volunteerDate" placeholder="날짜를 선택해주세요"  required="required"
-										th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" > 
-								</p>
+										id="volunteerDate" placeholder="날짜를 선택해주세요"  required="required" >  
+									
+						
+
+								</div>
 								
-								<p>
-									<label>방문 시간</label>
+								<div>
+									<span>방문 시간</span>
 									
 									<!-- <input type="time" name="volunteerTime" > -->
-									<select name="volunteerTime">
+									<!-- <select name="volunteerTime" id="volunteerTime">
 										<option value="09">09 AM</option>
 										<option value="10">10 AM</option>
 										<option value="11">11 AM</option>
@@ -208,12 +189,43 @@
 										<option value="17">17 PM</option>
 										<option value="18">18 PM</option>
 										<option value="19">19 PM</option>
+										<option value="20">20 PM</option>
+										<option value="21">21 PM</option>
+										<option value="22">22 PM</option>
+									</select> -->
+									
+									<select name="volunteerTime" id="volunteerTime">
+									    <option value="09">09:00 AM</option>
+									    <option value="10">10:00 AM</option>
+									    <option value="11">11:00 AM</option>
+									    <option value="12">12:00 AM</option>
+									    <option value="13">13:00 PM</option>
+									    <option value="14">14:00 PM</option>
+									    <option value="15">15:00 PM</option>
+									    <option value="16">16:00 PM</option>
+									    <option value="17">17:00 PM</option>
+									    <option value="18">18:00 PM</option>
+									    <option value="19">19:00 PM</option>
+									    <option value="20">20:00 PM</option>
+									    <option value="21">21:00 PM</option>
+									    
+									    <option value="22">22:00 PM</option>
+									    <option value="23">23:00 PM</option>
+									    <option value="24">24:00 PM</option>
 									</select>
-								</p>
+									
+									
+									</div>
 								
 								
-								<button type="submit">확인</button>
-								<p class="form-messege"></p>
+								<button type="submit" class="submit">submit</button>
+								<!-- <p class="form-messege"></p> -->
+								
+								
+								<p th:text="${message}" class="success-message"></p>
+								<p th:text="${error}" class="error-message"></p>
+								
+								
 							</form>
 
 						</div>
@@ -221,6 +233,152 @@
 				</div>
 			</div>
 		</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var centerOpenCloseTime = "09:00 AM"; // 변경할 시간 문자열
+
+    // centerOpenCloseTime 값을 변환
+    if (centerOpenCloseTime === "24:00 PM") {
+        centerOpenCloseTime = "00:00 AM"; // "24:00 PM"을 "00:00 AM"으로 변환
+    }
+
+    // <select> 요소를 가져옴
+    var selectElement = document.getElementById("volunteerTime");
+
+    // <select> 요소 내의 모든 <option> 요소를 순회하며 centerOpenCloseTime과 비교
+    for (var i = 0; i < selectElement.options.length; i++) {
+        if (selectElement.options[i].value === centerOpenCloseTime) {
+            // centerOpenCloseTime과 일치하는 옵션을 선택
+            selectElement.selectedIndex = i;
+            break;  // 일치하는 것을 찾았으므로 반복문 종료
+        }
+    }
+});
+</script>
+
+
+	
+<script>
+
+function ajaxRequest(method, url, sendJsonObject) {
+		let returnResultJsonObject={};
+		$.ajax({
+			async:false,
+			method: method,
+			url: url,
+			contentType: 'application/json;UTF-8',
+			data: JSON.stringify(sendJsonObject),
+			type: 'json',
+			success: function(resultJsonObject) {
+				returnResultJsonObject = resultJsonObject;
+			}
+		});
+		return returnResultJsonObject;
+	}
+
+//AJAX 요청
+$('.submit').on('click', function (event) {
+    event.preventDefault();
+    let centerNo = $('#centerid').val(); // 센터 번호를 정의
+    let volunteerDate = $('#volunteerDate').val();
+    let volunteerTime = $('#volunteerTime').val();
+
+    let sendJsonObject = {
+        centerNo: centerNo,
+        volunteerDate: volunteerDate,
+        volunteerTime: volunteerTime,
+        volunteerStatus: "봉사신청"
+    };
+    
+    let response = ajaxRequest('POST','volunteer/create-volunteer',sendJsonObject);
+    if(response.userNo!=null){
+    	alert('신청이 완료되었습니다.');
+    	window.location.href = 'index'; // 센터 페이지로 이동
+    }else{
+    	alert('로그인이 필요합니다.');
+        window.location.href = 'index'; // 로그인 페이지로 이동
+    }
+});
+
+/*
+    $.ajax({
+        method: 'POST',
+        url: '/create-volunteer',
+        contentType: 'application/json; charset=UTF-8',
+        data: JSON.stringify(sendJsonObject),
+        dataType: 'json',
+        success: function (response) {
+        	 if (response === 1) {
+                 alert('로그인이 필요합니다.');
+                 window.location.href = '/index'; // 로그인 페이지로 이동
+             } else {
+                 alert('봉사신청이 완료되었습니다.');
+                 window.location.href = '/index'; // 센터 페이지로 이동
+             }
+         },
+        error: function (error) {
+            console.error('AJAX 요청 실패:', error);
+            alert('봉사신청 중 오류가 발생했습니다.');
+        }
+    });
+//AJAX 요청
+$('.submit').on('click', function (event) {
+    event.preventDefault();
+    let centerNo = $('#centerid').val(); // 센터 번호를 정의
+    let volunteerDate = $('#volunteerDate').val();
+    let volunteerTime = $('#volunteerTime').val();
+	
+    
+    let sendJsonObject = {
+        centerNo: centerNo,
+        volunteerDate: volunteerDate,
+        volunteerTime: volunteerTime,
+        volunteerStatus: "봉사신청"
+    };
+    let responseObject=ajaxRequest('POST','volunteer/create-volunteer',sendJsonObject);
+	
+    if(responseObject.status == null){
+		alert('로그인이 필요합니다.');
+		window.location.href = 'index';	// 로그인 창으로 이동
+	}else{
+		alert('봉사신청이 완료되었습니다.');
+		window.location.href = 'center-list'; // 센터 페이지로 이동
+	}
+    
+});   
+
+    // AJAX 요청
+     $.ajax({
+        method: 'POST',
+        url: '/volunteer/create-volunteer',
+        contentType: 'application/json; charset=UTF-8',
+        data: JSON.stringify(sendJsonObject),
+        dataType: 'json',
+        success: function(responseObject) {
+            if (responseObject.status === 401) {
+                alert('로그인이 필요합니다.');
+                window.location.href = '/index/login.html'; // 수정된 로그인 페이지 URL로 이동
+            } else if (responseObject.status === 201) {
+                alert('봉사 신청이 완료되었습니다.');
+            }
+        }, 
+         error: function(error) {
+            console.error('AJAX 요청 실패:', error);
+            alert('로그인이 필요합니다.');
+        }
+    });
+*/
+
+
+</script> 
+
+
+
+
+
+	
+	
 	</th:block>
 	<!--contact area end-->
 

@@ -1,285 +1,314 @@
 <!doctype html>
-<html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
-	   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-       layout:decorate="layout/layout(title='마이페이지')">
-<head>
-    <title>Safira - my account</title>
-    <style>
-        .modal-dialog {
-        margin: auto;
-        margin-top: 20vh; /* 회원탈퇴창 가운데 정도로 떨어트림 */
-    }
+<html class="no-js" lang="kr" xmlns:th="https://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='리뷰작성')">
 
-    </style>
+<head>
+	<title>Safira - cart page</title>
+
+
+	<!-- 별점 css 위치 -->
+
+	<style>
+		@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+		.rate {
+			display: inline-block;
+			border: 0;
+			margin: 0 auto;
+			text-align: left;
+			direction: rtl;
+		}
+		.rate>input {
+			display: none;
+		}
+		.rate>label {
+			font-size: 3em;
+			color: #ddd;
+			position: relative;
+			display: inline-block;
+		}
+		.rate>label:before {
+			display: inline-block;
+			font-size: 1rem;
+			padding: .3rem .2rem;
+			margin: 0;
+			cursor: pointer;
+			font-family: FontAwesome;
+			content: "\f005 ";
+			text-align: left;
+		}
+		.rate .half:before {
+			content: "\f089 ";
+			position: absolute;
+			padding-right: 0;
+			left: 0;
+			/* 왼쪽에서 시작하도록 위치 조정 */
+		}
+		.rate input:checked~label,
+		.rate label:hover,
+		.rate label:hover~label {
+			width: auto;
+			color: #ffff00 !important;
+		}
+		.rate input:checked+.rate label:hover,
+		.rate input input:checked~label:hover,
+		.rate input:checked~.rate label:hover~label,
+		.rate label:hover~input:checked~label {
+			width: auto;
+			color: #ffff00 !important;
+		}
+	</style>
+	
+	
 
 </head>
 
+
 <body>
 
-   <!--header area start-->
-    <th:block layout:fragment="content">
-    <!--offcanvas menu area start-->
-    <!-- <div class="off_canvars_overlay">
+	<!--header area start-->
+	<th layout:fragment="content">
+		<!--offcanvas menu area start-->
+		<!--  <div class="off_canvars_overlay">
                 
-    </div>
-    <div class="offcanvas_menu">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="canvas_open">
-                        <a href="javascript:void(0)"><i class="icon-menu"></i></a>
-                    </div>
-                    <div class="offcanvas_menu_wrapper">
-                        <div class="canvas_close">
-                            <a href="javascript:void(0)"><i class="icon-x"></i></a>  
-                        </div>
-                        <div class="language_currency">
-                            <ul>
-                                <li class="language"><a href="#"> Language <i class="icon-right ion-ios-arrow-down"></i></a>
-                                    <ul class="dropdown_language">
-                                        <li><a href="#">French</a></li>
-                                        <li><a href="#">Spanish</a></li>
-                                        <li><a href="#">Russian</a></li>
-                                    </ul>
-                                </li>
-                                <li class="currency"><a href="#"> Currency <i class="icon-right ion-ios-arrow-down"></i></a>
-                                    <ul class="dropdown_currency">
-                                        <li><a href="#">€ Euro</a></li>
-                                        <li><a href="#">£ Pound Sterling</a></li>
-                                        <li><a href="#">$ US Dollar</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="header_social text-right">
-                            <ul>
-                                <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                                <li><a href="#"><i class="ion-social-googleplus-outline"></i></a></li>
-                                <li><a href="#"><i class="ion-social-youtube-outline"></i></a></li>
-                                <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-                                <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
-                            </ul>
-                        </div>
-                     
-                        <div class="call-support">
-                            <p><a href="tel:(08)23456789">(08) 23 456 789</a> Customer Support</p>
-                        </div>
-                        <div id="menu" class="text-left ">
-                            <ul class="offcanvas_main_menu">
-                                <li class="menu-item-has-children active">
-                                    <a href="#">Home</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="index.html">Home 1</a></li>
-                                        <li><a href="index-2.html">Home 2</a></li>
-                                        <li><a href="index-3.html">Home 3</a></li>
-                                        <li><a href="index-4.html">Home 4</a></li>
-                                        <li><a href="index-5.html">Home 5</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">Shop</a>
-                                    <ul class="sub-menu">
-                                        <li class="menu-item-has-children">
-                                            <a href="#">Shop Layouts</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="shop.html">shop</a></li>
-                                                <li><a href="shop-fullwidth.html">Full Width</a></li>
-                                                <li><a href="shop-fullwidth-list.html">Full Width list</a></li>
-                                                <li><a href="shop-right-sidebar.html">Right Sidebar </a></li>
-                                                <li><a href="shop-right-sidebar-list.html"> Right Sidebar list</a></li>
-                                                <li><a href="shop-list.html">List View</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item-has-children">
-                                            <a href="#">other Pages</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="cart.html">cart</a></li>
-                                                <li><a href="wishlist.html">Wishlist</a></li>
-                                                <li><a href="checkout.html">Checkout</a></li>
-                                                <li><a href="my-account.html">my account</a></li>
-                                                <li><a href="404.html">Error 404</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item-has-children">
-                                            <a href="#">Product Types</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="product-details.html">product details</a></li>
-                                                <li><a href="product-sidebar.html">product sidebar</a></li>
-                                                <li><a href="product-grouped.html">product grouped</a></li>
-                                                <li><a href="variable-product.html">product variable</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">blog</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="blog.html">blog</a></li>
-                                        <li><a href="blog-details.html">blog details</a></li>
-                                        <li><a href="blog-fullwidth.html">blog fullwidth</a></li>
-                                        <li><a href="blog-sidebar.html">blog sidebar</a></li>
-                                    </ul>
-
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">pages </a>
-                                    <ul class="sub-menu">
-                                        <li><a href="about.html">About Us</a></li>
-                                        <li><a href="services.html">services</a></li>
-                                        <li><a href="faq.html">Frequently Questions</a></li>
-                                        <li><a href="contact.html">contact</a></li>
-                                        <li><a href="login.html">login</a></li>
-                                        <li><a href="404.html">Error 404</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="my-account.html">my account</a>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="about.html">about Us</a>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="contact.html"> Contact Us</a> 
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="offcanvas_footer">
-                            <span><a href="#"><i class="fa fa-envelope-o"></i> info@yourdomain.com</a></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
+   
     <!--offcanvas menu area end-->
-    
 
-    <!--header area end-->
-    
-    <!--breadcrumbs area start-->
-    <!-- <div class="breadcrumbs_area">
-        <div class="container">   
-            <div class="row">
-                <div class="col-12">
-                    <div class="breadcrumb_content">
-                       <h3>My Account</h3>
-                        <ul>
-                            <li><a href="index.html">home</a></li>
-                            <li>My account</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>         
-    </div> -->
+		<!-- <header> -->
+
+		<!--header area end-->
+
+		<!--breadcrumbs area start-->
+		<!--  <div class="breadcrumbs_area">
+       
     <!--breadcrumbs area end-->
-    
-    <!-- my account start  -->
-    <section class="main_content_area">
-        <div class="container">   
-            <div class="account_dashboard">
-                <div class="row">
-                    <div class="col-sm-12 col-md-3 col-lg-3">
-                        <!-- Nav tabs -->
-                        <div class="dashboard_tab_button">
-                            <ul role="tablist" class="nav flex-column dashboard-list">
-                                <li><a href="userinfo" class="nav-link">내정보</a></li>
-                                <li><a href="#mypet"  class="nav-link">마이펫</a></li>
-                                <li><a href="#cuponpage"  class="nav-link">쿠폰</a></li>
-                                <li><a href="adoptByUserNo"  class="nav-link">입양</a></li>
-								<li><a href="volunteerByUserNo" class="nav-link">봉사</a></li>   
-								<li><a href="visitByUserNo" class="nav-link">견학</a></li>
-                                <li> <a href="#orders" class="nav-link">주문목록</a></li>
-                                <li><a href="logout" class="nav-link">로그아웃</a></li>
-                                <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li>
 
-                            </ul>
-                        </div>    
-                    </div>
-                    <div class="col-sm-12 col-md-9 col-lg-9">
-                        <!-- Tab panes -->
-                        <div class="tab-content dashboard_content">
-                        
-		                 <!--<div class="tab-pane fade" id="volunteer">-->
-                                <h3>봉사</h3>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Time</th>
-                                                <th>Date</th>
-                                                <th>Center</th>
-                                                <th>Status</th>              
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-											
-											<tr th:each="volunteer, rowStat : ${volunteerList}">
-												<!-- <td th:text="${volunteer.volunteerNo}"></td> -->
-												<!-- <td th:text="${rowStat.index + 1}"></td> 오름차순임-->
-												<td th:text="${volunteerList.size() - rowStat.index}"></td>
-												
-												<td th:text="${volunteer.volunteerTime}"></td>
-												<!-- !!!!! <td th:text="${#strings.substring(volunteer.volunteerTime.toString(), 0, 2)}"></td> -->
-
-												
-												<!-- <td th:text="${volunteer.volunteerDate}"></td> -->
-												<!-- 시간전체를 잘라서 날짜만 나올수있게 yyyy-mm-dd -->
-												<td th:text="${#strings.substring(volunteer.volunteerDate.toString(), 0, 10)}"></td>
-												<td th:text="${volunteer.center.centerName}"></td>
-												<td th:text="${volunteer.volunteerStatus}"><span class="success">봉사신청</span></td>
+		<!--shopping cart area start -->
+		<div class="shopping_cart_area mt-70">
+			<div class="container">
+				<form action="#">
+					<div class="row">
+						<div class="col-12">
+							<div class="table_desc">
+								<div class="cart_page">
+									<table>
+										<thead>
+											<tr>
+												<!--<th class="product_remove">Delete</th>-->
+												<th class="order_no">주문번호</th>
+												<th class="order_date">주문날짜</th>
+												<th class="product_thumb">사진</th>
+												<th class="product_name">상품이름</th>
+												<th class="product-price">가격</th>
+												<th class="product_quantity">수량</th>
+												<th class="product_total">총가격</th>
+												<th class="review_write_butten">리뷰쓰기</th>
 											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>asd</td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td><div class="cart_submit view">
+														<!--<button type="submit">리뷰작성</button>-->
+														<button type="submit" data-action="create">리뷰작성</button>
+													</div></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								
+								<!--<div class="cart_submit view">-->
+									<!--<button type="submit">리뷰작성</button>-->
+									<!--<button type="submit" data-action="create">리뷰작성</button>-->
+								<!--</div>-->
+								
+								<!-- 추가추가추가 -->
+								<!-- 사용자의 리뷰 목록 -->
+								<div th:each="reviewBoard : ${userReviews}">
+									<p>별점: <span th:text="${reviewBoard.star}"></span></p>
+									<p>리뷰 내용: <span th:text="${reviewBoard.content}"></span></p>
+								</div>
 
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <!--</div>-->
-                            
-                            <!--<div class="tab-pane fade" id="account-details">-->
-                          
-                           <!--   </div>-->
-                        </div>
-                    </div>
-                </div>
-            </div>  
-        </div>        	
-    </section>	
-    
-    <!-- my account end   --> 
-
-      <!--footer area start-->
-  
- 
-    <!--footer area end-->
-
-
-
- 
-
-
-<!--주문한 상품 리뷰쓰기 
-<script>
-
-    // 마이페이지 상품주문 완료된 항목에서 주문상세를 누르면 창이 뜨고 이 창에서만 리뷰를 쓸수 있음
-    // 주문 상세 링크를 클릭할 때 이벤트 핸들러
-    document.querySelector('.table').addEventListener('click', function(e) {
-    if (e.target.classList.contains('view')) {
-        e.preventDefault();
-        
-        // 주문상세 정보를 로드 하기
-        
-
-        // 모달창 표시
-        $('#orderDetailsModal').modal('show');
-    }
-    });
-
-</script> -->
-</th:block>		
+							</div>
+						</div>
+					</div>
 
 
+					<div class="modal fade" id="orderDetailsModal" tabindex="-1"
+						aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content" style="height:500px">
+								<div class="modal-header">
+									<h5 class="modal-title" id="orderDetailsModalLabel">리뷰 작성</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+										style="border: none; padding: 7px;">X
+										<!--<span aria-hidden="true">&times;</span>-->
+									</button>
+								</div>
+								<div class="modal-body">
+
+
+										<!--<h3>리뷰작성</h3>-->
+										<div class="comments_form">
+
+											<form th:action="@{/reviewBoard/createReviewBoard}" class="mb-3" name="myform" id="myform" method="post">
+												<input type="hidden" id="userNo" th:value="${userNo}" />
+											
+												<!--<input type="hidden" id="productNo" th:value="${user.userNo}"/>-->
+											
+											
+												<p>별점과 후기를 남겨주세요.</p>
+											
+											
+												<div class="row">
+											
+													<div>별점</div>
+											
+													<!-- 별점 위치 -->
+											
+													<div class="rate" draggable="false">
+														<input type="radio" name="boardStar" id="star5" class="rate" value="5">
+														<label for="star5"></label>
+														<input type="radio" name="boardStar" id="star4" class="rate" value="4">
+														<label for="star4"></label>
+														<input type="radio" name="boardStar" id="star3" class="rate" value="3">
+														<label for="star3"></label>
+														<input type="radio" name="boardStar" id="star2" class="rate" value="2">
+														<label for="star2"></label>
+														<input type="radio" name="boardStar" id="star1" class="rate" value="1">
+														<label for="star1"></label>
+													</div>
+											
+													<div class="col-12">
+														<label for="review_comment">Comment </label>
+														<div> <textarea name="comment" id="review_comment" style="width: 100%;"></textarea>
+														</div>
+											
+													</div>
+												</div>
+												<!--<button class="button" type="submit">Post Comment</button>-->
+												<div class="modal-footer">
+													<!--   <button type="button" class="btn btn-primary">리뷰 저장</button>-->
+													<button type="submit" class="submit" data-dismiss="modal">작성 완료</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--coupon code area start-->
+
+					<!--coupon code area end-->
+				</form>
+			</div>
+		</div>
+		<!--shopping cart area end -->
+
+
+		<!--주문한 상품 리뷰쓰기 -->
+		
+		<script>
+			
+			
+			// 주문 상세 모달 표시 이벤트 핸들러
+			document.querySelector('.cart_submit button').addEventListener('click', function (e) {
+				e.preventDefault();
+					
+
+				// 모달창 표시
+				$('#orderDetailsModal').modal('show');
+			});
+			
+			// 별점 라디오 버튼을 클릭할 때 이벤트 핸들러를 등록합니다.
+				$('.rate').on('change', function () {
+					// 선택된 별점 값을 가져옵니다.
+					let selectedRating = $('.rate:checked').val();
+					console.log('선택한 별점:', selectedRating);
+
+					// 여기서 선택한 별점 값을 변수에 할당하거나, AJAX 요청의 formData 객체에 추가할 수 있습니다.
+				});
+					
+			
+			function ajaxRequest(method, url, sendJsonObject) {
+			let returnResultJsonObject={};
+			$.ajax({
+				async:false,
+				method: method,
+				url: url,
+				contentType: 'application/json;UTF-8',
+				data: JSON.stringify(sendJsonObject),
+				type: 'json',
+				success: function(resultJsonObject) {
+					returnResultJsonObject = resultJsonObject;
+				}
+			});
+			return returnResultJsonObject;
+		}
+			
+			
+			function updateSubmitButton() {
+					const submitButton = document.querySelector('.cart_submit button');
+					submitButton.textContent = '리뷰완료';
+				}
+			
+			
+			$('.submit').on('click', function(event) {
+	        event.preventDefault();
+	       
+	       const now = new Date();
+		   const year = now.getFullYear();
+		   const month = (now.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더하고 2자리로 포맷팅
+		   const day = now.getDate().toString().padStart(2, '0'); // 일을 2자리로 포맷팅
+    	   const formattedDate = `${year}-${month}-${day}`;
+    	  
+	       let boardStar = $('.rate:checked').val();
+	    
+		   let review_comment = $('#review_comment').val();
+		  
+		   let userNo = $('#userNo').val();
+	    
+	        let sendJsonObject = {
+				userNo:userNo,
+	            boardStar: boardStar,
+	            boardContent: review_comment,
+	         	boardDate:formattedDate
+	        };
+	        console.log(sendJsonObject)
+	       let responseObject=ajaxRequest('POST','reviewBoard/createReviewBoard',sendJsonObject);
+	       console.log(responseObject)
+	      	
+	  		if(responseObject.userNo == null){
+				alert('로그인이 필요합니다.');
+				window.location.href = 'index';	// 로그인 창으로 이동
+			}else{
+				alert("리뷰작성이 완료되었습니다.");
+				updateSubmitButton();
+			}
+	  		
+	    });
+			
+			
+			
+		</script>
+
+		
+		
+
+
+
+
+		</th:block>
+
+		<!--footer area start-->
+
+		<!--footer area end-->
 
 </body>
 
