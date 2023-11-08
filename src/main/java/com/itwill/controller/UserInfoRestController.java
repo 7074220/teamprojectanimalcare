@@ -31,9 +31,11 @@ import com.itwill.entity.Userinfo;
 import com.itwill.exception.ExistedUserException;
 import com.itwill.exception.PasswordMismatchException;
 import com.itwill.exception.UserNotFoundException;
+import com.itwill.service.CartService;
 import com.itwill.service.CouponService;
 import com.itwill.service.MyPetService;
 import com.itwill.service.UserInfoService;
+import com.itwill.service.WishService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpSession;
@@ -50,6 +52,12 @@ public class UserInfoRestController {
 	
 	@Autowired
 	private MyPetService myPetService;
+	
+	@Autowired
+	private WishService wishService;
+	
+	@Autowired
+	private CartService cartService;
 	
 	// 아이디 중복체크
 	@GetMapping("/idcheck")
@@ -97,7 +105,12 @@ public class UserInfoRestController {
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		
 		dto.setStatus(1000);
-
+		
+		int wishCount = wishService.findAllWishByUserNo(loginUserCheck.getUserNo()).size();
+		session.setAttribute("wishCount", wishCount);
+		int cartCount = cartService.findAllCartByUserId(loginUserCheck.getUserNo()).size();
+		session.setAttribute("cartCount", cartCount);
+		
 		return new ResponseEntity<UserLoginActionDto>(dto, httpHeaders, HttpStatus.OK);
 	}
 
@@ -231,7 +244,7 @@ public class UserInfoRestController {
 	@Operation(summary = "비밀번호 찾기")
 	@PostMapping("/findPasswordUserInfo")
 	public ResponseEntity<UserInfoPassFindDto> findPasswordUserInfo(@RequestBody UserInfoPassFindDto dto) throws Exception {
-		Userinfo userinfo = userInfoService.findUserIdByNameAndPhoneNumber(dto.getUserName(), dto.getUserPhoneNumber());
+		Userinfo userinfo = userInfoService.findPasswordByUserIdPhoneNumber(dto.getUserId(), dto.getUserPhoneNumber());
 		Integer status = 0;
 		if(userinfo==null) {
 			status = 1;

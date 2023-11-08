@@ -95,7 +95,13 @@ public class MyPetRestController {
 	
 	@Operation(summary = "마이펫 1개 삭제")
 	@DeleteMapping("/{mypetNo}")
-	public void MyPetDeleteByUserNo(@PathVariable(name = "mypetNo")Long mypetNo) {
-		myPetService.deleteMypetByUserNo( mypetNo);
+	public void MyPetDeleteByUserNo(@PathVariable(name="mypetNo")Long mypetNo,HttpSession session) throws Exception{
+		System.out.println(">>>>>>>>>>>>>>>맵핑");
+		Long userNo = (Long)session.getAttribute("userNo");	
+	 	if(userNo==null) {
+	 		throw new Exception("로그인을 해주세요");
+	 	}
+		myPetService.deleteMypetByUserNo(mypetNo);
+		
 	}
 }

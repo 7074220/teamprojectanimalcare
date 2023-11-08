@@ -54,7 +54,10 @@ public class MyPetController {
         	
         	tempMypet.setMypetKind(myPetList.get(i).getMypetKind());
         	tempMypet.setMypetName(myPetList.get(i).getMypetName());
-        	tempMypet.setMypetNo(i+1);
+        	// 보여지는 No
+        	tempMypet.setMypetSequence(i+1);
+        	// DB 내 PK
+        	tempMypet.setMypetNo(myPetList.get(i).getMypetNo());
         	
         	String leader="";
         	

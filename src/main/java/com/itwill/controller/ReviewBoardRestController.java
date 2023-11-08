@@ -39,10 +39,12 @@ public class ReviewBoardRestController {
 	private ReviewBoardService reviewBoardService;
 	
 	@Operation(summary = "리뷰작성")
-	@PostMapping
+	@PostMapping("/createReviewBoard")
 	public ResponseEntity<ReviewBoardDto> createReviewBoard(@RequestBody ReviewBoardDto dto, HttpSession httpSession) throws Exception {
 	    ReviewBoard reviewBoardEntity = ReviewBoardDto.toEntity(dto);
+	  
 	    reviewBoardService.create(reviewBoardEntity);
+	  
 	    HttpHeaders httpHeaders = new HttpHeaders();
 	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 

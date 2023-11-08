@@ -93,8 +93,8 @@ public class CartController {
 		cartService.updateOverlapCart(selectCart);
 		
 		//List<Cart> cartList = cartService.findAllCartByUserId(userNo); 
-		
-		
+		int cartCount = cartService.findAllCartByUserId(userNo).size();
+		session.setAttribute("cartCount", cartCount);
 		model.addAttribute("cart", selectCart);
 		
 		//model.addAttribute("cartList", cartList);
@@ -181,6 +181,8 @@ public class CartController {
 			productListDto.add(ProductListDto.toDto(products));
 		}
 		
+		int cartCount = cartService.findAllCartByUserId(userNo).size();
+		session.setAttribute("cartCount", cartCount);
 		model.addAttribute("productList", productListDto);
 		model.addAttribute("myPet", myPet);
 		
