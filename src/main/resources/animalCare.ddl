@@ -92,6 +92,7 @@ CREATE TABLE Center(
 		center_name                   		VARCHAR2(50)		 NULL ,
 		center_phone_number           		VARCHAR2(50)		 NULL ,
 		center_local                  		VARCHAR2(50)		 NULL ,
+		center_image                 		VARCHAR2(100)		 NULL ,
 		center_open_close_time        		VARCHAR2(50)		 NULL ,
 		local_no                      		NUMBER(10)		 NULL 
 );

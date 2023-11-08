@@ -34,7 +34,7 @@ public class Center {
 	private String centerPhoneNumber;
 	private String centerLocal;
 	private String centerOpenCloseTime;
-	
+	private String centerImage;
 	@OneToMany(mappedBy = "center", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@Builder.Default
 	List<Visit> visits = new ArrayList<Visit>();

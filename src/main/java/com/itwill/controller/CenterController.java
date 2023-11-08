@@ -25,12 +25,13 @@ public class CenterController {
 
 	
 	//센터리스트 전체출력
-    @GetMapping("/centerList")
-    public String centerList(Model model) {
-        List<Center> centerList = centerService.findAllCenters();
-        model.addAttribute("centers", centerList);
-        return "center-list";
+	@GetMapping("/centerList")
+	public String centerList(Model model) {
+	    List<Center> centerList = centerService.findAllCenters();
+	    model.addAttribute("centerList", centerList);
+	    return "center-list";
 	}
+
 
     //센터이름검색
     @GetMapping("searchCenterName")

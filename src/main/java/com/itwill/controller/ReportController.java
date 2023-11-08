@@ -47,8 +47,14 @@ public class ReportController {
 		
 		System.out.println(">>>>>>>>>>>>>>>>"+reportBoard);
 		System.out.println(">>>>>>>>>>>>>>>>"+reportBoard.getBoardImage());
+		
 		model.addAttribute("reportBoard", reportBoard);
 		model.addAttribute("replyBoardList", replyBoardList);
+		
+		
+		
+		
+		
 		return "reportBoardView";
 	}
 	
