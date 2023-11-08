@@ -57,8 +57,6 @@
 											<thead>
 												<tr>
 													<label class="checkbox-inline">
-														<input type="checkbox" id="allCheckBox" onclick="allChecked()"
-															checked="true">
 													</label>
 													<th>No</th>
 													<th>이름</th>
@@ -73,7 +71,7 @@
 												<tr th:each="mypet : ${myPetList}">
 													<!--<td th:text="${mypet.mypetNo}">1</td>-->
 
-													<td th:text="${mypet.mypetNo}" th:id="${mypet.mypetNo}"></td>
+													<td th:text="${mypet.MypetSequence}" th:id="${mypet.mypetNo}"></td>
 													<td th:text="${mypet.mypetName}"></td>
 													<td th:text="${mypet.mypetBirthday}"></span></td>
 													<td th:text="${mypet.mypetKind}"></td>
@@ -108,6 +106,23 @@
 
 
 		<script>
+			function ajaxRequest(method, url, sendJsonObject) {
+				alert('요청');
+				let returnResultJsonObject = {};
+				$.ajax({
+					async: false,
+					method: method,
+					url: url,
+					contentType: 'application/json;UTF-8',
+					data: JSON.stringify(sendJsonObject),
+					type: 'json',
+					success: function (resultJsonObject) {
+						returnResultJsonObject = resultJsonObject;
+					}
+				});
+				return returnResultJsonObject;
+			}
+			
 			document.getElementById("registerButton").addEventListener("click", function (e) {
 				// 버튼 클릭 시 실행할 코드
 				//alert('클릭');
@@ -117,25 +132,33 @@
 
 			$(document).ready(function () {
 				// 특정 요소를 클릭할 때 그 요소의 부모 행을 삭제
-				$(".mypet_remove").on("click", function () {
+				$(".mypet_remove").on("click", function(e) {
 					$(this).closest("tr").remove();
+					let mypetNo = $(e.target).attr('id');
+					let send={
+						mypetNo : mypetNo
+					}
+					ajaxRequest('DELETE','mypet/'+mypetNo);
 				});
 			});
-/*
-		$.ajax({
-			url:/mypet/$('#id'),
-			method:,
-			data:,
-			dataType:,
-			contentType:,
-			success:function(){
+
+			/*
+				$.ajax({
+					url:/mypet/$('#mypetNo'),
+					method:'DELETE',
+					data:'application/json;UTF-8',
+					dataType:'json',
+					contentType:'application/json;UTF-8',
+					success:function(){
+						
+					}
+					
+					
+				});
+*/
 				
-			}
 			
-			
-		});
-		
-		*/
+
 		</script>
 	</th:block>
 
