@@ -1,5 +1,10 @@
 package com.itwill.controller;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itwill.dto.ReportBoardFormDto;
+import com.itwill.entity.FileStore;
 import com.itwill.entity.ReplyBoard;
 import com.itwill.entity.ReportBoard;
+import com.itwill.entity.UploadFile;
 import com.itwill.service.ReplyBoardService;
 import com.itwill.service.ReportBoardService;
 
@@ -18,6 +26,9 @@ import io.swagger.v3.oas.annotations.Operation;
 
 @Controller
 public class ReportController {
+	
+	private FileStore fileStore; 
+	private ReportBoardFormDto form;
 	
 	@Autowired
 	private ReportBoardService reportBoardService;
@@ -46,6 +57,14 @@ public class ReportController {
 		model.addAttribute("replyBoardList", replyBoardList);
 		return "reportBoardView";
 	}
+	
+	
+	
+	@GetMapping("/reportWrite")
+    public String showReportForm() {
+        return "reportBoard_write_form"; 
+    }
+
 	
 	
 	
