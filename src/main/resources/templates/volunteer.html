@@ -49,6 +49,7 @@
 
 
 <script> // 오전 9시 이전에 테스트 진행하기
+// 오늘 날짜를 포함하여 이전의 날짜는 비활성화. 옵션시간 확인하기(당일예약 불가능)
 //페이지 로드 시 실행
 window.onload = function() {
     var volunteerDate = document.getElementById('volunteerDate');
@@ -176,7 +177,7 @@ window.onload = function() {
 									<span>방문 시간</span>
 									
 									<!-- <input type="time" name="volunteerTime" > -->
-									<select name="volunteerTime" id="volunteerTime">
+									<!-- <select name="volunteerTime" id="volunteerTime">
 										<option value="09">09 AM</option>
 										<option value="10">10 AM</option>
 										<option value="11">11 AM</option>
@@ -188,8 +189,33 @@ window.onload = function() {
 										<option value="17">17 PM</option>
 										<option value="18">18 PM</option>
 										<option value="19">19 PM</option>
+										<option value="20">20 PM</option>
+										<option value="21">21 PM</option>
+										<option value="22">22 PM</option>
+									</select> -->
+									
+									<select name="volunteerTime" id="volunteerTime">
+									    <option value="09">09:00 AM</option>
+									    <option value="10">10:00 AM</option>
+									    <option value="11">11:00 AM</option>
+									    <option value="12">12:00 AM</option>
+									    <option value="13">13:00 PM</option>
+									    <option value="14">14:00 PM</option>
+									    <option value="15">15:00 PM</option>
+									    <option value="16">16:00 PM</option>
+									    <option value="17">17:00 PM</option>
+									    <option value="18">18:00 PM</option>
+									    <option value="19">19:00 PM</option>
+									    <option value="20">20:00 PM</option>
+									    <option value="21">21:00 PM</option>
+									    
+									    <option value="22">22:00 PM</option>
+									    <option value="23">23:00 PM</option>
+									    <option value="24">24:00 PM</option>
 									</select>
-								</div>
+									
+									
+									</div>
 								
 								
 								<button type="submit" class="submit">submit</button>
@@ -207,8 +233,31 @@ window.onload = function() {
 				</div>
 			</div>
 		</div>
-	
-	
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var centerOpenCloseTime = "09:00 AM"; // 변경할 시간 문자열
+
+    // centerOpenCloseTime 값을 변환
+    if (centerOpenCloseTime === "24:00 PM") {
+        centerOpenCloseTime = "00:00 AM"; // "24:00 PM"을 "00:00 AM"으로 변환
+    }
+
+    // <select> 요소를 가져옴
+    var selectElement = document.getElementById("volunteerTime");
+
+    // <select> 요소 내의 모든 <option> 요소를 순회하며 centerOpenCloseTime과 비교
+    for (var i = 0; i < selectElement.options.length; i++) {
+        if (selectElement.options[i].value === centerOpenCloseTime) {
+            // centerOpenCloseTime과 일치하는 옵션을 선택
+            selectElement.selectedIndex = i;
+            break;  // 일치하는 것을 찾았으므로 반복문 종료
+        }
+    }
+});
+</script>
+
+
 	
 <script>
 
@@ -323,6 +372,11 @@ $('.submit').on('click', function (event) {
 
 
 </script> 
+
+
+
+
+
 	
 	
 	</th:block>

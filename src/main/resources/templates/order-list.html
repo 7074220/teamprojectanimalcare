@@ -3,6 +3,8 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='리뷰작성')">
 
 <head>
+	<link href="/assets/css/star.css" rel="stylesheet" />
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<title>Safira - cart page</title>
 
 
@@ -10,6 +12,7 @@
 
 	<style>
 		@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
 		.rate {
 			display: inline-block;
 			border: 0;
@@ -17,15 +20,18 @@
 			text-align: left;
 			direction: rtl;
 		}
+
 		.rate>input {
 			display: none;
 		}
+
 		.rate>label {
 			font-size: 3em;
 			color: #ddd;
 			position: relative;
 			display: inline-block;
 		}
+
 		.rate>label:before {
 			display: inline-block;
 			font-size: 1rem;
@@ -36,6 +42,7 @@
 			content: "\f005 ";
 			text-align: left;
 		}
+
 		.rate .half:before {
 			content: "\f089 ";
 			position: absolute;
@@ -43,12 +50,14 @@
 			left: 0;
 			/* 왼쪽에서 시작하도록 위치 조정 */
 		}
+
 		.rate input:checked~label,
 		.rate label:hover,
 		.rate label:hover~label {
 			width: auto;
 			color: #ffff00 !important;
 		}
+
 		.rate input:checked+.rate label:hover,
 		.rate input input:checked~label:hover,
 		.rate input:checked~.rate label:hover~label,
@@ -103,7 +112,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											
+
 										</tbody>
 									</table>
 								</div>
@@ -225,14 +234,56 @@
 				$('#orderDetailsModal').modal('show');
 			});
 		</script>
-	
-		
+
+
+
+
+<script>
+    $(document).ready(function () {
+        let savedData = {
+            rate: null,
+            comment: ""
+        };
+
+        // 모달이 닫힐 때 데이터를 저장
+        $('#orderDetailsModal').on('hidden.bs.modal', function (e) {
+            savedData.rate = $('input[name="rate"]:checked').val();
+            savedData.comment = $('#review_comment').val();
+        });
+
+        // 모달이 열릴 때 저장된 데이터를 별점 및 리뷰 입력란에 채우기
+        $('#orderDetailsModal').on('show.bs.modal', function (e) {
+            $('input[name="rate"][value="' + savedData.rate + '"]').prop('checked', true);
+            $('#review_comment').val(savedData.comment);
+        });
+
+        // "작성 완료" 버튼 클릭 시 모달을 닫음
+        $('#closeModal').click(function () {
+            $('#orderDetailsModal').modal('hide');
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 		</th:block>
+
+
 
 		<!--footer area start-->
 
 		<!--footer area end-->
+
 
 </body>
 

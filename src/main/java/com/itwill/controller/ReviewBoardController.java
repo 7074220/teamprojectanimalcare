@@ -109,7 +109,7 @@ public class ReviewBoardController {
 
 	    model.addAttribute("userinfo", userinfo);
 
-	    return "redirect:/my-account-orders";
+	    return "my-account-orders";
 	}
 
 	

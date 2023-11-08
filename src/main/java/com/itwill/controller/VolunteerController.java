@@ -113,8 +113,8 @@ public class VolunteerController {
 	    volunteerList.sort((v1, v2) -> v2.getVolunteerNo().compareTo(v1.getVolunteerNo()));
 	    
 		model.addAttribute("volunteerList", volunteerList);
-		//return "my-account-volunteer"; //이게 원본임
-		return "order-list"; // 오더리스트 - 리뷰쓰기 연결
+		return "my-account-volunteer"; //이게 원본임
+		//return "order-list"; // 오더리스트 - 리뷰쓰기 연결
 	}
 	
 	
