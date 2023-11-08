@@ -77,15 +77,6 @@ function registEvent() {
 		}
 		
 	});
-	
-	$(document).on('keypress', function(e){
-		if(e.keyCode==13){
-			if(window.location.hash.substring(1)=='/login'){
-				navigate();
-			}	
-		}
-	})
-	
 }
 
 /*
@@ -130,17 +121,13 @@ function navigate() {
 		let responseJsonObject = ajaxRequest('POST','user/login',sendJsonObject);
 		
 		if(responseJsonObject.status == 1000){
-			window.location.href='index';	
+			window.location.href='index';
 		}
 		
 		if((responseJsonObject.status == 1001) || (responseJsonObject.status == 1002)) {
-			html = user_login_form(responseJsonObject);
+			html = user_login_form();
 			$('#content').html(html);
-			$('#loginForm').keypress(function(e){
-				  if(e.keyCode==13){
-					  window.location.hash = '#/login'
-				  }
-			  });
+			window.location.hash = '/login_form';
 			alert('아이디 혹은 비밀번호를 잘못 입력 하셨습니다. ');
 		}
 	}
