@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -64,7 +65,7 @@ public class ProductController {
 	}
 	*/
 	
-	/*
+	
 	// 펫카테고리별로 구분 --> 상품 리스트 출력
 		@GetMapping("/productList")
 		public String productList(Model model, HttpSession session) {
@@ -94,24 +95,31 @@ public class ProductController {
 			// System.out.println(productList.get(0).getProductPetCategory());
 			return "shop";
 		}
-		*/
+		
+		/*
 		// 펫카테고리별로 구분 --> 상품 리스트 출력
 		@GetMapping("/productList")
-		public String productList(@PageableDefault(page = 1, size = 5) Pageable p, Model model, HttpSession session) throws Exception {
+		public String productList(@PageableDefault(page = 1, size = 9) Pageable p, Model model, HttpSession session) throws Exception {
 			List<ProductListDto> productListDto = new ArrayList<>();
-			List<Product> productList = new ArrayList<>();
+			Page<Product> productList = null;
+			
+			int page = p.getPageNumber();
+			int size = p.getPageSize();
+			int blockSize = 5;
+			Pageable pageable = PageRequest.of(page - 1, size,Sort.by("productPrice").descending().and(Sort.by("productPetCategory").descending()));
 			
 			Long userNo = (Long) session.getAttribute("userNo");
 			MyPet myPet = MyPet.builder().build();
 			
-			productList = productService.findAllByOrderByProductNoDesc();
+			//productList = productService.findAllByOrderByProductNoDesc();
 			
 			if(userNo != null) {
 				myPet = myPetService.findLeaderMyPet(userNo);
 				if (myPet == null) {
 					myPet = MyPet.builder().build();
 				} else {
-					productList = productService.findAllProductByPetCategory(myPet.getMypetKind());
+					//productList = productService.findAllProductByPetCategory(myPet.getMypetKind());
+					productList = productService.findAllByProductPetCategory(myPet.getMypetKind(),pageable);
 				}
 			}
 			
@@ -119,22 +127,18 @@ public class ProductController {
 				productListDto.add(ProductListDto.toDto(product));
 			}
 			
-			int page = p.getPageNumber();
-			int size = p.getPageSize();
-			int blockSize = 5;
-			Pageable pageable = PageRequest.of(page - 1, size);
-			
-			Page<Product> productListPage = productService.findProductList(pageable);
 			//ProductListPageDto productListPageDto = new ProductListPageDto(productListPage, blockSize);
 			
 			//model.addAttribute("productList", productListDto);
-			model.addAttribute("productList", productListPage);
+			model.addAttribute("productList", productList);
 			model.addAttribute("myPet", myPet);
 			// System.out.println(productList.get(0).getProductPetCategory());
 			return "shop";
 		}
+		*/
 		
 		// 펫카테고리별로 구분 --> 상품 리스트 출력
+		
 		@GetMapping("/productDogList")
 		public String productDogList(Model model, HttpSession session, @RequestParam String category) {
 			List<ProductDogListDto> productDogListDto = new ArrayList<>();
@@ -175,6 +179,56 @@ public class ProductController {
 			return "shop";
 		}
 		
+		
+		/*
+		@GetMapping("/productDogList")
+		public String productDogList(Model model, HttpSession session, @RequestParam String category,@PageableDefault(page = 1, size = 3) Pageable p) {
+			List<ProductDogListDto> productDogListDto = new ArrayList<>();
+			//List<Product> productList = new ArrayList<>();
+			Page<Product> productList = null;
+			//Page<Product> productList = null;
+			
+			int page = p.getPageNumber();
+			int size = p.getPageSize();
+			int blockSize = 5;
+			Pageable pageable = PageRequest.of(page - 1, size,Sort.by("productPrice").descending().and(Sort.by("productPetCategory").descending()));
+			
+			Long userNo = (Long) session.getAttribute("userNo");
+			MyPet myPet = MyPet.builder().build();
+			productList = productService.findAllProductByPetCategory("강아지");
+			
+			if(category.equals("All")) {
+				productList = productService.findAllProductByPetCategory("강아지");
+			}
+			if(category.equals("1")) {
+				productList = productService.findAllByProductCategoryAndProductPetCategory("사료","강아지",pageable);
+			}
+			if(category.equals("2")) {
+				productList = productService.findAllByProductCategoryAndProductPetCategory("간식","강아지",pageable);
+			}
+			if(category.equals("3")) {
+				productList = productService.findAllByProductCategoryAndProductPetCategory("캔","강아지",pageable);
+			}
+			if(category.equals("4")) {
+				productList = productService.findAllByProductCategoryAndProductPetCategory("위생","강아지",pageable);
+			}
+			if(category.equals("5")) {
+				productList2 = productService.findAllByProductCategoryAndProductPetCategory("미용","강아지",pageable);
+			}
+			
+			myPet.setMypetKind("강아지");
+			
+			for (Product product : productList) {
+				productDogListDto.add(ProductDogListDto.toDto(product));
+			}
+			
+			model.addAttribute("productList", productList2);
+			model.addAttribute("myPet", myPet);
+			// System.out.println(productList.get(0).getProductPetCategory());
+			return "shop";
+		}
+		*/
+
 		// 펫카테고리별로 구분 --> 상품 리스트 출력
 		@GetMapping("/productCatList")
 		public String productCatList(Model model, HttpSession session,@RequestParam String category) {

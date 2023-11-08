@@ -81,6 +81,13 @@ public interface ProductDao {
 	// 검색 리스트 반환(시작번호, 끝번호)
 	Page<Product> findProductList(Specification<Product> specification, Pageable pageable) throws Exception;
 	
+	/************** 페이징에 필요 ****************/
+	// 펫 카테고리가 일치하는 모든 상품 출력(query 사용 X)
+	Page<Product> findAllByProductPetCategory(String productPetCategory, Pageable pageable);
+	
+	// 상품의 카테고리와 펫 카테고리가 일치하는 모든 상품 출력(query 사용 X)
+	Page<Product> findAllByProductCategoryAndProductPetCategory(String productCategory, String productPetCategory,  Pageable pageable);
+	
 }
 
 
