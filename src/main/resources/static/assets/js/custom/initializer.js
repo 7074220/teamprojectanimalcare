@@ -137,12 +137,18 @@ function createInitializer() {
 			findPhoneNumber:{
 				required : true,
 				phone : true
+			},
+			findName:{
+				required : true
 			}
 		},
 		messages: {
 			findPhoneNumber: {
 				required: '전화번호를 입력하세요',
 				phone : '휴대폰 번호를 입력하세요.'
+			},
+			findName:{
+				required : '이름을 입력하세요'
 			}
 		},
 		errorClass: 'error',

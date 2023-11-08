@@ -13,6 +13,7 @@ let html = '';
 */
 const initialize=createInitializer();
 initialize.addCustomFunctionHandlebars();
+
 jQuery.validator.addMethod("phone", function(phone_number, element) {
     phone_number = phone_number.replace(/\s+/g, "");
     return this.optional(element) || phone_number.length > 9 && 
@@ -143,13 +144,21 @@ function navigate() {
 	if (path == '/findUserInfo') {
 		html = user_finduserinfo_form();
 		$('#content').html(html);
-		initialize.validatorUserFindFormSetDefault();
 		let validator = $('#userFindIdForm').validate();
 		initialize.setValidator(validator);
 	}
 	if (path == '/findUserId') {
 		if (initialize.getValidator().form()) {
+			alert('ㅇㅇ');
+			/*
+			let sendJsonObject = {
+					userName: document.userFindIdForm.name.value,
+					userPhoneNumber: document.userFindIdForm.phone.value
+			}
+			*/
+			//const responseJsonObject = ajaxRequest('POST','findIdUserInfo',sendJsonObject);
 			
+			//window.location.href = 'index';
 		}
 	}
 }
