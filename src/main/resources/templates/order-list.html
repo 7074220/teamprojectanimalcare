@@ -109,7 +109,8 @@
 								</div>
 
 								<div class="cart_submit view">
-									<button type="submit">리뷰작성</button>
+									<!--<button type="submit">리뷰작성</button>-->
+									<button type="submit" data-action="create">리뷰작성</button>
 								</div>
 
 
@@ -163,7 +164,7 @@
 										<div class="comments_form">
 
 											<form th:action="@{/reviewBoard/createReviewBoard}" class="mb-3" name="myform" id="myform" method="post">
-												<input type="hidden" id="userNo" th:value="${user.userNo}" />
+												<input type="hidden" id="userNo" th:value="${userNo}" />
 											
 												<!--<input type="hidden" id="productNo" th:value="${user.userNo}"/>-->
 											
@@ -219,6 +220,7 @@
 
 
 		<!--주문한 상품 리뷰쓰기 -->
+		
 		<script>
 			
 			
@@ -256,58 +258,56 @@
 		}
 			
 			
+			function updateSubmitButton() {
+					const submitButton = document.querySelector('.cart_submit button');
+					submitButton.textContent = '리뷰완료';
+				}
+			
+			
 			$('.submit').on('click', function(event) {
 	        event.preventDefault();
 	       
-	     
+	       const now = new Date();
+		   const year = now.getFullYear();
+		   const month = (now.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더하고 2자리로 포맷팅
+		   const day = now.getDate().toString().padStart(2, '0'); // 일을 2자리로 포맷팅
+    	   const formattedDate = `${year}-${month}-${day}`;
+    	  
 	       let boardStar = $('.rate:checked').val();
-	       console.log('선택한 별점@@@@@@@@@@@:',boardStar)
+	    
 		   let review_comment = $('#review_comment').val();
-		   console.log('리뷰 내용#########:',review_comment)
+		  
 		   let userNo = $('#userNo').val();
-	        console.log('userNo#########:',userNo)
+	    
 	        let sendJsonObject = {
-			
+				userNo:userNo,
 	            boardStar: boardStar,
-	            review_comment: review_comment
-	         
+	            boardContent: review_comment,
+	         	boardDate:formattedDate
 	        };
 	        console.log(sendJsonObject)
-	       let responseObject=ajaxRequest('POST','/reviewBoard/createReviewBoard',sendJsonObject);
+	       let responseObject=ajaxRequest('POST','reviewBoard/createReviewBoard',sendJsonObject);
 	       console.log(responseObject)
-	      	/*
+	      	
 	  		if(responseObject.userNo == null){
 				alert('로그인이 필요합니다.');
 				window.location.href = 'index';	// 로그인 창으로 이동
 			}else{
-				alert("수정이 완료되었습니다.");
-				
+				alert("리뷰작성이 완료되었습니다.");
+				updateSubmitButton();
 			}
-	  		*/
+	  		
 	    });
 			
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 		</script>
-	
+
 		
+		
+
+
+
 
 		</th:block>
 
