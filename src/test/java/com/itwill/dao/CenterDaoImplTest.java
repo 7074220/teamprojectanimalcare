@@ -23,16 +23,17 @@ class CenterDaoImplTest {
 	@Transactional
 	@Rollback(false)
 	@Test
-	@Disabled
+	//@Disabled
 	void insetCenter() {
 
 
 		Center center = Center.builder()
 				.centerNo(null)
-				.centerName("ABC보호소")
-				.centerPhoneNumber("010-1234-1234")
-				.centerOpenCloseTime("09:00~17:00")
-				.centerLocal("서울")
+				.centerName("동물누리 보호센터")
+				.centerPhoneNumber("0507-1317-6943")
+				.centerOpenCloseTime("09:00 ~ 18:00")
+				.centerLocal("시흥시")
+				.centerImage("sihung.jpeg")
 				.build();
 		centerDao.createCenter(center);
 	}

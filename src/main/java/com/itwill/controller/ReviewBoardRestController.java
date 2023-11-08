@@ -26,7 +26,10 @@ import com.itwill.dto.ReviewBoardDto;
 import com.itwill.dto.VolunteerDto;
 import com.itwill.entity.Product;
 import com.itwill.entity.ReviewBoard;
+import com.itwill.entity.Userinfo;
+import com.itwill.service.ProductService;
 import com.itwill.service.ReviewBoardService;
+import com.itwill.service.UserInfoService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpSession;
@@ -37,11 +40,20 @@ public class ReviewBoardRestController {
 	
 	@Autowired
 	private ReviewBoardService reviewBoardService;
+	@Autowired
+	private UserInfoService userInfoService;
+	@Autowired
+	private ProductService productService;
 	
 	@Operation(summary = "리뷰작성")
 	@PostMapping("/createReviewBoard")
-	public ResponseEntity<ReviewBoardDto> createReviewBoard(@RequestBody ReviewBoardDto dto, HttpSession httpSession) throws Exception {
-	    ReviewBoard reviewBoardEntity = ReviewBoardDto.toEntity(dto);
+	public ResponseEntity<ReviewBoardDto> createReviewBoard(@RequestBody ReviewBoardDto dto, HttpSession session) throws Exception {
+	   Long userNo=(Long)session.getAttribute("userNo");
+		
+		dto.setUserNo(userNo);
+		
+		
+		ReviewBoard reviewBoardEntity = ReviewBoardDto.toEntity(dto);
 	  
 	    reviewBoardService.create(reviewBoardEntity);
 	  
