@@ -148,6 +148,15 @@ public class ProductDaoImpl implements ProductDao {
 				
 	}
 
-		
+	/************** 페이징에 필요 ****************/
+	@Override
+	public Page<Product> findAllByProductPetCategory(String productPetCategory, Pageable pageable) {
+		return productRepository.findAllByProductPetCategory(productPetCategory, pageable);
+	}
+
+	@Override
+	public Page<Product> findAllByProductCategoryAndProductPetCategory(String productCategory, String productPetCategory,  Pageable pageable) {
+		return productRepository.findAllByProductCategoryAndProductPetCategory(productPetCategory, productCategory, pageable);
+	}
 
 }
