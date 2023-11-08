@@ -126,7 +126,7 @@
                             </label>
                             <button type="button">로그인</button>-->
 
-							<form name="f" id="loginForm" action="my-account.html" onsubmit="return validateLoginForm()">
+							<form name="f" id="loginForm" onsubmit="return validateLoginForm()">
 							<h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 							<div class="form-floating">
 								<input type="email" class="form-control" id="floatingInput"
@@ -155,13 +155,7 @@
 		</div>
 		</div>
 		</div>
-		<script>
-		  	$('#loginForm').keypress(function(e){
-				  if(e.keyCode==13){
-					  window.location.hash = '#/login'
-				  }
-			  });
-		</script>
+		
 	</th:block>
 	<!-- customer login end -->
 

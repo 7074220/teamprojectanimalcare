@@ -81,10 +81,12 @@ public class ProductController {
 			if(userNo != null) {
 				myPet = myPetService.findLeaderMyPet(userNo);
 				if (myPet == null) {
-					myPet = MyPet.builder().build();
+					myPet = MyPet.builder().mypetKind("강아지").build();
 				} else {
 					productList = productService.findAllProductByPetCategory(myPet.getMypetKind());
 				}
+			}else {
+				myPet = MyPet.builder().mypetKind("강아지").build();
 			}
 			
 			for (Product product : productList) {
@@ -99,6 +101,7 @@ public class ProductController {
 		
 		/*
 		// 펫카테고리별로 구분 --> 상품 리스트 출력
+	/*
 		@GetMapping("/productList")
 		public String productList(@PageableDefault(page = 1, size = 9) Pageable p, Model model, HttpSession session) throws Exception {
 			List<ProductListDto> productListDto = new ArrayList<>();
@@ -285,7 +288,11 @@ public class ProductController {
 		String categoryPath = "";
 		
 		if(path.equals("/productList")) {
-			myPet.setMypetKind(myPetService.findLeaderMyPet(userNo).getMypetKind());
+			if(myPetService.findLeaderMyPet(userNo)!=null) {
+				myPet.setMypetKind(myPetService.findLeaderMyPet(userNo).getMypetKind());	
+			}else {
+				myPet.setMypetKind("강아지");
+			}
 			productList = productService.findAllByOrderByProductByPetCategoryPriceDesc(myPet.getMypetKind());
 		}else {
 			kindPath = path.substring(1,path.lastIndexOf("?"));
