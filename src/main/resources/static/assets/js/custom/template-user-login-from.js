@@ -28,7 +28,7 @@ export function user_login_form(responseJsonObject = {}) {
                      <a></a>
                      <a></a>
                      <a></a>
-	  				<a class="navi-link" href="finduserinfo">아이디/비밀번호 찾기</a>
+	  				<a class="navi-link" href="#/findUserInfo">아이디/비밀번호 찾기</a>
                      
                      <button class="btn btn-success w-100 py-1" type="button" data-navigate="/login">Sign in</button>
                      <!--<button type="button" data-navigate="/login">Sign in</button>-->

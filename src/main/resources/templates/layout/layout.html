@@ -30,6 +30,7 @@
 	<script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
 	<script defer type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
+	<script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
 
 	<style>
 		.valid {
@@ -45,7 +46,6 @@
 			border: 1px solid red;
 		}
 	</style>
-	<script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
 </head>
 
 <body>
@@ -92,14 +92,7 @@
 	<script defer type="text/javascript" src="assets/js/vendor/jquery.validate.js"></script>
 	<script defer src="assets/js/custom/userApp.js" type="module"></script>
 	<script defer src="assets/js/custom/productApp.js" type="module"></script>
-	<script>
-		$('#floatingInput, #floatingPassword').on('keypress', function (e) {
-			if (e.keyCode == '13') {
-				$('.loginBtn').click();
-			}
-		});
-	</script>
-	
+	<script defer src="assets/js/custom/reviewBoardApp.js" type="module"></script>
 </body>
 
 </html>

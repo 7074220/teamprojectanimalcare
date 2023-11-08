@@ -155,7 +155,7 @@
 									
 								</p>
 
-								<button type="submit" class="submit">submit</button>
+								<button type="submit" class="submit">신청하기</button>
 								<!-- <p class="form-messege"></p> -->
 								<!-- <div th:if="${msg!=null}">
 									<p th:text="${msg}" class="success-message"></p>
@@ -197,8 +197,10 @@
 	        let sendJsonObject = {
 	            petNo: petNo,
 	            adoptDate: adoptDate,
+
 	            adoptTime: adoptTime,
 	            adoptStatus:"입양신청접수"
+
 	        };
 			
 	       let responseObject=ajaxRequest('POST','adopt/create-adopt',sendJsonObject);

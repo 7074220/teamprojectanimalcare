@@ -5,12 +5,15 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.dao.VolunteerDao;
 import com.itwill.entity.Center;
 import com.itwill.entity.Volunteer;
 import com.itwill.repository.VolunteerRepository;
 
+
+@Transactional
 @Service
 public class VolunteerServiceImpl implements VolunteerService{
 	

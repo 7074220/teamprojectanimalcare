@@ -243,16 +243,16 @@
                                     
                                     
                                    <!--  위시리스트 버튼 -->
-                                    <div class="header_account_list header_wishlist">
-                                        <a href="wishList"><span class="lnr lnr-heart"></span> <span class="item_count" >3</span> </a>
+                                    <div class="header_account_list header_wishlist" th:if="${session.userNo}!=null">
+                                        <a href="wishList"><span class="lnr lnr-heart"></span> <span class="item_count" th:text=${session.wishCount}>3</span> </a>
                                     </div>
                                     
                                     
                                     
                                     
                                     
-                                    <div class="header_account_list  mini_cart_wrapper">
-                                       <a href="cartList"><span class="lnr lnr-cart"></span><span class="item_count">2</span></a>
+                                    <div class="header_account_list  mini_cart_wrapper" th:if="${session.userNo}!=null">
+                                       <a href="cartList"><span class="lnr lnr-cart"></span><span class="item_count" th:text=${session.cartCount}>2</span></a>
                                         <!--mini cart-->
                                     <!--    <div class="mini_cart">
                                             <div class="cart_gallery">
@@ -608,8 +608,8 @@
             </div>
         </div> 
     </header>
-    
+	
     </div>
     <!--header area end-->
-    
+
 </html>
