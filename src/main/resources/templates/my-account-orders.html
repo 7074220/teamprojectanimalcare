@@ -245,9 +245,9 @@
 									<li><a href="adoptByUserNo" class="nav-link">입양</a></li>
 									<li><a href="volunteerByUserNo" class="nav-link">봉사</a></li>
 									<li><a href="visitByUserNo" class="nav-link">견학</a></li>
-									<li> <a th:if="${session.userNo == 57}" href="ordersList" class="nav-link">관리자
+									<li> <a th:if="${session.userName == '어드민'}" href="ordersList" class="nav-link">관리자
 											전용주문목록</a></li>
-									<li> <a th:if="${session.userNo!= 57}" href="orders" class="nav-link">주문목록</a></li>
+									<li> <a th:if="${session.userName != '어드민'}" href="orders" class="nav-link">주문목록</a></li>
 									<li><a href="logout" class="nav-link">로그아웃</a></li>
 									<li><a href="#" data-toggle="modal" data-target="#deleteModal"
 											class="nav-link">회원탈퇴</a></li>
@@ -265,24 +265,28 @@
 										<table class="table">
 											<thead>
 												<tr>
-													<th>주문번호</th>
-													<th>구입날짜</th>
-													<th>상품명</th>
-													<th>총가격</th>
-													<th>리뷰</th>
+													<th class="order_no">주문번호</th>
+													<th class="order_userNo">사용자</th>
+													<th class="order_date">구입날짜</th>
+													<th class="order_desc">상품명</th>
+													<th class="order_price">총가격</th>
+													<th class="order_volunteer">리뷰</th>
+													<th class="order_remove">삭제</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr th:each="orders:${ordersList}" th:if="orders!=null">
-													<td th:text="${orders.orderNo}">1</td>
-													<td th:text="${#dates.format(orders.orderDate, 'yyyy-MM-dd')}">
+													<td class="order_no" th:text="${orders.orderNo}">1</td>
+													<td class="order_userNo" th:text="${orders.userinfo.userId}">1</td>
+													<td class="order_date" th:text="${#dates.format(orders.orderDate, 'yyyy-MM-dd')}">
 														2018-05-10</td>
-													<td th:text="${orders.orderDesc}"><span
+													<td class="order_desc" th:text="${orders.orderDesc}"><span
 															class="success">고양이캔조림</span></td>
-													<td
+													<td class="order_price"
 														th:text="${#numbers.formatInteger(orders.orderPrice, 3, 'COMMA') + '원'}">
 														$25.00 for 1 item </td>
-													<td><a href="volunteerByUserNo" class="view">주문상세</a></td>
+													<td class="order_volunteer"><a href="volunteerByUserNo" class="view">주문상세</a></td>
+													<td class="order_remove" th:id="${orders.orderNo}"><a class="deleteOrder"><i class="fa fa-trash-o" th:id="${orders.orderNo}"></i></a></td>
 												</tr>
 												<!-- <tr>
                                                 <td>2</td>
@@ -487,6 +491,22 @@
 
 		<!--주문한 상품 리뷰쓰기 -->
 		<script>
+			
+			function ajaxRequest(method, url, sendJsonObject) {
+				let returnResultJsonObject={};
+				$.ajax({
+					async:false,
+					method: method,
+					url: url,
+					contentType: 'application/json;UTF-8',
+					data: JSON.stringify(sendJsonObject),
+					type: 'json',
+					success: function(resultJsonObject) {
+						returnResultJsonObject = resultJsonObject;
+					}
+				});
+				return returnResultJsonObject;
+			}
 
 			// 마이페이지 상품주문 완료된 항목에서 주문상세를 누르면 창이 뜨고 이 창에서만 리뷰를 쓸수 있음
 			// 주문 상세 링크를 클릭할 때 이벤트 핸들러
@@ -528,6 +548,7 @@
 					returnResultJsonObject = resultJsonObject;
 				}
 			});
+
 			return returnResultJsonObject;
 		}
 			
@@ -578,6 +599,27 @@
 
 
 
+
+
+			
+			// 삭제
+			$(".order_remove").on('click', function(e) {
+		   // e.preventDefault(); // 기본 이벤트 방지
+		    let orderNo = $(e.target).attr('id');
+		    // AJAX 요청 보내기
+			ajaxRequest("DELETE","order/" + orderNo);
+		    
+		    $(".order_remove, .order_no, .order_date, .order_desc, .order_price, .order_volunteer").each(function() {
+	            if ($(this).attr("id") === orderNo) {
+	                $(this).closest("tr").remove();
+	            }
+	        });
+		    
+		  });
+		  
+		  
+	
+			
 
 		</script>
 		
