@@ -176,8 +176,7 @@ public class ReplyRestController {
 			*/
 		ReplyBoard saveReplyBoard= replyBoardService.Create(replyBoard);
 		System.out.println(saveReplyBoard);
-				 HttpHeaders httpHeaders = new HttpHeaders(); httpHeaders.setContentType(new
-		 MediaType("application", "json", Charset.forName("UTF-8")));
+				 HttpHeaders httpHeaders = new HttpHeaders(); httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		
 		return new ResponseEntity<ReplyCreateDto>(ReplyCreateDto.toDto(saveReplyBoard), httpHeaders,HttpStatus.CREATED);
 	}

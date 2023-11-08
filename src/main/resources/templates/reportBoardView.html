@@ -179,7 +179,7 @@
 										<div id="reviewContent">
 											<div class="reviews_wrapper">
 												<h2
-													th:text="${#dates.format(replyBoard.ReplyBoardRegisterDate, 'yyyy-MM-dd HH:mm')}">roadthemes</h2>
+													th:text="${#dates.format(replyBoard.replyBoardRegisterDate, 'yyyy-MM-dd HH:mm')}">roadthemes</h2>
 
 												<div class="reviews_comment_box">
 													<div class="comment_thmb">
@@ -197,7 +197,7 @@
 															<h2>
 																<p></p>
 															</h2>
-															<p th:text="${replyBoard.ReplyBoardContent}">roadthemes</p>
+															<p th:text="${replyBoard.replyBoardContent}">roadthemes</p>
 														</div>
 													</div>
 												</div>
@@ -259,23 +259,26 @@
 			type: 'json',
 			success: function(resultJsonObject) {
 				returnResultJsonObject = resultJsonObject;
-				console.log(resultJsonObject);
+				//console.log(resultJsonObject);
 			}
 		});
 		return returnResultJsonObject;
 	}
 		
 		function replyInsert(){
-			let boardNo = $('.single_blog').attr('id')
-			alert(boardNo);
+			let boardNo = $('.single_blog').attr('id');
+			let userName = document.f.author.value;
+			let replyBoardContent = document.getElementById('replyComment').value;
+			//alert(boardNo);
 			
 			
 			let send = {
-					userName : document.f.author.value,
-					replyBoardContent :"sdfasdsadasd",
+					userName : userName,
+					replyBoardContent : replyBoardContent,
 					reportNo : boardNo
 			}
 			ajaxRequest('POST','reply/inserted',send);
+			location.href="/teamproject_animalcare/reportBoardView?boardNo="+boardNo;
 		}
 	
 	</script>
