@@ -592,7 +592,7 @@
                                     </thead>
                                     <tbody>
                                         <tr th:each="wish:${wishList}">
-                                            <td>
+                                            <td class="product_check">
 												<label class="checkbox-inline">
 													<input type="checkbox" name="chk" class="chk" onclick="chkClicked()" value="" th:id="${wish.wishNo}" checked="true">
 												</label>
@@ -684,11 +684,11 @@
 		    //e.preventDefault(); // 기본 이벤트 방지
 		    let wishNo = $(e.target).attr('id');
 		    // AJAX 요청 보내기
-			ajaxRequest("DELETE", "wish" + wishNo);
+			ajaxRequest("DELETE", "wish/" + wishNo);
 		    
-		    $(".product_remove, .product_thumb, .product_name, .product-price, .product_quantity, .product_total").each(function() {
+		    $(".product_check, .product_remove, .product_thumb, .product_name, .product-price, .product_quantity, .product_total").each(function() {
 	            if ($(this).attr("id") === wishNo) {
-	                $(this).remove();
+	                 $(this).closest("tr").remove();
 	            }
 	        });
 		    

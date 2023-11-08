@@ -7,6 +7,22 @@
 <script
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+	function ajaxRequest(method, url, sendJsonObject) {
+		let returnResultJsonObject={};
+		$.ajax({
+			async:false,
+			method: method,
+			url: url,
+			contentType: 'application/json;UTF-8',
+			data: JSON.stringify(sendJsonObject),
+			type: 'json',
+			success: function(resultJsonObject) {
+				returnResultJsonObject = resultJsonObject;
+			}
+		});
+		return returnResultJsonObject;
+	}
+
 	$(document).ready(
 			function() {
 				$('#useLoyaltyPoints').click(function() {
@@ -53,6 +69,7 @@
 							var orderAddress3 = $('#ordersAddress3').val();
 							var orderPrice = $('#total').text();
 							var userPoint = $('#loyaltyPoints').val();
+							var couponId = $('#hiddencoupon').val();
 
 							/*  console.log(orderAddress);
 							console.log(orderPrice);
@@ -69,12 +86,25 @@
 								
 								alert('주소 입력은 필수 입니다.');
 								return;
-							}else{
+							}
+								
+								/*
 								window.location.href = "orderInsert?orderAddress="
 									+ orderAddress1 + orderAddress2
 									+ orderAddress3 + "&orderPrice="
-									+ orderPrice + "&userPoint=" + userPoint;
-							}
+									+ orderPrice + "&userPoint=" + userPoint
+									+"&couponId="+couponId;
+								*/
+								let send = {
+										orderAddress : orderAddress1+orderAddress2+orderAddress3,
+										orderPrice : orderPrice,
+										userPoint : userPoint,
+										couponId : couponId
+								}
+								ajaxRequest('POST', 'order/insert', send);
+								window.location.href = "index";
+							
+							
 							
 							
 							// '#f'를 사용하여 폼을 선택합니다.
@@ -126,8 +156,8 @@
 				});
 	
 	$(document).on('click', '#couponcheck', function(e) {
-		var cartPrice = parseInt($('.cart_price').text());
-		var loyaltyPointsValue = parseInt($('#loyaltyPoints').val());
+		var cartPrice = parseInt($('.cart_price').text()); //카트리스트 가격합
+		var loyaltyPointsValue = parseInt($('#loyaltyPoints').val()); //적립금 사용시
 	    var couponId = $(e.target).closest('tr').find('#couponid').text(); // 쿠폰 번호
 	    var couponName = $(e.target).closest('tr').find('#couponname').text(); // 쿠폰 이름
 	    var couponDiscount = parseInt($(e.target).closest('tr').find('#coupondiscount').text()); // 할인율
@@ -137,14 +167,15 @@
 	    
 	    
 	    var totalPrice=cartPrice-totalDiscount;
+	    
+	    
 	    if(!loyaltyPointsValue){
 	    	
 	    totalPrice=cartPrice-totalDiscount;
 	    }else{
 	    	totalPrice=cartPrice-totalDiscount-loyaltyPointsValue;
 	    }
-	    
-	    
+	    $('#hiddencoupon').val(couponId);
 	    $('#coupon').text('-'+totalDiscount);
 	    $('#total').text(totalPrice);
 	    $('#inputcoupon').val(couponName);
@@ -854,6 +885,7 @@
 									<div class="col-lg-6 mb-20">
 									<label>쿠폰</label>
 										<input readonly="readonly" id="inputcoupon"> 
+										<input type="hidden" id="hiddencoupon"> 
 										<!-- Button trigger modal -->
 										<button type="button" class="btn btn-primary" id="findcoupon"
 											data-bs-toggle="modal" data-bs-target="#exampleModal">

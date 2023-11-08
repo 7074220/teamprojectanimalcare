@@ -33,6 +33,7 @@ import com.itwill.entity.Orderstatus;
 import com.itwill.entity.Userinfo;
 import com.itwill.repository.OrderStatusRepository;
 import com.itwill.service.CartService;
+import com.itwill.service.CouponService;
 import com.itwill.service.OrderItemService;
 import com.itwill.service.OrderService;
 import com.itwill.service.UserInfoService;
@@ -53,18 +54,20 @@ public class OrderController {
 	OrderItemService itemService;
 	@Autowired
 	UserInfoService userInfoService;
+	@Autowired
+	CouponService couponService;
 	
 	@Operation(summary = "주문 등록")
 	@GetMapping("/orderInsert")
-	public String insert_Order(String orderAddress,String orderPrice,String userPoint, HttpSession session)throws Exception {
-		  if (session.getAttribute("userNo") == null) {
+	public String insert_Order(String orderAddress,String orderPrice,String userPoint,String couponId, HttpSession session)throws Exception {
+		if (session.getAttribute("userNo") == null) {
 			  
 			  throw new
 		 Exception("로그인 하세요."); 
 		  
 		}
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>주문등록");
-		  
+		
 		Long userNo = (Long) session.getAttribute("userNo");
 		Userinfo userinfo = userInfoService.findUserByNo(userNo);
 		Integer point=Integer.parseInt(userPoint);
@@ -90,7 +93,7 @@ public class OrderController {
 			tempOrderItemDto.setOiQty(cart.getCartQty());
 			tempOrderItemDto.setOrderNo(newOrder.getOrderNo());
 			tempOrderItemDto.setOsNo(osNo);
-			tempOrderItemDto.setProductNo(cart.getProduct().getProductNo());
+			tempOrderItemDto.setProduct(cart.getProduct());
 			
 			itemService.insertOrderItem(OrderItemDto.toEntity(tempOrderItemDto));
 			orderItemDtos.add(tempOrderItemDto);
@@ -106,6 +109,7 @@ public class OrderController {
 		
 		orderService.insertOrder(OrdersDto.toEntity(orderDto));
 		 */
+		couponService.Delete(Long.parseLong(couponId)); //쿠폰삭제기능
 		cartService.deleteByUserId(userNo);
 		return "index";
 	}
@@ -115,7 +119,10 @@ public class OrderController {
 		List<Orders> orderList = orderService.findOrders();
 		List<OrdersDto> ordersDto = new ArrayList<OrdersDto>();
 			for (Orders orders : orderList) {
-				ordersDto.add(OrdersDto.toDto(orders));
+				Userinfo userinfo = orders.getUserinfo();
+				OrdersDto dto = OrdersDto.toDto(orders);
+				dto.setUserinfo(userinfo);
+				ordersDto.add(dto);
 			}
 			model.addAttribute("ordersList",ordersDto);
 			return "my-account-orders";
@@ -131,11 +138,11 @@ public class OrderController {
 		
 		List<Orders> orderList = orderService.findOrderById(userNo);
 		List<OrdersDto> ordersDtoList = new ArrayList<OrdersDto>();
-		
 		for (Orders orders : orderList) {
-			ordersDtoList.add(OrdersDto.toDto(orders));
 			
+			ordersDtoList.add(OrdersDto.toDto(orders));
 		}
+		
 		
 		
 		model.addAttribute("ordersList",ordersDtoList);
