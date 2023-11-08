@@ -36,8 +36,8 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		Userinfo userinfo = userInfoDao.findByNo(2L);
 		ReportBoard reportBoard = reportBoardDao.findByBoardNo(1L);
 		ReplyBoard replyBoard = ReplyBoard.builder()
-										.ReplyBoardContent("희주짱나죽겟음")
-										.ReplyBoardRegisterDate(new Date())
+										.replyBoardContent("희주짱나죽겟음")
+										.replyBoardRegisterDate(new Date())
 										.userinfo(userinfo)
 										.reportBoard(reportBoard)
 										.build();
@@ -124,7 +124,7 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 		Userinfo userinfo = userInfoDao.findByNo(5L);
 		ReportBoard reportBoard = reportBoardDao.findByBoardNo(1L);
 		ReplyBoard replyBoard=ReplyBoard.builder()
-										.ReplyBoardContent("하하1")
+										.replyBoardContent("하하1")
 										.userinfo(userinfo)
 										.reportBoard(reportBoard)
 										.build();
