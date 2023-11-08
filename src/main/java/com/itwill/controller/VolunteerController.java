@@ -22,6 +22,7 @@ import com.itwill.entity.Center;
 import com.itwill.entity.Userinfo;
 import com.itwill.entity.Volunteer;
 import com.itwill.service.CenterService;
+import com.itwill.service.ReviewBoardService;
 import com.itwill.service.UserInfoService;
 import com.itwill.service.VolunteerService;
 
@@ -39,7 +40,8 @@ public class VolunteerController {
 	private CenterService centerService;
 	@Autowired
 	private UserInfoService userInfoService;
-	
+	@Autowired
+	private ReviewBoardService reviewBoardService;
 	
 	@GetMapping(value = "/volunteer", params = "centerNo") // 봉사 신청
 	public String insert_action(Model model, @RequestParam Long centerNo) throws Exception {				
@@ -111,7 +113,7 @@ public class VolunteerController {
 		List<Volunteer> volunteerList = volunteerService.findVolunteertByUserNo(user.getUserNo());		
 		// volunteerNo를 내림차순으로 정렬
 	    volunteerList.sort((v1, v2) -> v2.getVolunteerNo().compareTo(v1.getVolunteerNo()));
-	    
+	    model.addAttribute("userNo", userNo);
 		model.addAttribute("volunteerList", volunteerList);
 		//return "my-account-volunteer"; //이게 원본임
 		return "order-list"; // 오더리스트 - 리뷰쓰기 연결
