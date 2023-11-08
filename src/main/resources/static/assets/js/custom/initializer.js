@@ -134,13 +134,45 @@ function createInitializer() {
 		validatorUserFindFormSetDefault: function() {
 			$.validator.setDefaults({
 		rules: {
-			findPhoneNumber:{
+			name:{
+				required : true
+			},
+			phone:{
 				required : true,
 				phone : true
 			}
 		},
 		messages: {
-			findPhoneNumber: {
+			name:{
+				required : '이름을 입력하세요'
+			},
+			phone: {
+				required: '전화번호를 입력하세요',
+				phone : '휴대폰 번호를 입력하세요.'
+			}
+		},
+		errorClass: 'error',
+		validClass: 'valid'
+	});
+		},
+		validatorUserPasswordFormSetDefault: function() {
+			$.validator.setDefaults({
+		rules: {
+			userId:{
+				required : true,
+				email : true
+			},
+			phone:{
+				required : true,
+				phone : true
+			}
+		},
+		messages: {
+			userId:{
+				required : '아이디를 입력하세요',
+				email : '이메일 형식으로 입력하세요'
+			},
+			phone: {
 				required: '전화번호를 입력하세요',
 				phone : '휴대폰 번호를 입력하세요.'
 			}
@@ -149,7 +181,6 @@ function createInitializer() {
 		validClass: 'valid'
 	});
 		}
-		
 
 	}
 

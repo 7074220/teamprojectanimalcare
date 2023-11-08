@@ -231,7 +231,7 @@ public class UserInfoRestController {
 	@Operation(summary = "비밀번호 찾기")
 	@PostMapping("/findPasswordUserInfo")
 	public ResponseEntity<UserInfoPassFindDto> findPasswordUserInfo(@RequestBody UserInfoPassFindDto dto) throws Exception {
-		Userinfo userinfo = userInfoService.findUserIdByNameAndPhoneNumber(dto.getUserName(), dto.getUserPhoneNumber());
+		Userinfo userinfo = userInfoService.findPasswordByUserIdPhoneNumber(dto.getUserId(), dto.getUserPhoneNumber());
 		Integer status = 0;
 		if(userinfo==null) {
 			status = 1;

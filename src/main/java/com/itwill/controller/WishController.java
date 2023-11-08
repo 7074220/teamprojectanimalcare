@@ -119,7 +119,8 @@ public class WishController {
 		for (Product productName : productNameList) {
 			productNameDto.add(ProductNameDto.toDto(productName));
 		}
-		
+		int wishCount = wishService.findAllWishByUserNo(userNo).size();
+		session.setAttribute("wishCount", wishCount);
 		model.addAttribute("product", product);
 		model.addAttribute("products", productListDto);
 		model.addAttribute("productName", productNameDto);
@@ -171,7 +172,8 @@ public class WishController {
 		for (Product products : productList) {
 			productListDto.add(ProductListDto.toDto(products));
 		}
-		
+		int wishCount = wishService.findAllWishByUserNo(userNo).size();
+		session.setAttribute("wishCount", wishCount);
 		model.addAttribute("productList", productListDto);
 		model.addAttribute("myPet", myPet);
 		

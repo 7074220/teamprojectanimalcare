@@ -19,10 +19,12 @@ import oracle.net.aso.b;
 @NoArgsConstructor
 public class MyPetListDto {
 
-	private int mypetNo;
+	private Long mypetNo;
+	private int mypetSequence;
 	private String mypetName;
 	private String mypetBirthday;
 	private String mypetKind;
+	
 	
 	private String mypetLeader;
 	

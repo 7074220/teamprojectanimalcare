@@ -46,23 +46,63 @@
 }
 </style>
 
-<script>
-// 페이지 로드 시 실행
+
+
+<script> // 오전 9시 이전에 테스트 진행하기
+//페이지 로드 시 실행
 window.onload = function() {
     var volunteerDate = document.getElementById('volunteerDate');
     var today = new Date();
-    var tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1); // 내일 날짜 계산
-    var todayString = today.toISOString().slice(0, 10);
-    var tomorrowString = tomorrow.toISOString().slice(0, 10);
-    
-    // 현재 날짜를 기본값으로 설정
-    volunteerDate.value = tomorrowString;
-    
-    // 현재 날짜를 포함한 이전 날짜를 비활성화
-    volunteerDate.setAttribute('min', tomorrowString);
+    var afterTomorrow = new Date(today);
+    afterTomorrow.setDate(afterTomorrow.getDate() + 1); // 냉ㄹ 날짜 계산
+    var afterTomorrowString = afterTomorrow.toISOString().slice(0, 10);
+
+    // 내일 날짜를 기본값으로 설정
+    volunteerDate.value = afterTomorrowString;
+
+    // 오늘 날짜 오전 9시를 기준으로 이전 날짜를 계산
+    var minDate = new Date(today);
+    minDate.setHours(9, 0, 0, 0); // 오전 9시를 설정
+    if (today.getHours() >= 9) {
+        // 이미 오늘 오전 9시를 지난 경우, 모레부터 선택 가능하도록 설정
+        minDate.setDate(minDate.getDate() + 1);
+    }
+    var minDateString = minDate.toISOString().slice(0, 10);
+    volunteerDate.setAttribute('min', minDateString);
+
+    // 선택 가능한 최대 날짜를 설정하지 않음
+    volunteerDate.removeAttribute('max');
 };
 </script>
+<!-- <script> // 오전 9시 이전에 테스트 진행하기
+//페이지 로드 시 실행
+window.onload = function() {
+    var volunteerDate = document.getElementById('volunteerDate');
+    var today = new Date();
+    // 한국 시간대 (UTC+9)로 변경
+    today.setHours(today.getHours() + 9);
+    var afterTomorrow = new Date(today);
+    afterTomorrow.setDate(afterTomorrow.getDate() + 2); // 모레 날짜 계산
+    var afterTomorrowString = afterTomorrow.toISOString().slice(0, 10);
+
+    // 모레 날짜를 기본값으로 설정
+    volunteerDate.value = afterTomorrowString;
+
+    // 오늘 날짜 오전 9시 (한국 시간대)를 기준으로 이전 날짜를 계산
+    var minDate = new Date(today);
+    minDate.setHours(9, 0, 0, 0); // 오전 9시 (한국 시간대)를 설정
+    if (today.getHours() >= 9) {
+        // 이미 오늘 오전 9시 (한국 시간대)를 지난 경우, 모레부터 선택 가능하도록 설정
+        minDate.setDate(minDate.getDate() + 1);
+    }
+    var minDateString = minDate.toISOString().slice(0, 10);
+    volunteerDate.setAttribute('min', minDateString);
+
+    // 선택 가능한 최대 날짜를 설정하지 않음
+    volunteerDate.removeAttribute('max');
+};
+
+</script> -->
 
 
 </head>

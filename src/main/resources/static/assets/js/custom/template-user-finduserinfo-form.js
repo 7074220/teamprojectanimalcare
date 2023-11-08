@@ -10,14 +10,16 @@ export function user_finduserinfo_form(responseJsonObject = {}) {
                 <div class="col-lg-6 col-md-6">
                  <div class="account_form register">
                         <h2>아이디 찾기</h2>
-                        <form name="f" id="userFindIdForm" action="#">
+                        <form name="userFindIdForm" id="userFindIdForm" action="#">
                             <p>   
                                 <label>이름 <span>*</span></label>
-                                <input type="text" id="findName">
+                                <input type="text" id="name" name="name">
+                                <span id="nameError" style="color:red;"></span>
                              </p>
                              <p>   
                                 <label>전화번호 <span>*</span></label>
-                                <input type="text" id="findPhoneNumber">
+                                <input type="text" id="phone" name="phone">
+                                <span id="phoneError" style="color:red;"></span>
                              </p>
                              <label id="findIdText" style="color: green"></label>
                             <div class="login_submit">
@@ -27,22 +29,21 @@ export function user_finduserinfo_form(responseJsonObject = {}) {
                     </div>  
                 </div>
                 <!--login area start-->
-
-                <!--register area start-->
+				<!--register area start-->
                 <div class="col-lg-6 col-md-6">
 					          <div class="account_form">
                         <h2>비밀번호 찾기</h2>
-                        <form name="f2" id="userFindPasswordForm" action="#">
+                        <form name="userFindPasswordForm" id="userFindPasswordForm" action="#">
                             <p>   
                                 <label>아이디<span>*</span></label>
-                                <input type="text" id="findUserId">
+                                <input class ="finduserId" type="text" id="userId" name="userId">
                              </p>
                              <p>   
                                 <label>전화번호<span>*</span></label>
-                                <input type="text" id="findPhoneNumber2">
+                                <input type="text" id="phone" name="phone">
                              </p>   
                             <div class="login_submit">
-                                <button type="button" onclick="findPassword()">확인</button>
+                                <button type="button" data-navigate="/findPassword">확인</button>
                             </div>
 
                         </form>
