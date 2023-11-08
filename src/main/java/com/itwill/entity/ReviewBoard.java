@@ -35,16 +35,16 @@ public class ReviewBoard {
 	private String boardTitle;
 	private String boardContent;
 	private Date boardDate;
-	private Integer boardStar;
+	private Double boardStar;
 
 	@Builder.Default
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_no")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
 	
 	@Builder.Default
-	@OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_no")
 	@ToString.Exclude
 	private Product product = new Product();

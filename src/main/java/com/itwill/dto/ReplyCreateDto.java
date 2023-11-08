@@ -21,35 +21,42 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReplyCreateDto {
 	
-	private Long ReplyBoardNo;
-	private Date ReplyBoardRegisterDate;
-	private String ReplyBoardContent;
-	private Integer ReplyBoardGroupNo;
-	private Integer ReplyBoardStep;
-	private Integer ReplyBoardDepth;
+	private Long replyBoardNo;
+	
+	private Date replyBoardRegisterDate;
+	private String replyBoardContent;
+	private Integer replyBoardGroupNo;
+	private Integer replyBoardStep;
+	private Integer replyBoardDepth;
 	private Long reportNo;
 	private Long userNo;
 	
+	
+	private String userName;
+	
+	
+	
+	
 	public static ReplyBoard toEntity(ReplyCreateDto replyCreateDto) {
 		ReplyBoard replyBoard = ReplyBoard.builder()
-											.ReplyBoardContent(replyCreateDto.getReplyBoardContent())
-											.ReplyBoardRegisterDate(replyCreateDto.getReplyBoardRegisterDate())
-											.ReplyBoardGroupNo(replyCreateDto.getReplyBoardGroupNo())
-											.ReplyBoardStep(replyCreateDto.getReplyBoardStep())
-											.ReplyBoardDepth(replyCreateDto.getReplyBoardDepth())
-											.ReplyBoardNo(replyCreateDto.getReplyBoardNo())
+											.replyBoardContent(replyCreateDto.getReplyBoardContent())
+											.replyBoardRegisterDate(replyCreateDto.getReplyBoardRegisterDate())
+											.replyBoardGroupNo(replyCreateDto.getReplyBoardGroupNo())
+											.replyBoardStep(replyCreateDto.getReplyBoardStep())
+											.replyBoardDepth(replyCreateDto.getReplyBoardDepth())
+											.replyBoardNo(replyCreateDto.getReplyBoardNo())
 											.build();
 		return replyBoard;
 	}
 	
 	public static ReplyCreateDto toDto(ReplyBoard replyBoard) {
 		ReplyCreateDto createDto = ReplyCreateDto.builder()
-												.ReplyBoardContent(replyBoard.getReplyBoardContent())
-												.ReplyBoardDepth(replyBoard.getReplyBoardDepth())
-												.ReplyBoardGroupNo(replyBoard.getReplyBoardGroupNo())
-												.ReplyBoardStep(replyBoard.getReplyBoardStep())
-												.ReplyBoardNo(replyBoard.getReplyBoardNo())
-												.ReplyBoardRegisterDate(replyBoard.getReplyBoardRegisterDate())
+												.replyBoardContent(replyBoard.getReplyBoardContent())
+												.replyBoardDepth(replyBoard.getReplyBoardDepth())
+												.replyBoardGroupNo(replyBoard.getReplyBoardGroupNo())
+												.replyBoardStep(replyBoard.getReplyBoardStep())
+												.replyBoardNo(replyBoard.getReplyBoardNo())
+												.replyBoardRegisterDate(replyBoard.getReplyBoardRegisterDate())
 												.reportNo(replyBoard.getReportBoard().getBoardNo())
 												.userNo(replyBoard.getUserinfo().getUserNo())
 												.build();

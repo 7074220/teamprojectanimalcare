@@ -7,6 +7,9 @@ import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +30,7 @@ class ProductServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 				.productPrice(3000)
 				.productCategory("간식")
 				.productImage("cat.jpg")
-				.productStarAvg(3)
+				//.productStarAvg(3)
 				.productQty(2)
 				.build();
 		Product savedProduct1 = productService.insertProduct(product1);
@@ -178,9 +181,30 @@ class ProductServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 	}
 	
 	@Test
-	//@Disabled
+	@Disabled
 	void findAllByOrderByProductByPetCategoryByProductCategoryNoDesc() {
 		List<Product> products = productService.findAllByOrderByProductByPetCategoryByProductCategoryNoDesc("고양이", "사료");
 		System.out.println(products);
+	}
+	
+	/************** 페이징에 필요 ****************/
+	@Test
+	@Disabled
+	void findAllByProductPetCategory() {
+		Pageable pageable = PageRequest.of(0, 10);
+		
+		Page<Product> products = productService.findAllByProductPetCategory("고양이", pageable);
+		
+		System.out.println(products.getContent());
+	}
+	
+	@Test
+	//@Disabled
+	void findAllByProductPetCategoryAndProductCategory() {
+		Pageable pageable = PageRequest.of(0, 5);
+		
+		Page<Product> products = productService.findAllByProductCategoryAndProductPetCategory("사료", "강아지", pageable);
+		
+		System.out.println(products.getContent());
 	}
 }

@@ -37,10 +37,10 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 		// 해당 그룹의 최대 스텝 수
 		Integer maxStep = replyBoardRepository.findGreatestStepByGroupNo(replyBoard.getReplyBoardGroupNo());
 		ReplyBoard board = ReplyBoard.builder()
-					.ReplyBoardGroupNo(replyBoard.getReplyBoardGroupNo())
-					.ReplyBoardDepth(replyBoard.getReplyBoardDepth()+1)
-					.ReplyBoardStep(maxStep+1)
-					.ReplyBoardContent(replyBoard.getReplyBoardContent())
+					.replyBoardGroupNo(replyBoard.getReplyBoardGroupNo())
+					.replyBoardDepth(replyBoard.getReplyBoardDepth()+1)
+					.replyBoardStep(maxStep+1)
+					.replyBoardContent(replyBoard.getReplyBoardContent())
 					.reportBoard(replyBoard.getReportBoard())
 					.userinfo(null)
 					.build();

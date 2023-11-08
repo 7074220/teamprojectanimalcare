@@ -1,25 +1,29 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
-	   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-       layout:decorate="layout/layout(title='마이페이지')">
-<head>
-    <title>Safira - my account</title>
-    <style>
-        .modal-dialog {
-        margin: auto;
-        margin-top: 20vh; /* 회원탈퇴창 가운데 정도로 떨어트림 */
-    }
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='마이페이지')">
 
-    </style>
+<head>
+	<title>Safira - my account</title>
+	<style>
+		.modal-dialog {
+			margin: auto;
+			margin-top: 20vh;
+			/* 회원탈퇴창 가운데 정도로 떨어트림 */
+			
+	}
+			#visitTable{
+		width: 1000px;
+		}
+	</style>
 
 </head>
 
 <body>
 
-   <!--header area start-->
-    <th:block layout:fragment="content">
-    <!--offcanvas menu area start-->
-    <!-- <div class="off_canvars_overlay">
+	<!--header area start-->
+	<th:block layout:fragment="content">
+		<!--offcanvas menu area start-->
+		<!-- <div class="off_canvars_overlay">
                 
     </div>
     <div class="offcanvas_menu">
@@ -151,13 +155,13 @@
             </div>
         </div>
     </div> -->
-    <!--offcanvas menu area end-->
-  
+		<!--offcanvas menu area end-->
 
-    <!--header area end-->
-    
-    <!--breadcrumbs area start-->
-    <!-- <div class="breadcrumbs_area">
+
+		<!--header area end-->
+
+		<!--breadcrumbs area start-->
+		<!-- <div class="breadcrumbs_area">
         <div class="container">   
             <div class="row">
                 <div class="col-12">
@@ -172,81 +176,91 @@
             </div>
         </div>         
     </div> -->
-    <!--breadcrumbs area end-->
-    
-    <!-- my account start  -->
-    <section class="main_content_area">
-        <div class="container">   
-            <div class="account_dashboard">
-                <div class="row">
-                    <div class="col-sm-12 col-md-3 col-lg-3">
-                        <!-- Nav tabs -->
-                        <div class="dashboard_tab_button">
-                            <ul role="tablist" class="nav flex-column dashboard-list">
-                                <li><a href="userinfo" class="nav-link">내정보</a></li>
-                                <li><a href="#mypet"  class="nav-link">마이펫</a></li>
-                                <li><a href="#cuponpage"  class="nav-link">쿠폰</a></li>
-                                <li><a href="adoptByUserNo"  class="nav-link">입양</a></li>
-                                <li><a href="volunteerByUserNo"  class="nav-link">봉사</a></li>
-                                <li><a href="visitByUserNo"  class="nav-link">견학</a></li>
-                                <li> <a href="#orders"  class="nav-link">주문목록</a></li>
-                               <li><a href="logout" class="nav-link">로그아웃</a></li>
-                                <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li>
+		<!--breadcrumbs area end-->
 
-                            </ul>
-                        </div>    
-                    </div>
-      	         <div class="col-sm-12 col-md-9 col-lg-9">
-                        <!-- Tab panes -->
-                        <div class="tab-content dashboard_content">
-                            
-         
+		<!-- my account start  -->
+		<section class="main_content_area">
+			<div class="container">
+				<div class="account_dashboard">
+					<div class="row">
+						<div class="col-sm-12 col-md-3 col-lg-3">
+							<!-- Nav tabs -->
+							<div class="dashboard_tab_button">
+								<ul role="tablist" class="nav flex-column dashboard-list">
+									<li><a href="userinfo" class="nav-link">내정보</a></li>
+									<li><a href="userinfo/mypet" class="nav-link">마이펫</a></li>
+									<li><a href="couponList" class="nav-link">쿠폰</a></li>
+									<li><a href="adoptByUserNo" class="nav-link">입양</a></li>
+									<li><a href="volunteerByUserNo" class="nav-link">봉사</a></li>
+									<li><a href="visitByUserNo" class="nav-link">견학</a></li>
+									<li> <a th:if="${session.userName == '어드민'}" href="ordersList" class="nav-link">관리자
+											전용주문목록</a></li>
+									<li> <a th:if="${session.userName != '어드민'}" href="orders" class="nav-link">주문목록</a></li>
+									<li><a href="logout" class="nav-link">로그아웃</a></li>
+									<li><a href="#" data-toggle="modal" data-target="#deleteModal"
+											class="nav-link">회원탈퇴</a></li>
 
-             
-                            
-                          <!--  <div class="tab-pane fade" id="visit">-->
-                                <h3>견학</h3>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Time</th>
-                                                <th>Date</th>
-                                                <th>Center</th>
-                                                <th>Status</th>                   
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr th:each="visit,visitLatest : ${visitList}">
-                                               <!-- <td th:text="${visit.visitNo}"></td>-->
-                                                <td th:text="${visitList.size() - visitLatest.index}"></td>
-                                                <td th:text="${visit.visitTime}"></td>
-                                                <td th:text="${#strings.substring(visit.visitDate.toString(), 0, 10)}"></td>
-                                                <td th:text="${visit.Center.centerName}"></td>
-                                                <td th:text="${visit.visitStatus}"><span class="success">견학신청</span></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+								</ul>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-9 col-lg-9">
+							<!-- Tab panes -->
+							<div class="tab-content dashboard_content">
+
+
+
+
+
+								<!--  <div class="tab-pane fade" id="visit">-->
+								<h3>견학</h3>
+								<div class="table-responsive" id="visitTable">
+									<table class="table" >
+										<thead>
+											<tr>
+												<th>No</th>
+												<th>Time</th>
+												<th>Date</th>
+												<th>Center</th>
+												<th>Status</th>
+												<th>Delete</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="visit,visitLatest : ${visitList}">
+												<!-- <td th:text="${visit.visitNo}"></td>-->
+												<td th:text="${visitList.size() - visitLatest.index}"></td>
+												<td th:text="${visit.visitTime}"></td>
+												<td th:text="${#strings.substring(visit.visitDate.toString(), 0, 10)}">
+												</td>
+												<td th:text="${visit.Center.centerName}"></td>
+												<td th:text="${visit.visitStatus}"><span class="success">견학신청</span>
+												</td>
+												<td>
+													<button type="submit" class="deleteBtn"
+														th:id="'deleteBtn-' + ${visit.visitNo}">취소</button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
-                                </div>
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                            </section>	
-                            
-    
-    <!-- my account end   --> 
-
-      <!--footer area start-->
-  
- 
-    <!--footer area end-->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
 
-<!-- 회원탈퇴  -->
-<!-- <script>
+		<!-- my account end   -->
+
+		<!--footer area start-->
+
+
+		<!--footer area end-->
+
+
+		<!-- 회원탈퇴  -->
+		<!-- <script>
     $('#confirmDelete').on('click', function() {
         const selectedReason = $('input[name="reason"]:checked').val();
         if (selectedReason) {
@@ -279,16 +293,45 @@
     });
 
 </script> -->
-</th:block>		
+		<script>
+			$('.deleteBtn').on('click', function (e) {
+				e.preventDefault();
+				let id = $(this).attr('id');
+				let no = id.split('-')[1];
+
+				if (isNaN(no)) {
+					alert('visitNo 가져오기실패')
+					return;
+				}
+
+				let sendJsonObject = {visitNo: no};
+				let $row = $(this).closest('tr');
+
+				$.ajax({
+					type: 'DELETE',
+					url: 'visit/' + no,
+					data: JSON.stringify(sendJsonObject),
+					contentType: 'application/json;UTF-8',
+					success: function (response) {
+						if (response && response.visitNo == null) {
+							alert('신청내역이 없음');
+						} else {
+							alert('예약취소가 완료되었습니다.');
+							$row.remove();
+							window.location.href = "index"
+						}
+					},
+					error: function () {
+						alert('취소 요청중 오류가 발생했습니다.');
+					}
+				});
+			});
+
+		</script>
+	</th:block>
 
 
 
 </body>
 
-</html>    
-                            
-                            
-                            
-                            
-            
-                          
+</html>

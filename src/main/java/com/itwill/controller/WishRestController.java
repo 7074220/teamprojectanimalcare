@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itwill.dto.CartDto;
 import com.itwill.dto.WishlistDto;
 import com.itwill.dto.WishlistInsertDto;
 import com.itwill.entity.Wish;
@@ -33,6 +34,9 @@ public class WishRestController {
 	// 서진님... 왜 컨트롤러 안보이냐고  
 	@Autowired
 	private WishService wishService;
+	
+	
+	
 	
 	@Operation(summary = "위시리스트 추가")
 	@PostMapping
@@ -52,12 +56,30 @@ public class WishRestController {
 		return new ResponseEntity<WishlistInsertDto>(dto, httpHeaders, HttpStatus.CREATED);
 	}
 	
+	
+	@Operation(summary = "위시리스트에 담긴 갯수 출력")
+	@GetMapping("/countWishlist/{userNo}")
+	public ResponseEntity<Integer> countWishlist(@PathVariable(name = "userNo") Long userNo, HttpSession session) {
+		Integer count = wishService.countWishlist(userNo);
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<>(count, httpHeaders, HttpStatus.OK);
+	}
+	
+	
 	@Operation(summary = "위시리스트 삭제")
 	@DeleteMapping("/{no}")
 	// delete
 	public void deleteWish(@PathVariable(name = "no") Long no) throws Exception{
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>실행1");
 		wishService.deleteWish(no);
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>실행2");
 	}
+	
+	
+	
 	
 	@Operation(summary = "위시리스트 보기")
 	@GetMapping("/find/{userNo}")

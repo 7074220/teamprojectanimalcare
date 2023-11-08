@@ -1,4 +1,4 @@
-import {petList} from './template-pet-list';
+import {my_account_order} from './template-my-account-order';
 import {ajaxRequest} from './request.js';
 
 //작성진행중
@@ -17,11 +17,11 @@ function init() {
 이벤트등록
 */
 function registEvent() {
-	/*
+	
 	$(window).on('load', function(e) {
 		alert('load  event:' + e);
 	});
-	*/
+	
 	$(window).on('hashchange', function(e) {
 		alert('hashchange event:' + e);
 		hash = window.location.hash
@@ -36,17 +36,21 @@ function registEvent() {
 			window.location.hash = e.target.getAttribute('data-navigate');
 		}
 		
-	$(document).ready(function(){
-    $('#short').change(function(){
-        var selectedValue = $(this).val();  // 선택된 값을 가져옵니다.
-
-        // 선택된 값을 기반으로 새로운 해시를 설정합니다.
-        window.location.hash = 'pet/'+selectedValue;
-        
-    });
-});
+	
 		
 	});
+	
+	$('#orderDetailsModal').on('show.bs.modal',function(e){
+				let index=e.relatedTarget.href.lastIndexOf('#')
+				let orderNo=e.relatedTarget.href.substring(index+1);
+				console.log(orderNo);
+				
+				const responseJsonObject = ajaxRequest('GET','/order/orderItemList/'+orderNo);
+				console.log(responseJsonObject);
+				html = my_account_order(responseJsonObject);
+				$('#orderDetailsModal').html(html); 
+	});
+	
 }
 
 /*
@@ -54,14 +58,10 @@ function registEvent() {
 */
 function navigate() {
 	
-	if (path.startsWith('/guest_write_form')) {
-		/**************** /user_write_action******************/
-		let sendJsonObject = {
-			petType:$("#short").val(),
-		}
-		const responseJsonObject = ajaxRequest('GET','pet/'+'강아지',sendJsonObject);
-		html = petList(responseJsonObject);
-		$('#content').html(html);
+	if (path.startsWith('/orderdetail/')) {
+		/*
+		
+		*/
 	}
 }
 

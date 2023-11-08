@@ -71,6 +71,15 @@ class WishServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 		Wish wish = wishService.findByUserNoProductNo(8L, 1L);
 		System.out.println(wish);	
 	}
+	
+	@Test
+	@Disabled
+	@Transactional
+	@Rollback(false)
+	void countWishlist() {
+		Integer count = wishService.countWishlist(14L);
+		System.out.println(count);
+	}
 }
 
 

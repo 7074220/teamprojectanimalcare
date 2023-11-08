@@ -630,7 +630,12 @@
                           <net.java.amateras.db.visual.model.ColumnModel>
                             <columnName>product_star_avg</columnName>
                             <logicalName>product_star_avg</logicalName>
-                            <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[3]/source/columns/net.java.amateras.db.visual.model.ColumnModel[5]/columnType"/>
+                            <columnType class="net.java.amateras.db.dialect.ColumnType">
+                              <name>DOUBLE PRECISION</name>
+                              <logicalName>Real</logicalName>
+                              <supportSize>false</supportSize>
+                              <type>8</type>
+                            </columnType>
                             <size>10</size>
                             <notNull>false</notNull>
                             <primaryKey>false</primaryKey>

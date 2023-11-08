@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itwill.dto.UserInfoFindDto;
+import com.itwill.dto.UserInfoPassFindDto;
 import com.itwill.dto.UserLoginActionDto;
 import com.itwill.dto.UserWriteActionDto;
 import com.itwill.entity.Coupon;
@@ -29,9 +31,11 @@ import com.itwill.entity.Userinfo;
 import com.itwill.exception.ExistedUserException;
 import com.itwill.exception.PasswordMismatchException;
 import com.itwill.exception.UserNotFoundException;
+import com.itwill.service.CartService;
 import com.itwill.service.CouponService;
 import com.itwill.service.MyPetService;
 import com.itwill.service.UserInfoService;
+import com.itwill.service.WishService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpSession;
@@ -48,6 +52,12 @@ public class UserInfoRestController {
 	
 	@Autowired
 	private MyPetService myPetService;
+	
+	@Autowired
+	private WishService wishService;
+	
+	@Autowired
+	private CartService cartService;
 	
 	// 아이디 중복체크
 	@GetMapping("/idcheck")
@@ -74,6 +84,8 @@ public class UserInfoRestController {
 		
 		coupon = couponService.Create(coupon);
 		
+		
+		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
@@ -87,12 +99,18 @@ public class UserInfoRestController {
 			HttpSession session) throws Exception {
 		Userinfo loginUserCheck = userInfoService.login(dto.getUserId(), dto.getUserPassword());
 		session.setAttribute("userNo", loginUserCheck.getUserNo());
+		session.setAttribute("userName", loginUserCheck.getUserName());
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		
 		dto.setStatus(1000);
-
+		
+		int wishCount = wishService.findAllWishByUserNo(loginUserCheck.getUserNo()).size();
+		session.setAttribute("wishCount", wishCount);
+		int cartCount = cartService.findAllCartByUserId(loginUserCheck.getUserNo()).size();
+		session.setAttribute("cartCount", cartCount);
+		
 		return new ResponseEntity<UserLoginActionDto>(dto, httpHeaders, HttpStatus.OK);
 	}
 
@@ -204,6 +222,40 @@ public class UserInfoRestController {
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		
 		return new ResponseEntity<List<Userinfo>>(userinfos, httpHeaders, HttpStatus.OK);
+	}
+	
+	@Operation(summary = "아이디 찾기")
+	@PostMapping("/findIdUserInfo")
+	public ResponseEntity<UserInfoFindDto> findIdUserInfo(@RequestBody UserInfoFindDto dto) throws Exception {
+		Userinfo userinfo = userInfoService.findUserIdByNameAndPhoneNumber(dto.getUserName(), dto.getUserPhoneNumber());
+		Integer status = 0;
+		if(userinfo==null) {
+			status = 1;
+		}
+		UserInfoFindDto findDto = UserInfoFindDto.builder().userId(userinfo.getUserId()).status(status).build();
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+		return new ResponseEntity<UserInfoFindDto>(findDto,httpHeaders, HttpStatus.OK);
+
+	}
+	
+	@Operation(summary = "비밀번호 찾기")
+	@PostMapping("/findPasswordUserInfo")
+	public ResponseEntity<UserInfoPassFindDto> findPasswordUserInfo(@RequestBody UserInfoPassFindDto dto) throws Exception {
+		Userinfo userinfo = userInfoService.findPasswordByUserIdPhoneNumber(dto.getUserId(), dto.getUserPhoneNumber());
+		Integer status = 0;
+		if(userinfo==null) {
+			status = 1;
+		}
+		UserInfoPassFindDto findDto = UserInfoPassFindDto.builder().userPassword(userinfo.getUserPassword()).status(status).build();
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+		return new ResponseEntity<UserInfoPassFindDto>(findDto,httpHeaders, HttpStatus.OK);
+
 	}
 	
 	@ExceptionHandler(value = ExistedUserException.class)

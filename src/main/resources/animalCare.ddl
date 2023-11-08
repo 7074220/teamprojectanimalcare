@@ -92,6 +92,7 @@ CREATE TABLE Center(
 		center_name                   		VARCHAR2(50)		 NULL ,
 		center_phone_number           		VARCHAR2(50)		 NULL ,
 		center_local                  		VARCHAR2(50)		 NULL ,
+		center_image                 		VARCHAR2(100)		 NULL ,
 		center_open_close_time        		VARCHAR2(50)		 NULL ,
 		local_no                      		NUMBER(10)		 NULL 
 );
@@ -177,7 +178,7 @@ CREATE TABLE Product(
 		product_qty                   		NUMBER(10)		 NULL ,
 		product_image                 		VARCHAR2(100)		 NULL ,
 		product_detail_image          		VARCHAR2(100)		 NULL ,
-		product_star_avg              		NUMBER(10)		 NULL 
+		product_star_avg              		DOUBLE PRECISION		 NULL 
 );
 
 DROP SEQUENCE Product_product_no_SEQ;
@@ -261,7 +262,7 @@ CREATE TABLE ReviewBoard(
 		board_title                   		VARCHAR2(100)		 NULL ,
 		board_content                 		VARCHAR2(100)		 NULL ,
 		board_date                    		DATE		 NULL ,
-		board_star                    		NUMBER(10)		 NULL ,
+		board_star                    		DOUBLE PRECISION		 NULL ,
 		product_no                    		NUMBER(10)		 NULL ,
 		user_no                       		NUMBER(10)		 NULL 
 );

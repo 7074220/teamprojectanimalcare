@@ -2,7 +2,9 @@ package com.itwill.dao;
 
 import java.util.List;
 
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 
 import com.itwill.entity.Product;
 
@@ -59,13 +61,33 @@ public interface ProductDao {
 	
 
 	/*************** 펫 카테고리 및 프로덕트별 정렬 ****************/
+	// 높은 가격순 정렬
 	List<Product> findAllByOrderByProductByPetCategoryByProductCategoryPriceDesc(String productPetCategory, String productCategory);
 	
+	// 낮은 가격순 정렬
 	List<Product> findAllByOrderByProductByPetCategoryByProductCategoryPriceAsc(String productPetCategory, String productCategory);
 	
+	// 평점높은순 정렬
 	List<Product> findAllByOrderByProductByPetCategoryByProductCategoryStarAvgDesc(String productPetCategory, String productCategory);
 	
+	// 최신번호순 정렬
 	List<Product> findAllByOrderByProductByPetCategoryByProductCategoryNoDesc(String productPetCategory, String productCategory);
+	
+	
+	/*************** 페이징 ***************/
+	// 상품 리스트를 반환(시작번호, 끝번호)
+	Page<Product> findProductList(Pageable pageable) throws Exception;
+	
+	// 검색 리스트 반환(시작번호, 끝번호)
+	Page<Product> findProductList(Specification<Product> specification, Pageable pageable) throws Exception;
+	
+	/************** 페이징에 필요 ****************/
+	// 펫 카테고리가 일치하는 모든 상품 출력(query 사용 X)
+	Page<Product> findAllByProductPetCategory(String productPetCategory, Pageable pageable);
+	
+	// 상품의 카테고리와 펫 카테고리가 일치하는 모든 상품 출력(query 사용 X)
+	Page<Product> findAllByProductCategoryAndProductPetCategory(String productCategory, String productPetCategory,  Pageable pageable);
+	
 }
 
 

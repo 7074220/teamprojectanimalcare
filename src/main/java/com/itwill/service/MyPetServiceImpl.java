@@ -47,9 +47,10 @@ public class MyPetServiceImpl implements MyPetService{
 
 	// 마이펫 중 1개 삭제
 	@Override
-	public void deleteMypetByUserNo(Long userNo, Long mypetNo) {
-		myPetDao.deleteMypetByUserNo(userNo, mypetNo);
+	public void deleteMypetByUserNo( Long mypetNo) {
+		myPetDao.deleteMypetByUserNo(mypetNo);
 	}
+	
 	
 	// 마이펫 전체 삭제
 	@Override

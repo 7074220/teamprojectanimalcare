@@ -40,17 +40,6 @@ public class UserInfoController {
 	@Autowired
 	private MyPetService myPetService;
 	
-	
-	@GetMapping("/login")
-	public String login(Model model) throws Exception {
-		return "login";
-	}
-	
-	@GetMapping("/register")
-	public String register(Model model) throws Exception {
-		return "register";
-	}
-	
 	// 관리자가 유저리스트 볼때
 	@GetMapping(value = "/userList")
 	public String list(Model model) throws Exception {
@@ -123,6 +112,16 @@ public class UserInfoController {
 		return "index";
 	}
 	
+	//아이디 찾기,비밀번호 찾기 폼으로 이동
+	@GetMapping("/finduserinfo")
+	public String finduserinfo() {
+		return "finduserinfo";
+	}
 	
+	//아이디 찾은 리스트 폼 이동
+	@GetMapping("/findId")
+	public String findId() {
+		return "findId";
+	}
 	
 }

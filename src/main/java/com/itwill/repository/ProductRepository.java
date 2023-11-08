@@ -2,15 +2,18 @@ package com.itwill.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.itwill.entity.Product;
 import com.itwill.entity.Userinfo;
 
-public interface ProductRepository extends JpaRepository<Product, Long> {
-
+public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpecificationExecutor<Product> {
+	
 	// 일부 단어 입력으로 제품 검색
 	@Query(value = "select * from product where product_name like '%'||?1||'%'", nativeQuery = true)
 	List<Product> findByContains(String productName);
@@ -68,4 +71,13 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 	
 	@Query(value = "select * from product where product_pet_category = ?1 and product_category = ?2 order by product_no desc", nativeQuery = true)
 	List<Product> findAllByOrderByProductByPetCategoryByProductCategoryNoDesc(String productPetCategory, String productCategory);
+	
+	/************** 페이징에 필요 ****************/
+	// 펫 카테고리가 일치하는 모든 상품 출력(query 사용 X)
+	Page<Product> findAllByProductPetCategory(String productPetCategory, Pageable pageable);
+	
+	// 상품의 카테고리와 펫 카테고리가 일치하는 모든 상품 출력(query 사용 X)
+	Page<Product> findAllByProductCategoryAndProductPetCategory(String productCategory, String productPetCategory,  Pageable pageable);
+	
+	
 }

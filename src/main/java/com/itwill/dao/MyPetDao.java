@@ -18,10 +18,12 @@ public interface MyPetDao {
     
      public List<MyPet> findMyPetListByuserNo(Long userNo);
    
-     public void deleteMypetByUserNo(Long userNo,Long mypetNo);
+     public void deleteMypetByUserNo(Long mypetNo);
      
      public void deleteMypetAllByUserNo(Long userNo);
      
      //대표 동물 뽑아오기 
      public MyPet findLeaderMyPet(Long userNo);
+     
+     
 }

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -149,7 +151,27 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.findAllByOrderByProductByPetCategoryByProductCategoryNoDesc(productPetCategory, productCategory);
 	}
 
+	
+	/**************** 페이징 **************/
+	public Page<Product> findProductList(Pageable pageable) throws Exception {
+		
+		Page<Product> productListPage = productDao.findProductList(pageable);
+		
+		return productListPage;
+	}
 
+	
+	/************** 페이징에 필요 ****************/
+	@Override
+	public Page<Product> findAllByProductPetCategory(String productPetCategory, Pageable pageable) {
+		return productDao.findAllByProductPetCategory(productPetCategory, pageable);
+	}
+
+	@Override
+	public Page<Product> findAllByProductCategoryAndProductPetCategory(String productCategory, String productPetCategory,  Pageable pageable) {
+		return productDao.findAllByProductCategoryAndProductPetCategory(productPetCategory, productCategory, pageable);
+	} 
+	
 	
 	
 }

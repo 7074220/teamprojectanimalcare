@@ -1,6 +1,10 @@
 package com.itwill.controller;
 
 import java.nio.charset.Charset;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +26,9 @@ import com.itwill.dto.MyPetCreateDto;
 import com.itwill.dto.MyPetListDto;
 import com.itwill.dto.MypetDto;
 import com.itwill.entity.MyPet;
+import com.itwill.entity.Userinfo;
 import com.itwill.service.MyPetService;
+import com.itwill.service.UserInfoService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpSession;
@@ -34,24 +40,36 @@ public class MyPetRestController {
 	@Autowired
 	private MyPetService myPetService;
 	
+	@Autowired 
+	private UserInfoService userInfoService;
+	
 	// 로그인 상태에서 펫 등록 누름
 	 @Operation(summary = "마이펫등록")
-	 @PostMapping("/create")
-	 public ResponseEntity<List<MypetDto>> MypetCreate(@RequestBody MyPetCreateDto myPetCreateDto , HttpSession session) throws Exception{
+	 @PostMapping("/inserted")
+	 public ResponseEntity<MypetDto> MypetCreate(@RequestBody MypetDto mypetDto , HttpSession session) throws Exception{
+		 	System.out.println(">>>>>>>>>>>>>>>>>>>>>>>맵핑");
 		 	Long userNo = (Long)session.getAttribute("userNo");	
 		 	if(userNo==null) {
 		 		throw new Exception("로그인을 해주세요");
 		 	}
-		 	List<MypetDto> mypetDtos = myPetCreateDto.getMyPets();
-		 	for (MypetDto mypetDto : mypetDtos) {
-		 		myPetService.Create(MypetDto.toEntity(mypetDto));
-			}
+		 	
+		 	Userinfo userinfo=  userInfoService.findUserByNo(userNo);
+		 	
+		 	
+		 	MyPet myPet = MypetDto.toEntity(mypetDto);
+		 	myPet.setUserinfo(userinfo);
+		 	myPetService.Create(myPet);
+		 	
 			HttpHeaders httpHeaders = new HttpHeaders();
 			httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 			
-			return new ResponseEntity<List<MypetDto>>(mypetDtos,httpHeaders ,HttpStatus.OK);
+			return new ResponseEntity<MypetDto>(mypetDto,httpHeaders ,HttpStatus.OK);
 		}
-	
+	 
+	 
+	 
+	 
+	/*
 	@Operation(summary = "마이펫리스트")
 	@GetMapping("/{userNo}")
 	public ResponseEntity<List<MyPetListDto>> MypetList(@PathVariable(name = "userNo")Long userNo) {
@@ -73,11 +91,17 @@ public class MyPetRestController {
 	public void MyPetAllDelete(@PathVariable(name = "userNo")Long userNo) {
 		myPetService.deleteMypetAllByUserNo(userNo);
 	}
+	 */
 	
 	@Operation(summary = "마이펫 1개 삭제")
-	@DeleteMapping("/{userNo}/{mypetNo}")
-	public void MyPetDeleteByUserNo(@PathVariable(name = "userNo")Long userNo,@PathVariable(name = "mypetNo")Long mypetNo) {
-		myPetService.deleteMypetByUserNo(userNo, mypetNo);
+	@DeleteMapping("/{mypetNo}")
+	public void MyPetDeleteByUserNo(@PathVariable(name="mypetNo")Long mypetNo,HttpSession session) throws Exception{
+		System.out.println(">>>>>>>>>>>>>>>맵핑");
+		Long userNo = (Long)session.getAttribute("userNo");	
+	 	if(userNo==null) {
+	 		throw new Exception("로그인을 해주세요");
+	 	}
+		myPetService.deleteMypetByUserNo(mypetNo);
+		
 	}
-	
 }

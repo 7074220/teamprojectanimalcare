@@ -97,4 +97,24 @@ public class UserInfoServiceImpl implements UserInfoService{
 		}
 	}
 	
+	// 아이디 찾기
+	@Override
+	public Userinfo findUserIdByNameAndPhoneNumber(String userName, String userPhoneNumber) {
+		Userinfo userinfo = userInfoDao.findUserIdByNameAndPhoneNumber(userName, userPhoneNumber);
+		if(userinfo==null) {
+			userinfo = Userinfo.builder().userId("").build();
+		}
+		return userinfo;
+	}
+	
+	// 비밀번호 찾기
+	@Override
+	public Userinfo findPasswordByUserIdPhoneNumber(String userId, String userPhoneNumber) {
+		Userinfo userPassword= userInfoDao.findPasswordByUserIdPhoneNumber(userId, userPhoneNumber);
+		if(userPassword==null) {
+			Userinfo.builder().userPassword("").build();
+		}
+		return userPassword;
+	}
+	
 }

@@ -148,7 +148,7 @@
     
     <header>
         <div class="main_header">
-            <div class="header_top">
+            <!-- <div class="header_top">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-6">
@@ -184,7 +184,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="header_middle">
                 <div class="container">
                     <div class="row align-items-center">
@@ -226,12 +226,14 @@
                                 <div class="header_account_area">
                                     <div class="header_account_list register">
                                         <ul th:if="${session.userNo}==null">
+											<!--index가 없으면 reportList에서 resigter누르면 페이지를 부르지 못함 그래서 앞에 index붙임-->
                                             <li><a href="#/user_write_form">Register</a></li>
                                             <li><span>/</span></li>
                                             <li><a href="#/login_form">Login</a></li>
                                         </ul>
                                         <ul th:if="${session.userNo}!=null">
-                                            <li><a href="userinfo" th:text="my-account">Login</a></li>
+                                            <!--<li><a href="userinfo" th:text="${session.userName} 님">Login</a></li>-->
+                                            <li><a href="userinfo" th:text='${session.userName+"님"}'>Login</a></li>
                                             <li><span>/</span></li>
                                             <li><a href="logout" th:text="Logout">Log</a></li>
                                         </ul>
@@ -241,18 +243,18 @@
                                     
                                     
                                    <!--  위시리스트 버튼 -->
-                                    <div class="header_account_list header_wishlist">
-                                        <a href="wishList"><span class="lnr lnr-heart"></span> <span class="item_count">3</span> </a>
+                                    <div class="header_account_list header_wishlist" th:if="${session.userNo}!=null">
+                                        <a href="wishList"><span class="lnr lnr-heart"></span> <span class="item_count" th:text=${session.wishCount}>3</span> </a>
                                     </div>
                                     
                                     
                                     
                                     
                                     
-                                    <div class="header_account_list  mini_cart_wrapper">
-                                       <a href="cartList"><span class="lnr lnr-cart"></span><span class="item_count">2</span></a>
+                                    <div class="header_account_list  mini_cart_wrapper" th:if="${session.userNo}!=null">
+                                       <a href="cartList"><span class="lnr lnr-cart"></span><span class="item_count" th:text=${session.cartCount}>2</span></a>
                                         <!--mini cart-->
-                                        <div class="mini_cart">
+                                    <!--    <div class="mini_cart">
                                             <div class="cart_gallery">
                                                 <div class="cart_close">
                                                 	<div class="cart_text">
@@ -308,7 +310,7 @@
                                                 </div>
 
                                             </div>
-                                        </div>
+                                        </div>-->
                                         <!--mini cart end-->
                                    </div>
                                 </div>
@@ -351,7 +353,7 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6">
+                        <!-- <div class="col-lg-3 col-md-6">
                             <div class="categories_menu">
                                 <div class="categories_title">
                                     <h2 class="categori_toggle">All Cattegories</h2>
@@ -475,7 +477,7 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-lg-6">
                             <!--main menu start-->
                             <div class="main_menu menu_position"> 
@@ -596,18 +598,18 @@
                             </div>
                             <!--main menu end-->
                         </div>
-                        <div class="col-lg-3">
+                        <!-- <div class="col-lg-3">
                             <div class="call-support">
                                 <p><a href="tel:(08)23456789">(08) 23 456 789</a> Customer Support</p>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
         </div> 
     </header>
-    
+	
     </div>
     <!--header area end-->
-    
+
 </html>

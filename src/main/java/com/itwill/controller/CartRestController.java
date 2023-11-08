@@ -86,12 +86,12 @@ public class CartRestController {
 	
 	@Operation(summary = "상품 수량 업데이트")
 	@PutMapping("/{cartNo}")
-	public ResponseEntity<CartDto> updateCartQty(@PathVariable(name = "cartNo") Long no, @RequestBody CartDto dto, HttpSession session) throws Exception {
+	public ResponseEntity<CartDto> updateCartQty(@PathVariable(name = "cartNo") Long cartNo, @RequestBody CartDto dto, HttpSession session) throws Exception {
 		if (session.getAttribute("userNo") == null) {
 			throw new Exception("로그인 하세요.");
 		}
-		
-		Cart findCart = cartService.findByCartNo(no);
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>업뎃"+cartNo);
+		Cart findCart = cartService.findByCartNo(cartNo);
 
 		findCart.setCartQty(dto.getCartQty());
 		cartService.update_qty(findCart);

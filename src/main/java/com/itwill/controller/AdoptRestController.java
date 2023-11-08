@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.AdoptDto;
@@ -33,6 +34,7 @@ import com.itwill.service.PetService;
 import com.itwill.service.UserInfoService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
@@ -41,20 +43,28 @@ public class AdoptRestController {
 
 	@Autowired
 	private AdoptService adoptService;
-	
+	@Autowired
+	private PetService petService;
+	@Autowired
+	private UserInfoService userInfoService;
 	
 	@Operation(summary = "입양신청")
-	@PostMapping
+	@PostMapping("/create-adopt")
 	public ResponseEntity<AdoptDto> insertAdopt(@RequestBody AdoptDto dto, HttpSession session) throws Exception {
-		Adopt adoptEntity = AdoptDto.toEntity(dto);
-
-		adoptService.insertAdopt(adoptEntity);
-
+		Long userNo = (Long)session.getAttribute("userNo");
+		
+		if(userNo==null) {
+			throw new Exception("로그인 해주세요");
+		}
+		
+		dto.setUserNo(userNo);
+		Adopt adopt = AdoptDto.toEntity(dto);
+		adoptService.insertAdopt(adopt);
+		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-
-		return new ResponseEntity<>(dto, httpHeaders, HttpStatus.CREATED);
-	}
+		return new ResponseEntity<AdoptDto>(dto, httpHeaders, HttpStatus.CREATED);
+}
 
 	@Operation(summary = "no로 입양신청 보기")
 	@GetMapping("/{no}")
@@ -71,69 +81,80 @@ public class AdoptRestController {
 	}
 
 	@Operation(summary = "userNo로 입양신청 찾기")
-	@GetMapping("/find/{userNo}")
+	@GetMapping("/{userNo}")
 	public ResponseEntity<List<AdoptDto>> findAdoptsByUserNo(@PathVariable(name = "userNo") Long userNo) {
 		List<Adopt> findAdopt = adoptService.findAdoptsByUserNo(userNo);
 		if (findAdopt.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
 		}
-		List<AdoptDto> adoptDtoList = new ArrayList<>();
+		List<AdoptDto> adoptDtoList = new ArrayList<AdoptDto>();
 
 		for (Adopt adopt : findAdopt) {
 			AdoptDto adoptDto = AdoptDto.fromEntity(adopt);
 			adoptDtoList.add(adoptDto);
 		}
 
-		return ResponseEntity.status(HttpStatus.OK).body(adoptDtoList);
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<List<AdoptDto>>(adoptDtoList,httpHeaders, HttpStatus.OK);
 	}
 
 	@Operation(summary = "no로 삭제")
-	@DeleteMapping("/{no}")
-	public ResponseEntity<Map> deleteAdopt(@PathVariable(value  = "no") Long no) throws Exception {
-		adoptService.deleteAdopt(no);
-		return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>());
+	@DeleteMapping("/{adoptNo}")
+	public ResponseEntity<Map> deleteAdopt(@PathVariable(value  = "adoptNo") Long adoptNo) throws Exception {
+		 try {
+		        adoptService.deleteAdopt(adoptNo);
+		        return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("adoptNo", adoptNo));
+		    } catch (Exception e) {
+		        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		    }
 	}
 
 	@Operation(summary = "no로 입양 수정하기")
-	@PutMapping("/{adoptNo}")
-	public ResponseEntity<AdoptDto> updateAdopt(@PathVariable(value = "adoptNo") Long adoptNo, @RequestBody AdoptDto dto) throws Exception {
-		Adopt findAdopt = adoptService.findByAdoptNo(adoptNo);
+	@PutMapping("/update-adopt")
+	public ResponseEntity<AdoptDto> updateAdopt(@RequestBody AdoptDto dto, HttpServletRequest request, HttpSession session) throws Exception {
+		//HttpSession session=request.getSession();
+		Long userNo=(Long)session.getAttribute("userNo");
 		
+		
+		/* if (userNo == null) { throw new Exception("로그인이 필요합니다."); } */
+		 
+		dto.setUserNo(userNo);
+		 
+		Adopt findAdopt=adoptService.findByAdoptNo(dto.getAdoptNo());
+		Userinfo findUser = userInfoService.findUserByNo(userNo);
+		findAdopt.setUserinfo(findUser);
 		if(findAdopt!=null) {
 			if(dto.getAdoptDate()!=null) {
 				findAdopt.setAdoptDate(dto.getAdoptDate());
 			}
 			
-			if(dto.getAdoptStatus()!=null) {
-				findAdopt.setAdoptStatus(dto.getAdoptStatus());
-			}
+			/*
+			 * if(dto.getAdoptStatus()!=null) {
+			 * findAdopt.setAdoptStatus(dto.getAdoptStatus()); }
+			 */
 			
 			if(dto.getAdoptTime()!=null) {
 				findAdopt.setAdoptTime(dto.getAdoptTime());
 			}
 			
-			/*
-			 * petNo 로 수정 불가?
-			Pet findPet = findAdopt.getPet();
-			if (dto.getPetNo() != null) {
-			    if (findPet != null) {
-			        findAdopt.setPet(findPet);
-			    } else {
-			        // 오류 처리: 해당 ID의 Pet을 찾을 수 없음
-			        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-			    }
-			}
-			*/
 			
-			adoptService.updateAdopt(findAdopt);
-			AdoptDto updatedDto = AdoptDto.fromEntity(findAdopt);
+			
+			Adopt updateAdopt = adoptService.updateAdopt(findAdopt);
+			
+			
+			AdoptDto updatedDto = AdoptDto.fromEntity(updateAdopt);
+			//System.out.println(">>>>>>>>>>>>>>>>>>"+userNo);
+			
+			
 			HttpHeaders httpHeaders = new HttpHeaders();
 			httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 			
-			return new ResponseEntity<>(updatedDto, httpHeaders, HttpStatus.OK);
+			return new ResponseEntity<AdoptDto>(updatedDto, httpHeaders, HttpStatus.OK);
 			
 		}else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<AdoptDto>(HttpStatus.NOT_FOUND);
 		}
 		
 		
