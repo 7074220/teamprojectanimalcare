@@ -26,7 +26,9 @@ import com.itwill.dto.MyPetCreateDto;
 import com.itwill.dto.MyPetListDto;
 import com.itwill.dto.MypetDto;
 import com.itwill.entity.MyPet;
+import com.itwill.entity.Userinfo;
 import com.itwill.service.MyPetService;
+import com.itwill.service.UserInfoService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpSession;
@@ -38,6 +40,9 @@ public class MyPetRestController {
 	@Autowired
 	private MyPetService myPetService;
 	
+	@Autowired 
+	private UserInfoService userInfoService;
+	
 	// 로그인 상태에서 펫 등록 누름
 	 @Operation(summary = "마이펫등록")
 	 @PostMapping("/inserted")
@@ -48,17 +53,22 @@ public class MyPetRestController {
 		 		throw new Exception("로그인을 해주세요");
 		 	}
 		 	
+		 	Userinfo userinfo=  userInfoService.findUserByNo(userNo);
 		 	
 		 	
-		 	
-		 	
-		 	myPetService.Create(MypetDto.toEntity(mypetDto));
+		 	MyPet myPet = MypetDto.toEntity(mypetDto);
+		 	myPet.setUserinfo(userinfo);
+		 	myPetService.Create(myPet);
 		 	
 			HttpHeaders httpHeaders = new HttpHeaders();
 			httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 			
 			return new ResponseEntity<MypetDto>(mypetDto,httpHeaders ,HttpStatus.OK);
 		}
+	 
+	 
+	 
+	 
 	/*
 	@Operation(summary = "마이펫리스트")
 	@GetMapping("/{userNo}")
@@ -81,11 +91,11 @@ public class MyPetRestController {
 	public void MyPetAllDelete(@PathVariable(name = "userNo")Long userNo) {
 		myPetService.deleteMypetAllByUserNo(userNo);
 	}
+	 */
 	
 	@Operation(summary = "마이펫 1개 삭제")
-	@DeleteMapping("/{userNo}/{mypetNo}")
-	public void MyPetDeleteByUserNo(@PathVariable(name = "userNo")Long userNo,@PathVariable(name = "mypetNo")Long mypetNo) {
-		myPetService.deleteMypetByUserNo(userNo, mypetNo);
+	@DeleteMapping("/{mypetNo}")
+	public void MyPetDeleteByUserNo(@PathVariable(name = "mypetNo")Long mypetNo) {
+		myPetService.deleteMypetByUserNo( mypetNo);
 	}
-	*/
 }

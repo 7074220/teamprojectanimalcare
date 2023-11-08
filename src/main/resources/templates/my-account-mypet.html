@@ -52,40 +52,52 @@
 
 									<!--<div class="tab-pane fade" id="adopt">-->
 									<h3>마이펫</h3>
-									<div class="table-responsive">
+									<div class="table-responsive" style="width: 1000px;">
 										<table class="table">
 											<thead>
 												<tr>
+													<label class="checkbox-inline">
+														<input type="checkbox" id="allCheckBox" onclick="allChecked()"
+															checked="true">
+													</label>
 													<th>No</th>
 													<th>이름</th>
 													<th>생일</th>
 													<th>종류</th>
 													<th>대표동물</th>
+													<th class="product_remove">삭제</th>
 												</tr>
 											</thead>
+
 											<tbody>
 												<tr th:each="mypet : ${myPetList}">
 													<!--<td th:text="${mypet.mypetNo}">1</td>-->
 
-													<td th:text="${sequentialNumber}"></td>
+													<td th:text="${mypet.mypetNo}" th:id="${mypet.mypetNo}"></td>
 													<td th:text="${mypet.mypetName}"></td>
-													<td th:text="${formattedDate}"></span></td>
+													<td th:text="${mypet.mypetBirthday}"></span></td>
 													<td th:text="${mypet.mypetKind}"></td>
-													<td th:text="${Name}"></td>
+													<td th:text="${mypet.mypetLeader}"></td>
+													<td class="mypet_remove" th:id="${mypet.mypetNo}"><a
+															class="deleteCart"><i class="fa fa-trash-o"
+																th:id="${mypet.mypetNo}"></i></a></td>
+
 
 
 												</tr>
-										
+
 											</tbody>
 										</table>
+
+										<div class="login_submit">
+											<button id="registerButton" type="button">등록</button>
+										</div>
 									</div>
-									
-									<div class="login_submit">
-										<button id="registerButton" type="button">등록</button>
-									</div>
-									
+
+
+
 								</form>
-								
+
 							</div>
 						</div>
 					</div>
@@ -94,14 +106,37 @@
 		</section>
 
 
-	
-	<script>
-		document.getElementById("registerButton").addEventListener("click", function (e) {
-			// 버튼 클릭 시 실행할 코드
-			//alert('클릭');
-			window.location.href = "registerMyPet"; // 페이지 이동
+
+		<script>
+			document.getElementById("registerButton").addEventListener("click", function (e) {
+				// 버튼 클릭 시 실행할 코드
+				//alert('클릭');
+				window.location.href = "registerMyPet"; // 페이지 이동
+			});
+
+
+			$(document).ready(function () {
+				// 특정 요소를 클릭할 때 그 요소의 부모 행을 삭제
+				$(".mypet_remove").on("click", function () {
+					$(this).closest("tr").remove();
+				});
+			});
+/*
+		$.ajax({
+			url:/mypet/$('#id'),
+			method:,
+			data:,
+			dataType:,
+			contentType:,
+			success:function(){
+				
+			}
+			
+			
 		});
-	</script>
+		
+		*/
+		</script>
 	</th:block>
 
 </body>

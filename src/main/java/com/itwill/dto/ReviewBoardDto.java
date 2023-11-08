@@ -31,7 +31,7 @@ public class ReviewBoardDto {
 	private Date boardDate;
 	private Double boardStar;
 	private Long productNo;
-	   private double averageRating;
+	private double averageRating;
 	
 	public static ReviewBoard toEntity(ReviewBoardDto dto) {
 		ReviewBoard reviewBoard = ReviewBoard.builder()

@@ -1,147 +1,204 @@
 <!doctype html>
 <html class="no-js" lang="kr" xmlns:th="https://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='order')">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout/layout(title='order')">
 <head>
-   <title>Safira - checkout page</title>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<title>Safira - checkout page</title>
+<script
+	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+	$(document).ready(
+			function() {
+				$('#useLoyaltyPoints').click(function() {
 
-$(document).ready(function(){
-    $('#useLoyaltyPoints').click(function() {
-    	
-    	var userPointsValue=$('#userPoints').val();
-        var loyaltyPointsValue = $('#loyaltyPoints').val();
-       	var cartPrice= $('.cart_price').text();
-        var discountval =  parseInt(loyaltyPointsValue);
-        
-        if($('.cart_price').text() < loyaltyPointsValue ){
-        	loyaltyPointsValue = $('.cart_price').text();
-        	alert('적립금이 상품금액을 초과합니다.');
-        	
-        	if(userPointsValue<loyaltyPointsValue){
-        		alert('보유적립금을 초과합니다1.')
-        		return;
-        	}
-        }
-        if(userPointsValue<loyaltyPointsValue){
-    		alert('보유적립금을 초과합니다2.')
-    		return;
-    	}
-    	
-        
-        
-        $('#discount').text('-'+loyaltyPointsValue);
-       // $('#discount').text('-'+loyaltyPointsValue);
-       var cartpirce=parseInt($('.cart_price').text());
-       var total = cartpirce-discountval;
-       if(total > 0){
-    	   total =cartpirce-discountval;
-       }else{
-    	   total =0;
-       }
-       
-       $('#total').text(total);
-         $('#loyaltyPoints').val(loyaltyPointsValue);
-       $('#totprice').val(total);
-        
-    });
-    
-    
-    
-    $('.order_button').click(function() {
-        var orderAddress1 = $('#ordersAddress1').text();
-        var orderAddress2 = $('#ordersAddress2').text();
-        var orderAddress3 = $('#ordersAddress3').text();
-        var orderPrice = $('#total').text();
-        var userPoint = $('#loyaltyPoints').val();
-        
-        console.log(orderAddress);
-       console.log(orderPrice);
-       console.log(userPoint);
-        
-        $('#orderAddress').val(orderAddress);
-        $('#orderPrice').val(orderPrice);
-        $('#userPoint').val(userPoint);
-		
- 		alert( "주소"+$('#orderAddress').val());
- 		alert( "가격"+$('#orderPrice').val());
- 		alert( "포인트"+$('#userPoint').val());
- 		
- 		window.location.href="orderInsert?orderAddress="+orderAddress1+orderAddress2+orderAddress3+"&orderPrice="+orderPrice+"&userPoint="+userPoint;
- 		
-        // '#f'를 사용하여 폼을 선택합니다.
-        /*
-        $('#f').attr('action', 'orderInsert');
-        $('#f').attr('method', 'post');
-        $('#f').submit();
-        */
-    });
-});
+					var userPointsValue = $('#userPoints').val();
+					var loyaltyPointsValue = $('#loyaltyPoints').val();
+					var cartPrice = $('.cart_price').text();
+					var couponPrice=$('#coupon').text();
+					var discountval = parseInt(loyaltyPointsValue);
 
-/* 다음 주소 연동 */
-function execution_daum_address() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+					if ($('.cart_price').text() < loyaltyPointsValue) {
+						loyaltyPointsValue = $('.cart_price').text();
+						alert('적립금이 상품금액을 초과합니다.');
 
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var addr = ''; // 주소 변수
-                var extraAddr = ''; // 참고항목 변수
+						if (userPointsValue < loyaltyPointsValue) {
+							alert('보유적립금을 초과합니다1.')
+							return;
+						}
+					}
+					if (userPointsValue < loyaltyPointsValue) {
+						alert('보유적립금을 초과합니다2.')
+						return;
+					}
 
-                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    addr = data.jibunAddress;
-                }
+					$('#discount').text('-' + loyaltyPointsValue);
+					// $('#discount').text('-'+loyaltyPointsValue);
+					var cartpirce = parseInt($('.cart_price').text());
+					var total = cartpirce - discountval-couponPrice;
+					if (total > 0) {
+						total = cartpirce - discountval-couponPrice;
+					} else {
+						total = 0;
+					}
 
-                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-                if(data.userSelectedType === 'R'){
-                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                        extraAddr += data.bname;
-                    }
-                    // 건물명이 있고, 공동주택일 경우 추가한다.
-                    if(data.buildingName !== '' && data.apartment === 'Y'){
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                    if(extraAddr !== ''){
-                        extraAddr = ' (' + extraAddr + ')';
-                    }
-                    // 조합된 참고항목을 해당 필드에 넣는다.
-                    document.getElementById("ordersAddress2").value = extraAddr;
-                
-                } else {
-                    document.getElementById("ordersAddress2").value = '';
-                }
+					$('#total').text(total);
+					$('#loyaltyPoints').val(loyaltyPointsValue);
+					$('#totprice').val(total);
 
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('postcode').value = data.zonecode;
-                document.getElementById("ordersAddress1").value = addr;
-                // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("ordersAddress3").focus();
-            }
-        }).open();
-    }
+				});
 
+				$('.order_button').click(
+						function() {
+							var orderAddress1 = $('#ordersAddress1').val();
+							var orderAddress2 = $('#ordersAddress2').val();
+							var orderAddress3 = $('#ordersAddress3').val();
+							var orderPrice = $('#total').text();
+							var userPoint = $('#loyaltyPoints').val();
+
+							/*  console.log(orderAddress);
+							console.log(orderPrice);
+							console.log(userPoint);
+							 
+							 $('#orderAddress').val(orderAddress);
+							 $('#orderPrice').val(orderPrice);
+							 $('#userPoint').val(userPoint);
+							
+							alert( "주소"+$('#orderAddress').val());
+							alert( "가격"+$('#orderPrice').val());
+							alert( "포인트"+$('#userPoint').val()); */
+							window.location.href = "orderInsert?orderAddress="
+									+ orderAddress1 + orderAddress2
+									+ orderAddress3 + "&orderPrice="
+									+ orderPrice + "&userPoint=" + userPoint;
+							// '#f'를 사용하여 폼을 선택합니다.
+							/*
+							$('#f').attr('action', 'orderInsert');
+							$('#f').attr('method', 'post');
+							$('#f').submit();
+							 */
+						});
+
+				$('#findcoupon').click(function() {
+
+					$('#coupondetail').modal('show');
+
+				});
+
+				$('#coponconfirm').click(function() {
+					var totalDiscount=$('#coupondiscountprice').text();
+					
+
+					$('#coupon').text(totalDiscount);
+					var cartPrice = parseInt($('.cart_price').text());
+					var couponPrice = parseInt($('#coupon').text());
+					
+					var totPrice=cartPrice-couponPrice;
+					$('#total').text(totPrice);
+					
+					
+
+					$('#coupondetail').modal('hide');
+
+				});
+
+				$('.couponSelect').change(function(e) {
+					var selectedDiscount = parseInt($(this).val());
+					var discountPrice =(100 - selectedDiscount) * 0.01;
+					var productPrice = parseInt($('#cprice').text());
+					var totalDiscount = productPrice * discountPrice;
+					document.querySelectorAll('.couponSelect').forEach(function (v, i) {
+						if(v!=e.target){
+							$(v).find('option').each(function(i,e){
+								
+								if($(e).text()=='생일쿠폰'){
+									$(e).remove();
+									alert('삭제1');
+								}else if($(e).text()=='가입쿠폰'){
+									$(e).remove();
+									alert('삭제2');
+								}
+								
+							});
+						}
+					});
+					
+					
+					//
+					//alert($('option [value=30]'));
+					
+					$('#couponprice').text(selectedDiscount + '%');
+					$('#coupondiscountprice').text(totalDiscount);
+				});
+
+			});
+
+	/* 다음 주소 연동 */
+	function execution_daum_address() {
+		new daum.Postcode(
+				{
+					oncomplete : function(data) {
+						// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+						// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+						var addr = ''; // 주소 변수
+						var extraAddr = ''; // 참고항목 변수
+
+						//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+						if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+							addr = data.roadAddress;
+						} else { // 사용자가 지번 주소를 선택했을 경우(J)
+							addr = data.jibunAddress;
+						}
+
+						// 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+						if (data.userSelectedType === 'R') {
+							// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+							// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+							if (data.bname !== ''
+									&& /[동|로|가]$/g.test(data.bname)) {
+								extraAddr += data.bname;
+							}
+							// 건물명이 있고, 공동주택일 경우 추가한다.
+							if (data.buildingName !== ''
+									&& data.apartment === 'Y') {
+								extraAddr += (extraAddr !== '' ? ', '
+										+ data.buildingName : data.buildingName);
+							}
+							// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+							if (extraAddr !== '') {
+								extraAddr = ' (' + extraAddr + ')';
+							}
+							// 조합된 참고항목을 해당 필드에 넣는다.
+							document.getElementById("ordersAddress2").value = extraAddr;
+
+						} else {
+							document.getElementById("ordersAddress2").value = '';
+						}
+
+						// 우편번호와 주소 정보를 해당 필드에 넣는다.
+						document.getElementById('postcode').value = data.zonecode;
+						document.getElementById("ordersAddress1").value = addr;
+						// 커서를 상세주소 필드로 이동한다.
+						document.getElementById("ordersAddress3").focus();
+					}
+				}).open();
+	}
 </script>
 </head>
 
 <body>
-   <!--header area start-->
-   <th:block layout:fragment="content">
-    <!--offcanvas menu area start-->
-	<form id="f">
-	 <input type="hidden" name="orderAddress" value="" id="orderAddress">
-	 <input type="hidden" name="orderPrice" value="" id="orderPrice">
-	 <input type="hidden" name="userPoint" value="" id="userPoint">
-	</form>
-    
-    
-    <!--
+	<!--header area start-->
+	<th:block layout:fragment="content">
+		<!--offcanvas menu area start-->
+		<form id="f">
+			<input type="hidden" name="orderAddress" value="" id="orderAddress">
+			<input type="hidden" name="orderPrice" value="" id="orderPrice">
+			<input type="hidden" name="userPoint" value="" id="userPoint">
+		</form>
+
+
+		<!--
     <div class="off_canvars_overlay">
                 
     </div>
@@ -274,9 +331,9 @@ function execution_daum_address() {
             </div>
         </div>
     </div>-->
-    <!--offcanvas menu area end-->
-    
-   <!-- <header>
+		<!--offcanvas menu area end-->
+
+		<!-- <header>
         <div class="main_header">
             <div class="header_top">
                 <div class="container">
@@ -367,7 +424,7 @@ function execution_daum_address() {
                                     <div class="header_account_list  mini_cart_wrapper">
                                        <a href="javascript:void(0)"><span class="lnr lnr-cart"></span><span class="item_count">2</span></a>
                                         <!--mini cart-->
-                                      <!--  <div class="mini_cart">
+		<!--  <div class="mini_cart">
                                             <div class="cart_gallery">
                                                 <div class="cart_close">
                                                 	<div class="cart_text">
@@ -424,8 +481,8 @@ function execution_daum_address() {
 
                                             </div>
                                         </div>-->
-                                        <!--mini cart end-->
-                                 <!--  </div>
+		<!--mini cart end-->
+		<!--  </div>
                                 </div>
                             </div>
                         </div>
@@ -591,8 +648,8 @@ function execution_daum_address() {
                             </div>
                         </div>
                         <div class="col-lg-6">-->
-                            <!--main menu start-->
-                           <!-- <div class="main_menu menu_position"> 
+		<!--main menu start-->
+		<!-- <div class="main_menu menu_position"> 
                                 <nav>  
                                     <ul>
                                         <li><a   href="index.html">home<i class="fa fa-angle-down"></i></a>
@@ -659,7 +716,7 @@ function execution_daum_address() {
                                 </nav> 
                             </div>
                             <!--main menu end-->
-                    <!--    </div>
+		<!--    </div>
                         <div class="col-lg-3">
                             <div class="call-support">
                                 <p><a href="tel:(08)23456789">(08) 23 456 789</a> Customer Support</p>
@@ -671,9 +728,9 @@ function execution_daum_address() {
         </div> 
     </header>
     <!--header area end-->
-<!--
+		<!--
     <!--breadcrumbs area start-->
-   <!-- <div class="breadcrumbs_area">
+		<!-- <div class="breadcrumbs_area">
         <div class="container">   
             <div class="row">
                 <div class="col-12">
@@ -688,14 +745,14 @@ function execution_daum_address() {
             </div>
         </div>         
     </div>-->
-    <!--breadcrumbs area end-->
-    
-    <!--Checkout page section-->
-    <div class="Checkout_section mt-70">
-       <div class="container">
-            <div class="row">
-               <div class="col-12">
-                  <!--  <div class="user-actions">
+		<!--breadcrumbs area end-->
+
+		<!--Checkout page section-->
+		<div class="Checkout_section mt-70">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<!--  <div class="user-actions">
                         <h3> 
                             <i class="fa fa-file-o" aria-hidden="true"></i>
                             Returning customer?
@@ -726,7 +783,7 @@ function execution_daum_address() {
                             </div>
                         </div>    
                     </div>-->
-                   <!-- <div class="user-actions">
+						<!-- <div class="user-actions">
                         <h3> 
                             <i class="fa fa-file-o" aria-hidden="true"></i>
                             Returning customer?
@@ -742,22 +799,23 @@ function execution_daum_address() {
                             </div>
                         </div>    
                     </div>    -->
-               </div>
-            </div>
-            <div class="checkout_form">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <form action=""><!--폼시작-->
-                        	
-                        	
-                            <h3>주문자 정보</h3>
-                            <div class="row">
+					</div>
+				</div>
+				<div class="checkout_form">
+					<div class="row">
+						<div class="col-lg-6 col-md-6">
+							<form action="">
+								<!--폼시작-->
 
-                                <div class="col-lg-6 mb-20">
-                                    <label>주문자명 <span>*</span></label>
-                                    <input type="text"  th:value="${user.userName}">     
-                                </div>
-                               <!-- <div class="col-lg-6 mb-20">
+
+								<h3>주문자 정보</h3>
+								<div class="row">
+
+									<div class="col-lg-6 mb-20">
+										<label>주문자명 <span>*</span></label> <input type="text"
+											th:value="${user.userName}">
+									</div>
+									<!-- <div class="col-lg-6 mb-20">
                                     <label>Last Name  <span>*</span></label>
                                     <input type="text"> 
                                 </div>
@@ -765,37 +823,84 @@ function execution_daum_address() {
                                     <label>Company Name</label>
                                     <input type="text">     
                                 </div>-->
-                                
-                                <!--쿠폰목록 시작 select 말고 창으로 해서 쿠폰리스트 출력하도록 변경예정-->
-                                <div class="col-12 mb-20">
-                                
-                                <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  쿠폰조회/적용
-</button>
-<!-- Modal -->
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+									<!--쿠폰목록 시작 select 말고 창으로 해서 쿠폰리스트 출력하도록 변경예정-->
+									<div class="col-12 mb-20">
+
+										<!-- Button trigger modal -->
+										<button type="button" class="btn btn-primary" id="findcoupon"
+											data-bs-toggle="modal" data-bs-target="#exampleModal">
+											쿠폰조회/적용</button>
+										<!-- Modal -->
+
+										<div class="modal fade" id="coupondetail" tabindex="-1"
+											aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content"
+													style="width: 800px; height: 500px;">
+													<div class="modal-header">
+														<h5 class="modal-title" id="orderDetailsModalLabel">쿠폰조회
+														</h5>
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close" style="border: none; padding: 7px;">
+															X
+															<!--<span aria-hidden="true">&times;</span>-->
+														</button>
+													</div>
+													<div class="modal-body">
+														<!-- 주문 상세 내용이 여기에 로드됩니다 -->
+
+														<div class="table-responsive">
+															<table class="table">
+																<thead>
+																	<tr>
+																		<th>상품명</th>
+																		<th>판매가</th>
+																		<th>쿠폰선택</th>
+																		<!--<th>총가격</th>-->
+																		<th>할인률</th>
+																		<th>할인금액</th>
+																	</tr>
+																</thead>
+																<tbody th:each="cart:${cartList}">
+																	<tr>
+																		<td th:text="${cart.product.productName}">1</td>
+																		<td th:text="${cart.product.productPrice}" id="cprice">May
+																			10, 2018</td>
+																		<td>
+																		<select class="form-select form-select-sm couponSelect"
+																			aria-label="Large select example" th:id="'couponSelect'+${cart.product.productNo}">
+																				<option selected>쿠폰선택</option>
+																				<option th:id="${coupon.couponDiscount}" value="1" th:each="coupon:${coupons}"
+																					th:value="${coupon.couponDiscount}"
+																					th:text="${coupon.couponName}">주문확인</option>
+
+																		</select></td>
+																		<td><span class="success" id="couponprice">0</span></td>
+																		<td><span class="success"
+																			id="coupondiscountprice">0</span></td>
+																		<!-- <td>$25.00 for 1 item </td>-->
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+
+													</div>
+													<div class="modal-footer">
+														<!--   <button type="button" class="btn btn-primary">리뷰 저장</button>-->
+														<button type="button" class="btn btn-secondary"
+															data-dismiss="modal">닫기</button>
+														<button type="button" class="btn btn-primary"
+															id="coponconfirm">선택완료</button>
+
+													</div>
+												</div>
+											</div>
+										</div>
 
 
-                                    <!-- <label for="country">쿠폰목록 <span></span></label> -->
-                                    <!-- <select class="select_option" name="cuntry" id="country"> 
+										<!-- <label for="country">쿠폰목록 <span></span></label> -->
+										<!-- <select class="select_option" name="cuntry" id="country"> 
                                         <option th:each="coupon:${coupons}"value="2" th:value="${coupon.couponId}" th:text="${coupon.couponName}">bangladesh</option>      
                                         
                                         
@@ -810,58 +915,60 @@ function execution_daum_address() {
 
 
                                     </select> -->
-                                    
-                                     
-    <!-- 모달 시작 -->
-    
-                                </div>
-                                
-                                 <div class="col-12 mb-20">
-                                   <label>보유 적립금<span> *0원부터 사용가능</span></label>
-                                    <input readonly="readonly"  id="userPoints"th:value="${user.userPoint}" >  
-                                </div> 
-                                <div class="col-lg-6 mb-20">
-                                   <label>사용 적립금<span> *0원부터 사용가능</span></label>
-                                    <input type="text" id="loyaltyPoints">  
-                                    <button type="button" class="btn btn-primary" id="useLoyaltyPoints">사용하기</button>
-                                </div> 
-									
-									
-	
-                                <div class="col-12 mb-20">
-                                    <label>주소  <span>*</span></label>
-                                </div>
-                                
-                                <div class="col-lg-6 mb-20">
-                                   <label>우편주소<span></span></label>
-                                	<button type="button" class="btn btn-secondary btn-sm" onclick="execution_daum_address()">주소찾기</button>
-                                    <input placeholder="우편번호" type="text" id="postcode"> 
-                                </div> 
-                                <div class="col-12 mb-20">
-                                    <input placeholder="기본주소" input readonly="readonly"  id="ordersAddress1"  >      
-                                      <input placeholder="참고항목" input readonly="readonly"  id="ordersAddress2">        
-                                      <input placeholder="상세주소" type="text" id="ordersAddress3">        
-                                </div>
-                                
-                                
-                                <div class="col-12 mb-20">
-                                   <label>휴대폰 번호 <span>*</span></label>
-                                    <input  type="text" th:value="${user.userPhoneNumber}" >   
-                                </div> 
-                                <!-- <div class="col-12 mb-20">
+
+
+										<!-- 모달 시작 -->
+
+									</div>
+
+									<div class="col-12 mb-20">
+										<label>보유 적립금<span> *0원부터 사용가능</span></label> <input
+											readonly="readonly" id="userPoints"
+											th:value="${user.userPoint}">
+									</div>
+									<div class="col-lg-6 mb-20">
+										<label>사용 적립금<span> *0원부터 사용가능</span></label> <input
+											type="text" id="loyaltyPoints">
+										<button type="button" class="btn btn-primary"
+											id="useLoyaltyPoints">사용하기</button>
+									</div>
+
+
+
+									<div class="col-12 mb-20">
+										<label>주소 <span>*</span></label>
+									</div>
+
+									<div class="col-lg-6 mb-20">
+										<label>우편주소<span></span></label>
+										<button type="button" class="btn btn-secondary btn-sm"
+											onclick="execution_daum_address()">주소찾기</button>
+										<input placeholder="우편번호" type="text" id="postcode">
+									</div>
+									<div class="col-12 mb-20">
+										<input placeholder="기본주소" input readonly="readonly"
+											id="ordersAddress1"> <input placeholder="기본주소" input
+											readonly="readonly" id="ordersAddress2"> <input
+											placeholder="상세주소" type="text" id="ordersAddress3">
+									</div>
+
+
+									<div class="col-12 mb-20">
+										<label>휴대폰 번호 <span>*</span></label> <input type="text"
+											th:value="${user.userPhoneNumber}">
+									</div>
+									<!-- <div class="col-12 mb-20">
                                     <label>State / County <span>*</span></label>
                                     <input type="text">    
                                 </div> -->
-                                <div class="col-lg-6 mb-20">
-                                   <label>전화 번호<span></span></label>
-                                    <input type="text"> 
-                                </div> 
-                                 <div class="col-lg-6 mb-20">
-                                   <label> Email   <span></span></label>
-                                      <input type="text"> 
+									<div class="col-lg-6 mb-20">
+										<label>전화 번호<span></span></label> <input type="text">
+									</div>
+									<div class="col-lg-6 mb-20">
+										<label> Email <span></span></label> <input type="text">
 
-                                </div> 
-                               <!-- <div class="col-12 mb-20">
+									</div>
+									<!-- <div class="col-12 mb-20">
                                     <input id="account" type="checkbox" data-target="createp_account" />
                                     <label for="account" data-toggle="collapse" data-target="#collapseOne" aria-controls="collapseOne">Create an account?</label>
 
@@ -872,7 +979,7 @@ function execution_daum_address() {
                                         </div>
                                     </div>
                                 </div>-->
-                              <!--  <div class="col-12 mb-20">
+									<!--  <div class="col-12 mb-20">
                                     <input id="address" type="checkbox" data-target="createp_account" />
                                     <label class="righ_0" for="address" data-toggle="collapse" data-target="#collapsetwo" aria-controls="collapseOne">Ship to a different address?</label>
 
@@ -936,31 +1043,34 @@ function execution_daum_address() {
                                     </div>
                                 </div>
                                 -->
-                                
-                                <div class="col-12">
-                                    <div class="order-notes">
-                                         <label for="order_note">배송메세지</label>
-                                        <textarea id="order_note" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-                                    </div>    
-                                </div>     	    	    	    	    	    	    
-                            </div>
-                       <!-- </form> -->  <!--폼끝--> 
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                       <!--<form action="#">  -->   <!--form 시작-->
-                            <h3>주문 정보</h3> 
-                            <div class="order_table table-responsive">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>상품명</th>
-                                            <th>상품</th>
-                                            <th>수량</th>
-                                            <th>가격</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody th:each="cart:${cartList}">
-                                        <!--<tr>
+
+									<div class="col-12">
+										<div class="order-notes">
+											<label for="order_note">배송메세지</label>
+											<textarea id="order_note"
+												placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+										</div>
+									</div>
+								</div>
+								<!-- </form> -->
+								<!--폼끝-->
+						</div>
+						<div class="col-lg-6 col-md-6">
+							<!--<form action="#">  -->
+							<!--form 시작-->
+							<h3>주문 정보</h3>
+							<div class="order_table table-responsive">
+								<table>
+									<thead>
+										<tr>
+											<th>상품명</th>
+											<th>상품</th>
+											<th>수량</th>
+											<th>가격</th>
+										</tr>
+									</thead>
+									<tbody th:each="cart:${cartList}">
+										<!--<tr>
                                             <td> Handbag  fringilla <strong> × 2</strong></td>
                                             <td> $165.00</td>
                                         </tr>
@@ -972,75 +1082,88 @@ function execution_daum_address() {
                                             <td>  Handbag elit	<strong> × 2</strong></td>
                                             <td> $50.00</td>
                                         </tr>-->
-                                        <tr>
-                                            <td th:text="${cart.product.productName}"> $50.00</td>
-                                            <td><img src="#" alt="" th:src="@{/image/product/} + ${cart.product.getProductImage}"> </td >
-                                            <td th:text="${cart.cartQty}"> $50.00</td>
-                                            <td class="subtotal" th:text="(${cart.product.productPrice})*(${cart.cartQty})"> $50.00</td >
-                                        </tr>
-                                    </tbody >
-                                    
-                                    <tfoot>
-                                        <tr>
-                                            <th>상품 합계 금액</th>
-                                            <td class="cart_price" th:text="${cartTotalPrice}">25000</td>
-                                        </tr>
-                                        <tr>
-                                            <th>적립금 사용</th>
-                                            <td id="discount"><strong>-0</strong></td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <th>쿠폰 사용</th>
-                                            <td id="coupon"><strong>-0</strong></td>
-                                        </tr>
-                                        <tr class="order_total">
-                                            <th >총 주문금액</th>
-                                            <td id="total" th:text="${cartTotalPrice}"><strong>$220.00</strong></td>
-                                           
-                                        </tr>
-                                    </tfoot>
-                                    
-                                </table>     
-                            </div>
-                            <div class="payment_method">
-                               <div class="panel-default">
-                                    <input id="payment" name="check_method" type="radio" data-target="createp_account" />
-                                    <label for="payment" data-toggle="collapse" data-target="#method" aria-controls="method">Create an account?</label>
+										<tr>
+											<td th:text="${cart.product.productName}">$50.00</td>
+											<td><img src="#" alt=""
+												th:src="@{/image/product/} + ${cart.product.getProductImage}">
+											</td>
+											<td th:text="${cart.cartQty}">$50.00</td>
+											<td class="subtotal"
+												th:text="(${cart.product.productPrice})*(${cart.cartQty})">
+												$50.00</td>
+										</tr>
+									</tbody>
 
-                                    <div id="method" class="collapse one" data-parent="#accordion">
-                                        <div class="card-body1">
-                                           <p>Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
-                                        </div>
-                                    </div>
-                                </div> 
-                               <div class="panel-default">
-                                    <input id="payment_defult" name="check_method" type="radio" data-target="createp_account" />
-                                    <label for="payment_defult" data-toggle="collapse" data-target="#collapsedefult" aria-controls="collapsedefult">PayPal <img src="assets/img/icon/papyel.png" alt=""></label>
+									<tfoot>
+										<tr>
+											<th>상품 합계 금액</th>
+											<td class="cart_price" th:text="${cartTotalPrice}">25000</td>
+										</tr>
+										<tr>
+											<th>적립금 사용</th>
+											<td id="discount"><strong>-0</strong></td>
+										</tr>
 
-                                    <div id="collapsedefult" class="collapse one" data-parent="#accordion">
-                                        <div class="card-body1">
-                                           <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p> 
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="order_button">
-                                    <button  type="button" id="insert">Proceed to PayPal</button> 
-                                </div>    
-                            </div> 
-                        </form> <!--orderform-->        
-                    </div>
-                </div> 
-            </div> 
-        </div>       
-    </div>-->
+										<tr>
+											<th>쿠폰 사용</th>
+											<td id="coupon"><strong>-0</strong></td>
+										</tr>
+										<tr class="order_total">
+											<th>총 주문금액</th>
+											<td id="total" th:text="${cartTotalPrice}"><strong>$220.00</strong></td>
+
+										</tr>
+									</tfoot>
+
+								</table>
+							</div>
+							<div class="payment_method">
+								<div class="panel-default">
+									<input id="payment" name="check_method" type="radio"
+										data-target="createp_account" /> <label for="payment"
+										data-toggle="collapse" data-target="#method"
+										aria-controls="method">Create an account?</label>
+
+									<div id="method" class="collapse one" data-parent="#accordion">
+										<div class="card-body1">
+											<p>Please send a check to Store Name, Store Street, Store
+												Town, Store State / County, Store Postcode.</p>
+										</div>
+									</div>
+								</div>
+								<div class="panel-default">
+									<input id="payment_defult" name="check_method" type="radio"
+										data-target="createp_account" /> <label for="payment_defult"
+										data-toggle="collapse" data-target="#collapsedefult"
+										aria-controls="collapsedefult">PayPal <img
+										src="assets/img/icon/papyel.png" alt=""></label>
+
+									<div id="collapsedefult" class="collapse one"
+										data-parent="#accordion">
+										<div class="card-body1">
+											<p>Pay via PayPal; you can pay with your credit card if
+												you don’t have a PayPal account.</p>
+										</div>
+									</div>
+								</div>
+								<div class="order_button">
+									<button type="button" id="insert">Proceed to PayPal</button>
+								</div>
+							</div>
+							</form>
+							<!--orderform-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>-->
     
     
    
     <!--Checkout page section end-->
-    
-     <!--footer area start-->
-   <!-- <footer class="footer_widgets footer_border">
+
+		<!--footer area start-->
+		<!-- <footer class="footer_widgets footer_border">
         <div class="container">
             <div class="footer_top">
                 <div class="row">
@@ -1096,13 +1219,17 @@ function execution_daum_address() {
                                         <button id="mc-submit">Subscribe</button>
                                     </form>
                                     <!-- mailchimp-alerts Start -->
-                                    <div class="mailchimp-alerts text-centre">
-                                        <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-                                        <div class="mailchimp-success"></div><!-- mailchimp-success end -->
-                                        <div class="mailchimp-error"></div><!-- mailchimp-error end -->
-                                    </div><!-- mailchimp-alerts end -->
-                                
-       <!-- <div class="footer_bottom">
+		<div class="mailchimp-alerts text-centre">
+			<div class="mailchimp-submitting"></div>
+			<!-- mailchimp-submitting end -->
+			<div class="mailchimp-success"></div>
+			<!-- mailchimp-success end -->
+			<div class="mailchimp-error"></div>
+			<!-- mailchimp-error end -->
+		</div>
+		<!-- mailchimp-alerts end -->
+
+		<!-- <div class="footer_bottom">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-md-7">
@@ -1124,11 +1251,11 @@ function execution_daum_address() {
              </div>   
         </div>  
     </footer>-->
-    <!--footer area end-->
-    
-  
+		<!--footer area end-->
 
-</th:block>
+
+
+	</th:block>
 
 </body>
 

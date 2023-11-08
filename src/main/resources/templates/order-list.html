@@ -4,7 +4,7 @@
 
 <head>
 	<title>Safira - cart page</title>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>	
 
 	<!-- 별점 css 위치 -->
 	<style>
@@ -87,8 +87,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											
-											
+																					
 										</tbody>
 
 									</table>
@@ -117,67 +116,46 @@
 
 									<div>
 										<!--class="table-responsive"-->
+										
+										<input type="hidden" id="userid" name="userNo" th:value="${userNo}" />
 
-										<!--<table class="table">
-                                        <thead>
-                                            <tr>
-												<th>번호</th>
-												<th>구입날짜</th>
-												<th>상품명</th>
-												<th>총가격</th>
-												<th>주문상태</th>
-												<th>리뷰</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>May 10, 2018</td>
-                                                <td><span class="success">고양이캔조림</span></td>
-                                                <td>$25.00 for 1 item </td>
-                                                <td>배송완료 </td>
-                                                <td><a href="cart.html" class="view">리뷰쓰기</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>-->
 
 
 										<!--<h3>리뷰작성</h3>-->
 										<div class="comments_form">
-
-											<form action="#" class="mb-3" name="myform" id="myform" method="post">
+											<form action="/create-reviewBoard" class="mb-3" name="reviewForm" id="reviewForm" method="post">
 
 												<p>별점과 후기를 남겨주세요.</p>
 												<div class="row" style="flex-direction: column;">
-
 													<div>별점</div>
 													<!-- 별점 위치 -->
 													<div class="rating_box">
 														<div class="rating">
 															★★★★★
 															<span class="rating_star">★★★★★</span>
-															<input type="range" value="1" step="1" min="0" max="10">
+															<input type="range" name="boardStar" value="1" step="1" min="0" max="10">
 														</div>
 													</div>
-
 													<div class="col-12">
-														<label for="review_comment">Comment </label>
-														<div> <textarea name="comment" id="review_comment"></textarea>
+														<label for="review_comment">Comment</label>
+														<div>
+															<textarea name="boardContent" id="review_comment"></textarea>
+																
+									
 														</div>
-
 													</div>
 												</div>
-												<!--<button class="button" type="submit">Post Comment</button>-->
 											</form>
-
+											<!--<button class="button" type="submit">Post Comment</button>-->
+										
 										</div>
 									</div>
 
 								</div>
 								<div class="modal-footer">
 									<!--   <button type="button" class="btn btn-primary">리뷰 저장</button>-->
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">작성 완료</button>
-
+									<!--<button type="button" class="btn btn-secondary" data-dismiss="modal">작성 완료</button>-->
+								<button class="submit" type="submit" >리뷰 작성</button>
 								</div>
 							</div>
 						</div>
@@ -219,6 +197,66 @@
 			});
 
 		</script>
+
+
+
+<script>
+    // 리뷰 작성 모달을 열 때 실행
+    $('#orderDetailsModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); 
+        var userNo = button.data('userno');
+        var modal = $(this);
+        modal.find('#userNo').val(userNo); 
+    });
+</script>
+
+<script>
+	
+	function ajaxRequest(method, url, sendJsonObject) {
+		let returnResultJsonObject={};
+		$.ajax({
+			async:false,
+			method: method,
+			url: url,
+			contentType: 'application/json;UTF-8',
+			data: JSON.stringify(sendJsonObject),
+			type: 'json',
+			success: function(resultJsonObject) {
+				returnResultJsonObject = resultJsonObject;
+			}
+		});
+		return returnResultJsonObject;
+	}
+
+//AJAX 요청
+$(document).ready(function () {
+    $('#submit').click(function () {
+        var formData = {
+            userNo: $('#userid').val(),
+            boardStar: $('#boardStar').val(), // boardStar: $('.rating input[name="boardStar"]').val(),
+            boardContent: $('#review_comment').val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/reviewBoard/create-reviewBoard', 
+            data: JSON.stringify(formData),
+            contentType: 'application/json',
+            success: function (response) {
+                // 성공 시 처리
+                console.log('리뷰 작성 성공:', response);
+                // 모달 닫기
+                $('#orderDetailsModal').modal('hide');
+            },
+            error: function (error) {
+                console.error('리뷰 작성 오류:', error);
+                alert('리뷰 작성 중 오류가 발생했습니다.');
+            }
+        });
+    });
+});
+
+</script> 
 
 		</th:block>
 

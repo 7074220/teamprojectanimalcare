@@ -72,12 +72,13 @@ function navigate() {
 		html = reviewBoard(responseObject);
 		$('#reviewContent').html(html);
 	}
+	
 	if (path == '/reviewRatingDesc') {
 		let productNo = $('#productNo').val();
 		let sendObject = {
 			productNo : productNo
 		}
-		let responseObject = ajaxRequest('POST','reviewBoard/productDetail',sendObject);
+		let responseObject = ajaxRequest('POST','reviewBoard/productDetailDate',sendObject);
 		console.log(responseObject);
 		html = reviewBoard(responseObject);
 		$('#reviewContent').html(html);
