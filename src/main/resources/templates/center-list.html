@@ -62,7 +62,7 @@
 						<!--shop toolbar end-->
 						<div class="row shop_wrapper grid_list">
 							
-							<div class="col-12" th:each="center: ${centers}" >
+							<div class="col-12" th:each="center: ${centerList}">
 									
 								<div class="single_product">
 									
@@ -97,6 +97,7 @@
                     <span class="old_price">$362.00</span>
                 </div>
 									</div>-->
+												<p><img th:src="@{image/center/} + ${center.centerImage}"></p>
 									</div>
 									<div class="product_content list_content">
 										<div class="price_box" style="margin-bottom: 20px;">
