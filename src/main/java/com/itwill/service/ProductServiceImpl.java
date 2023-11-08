@@ -158,6 +158,18 @@ public class ProductServiceImpl implements ProductService {
 		Page<Product> productListPage = productDao.findProductList(pageable);
 		
 		return productListPage;
+	}
+
+	
+	/************** 페이징에 필요 ****************/
+	@Override
+	public Page<Product> findAllByProductPetCategory(String productPetCategory, Pageable pageable) {
+		return productDao.findAllByProductPetCategory(productPetCategory, pageable);
+	}
+
+	@Override
+	public Page<Product> findAllByProductCategoryAndProductPetCategory(String productCategory, String productPetCategory,  Pageable pageable) {
+		return productDao.findAllByProductCategoryAndProductPetCategory(productPetCategory, productCategory, pageable);
 	} 
 	
 	
