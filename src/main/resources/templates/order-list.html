@@ -57,6 +57,8 @@
 			color: #ffff00 !important;
 		}
 	</style>
+	
+	
 
 </head>
 
@@ -103,16 +105,34 @@
 											</tr>
 										</thead>
 										<tbody>
-											
+											<tr>
+												<td>asd</td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td><div class="cart_submit view">
+														<!--<button type="submit">리뷰작성</button>-->
+														<button type="submit" data-action="create">리뷰작성</button>
+													</div></td>
+											</tr>
 										</tbody>
 									</table>
 								</div>
-
-								<div class="cart_submit view">
+								
+								<!--<div class="cart_submit view">-->
 									<!--<button type="submit">리뷰작성</button>-->
-									<button type="submit" data-action="create">리뷰작성</button>
+									<!--<button type="submit" data-action="create">리뷰작성</button>-->
+								<!--</div>-->
+								
+								<!-- 추가추가추가 -->
+								<!-- 사용자의 리뷰 목록 -->
+								<div th:each="reviewBoard : ${userReviews}">
+									<p>별점: <span th:text="${reviewBoard.star}"></span></p>
+									<p>리뷰 내용: <span th:text="${reviewBoard.content}"></span></p>
 								</div>
-
 
 							</div>
 						</div>
@@ -131,33 +151,6 @@
 									</button>
 								</div>
 								<div class="modal-body">
-									<!-- 주문 상세 내용이 여기에 로드됩니다 -->
-
-									<div>
-										<!--class="table-responsive"-->
-
-										<!--<table class="table">
-                                        <thead>
-                                            <tr>
-												<th>번호</th>
-												<th>구입날짜</th>
-												<th>상품명</th>
-												<th>총가격</th>
-												<th>주문상태</th>
-												<th>리뷰</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>May 10, 2018</td>
-                                                <td><span class="success">고양이캔조림</span></td>
-                                                <td>$25.00 for 1 item </td>
-                                                <td>배송완료 </td>
-                                                <td><a href="cart.html" class="view">리뷰쓰기</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>-->
 
 
 										<!--<h3>리뷰작성</h3>-->
@@ -227,6 +220,7 @@
 			// 주문 상세 모달 표시 이벤트 핸들러
 			document.querySelector('.cart_submit button').addEventListener('click', function (e) {
 				e.preventDefault();
+					
 
 				// 모달창 표시
 				$('#orderDetailsModal').modal('show');
@@ -240,6 +234,7 @@
 
 					// 여기서 선택한 별점 값을 변수에 할당하거나, AJAX 요청의 formData 객체에 추가할 수 있습니다.
 				});
+					
 			
 			function ajaxRequest(method, url, sendJsonObject) {
 			let returnResultJsonObject={};
