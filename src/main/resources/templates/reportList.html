@@ -28,6 +28,10 @@
 		<div class="album py-5 bg-body-tertiary">
 			<div class="container">
 
+					<a class="button" href="#" th:href="@{reportWrite}">글쓰기</a>
+					 <!-- <button class="button" type="submit">글쓰기</button> -->
+					 <br>
+					 <br>
 				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
 					<div class="col" th:each="reportboard : ${reportBoardList}">
                   <!--  <div class="card shadow-sm">-->
@@ -47,9 +51,10 @@
 							<div class="card-body">
 									<tr>
 										<th width=280 align=center bgcolor="E6ECDE" th:text="${reportboard.boardTitle}">제목</th></br>
+										<th width=280 align=center bgcolor="E6ECDE" th:text='${"발견장소 : " + reportboard.boardTitle}'>발견 장소</th></br>
 									</tr>
 							</div>
-							<small class="text-body-secondary"><span style="margin-left: 20px;" th:text="${#dates.format(reportboard.boardRegisterDate, 'yyyy년 MM월 dd일')}">글쓴이 </span> </small>
+							<small class="text-body-secondary"><span style="margin-left: 20px;" th:text="${#dates.format(reportboard.boardRegisterDate, 'yyyy년 MM월 dd일')}">작성 날짜</span> </small>
 						<!--</div>-->
 					</div>
 					
@@ -261,8 +266,13 @@
 						</div>
 					</div>-->
 				</div>
-			</parent>
+			<!-- </parent> -->
 		</div>
 		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
 	</th:block>
 </body>
