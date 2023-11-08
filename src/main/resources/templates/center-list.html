@@ -10,6 +10,7 @@
 
 	<!--header area start-->
 
+	<th:block layout:fragment="content">
 	<!--offcanvas menu area start-->
 
 	<!--header area end-->
@@ -18,11 +19,15 @@
 	<!--breadcrumbs area start-->
 
 	<!--breadcrumbs area end-->
-	<th:block layout:fragment="content">
 		<!--shop  area start-->
 		<div class="shop_area shop_fullwidth mt-70 mb-70">
+			
 			<div class="container">
+				<div>
+					<div id="map" style="width: 500px; height: 400px;"></div>
+				</div>
 				<div class="row">
+					
 					<div class="col-12">
 						<!--shop wrapper start-->
 						<!--shop toolbar start-->
@@ -58,8 +63,11 @@
 						</div>
 						<!--shop toolbar end-->
 						<div class="row shop_wrapper grid_list">
+							
 							<div class="col-12" th:each="center: ${centers}">
+								
 								<div class="single_product">
+									
 									<div class="product_thumb">
 
 										<!-- 
@@ -650,6 +658,21 @@
 				</div>
 			</div>
 		</div>
+		
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b20eb4e64e9d02d04ba2edbb0741650"></script>
+		<script>
+			var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+	var options = { //지도를 생성할 때 필요한 기본 옵션
+		center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+		level: 3 //지도의 레벨(확대, 축소 정도)
+	};
+
+	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+			
+			
+			
+		</script>
+		
 	</th:block>
 	<!--shop  area end-->
 
