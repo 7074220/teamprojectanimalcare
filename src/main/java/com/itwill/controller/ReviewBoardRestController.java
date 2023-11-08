@@ -48,19 +48,21 @@ public class ReviewBoardRestController {
 	@Operation(summary = "리뷰작성")
 	@PostMapping("/createReviewBoard")
 	public ResponseEntity<ReviewBoardDto> createReviewBoard(@RequestBody ReviewBoardDto dto, HttpSession session) throws Exception {
-	   Long userNo=(Long)session.getAttribute("userNo");
+		Long userNo=(Long)session.getAttribute("userNo");
 		
 		dto.setUserNo(userNo);
-		
 		
 		ReviewBoard reviewBoardEntity = ReviewBoardDto.toEntity(dto);
 	  
 	    reviewBoardService.create(reviewBoardEntity);
 	  
+	    System.out.println(">>>>>>>>>>>>>>"+dto.getUserNo());
+		System.out.println(">>>>>>>>>>>>>>"+dto.getProductNo());
+	    
 	    HttpHeaders httpHeaders = new HttpHeaders();
 	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-	    return new ResponseEntity<>(dto, httpHeaders, HttpStatus.CREATED);
+	    return new ResponseEntity<ReviewBoardDto>(dto, httpHeaders, HttpStatus.CREATED);
 	}
 	
 	
