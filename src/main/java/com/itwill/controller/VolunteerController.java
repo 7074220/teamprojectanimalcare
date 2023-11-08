@@ -105,7 +105,7 @@ public class VolunteerController {
 	*/
 	
 	// userNo 로 봉사 리스트 조회. 로그인한 회원
-	@GetMapping("/volunteerByUserNo")
+	@GetMapping("/volunteerByUserNo") // 이게 원본
 	public String findByVolunteerListUserNo(Model model, HttpSession session) throws Exception {
 		Long userNo=(Long)session.getAttribute("userNo");
 		Userinfo user=userInfoService.findUserByNo(userNo);
