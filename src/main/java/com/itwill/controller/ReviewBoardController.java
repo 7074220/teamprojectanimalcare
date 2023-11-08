@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.itwill.dto.ReviewBoardDto;
 import com.itwill.entity.Product;
@@ -92,6 +93,7 @@ public class ReviewBoardController {
 	}
 	
 	
+	
 	// 로그인 후 마이페이지에서 리뷰작성
 	@PostMapping("/create-reviewBoard")
 	public String createReviewBoard(@RequestParam Double boardStar, @RequestParam String boardContent, HttpSession session, Model model) throws Exception {
@@ -109,7 +111,6 @@ public class ReviewBoardController {
 
 	    return "redirect:/my-account-orders";
 	}
-
 
 	
 	
