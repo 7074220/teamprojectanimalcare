@@ -46,11 +46,11 @@ export function user_login_form(responseJsonObject = {}) {
       </div>
       </div>
       <script>
-		  	$('#loginForm').keypress(function(e){
-				  if(e.keyCode==13){
-					  window.location.hash = '/login'
-				  }
-			  });
+		$('#loginForm').keypress(function(e){
+			  if(e.keyCode==13){
+				  window.location.hash = '#/login'
+			  }
+		  });
 		</script>
    </th:block>`;
 	

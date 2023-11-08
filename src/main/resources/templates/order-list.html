@@ -3,8 +3,6 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='리뷰작성')">
 
 <head>
-	<link href="/assets/css/star.css" rel="stylesheet" />
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<title>Safira - cart page</title>
 
 
@@ -12,7 +10,6 @@
 
 	<style>
 		@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
-
 		.rate {
 			display: inline-block;
 			border: 0;
@@ -20,18 +17,15 @@
 			text-align: left;
 			direction: rtl;
 		}
-
 		.rate>input {
 			display: none;
 		}
-
 		.rate>label {
 			font-size: 3em;
 			color: #ddd;
 			position: relative;
 			display: inline-block;
 		}
-
 		.rate>label:before {
 			display: inline-block;
 			font-size: 1rem;
@@ -42,7 +36,6 @@
 			content: "\f005 ";
 			text-align: left;
 		}
-
 		.rate .half:before {
 			content: "\f089 ";
 			position: absolute;
@@ -50,14 +43,12 @@
 			left: 0;
 			/* 왼쪽에서 시작하도록 위치 조정 */
 		}
-
 		.rate input:checked~label,
 		.rate label:hover,
 		.rate label:hover~label {
 			width: auto;
 			color: #ffff00 !important;
 		}
-
 		.rate input:checked+.rate label:hover,
 		.rate input input:checked~label:hover,
 		.rate input:checked~.rate label:hover~label,
@@ -112,13 +103,14 @@
 											</tr>
 										</thead>
 										<tbody>
-
+											
 										</tbody>
 									</table>
 								</div>
 
 								<div class="cart_submit view">
-									<button type="submit">리뷰작성</button>
+									<!--<button type="submit">리뷰작성</button>-->
+									<button type="submit" data-action="create">리뷰작성</button>
 								</div>
 
 
@@ -172,7 +164,7 @@
 										<div class="comments_form">
 
 											<form th:action="@{/reviewBoard/createReviewBoard}" class="mb-3" name="myform" id="myform" method="post">
-												<input type="hidden" id="userNo" th:value="${user.userNo}" />
+												<input type="hidden" id="userNo" th:value="${userNo}" />
 											
 												<!--<input type="hidden" id="productNo" th:value="${user.userNo}"/>-->
 											
@@ -228,6 +220,7 @@
 
 
 		<!--주문한 상품 리뷰쓰기 -->
+		
 		<script>
 			
 			
@@ -265,106 +258,62 @@
 		}
 			
 			
+			function updateSubmitButton() {
+					const submitButton = document.querySelector('.cart_submit button');
+					submitButton.textContent = '리뷰완료';
+				}
+			
+			
 			$('.submit').on('click', function(event) {
 	        event.preventDefault();
 	       
-	     
+	       const now = new Date();
+		   const year = now.getFullYear();
+		   const month = (now.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더하고 2자리로 포맷팅
+		   const day = now.getDate().toString().padStart(2, '0'); // 일을 2자리로 포맷팅
+    	   const formattedDate = `${year}-${month}-${day}`;
+    	  
 	       let boardStar = $('.rate:checked').val();
-	       console.log('선택한 별점@@@@@@@@@@@:',boardStar)
+	    
 		   let review_comment = $('#review_comment').val();
-		   console.log('리뷰 내용#########:',review_comment)
+		  
 		   let userNo = $('#userNo').val();
-	        console.log('userNo#########:',userNo)
+	    
 	        let sendJsonObject = {
-			
+				userNo:userNo,
 	            boardStar: boardStar,
-	            review_comment: review_comment
-	         
+	            boardContent: review_comment,
+	         	boardDate:formattedDate
 	        };
 	        console.log(sendJsonObject)
-	       let responseObject=ajaxRequest('POST','/reviewBoard/createReviewBoard',sendJsonObject);
+	       let responseObject=ajaxRequest('POST','reviewBoard/createReviewBoard',sendJsonObject);
 	       console.log(responseObject)
-	      	/*
+	      	
 	  		if(responseObject.userNo == null){
 				alert('로그인이 필요합니다.');
 				window.location.href = 'index';	// 로그인 창으로 이동
 			}else{
-				alert("수정이 완료되었습니다.");
-				
+				alert("리뷰작성이 완료되었습니다.");
+				updateSubmitButton();
 			}
-	  		*/
+	  		
 	    });
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			
 			
 		</script>
 
-
-
-
-<script>
-    $(document).ready(function () {
-        let savedData = {
-            rate: null,
-            comment: ""
-        };
-
-        // 모달이 닫힐 때 데이터를 저장
-        $('#orderDetailsModal').on('hidden.bs.modal', function (e) {
-            savedData.rate = $('input[name="rate"]:checked').val();
-            savedData.comment = $('#review_comment').val();
-        });
-
-        // 모달이 열릴 때 저장된 데이터를 별점 및 리뷰 입력란에 채우기
-        $('#orderDetailsModal').on('show.bs.modal', function (e) {
-            $('input[name="rate"][value="' + savedData.rate + '"]').prop('checked', true);
-            $('#review_comment').val(savedData.comment);
-        });
-
-        // "작성 완료" 버튼 클릭 시 모달을 닫음
-        $('#closeModal').click(function () {
-            $('#orderDetailsModal').modal('hide');
-        });
-    });
-</script>
-
-
-
-
-
-
-
-
-
+		
+		
 
 
 
 
 		</th:block>
 
-
-
 		<!--footer area start-->
 
 		<!--footer area end-->
-
 
 </body>
 
