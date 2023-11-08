@@ -75,7 +75,7 @@
                     <span class="label_sale">Sale</span>
                     <span class="label_new">New</span>
                 </div>-->
-										<div class="action_links">
+									<!--	<div class="action_links">
 											<ul>
 												<li class="add_to_cart">
 													<a href="visit" title="Add to cart">견학신청</a>
@@ -84,33 +84,42 @@
 													<a href="volunteer" title="Add to cart">봉사신청</a>
 												</li>
 											</ul>
-										</div>
+										</div>-->
 									</div>
-									<div class="product_content grid_content">
+									
+									<!--<div class="product_content grid_content">
 										<h4 class="product_name">
 											<a th:href="@{/center-details(centerNo=${center.centerNo})}"
 												th:text="${center.centerName}">센터명</a>
 										</h4>
 										<p th:text="${center.centerLocal}">지역</p>
 										<p th:text="${centerOpenCloseTime}">운영 시간</p>
-										<!-- <div class="price_box">
+										 <div class="price_box">
                     <span class="current_price">$26.00</span>
                     <span class="old_price">$362.00</span>
-                </div>-->
-									</div>
+                </div>
+									</div>-->
 									<div class="product_content list_content">
-										<h4 class="product_name">
-											<p>센터 이름: <span th:text="${center.centerName}"></span></p>
-										</h4>
-										<p>전화번호: <span th:text="${center.centerPhoneNumber}"></span></p>
-										<p>지역: <span th:text="${center.centerLocal}"></span></p>
-										<p>오픈/클로즈 시간: <span th:text="${center.centerOpenCloseTime}"></span></p>
+										<div class="price_box" style="margin-bottom: 20px;">
+										
+											<h4 class="product_name">
+												<p>센터 이름: <span th:text="${center.centerName}"></span></p>
+											</h4>
+											<p>전화번호: <span th:text="${center.centerPhoneNumber}"></span></p>
+											<p>지역: <span th:text="${center.centerLocal}"></span></p>
+											<p>오픈/클로즈 시간: <span th:text="${center.centerOpenCloseTime}"></span></p>
+										
+										
+										
+										</div>
 										<!--  <div class="price_box">
                     <span class="current_price">$26.00</span>
                     <span class="old_price">$362.00</span>
+                    
+                    
                 </div>-->
-									</div>
-									<div class="action_links list_action_right">
+                <div class="action_links list_action_right">
+									
 										<ul>
 											<li class="add_to_cart">
 												<a th:href="@{/visit(centerNo=${center.centerNo})}">
@@ -124,6 +133,9 @@
 											</li>
 										</ul>
 									</div>
+									</div>
+									
+                				
 								</div>
 							</div>
 						</div>
