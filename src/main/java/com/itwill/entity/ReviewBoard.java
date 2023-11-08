@@ -38,7 +38,7 @@ public class ReviewBoard {
 	private Double boardStar;
 
 	@Builder.Default
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_no")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();

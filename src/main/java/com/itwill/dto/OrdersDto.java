@@ -33,7 +33,7 @@ public class OrdersDto {
 	private Long userNo;
 	private String couponId;
 	private String userPoint;
-	@Default
+	private Userinfo userinfo;
 	private List<OrderItemDto> orderItemDtos = new ArrayList();
 
 	

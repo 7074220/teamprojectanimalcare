@@ -332,6 +332,8 @@ public class OrderRestController {
 			throw new Exception("로그인 하세요.");
 		}
 		orderService.removeOrderByOrderNo(orderNo);
+		
+	
 	}
 
 	@Operation(summary = "오더아이템 리스트 확인")

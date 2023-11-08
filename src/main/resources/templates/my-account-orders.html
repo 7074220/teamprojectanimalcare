@@ -3,7 +3,6 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='마이페이지')">
 
 <head>
-
 	<title>Safira - my account</title>
 	<style>
 		.modal-dialog {
@@ -189,9 +188,9 @@
 									<li><a href="adoptByUserNo" class="nav-link">입양</a></li>
 									<li><a href="volunteerByUserNo" class="nav-link">봉사</a></li>
 									<li><a href="visitByUserNo" class="nav-link">견학</a></li>
-									<li> <a th:if="${session.userNo == 57}" href="ordersList" class="nav-link">관리자
+									<li> <a th:if="${session.userName == '어드민'}" href="ordersList" class="nav-link">관리자
 											전용주문목록</a></li>
-									<li> <a th:if="${session.userNo!= 57}" href="orders" class="nav-link">주문목록</a></li>
+									<li> <a th:if="${session.userName != '어드민'}" href="orders" class="nav-link">주문목록</a></li>
 									<li><a href="logout" class="nav-link">로그아웃</a></li>
 									<li><a href="#" data-toggle="modal" data-target="#deleteModal"
 											class="nav-link">회원탈퇴</a></li>
@@ -209,25 +208,28 @@
 										<table class="table">
 											<thead>
 												<tr>
-													<th>주문번호</th>
-													<th>구입날짜</th>
-													<th>상품명</th>
-													<th>총가격</th>
-													<th>리뷰</th>
+													<th class="order_no">주문번호</th>
+													<th class="order_userNo">사용자</th>
+													<th class="order_date">구입날짜</th>
+													<th class="order_desc">상품명</th>
+													<th class="order_price">총가격</th>
+													<th class="order_volunteer">리뷰</th>
+													<th class="order_remove">삭제</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr th:each="orders:${ordersList}" th:if="orders!=null">
-													<td th:text="${orders.orderNo}">1</td>
-													<td th:text="${#dates.format(orders.orderDate, 'yyyy-MM-dd')}">
+													<td class="order_no" th:text="${orders.orderNo}">1</td>
+													<td class="order_userNo" th:text="${orders.userinfo.userId}">1</td>
+													<td class="order_date" th:text="${#dates.format(orders.orderDate, 'yyyy-MM-dd')}">
 														2018-05-10</td>
-													<td th:text="${orders.orderDesc}"><span
+													<td class="order_desc" th:text="${orders.orderDesc}"><span
 															class="success">고양이캔조림</span></td>
-													<td
+													<td class="order_price"
 														th:text="${#numbers.formatInteger(orders.orderPrice, 3, 'COMMA') + '원'}">
 														$25.00 for 1 item </td>
-														
-													<td><a  data-toggle="modal" data-target="#orderDetailsModal"  th:href="@{#__${orders.orderNo}__}" class="view">주문상세</a></td>
+													<td class="order_volunteer"><a href="volunteerByUserNo" class="view">주문상세</a></td>
+													<td class="order_remove" th:id="${orders.orderNo}"><a class="deleteOrder"><i class="fa fa-trash-o" th:id="${orders.orderNo}"></i></a></td>
 												</tr>
 												<!-- <tr>
                                                 <td>2</td>
@@ -244,11 +246,11 @@
 
 
 								<!--   </div>-->
-								
+
 								<div class="modal fade" id="orderDetailsModal" tabindex="-1"
 									aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
-										<div class="modal-content" style="width: 800px; height: 500px;" th:id="modalContent">
+										<div class="modal-content" style="width: 800px; height: 500px;">
 											<div class="modal-header">
 												<h5 class="modal-title" id="orderDetailsModalLabel">주문 상세</h5>
 												<button type="button" class="close" data-dismiss="modal"
@@ -256,7 +258,7 @@
 													<!--<span aria-hidden="true">&times;</span>-->
 												</button>
 											</div>
-											<div class="modal-body" id="modalContent">
+											<div class="modal-body">
 												<!-- 주문 상세 내용이 여기에 로드됩니다 -->
 
 												<div class="table-responsive">
@@ -264,7 +266,7 @@
 														<thead>
 															<tr>
 																<th>번호</th>
-																<th>상품가격</th>
+																<th>구입날짜</th>
 																<th>상품명</th>
 																<!--<th>총가격</th>-->
 																<th>주문상태</th>
@@ -275,7 +277,7 @@
 															<tr>
 																<td>1</td>
 																<td>May 10, 2018</td>
-																<td ><span class="success">고양이캔조림</span></td>
+																<td><span class="success">고양이캔조림</span></td>
 																<!-- <td>$25.00 for 1 item </td>-->
 																<td> <select class="form-select form-select-sm"
 																		aria-label="Large select example">
@@ -286,15 +288,13 @@
 																		<option value="4">배송완료</option>
 																	</select>
 																</td>
-																<td><a href="cart.html" class="view">리뷰쓰기</a></td>
+																<td><a href="volunteerByUserNo" class="view">리뷰쓰기</a></td>
 															</tr>
 														</tbody>
 													</table>
 												</div>
 
 											</div>
-											
-											
 											<div class="modal-footer">
 												<!--   <button type="button" class="btn btn-primary">리뷰 저장</button>-->
 												<button type="button" class="btn btn-secondary"
@@ -312,6 +312,7 @@
 						</div>
 					</div>
 				</div>
+			</div>
 		</section>
 		<!-- my account end   -->
 
@@ -326,83 +327,56 @@
 
 
 		<!--주문한 상품 리뷰쓰기 -->
-		
-		
-		<!--  <script defer src="assets/js/custom/orderApp.js" type="module"></script>
-		-->
 		<script>
-		function my_account_order(responseJsonObject = {}) {
-			alert('asd');
-			let htmltemplate =
-			`<div class="modal-body" id="modalContent">
-												<!-- 주문 상세 내용이 여기에 로드됩니다 -->
-
-												<div class="table-responsive">
-													<table class="table">
-														<thead>
-															<tr>
-																<th>번호</th>
-																<th>상품가격</th>
-																<th>상품명</th>
-																<!--<th>총가격</th>-->
-																<th>주문상태</th>
-																<th>리뷰</th>
-															</tr>
-														</thead>
-														<tbody>
-														{{#each this}}
-															<tr>
-																<td>{{oiNo}}</td>
-																<td>{{product.productPrice}}</td>
-																<td ><span class="success">{{product.productName}}</span></td>
-																<!-- <td>$25.00 for 1 item </td>-->
-																<td> <select class="form-select form-select-sm"
-																		aria-label="Large select example">
-																		<option selected>주문 상태</option>
-																		<option value="1">주문확인</option>
-																		<option value="2">배송준비</option>
-																		<option value="3">배송중</option>
-																		<option value="4">배송완료</option>
-																	</select>
-																</td>
-																<td><a href="cart.html" class="view">리뷰쓰기</a></td>
-															</tr>
-															{{/each}}
-														</tbody>
-													</table>
-												</div>
-
-											</div>`;
 			
-			let bindTemplate = Handlebars.compile(htmltemplate);
-			let resultTemplate = bindTemplate(responseJsonObject);
-			
-			return resultTemplate;
-		}
-		
-			$('#orderDetailsModal').on('show.bs.modal',function(e){
-				let index=e.relatedTarget.href.lastIndexOf('#')
-				let orderNo=e.relatedTarget.href.substring(index+1);
-				console.log(orderNo);
+			function ajaxRequest(method, url, sendJsonObject) {
+				let returnResultJsonObject={};
 				$.ajax({
 					async:false,
-					method: 'GET',
-					url: 'order/orderItemList/'+orderNo,
+					method: method,
+					url: url,
 					contentType: 'application/json;UTF-8',
-					data: {},
+					data: JSON.stringify(sendJsonObject),
 					type: 'json',
 					success: function(resultJsonObject) {
-						console.log(resultJsonObject);
-						let html = my_account_order(resultJsonObject);
-						$('#modalContent').html(html); 
+						returnResultJsonObject = resultJsonObject;
 					}
-				}); 
-				
-	      });
-			
-			
-			
+				});
+				return returnResultJsonObject;
+			}
 
+			// 마이페이지 상품주문 완료된 항목에서 주문상세를 누르면 창이 뜨고 이 창에서만 리뷰를 쓸수 있음
+			// 주문 상세 링크를 클릭할 때 이벤트 핸들러
+			document.querySelector('.table').addEventListener('click', function (e) {
+				if (e.target.classList.contains('view')) {
+					e.preventDefault();
+
+					// 주문상세 정보를 로드 하기
+
+
+					// 모달창 표시
+					$('#orderDetailsModal').modal('show');
+				}
+			});
+			
+			// 삭제
+			$(".order_remove").on('click', function(e) {
+		   // e.preventDefault(); // 기본 이벤트 방지
+		    let orderNo = $(e.target).attr('id');
+		    // AJAX 요청 보내기
+			ajaxRequest("DELETE","order/" + orderNo);
+		    
+		    $(".order_remove, .order_no, .order_date, .order_desc, .order_price, .order_volunteer").each(function() {
+	            if ($(this).attr("id") === orderNo) {
+	                $(this).closest("tr").remove();
+	            }
+	        });
+		    
+		  });
+		  
+		  
+	
+			
 		</script>
 	</th:block>
 
