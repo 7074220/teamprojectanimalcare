@@ -65,7 +65,7 @@ public class ProductController {
 	}
 	*/
 	
-	/*
+	
 	// 펫카테고리별로 구분 --> 상품 리스트 출력
 		@GetMapping("/productList")
 		public String productList(Model model, HttpSession session) {
@@ -95,8 +95,9 @@ public class ProductController {
 			// System.out.println(productList.get(0).getProductPetCategory());
 			return "shop";
 		}
-		*/
+		
 		// 펫카테고리별로 구분 --> 상품 리스트 출력
+	/*
 		@GetMapping("/productList")
 		public String productList(@PageableDefault(page = 1, size = 5) Pageable p, Model model, HttpSession session) throws Exception {
 			List<ProductListDto> productListDto = new ArrayList<>();
@@ -134,7 +135,7 @@ public class ProductController {
 			// System.out.println(productList.get(0).getProductPetCategory());
 			return "shop";
 		}
-		
+		*/
 		// 펫카테고리별로 구분 --> 상품 리스트 출력
 		@GetMapping("/productDogList")
 		public String productDogList(Model model, HttpSession session, @RequestParam String category) {
