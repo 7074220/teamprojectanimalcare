@@ -109,7 +109,8 @@
 								</div>
 
 								<div class="cart_submit view">
-									<button type="submit">리뷰작성</button>
+									<!--<button type="submit">리뷰작성</button>-->
+									<button type="submit" data-action="create">리뷰작성</button>
 								</div>
 
 
@@ -162,42 +163,45 @@
 										<!--<h3>리뷰작성</h3>-->
 										<div class="comments_form">
 
-											<form action="#" class="mb-3" name="myform" id="myform" method="post">
-
+											<form th:action="@{/reviewBoard/createReviewBoard}" class="mb-3" name="myform" id="myform" method="post">
+												<input type="hidden" id="userNo" th:value="${userNo}" />
+											
+												<!--<input type="hidden" id="productNo" th:value="${user.userNo}"/>-->
+											
+											
 												<p>별점과 후기를 남겨주세요.</p>
-
-
-												<div class="row" style="flex-direction: column;">
-
+											
+											
+												<div class="row">
+											
 													<div>별점</div>
-
+											
 													<!-- 별점 위치 -->
-
+											
 													<div class="rate" draggable="false">
-														<input type="radio" id="star1" name="rate" value="1">
-														<label for="star1"></label>
-														<input type="radio" id="star2" name="rate" value="2">
-														<label for="star2"></label>
-														<input type="radio" id="star3" name="rate" value="3">
-														<label for="star3"></label>
-														<input type="radio" id="star4" name="rate" value="4">
-														<label for="star4"></label>
-														<input type="radio" id="star5" name="rate" value="5">
+														<input type="radio" name="boardStar" id="star5" class="rate" value="5">
 														<label for="star5"></label>
+														<input type="radio" name="boardStar" id="star4" class="rate" value="4">
+														<label for="star4"></label>
+														<input type="radio" name="boardStar" id="star3" class="rate" value="3">
+														<label for="star3"></label>
+														<input type="radio" name="boardStar" id="star2" class="rate" value="2">
+														<label for="star2"></label>
+														<input type="radio" name="boardStar" id="star1" class="rate" value="1">
+														<label for="star1"></label>
 													</div>
-
+											
 													<div class="col-12">
 														<label for="review_comment">Comment </label>
-														<div> <textarea name="comment" id="review_comment"></textarea>
+														<div> <textarea name="comment" id="review_comment" style="width: 100%;"></textarea>
 														</div>
-
+											
 													</div>
 												</div>
 												<!--<button class="button" type="submit">Post Comment</button>-->
 												<div class="modal-footer">
 													<!--   <button type="button" class="btn btn-primary">리뷰 저장</button>-->
-													<button type="button" class="btn btn-secondary"
-														data-dismiss="modal">작성 완료</button>
+													<button type="submit" class="submit" data-dismiss="modal">작성 완료</button>
 												</div>
 											</form>
 										</div>
@@ -216,7 +220,10 @@
 
 
 		<!--주문한 상품 리뷰쓰기 -->
+		
 		<script>
+			
+			
 			// 주문 상세 모달 표시 이벤트 핸들러
 			document.querySelector('.cart_submit button').addEventListener('click', function (e) {
 				e.preventDefault();
@@ -224,9 +231,83 @@
 				// 모달창 표시
 				$('#orderDetailsModal').modal('show');
 			});
+			
+			// 별점 라디오 버튼을 클릭할 때 이벤트 핸들러를 등록합니다.
+				$('.rate').on('change', function () {
+					// 선택된 별점 값을 가져옵니다.
+					let selectedRating = $('.rate:checked').val();
+					console.log('선택한 별점:', selectedRating);
+
+					// 여기서 선택한 별점 값을 변수에 할당하거나, AJAX 요청의 formData 객체에 추가할 수 있습니다.
+				});
+			
+			function ajaxRequest(method, url, sendJsonObject) {
+			let returnResultJsonObject={};
+			$.ajax({
+				async:false,
+				method: method,
+				url: url,
+				contentType: 'application/json;UTF-8',
+				data: JSON.stringify(sendJsonObject),
+				type: 'json',
+				success: function(resultJsonObject) {
+					returnResultJsonObject = resultJsonObject;
+				}
+			});
+			return returnResultJsonObject;
+		}
+			
+			
+			function updateSubmitButton() {
+					const submitButton = document.querySelector('.cart_submit button');
+					submitButton.textContent = '리뷰완료';
+				}
+			
+			
+			$('.submit').on('click', function(event) {
+	        event.preventDefault();
+	       
+	       const now = new Date();
+		   const year = now.getFullYear();
+		   const month = (now.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더하고 2자리로 포맷팅
+		   const day = now.getDate().toString().padStart(2, '0'); // 일을 2자리로 포맷팅
+    	   const formattedDate = `${year}-${month}-${day}`;
+    	  
+	       let boardStar = $('.rate:checked').val();
+	    
+		   let review_comment = $('#review_comment').val();
+		  
+		   let userNo = $('#userNo').val();
+	    
+	        let sendJsonObject = {
+				userNo:userNo,
+	            boardStar: boardStar,
+	            boardContent: review_comment,
+	         	boardDate:formattedDate
+	        };
+	        console.log(sendJsonObject)
+	       let responseObject=ajaxRequest('POST','reviewBoard/createReviewBoard',sendJsonObject);
+	       console.log(responseObject)
+	      	
+	  		if(responseObject.userNo == null){
+				alert('로그인이 필요합니다.');
+				window.location.href = 'index';	// 로그인 창으로 이동
+			}else{
+				alert("리뷰작성이 완료되었습니다.");
+				updateSubmitButton();
+			}
+	  		
+	    });
+			
+			
+			
 		</script>
-	
+
 		
+		
+
+
+
 
 		</th:block>
 
