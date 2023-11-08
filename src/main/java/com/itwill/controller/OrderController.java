@@ -115,7 +115,10 @@ public class OrderController {
 		List<Orders> orderList = orderService.findOrders();
 		List<OrdersDto> ordersDto = new ArrayList<OrdersDto>();
 			for (Orders orders : orderList) {
-				ordersDto.add(OrdersDto.toDto(orders));
+				Userinfo userinfo = orders.getUserinfo();
+				OrdersDto dto = OrdersDto.toDto(orders);
+				dto.setUserinfo(userinfo);
+				ordersDto.add(dto);
 			}
 			model.addAttribute("ordersList",ordersDto);
 			return "my-account-orders";

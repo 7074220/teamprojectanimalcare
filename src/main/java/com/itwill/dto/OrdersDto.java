@@ -30,6 +30,7 @@ public class OrdersDto {
 	private String orderAddress;
 	private String orderDesc;
 	private Long userNo;
+	private Userinfo userinfo;
 	private List<OrderItemDto> orderItemDtos = new ArrayList();
 
 	
