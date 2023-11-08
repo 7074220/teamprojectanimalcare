@@ -139,8 +139,10 @@ public class OrderController {
 		List<Orders> orderList = orderService.findOrderById(userNo);
 		List<OrdersDto> ordersDtoList = new ArrayList<OrdersDto>();
 		for (Orders orders : orderList) {
-			
-			ordersDtoList.add(OrdersDto.toDto(orders));
+			Userinfo userinfo = orders.getUserinfo();
+			OrdersDto dto = OrdersDto.toDto(orders);
+			dto.setUserinfo(userinfo);
+			ordersDtoList.add(dto);
 		}
 		
 		
