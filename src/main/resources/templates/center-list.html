@@ -23,9 +23,7 @@
 		<div class="shop_area shop_fullwidth mt-70 mb-70">
 			
 			<div class="container">
-				<div>
-					<div id="map" style="width: 500px; height: 400px;"></div>
-				</div>
+				
 				<div class="row">
 					
 					<div class="col-12">
@@ -64,12 +62,12 @@
 						<!--shop toolbar end-->
 						<div class="row shop_wrapper grid_list">
 							
-							<div class="col-12" th:each="center: ${centers}">
-								
+							<div class="col-12" th:each="center: ${centers}" >
+									
 								<div class="single_product">
 									
 									<div class="product_thumb">
-
+<div id="map" style="width: 400px; height: 300px;">
 										<!-- 
                 <div class="label_product">
                     <span class="label_sale">Sale</span>
@@ -85,8 +83,8 @@
 												</li>
 											</ul>
 										</div>-->
-									</div>
 									
+									</div>
 									<!--<div class="product_content grid_content">
 										<h4 class="product_name">
 											<a th:href="@{/center-details(centerNo=${center.centerNo})}"
@@ -99,6 +97,7 @@
                     <span class="old_price">$362.00</span>
                 </div>
 									</div>-->
+									</div>
 									<div class="product_content list_content">
 										<div class="price_box" style="margin-bottom: 20px;">
 										
@@ -118,6 +117,7 @@
                     
                     
                 </div>-->
+                
                 <div class="action_links list_action_right">
 									
 										<ul>
@@ -132,12 +132,14 @@
 												</a>
 											</li>
 										</ul>
+										
 									</div>
 									</div>
 									
                 				
 								</div>
 							</div>
+							
 						</div>
 
 						<!--    <div class="col-12 ">
