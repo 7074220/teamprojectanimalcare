@@ -104,8 +104,10 @@ public class VolunteerController {
 	}
 	*/
 	
+	
+	/* // 이게 원본
 	// userNo 로 봉사 리스트 조회. 로그인한 회원
-	@GetMapping("/volunteerByUserNo") // 이게 원본
+	@GetMapping("/volunteerByUserNo") 
 	public String findByVolunteerListUserNo(Model model, HttpSession session) throws Exception {
 		Long userNo=(Long)session.getAttribute("userNo");
 		Userinfo user=userInfoService.findUserByNo(userNo);
@@ -115,9 +117,28 @@ public class VolunteerController {
 	    volunteerList.sort((v1, v2) -> v2.getVolunteerNo().compareTo(v1.getVolunteerNo()));
 	    model.addAttribute("userNo", userNo);
 		model.addAttribute("volunteerList", volunteerList);
-		//return "my-account-volunteer"; //이게 원본임
+		return "my-account-volunteer"; //이게 원본임
+		//return "order-list"; // 오더리스트 - 리뷰쓰기 연결
+	}
+	*/
+	
+	
+	/*
+	// order-list 임시 연결
+	@GetMapping("/volunteerByUserNo") 
+	public String findByVolunteerListUserNo(Model model, HttpSession session) throws Exception {
+		Long userNo=(Long)session.getAttribute("userNo");
+		Userinfo user=userInfoService.findUserByNo(userNo);
+		
+		List<Volunteer> volunteerList = volunteerService.findVolunteertByUserNo(user.getUserNo());		
+		// volunteerNo를 내림차순으로 정렬
+	    //volunteerList.sort((v1, v2) -> v2.getVolunteerNo().compareTo(v1.getVolunteerNo()));
+	    
+	    model.addAttribute("userNo", userNo);
+		model.addAttribute("volunteerList", volunteerList);
 		return "order-list"; // 오더리스트 - 리뷰쓰기 연결
 	}
+	*/
 	
 	
 	
