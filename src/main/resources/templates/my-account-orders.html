@@ -460,7 +460,7 @@
                                                       <option value="4">배송완료</option> 
                                                    </select>
                                                 </td>
-                                                <td><button type="button" class="write-review" onclick="reviewWrite(event,{{oiNo}})" id="{{product.productNo}}">리뷰쓰기</button></td>
+                                                <td><button type="button" class="write-review" onclick="reviewWrite(event,{{oiNo}})" id="{{product.productNo}}">{{reviewStatus}}</button></td>
                                              </tr>
                                              {{/each}}
                                           </tbody>
@@ -730,6 +730,9 @@
 		
 		function reviewComplete(e){
 			alert('리뷰완료!');
+			
+			let oiNo = e.target.id;
+				
 			const now = new Date();
 			const year = now.getFullYear();
 			const month = (now.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더하고 2자리로 포맷팅
@@ -741,7 +744,7 @@
 			let review_comment = $('#review_comment').val();
 			let userNo = $('#userNo').val();
 			let productNo = $('.write-review').attr('id');
-			let oiNo = e.target.id;
+		
 			
 			alert('템번호'+oiNo);
 			
@@ -754,6 +757,8 @@
 				boardDate: formattedDate
 			};
 			let responseObject = ajaxRequest('POST', 'reviewBoard/createReviewBoard', sendJsonObject);
+			
+			
 			
 		}
 		
@@ -839,7 +844,7 @@
 						window.location.href = 'index';	// 로그인 창으로 이동
 					} else {
 						alert("리뷰작성이 완료되었습니다.");
-						
+					
 					}
 	    });
 
