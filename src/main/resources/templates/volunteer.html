@@ -55,7 +55,7 @@ window.onload = function() {
     // 한국 시간대 (UTC+9)로 변경
     today.setHours(today.getHours() + 9);
     var afterTomorrow = new Date(today);
-    afterTomorrow.setDate(afterTomorrow.getDate() + 1);
+    afterTomorrow.setDate(afterTomorrow.getDate() + 1); // 내일 날짜 계산
     var afterTomorrowString = afterTomorrow.toISOString().slice(0, 10);
 
     volunteerDate.value = afterTomorrowString;
@@ -134,8 +134,7 @@ window.onload = function() {
 									<!-- <input type="date" name="volunteerDate"> -->
 									<!--  th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" 이 코드 추가시 현재 날짜 보여줌 -->
 									<input type="date" name="volunteerDate"
-										id="volunteerDate" placeholder="날짜를 선택해주세요"  required="required" 
-										th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">  
+										id="volunteerDate" placeholder="날짜를 선택해주세요"  required="required" >  
 									
 						
 
@@ -160,7 +159,7 @@ window.onload = function() {
 								</div>
 								
 								
-								<button type="submit" class="submit">신청</button>
+								<button type="submit" class="submit">submit</button>
 								<!-- <p class="form-messege"></p> -->
 								
 								
@@ -193,8 +192,6 @@ function ajaxRequest(method, url, sendJsonObject) {
 		return returnResultJsonObject;
 	}
 
-
-
 //AJAX 요청. 봉사 신청시 회원, 비회원 확인
 $('.submit').on('click', function (event) {
     event.preventDefault();
@@ -212,42 +209,13 @@ $('.submit').on('click', function (event) {
     let response = ajaxRequest('POST','volunteer/create-volunteer',sendJsonObject);
     if(response.userNo!=null){
     	alert('신청이 완료되었습니다.');
-    	window.location.href = 'centerList'; // 마이페이지-봉사 이동
+    	window.location.href = 'volunteerByUserNo'; // 마이페이지-봉사 이동
     }else{
     	alert('로그인이 필요합니다.');
-        window.location.href = 'index#/login_form'; // 로그인 페이지로 이동
+        window.location.href = 'index#/login_form'; // 로그인 페이지로 이동 수정하기
     }
 });
 </script> 
-
-
-<!-- <script>
-
-function calculatePoints(selectedTime) {
-    // 옵션 값에 따라 포인트 계산
-    var pointsPerHour = 1000; // 1시간당 포인트
-    var accumulatedPoints = calculateAccumulatedPoints(selectedTime);
-    return accumulatedPoints;
-}
-
-function calculateAccumulatedPoints(selectedTime) {
-    // 예시: 09 AM부터 선택한 시간까지의 누적 포인트 계산
-    var pointsPerHour = 1000;
-    var startHour = 9;
-    var selectedHour = parseInt(selectedTime);
-
-    // 시간 차이 계산
-    var hoursDiff = selectedHour - startHour;
-
-    // 음수 값이면 0으로 설정
-    var accumulatedPoints = Math.max(0, hoursDiff * pointsPerHour);
-
-    return accumulatedPoints;
-}
-</script> -->
-
-
-
 
 
 

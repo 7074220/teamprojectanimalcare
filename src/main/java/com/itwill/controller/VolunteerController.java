@@ -122,7 +122,7 @@ public class VolunteerController {
 		return "my-account-volunteer";
 	}
 		
-	
+	/*
 	@GetMapping("/volunteerUpdate")
     public String getVolunteerPage(@RequestParam Long volunteerNo, @RequestParam Long centerNo, Model model) {
 
@@ -154,7 +154,7 @@ public class VolunteerController {
         }
         return "my-account-volunteer"; // 수정 실패 페이지로 이동
     }
-
+	*/
 
 	
 }

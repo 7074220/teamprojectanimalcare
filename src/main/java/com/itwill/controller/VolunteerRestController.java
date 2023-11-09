@@ -53,11 +53,10 @@ public class VolunteerRestController {
 	@Autowired
 	private UserinfoRepository userinfoRepository;
 	
-	
+	/*
 	@Operation(summary = "포인트3000생성 (관리자)")
 	@PostMapping("/insertVolunteerPoint")
-	public ResponseEntity<VolunteerTimePointDto> insertVolunteerPoint(
-	        @RequestBody VolunteerTimePointDto timePointDto,
+	public ResponseEntity<VolunteerTimePointDto> insertVolunteerPoint( @RequestBody VolunteerTimePointDto timePointDto,
 	        HttpSession session) throws Exception {
 
 	    Long userNo = (Long) session.getAttribute("userNo");
@@ -96,13 +95,7 @@ public class VolunteerRestController {
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 	    }
 	}
-
-
-	
-
-
-	
-	
+	*/
 	
 	// 봉사버튼 클릭시 로그인이면 저장, 비회원이면 메인 이동
 	@Operation(summary = "봉사신청")
@@ -153,36 +146,33 @@ public class VolunteerRestController {
 	
 	
 	@Operation(summary = "봉사 부분 업데이트") 
-	@PutMapping("/update-volunteer")
-	public ResponseEntity<VolunteerDto> updateVolunteer(@RequestBody VolunteerDto dto, HttpServletRequest request, HttpSession session) throws Exception {
-	    Long userNo = (Long) session.getAttribute("userNo");
-	    
-	    dto.setUserNo(userNo);
-	    
-	    Volunteer findVolunteer = volunteerService.findByVolunteerNo(dto.getVolunteerNo());
-	    Userinfo findUserinfo = userInfoService.findUserByNo(userNo);
-	    
-	    findVolunteer.setUserinfo(findUserinfo);
-	    if(findVolunteer != null) {
-	    	if(dto.getVolunteerDate()!=null) {
-	    		findVolunteer.setVolunteerDate(dto.getVolunteerDate());
-	    	}
-	    	if(dto.getVolunteerTime()!=null) {
-	    		findVolunteer.setVolunteerTime(dto.getVolunteerTime());
-	    	}
-	    	Volunteer updateVolunteer = volunteerService.updateVolunteer(findVolunteer);
-	    	VolunteerDto updatedDto = VolunteerDto.toDto(updateVolunteer);
-	    	
-	    	HttpHeaders httpHeaders = new HttpHeaders();
-			httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-			
-			return new ResponseEntity<VolunteerDto>(updatedDto, httpHeaders, HttpStatus.OK);
-	    	
-	    }	    
-	    
-	    return new ResponseEntity<VolunteerDto>(HttpStatus.NOT_FOUND);
-	}
+	@PutMapping("/{volunteerNo}")
+	public ResponseEntity<VolunteerDto> updateVolunteer(@PathVariable(name = "volunteerNo") Long volunteerNo, @RequestBody VolunteerDto dto) throws Exception {
+	    Volunteer existingVolunteer = volunteerService.findByVolunteerNo(volunteerNo);
 
+	    if (existingVolunteer == null) {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    } else {
+	        if (dto.getVolunteerTime() != null) {
+	            existingVolunteer.setVolunteerTime(dto.getVolunteerTime());
+	        }
+	        if (dto.getVolunteerDate() != null) {
+	            existingVolunteer.setVolunteerDate(dto.getVolunteerDate());
+	        }
+	        if (dto.getVolunteerStatus() != null) {
+	            existingVolunteer.setVolunteerStatus(dto.getVolunteerStatus());
+	        }	
+	        if (dto.getCenterNo() != null) {
+	        	Center center = centerService.findByCenterNo(dto.getCenterNo());
+	            existingVolunteer.setCenter(center);
+	        }
+  
+	        volunteerService.updateVolunteer(existingVolunteer);
+	        VolunteerDto updatedVolunteerDto = VolunteerDto.toDto(existingVolunteer);
+	        return new ResponseEntity<>(updatedVolunteerDto, HttpStatus.OK);
+	    }
+	} // UPDATE
+	
 
 	
 
