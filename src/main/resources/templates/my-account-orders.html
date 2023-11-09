@@ -378,6 +378,7 @@
 								</div>
 					
 	<script>
+	 
 	  $(function() {
           //input을 datepicker로 선언
           $("#datepicker1,#datepicker2").datepicker({
@@ -425,12 +426,12 @@
 		    	    var endDate = $("#datepicker2").val();
 		    	    if(!startDate || !endDate){
 		    	    	
-		    	    	 window.location.href = "/teamproject_animalcare/orders";
+		    	    	 window.location.href = "orders";
 		    	    	 
 		    	    }
 		    	    else{
 		    	    	
-		    	    window.location.href = "/teamproject_animalcare/dateByOrder?startDate=" + startDate + "&endDate=" + endDate;
+		    	    window.location.href = "dateByOrder?startDate=" + startDate + "&endDate=" + endDate;
 		    	    }
 		         
 		     });    
@@ -490,6 +491,15 @@
          return resultTemplate;
       }
       
+            /* let response = ajaxRequest('GET','order/orderItemList/'+orderNo)
+            let html = my_account_order(response);
+            $('#modalContent').html(html);
+            alert(response.orderStatusNo);
+            if(response.orderStatusNo==3){
+          	  alert('실행');
+          	  $('.form-select form-select-sm').val('3'); // '배송준비' 옵션을 선택
+          	   $('.form-select form-select-sm option:not(:selected)').prop('disabled', true);
+            } */
          $('#orderDetailsModal').on('show.bs.modal',function(e){
             let index=e.relatedTarget.href.lastIndexOf('#')
             let orderNo=e.relatedTarget.href.substring(index+1);
@@ -503,8 +513,15 @@
                type: 'json',
                success: function(resultJsonObject) {
                   console.log(resultJsonObject);
+                  alert(resultJsonObject.orderStatusNo);
                   let html = my_account_order(resultJsonObject);
-                  $('#modalContent').html(html); 
+                  $('#modalContent').html(html);
+                  if(resultJsonObject.orderStatusNo==3){
+                	  alert('실행');
+                	  $('.form-select form-select-sm').val('3'); // '배송준비' 옵션을 선택
+                	   $('.form-select form-select-sm option:not(:selected)').prop('disabled', true);
+                  }
+                  // 셀렉티드 시키면 되겠다~
                }
             }); 
             
@@ -886,16 +903,7 @@
 			
 			
 			// 날짜 지정스토리지 설정
-			 var startDate = localStorage.getItem('startDate');
-			    var endDate = localStorage.getItem('endDate');
-
 			
-			    if (startDate) {
-			        $('#datepicker1').val(startDate);
-			    }
-			    if (endDate) {
-			        $('#datepicker2').val(endDate);
-			    }
 			
 
 			});	
