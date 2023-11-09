@@ -74,7 +74,7 @@ public class ReportController {
 	@PostMapping("/reportWrite")
 	  public String handleImagePost(@RequestParam("imageFile") MultipartFile file , @RequestParam("boardTitle")String boardTitle,
 			  @RequestParam("boardFindDate") @DateTimeFormat(pattern = "yyyy-MM-dd")Date boardFindDate, @RequestParam("boardFindName")String boardFindName,
-			  @RequestParam("boardFindPhone")String boardFindPhone, @RequestParam("boardContent")String boardContent) throws Exception{
+			  @RequestParam("boardFindPhone")String boardFindPhone, @RequestParam("boardContent")String boardContent , HttpSession session) throws Exception{
 
 	    String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/reportboard/";
 	    String originalFileName = file.getOriginalFilename();
@@ -85,9 +85,13 @@ public class ReportController {
 
 	    file.transferTo(newFile);
 	    
-	    //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        //Date parsingDate = dateFormat.parse(boardFindDate);
-	    //System.out.println(">>>>>>>>>>>>>>>>>"+boardFindDate);
+	    Long userNo =(Long)session.getAttribute("userNo");
+	    
+	    Userinfo userinfo = Userinfo.builder().userName("비회원").build();
+	    if(userNo!=null) {
+	    	userinfo = userInfoService.findUserByNo(userNo);
+	    }
+	    
 	    ReportBoard writeReportBoard = ReportBoard.builder()
 	    										.boardContent(boardContent)
 	    										.boardFindDate(boardFindDate)
@@ -95,7 +99,9 @@ public class ReportController {
 	    										.boardFindPhone(boardFindPhone)
 	    										.boardImage(newFile.getName())
 	    										.boardTitle(boardTitle)
+	    										.userinfo(userinfo)
 	    										.build();
+	    
 	    System.out.println(">>>>"+writeReportBoard);
 	    ReportBoard insertReportBoard = reportBoardService.Create(writeReportBoard);
 	    System.out.println(">>>>"+insertReportBoard);

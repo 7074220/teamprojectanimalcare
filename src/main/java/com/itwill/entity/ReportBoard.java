@@ -56,10 +56,7 @@ public class ReportBoard {
 	// 유기견 대표이미지
 	private String boardImage;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	//유기견 발견 장소
-	//private String boardFindLocal;
-	
+	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_no")
 	@Builder.Default
 	@ToString.Exclude
