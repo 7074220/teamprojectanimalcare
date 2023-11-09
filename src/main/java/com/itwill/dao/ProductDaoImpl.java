@@ -159,4 +159,10 @@ public class ProductDaoImpl implements ProductDao {
 		return productRepository.findAllByProductCategoryAndProductPetCategory(productPetCategory, productCategory, pageable);
 	}
 
+	@Override
+	public boolean existsById(Long productNo) {
+		// TODO Auto-generated method stub
+		return productRepository.existsById(productNo);
+	}
+
 }

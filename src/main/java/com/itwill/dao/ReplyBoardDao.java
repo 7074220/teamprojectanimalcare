@@ -28,7 +28,7 @@ public interface ReplyBoardDao {
 	public List<ReplyBoard> findByUserNo(Long userNo);
 	
 	// 오래된 순서
-	public List<ReplyBoard> findAllByOrderByReplyBoardNoAsc();
+	public List<ReplyBoard> findAllByOrderByReplyBoardNoAsc(Long boardNo);
 	
 	// 해당 그룹 최대 스텝 수 찾기
 	public Integer findGreatestStepByGroupNo(Integer ReplyBoardGroupNo);

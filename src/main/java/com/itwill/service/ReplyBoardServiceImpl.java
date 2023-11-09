@@ -33,8 +33,8 @@ public class ReplyBoardServiceImpl implements ReplyBoardService{
 	}
 
 	@Override
-	public List<ReplyBoard> findAllByOrderByReplyBoardNoAsc() {
-		return replyBoardDao.findAllByOrderByReplyBoardNoAsc();
+	public List<ReplyBoard> findAllByOrderByReplyBoardNoAsc(Long boardNo) {
+		return replyBoardDao.findAllByOrderByReplyBoardNoAsc(boardNo);
 	}
 
 	@Override

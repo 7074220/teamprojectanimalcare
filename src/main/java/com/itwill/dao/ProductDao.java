@@ -9,7 +9,7 @@ import org.springframework.data.jpa.domain.Specification;
 import com.itwill.entity.Product;
 
 public interface ProductDao {
-
+   
 	// 상품등록 (관리자 모드)
 	Product insertProduct(Product product);
 	
@@ -87,6 +87,8 @@ public interface ProductDao {
 	
 	// 상품의 카테고리와 펫 카테고리가 일치하는 모든 상품 출력(query 사용 X)
 	Page<Product> findAllByProductCategoryAndProductPetCategory(String productCategory, String productPetCategory,  Pageable pageable);
+	
+	boolean existsById(Long productNo);
 	
 }
 

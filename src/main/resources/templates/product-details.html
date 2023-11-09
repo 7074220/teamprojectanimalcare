@@ -646,12 +646,27 @@
 
 									<div class="product_nav">
 										<ul>
-											<li class="prev"><a href="product-details.html"
-													th:href="@{productDetail(productNo=${(product.productNo)+1})}"><i
-														class="fa fa-angle-left"></i></a></li>
-											<li class="next"><a href="variable-product.html"
-													th:href="@{productDetail(productNo=${(product.productNo)-1})}"><i
-														class="fa fa-angle-right"></i></a></li>
+											<li th:if="${product.productNo != 1}" class="prev">
+											    <a th:href="@{productDetail(productNo=${product.productNo - 1})}">
+											        <i class="fa fa-angle-left"></i>
+											    </a>
+											</li>
+											
+											
+											<li class="next">
+												<th:block th:if="${nextExist}">
+													<a href="variable-product.html"
+															
+															th:href="@{productDetail(productNo=${product.productNo + 1})}"><i
+																class="fa fa-angle-right"></i></a>
+												</th:block>			
+												<th:block th:unless="${nextExist}">
+													<a href="variable-product.html"
+															th:href="@{'#'}" ><i 
+																class="fa fa-angle-right " ></i></a>
+												</th:block>			
+											</li>
+														
 										</ul>
 									</div>
 									<!--   "<" 화살표 누르면 앞 상품으로 이동, ">" 화살표 누르면 뒷 상품으로 이동 끝 -->

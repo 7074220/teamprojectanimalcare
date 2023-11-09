@@ -1,5 +1,6 @@
 package com.itwill.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,15 +12,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.dao.OrderItemDao;
+import com.itwill.dto.PetDto;
 import com.itwill.entity.MyPet;
 import com.itwill.entity.OrderItem;
 import com.itwill.entity.Orders;
+import com.itwill.entity.Pet;
 import com.itwill.entity.Userinfo;
 import com.itwill.entity.Wish;
 import com.itwill.service.CartService;
 import com.itwill.service.MyPetService;
 import com.itwill.service.OrderItemService;
 import com.itwill.service.OrderService;
+import com.itwill.service.PetService;
 import com.itwill.service.UserInfoService;
 import com.itwill.service.WishService;
 
@@ -39,6 +43,9 @@ public class UserInfoController {
 	private WishService wishService;
 	@Autowired
 	private MyPetService myPetService;
+	@Autowired
+	private PetService petService;
+	
 	
 	// 관리자가 유저리스트 볼때
 	@GetMapping(value = "/userList")
@@ -107,8 +114,15 @@ public class UserInfoController {
 	}
 	
 	@GetMapping(value="/logout")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, Model model) {
 		session.invalidate();
+		List<PetDto> petDtoList = new ArrayList<>();
+		List<Pet> petList = petService.petFindAll();
+		for (Pet pet : petList) {
+			petDtoList.add(PetDto.toDto(pet));
+			
+			model.addAttribute("petList", petDtoList);
+		}
 		return "index";
 	}
 	
@@ -122,6 +136,12 @@ public class UserInfoController {
 	@GetMapping("/findId")
 	public String findId() {
 		return "findId";
+	}
+	
+	//
+	@GetMapping("/loginPopUp")
+	public String loginPopUp() {
+		return "loginPopUp";
 	}
 	
 }

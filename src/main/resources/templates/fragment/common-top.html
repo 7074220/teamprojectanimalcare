@@ -190,7 +190,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-2 col-md-3 col-sm-3 col-3">
                             <div class="logo">
-                                <a href="index"><img src="assets/img/logo/logo.png" alt=""></a>
+                                <a href="" th:href="@{/}"><img src="assets/img/logo/logo.png" alt=""></a>
                             </div>
                         </div>
                         <div class="col-lg-10 col-md-6 col-sm-7 col-8">
@@ -243,7 +243,7 @@
                                     
                                     
                                    <!--  위시리스트 버튼 -->
-                                    <div class="header_account_list header_wishlist" th:if="${session.userNo}!=null">
+                                    <div class="header_account_list header_wishlist" th:if="${session.userNo !=null and session.userName != '관리자'}">
                                         <a href="wishList"><span class="lnr lnr-heart"></span> <span class="item_count" th:text=${session.wishCount}>3</span> </a>
                                     </div>
                                     
@@ -251,7 +251,7 @@
                                     
                                     
                                     
-                                    <div class="header_account_list  mini_cart_wrapper" th:if="${session.userNo}!=null">
+                                    <div class="header_account_list  mini_cart_wrapper" th:if="${session.userNo !=null and session.userName != '관리자'}">
                                        <a href="cartList"><span class="lnr lnr-cart"></span><span class="item_count" th:text=${session.cartCount}>2</span></a>
                                         <!--mini cart-->
                                     <!--    <div class="mini_cart">
@@ -483,7 +483,7 @@
                             <div class="main_menu menu_position"> 
                                 <nav>  
                                     <ul>
-                                        <li><a class="active" href="index">home<!--<i class="fa fa-angle-down"></i>--></a>
+                                        <li><a class="active" href="" th:href="@{/}">home<!--<i class="fa fa-angle-down"></i>--></a>
                                             <!--<ul class="sub_menu">
                                                 <li><a href="index.html">Home shop 1</a></li>
                                                 <li><a href="index-2.html">Home shop 2</a></li>
