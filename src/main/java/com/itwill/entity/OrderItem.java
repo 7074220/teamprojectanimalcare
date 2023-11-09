@@ -46,12 +46,9 @@ public class OrderItem {
 	@JoinColumn(name = "product_no")
 	private Product product =new Product();
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@Builder.Default
 	@JoinColumn(name = "os_no")
-	private Orderstatus orderStatus = new 
-	
-	Orderstatus();
-	
+	private Orderstatus orderStatus = new Orderstatus();
 
 }

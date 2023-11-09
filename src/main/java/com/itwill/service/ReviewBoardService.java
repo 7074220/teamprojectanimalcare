@@ -38,4 +38,10 @@ public interface ReviewBoardService {
 	
 	public List<ReviewBoard> findByProductProductNoOrderByBoardStarDesc(Long productNo);//별점높음
 	public List<ReviewBoard> findByProductProductNoOrderByBoardDateDesc(Long productNo);//최신
+	
+	public List<ReviewBoard> findByUserNoAndProductNo(Long userNo, Long productNo);
+	
+	public ReviewBoard findByOrderItemNo(Long oiNo);
+	
+	
 }

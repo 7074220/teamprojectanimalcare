@@ -1,22 +1,6 @@
-DROP TABLE Wish CASCADE CONSTRAINTS;
-DROP TABLE ReplyBoard CASCADE CONSTRAINTS;
-DROP TABLE ReviewBoard CASCADE CONSTRAINTS;
-DROP TABLE MyPet CASCADE CONSTRAINTS;
-DROP TABLE Cart CASCADE CONSTRAINTS;
-DROP TABLE Order_item CASCADE CONSTRAINTS;
-DROP TABLE OrderStatus CASCADE CONSTRAINTS;
-DROP TABLE Orders CASCADE CONSTRAINTS;
-DROP TABLE Product CASCADE CONSTRAINTS;
-DROP TABLE Adopt CASCADE CONSTRAINTS;
-DROP TABLE Pet CASCADE CONSTRAINTS;
-DROP TABLE Visit CASCADE CONSTRAINTS;
-DROP TABLE Volunteer CASCADE CONSTRAINTS;
-DROP TABLE Center CASCADE CONSTRAINTS;
-DROP TABLE Local CASCADE CONSTRAINTS;
-DROP TABLE ReportBoard CASCADE CONSTRAINTS;
-DROP TABLE Coupon CASCADE CONSTRAINTS;
-DROP TABLE UserInfo CASCADE CONSTRAINTS;
-
+/**********************************/
+/* Table Name: UserInfo */
+/**********************************/
 CREATE TABLE UserInfo(
 		user_no                       		NUMBER(10)		 NULL ,
 		user_password                 		VARCHAR2(50)		 NULL ,
@@ -31,8 +15,6 @@ CREATE TABLE UserInfo(
 		user_coupon_year              		NUMBER(10)		 NULL 
 );
 
-DROP SEQUENCE UserInfo_user_no_SEQ;
-
 CREATE SEQUENCE UserInfo_user_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 CREATE TRIGGER UserInfo_user_no_TRG
@@ -44,7 +26,23 @@ IF :NEW.user_no IS NOT NULL THEN
 END IF;
 END;
 
+COMMENT ON TABLE UserInfo is 'UserInfo';
+COMMENT ON COLUMN UserInfo.user_no is 'user_no';
+COMMENT ON COLUMN UserInfo.user_password is 'user_password';
+COMMENT ON COLUMN UserInfo.user_point is 'user_point';
+COMMENT ON COLUMN UserInfo.user_gender is 'user_gender';
+COMMENT ON COLUMN UserInfo.user_address is 'user_address';
+COMMENT ON COLUMN UserInfo.user_phone_number is 'user_phone_number';
+COMMENT ON COLUMN UserInfo.user_id is 'user_id';
+COMMENT ON COLUMN UserInfo.user_resident_number is 'user_resident_number';
+COMMENT ON COLUMN UserInfo.user_register_date is 'user_register_date';
+COMMENT ON COLUMN UserInfo.user_name is 'user_name';
+COMMENT ON COLUMN UserInfo.user_coupon_year is 'user_coupon_year';
 
+
+/**********************************/
+/* Table Name: Coupon */
+/**********************************/
 CREATE TABLE Coupon(
 		coupon_id                     		NUMBER(10)		 NULL ,
 		coupon_name                   		VARCHAR2(50)		 NULL ,
@@ -53,8 +51,6 @@ CREATE TABLE Coupon(
 		coupon_payday                 		TIMESTAMP(10)		 NULL ,
 		user_no                       		NUMBER(10)		 NULL 
 );
-
-DROP SEQUENCE Coupon_coupon_id_SEQ;
 
 CREATE SEQUENCE Coupon_coupon_id_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
@@ -67,7 +63,18 @@ IF :NEW.coupon_id IS NOT NULL THEN
 END IF;
 END;
 
+COMMENT ON TABLE Coupon is 'Coupon';
+COMMENT ON COLUMN Coupon.coupon_id is 'coupon_id';
+COMMENT ON COLUMN Coupon.coupon_name is 'coupon_name';
+COMMENT ON COLUMN Coupon.coupon_discount is 'coupon_discount';
+COMMENT ON COLUMN Coupon.coupon_expiration_date is 'coupon_expiration_date';
+COMMENT ON COLUMN Coupon.coupon_payday is 'coupon_payday';
+COMMENT ON COLUMN Coupon.user_no is 'user_no';
 
+
+/**********************************/
+/* Table Name: ReportBoard */
+/**********************************/
 CREATE TABLE ReportBoard(
 		board_no                      		NUMBER(10)		 NULL ,
 		board_title                   		VARCHAR2(100)		 NULL ,
@@ -81,8 +88,6 @@ CREATE TABLE ReportBoard(
 		board_image                   		VARCHAR2(50)		 NULL 
 );
 
-DROP SEQUENCE ReportBoard_board_no_SEQ;
-
 CREATE SEQUENCE ReportBoard_board_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 CREATE TRIGGER ReportBoard_board_no_TRG
@@ -94,14 +99,27 @@ IF :NEW.board_no IS NOT NULL THEN
 END IF;
 END;
 
+COMMENT ON TABLE ReportBoard is 'ReportBoard';
+COMMENT ON COLUMN ReportBoard.board_no is 'board_no';
+COMMENT ON COLUMN ReportBoard.board_title is 'board_title';
+COMMENT ON COLUMN ReportBoard.board_register_date is 'board_register_date';
+COMMENT ON COLUMN ReportBoard.board_content is 'board_content';
+COMMENT ON COLUMN ReportBoard.board_find_date is 'board_find_date';
+COMMENT ON COLUMN ReportBoard.board_readCount is 'board_readCount';
+COMMENT ON COLUMN ReportBoard.board_find_name is 'board_find_name';
+COMMENT ON COLUMN ReportBoard.board_find_phone is 'board_find_phone';
+COMMENT ON COLUMN ReportBoard.user_no is 'user_no';
+COMMENT ON COLUMN ReportBoard.board_image is 'board_image';
 
+
+/**********************************/
+/* Table Name: Local */
+/**********************************/
 CREATE TABLE Local(
 		local_no                      		NUMBER(10)		 NULL ,
 		local_city                    		VARCHAR2(50)		 NULL ,
 		local_gu                      		VARCHAR2(50)		 NULL 
 );
-
-DROP SEQUENCE Local_local_no_SEQ;
 
 CREATE SEQUENCE Local_local_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
@@ -114,7 +132,15 @@ IF :NEW.local_no IS NOT NULL THEN
 END IF;
 END;
 
+COMMENT ON TABLE Local is 'Local';
+COMMENT ON COLUMN Local.local_no is 'local_no';
+COMMENT ON COLUMN Local.local_city is 'local_city';
+COMMENT ON COLUMN Local.local_gu is 'local_gu';
 
+
+/**********************************/
+/* Table Name: Center */
+/**********************************/
 CREATE TABLE Center(
 		center_no                     		NUMBER(10)		 NULL ,
 		center_name                   		VARCHAR2(50)		 NULL ,
@@ -123,8 +149,6 @@ CREATE TABLE Center(
 		center_open_close_time        		VARCHAR2(50)		 NULL ,
 		local_no                      		NUMBER(10)		 NULL 
 );
-
-DROP SEQUENCE Center_center_no_SEQ;
 
 CREATE SEQUENCE Center_center_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
@@ -137,7 +161,18 @@ IF :NEW.center_no IS NOT NULL THEN
 END IF;
 END;
 
+COMMENT ON TABLE Center is 'Center';
+COMMENT ON COLUMN Center.center_no is 'center_no';
+COMMENT ON COLUMN Center.center_name is 'center_name';
+COMMENT ON COLUMN Center.center_phone_number is 'center_phone';
+COMMENT ON COLUMN Center.center_local is 'center_local';
+COMMENT ON COLUMN Center.center_open_close_time is 'center_open_close_time';
+COMMENT ON COLUMN Center.local_no is 'local_no';
 
+
+/**********************************/
+/* Table Name: Volunteer */
+/**********************************/
 CREATE TABLE Volunteer(
 		volunteer_no                  		NUMBER(10)		 NULL ,
 		volunteer_time                		NUMBER(10)		 NULL ,
@@ -146,8 +181,6 @@ CREATE TABLE Volunteer(
 		user_no                       		NUMBER(10)		 NULL ,
 		volunteer_status              		VARCHAR2(50)		 NULL 
 );
-
-DROP SEQUENCE Volunteer_volunteer_no_SEQ;
 
 CREATE SEQUENCE Volunteer_volunteer_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
@@ -160,7 +193,18 @@ IF :NEW.volunteer_no IS NOT NULL THEN
 END IF;
 END;
 
+COMMENT ON TABLE Volunteer is 'Volunteer';
+COMMENT ON COLUMN Volunteer.volunteer_no is 'volunteer_no';
+COMMENT ON COLUMN Volunteer.volunteer_time is 'volunteer_time';
+COMMENT ON COLUMN Volunteer.volunteer_date is 'volunteer_date';
+COMMENT ON COLUMN Volunteer.center_no is 'center_no';
+COMMENT ON COLUMN Volunteer.user_no is 'user_no';
+COMMENT ON COLUMN Volunteer.volunteer_status is 'volunteer_status';
 
+
+/**********************************/
+/* Table Name: Visit */
+/**********************************/
 CREATE TABLE Visit(
 		visit_no                      		NUMBER(10)		 NULL ,
 		visit_time                    		NUMBER(10)		 NULL ,
@@ -169,8 +213,6 @@ CREATE TABLE Visit(
 		user_no                       		NUMBER(10)		 NULL ,
 		visit_status                  		VARCHAR2(50)		 NULL 
 );
-
-DROP SEQUENCE Visit_visit_no_SEQ;
 
 CREATE SEQUENCE Visit_visit_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
@@ -183,7 +225,18 @@ IF :NEW.visit_no IS NOT NULL THEN
 END IF;
 END;
 
+COMMENT ON TABLE Visit is 'Visit';
+COMMENT ON COLUMN Visit.visit_no is 'visit_no';
+COMMENT ON COLUMN Visit.visit_time is 'visit_time';
+COMMENT ON COLUMN Visit.visit_date is 'visit_date';
+COMMENT ON COLUMN Visit.center_no is 'center_no';
+COMMENT ON COLUMN Visit.user_no is 'user_no';
+COMMENT ON COLUMN Visit.visit_status is 'visit_status';
 
+
+/**********************************/
+/* Table Name: Pet */
+/**********************************/
 CREATE TABLE Pet(
 		pet_local                     		VARCHAR2(50)		 NULL ,
 		pet_no                        		NUMBER(10)		 NULL ,
@@ -197,8 +250,6 @@ CREATE TABLE Pet(
 		pet_image                     		VARCHAR2(50)		 NULL 
 );
 
-DROP SEQUENCE Pet_pet_no_SEQ;
-
 CREATE SEQUENCE Pet_pet_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 CREATE TRIGGER Pet_pet_no_TRG
@@ -210,7 +261,22 @@ IF :NEW.pet_no IS NOT NULL THEN
 END IF;
 END;
 
+COMMENT ON TABLE Pet is 'Pet';
+COMMENT ON COLUMN Pet.pet_local is 'pet_local';
+COMMENT ON COLUMN Pet.pet_no is 'pet_no';
+COMMENT ON COLUMN Pet.pet_type is 'pet_type';
+COMMENT ON COLUMN Pet.pet_gender is 'pet_gender';
+COMMENT ON COLUMN Pet.pet_register_date is 'pet_register_date';
+COMMENT ON COLUMN Pet.pet_find_place is 'pet_find_place';
+COMMENT ON COLUMN Pet.pet_character is 'pet_character';
+COMMENT ON COLUMN Pet.center_no is 'center_no';
+COMMENT ON COLUMN Pet.local_no is 'local_no';
+COMMENT ON COLUMN Pet.pet_image is 'pet_image';
 
+
+/**********************************/
+/* Table Name: Adopt */
+/**********************************/
 CREATE TABLE Adopt(
 		adopt_no                      		NUMBER(10)		 NULL ,
 		adopt_time                    		NUMBER(10)		 NULL ,
@@ -219,8 +285,6 @@ CREATE TABLE Adopt(
 		pet_no                        		NUMBER(10)		 NULL ,
 		user_no                       		NUMBER(10)		 NULL 
 );
-
-DROP SEQUENCE Adopt_adopt_no_SEQ;
 
 CREATE SEQUENCE Adopt_adopt_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
@@ -233,7 +297,18 @@ IF :NEW.adopt_no IS NOT NULL THEN
 END IF;
 END;
 
+COMMENT ON TABLE Adopt is 'Adopt';
+COMMENT ON COLUMN Adopt.adopt_no is 'adopt_no';
+COMMENT ON COLUMN Adopt.adopt_time is 'adopt_time';
+COMMENT ON COLUMN Adopt.adopt_date is 'adopt_date';
+COMMENT ON COLUMN Adopt.adopt_status is 'adopt_status';
+COMMENT ON COLUMN Adopt.pet_no is 'pet_no';
+COMMENT ON COLUMN Adopt.user_no is 'user_no';
 
+
+/**********************************/
+/* Table Name: Product */
+/**********************************/
 CREATE TABLE Product(
 		product_no                    		NUMBER(10)		 NULL ,
 		product_name                  		VARCHAR2(50)		 NULL ,
@@ -246,8 +321,6 @@ CREATE TABLE Product(
 		product_star_avg              		DOUBLE PRECISION		 NULL 
 );
 
-DROP SEQUENCE Product_product_no_SEQ;
-
 CREATE SEQUENCE Product_product_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 CREATE TRIGGER Product_product_no_TRG
@@ -259,7 +332,21 @@ IF :NEW.product_no IS NOT NULL THEN
 END IF;
 END;
 
+COMMENT ON TABLE Product is 'Product';
+COMMENT ON COLUMN Product.product_no is 'product_no';
+COMMENT ON COLUMN Product.product_name is 'product_name';
+COMMENT ON COLUMN Product.product_price is 'product_price';
+COMMENT ON COLUMN Product.product_category is 'product_category';
+COMMENT ON COLUMN Product.product_pet_category is 'product_pet_category';
+COMMENT ON COLUMN Product.product_qty is 'product_qty';
+COMMENT ON COLUMN Product.product_image is 'product_image';
+COMMENT ON COLUMN Product.product_detail_image is 'product_detail_image';
+COMMENT ON COLUMN Product.product_star_avg is 'product_star_avg';
 
+
+/**********************************/
+/* Table Name: Orders */
+/**********************************/
 CREATE TABLE Orders(
 		order_no                      		NUMBER(10)		 NULL ,
 		order_date                    		DATE		 NULL ,
@@ -268,8 +355,6 @@ CREATE TABLE Orders(
 		order_desc                    		VARCHAR2(100)		 NULL ,
 		user_no                       		NUMBER(10)		 NULL 
 );
-
-DROP SEQUENCE Orders_order_no_SEQ;
 
 CREATE SEQUENCE Orders_order_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
@@ -282,14 +367,23 @@ IF :NEW.order_no IS NOT NULL THEN
 END IF;
 END;
 
+COMMENT ON TABLE Orders is 'Orders';
+COMMENT ON COLUMN Orders.order_no is 'order_no';
+COMMENT ON COLUMN Orders.order_date is 'order_date';
+COMMENT ON COLUMN Orders.order_price is 'order_price';
+COMMENT ON COLUMN Orders.order_address is 'order_address';
+COMMENT ON COLUMN Orders.order_desc is 'order_desc';
+COMMENT ON COLUMN Orders.user_no is 'user_no';
 
+
+/**********************************/
+/* Table Name: OrderStatus */
+/**********************************/
 CREATE TABLE OrderStatus(
 		os_no                         		NUMBER(10)		 NULL ,
 		os_image                      		VARCHAR2(50)		 NULL ,
 		os_desc                       		VARCHAR2(50)		 NULL 
 );
-
-DROP SEQUENCE OrderStatus_os_no_SEQ;
 
 CREATE SEQUENCE OrderStatus_os_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
@@ -302,7 +396,15 @@ IF :NEW.os_no IS NOT NULL THEN
 END IF;
 END;
 
+COMMENT ON TABLE OrderStatus is 'OrderStatus';
+COMMENT ON COLUMN OrderStatus.os_no is 'os_no';
+COMMENT ON COLUMN OrderStatus.os_image is 'os_image';
+COMMENT ON COLUMN OrderStatus.os_desc is 'os_desc';
 
+
+/**********************************/
+/* Table Name: Order_item */
+/**********************************/
 CREATE TABLE Order_item(
 		oi_no                         		NUMBER(10)		 NULL ,
 		oi_qty                        		NUMBER(10)		 NULL ,
@@ -310,8 +412,6 @@ CREATE TABLE Order_item(
 		product_no                    		NUMBER(10)		 NULL ,
 		os_no                         		NUMBER(10)		 NULL 
 );
-
-DROP SEQUENCE Order_item_oi_no_SEQ;
 
 CREATE SEQUENCE Order_item_oi_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
@@ -324,15 +424,23 @@ IF :NEW.oi_no IS NOT NULL THEN
 END IF;
 END;
 
+COMMENT ON TABLE Order_item is 'Order_item';
+COMMENT ON COLUMN Order_item.oi_no is 'oi_no';
+COMMENT ON COLUMN Order_item.oi_qty is 'oi_qty';
+COMMENT ON COLUMN Order_item.order_no is 'order_no';
+COMMENT ON COLUMN Order_item.product_no is 'product_no';
+COMMENT ON COLUMN Order_item.os_no is 'os_no';
 
+
+/**********************************/
+/* Table Name: Cart */
+/**********************************/
 CREATE TABLE Cart(
 		cart_no                       		NUMBER(10)		 NULL ,
 		cart_qty                      		NUMBER(10)		 NULL ,
 		product_no                    		NUMBER(10)		 NULL ,
 		user_no                       		NUMBER(10)		 NULL 
 );
-
-DROP SEQUENCE Cart_cart_no_SEQ;
 
 CREATE SEQUENCE Cart_cart_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
@@ -345,7 +453,16 @@ IF :NEW.cart_no IS NOT NULL THEN
 END IF;
 END;
 
+COMMENT ON TABLE Cart is 'Cart';
+COMMENT ON COLUMN Cart.cart_no is 'cart_no';
+COMMENT ON COLUMN Cart.cart_qty is 'cart_qty';
+COMMENT ON COLUMN Cart.product_no is 'product_no';
+COMMENT ON COLUMN Cart.user_no is 'user_no';
 
+
+/**********************************/
+/* Table Name: MyPet */
+/**********************************/
 CREATE TABLE MyPet(
 		mypet_no                      		NUMBER(10)		 NULL ,
 		mypet_name                    		VARCHAR2(50)		 NULL ,
@@ -353,8 +470,6 @@ CREATE TABLE MyPet(
 		user_no                       		NUMBER(10)		 NULL ,
 		mypet_kind                    		VARCHAR2(50)		 NULL 
 );
-
-DROP SEQUENCE MyPet_mypet_no_SEQ;
 
 CREATE SEQUENCE MyPet_mypet_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
@@ -367,7 +482,17 @@ IF :NEW.mypet_no IS NOT NULL THEN
 END IF;
 END;
 
+COMMENT ON TABLE MyPet is 'MyPet';
+COMMENT ON COLUMN MyPet.mypet_no is 'mypet_no';
+COMMENT ON COLUMN MyPet.mypet_name is 'mypet_name';
+COMMENT ON COLUMN MyPet.mypet_birthday is 'mypet_birthday';
+COMMENT ON COLUMN MyPet.user_no is 'user_no';
+COMMENT ON COLUMN MyPet.mypet_kind is 'mypet_kind';
 
+
+/**********************************/
+/* Table Name: ReviewBoard */
+/**********************************/
 CREATE TABLE ReviewBoard(
 		board_no                      		NUMBER(10)		 NULL ,
 		board_title                   		VARCHAR2(100)		 NULL ,
@@ -375,10 +500,9 @@ CREATE TABLE ReviewBoard(
 		board_date                    		DATE		 NULL ,
 		board_star                    		NUMBER(10)		 NULL ,
 		product_no                    		NUMBER(10)		 NULL ,
-		user_no                       		NUMBER(10)		 NULL 
+		user_no                       		NUMBER(10)		 NULL ,
+		oi_no                         		NUMBER(10)		 NULL 
 );
-
-DROP SEQUENCE ReviewBoard_board_no_SEQ;
 
 CREATE SEQUENCE ReviewBoard_board_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
@@ -391,7 +515,20 @@ IF :NEW.board_no IS NOT NULL THEN
 END IF;
 END;
 
+COMMENT ON TABLE ReviewBoard is 'ReviewBoard';
+COMMENT ON COLUMN ReviewBoard.board_no is 'board_no';
+COMMENT ON COLUMN ReviewBoard.board_title is 'board_title';
+COMMENT ON COLUMN ReviewBoard.board_content is 'board_content';
+COMMENT ON COLUMN ReviewBoard.board_date is 'board_date';
+COMMENT ON COLUMN ReviewBoard.board_star is 'board_star';
+COMMENT ON COLUMN ReviewBoard.product_no is 'product_no';
+COMMENT ON COLUMN ReviewBoard.user_no is 'user_no';
+COMMENT ON COLUMN ReviewBoard.oi_no is 'oi_no';
 
+
+/**********************************/
+/* Table Name: ReplyBoard */
+/**********************************/
 CREATE TABLE ReplyBoard(
 		reply_board_no                		NUMBER(10)		 NOT NULL,
 		reply_board_register_date     		DATE		 NULL ,
@@ -402,8 +539,6 @@ CREATE TABLE ReplyBoard(
 		user_no                       		NUMBER(10)		 NULL ,
 		board_no                      		NUMBER(10)		 NULL 
 );
-
-DROP SEQUENCE ReplyBoard_reply_board_no_SEQ;
 
 CREATE SEQUENCE ReplyBoard_reply_board_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
@@ -416,14 +551,25 @@ IF :NEW.reply_board_no IS NOT NULL THEN
 END IF;
 END;
 
+COMMENT ON TABLE ReplyBoard is 'ReplyBoard';
+COMMENT ON COLUMN ReplyBoard.reply_board_no is 'reply_board_no';
+COMMENT ON COLUMN ReplyBoard.reply_board_register_date is 'reply_board_register_date';
+COMMENT ON COLUMN ReplyBoard.reply_board_content is 'reply_board_content';
+COMMENT ON COLUMN ReplyBoard.reply_board_group_no is 'reply_board_group_no';
+COMMENT ON COLUMN ReplyBoard.reply_board_step is 'reply_board_step';
+COMMENT ON COLUMN ReplyBoard.reply_board_depth is 'reply_board_depth';
+COMMENT ON COLUMN ReplyBoard.user_no is 'user_no';
+COMMENT ON COLUMN ReplyBoard.board_no is 'board_no';
 
+
+/**********************************/
+/* Table Name: Wish */
+/**********************************/
 CREATE TABLE Wish(
 		wish_no                       		NUMBER(10)		 NULL ,
 		product_no                    		NUMBER(10)		 NULL ,
 		user_no                       		NUMBER(10)		 NULL 
 );
-
-DROP SEQUENCE Wish_wish_no_SEQ;
 
 CREATE SEQUENCE Wish_wish_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
@@ -435,6 +581,11 @@ IF :NEW.wish_no IS NOT NULL THEN
   SELECT Wish_wish_no_SEQ.NEXTVAL INTO :NEW.wish_no FROM DUAL;
 END IF;
 END;
+
+COMMENT ON TABLE Wish is 'Wish';
+COMMENT ON COLUMN Wish.wish_no is 'wish_no';
+COMMENT ON COLUMN Wish.product_no is 'product_no';
+COMMENT ON COLUMN Wish.user_no is 'user_no';
 
 
 
@@ -489,6 +640,7 @@ ALTER TABLE MyPet ADD CONSTRAINT IDX_MyPet_FK0 FOREIGN KEY (user_no) REFERENCES 
 ALTER TABLE ReviewBoard ADD CONSTRAINT IDX_ReviewBoard_PK PRIMARY KEY (board_no);
 ALTER TABLE ReviewBoard ADD CONSTRAINT IDX_ReviewBoard_FK0 FOREIGN KEY (product_no) REFERENCES Product (product_no);
 ALTER TABLE ReviewBoard ADD CONSTRAINT IDX_ReviewBoard_FK1 FOREIGN KEY (user_no) REFERENCES UserInfo (user_no);
+ALTER TABLE ReviewBoard ADD CONSTRAINT IDX_ReviewBoard_FK2 FOREIGN KEY (oi_no) REFERENCES Order_item (oi_no);
 
 ALTER TABLE ReplyBoard ADD CONSTRAINT IDX_ReplyBoard_PK PRIMARY KEY (reply_board_no);
 ALTER TABLE ReplyBoard ADD CONSTRAINT IDX_ReplyBoard_FK0 FOREIGN KEY (user_no) REFERENCES UserInfo (user_no);

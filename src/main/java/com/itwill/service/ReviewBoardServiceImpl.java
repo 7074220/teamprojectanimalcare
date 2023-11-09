@@ -118,4 +118,14 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 		// 최신
 		return reviewBoardRepository.findByProductProductNoOrderByBoardDateDesc(productNo);
 	}
+
+	@Override
+	public List<ReviewBoard> findByUserNoAndProductNo(Long userNo, Long productNo) {
+		return reviewBoardDao.findByUserNoAndProductNo(userNo, productNo);
+	}
+
+	@Override
+	public ReviewBoard findByOrderItemNo(Long oiNo) {
+		return reviewBoardDao.findByOrderItemNo(oiNo);
+	}
 }

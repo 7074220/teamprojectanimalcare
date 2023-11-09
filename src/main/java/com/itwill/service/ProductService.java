@@ -13,6 +13,7 @@ import com.itwill.entity.Product;
 @Transactional
 public interface ProductService {
 
+	
 	Product insertProduct(Product product);
 	
 	Product updateProduct(Product updateProduct) throws Exception;
@@ -78,4 +79,5 @@ public interface ProductService {
 	
 	// 상품의 카테고리와 펫 카테고리가 일치하는 모든 상품 출력(query 사용 X)
 	Page<Product> findAllByProductCategoryAndProductPetCategory(String productCategory, String productPetCategory,  Pageable pageable);
+	boolean existsById(Long productNo);
 }
