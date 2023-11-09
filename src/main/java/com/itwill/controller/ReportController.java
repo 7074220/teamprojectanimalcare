@@ -18,6 +18,7 @@ import com.itwill.service.ReplyBoardService;
 import com.itwill.service.ReportBoardService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ReportController {
@@ -40,19 +41,26 @@ public class ReportController {
 	}
 	
 	@GetMapping(value="/reportBoardView",params="boardNo")
-	public String ReportView(Model model,@RequestParam Long boardNo) {
+	public String ReportView(Model model,@RequestParam Long boardNo, HttpSession session) {
 		
 		ReportBoard reportBoard = reportBoardService.findByBoardNo(boardNo);
-		List<ReplyBoard> replyBoardList= replyBoardService.findAllByReportBoardNo(boardNo);
 		
-		System.out.println(">>>>>>>>>>>>>>>>"+reportBoard);
-		System.out.println(">>>>>>>>>>>>>>>>"+reportBoard.getBoardImage());
 		
+		List<ReplyBoard> replyBoardList= replyBoardService.findAllByOrderByReplyBoardNoAsc();
+		
+		String userName=  (String) session.getAttribute("userName");
+		
+		
+		//System.out.println(">>>>>>>>>>>>>>>>"+reportBoard);
+		//System.out.println(">>>>>>>>>>>>>>>>"+reportBoard.getBoardImage());
+		//System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>"+userName);
+		
+	   
 		model.addAttribute("reportBoard", reportBoard);
+		
 		model.addAttribute("replyBoardList", replyBoardList);
 		
-		
-		
+		model.addAttribute("userName", userName);
 		
 		
 		return "reportBoardView";
