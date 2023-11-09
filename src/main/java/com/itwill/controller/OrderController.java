@@ -92,7 +92,7 @@ public class OrderController {
 			OrderItemDto tempOrderItemDto=OrderItemDto.builder().build();
 			tempOrderItemDto.setOiQty(cart.getCartQty());
 			tempOrderItemDto.setOrderNo(newOrder.getOrderNo());
-			tempOrderItemDto.setOsNo(osNo);
+			tempOrderItemDto.setOrderstatus(orderstatus);
 			tempOrderItemDto.setProduct(cart.getProduct());
 			
 			itemService.insertOrderItem(OrderItemDto.toEntity(tempOrderItemDto));
