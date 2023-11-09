@@ -49,9 +49,6 @@ public class OrderItem {
 	@OneToOne(fetch = FetchType.EAGER)
 	@Builder.Default
 	@JoinColumn(name = "os_no")
-	private Orderstatus orderStatus = new 
-	
-	Orderstatus();
-	
+	private Orderstatus orderStatus = new Orderstatus();
 
 }

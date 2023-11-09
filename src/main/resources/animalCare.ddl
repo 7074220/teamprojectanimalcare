@@ -264,7 +264,8 @@ CREATE TABLE ReviewBoard(
 		board_date                    		DATE		 NULL ,
 		board_star                    		DOUBLE PRECISION		 NULL ,
 		product_no                    		NUMBER(10)		 NULL ,
-		user_no                       		NUMBER(10)		 NULL 
+		user_no                       		NUMBER(10)		 NULL ,
+		oi_no                         		NUMBER(10)		 NULL 
 );
 
 DROP SEQUENCE ReviewBoard_board_no_SEQ;

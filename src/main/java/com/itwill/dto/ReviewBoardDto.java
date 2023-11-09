@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.itwill.entity.OrderItem;
 import com.itwill.entity.Product;
 import com.itwill.entity.ReviewBoard;
 import com.itwill.entity.Userinfo;
@@ -32,6 +33,7 @@ public class ReviewBoardDto {
 	private Double boardStar;
 	private Long productNo;
 	private double averageRating;
+	private Long oiNo;
 	
 	public static ReviewBoard toEntity(ReviewBoardDto dto) {
 		ReviewBoard reviewBoard = ReviewBoard.builder()
@@ -54,7 +56,7 @@ public class ReviewBoardDto {
 									.boardContent(reviewBoard.getBoardContent())
 									.boardDate(reviewBoard.getBoardDate())
 									.boardStar(reviewBoard.getBoardStar())
-									.productNo(reviewBoard.getProduct().getProductNo())							
+									.productNo(reviewBoard.getProduct().getProductNo())		
 									.build(); 		
 		return reviewBoardDto;
 	}
