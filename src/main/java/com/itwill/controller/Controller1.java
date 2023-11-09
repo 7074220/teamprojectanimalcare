@@ -43,14 +43,13 @@ public class Controller1 {
 		
 		List<PetDto> petDtoList = new ArrayList<>();
 		List<Pet> petList = petService.petFindAll();
-		List<ReportBoard> reportBoards = reportBoardService.findAll();
 		
 		for (Pet pet : petList) {
 			petDtoList.add(PetDto.toDto(pet));
 			model.addAttribute("petList", petDtoList);
 		}
-		
-		
+		List<ReportBoard> reportBoards = reportBoardService.findAll();
+		model.addAttribute("reportBoardList", reportBoards);
 
 		return "index";
 	}
@@ -67,6 +66,8 @@ public class Controller1 {
 			model.addAttribute("petList", petDtoList);
 		}
 		
+		List<ReportBoard> reportBoards = reportBoardService.findAll();
+		model.addAttribute("reportBoardList", reportBoards);
 		
 		return "index";
 	}
