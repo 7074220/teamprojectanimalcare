@@ -460,7 +460,7 @@
                                                       <option value="4">배송완료</option> 
                                                    </select>
                                                 </td>
-                                                <td><button type="button" class="write-review" onclick="reviewWrite(event)" id="{{product.productNo}}">리뷰쓰기</button></td>
+                                                <td><button type="button" class="write-review" onclick="reviewWrite(event,{{oiNo}})" id="{{product.productNo}}">리뷰쓰기</button></td>
                                              </tr>
                                              {{/each}}
                                           </tbody>
@@ -656,7 +656,7 @@
 								</div>
 							</div>
 							<div class="modal-footer" style="height: 40px;">
-								<button type="button" class="submit" data-dismiss="modal" style="background: white;" onclick="reviewComplete(event)">작성 완료</button>
+								<button type="button" id="{{oiNo}}" data-dismiss="modal" style="background: white;" onclick="reviewComplete(event)">작성 완료</button>
 							</div>
 						</form>
 					</div>
@@ -691,22 +691,24 @@
 			
 			
 		
-		function reviewWrite(e){			
+		function reviewWrite(e,oiNo){			
 
 			e.preventDefault();
 			let productNo = e.target.id;
 			let userNo = $('#userNo').val();
 			alert('리뷰쓰기');
 			
-			let oiNo = $('#oiNo').text();
+			//let oiNo = $('#oiNo').text();
+			
 			alert(oiNo);
+			console.log('oiNo:', oiNo); // 콘솔에 oiNo를 출력하여 디버깅 정보 확인
 			let send = {
 				oiNo : oiNo
 			}
 			response = ajaxRequest('POST','reviewBoard/reviewBoardView',send);
 			let html = orderitemView(response);
 			$('#reviewContent').html(html);
-			alert(response.boardStar);
+			
 			if(response.boardStar==1){
 				document.getElementById("star1").checked = true
 			}
@@ -737,10 +739,11 @@
 			let boardStar = $('.rate:checked').val();
 
 			let review_comment = $('#review_comment').val();
-
 			let userNo = $('#userNo').val();
 			let productNo = $('.write-review').attr('id');
-			let oiNo = $('#oiNo').text();
+			let oiNo = e.target.id;
+			
+			alert('템번호'+oiNo);
 			
 			let sendJsonObject = {
 				userNo: userNo,
@@ -788,44 +791,13 @@
 			}
 			
 			
-			function updateSubmitButton() {
-					const submitButton = document.querySelector('.write-review');
-					submitButton.textContent = '리뷰완료';
-				}
+			
 			
 			
 		
 			$(document).ready(function () {
 				
-				// 리뷰 데이터를 저장하는 JavaScript 객체
-				 const reviewData = JSON.parse(localStorage.getItem('reviewData')) || {};
 				
-				// 모달 창이 열릴 때 이벤트 핸들러
-				$('#orderDetailsModal').on('shown.bs.modal', function () {
-					const orderNo  = $(this).find('.view').data('orderNo');
-					 productNo  = $(this).find('.view').data('productNo');
-					
-					
-					const review = reviewData[orderNo];
-
-					if (review) {
-						$('.write-review').text('리뷰완료');
-					} else {
-						$('.write-review').text('리뷰쓰기');
-					}
-					
-					 
-					
-				});
-				
-				
-				// 모달 창이 닫힐 때 이벤트 핸들러
-				$('#orderDetailsModal').on('hidden.bs.modal', function () {
-					// 모달이 닫힐 때 리뷰 상태에 따라 버튼 상태를 초기화
-					if (!localStorage.getItem('sendJsonObject')) {
-						$('.write-review').text('리뷰쓰기');
-					}
-				});
 				
 				 // 리뷰 작성 완료 버튼 클릭 이벤트
 					$('.submit').on('click', function (event) {
@@ -859,21 +831,15 @@
 					let responseObject = ajaxRequest('POST', 'reviewBoard/createReviewBoard', sendJsonObject);
 					console.log(responseObject)
 
-			        // 로컬 스토리지에 리뷰 데이터 저장
-			       localStorage.setItem('reviewData', JSON.stringify(reviewData));
+			       
 
-        			 // 페이지가 로드될 때 리뷰 데이터 초기화
-				        	 
-				    if (!localStorage.getItem('sendJsonObject')) {
-				        $('.write-review').text('리뷰쓰기');
-				    }
 
 					if (responseObject.userNo == null) {
 						alert('로그인이 필요합니다.');
 						window.location.href = 'index';	// 로그인 창으로 이동
 					} else {
 						alert("리뷰작성이 완료되었습니다.");
-						updateSubmitButton();
+						
 					}
 	    });
 
