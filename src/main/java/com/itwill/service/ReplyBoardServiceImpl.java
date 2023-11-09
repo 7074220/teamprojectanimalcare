@@ -33,14 +33,14 @@ public class ReplyBoardServiceImpl implements ReplyBoardService{
 	}
 
 	@Override
-	public List<ReplyBoard> findAllByOrderByReplyBoardNoAsc() {
-		return replyBoardDao.findAllByOrderByReplyBoardNoAsc();
+	public List<ReplyBoard> findAllByOrderByReplyBoardNoAsc(Long boardNo) {
+		return replyBoardDao.findAllByOrderByReplyBoardNoAsc(boardNo);
 	}
 
 	@Override
-	public void deleteByReplyBoardStepBoardDepthBoardGroupNo(Integer ReplyBoardStep, Integer ReplyBoardDepth,
-			Integer ReplyBoardGroupNo) {
-		replyBoardDao.deleteByReplyBoardStepBoardDepthBoardGroupNo(ReplyBoardStep, ReplyBoardDepth, ReplyBoardGroupNo);
+	public void deleteByReplyBoardStepBoardDepthBoardGroupNo(Integer replyBoardStep, Integer replyBoardDepth,
+			Integer replyBoardGroupNo) {
+		replyBoardDao.deleteByReplyBoardStepBoardDepthBoardGroupNo(replyBoardStep, replyBoardDepth, replyBoardGroupNo);
 	}
 	
 	@Override

@@ -37,6 +37,7 @@
 					<div class="col-lg-6 col-md-6">
 						<div>
 							<h2>센터 정보</h2>
+							<p><img th:src="@{image/center/} + ${center.centerImage}"></p>
 							<p>센터 번호: <span th:text="${center.centerNo}">10</span></p>
 							<p>센터 이름: <span th:text="${center.centerName}">123</span></p>
 							<p>전화번호: <span th:text="${center.centerPhoneNumber}">123</span></p>

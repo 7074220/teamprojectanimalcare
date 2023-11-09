@@ -57,6 +57,9 @@ public class ReportBoard {
 	private String boardImage;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	//유기견 발견 장소
+	//private String boardFindLocal;
+	
 	@JoinColumn(name = "user_no")
 	@Builder.Default
 	@ToString.Exclude

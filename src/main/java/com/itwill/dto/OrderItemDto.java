@@ -11,6 +11,7 @@ import com.itwill.entity.Userinfo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -30,8 +31,9 @@ private Long oiNo;
 
 	
 	private Long orderNo;
-	private Long productNo;
 	private Long osNo;
+	@Default
+	private Product product=new Product();
 	
 //	private Long orderId;
 	
@@ -40,7 +42,7 @@ private Long oiNo;
 									.oiNo(entity.getOiNo())
 									.oiQty(entity.getOiQty())
 									.orderNo(entity.getOrders().getOrderNo())
-									.productNo(entity.getProduct().getProductNo())
+									.product(entity.getProduct())
 									.osNo(entity.getOrderStatus().getOsNo())
 								 .build();
 		
@@ -53,7 +55,7 @@ private Long oiNo;
 									.oiQty(dto.getOiQty())
 									.orders(Orders.builder().orderNo(dto.getOrderNo()).build())
 									.orderStatus(Orderstatus.builder().osNo(dto.getOsNo()).build())
-									.product(Product.builder().productNo(dto.getProductNo()).build())
+									.product(dto.getProduct())
 								 .build();
 		
 		return orderItem;

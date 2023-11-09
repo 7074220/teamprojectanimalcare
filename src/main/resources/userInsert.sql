@@ -37,10 +37,11 @@ insert into cart(cart_no, cart_qty, product_no, user_no) values(cart_cart_no_SEQ
 
 -- center insert
 
-INSERT INTO center (center_no, center_name, center_phone_number, center_local, center_open_close_time) VALUES (Center_center_no_SEQ.nextval,'안녕보호소','010-1111-1111','서울시','09:00 ~ 21:00');
-INSERT INTO center (center_no, center_name, center_phone_number, center_local, center_open_close_time) VALUES (Center_center_no_SEQ.nextval,'사랑보호소','010-2222-2222','경기도','09:00 ~ 22:00');
-INSERT INTO center (center_no, center_name, center_phone_number, center_local, center_open_close_time) VALUES (Center_center_no_SEQ.nextval,'하하보호소','010-3333-3333','강원도','09:00 ~ 23:00');
-INSERT INTO center (center_no, center_name, center_phone_number, center_local, center_open_close_time) VALUES (Center_center_no_SEQ.nextval,'소소보호소','010-4444-4444','충청도','09:00 ~ 24:00');
+INSERT INTO center (center_no, center_name, center_phone_number, center_image, center_local, center_open_close_time) VALUES (Center_center_no_SEQ.nextval,'용인시 동물보호센터','031-324-3463','yongin.jpeg','용인시','09:00 ~ 18:00');
+INSERT INTO center (center_no, center_name, center_phone_number, center_image, center_local, center_open_close_time) VALUES (Center_center_no_SEQ.nextval,'시흥시 동물누리 보호센터','0507-1317-6943','sihung.jpeg','시흥시','09:00 ~ 18:00');
+INSERT INTO center (center_no, center_name, center_phone_number, center_image, center_local, center_open_close_time) VALUES (Center_center_no_SEQ.nextval,'안녕보호소','010-1111-1111','yongin.jpeg','서울시','09:00 ~ 21:00');
+INSERT INTO center (center_no, center_name, center_phone_number, center_image, center_local, center_open_close_time) VALUES (Center_center_no_SEQ.nextval,'안녕보호소','010-1111-1111','yongin.jpeg','서울시','09:00 ~ 21:00');
+
 
 -- pet insert
 insert into pet(pet_no,pet_local,pet_character,pet_find_place,pet_register_date,pet_type,pet_gender,center_no,pet_image) 

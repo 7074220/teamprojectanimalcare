@@ -596,17 +596,17 @@
                            
                                 <tr th:each="cart:${cartList}">
                                     <!--<td class="product_checkbox" th:id="${cart.cartNo}"><input type="checkbox" name="cartCheckbox"></td>-->
-                                    <td>
+                                    <td class="product_check">
 										<label class="checkbox-inline">
 											<input type="checkbox" name="chk" class="chk" onclick="chkClicked()" value="" th:value="(${cart.product.productPrice})*(${cart.cartQty})" th:id="${cart.cartNo}" checked="true">
 										</label>
 									</td>
                                     <td class="product_thumb" th:id="${cart.cartNo}"><a href="#" th:href="@{productDetail(productNo=${cart.product.productNo})}"><img src="#" alt="" th:src="@{/image/product/} + ${cart.product.getProductImage}"></a></td>
                                     <td class="product_name" th:id="${cart.cartNo}"><a href="#" th:text="${cart.product.productName}" th:href="@{productDetail(productNo=${cart.product.productNo})}">상품명</a></td>
-                                    <td class="product-price" th:id="${cart.cartNo}" th:text="${cart.product.productPrice}">가격</td>
+                                    <td class="product-price" th:id="${cart.cartNo}" th:text="${#numbers.formatInteger(cart.product.productPrice, 3, 'COMMA') + '원'}">가격</td>
                                     <td class="product_quantity" th:id="${cart.cartNo}"><label>수량</label> <input min="1" max="100" value="1" type="number" th:value="${cart.cartQty}" th:id="${cart.cartNo}"></td>
                                     <!--  상품가격 X 수량 = 총금액 수정해야댐 -->
-                                    <td class="product_total" th:id="${cart.cartNo}" th:text="(${cart.product.productPrice})*(${cart.cartQty})">총금액</td>
+                                    <td class="product_total" th:id="${cart.cartNo}" th:text="${#numbers.formatInteger(cart.product.productPrice * cart.cartQty, 3, 'COMMA') + '원'}">총금액</td>
                                     <td class="product_remove" th:id="${cart.cartNo}"><a class="deleteCart"><i class="fa fa-trash-o" th:id="${cart.cartNo}"></i></a></td>
                                 </tr>
                                 
@@ -751,9 +751,9 @@
 		    // AJAX 요청 보내기
 			ajaxRequest("DELETE","cart/delete/"+cartNo);
 		    
-		    $(".product_remove, .product_thumb, .product_name, .product-price, .product_quantity, .product_total").each(function() {
+		    $(".product_check, .product_remove, .product_thumb, .product_name, .product-price, .product_quantity, .product_total").each(function() {
 	            if ($(this).attr("id") === cartNo) {
-	                $(this).remove();
+	                $(this).closest("tr").remove();
 	            }
 	        });
 		    

@@ -673,7 +673,7 @@
 										</ul>
 									</div>
 									<div class="price_box">
-										<span class="current_price" th:text="${product.productPrice}">상품 가격</span>
+										<span class="current_price" th:text="${#numbers.formatInteger(product.productPrice, 3, 'COMMA') + '원'}">상품 가격</span>
 										<!--  <span class="old_price">£80.00</span> -->
 
 									</div>
@@ -883,11 +883,11 @@
 											</div>
 										</div>
 										</div>
-										<!--	 <div class="comment_title">
+											 <div class="comment_title">
                                         <h2>Add a review </h2>
                                         <p>Your email address will not be published.  Required fields are marked </p>
-                                    </div>-->
-										<!-- <div class="product_ratting mb-10">
+                                    </div>
+										 <div class="product_ratting mb-10">
                                        <h3>Your rating</h3>
                                         <ul>
                                             <li><a href="#"><i class="icon-star"></i></a></li>
@@ -896,8 +896,8 @@
                                                <li><a href="#"><i class="icon-star"></i></a></li>
                                                <li><a href="#"><i class="icon-star"></i></a></li>
                                         </ul>
-                                    </div>-->
-										<!-- <div class="product_review_form">
+                                    </div>
+										 <div class="product_review_form">
                                         <form action="#">
                                             <div class="row">
                                                 <div class="col-12">
@@ -916,7 +916,7 @@
                                             </div>
                                             <button type="submit">Submit</button>
                                          </form>   
-                                    </div> -->
+                                    </div>
 									</div>
 								</div>
 							</div>

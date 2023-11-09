@@ -4,6 +4,7 @@ package com.itwill.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -20,12 +21,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.entity.ReplyBoard;
 import com.itwill.entity.ReportBoard;
-
+import com.itwill.entity.Userinfo;
 import com.itwill.service.ReplyBoardService;
 import com.itwill.service.ReportBoardService;
+import com.itwill.service.UserInfoService;
 
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ReportController {
@@ -34,6 +36,9 @@ public class ReportController {
 	
 	@Autowired
 	private ReplyBoardService replyBoardService;
+	
+	@Autowired
+	private UserInfoService userInfoService;
 	
 	@Operation(summary = "신고게시판 리스트")
 	@GetMapping("/reportlist")
@@ -45,19 +50,21 @@ public class ReportController {
 	}
 	
 	@GetMapping(value="/reportBoardView",params="boardNo")
-	public String ReportView(Model model,@RequestParam Long boardNo) {
-		
+	public String ReportView(Model model,@RequestParam Long boardNo,HttpSession session) throws Exception {
 		ReportBoard reportBoard = reportBoardService.findByBoardNo(boardNo);
-		List<ReplyBoard> replyBoardList= replyBoardService.findAllByReportBoardNo(boardNo);
+		List<ReplyBoard> replyBoardList= replyBoardService.findAllByOrderByReplyBoardNoAsc(boardNo);
 		
-		System.out.println(">>>>>>>>>>>>>>>>"+reportBoard);
-		System.out.println(">>>>>>>>>>>>>>>>"+reportBoard.getBoardImage());
+		for (ReplyBoard replyBoard : replyBoardList) {
+			Long userNo = replyBoard.getUserinfo().getUserNo();
+			Userinfo replyBoardUserinfo = userInfoService.findUserByNo(userNo);
+			replyBoard.setUserinfo(replyBoardUserinfo);
+		}
+	   
 		model.addAttribute("reportBoard", reportBoard);
 		model.addAttribute("replyBoardList", replyBoardList);
+		
 		return "reportBoardView";
 	}
-	
-	
 	
 	@GetMapping("/reportWriteForm")
     public String showReportForm() {
@@ -80,7 +87,7 @@ public class ReportController {
 	    
 	    //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         //Date parsingDate = dateFormat.parse(boardFindDate);
-	    System.out.println(">>>>>>>>>>>>>>>>>"+boardFindDate);
+	    //System.out.println(">>>>>>>>>>>>>>>>>"+boardFindDate);
 	    ReportBoard writeReportBoard = ReportBoard.builder()
 	    										.boardContent(boardContent)
 	    										.boardFindDate(boardFindDate)

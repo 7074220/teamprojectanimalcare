@@ -592,14 +592,14 @@
                                     </thead>
                                     <tbody>
                                         <tr th:each="wish:${wishList}">
-                                            <td>
+                                            <td class="product_check">
 												<label class="checkbox-inline">
 													<input type="checkbox" name="chk" class="chk" onclick="chkClicked()" value="" th:id="${wish.wishNo}" checked="true">
 												</label>
 											</td>
                                             <td class="product_thumb" th:id="${wish.wishNo}"><a href="#" th:href="@{productDetail(productNo=${wish.product.productNo})}"><img src="#" alt="" th:src="@{/image/product/} + ${wish.product.getProductImage}"></a></td>
                                             <td class="product_name" th:id="${wish.wishNo}"><a href="#" th:text="${wish.product.productName}" th:href="@{productDetail(productNo=${wish.product.productNo})}">상품명</a></td>
-                                            <td class="product-price"  th:id="${wish.wishNo}" th:text="${wish.product.productPrice}">가격</td>
+                                            <td class="product-price"  th:id="${wish.wishNo}" th:text="${#numbers.formatInteger(wish.product.productPrice, 3, 'COMMA') + '원'}">가격</td>
                                             <td class="product_quantity" th:id="${wish.wishNo}" th:text="${wish.product.productCategory}">In Stock</td>
                                            <td class="product_remove" th:id="${wish.wishNo}"><a class="deleteWish"><i class="fa fa-trash-o" th:id="${wish.wishNo}"></i></a></td>
                                             <!--<td class="product_total"><a href="#">Add To Cart</a></td>-->
@@ -684,11 +684,11 @@
 		    //e.preventDefault(); // 기본 이벤트 방지
 		    let wishNo = $(e.target).attr('id');
 		    // AJAX 요청 보내기
-			ajaxRequest("DELETE", "wish" + wishNo);
+			ajaxRequest("DELETE", "wish/" + wishNo);
 		    
-		    $(".product_remove, .product_thumb, .product_name, .product-price, .product_quantity, .product_total").each(function() {
+		    $(".product_check, .product_remove, .product_thumb, .product_name, .product-price, .product_quantity, .product_total").each(function() {
 	            if ($(this).attr("id") === wishNo) {
-	                $(this).remove();
+	                 $(this).closest("tr").remove();
 	            }
 	        });
 		    
