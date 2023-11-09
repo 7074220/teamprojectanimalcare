@@ -478,8 +478,8 @@ public class ProductController {
 		}
 		
 		model.addAttribute("product", product);
-		
-		model.addAttribute("nextExist",nextExist);
+		//model.addAttribute("nextExist",nextExist);
+		model.addAttribute("products", products);
 		model.addAttribute("productName", productNameDto);
 		
 		List<ReviewBoard> reviewList = reviewBoardService.findByProductNo(product.getProductNo());
