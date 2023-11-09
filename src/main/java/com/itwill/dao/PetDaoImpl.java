@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.itwill.entity.Pet;
@@ -21,11 +23,15 @@ public class PetDaoImpl implements PetDao {
 	}
 
 	@Override
-	public List<Pet> petFindAll() {
-		List<Pet> petList = petRepository.findAll();
+	
+	public Page<Pet> petFindAllPage(Pageable pageable) {
+		Page<Pet> petList = petRepository.findAll(pageable);
 		return petList;
 	}
-
+	/*
+	 * public List<Pet> petFindAll() { List<Pet> petList = petRepository.findAll();
+	 * return petList; }
+	 */
 	@Override
 	public Pet petInsert(Pet pet) {
 		Pet petSave = petRepository.save(pet);
@@ -62,6 +68,12 @@ public class PetDaoImpl implements PetDao {
 		@Override
 		public List<Pet> findAllByPetLocal(String petLocal) {
 			List<Pet> petList = petRepository.findByPetLocal(petLocal);
+			return petList;
+		}
+
+		@Override
+		public List<Pet> petFindAll() {
+			List<Pet> petList = petRepository.findAll();
 			return petList;
 		}
 	
