@@ -2,6 +2,9 @@ package com.itwill.dao;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.itwill.entity.Pet;
 
 public interface PetDao {
@@ -20,4 +23,6 @@ public interface PetDao {
 	 List<Pet> findAllByOrderByPetType(String petType);
 	 
 	 List<Pet> findAllByPetLocal(String petLocal);
+
+	Page<Pet> petFindAllPage(Pageable pageable);
 }
