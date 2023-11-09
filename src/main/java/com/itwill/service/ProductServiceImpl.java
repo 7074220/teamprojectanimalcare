@@ -170,6 +170,12 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Page<Product> findAllByProductCategoryAndProductPetCategory(String productCategory, String productPetCategory,  Pageable pageable) {
 		return productDao.findAllByProductCategoryAndProductPetCategory(productPetCategory, productCategory, pageable);
+	}
+
+	@Override
+	public boolean existsById(Long productNo) {
+		// TODO Auto-generated method stub
+		return productDao.existsById(productNo);
 	} 
 	
 	
