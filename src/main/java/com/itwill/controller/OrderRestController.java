@@ -362,6 +362,7 @@ public class OrderRestController {
 		
 		List<OrderItemDto> orderItemDtos = ordersDto.getOrderItemDtos();
 		for (OrderItemDto orderItemDto : orderItemDtos) {
+			orderItemDto.setOrderStatusNo(3);
 			ReviewBoard reviewBoard = reviewBoardService.findByOrderItemNo(orderItemDto.getOiNo());
 			if(reviewBoard!=null) {
 				orderItemDto.setReviewStatus("수정/완료");
@@ -369,7 +370,7 @@ public class OrderRestController {
 				orderItemDto.setReviewStatus("리뷰쓰기");
 			}
 		}
-		
+		System.out.println(">>>>>>>>>>"+orderItemDtos);
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		
