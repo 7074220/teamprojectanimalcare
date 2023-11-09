@@ -123,7 +123,12 @@ function navigate() {
 		let responseJsonObject = ajaxRequest('POST','user/login',sendJsonObject);
 		
 		if(responseJsonObject.status == 1000){
-			window.location.href='index';
+			if(responseJsonObject.userId=="admin@gmail.com"){
+				window.location.href='userinfo';
+			}else{
+				window.location.href='index';	
+			}
+			
 		}
 		
 		if((responseJsonObject.status == 1001) || (responseJsonObject.status == 1002)) {
