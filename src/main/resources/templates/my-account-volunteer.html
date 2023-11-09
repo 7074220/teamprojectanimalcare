@@ -217,7 +217,8 @@
                                                 <th>Date</th>
                                                 <th>Center</th>
                                                 <th>Status</th>    
-                                                <th>Delete</th>  
+                                                <!-- <th>Delete</th> -->
+                                                <th>Update</th>                                            
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -236,9 +237,14 @@
 												
 												<td th:text="${volunteer.center.centerName}"></td>
 												<td th:text="${volunteer.volunteerStatus}"><span class="success">봉사신청</span></td>
+												
 												<td>
-													<button type="submit" class="deleteBtn" th:id="'deleteBtn-' + ${volunteer.volunteerNo}">취소</button>
+												<a th:href="@{'/volunteerUpdate?volunteerNo=' +${volunteer.volunteerNo} + '&centerNo=' +${volunteer.Center.centerNo} }" >수정</a>										
 												</td>
+												
+												<!-- <td> 삭제
+													<button type="submit" class="deleteBtn" th:id="'deleteBtn-' + ${volunteer.volunteerNo}">취소</button>
+												</td> -->
 												
 											</tr>
 
@@ -289,7 +295,7 @@
 </script> -->
 
 
-<script>
+<!-- <script>
 	$('.deleteBtn').on('click', function(e) {
 		e.preventDefault();
 		let id = $(this).attr('id');
@@ -322,9 +328,49 @@
 			}
 		});
 	});
+</script> -->
+
+<script>
+	$('.updateBtn').on('click', function(e) {
+		e.preventDefault();
+		let id = $(this).attr('id');
+		let no = id.split('-')[1];
+
+		if (isNaN(no)) {
+			alert('volunteerNo 가져오기실패')
+			return;
+		}
+
+		let sendJsonObject = {volunteerNo : no};
+		//let $row = $(this).closest('tr');
+		
+		let updateData = {
+			volunteerNo: volunteerNo, 
+			volunteerDate:volunteerDate,
+			volunteerTime:volunteerTime
+		};
+		
+
+		$.ajax({
+			type : 'PUT',
+			url : '/volunteerUpdate?volunteerNo=' + volunteerNo + '&centerNo=' + centerNo,
+			data : JSON.stringify(sendJsonObject),
+			contentType : 'application/json;UTF-8',
+			success : function(response) {
+				if (response && response.volunteerNo == null) {
+					alert('신청내역이 없음');
+				} else {
+					$('#volunteerNo').val(response.volunteerNo);
+					$('#volunteerDate').val(response.volunteerDate);
+					$('#volunteerTime').val(response.volunteerTime);
+				}
+			},
+			error : function() {
+				alert('수정 요청중 오류가 발생했습니다.');
+			}
+		});
+	});
 </script>
-
-
 
 
 
