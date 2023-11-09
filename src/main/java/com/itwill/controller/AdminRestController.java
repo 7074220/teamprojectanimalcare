@@ -51,6 +51,9 @@ public class AdminRestController {
 	
 	
 
+	/******************************* Adopt ************************************/
+	
+	
 	@Operation(summary = "no로 삭제")
 	@DeleteMapping("/{adoptNo}")
 	public ResponseEntity<Map> deleteAdopt(@PathVariable(value = "adoptNo") Long adoptNo) throws Exception {
@@ -63,10 +66,6 @@ public class AdminRestController {
 	}
 	
 	
-		
-	
-	
-	
 	
 	
 	@Operation(summary = "봉사삭제")
@@ -77,6 +76,7 @@ public class AdminRestController {
 	} // DELETE
 	
 	
+
 	
 	
 	@Operation(summary = "봉사 부분 업데이트") 
@@ -111,6 +111,9 @@ public class AdminRestController {
 	
 	
 	
+	/******************************* Pet ************************************/
+	
+	
 	@Operation(summary = "펫 삭제")	
 	@DeleteMapping("/{petNo}")
 	public ResponseEntity<Map> petDelete(@PathVariable(name = "petNo") Long petNo) throws Exception{
@@ -123,6 +126,11 @@ public class AdminRestController {
 			return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>());
 		}
 	
+	
+	
+	
+	
+	/******************************* Product ************************************/
 	
 	
 	
