@@ -18,6 +18,8 @@ import com.itwill.service.UserInfoService;
 
 import jakarta.servlet.http.HttpSession;
 
+
+
 @Controller
 public class Controller1 {
 	
@@ -34,7 +36,9 @@ public class Controller1 {
 	public String main() {
 		return "index";
 	}
+<<<<<<< HEAD
 	 */
+
 	
 	@GetMapping(value = "/myAccount")
 	public String myAccount() {
