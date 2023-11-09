@@ -14,6 +14,8 @@ import com.itwill.entity.ReportBoard;
 import com.itwill.service.PetService;
 import com.itwill.service.ReportBoardService;
 
+
+
 @Controller
 public class Controller1 {
 	
@@ -24,6 +26,12 @@ public class Controller1 {
 	/*
 	@GetMapping(value = "/")
 	public String main() {
+		return "index";
+	}
+
+	@GetMapping(value = "/index")
+	public String index() {
+		
 		return "index";
 	}
 */
@@ -43,14 +51,13 @@ public class Controller1 {
 		
 		List<PetDto> petDtoList = new ArrayList<>();
 		List<Pet> petList = petService.petFindAll();
-		List<ReportBoard> reportBoards = reportBoardService.findAll();
 		
 		for (Pet pet : petList) {
 			petDtoList.add(PetDto.toDto(pet));
 			model.addAttribute("petList", petDtoList);
 		}
-		
-		
+		List<ReportBoard> reportBoards = reportBoardService.findAll();
+		model.addAttribute("reportBoardList", reportBoards);
 
 		return "index";
 	}
@@ -67,6 +74,8 @@ public class Controller1 {
 			model.addAttribute("petList", petDtoList);
 		}
 		
+		List<ReportBoard> reportBoards = reportBoardService.findAll();
+		model.addAttribute("reportBoardList", reportBoards);
 		
 		return "index";
 	}

@@ -69,8 +69,8 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 	
 	
 	@Override
-	public List<ReplyBoard> findAllByOrderByReplyBoardNoAsc() {
-		return replyBoardRepository.findAllByOrderByReplyBoardNoAsc();
+	public List<ReplyBoard> findAllByOrderByReplyBoardNoAsc(Long boardNo) {
+		return replyBoardRepository.findAllByOrderByReplyBoardNoAsc(boardNo);
 	}
 
 

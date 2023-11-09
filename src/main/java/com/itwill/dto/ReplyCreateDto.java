@@ -22,7 +22,6 @@ import lombok.NoArgsConstructor;
 public class ReplyCreateDto {
 	
 	private Long replyBoardNo;
-	
 	private Date replyBoardRegisterDate;
 	private String replyBoardContent;
 	private Integer replyBoardGroupNo;
@@ -30,10 +29,8 @@ public class ReplyCreateDto {
 	private Integer replyBoardDepth;
 	private Long reportNo;
 	private Long userNo;
-	
-	
 	private String userName;
-	
+	private int status;
 	
 	
 	

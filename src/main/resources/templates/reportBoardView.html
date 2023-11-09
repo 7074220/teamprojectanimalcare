@@ -178,8 +178,8 @@
 										<input type="hidden" id="productNo" />
 										<div id="reviewContent">
 											<div class="reviews_wrapper">
-												<h2
-													th:text="${#dates.format(replyBoard.replyBoardRegisterDate, 'yyyy-MM-dd HH:mm')}">roadthemes</h2>
+												<h7
+													th:text="${#dates.format(replyBoard.replyBoardRegisterDate, 'yyyy-MM-dd HH:mm')}">roadthemes</h7>
 
 												<div class="reviews_comment_box">
 													<div class="comment_thmb">
@@ -218,18 +218,6 @@
 													<label for="review_comment">Comment </label>
 													<textarea name="comment" id="replyComment"></textarea>
 												</div>
-												<div class="col-lg-4 col-md-4">
-													<label for="author">Name *</label> <input id="author"
-														type="text">
-
-												</div>
-												<!-- 
-												<div class="col-lg-4 col-md-4">
-													<label for="website">PhoneNumber * </label> <input
-														id="website" type="text">
-												</div>
- 												-->
-
 											</div>
 											<button class="button" id="postCommentButton" type="button" onclick="replyInsert()">Post
 												Comment</button>
@@ -267,13 +255,9 @@
 		
 		function replyInsert(){
 			let boardNo = $('.single_blog').attr('id');
-			let userName = document.f.author.value;
 			let replyBoardContent = document.getElementById('replyComment').value;
-			//alert(boardNo);
-			
 			
 			let send = {
-					userName : userName,
 					replyBoardContent : replyBoardContent,
 					reportNo : boardNo
 			}

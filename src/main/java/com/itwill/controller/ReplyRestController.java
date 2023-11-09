@@ -158,28 +158,21 @@ public class ReplyRestController {
 	@Operation(summary = " 댓글 작성")
 	@PostMapping("/inserted")
 	public ResponseEntity<ReplyCreateDto> Create(@RequestBody ReplyCreateDto replyCreateDto,HttpSession session) throws Exception {
-		//System.out.println(">>>>>> 맵핑");
-		//System.out.println("no:"+replyCreateDto.getReportNo());
-		//System.out.println("replyCreateDto:"+replyCreateDto);
+		Long userNo = (Long)session.getAttribute("userNo");
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		if(userNo==null) {
+			replyCreateDto.setStatus(0);
+			return new ResponseEntity<ReplyCreateDto>(replyCreateDto, httpHeaders,HttpStatus.NOT_FOUND);
+		}
+		Userinfo loginUser = userInfoService.findUserByNo(userNo);
 		ReportBoard findReportBoard = reportBoardService.findByBoardNo(replyCreateDto.getReportNo());
-		//System.out.println(findReportBoard);
 		ReplyBoard replyBoard = ReplyCreateDto.toEntity(replyCreateDto);
 		replyBoard.setReportBoard(findReportBoard);
+		replyBoard.setUserinfo(loginUser);
 		
-		
-		
-		/*
-		List<ReplyBoard> replyBoardList = replyBoardService.findAllByReportBoardNo(replyBoard.getReportBoard().getBoardNo());
-		List<ReplyCreateDto> replyCreateDtoList=new ArrayList<ReplyCreateDto>();
-		for (ReplyBoard replyBoard2 : replyBoardList) {
-		  ReplyCreateDto createDto =  ReplyCreateDto.toDto(replyBoard2);
-		  replyCreateDtoList.add(createDto);
-		}
-		
-			*/
 		ReplyBoard saveReplyBoard= replyBoardService.Create(replyBoard);
-		System.out.println(saveReplyBoard);
-				 HttpHeaders httpHeaders = new HttpHeaders(); httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		
 		return new ResponseEntity<ReplyCreateDto>(ReplyCreateDto.toDto(saveReplyBoard), httpHeaders,HttpStatus.CREATED);
 	}

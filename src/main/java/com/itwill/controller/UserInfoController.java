@@ -138,4 +138,10 @@ public class UserInfoController {
 		return "findId";
 	}
 	
+	//
+	@GetMapping("/loginPopUp")
+	public String loginPopUp() {
+		return "loginPopUp";
+	}
+	
 }
