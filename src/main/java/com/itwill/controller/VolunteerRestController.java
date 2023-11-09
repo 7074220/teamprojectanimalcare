@@ -2,6 +2,7 @@ package com.itwill.controller;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,9 +80,14 @@ public class VolunteerRestController {
 	
 	@Operation(summary = "봉사삭제")
 	@DeleteMapping("/{volunteerNo}")
-	public ResponseEntity<Map> VolunteerDelete(@PathVariable(name = "volunteerNo") Long volunteerNo) throws Exception{
-		volunteerService.deleteVolunteer(volunteerNo);	
-		return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>());
+	public ResponseEntity<Map> VolunteerDelete(@PathVariable(name = "volunteerNo") Long volunteerNo) throws Exception{		
+		try {
+			volunteerService.deleteVolunteer(volunteerNo);
+			return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("volunteerNo", volunteerNo));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+		
 	} // DELETE
 	
 	

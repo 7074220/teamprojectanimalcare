@@ -55,23 +55,19 @@ window.onload = function() {
     // 한국 시간대 (UTC+9)로 변경
     today.setHours(today.getHours() + 9);
     var afterTomorrow = new Date(today);
-    afterTomorrow.setDate(afterTomorrow.getDate() + 1); // 내일 날짜 계산
+    afterTomorrow.setDate(afterTomorrow.getDate() + 1);
     var afterTomorrowString = afterTomorrow.toISOString().slice(0, 10);
 
-    // 내일 날짜를 기본값으로 설정
     volunteerDate.value = afterTomorrowString;
 
-    // 오늘 날짜 오전 9시 (한국 시간대)를 기준으로 이전 날짜를 계산
     var minDate = new Date(today);
-    minDate.setHours(9, 0, 0, 0); // 오전 9시 (한국 시간대)를 설정
-	/* if (today.getHours() >= 9) { 
-        // 이미 오늘 오전 9시 (한국 시간대)를 지난 경우, 모레부터 선택 가능하도록 설정
+    minDate.setHours(9, 0, 0, 0);
+	if (today.getHours() >= 9) { 
         minDate.setDate(minDate.getDate() + 1);
-    } */
+    }
     var minDateString = minDate.toISOString().slice(0, 10);
     volunteerDate.setAttribute('min', minDateString);
 
-    // 선택 가능한 최대 날짜를 설정하지 않음
     volunteerDate.removeAttribute('max');
 };
 </script> 
@@ -216,7 +212,7 @@ $('.submit').on('click', function (event) {
     	window.location.href = 'volunteerByUserNo'; // 마이페이지-봉사 이동
     }else{
     	alert('로그인이 필요합니다.');
-        window.location.href = 'index#/login_form'; // 로그인 페이지로 이동 수정하기
+        window.location.href = 'index#/login_form'; // 로그인 페이지로 이동
     }
 });
 </script> 
