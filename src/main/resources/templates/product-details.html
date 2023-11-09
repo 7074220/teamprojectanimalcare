@@ -890,7 +890,7 @@
 
 
 														<h2>
-															<p th:text="${review.boardTitle}"></p>
+															<p th:text="${review.boardTitle}">게시판 제목</p>
 														</h2>
 														<p th:text="${review.boardContent}">roadthemes</p>
 													</div>
@@ -1401,8 +1401,8 @@
 				var url = window.location.href;
 				var productNo = url.substring(url.lastIndexOf("=") + 1);
 				//var productQty = document.getElementById("productQty").value;
-				alert("위시리스트에 상품이 담겼습니다.");
-				window.location.href = "wish?productNo=" + productNo + "&productQty=" + 1;
+				alert("장바구니에 상품이 담겼습니다.");
+				window.location.href = "insertWish?productNo=" + productNo + "&productQty=" + 1;
 			}
 
 
