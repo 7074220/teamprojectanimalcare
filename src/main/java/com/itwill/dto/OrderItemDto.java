@@ -27,9 +27,6 @@ public class OrderItemDto {
 private Long oiNo;
 	
 	private Integer oiQty;
-	
-
-	
 	private Long orderNo;
 	
 	

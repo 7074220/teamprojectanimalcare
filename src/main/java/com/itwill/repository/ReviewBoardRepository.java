@@ -3,6 +3,7 @@ package com.itwill.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -36,5 +37,11 @@ public interface ReviewBoardRepository extends JpaRepository<ReviewBoard, Long> 
 
 	@Query("SELECT AVG(r.boardStar) FROM ReviewBoard r WHERE r.product.productNo = :productNo")
 	Double calculateAverageStarRating(@Param("productNo") Long productNo); // 상품 번호를 사용하여 별점 평균계산
-
+	
+	@Modifying
+	@Query(value ="select * from reviewboard where user_no=?1 and product_no=?2",nativeQuery = true)
+	public List<ReviewBoard> findByUserNoAndProductNo(Long userNo, Long productNo);
+	
+	@Query(value = "select * from reviewboard where oi_no=?1",nativeQuery = true)
+	public ReviewBoard findByOrderItemNo(Long oiNo);
 }

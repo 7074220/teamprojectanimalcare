@@ -37,7 +37,7 @@ public class OrdersDto {
 	
 	private Userinfo userinfo;
 	private List<OrderItemDto> orderItemDtos = new ArrayList();
-
+	private int reviewStatus;
 	
 	public static OrdersDto toDto(Orders entity) {
 		OrdersDto orderDto = OrdersDto.builder()
