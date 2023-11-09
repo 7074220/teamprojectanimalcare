@@ -155,15 +155,6 @@ public class VolunteerController {
         return "my-account-volunteer"; // 수정 실패 페이지로 이동
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
-
 
 	
 }

@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -24,9 +25,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.AdoptDto;
 import com.itwill.dto.VolunteerDto;
+import com.itwill.dto.VolunteerTimePointDto;
 import com.itwill.entity.Center;
 import com.itwill.entity.Userinfo;
 import com.itwill.entity.Volunteer;
+import com.itwill.repository.UserinfoRepository;
 import com.itwill.service.CenterService;
 import com.itwill.service.UserInfoService;
 import com.itwill.service.VolunteerService;
@@ -47,6 +50,58 @@ public class VolunteerRestController {
 	private CenterService centerService;
 	@Autowired
 	private UserInfoService userInfoService;
+	@Autowired
+	private UserinfoRepository userinfoRepository;
+	
+	
+	@Operation(summary = "포인트3000생성 (관리자)")
+	@PostMapping("/insertVolunteerPoint")
+	public ResponseEntity<VolunteerTimePointDto> insertVolunteerPoint(
+	        @RequestBody VolunteerTimePointDto timePointDto,
+	        HttpSession session) throws Exception {
+
+	    Long userNo = (Long) session.getAttribute("userNo");
+	    
+	    if (userNo == null) {
+	        // 세션에서 userNo가 없는 경우에 대한 처리
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+	    }
+
+	    timePointDto.setUserNo(userNo);
+
+	    try {
+	        // 세션에서 얻은 userNo를 사용하여 기존 UserInfo를 찾기
+	        Optional<Userinfo> userinfoOptional = userinfoRepository.findById(userNo);
+
+	        if (userinfoOptional.isPresent()) {
+	            // UserInfo가 존재한다면
+	            Userinfo userinfo = userinfoOptional.get();
+
+	            Volunteer volunteer = new Volunteer();
+	            volunteer.setVolunteerTime(3);
+	            volunteer.setUserinfo(userinfo);
+
+	            Volunteer createdVolunteer = volunteerService.insertVolunteer(volunteer);
+
+	            volunteerService.addPointsToVolunteer(createdVolunteer.getVolunteerNo(), 3000);
+
+	            VolunteerTimePointDto dto = VolunteerTimePointDto.toDto(createdVolunteer);
+	            return ResponseEntity.ok(dto);
+	        } else {
+	            // UserInfo가 존재하지 않는 경우에 대한 처리
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+	    }
+	}
+
+
+	
+
+
+	
 	
 	
 	// 봉사버튼 클릭시 로그인이면 저장, 비회원이면 메인 이동
@@ -174,11 +229,7 @@ public class VolunteerRestController {
 		return new ResponseEntity<List<VolunteerDto>>(volunteerDtoList, httpHeaders, HttpStatus.OK);
 	} // 목록 전체 조회
 	
-	
-	
-	
-	
-	
+	/*
 	@PostMapping("/apply-points")
 	public ResponseEntity<String> applyPoints(HttpSession session, @RequestParam String selectedTime) {
 	    Long userNo = (Long) session.getAttribute("userNo");
@@ -217,14 +268,7 @@ public class VolunteerRestController {
 
 	    return ResponseEntity.ok("포인트가 성공적으로 적립되었습니다.");
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	*/
+
 	
 }
