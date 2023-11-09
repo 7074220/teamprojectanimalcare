@@ -67,27 +67,34 @@ public class ReviewBoardRestController {
 		
 		ReviewBoard preReviewBoard = reviewBoardService.findByOrderItemNo(orderItem.getOiNo());
 		
-
+		//;
 		if(preReviewBoard==null) {
 			// 리뷰작성
 			reviewBoardService.create(reviewBoardEntity);
 		}else {
 			// 업뎃
-
+			//preReviewBoard.setBoardContent(reviewBoardEntity.getBoardContent());
+			//preReviewBoard.setBoardStar(reviewBoardEntity.getBoardStar());
 			Long boardNo = preReviewBoard.getBoardNo();
 			reviewBoardEntity.setBoardNo(boardNo);
 			System.out.println(reviewBoardEntity);
 			reviewBoardService.update(reviewBoardEntity);
 
-	       
+	        // 업데이트된 리뷰 정보를 반환
+	        //ReviewBoardDto updatedReviewDto = ReviewBoardDto.toDto(preReviewBoard);
+	        //return new ResponseEntity<>(updatedReviewDto, HttpStatus.OK); // HttpStatus.OK를 사용하여 성공 상태 반환
 			
 		}
+		Long productNo = orderItem.getProduct().getProductNo();
+		double averageRating = reviewBoardService.calculateAverageStarRating(productNo);
+		Product product = productService.findByProductNo(productNo);
 
-	    Long productNo = orderItem.getProduct().getProductNo();
-	    double averageRating = reviewBoardService.calculateAverageStarRating(productNo);
-	    Product product = productService.findByProductNo(productNo);
-	    product.setProductStarAvg(averageRating);
-	    productService.updateProduct(product);
+		// 평균 점수를 반올림하여 정수로 변환
+		int roundedAverageRating = (int) Math.round(averageRating);
+		Double doubleRating = (double) roundedAverageRating;
+		product.setProductStarAvg(doubleRating);
+		productService.updateProduct(product);
+		
 	    HttpHeaders httpHeaders = new HttpHeaders();
 	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
