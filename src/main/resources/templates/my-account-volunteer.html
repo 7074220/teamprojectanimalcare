@@ -218,7 +218,8 @@
                                                 <th>Center</th>
                                                 <th>Status</th>    
                                                 <!-- <th>Delete</th> -->
-                                                <th>Update</th>                                            
+                                                <th>Update</th>
+                                                <th>Point</th>                                      
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -236,16 +237,17 @@
 												<td th:text="${#dates.format(volunteer.volunteerDate, 'yyyy-MM-dd')}"></td>
 												
 												<td th:text="${volunteer.center.centerName}"></td>
-												<td th:text="${volunteer.volunteerStatus}"><span class="success">봉사신청</span></td>
+												<td th:text="${volunteer.volunteerStatus}"><!-- <span class="success">봉사신청</span> --></td>
 												
 												<td>
-												<a th:href="@{'/volunteerUpdate?volunteerNo=' +${volunteer.volunteerNo} + '&centerNo=' +${volunteer.Center.centerNo} }" >수정</a>										
+												<!-- <a th:href="@{'/update-volunteer?volunteerNo=' +${volunteer.volunteerNo} + '&centerNo='+ ${volunteer.Center.centerNo}}" >수정</a> -->										
+												<a th:href="@{'/volunteerUpdate?volunteerNo=' + ${volunteerNo} + '&centerNo=' + ${centerNo}}">수정</a>
+												<!-- <a th:href="@{/volunteerUpdate(volunteerNo=${volunteerNo}, centerNo=${centerNo})}">수정</a> -->
 												</td>
 												
 												<!-- <td> 삭제
 													<button type="submit" class="deleteBtn" th:id="'deleteBtn-' + ${volunteer.volunteerNo}">취소</button>
-												</td> -->
-												
+												</td> -->																						
 											</tr>
 
                                         </tbody>
@@ -347,19 +349,21 @@
 		let updateData = {
 			volunteerNo: volunteerNo, 
 			volunteerDate:volunteerDate,
-			volunteerTime:volunteerTime
+			volunteerTime:volunteerTime,
+			centerNo:centerNo
 		};
 		
 
 		$.ajax({
-			type : 'PUT',
+			type : 'GET',
 			url : '/volunteerUpdate?volunteerNo=' + volunteerNo + '&centerNo=' + centerNo,
-			data : JSON.stringify(sendJsonObject),
+			data : JSON.stringify(updateData),
 			contentType : 'application/json;UTF-8',
 			success : function(response) {
 				if (response && response.volunteerNo == null) {
 					alert('신청내역이 없음');
 				} else {
+					$('#centerNo').val(response.centerNo);
 					$('#volunteerNo').val(response.volunteerNo);
 					$('#volunteerDate').val(response.volunteerDate);
 					$('#volunteerTime').val(response.volunteerTime);
@@ -371,9 +375,6 @@
 		});
 	});
 </script>
-
-
-
 
 
 	</th:block>		

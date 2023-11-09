@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="layout/layout(title='volunteer')">
+	layout:decorate="layout/layout(title='volunteerUpdate')">
 
 
 
@@ -122,11 +122,12 @@ window.onload = function() {
 					
 					<div class="col-lg-6 col-md-6">
 						<div class="contact_message form">
-							<h3 style="font-weight: bold">신청 양식</h3>
+							<h3 style="font-weight: bold">수정 양식</h3>
 							
-							<form th:action="@{/create-volunteer}" method="post" th:object="${volunteer}">
+							<form id="update-form" th:action="@{/volunteer/update-volunteer}" th:object="${volunteer}">
 							
 								
+								<input type="hidden" id="volunteerid" name="volunteerNo" th:value="${volunteerNo}" />
 								<input type="hidden" id="centerid" name="centerNo" th:value="${center.centerNo}" />
 								
 								<div>
@@ -160,13 +161,13 @@ window.onload = function() {
 								</div>
 								
 								
-								<button type="submit" class="submit">신청</button>
+								<button type="submit" class="submit">수정</button>
 								<!-- <p class="form-messege"></p> -->
 								
-								
+								<!--
 								<p th:text="${message}" class="success-message"></p>
 								<p th:text="${error}" class="error-message"></p>
-								
+								-->
 								
 							</form>
 
@@ -176,7 +177,8 @@ window.onload = function() {
 			</div>
 		</div>
 	
-<script> 
+<!--<script> 
+
 function ajaxRequest(method, url, sendJsonObject) {
 		let returnResultJsonObject={};
 		$.ajax({
@@ -194,61 +196,108 @@ function ajaxRequest(method, url, sendJsonObject) {
 	}
 
 
-
-//AJAX 요청. 봉사 신청시 회원, 비회원 확인
+// AJAX 요청. 신청 완료 후 수정하기
 $('.submit').on('click', function (event) {
     event.preventDefault();
-    let centerNo = $('#centerid').val(); // 센터 번호를 정의
+
+    let volunteerNo = $('#volunteerNo').val(); // 봉사 번호를 정의
+    let volunteerDate = $('#volunteerDate').val(); // 선택한 날짜 가져오기
+    let volunteerTime = $('#volunteerTime').val(); // 선택한 시간 가져오기
+    let centerNo = $('#centerid').val();
+
+    let sendJsonObject = {
+        volunteerNo: volunteerNo,
+        volunteerDate: volunteerDate,
+        volunteerTime: volunteerTime,
+        centerNo: centerNo
+    };
+
+    $.ajax({
+        method: 'PUT',
+        url: '/volunteer/update-volunteer',
+        contentType: 'application/json; charset=UTF-8',
+        data: JSON.stringify(sendJsonObject),
+        dataType: 'json',
+        success: function (response) {
+            if (response.userNo != null) {
+                alert('수정이 완료되었습니다.');
+                window.location.href = '/volunteerByUserNo'; // URL 경로 수정
+            } else {
+                alert('로그인이 필요합니다.');
+                window.location.href = '/index#/login_form'; // URL 경로 수정
+            }
+        },
+        error: function () {
+            alert('수정 중 오류가 발생했습니다.');
+        }
+    });
+});
+
+
+
+ajaxRequest('PUT', '/volunteer/update-volunteer', sendJsonObject)
+        .done(function (response) {
+            if (response.userNo != null) {
+                alert('수정이 완료되었습니다.');
+                window.location.href = '/volunteerByUserNo'; // URL 경로 수정
+            } else {
+                alert('로그인이 필요합니다.');
+                window.location.href = '/index#/login_form'; // URL 경로 수정
+            }
+        })
+        .fail(function () {
+            alert('수정 중 오류가 발생했습니다.');
+        });
+
+
+</script>-->
+
+
+<script>
+function ajaxRequest(method, url, sendJsonObject) {
+			let returnResultJsonObject={};
+			$.ajax({
+				async:false,
+				method: method,
+				url: url,
+				contentType: 'application/json;UTF-8',
+				data: JSON.stringify(sendJsonObject),
+				type: 'json',
+				success: function(resultJsonObject) {
+					returnResultJsonObject = resultJsonObject;
+				}
+			});
+			return returnResultJsonObject;
+		}
+
+// AJAX 요청. 신청 완료 후 수정하기
+$('.submit').on('click', function (event) {
+    event.preventDefault();
+    
+    let volunteerNo = $('#volunteerid').val();
     let volunteerDate = $('#volunteerDate').val();
     let volunteerTime = $('#volunteerTime').val();
 
     let sendJsonObject = {
-        centerNo: centerNo,
+        volunteerNo: volunteerNo,
         volunteerDate: volunteerDate,
         volunteerTime: volunteerTime,
-        volunteerStatus: "봉사신청"
     };
-    
-    let response = ajaxRequest('POST','volunteer/create-volunteer',sendJsonObject);
-    if(response.userNo!=null){
-    	alert('신청이 완료되었습니다.');
-    	window.location.href = 'centerList'; // 마이페이지-봉사 이동
-    }else{
-    	alert('로그인이 필요합니다.');
-        window.location.href = 'index#/login_form'; // 로그인 페이지로 이동
-    }
+	
+	
+	
+	let responseObject=ajaxRequest('PUT','volunteer/update-volunteer',sendJsonObject);
+	      	
+  		if(responseObject.userNo == null){
+			alert('로그인이 필요합니다.');
+			window.location.href = 'index';	// 로그인 창으로 이동
+		}else{
+			alert("수정이 완료되었습니다.");
+			
+		}
+
 });
-</script> 
-
-
-<!-- <script>
-
-function calculatePoints(selectedTime) {
-    // 옵션 값에 따라 포인트 계산
-    var pointsPerHour = 1000; // 1시간당 포인트
-    var accumulatedPoints = calculateAccumulatedPoints(selectedTime);
-    return accumulatedPoints;
-}
-
-function calculateAccumulatedPoints(selectedTime) {
-    // 예시: 09 AM부터 선택한 시간까지의 누적 포인트 계산
-    var pointsPerHour = 1000;
-    var startHour = 9;
-    var selectedHour = parseInt(selectedTime);
-
-    // 시간 차이 계산
-    var hoursDiff = selectedHour - startHour;
-
-    // 음수 값이면 0으로 설정
-    var accumulatedPoints = Math.max(0, hoursDiff * pointsPerHour);
-
-    return accumulatedPoints;
-}
-</script> -->
-
-
-
-
+</script>
 
 
 

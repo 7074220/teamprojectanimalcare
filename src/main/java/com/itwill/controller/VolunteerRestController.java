@@ -19,16 +19,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.AdoptDto;
 import com.itwill.dto.VolunteerDto;
 import com.itwill.entity.Center;
+import com.itwill.entity.Userinfo;
 import com.itwill.entity.Volunteer;
 import com.itwill.service.CenterService;
+import com.itwill.service.UserInfoService;
 import com.itwill.service.VolunteerService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 //import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -41,6 +45,8 @@ public class VolunteerRestController {
 	private VolunteerService volunteerService;
 	@Autowired
 	private CenterService centerService;
+	@Autowired
+	private UserInfoService userInfoService;
 	
 	
 	// 봉사버튼 클릭시 로그인이면 저장, 비회원이면 메인 이동
@@ -92,35 +98,39 @@ public class VolunteerRestController {
 	
 	
 	@Operation(summary = "봉사 부분 업데이트") 
-	@PutMapping("/{volunteerNo}")
-	public ResponseEntity<VolunteerDto> updateVolunteer(@PathVariable(name = "volunteerNo") Long volunteerNo, @RequestBody VolunteerDto dto) throws Exception {
-	    Volunteer existingVolunteer = volunteerService.findByVolunteerNo(volunteerNo);
-
-	    if (existingVolunteer == null) {
-	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    } else {
-	        if (dto.getVolunteerTime() != null) {
-	            existingVolunteer.setVolunteerTime(dto.getVolunteerTime());
-	        }
-	        if (dto.getVolunteerDate() != null) {
-	            existingVolunteer.setVolunteerDate(dto.getVolunteerDate());
-	        }
-	        if (dto.getVolunteerStatus() != null) {
-	            existingVolunteer.setVolunteerStatus(dto.getVolunteerStatus());
-	        }	
-	        if (dto.getCenterNo() != null) {
-	        	Center center = centerService.findByCenterNo(dto.getCenterNo());
-	            existingVolunteer.setCenter(center);
-	        }
-  
-	        volunteerService.updateVolunteer(existingVolunteer);
-	        VolunteerDto updatedVolunteerDto = VolunteerDto.toDto(existingVolunteer);
-	        return new ResponseEntity<>(updatedVolunteerDto, HttpStatus.OK);
-	    }
-	} // UPDATE
+	@PutMapping("/update-volunteer")
+	public ResponseEntity<VolunteerDto> updateVolunteer(@RequestBody VolunteerDto dto, HttpServletRequest request, HttpSession session) throws Exception {
+	    Long userNo = (Long) session.getAttribute("userNo");
+	    
+	    dto.setUserNo(userNo);
+	    
+	    Volunteer findVolunteer = volunteerService.findByVolunteerNo(dto.getVolunteerNo());
+	    Userinfo findUserinfo = userInfoService.findUserByNo(userNo);
+	    
+	    findVolunteer.setUserinfo(findUserinfo);
+	    if(findVolunteer != null) {
+	    	if(dto.getVolunteerDate()!=null) {
+	    		findVolunteer.setVolunteerDate(dto.getVolunteerDate());
+	    	}
+	    	if(dto.getVolunteerTime()!=null) {
+	    		findVolunteer.setVolunteerTime(dto.getVolunteerTime());
+	    	}
+	    	Volunteer updateVolunteer = volunteerService.updateVolunteer(findVolunteer);
+	    	VolunteerDto updatedDto = VolunteerDto.toDto(updateVolunteer);
+	    	
+	    	HttpHeaders httpHeaders = new HttpHeaders();
+			httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+			
+			return new ResponseEntity<VolunteerDto>(updatedDto, httpHeaders, HttpStatus.OK);
+	    	
+	    }	    
+	    
+	    return new ResponseEntity<VolunteerDto>(HttpStatus.NOT_FOUND);
+	}
 
 
 	
+
 	@Operation(summary = "volunteerNo로 봉사신청 보기") 
 	@GetMapping("/{volunteerNo}") 
 	public ResponseEntity<VolunteerDto> findByVolunteerNo(@PathVariable(name = "volunteerNo") Long no,  HttpSession httpSession) throws Exception{		
@@ -163,6 +173,58 @@ public class VolunteerRestController {
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));				
 		return new ResponseEntity<List<VolunteerDto>>(volunteerDtoList, httpHeaders, HttpStatus.OK);
 	} // 목록 전체 조회
+	
+	
+	
+	
+	
+	
+	@PostMapping("/apply-points")
+	public ResponseEntity<String> applyPoints(HttpSession session, @RequestParam String selectedTime) {
+	    Long userNo = (Long) session.getAttribute("userNo");
+	    Integer userPoint = (Integer) session.getAttribute("userPoint");
+
+	    if (userNo == null) {
+	        // 로그인하지 않은 사용자에 대한 처리
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+	    }
+
+	    // 선택한 시간에 따라 포인트 적립
+	    int pointsToAdd = 0;
+	    switch (selectedTime) {
+	        case "09":
+	        case "10":
+	        case "11":
+	        case "12":
+	        case "13":
+	        case "14":
+	        case "15":
+	        case "16":
+	        case "17":
+	        case "18":
+	            pointsToAdd = 1000;
+	            break;
+	        default:
+	            pointsToAdd = 0;
+	            break;
+	    }
+
+	    // 누적 포인트 계산
+	    userPoint += pointsToAdd;
+
+	    // 사용자의 세션에 포인트 정보 저장
+	    session.setAttribute("userPoint", userPoint);
+
+	    return ResponseEntity.ok("포인트가 성공적으로 적립되었습니다.");
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }
