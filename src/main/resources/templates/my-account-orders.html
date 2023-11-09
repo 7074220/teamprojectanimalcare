@@ -370,7 +370,7 @@
 												<!--   <button type="button" class="btn btn-primary">리뷰 저장</button>-->
 												<button type="button" class="btn btn-secondary"
 													data-dismiss="modal">닫기</button>
-													 <button type="button" class="btn btn-primary">저장</button>
+													<!-- <button type="button" class="btn btn-primary">저장</button>-->
 
 											</div>
 										</div>
@@ -757,7 +757,14 @@
 				boardDate: formattedDate
 			};
 			let responseObject = ajaxRequest('POST', 'reviewBoard/createReviewBoard', sendJsonObject);
-			
+
+			if (responseObject.userNo == null) {
+				alert('로그인이 필요합니다.');
+				window.location.href = 'index';	// 로그인 창으로 이동
+			} else {
+				alert("리뷰작성이 완료되었습니다.");
+
+			}
 			
 			
 		}
