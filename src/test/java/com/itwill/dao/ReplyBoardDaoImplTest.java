@@ -75,8 +75,8 @@ class ReplyBoardDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Disabled
 	@Test
 	void test2() {
-	List<ReplyBoard> boards=replyBoardDao.findAllByOrderByReplyBoardNoAsc();
-	System.out.println(boards);
+	//List<ReplyBoard> boards=replyBoardDao.findAllByOrderByReplyBoardNoAsc();
+	//System.out.println(boards);
 	
 	}
 	
