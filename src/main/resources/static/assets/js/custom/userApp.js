@@ -1,8 +1,10 @@
 import {user_write_form} from './template-user-write-from.js';
 import {user_login_form} from './template-user-login-from.js';
+//import {user_login_PopUp} from './template-user-login-popUp.js';
 import {user_finduserinfo_form} from './template-user-finduserinfo-form.js';
 import {ajaxRequest} from './request.js';
 import {createInitializer} from "./initializer.js";
+
 
 let hash = window.location.hash
 let path = hash.substring(1);
@@ -114,6 +116,29 @@ function navigate() {
 		$('#content').html(html);
 	}
 	if (path == '/login') {
+		let sendJsonObject = {
+				userId: document.f.loginUserId.value,
+				userPassword: document.f.loginPassword.value,
+		}
+		let responseJsonObject = ajaxRequest('POST','user/login',sendJsonObject);
+		
+		if(responseJsonObject.status == 1000){
+			if(responseJsonObject.userId=="admin@gmail.com"){
+				window.location.href='userinfo';
+			}else{
+				window.location.href='index';	
+			}
+			
+		}
+		
+		if((responseJsonObject.status == 1001) || (responseJsonObject.status == 1002)) {
+			html = user_login_form();
+			$('#content').html(html);
+			window.location.hash = '/login_form';
+			alert('아이디 혹은 비밀번호를 잘못 입력 하셨습니다. ');
+		}
+	}
+	if (path == '/loginPopUp') {
 		let sendJsonObject = {
 				userId: document.f.loginUserId.value,
 				userPassword: document.f.loginPassword.value,

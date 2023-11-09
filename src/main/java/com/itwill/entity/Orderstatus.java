@@ -26,5 +26,4 @@ public class Orderstatus {
 	private String osImage;
 	private String osDesc;
 	
-	
 }

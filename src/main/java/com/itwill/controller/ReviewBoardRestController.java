@@ -24,9 +24,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.ReviewBoardDto;
 import com.itwill.dto.VolunteerDto;
+import com.itwill.entity.OrderItem;
 import com.itwill.entity.Product;
 import com.itwill.entity.ReviewBoard;
 import com.itwill.entity.Userinfo;
+import com.itwill.repository.OrderItemRepository;
+import com.itwill.service.OrderItemService;
 import com.itwill.service.ProductService;
 import com.itwill.service.ReviewBoardService;
 import com.itwill.service.UserInfoService;
@@ -44,6 +47,8 @@ public class ReviewBoardRestController {
 	private UserInfoService userInfoService;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 	
 	@Operation(summary = "리뷰작성")
 	@PostMapping("/createReviewBoard")
@@ -53,8 +58,27 @@ public class ReviewBoardRestController {
 		dto.setUserNo(userNo);
 		
 		ReviewBoard reviewBoardEntity = ReviewBoardDto.toEntity(dto);
-	  
-	    reviewBoardService.create(reviewBoardEntity);
+		OrderItem orderItem = orderItemRepository.findById(dto.getOiNo()).get();
+		
+		reviewBoardEntity.setOrderItem(orderItem);
+		
+		ReviewBoard preReviewBoard = reviewBoardService.findByOrderItemNo(orderItem.getOiNo());
+		
+		if(preReviewBoard==null) {
+			reviewBoardService.create(reviewBoardEntity);
+		}else {
+			preReviewBoard.setBoardContent(reviewBoardEntity.getBoardContent());
+			preReviewBoard.setBoardStar(reviewBoardEntity.getBoardStar());
+			
+			reviewBoardService.update(preReviewBoard);
+
+	        // 업데이트된 리뷰 정보를 반환
+	        ReviewBoardDto updatedReviewDto = ReviewBoardDto.toDto(preReviewBoard);
+	        return new ResponseEntity<>(updatedReviewDto, HttpStatus.OK); // HttpStatus.OK를 사용하여 성공 상태 반환
+			
+		}
+		
+	    
 	  
 	    System.out.println(">>>>>>>>>>>>>>"+dto.getUserNo());
 		System.out.println(">>>>>>>>>>>>>>"+dto.getProductNo());
@@ -80,9 +104,22 @@ public class ReviewBoardRestController {
 	        httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));    
 	        return new ResponseEntity<>(reviewBoardDto, httpHeaders, HttpStatus.OK);
 	    }
-	
-	
 	}
+	
+	@PostMapping("/reviewBoardView")
+	public ResponseEntity<ReviewBoardDto> findByUserNoByProductNo(@RequestBody ReviewBoardDto reviewBoardDto){
+		ReviewBoard reviewBoard = reviewBoardService.findByOrderItemNo(reviewBoardDto.getOiNo());
+		
+		ReviewBoardDto dto = ReviewBoardDto.toDto(reviewBoard);
+		dto.setOiNo(reviewBoardDto.getOiNo());
+		System.out.println(">>>>>>>>>>>>"+dto);
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+        
+		return new ResponseEntity<ReviewBoardDto>(dto, httpHeaders, HttpStatus.OK);
+	}
+	
 	@Operation(summary = "no로 review 삭제")
 	@DeleteMapping("/{no}")
 	public ResponseEntity<Map> deleteReviewBoard(@PathVariable(value = "no") Long boardNo) throws Exception {

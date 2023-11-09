@@ -25,8 +25,8 @@ public interface ReplyBoardRepository extends JpaRepository<ReplyBoard, Long>{
 	@Query(value = "select * from replyboard where user_no = ?1",nativeQuery = true)
 	public List<ReplyBoard> findByUserNo(Long userNo);
 	
-	@Query(value = "select * from replyBoard order by reply_board_no asc ",nativeQuery = true)
-	public List<ReplyBoard> findAllByOrderByReplyBoardNoAsc();
+	@Query(value = "select * from replyBoard where board_no=?1 order by reply_board_no asc ",nativeQuery = true)
+	public List<ReplyBoard> findAllByOrderByReplyBoardNoAsc(Long boardNo);
 	
 	@Query(value = "select MAX (reply_board_step) from replyBoard where reply_board_group_no = ?1", nativeQuery = true)
 	public Integer findGreatestStepByGroupNo(Integer ReplyBoardGroupNo);

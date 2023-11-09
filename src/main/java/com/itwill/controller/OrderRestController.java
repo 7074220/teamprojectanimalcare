@@ -107,7 +107,7 @@ public class OrderRestController {
 			OrderItemDto tempOrderItemDto=OrderItemDto.builder().build();
 			tempOrderItemDto.setOiQty(cart.getCartQty());
 			tempOrderItemDto.setOrderNo(newOrder.getOrderNo());
-			tempOrderItemDto.setOsNo(osNo);
+			tempOrderItemDto.setOrderstatus(orderstatus);
 			tempOrderItemDto.setProduct(cart.getProduct());
 			
 			itemService.insertOrderItem(OrderItemDto.toEntity(tempOrderItemDto));
@@ -119,7 +119,10 @@ public class OrderRestController {
 		orderdto.setUserNo(userNo);
 		
 			
-		userinfo.setUserPoint(userinfo.getUserPoint()-Integer.parseInt(orderDto.getUserPoint()));
+		if (orderDto.getUserPoint() != null && !orderDto.getUserPoint().isEmpty()) {
+		    userinfo.setUserPoint(userinfo.getUserPoint() - Integer.parseInt(orderDto.getUserPoint()));
+		}
+		
 		
 		/*
 		//insertOrder.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+(carts.size()-1)+"개 상품");
@@ -127,8 +130,10 @@ public class OrderRestController {
 		
 		orderService.insertOrder(OrdersDto.toEntity(orderDto));
 		 */
-		
-			couponService.Delete(Long.parseLong(orderDto.getCouponId())); //쿠폰삭제기능
+		//쿠폰 삭제 기능
+		if (orderDto.getCouponId() != null && !orderDto.getCouponId().isEmpty()) {
+	        couponService.Delete(Long.parseLong(orderDto.getCouponId()));
+	    }
 			
 		
 		cartService.deleteByUserId(userNo);
@@ -292,22 +297,26 @@ public class OrderRestController {
 	}
 	
 	
-	@Operation(summary = "날짜별 기간으로 조회(아이디별)")
-	@GetMapping("/{startDate}/{endDate}/{userNo}")
-	public ResponseEntity<List<OrdersDto>> findAllByOrdersByOrderDateByUserNo(@PathVariable(name = "startDate") Date startDate, @PathVariable(name = "endDate") Date endDate, @PathVariable(name = "userNo") Long userNo){
-		List<OrdersDto> ordersListDto = new ArrayList<OrdersDto>();
-		List<Orders> ordersList = orderService.findAllByOrdersByOrderDateByUserNo(startDate, endDate, userNo);
-		
-		for (Orders orders : ordersList) {
-			OrdersDto ordersDto = OrdersDto.toDto(orders);
-			ordersListDto.add(ordersDto);
-		}
-		
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		
-		return new ResponseEntity<List<OrdersDto>>(ordersListDto, httpHeaders, HttpStatus.OK);
-	}
+	/*
+	 * @Operation(summary = "날짜별 기간으로 조회(아이디별)")
+	 * 
+	 * @GetMapping("/{startDate}/{endDate}/{userNo}") public
+	 * ResponseEntity<List<OrdersDto>>
+	 * findAllByOrdersByOrderDateByUserNo(@PathVariable(name = "startDate") Date
+	 * startDate, @PathVariable(name = "endDate") Date endDate, @PathVariable(name =
+	 * "userNo") Long userNo){ List<OrdersDto> ordersListDto = new
+	 * ArrayList<OrdersDto>(); List<Orders> ordersList =
+	 * orderService.findAllByOrdersByOrderDateByUserNo(startDate, endDate, userNo);
+	 * 
+	 * for (Orders orders : ordersList) { OrdersDto ordersDto =
+	 * OrdersDto.toDto(orders); ordersListDto.add(ordersDto); }
+	 * 
+	 * HttpHeaders httpHeaders = new HttpHeaders(); httpHeaders.setContentType(new
+	 * MediaType("application", "json", Charset.forName("UTF-8")));
+	 * 
+	 * return new ResponseEntity<List<OrdersDto>>(ordersListDto, httpHeaders,
+	 * HttpStatus.OK); }
+	 */
 	
 	
 	@Operation(summary = "사용자 주문후 배송지변경")
@@ -342,6 +351,7 @@ public class OrderRestController {
 		if (session.getAttribute("userNo") == null) {
 			throw new Exception("로그인 하세요.");
 		}
+		
 		Orders orders=orderService.findOrderByNo(orderNo);
 		OrdersDto ordersDto = OrdersDto.toDto(orders);
 		
