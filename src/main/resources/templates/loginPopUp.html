@@ -202,15 +202,15 @@
 		floatingInput : floatingInput,
 		floatingPassword : floatingPassword
 	}
-	$('login-btn').on('click',function(){
+	$('#login-btn').on('click',function(e){
 		$.ajax({
 			url : "/user/login",
 			method : "post",
-			data : loginData,
+			data : JSON.stringify(loginData),
 			dataType:'json',
-			contentType:'application/json;UTF-8',
+			contentType:'application/json;chrset=UTF-8',
 			success:function(){
-				
+				alert('로그인 성공');
 			}
 		});
 	});
