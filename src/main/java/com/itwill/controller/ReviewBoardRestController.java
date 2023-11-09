@@ -85,7 +85,12 @@ public class ReviewBoardRestController {
 	        //return new ResponseEntity<>(updatedReviewDto, HttpStatus.OK); // HttpStatus.OK를 사용하여 성공 상태 반환
 			
 		}
-	    
+		Long productNo = orderItem.getProduct().getProductNo();
+		double averageRating = reviewBoardService.calculateAverageStarRating(productNo);
+		Product product = productService.findByProductNo(productNo);
+		product.setProductStarAvg(averageRating);
+		productService.updateProduct(product);
+		
 	    HttpHeaders httpHeaders = new HttpHeaders();
 	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
