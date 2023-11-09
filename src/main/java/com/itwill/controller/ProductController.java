@@ -456,6 +456,8 @@ public class ProductController {
 		System.out.println(">>>>>>>>>"+request.getRequestURI());
 		Product product = productService.findByProductNo(productNo);
 		String findProductName = productService.findByProductNo(productNo).getProductName();
+		boolean nextExist = productService.existsById(productNo+1);
+		System.out.println("-------------->"+nextExist);
 		int firstSpaceIndex = findProductName.indexOf(" ");
 		
 		if (firstSpaceIndex >= 0) {
@@ -476,7 +478,8 @@ public class ProductController {
 		}
 		
 		model.addAttribute("product", product);
-		model.addAttribute("products", productListDto);
+		
+		model.addAttribute("nextExist",nextExist);
 		model.addAttribute("productName", productNameDto);
 		
 		List<ReviewBoard> reviewList = reviewBoardService.findByProductNo(product.getProductNo());

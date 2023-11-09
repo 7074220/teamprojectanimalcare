@@ -1,6 +1,7 @@
 package com.itwill.controller;
 
 import java.nio.charset.Charset;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -209,6 +210,25 @@ public class OrderController {
 		model.addAttribute("orderItemList",orderitemDtos);
 		
 			return "orderItemView";
+		}
+		
+		
+		@GetMapping("/dateByOrder")
+		public String dateByOrder(@RequestParam("startDate")Date startDate,@RequestParam("endDate") Date endDate, HttpSession session,Model model){
+			List<OrdersDto> ordersListDto = new ArrayList<OrdersDto>();
+			
+			Long userNo=(Long)session.getAttribute("userNo");
+			List<Orders> ordersList = orderService.findAllByOrdersByOrderDateByUserNo(startDate, endDate, userNo);
+			
+			for (Orders orders : ordersList) {
+				OrdersDto ordersDto = OrdersDto.toDto(orders);
+				ordersListDto.add(ordersDto);
+			}
+			
+			model.addAttribute("ordersList",ordersListDto);
+			
+			return "my-account-orders";
+			
 		}
 		
 	
