@@ -55,6 +55,8 @@ public class UserInfoController {
 		return "userList";
 	}
 	
+	
+	
 	//마이페이지 이동
 	@GetMapping(value="/userinfo")
 	public String view(Model model, HttpSession session) throws Exception{
@@ -68,6 +70,8 @@ public class UserInfoController {
 		return "my-account-userinfo";
 		
 	}
+	
+	
 	
 	@GetMapping(value = "userUpdate")
 	public String update(Model model , HttpSession session , @RequestParam String userName , @RequestParam String userPassword,

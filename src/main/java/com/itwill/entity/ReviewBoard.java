@@ -48,4 +48,9 @@ public class ReviewBoard {
 	@JoinColumn(name = "product_no")
 	@ToString.Exclude
 	private Product product = new Product();
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "oi_no")
+	@Builder.Default
+	private OrderItem orderItem = new OrderItem();
 }

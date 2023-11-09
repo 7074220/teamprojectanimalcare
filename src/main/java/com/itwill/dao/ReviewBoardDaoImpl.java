@@ -119,4 +119,14 @@ public class ReviewBoardDaoImpl implements ReviewBoardDao {
 		return reviewBoardRepository.findByProductProductNoOrderByBoardDateDesc(productNo);
 	}
 
+	@Override
+	public List<ReviewBoard> findByUserNoAndProductNo(Long userNo, Long productNo) {
+		return reviewBoardRepository.findByUserNoAndProductNo(userNo, productNo);
+	}
+
+	@Override
+	public ReviewBoard findByOrderItemNo(Long oiNo) {
+		return reviewBoardRepository.findByOrderItemNo(oiNo);
+	}
+
 }

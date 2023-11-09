@@ -31,11 +31,13 @@ public class OrdersDto {
 	private String orderAddress;
 	private String orderDesc;
 	private Long userNo;
+	
 	private String couponId;
 	private String userPoint;
+	
 	private Userinfo userinfo;
 	private List<OrderItemDto> orderItemDtos = new ArrayList();
-
+	private int reviewStatus;
 	
 	public static OrdersDto toDto(Orders entity) {
 		OrdersDto orderDto = OrdersDto.builder()
