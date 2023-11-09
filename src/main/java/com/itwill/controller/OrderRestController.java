@@ -34,6 +34,7 @@ import com.itwill.entity.Cart;
 import com.itwill.entity.OrderItem;
 import com.itwill.entity.Orders;
 import com.itwill.entity.Orderstatus;
+import com.itwill.entity.ReviewBoard;
 import com.itwill.entity.Userinfo;
 import com.itwill.repository.OrderStatusRepository;
 import com.itwill.service.CartService;
@@ -41,6 +42,7 @@ import com.itwill.service.CouponService;
 import com.itwill.service.OrderItemService;
 import com.itwill.service.OrderService;
 import com.itwill.service.OrderStatusService;
+import com.itwill.service.ReviewBoardService;
 import com.itwill.service.UserInfoService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -66,6 +68,9 @@ public class OrderRestController {
 
 	@Autowired
 	OrderItemService itemService;
+	
+	@Autowired
+	private ReviewBoardService reviewBoardService;
 	
 	
 	@Operation(summary = "주문 등록")
@@ -356,6 +361,14 @@ public class OrderRestController {
 		OrdersDto ordersDto = OrdersDto.toDto(orders);
 		
 		List<OrderItemDto> orderItemDtos = ordersDto.getOrderItemDtos();
+		for (OrderItemDto orderItemDto : orderItemDtos) {
+			ReviewBoard reviewBoard = reviewBoardService.findByOrderItemNo(orderItemDto.getOiNo());
+			if(reviewBoard!=null) {
+				orderItemDto.setReviewStatus("수정/완료");
+			}else {
+				orderItemDto.setReviewStatus("리뷰쓰기");
+			}
+		}
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
