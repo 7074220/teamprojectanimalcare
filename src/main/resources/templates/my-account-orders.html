@@ -11,9 +11,10 @@
 			/* 회원탈퇴창 가운데 정도로 떨어트림 */
 		}
 		
-		
-		
 	</style>
+	
+	
+
 
 <!-- 별점 css 위치 -->
 
@@ -306,12 +307,12 @@
 <!--주문 상세 모달창 -->
 								<div class="modal fade" id="orderDetailsModal" tabindex="-1"
 									aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content" style="width: 800px; height: 500px;">
+									<div class="modal-dialog" >
+										<div class="modal-content" style="width: 900px; height: auto;  border-radius: 10px;">
 											<div class="modal-header">
 												<h5 class="modal-title" id="orderDetailsModalLabel">주문 상세</h5>
 												<button type="button" class="close" data-dismiss="modal"
-													aria-label="Close" style="border: none; padding: 7px;">X
+													aria-label="Close" style="border: none;">X
 													<!--<span aria-hidden="true">&times;</span>-->
 												</button>
 											</div>
@@ -365,7 +366,7 @@
 					
 	<script>
       function my_account_order(responseJsonObject = {}) {
-       
+
          let htmltemplate =
          `<div class="modal-body" id="modalContent">
                                     <!-- 주문 상세 내용이 여기에 로드됩니다 -->
@@ -444,7 +445,7 @@
 <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog">
-		<div class="modal-content" style="border: 3px solid black; height: 400px;">
+		<div class="modal-content" style="border: 2px solid green; height: 380px; top: 20px; margin: 20px;  border-radius: 10px; width: 600px;">
 			<div class="modal-header">
 				<h5 class="modal-title" id="orderDetailsModalLabel">리뷰 작성</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"
@@ -518,15 +519,15 @@
 
 								<div class="col-12">
 									<label for="review_comment">Comment </label>
-									<div> <textarea name="comment" id="review_comment" style="height: 50px;"></textarea>
+									<div> <textarea name="comment" id="review_comment" style="height: 90px;"></textarea>
 									</div>
 
 								</div>
 							</div>
 							<!--<button class="button" type="submit">Post Comment</button>-->
-							<div class="modal-footer">
+							<div class="modal-footer" style="height: 40px;">
 								<!--   <button type="button" class="btn btn-primary">리뷰 저장</button>-->
-								<button type="submit" class="submit" data-dismiss="modal">작성 완료</button>
+								<button type="submit" class="submit" data-dismiss="modal" style="background: white;">작성 완료</button>
 							</div>
 						</form>
 					</div>
@@ -595,8 +596,12 @@
 					
 				});
 		
-		function reviewWrite(e){
+
+		
 			
+
+		function reviewWrite(e){			
+
 			e.preventDefault();
 			$('#reviewModal').modal('show');
 		}
