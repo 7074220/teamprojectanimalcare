@@ -650,63 +650,121 @@
 				}
 			
 			
-			$('.submit').on('click', function(event) {
-	        event.preventDefault();
-	       
-	       const now = new Date();
-		   const year = now.getFullYear();
-		   const month = (now.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더하고 2자리로 포맷팅
-		   const day = now.getDate().toString().padStart(2, '0'); // 일을 2자리로 포맷팅
-    	   const formattedDate = `${year}-${month}-${day}`;
-    	  
-	       let boardStar = $('.rate:checked').val();
-	    
-		   let review_comment = $('#review_comment').val();
-		  
-		   let userNo = $('#userNo').val();
-		   let productNo = $('.write-review').attr('id');
-	  
-	        let sendJsonObject = {
-				userNo:userNo,
-				productNo : productNo,
-	            boardStar: boardStar,
-	            boardContent: review_comment,
-	         	boardDate:formattedDate
-	        };
-	        console.log(sendJsonObject)
-	       let responseObject=ajaxRequest('POST','reviewBoard/createReviewBoard',sendJsonObject);
-	       console.log(responseObject)	
-	      	
-	  		if(responseObject.userNo == null){
-				alert('로그인이 필요합니다.');
-				window.location.href = 'index';	// 로그인 창으로 이동
-			}else{
-				alert("리뷰작성이 완료되었습니다.");
-				updateSubmitButton();
-			}
-	  		
+		
+			$(document).ready(function () {
+				
+				// 리뷰 데이터를 저장하는 JavaScript 객체
+				 const reviewData = JSON.parse(localStorage.getItem('reviewData')) || {};
+				
+				// 모달 창이 열릴 때 이벤트 핸들러
+				$('#orderDetailsModal').on('shown.bs.modal', function () {
+					const orderNo  = $(this).find('.view').data('orderNo');
+					
+					const review = reviewData[orderNo];
+
+					if (review) {
+						$('.write-review').text('리뷰완료');
+					} else {
+						$('.write-review').text('리뷰쓰기');
+					}
+					
+					 
+					
+				});
+				
+				
+				// 모달 창이 닫힐 때 이벤트 핸들러
+				$('#orderDetailsModal').on('hidden.bs.modal', function () {
+					// 모달이 닫힐 때 리뷰 상태에 따라 버튼 상태를 초기화
+					if (!localStorage.getItem('sendJsonObject')) {
+						$('.write-review').text('리뷰쓰기');
+					}
+				});
+				
+				 // 리뷰 작성 완료 버튼 클릭 이벤트
+					$('.submit').on('click', function (event) {
+					event.preventDefault();
+
+					// const orderNo = $('#orderDetailsModal .view').data('orderNo');
+					
+
+					const now = new Date();
+					const year = now.getFullYear();
+					const month = (now.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더하고 2자리로 포맷팅
+					const day = now.getDate().toString().padStart(2, '0'); // 일을 2자리로 포맷팅
+					const formattedDate = `${year}-${month}-${day}`;
+
+					let boardStar = $('.rate:checked').val();
+
+					let review_comment = $('#review_comment').val();
+
+					let userNo = $('#userNo').val();
+					let productNo = $('.write-review').attr('id');
+
+
+					let sendJsonObject = {
+						userNo: userNo,
+						productNo: productNo,
+						boardStar: boardStar,
+						boardContent: review_comment,
+						boardDate: formattedDate
+					};
+					console.log(sendJsonObject)
+					let responseObject = ajaxRequest('POST', 'reviewBoard/createReviewBoard', sendJsonObject);
+					console.log(responseObject)
+
+				
+						
+		
+
+        // 로컬 스토리지에 리뷰 데이터 저장
+        localStorage.setItem('reviewData', JSON.stringify(reviewData));
+
+        	 // 페이지가 로드될 때 리뷰 데이터 초기화
+    if (!localStorage.getItem('sendJsonObject')) {
+        $('.write-review').text('리뷰쓰기');
+    }
+						
+
+
+					if (responseObject.userNo == null) {
+						alert('로그인이 필요합니다.');
+						window.location.href = 'index';	// 로그인 창으로 이동
+					} else {
+						alert("리뷰작성이 완료되었습니다.");
+						updateSubmitButton();
+					
+					}
+					
+					
+					
 	    });
 			
-
-
-
-
-
 			
-			// 삭제
-			$(".order_remove").on('click', function(e) {
-		   // e.preventDefault(); // 기본 이벤트 방지
-		    let orderNo = $(e.target).attr('id');
-		    // AJAX 요청 보내기
-			ajaxRequest("DELETE","order/" + orderNo);
-		    
-		    $(".order_remove, .order_no, .order_date, .order_desc, .order_price, .order_volunteer").each(function() {
-	            if ($(this).attr("id") === orderNo) {
-	                $(this).closest("tr").remove();
-	            }
-	        });
-		    
-		  });
+
+			});	
+
+
+	
+	
+
+
+
+
+		// 삭제
+		$(".order_remove").on('click', function (e) {
+			// e.preventDefault(); // 기본 이벤트 방지
+			let orderNo = $(e.target).attr('id');
+			// AJAX 요청 보내기
+			ajaxRequest("DELETE", "order/" + orderNo);
+
+			$(".order_remove, .order_no, .order_date, .order_desc, .order_price, .order_volunteer").each(function () {
+				if ($(this).attr("id") === orderNo) {
+					$(this).closest("tr").remove();
+				}
+			});
+
+		});
 		  
 		  
 	
