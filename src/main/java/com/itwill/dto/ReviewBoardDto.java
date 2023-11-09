@@ -50,7 +50,6 @@ public class ReviewBoardDto {
 	
 	public static ReviewBoardDto toDto(ReviewBoard reviewBoard) {
 		ReviewBoardDto reviewBoardDto = ReviewBoardDto.builder()
-									.userNo(reviewBoard.getUserinfo().getUserNo())
 									.boardNo(reviewBoard.getBoardNo())
 									.boardTitle(reviewBoard.getBoardTitle())
 									.boardContent(reviewBoard.getBoardContent())

@@ -34,6 +34,7 @@ private Long oiNo;
 	private Orderstatus orderstatus=new Orderstatus();
 	@Default
 	private Product product=new Product();
+	private String reviewStatus;
 	
 //	private Long orderId;
 	
