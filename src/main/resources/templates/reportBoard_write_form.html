@@ -32,104 +32,41 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="account_form register">
                         <h2 th:text="실종신고">실종신고 글쓰기</h2>
-                        <form name="f" id="reportBoard_write_form" action="my-account" method="post" enctype="multipart/form-data">
-                            
+                        <form name="f" id="reportBoard_write_form" action="#" method="post" enctype="multipart/form-data"
+                        	th:action="@{'/reportWrite'}">
                             <p>   
-                                <label>아이디 <span>*</span></label>
-                                <input type="text" id="userId">
-                                <span id="userIdError" style="color:red;"></span>
+                                <label>글 제목<span>*</span></label>
+                                <input type="text" id="boardTitle" name="boardTitle">
+                                <span id="boardTitleError" style="color:red;"></span>
                              </p>
-                
                              <p>
-                                <label>비밀번호 <span>*</span></label>
-                                <input type="password" id="password">
-                                <span id="passwordError" style="color:red;"></span>
-                            </p>
-                            <p>
-                                <label>비밀번호 확인 <span>*</span></label>
-                                <input type="password" id="confirmPassword">
-                                <span id="confirmPasswordError" style="color:red;"></span>
+                                <label>찾은날짜<span>*</span></label>
+                                <input type="text" id="boardFindDate" name="boardFindDate">
+                                <span id="boardFindDateError" style="color:red;"></span>
                             </p>
                             <p>   
-                                <label>이름  <span>*</span></label>
-                                <input type="text" id="name">
+                                <label>찾은사람이름<span>*</span></label>
+                                <input type="text" id="boardFindName" name="boardFindName">
                                 <span id="nameError" style="color:red;"></span>
                              </p>
-                
-                            <p>   
-                                <label>주민번호  <span>*</span></label>
-                                <input type="text" id="residentNumber">
-                                <span id="nameError" style="color:red;"></span>
-                             </p>
-                
-                             <p>
-                                <label>성별  <span>*</span></label>
-                                <select id="gender">
-                                    <option value="">성별 선택</option>
-                                    <option value="남">남</option>
-                                    <option value="여">여</option>
-                                </select>
-                                <span id="genderError" style="color:red;"></span>
-                             </p>
-                
                              <p>   
-                                <label>핸드폰번호  <span>*</span></label>
-                                <input type="text" id="phone">
+                                <label>휴대폰번호<span>*</span></label>
+                                <input type="text" id="boardFindPhone" name="boardFindPhone">
                                 <span id="phoneError" style="color:red;"></span>
                              </p>
-
-                             <p>   
-                                <label>주소  <span>*</span></label>
-                                <input type="text" id="address">
-                                
-                                <span id="addressError" style="color:red;"></span>
+                            <p>   
+                                <label>내용<span>*</span></label>
+                                <textarea id="boardContent" name="boardContent" style="width: 520px; height: 200px;"></textarea>
                             </p>
-                
-                
-                		
-                			
-                			
-                            <div class="login_submit">
-                                <button type="button" data-navigate="#/user_write_action">확인</button>
-                            </div>
+                            <label>Select image</label>
+                		    <input type="file" id="imageFile" name="imageFile">
+                           <div class="login_submit">
+                                <button type="submit" th:text="글쓰기">확인</button>
+                           </div>
 						</form>
                         </div>
                     
                     </div>    
-            
-             
-                 <!--login area start-->
-
-                <!--register area start-->
-                <!-- <div class="col-lg-6 col-md-6">
-                    <div class="account_form register">
-                        <h2 th:text="MyPet">Register</h2>
-                        <form action="#">
-                            <p>   
-                                <label th:text="이름">Email address  <span>*</span></label>
-                                <input type="text">
-                             </p>
-                             <p>   
-                                <label th:text="생일">Passwords <span>*</span></label>
-                                <input type="text">
-                             </p>
-                              <p>
-                                <label>종류  <span>*</span></label>
-                                <select id="kind">
-                                    <option value="">종류 선택</option>
-                                    <option value="남" th:text="강아지" th:value="강아지">남</option>
-                                    <option value="여" th:text="고양이" th:value="고양이">여</option>
-                                </select>
-                                <span id="kindError" style="color:red;"></span>
-                             </p>
-                
-                            <div class="login_submit">
-                                <button type="submit" th:text="등록">Register</button>
-                            </div>
-                        </form>
-                    </div>    
-                </div> -->
-                <!--register area end-->
             </div>
         </div>   
             </div> 

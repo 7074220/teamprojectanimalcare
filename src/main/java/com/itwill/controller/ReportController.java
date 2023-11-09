@@ -1,15 +1,22 @@
 package com.itwill.controller;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.entity.ReplyBoard;
 import com.itwill.entity.ReportBoard;
@@ -18,12 +25,10 @@ import com.itwill.service.ReplyBoardService;
 import com.itwill.service.ReportBoardService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class ReportController {
-	
-	
-	
 	@Autowired
 	private ReportBoardService reportBoardService;
 	
@@ -54,13 +59,41 @@ public class ReportController {
 	
 	
 	
-	@GetMapping("/reportWrite")
+	@GetMapping("/reportWriteForm")
     public String showReportForm() {
         return "reportBoard_write_form"; 
     }
 
-	
-	
+	@PostMapping("/reportWrite")
+	  public String handleImagePost(@RequestParam("imageFile") MultipartFile file , @RequestParam("boardTitle")String boardTitle,
+			  @RequestParam("boardFindDate") @DateTimeFormat(pattern = "yyyy-MM-dd")Date boardFindDate, @RequestParam("boardFindName")String boardFindName,
+			  @RequestParam("boardFindPhone")String boardFindPhone, @RequestParam("boardContent")String boardContent) throws Exception{
+
+	    String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/reportboard/";
+	    String originalFileName = file.getOriginalFilename();
+	    UUID uuid = UUID.randomUUID();
+	    String savedFileName = uuid.toString() + "_" + originalFileName;
+
+	    File newFile = new File(uploadPath + savedFileName);
+
+	    file.transferTo(newFile);
+	    
+	    //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        //Date parsingDate = dateFormat.parse(boardFindDate);
+	    System.out.println(">>>>>>>>>>>>>>>>>"+boardFindDate);
+	    ReportBoard writeReportBoard = ReportBoard.builder()
+	    										.boardContent(boardContent)
+	    										.boardFindDate(boardFindDate)
+	    										.boardFindName(boardFindName)
+	    										.boardFindPhone(boardFindPhone)
+	    										.boardImage(newFile.getName())
+	    										.boardTitle(boardTitle)
+	    										.build();
+	    System.out.println(">>>>"+writeReportBoard);
+	    ReportBoard insertReportBoard = reportBoardService.Create(writeReportBoard);
+	    System.out.println(">>>>"+insertReportBoard);
+	    return "index";
+	  }
 	
 	/*
 	@Operation(summary = "신고게시판 상세보기")

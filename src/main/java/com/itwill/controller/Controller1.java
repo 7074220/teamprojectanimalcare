@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ch.qos.logback.core.model.Model;
+
 @Controller
 public class Controller1 {
 	
@@ -14,6 +16,7 @@ public class Controller1 {
 
 	@GetMapping(value = "/index")
 	public String index() {
+		
 		return "index";
 	}
 	

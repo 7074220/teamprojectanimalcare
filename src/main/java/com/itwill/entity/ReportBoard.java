@@ -56,7 +56,7 @@ public class ReportBoard {
 	// 유기견 대표이미지
 	private String boardImage;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST , fetch = FetchType.LAZY) // ManyToOne 확실한가?
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_no")
 	@Builder.Default
 	@ToString.Exclude
