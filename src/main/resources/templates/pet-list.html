@@ -19,7 +19,7 @@ function petType() {
         window.location.href = newUrl;
         sessionStorage.setItem('selectedPetType', selectedValue);
         if(selectedValue==1){
-        	window.location.href = '/teamproject_animalcare/petList';
+        	window.location.href = '/teamproject_animalcare/petListPage';
         }
     }
 }
@@ -33,7 +33,7 @@ function petLocal() {
     sessionStorage.setItem('selectedPetLocal', selectedValue);
     }
     if(selectedValue==1){
-    	window.location.href = '/teamproject_animalcare/petList';
+    	window.location.href = '/teamproject_animalcare/petListPage';
     }
 }
 
@@ -218,17 +218,34 @@ function petLocal() {
                        
                     </div>
 
-                    <div class="shop_toolbar t_bottom">
-                        <div class="pagination">
-                            <ul>
-                                <li class="current">1</li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li class="next"><a href="#">next</a></li>
-                                <li><a href="#">>></a></li>
-                            </ul>
-                        </div>
-                    </div>
+                  <div th:if="${!petList.isEmpty()}">
+    <ul class="pagination"
+        th:with="
+            pageNumber = ${petList.pageable.pageNumber},
+            pageSize = ${petList.pageable.pageSize},
+            totalPages = ${petList.totalPages},
+            startPage = ${T(java.lang.Math).floor(pageNumber / pageSize) * pageSize },
+            tempEndPage = ${startPage + pageSize - 1},
+            endPage = (${tempEndPage < totalPages ? tempEndPage : totalPages})">
+
+        <li th:classappend="${petList.first} ? 'disabled'" class="page-item">
+            <a class="page-link" th:href="${petList.first} ? '#' : @{petListPage(page=${pageNumber - 1})}">
+                <span aria-hidden="true">&lt;</span>
+            </a>
+        </li>
+        <!-- 특정 페이지로 이동 -->
+
+        <li th:each="page: ${#numbers.sequence(startPage, endPage)}" th:classappend="${page == pageNumber} ? 'active'" class="page-item">
+            <a th:text="${page}" class="page-link" th:href="@{petListPage(page=${page})}"></a>
+        </li>
+
+        <li th:classappend="${petList.last} ? 'disabled'" class="page-item">
+            <a class="page-link" th:href="${petList.last} ? '#' : @{petListPage(page=${pageNumber +1})}" aria-label="Next">
+                <span aria-hidden="true">&gt;</span>
+            </a>
+        </li>
+    </ul>
+</div>
                     <!--shop toolbar end-->
                     <!--shop wrapper end-->
                 </div>
