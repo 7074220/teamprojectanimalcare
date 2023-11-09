@@ -1,6 +1,6 @@
 import {user_write_form} from './template-user-write-from.js';
 import {user_login_form} from './template-user-login-from.js';
-import {user_login_PopUp} from './template-user-login-popUp.js';
+//import {user_login_PopUp} from './template-user-login-popUp.js';
 import {user_finduserinfo_form} from './template-user-finduserinfo-form.js';
 import {ajaxRequest} from './request.js';
 import {createInitializer} from "./initializer.js";
