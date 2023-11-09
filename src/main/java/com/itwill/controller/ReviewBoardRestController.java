@@ -67,10 +67,10 @@ public class ReviewBoardRestController {
 		if(preReviewBoard==null) {
 			reviewBoardService.create(reviewBoardEntity);
 		}else {
-			preReviewBoard.setBoardContent(reviewBoardEntity.getBoardContent());
-			preReviewBoard.setBoardStar(reviewBoardEntity.getBoardStar());
-			
-			reviewBoardService.update(preReviewBoard);
+			ReviewBoard findReview=reviewBoardService.findByOrderItemNo(dto.getOiNo());
+			preReviewBoard.setBoardContent(findReview.getBoardContent());
+			preReviewBoard.setBoardStar(findReview.getBoardStar());
+			reviewBoardService.update(preReviewBoard); // 업데이트
 
 	        // 업데이트된 리뷰 정보를 반환
 	        ReviewBoardDto updatedReviewDto = ReviewBoardDto.toDto(preReviewBoard);
