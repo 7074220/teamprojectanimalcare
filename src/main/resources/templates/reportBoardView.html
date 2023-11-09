@@ -18,31 +18,14 @@
 	<!--breadcrumbs area start-->
 	<th:block layout:fragment="content">
 		<div id="content">
-			<!--<div class="breadcrumbs_area">
-        <div class="container">   
-            <div class="row">
-                <div class="col-12">
-                    <div class="breadcrumb_content">
-                        <h3>Blog</h3>
-                        <ul>
-                            <li><a href="index.html">home</a></li>
-                            <li>blog details</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>         
-    </div>-->
-			<!--breadcrumbs area end-->
 
-			<!--blog body area start-->
 			<div class="blog_details">
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-9 col-md-12">
 							<!--blog grid area start-->
-							<div class="blog_wrapper blog_wrapper_details">
-								<article class="single_blog">
+							<div class="blog_wrapper blog_wrapper_details" >
+								<article class="single_blog" th:id="${reportBoard.boardNo}">
 									<figure>
 										<div class="post_header">
 											<h3 class="post_title" th:text="${reportBoard.boardTitle}">Aypi
@@ -51,8 +34,8 @@
 												<p>
 													작성자 : <a href="#" th:text="${reportBoard.boardFindName}">admin</a>
 													/ 작성 날짜 : <a href="#"
-														th:text="${reportBoard.boardRegisterDate}">April 10,
-														2019</a> / 발견 장소 : <a href="#">Company, Image, Travel</a>
+														th:text="${#dates.format(reportBoard.boardRegisterDate, 'yyyy-MM-dd')}">April
+														10, 2019</a> / 발견 장소 : <a href="#">Company, Image, Travel</a>
 												</p>
 											</div>
 										</div>
@@ -64,32 +47,12 @@
 										</div>
 										<figcaption class="blog_content">
 											<div class="post_content">
-												<!-- <p>Aenean et tempor eros, vitae sollicitudin velit. Etiam varius enim nec quam tempor, sed efficitur ex ultrices. Phasellus pretium est vel dui vestibulum condimentum. Aenean nec suscipit nibh. Phasellus nec lacus id arcu facilisis elementum. Curabitur lobortis, elit ut elementum congue, erat ex bibendum odio, nec iaculis lacus sem non lorem. Duis suscipit metus ante, sed convallis quam posuere quis. Ut tincidunt eleifend odio, ac fringilla mi vehicula nec. Nunc vitae lacus eget lectus imperdiet tempus sed in dui. Nam molestie magna at risus consectetur, placerat suscipit justo dignissim. Sed vitae fringilla enim, nec ullamcorper arcu.</p> -->
 												<blockquote th:text="${reportBoard.boardContent}">
 													<p>글 내용</p>
 												</blockquote>
-												<!-- <p>Aenean et tempor eros, vitae sollicitudin velit. Etiam varius enim nec quam tempor, sed efficitur ex ultrices. Phasellus pretium est vel dui vestibulum condimentum. Aenean nec suscipit nibh. Phasellus nec lacus id arcu facilisis elementum. Curabitur lobortis, elit ut elementum congue, erat ex bibendum odio, nec iaculis lacus sem non lorem. Duis suscipit metus ante, sed convallis quam posuere quis. Ut tincidunt eleifend odio, ac fringilla mi vehicula nec. Nunc vitae lacus eget lectus imperdiet tempus sed in dui. Nam molestie magna at risus consectetur, placerat suscipit justo dignissim. Sed vitae fringilla enim, nec ullamcorper arcu.</p> -->
-												<!-- <p>Suspendisse turpis ipsum, tempus in nulla eu, posuere pharetra nibh. In dignissim vitae lorem non mollis. Praesent pretium tellus in tortor viverra condimentum. Nullam dignissim facilisis nisl, accumsan placerat justo ultricies vel. Vivamus finibus mi a neque pretium, ut convallis dui lacinia. Morbi a rutrum velit. Curabitur sagittis quam quis consectetur mattis. Aenean sit amet quam vel turpis interdum sagittis et eget neque. Nunc ante quam, luctus et neque a, interdum iaculis metus. Aliquam vel ante mattis, placerat orci id, vehicula quam. Suspendisse quis eros cursus, viverra urna sed, commodo mauris. Cras diam arcu, fringilla a sem condimentum, viverra facilisis nunc. Curabitur vitae orci id nulla maximus maximus. Nunc pulvinar sollicitudin molestie.</p> -->
+											
 											</div>
-											<!-- <div class="entry_content">
-                                        <div class="post_meta">
-                                            <span>Tags: </span>
-                                            <span><a href="#">, fashion</a></span>
-                                            <span><a href="#">, t-shirt</a></span>
-                                            <span><a href="#">, white</a></span>
-                                        </div>
-
-                                        <div class="social_sharing">
-                                            <p>share this post:</p>
-                                            <ul>
-                                                <li><a href="#" title="facebook"><i class="fa fa-facebook"></i></a></li>
-                                                <li><a href="#" title="twitter"><i class="fa fa-twitter"></i></a></li>
-                                                <li><a href="#" title="pinterest"><i class="fa fa-pinterest"></i></a></li>
-                                                <li><a href="#" title="google+"><i class="fa fa-google-plus"></i></a></li>
-                                                <li><a href="#" title="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div> -->
+							>
 										</figcaption>
 									</figure>
 								</article>
@@ -207,7 +170,7 @@
 									</div>
 									 -->
 
-						
+
 
 
 									<div class="tab-pane fade active show" id="reviews"
@@ -216,11 +179,11 @@
 										<div id="reviewContent">
 											<div class="reviews_wrapper">
 												<h2
-													th:text="${#dates.format(replyBoard.ReplyBoardRegisterDate, 'yyyy-MM-dd HH:mm')}">roadthemes</h2>
+													th:text="${#dates.format(replyBoard.replyBoardRegisterDate, 'yyyy-MM-dd HH:mm')}">roadthemes</h2>
 
 												<div class="reviews_comment_box">
 													<div class="comment_thmb">
-														<p >
+														<p>
 															<strong th:text="${replyBoard.userinfo.userName}">허승범
 															</strong>
 														</p>
@@ -234,7 +197,7 @@
 															<h2>
 																<p></p>
 															</h2>
-															<p th:text="${replyBoard.ReplyBoardContent}">roadthemes</p>
+															<p th:text="${replyBoard.replyBoardContent}">roadthemes</p>
 														</div>
 													</div>
 												</div>
@@ -244,69 +207,88 @@
 
 								</div>
 
+								<div class="comments_form">
+									<h3>Leave a Reply</h3>
+									<p>Your phone number will not be published. Required fields
+										are marked *</p>
+									<div class="layout">
+										<form name="f" action="#">
+											<div class="row">
+												<div class="col-12">
+													<label for="review_comment">Comment </label>
+													<textarea name="comment" id="replyComment"></textarea>
+												</div>
+												<div class="col-lg-4 col-md-4">
+													<label for="author">Name *</label> <input id="author"
+														type="text">
 
+												</div>
+												<!-- 
+												<div class="col-lg-4 col-md-4">
+													<label for="website">PhoneNumber * </label> <input
+														id="website" type="text">
+												</div>
+ 												-->
 
+											</div>
+											<button class="button" id="postCommentButton" type="button" onclick="replyInsert()">Post
+												Comment</button>
+										</form>
+									</div>
+								</div>
 
-
-
-
-
-
-
-
-
-
-
-								<!--댓글 쓰기 창-->
-								<!--  <div class="comments_form">
-                            <h3>Leave a Reply </h3>
-                            <p>Your email address will not be published. Required fields are marked *</p>
-                            <div class="layout">
-                            <form action="#" >
-                                <div class="row">
-                                    <div class="col-12">
-                                        <label for="review_comment">Comment </label>
-                                        <textarea name="comment" id="review_comment" ></textarea>
-                                    </div> 
-                                    <div class="col-lg-4 col-md-4">
-                                        <label for="author">Name</label>
-                                        <input id="author"  type="text">
-
-                                    </div> 
-                                    <div class="col-lg-4 col-md-4">
-                                        <label for="email">Email </label>
-                                        <input id="email"  type="text">
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <label for="website">Website </label>
-                                        <input id="website"  type="text">
-                                    </div>  
-                                    
-                              
-                               
-                                  
-                                    
-                                    
-                                    
-                                    
-                                    
-                                     
-                                </div>
-                                <button class="button" type="submit">Post Comment</button>
-                             </form>    
-                        </div>
-                    </div>
-                   -->
-
-
-							</div>
+                    
+            					</div>
 
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		
+		<script type="text/javascript">
+	
+	function ajaxRequest(method, url, sendJsonObject) {
+		let returnResultJsonObject={};
+		$.ajax({
+			async:false,
+			method: method,
+			url: url,
+			contentType: 'application/json;UTF-8',
+			data: JSON.stringify(sendJsonObject),
+			type: 'json',
+			success: function(resultJsonObject) {
+				returnResultJsonObject = resultJsonObject;
+				//console.log(resultJsonObject);
+			}
+		});
+		return returnResultJsonObject;
+	}
+		
+		function replyInsert(){
+			let boardNo = $('.single_blog').attr('id');
+			let userName = document.f.author.value;
+			let replyBoardContent = document.getElementById('replyComment').value;
+			//alert(boardNo);
+			
+			
+			let send = {
+					userName : userName,
+					replyBoardContent : replyBoardContent,
+					reportNo : boardNo
+			}
+			ajaxRequest('POST','reply/inserted',send);
+			location.href="/teamproject_animalcare/reportBoardView?boardNo="+boardNo;
+		}
+	
+	</script>
+		
 	</th:block>
+
+	
+
+
+
 	<!--blog section area end-->
 
 	<!--footer area start-->
@@ -316,3 +298,7 @@
 </body>
 
 </html>
+                              
+                                                                                                        
+                                    
+                                   

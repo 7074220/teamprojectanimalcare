@@ -34,13 +34,13 @@ public class ReplyBoard {
 	@Id
 	@SequenceGenerator(name = "ReplyBoard_reply_board_no_SEQ", sequenceName = "ReplyBoard_reply_board_no_SEQ", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ReplyBoard_reply_board_no_SEQ")
-	private Long ReplyBoardNo;
+	private Long replyBoardNo;
 	@CreationTimestamp
-	private Date ReplyBoardRegisterDate;
-	private String ReplyBoardContent;
-	private Integer ReplyBoardGroupNo;
-	private Integer ReplyBoardStep;
-	private Integer ReplyBoardDepth;
+	private Date replyBoardRegisterDate;
+	private String replyBoardContent;
+	private Integer replyBoardGroupNo;
+	private Integer replyBoardStep;
+	private Integer replyBoardDepth;
 	
 	
 	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
