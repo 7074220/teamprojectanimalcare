@@ -227,7 +227,7 @@ public class OrderController {
 		@GetMapping("/dateByOrder")
 		public String dateByOrder(@RequestParam("startDate")Date startDate,@RequestParam("endDate") Date endDate, HttpSession session,Model model){
 			List<OrdersDto> ordersListDto = new ArrayList<OrdersDto>();
-			
+			System.out.println(">>>>>>>>파라미터 왔을까");
 			Long userNo=(Long)session.getAttribute("userNo");
 			List<Orders> ordersList = orderService.findAllByOrdersByOrderDateByUserNo(startDate, endDate, userNo);
 			
