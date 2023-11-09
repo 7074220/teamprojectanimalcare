@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.itwill.dto.PetDto;
 import com.itwill.entity.Pet;
 import com.itwill.entity.ReportBoard;
+import com.itwill.entity.Userinfo;
 import com.itwill.service.PetService;
 import com.itwill.service.ReportBoardService;
+import com.itwill.service.UserInfoService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class Controller1 {
@@ -21,12 +25,16 @@ public class Controller1 {
 	private PetService petService;
 	@Autowired
 	private ReportBoardService reportBoardService;
+	@Autowired
+	private UserInfoService userInfoService;
+	
+	
 	/*
 	@GetMapping(value = "/")
 	public String main() {
 		return "index";
 	}
-*/
+	 */
 	
 	@GetMapping(value = "/myAccount")
 	public String myAccount() {
@@ -72,5 +80,6 @@ public class Controller1 {
 		return "index";
 	}
 
+	
 	
 }
