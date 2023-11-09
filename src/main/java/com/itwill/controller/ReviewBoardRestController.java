@@ -88,7 +88,11 @@ public class ReviewBoardRestController {
 		Long productNo = orderItem.getProduct().getProductNo();
 		double averageRating = reviewBoardService.calculateAverageStarRating(productNo);
 		Product product = productService.findByProductNo(productNo);
-		product.setProductStarAvg(averageRating);
+
+		// 평균 점수를 반올림하여 정수로 변환
+		int roundedAverageRating = (int) Math.round(averageRating);
+		Double doubleRating = (double) roundedAverageRating;
+		product.setProductStarAvg(doubleRating);
 		productService.updateProduct(product);
 		
 	    HttpHeaders httpHeaders = new HttpHeaders();

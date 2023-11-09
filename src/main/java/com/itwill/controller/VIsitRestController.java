@@ -29,10 +29,12 @@ import com.itwill.entity.Center;
 import com.itwill.entity.Userinfo;
 import com.itwill.entity.Visit;
 import com.itwill.entity.Volunteer;
+import com.itwill.service.UserInfoService;
 import com.itwill.service.VisitService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.persistence.criteria.Path;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
@@ -41,7 +43,8 @@ public class VIsitRestController {
 	
 	@Autowired
 	private VisitService visitService ;
-	
+	@Autowired
+	private UserInfoService userInfoService;
 	
 		@Operation(summary = "견학신청")
 		@PostMapping("/create-VisitDto")
@@ -89,37 +92,55 @@ public class VIsitRestController {
 		}
 	}
 	
-	@Operation(summary = "견학리스트업데이트")
-	@PutMapping("/{centerNo}")
-	public ResponseEntity<VisitDto> updateVisit(@PathVariable(name = "centerNo") Long visitNo, @RequestBody VisitDto dto) {
-		Visit existingVisit = visitService.findByVisitNo(visitNo);
-		
-		if (existingVisit != null) {
-			if (dto.getCenterNo() != null) {
-				 Center center = Center.builder().centerNo(dto.getCenterNo()).build();
-				  existingVisit.setCenter(center);
-			}
-			if (dto.getUserNo() != null) {
-				Userinfo userinfo = Userinfo.builder().userNo(dto.getUserNo()).build();
-				  existingVisit.setUserinfo(userinfo);
-			}
-			if (dto.getVisitDate() != null) {
-				existingVisit.setVisitDate(dto.getVisitDate());
-			}
-			if (dto.getVisitTime() != null) {
-				existingVisit.setVisitTime(dto.getVisitTime());
-			}
-			if (dto.getVisitStatus() != null) {
-				existingVisit.setVisitStatus(dto.getVisitStatus());
-			}
-			
-			visitService.updateVisit(existingVisit);
-			return new ResponseEntity<>(VisitDto.toDto(existingVisit),HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
+//	@Operation(summary = "견학리스트업데이트")
+//	@PutMapping("/{centerNo}")
+//	public ResponseEntity<VisitDto> updateVisit(@PathVariable(name = "centerNo") Long visitNo, @RequestBody VisitDto dto) {
+//		Visit existingVisit = visitService.findByVisitNo(visitNo);
+//		
+//		if (existingVisit != null) {
+//			if (dto.getCenterNo() != null) {
+//				 Center center = Center.builder().centerNo(dto.getCenterNo()).build();
+//				  existingVisit.setCenter(center);
+//			}
+//			if (dto.getUserNo() != null) {
+//				Userinfo userinfo = Userinfo.builder().userNo(dto.getUserNo()).build();
+//				  existingVisit.setUserinfo(userinfo);
+//			}
+//			if (dto.getVisitDate() != null) {
+//				existingVisit.setVisitDate(dto.getVisitDate());
+//			}
+//			if (dto.getVisitTime() != null) {
+//				existingVisit.setVisitTime(dto.getVisitTime());
+//			}
+//			if (dto.getVisitStatus() != null) {
+//				existingVisit.setVisitStatus(dto.getVisitStatus());
+//			}
+//			
+//			visitService.updateVisit(existingVisit);
+//			return new ResponseEntity<>(VisitDto.toDto(existingVisit),HttpStatus.OK);
+//		} else {
+//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//		}
+//	}
 	
+	
+//	@PutMapping("update-visit")
+//	public ResponseEntity<VisitDto> updateVisit(@RequestBody VisitDto dto,HttpServletRequest request, HttpSession session) {
+//		Long userNo = (Long)session.getAttribute("userNo");
+//		
+//		dto.setUserNo(userNo);
+//		Visit findVisitNo = visitService.findByVisitNo(dto.getVisitNo());
+//		Userinfo findUserNo = userInfoService.findUserByNo(userNo);
+//		findVisitNo.setUserinfo(findUserNo);
+//		if (findVisitNo != null) {
+//			if (dto.getVisitDate() != null) {
+//				findVisitNo.setVisitDate(dto.getVisitDate());
+//			}
+//				 
+//		}
+//		return null;
+//		
+//	}
 	
 	@Operation(summary = "견학번호검색")
 	@GetMapping("/centers/search")
