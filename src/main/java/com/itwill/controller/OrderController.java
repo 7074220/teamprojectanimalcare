@@ -36,6 +36,7 @@ import com.itwill.service.CartService;
 import com.itwill.service.CouponService;
 import com.itwill.service.OrderItemService;
 import com.itwill.service.OrderService;
+import com.itwill.service.ReviewBoardService;
 import com.itwill.service.UserInfoService;
 
 import groovyjarjarantlr4.v4.parse.ANTLRParser.parserRule_return;
@@ -56,6 +57,8 @@ public class OrderController {
 	UserInfoService userInfoService;
 	@Autowired
 	CouponService couponService;
+	@Autowired
+	private ReviewBoardService reviewBoardService;
 	
 	@Operation(summary = "주문 등록")
 	@GetMapping("/orderInsert")
@@ -142,7 +145,15 @@ public class OrderController {
 			Userinfo userinfo = orders.getUserinfo();
 			OrdersDto dto = OrdersDto.toDto(orders);
 			dto.setUserinfo(userinfo);
+			/*
+			if(reviewBoardService.findByUserNoProductNo()!=null) {
+				dto.setReviewStatus(1);
+			}else {
+				dto.setReviewStatus(0);
+			}
+			*/
 			ordersDtoList.add(dto);
+			
 		}
 		
 		
