@@ -82,7 +82,12 @@ public class ReviewBoardRestController {
 	       
 			
 		}
-	    
+
+	    Long productNo = orderItem.getProduct().getProductNo();
+	    double averageRating = reviewBoardService.calculateAverageStarRating(productNo);
+	    Product product = productService.findByProductNo(productNo);
+	    product.setProductStarAvg(averageRating);
+	    productService.updateProduct(product);
 	    HttpHeaders httpHeaders = new HttpHeaders();
 	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
