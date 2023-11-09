@@ -2,6 +2,9 @@ package com.itwill.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.itwill.entity.Pet;
 
 public interface PetService {
@@ -22,4 +25,6 @@ Pet petFindById(Long petNo); //pk로 찾기
 	
 	List<Pet> findAllByOrderBypetType(String petType);// 펫 no순으로 최신등록순 정렬
 	 List<Pet> findAllByPetLocal(String petLocal);
+
+	Page<Pet> petFindAllPage(Pageable pageable);
 }
