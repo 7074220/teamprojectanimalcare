@@ -273,8 +273,8 @@
 
 								<div id="orders">
 									<h3>주문목록</h3>
-								<input type="text" id="datepicker1">
-       							 <input type="text" id="datepicker2">
+								<input readonly="readonly" id="datepicker1">
+       							 <input readonly="readonly" id="datepicker2">
        							 <button type="button" class="btn btn-secondary" id="datecheck">조회</button>
       					
 									<div class="table-responsive" id="ordersTable">
@@ -378,6 +378,7 @@
 								</div>
 					
 	<script>
+	 
 	  $(function() {
           //input을 datepicker로 선언
           $("#datepicker1,#datepicker2").datepicker({
@@ -397,7 +398,15 @@
               ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 Tooltip
               ,minDate: "-1Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
               ,maxDate: "+1Y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)  
-          });                    
+          	,onSelect: function(dateText, inst) {
+                // 선택한 날짜를 로컬 스토리지에 저장
+                if (inst.id === "datepicker1") {
+                    localStorage.setItem('startDate', dateText);
+                } else if (inst.id === "datepicker2") {
+                    localStorage.setItem('endDate', dateText);
+                }
+            }
+        });                 
           
           //초기값을 오늘 날짜로 설정해줘야 합니다.
           $('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후) 
@@ -415,8 +424,15 @@
 		     
 		    	 var startDate = $("#datepicker1").val();
 		    	    var endDate = $("#datepicker2").val();
-		    	    
-		    	    window.location.href = "/dateByOrder?startDate=" + startDate + "&endDate=" + endDate;
+		    	    if(!startDate || !endDate){
+		    	    	
+		    	    	 window.location.href = "orders";
+		    	    	 
+		    	    }
+		    	    else{
+		    	    	
+		    	    window.location.href = "dateByOrder?startDate=" + startDate + "&endDate=" + endDate;
+		    	    }
 		         
 		     });    
 	
@@ -475,6 +491,15 @@
          return resultTemplate;
       }
       
+            /* let response = ajaxRequest('GET','order/orderItemList/'+orderNo)
+            let html = my_account_order(response);
+            $('#modalContent').html(html);
+            alert(response.orderStatusNo);
+            if(response.orderStatusNo==3){
+          	  alert('실행');
+          	  $('.form-select form-select-sm').val('3'); // '배송준비' 옵션을 선택
+          	   $('.form-select form-select-sm option:not(:selected)').prop('disabled', true);
+            } */
          $('#orderDetailsModal').on('show.bs.modal',function(e){
             let index=e.relatedTarget.href.lastIndexOf('#')
             let orderNo=e.relatedTarget.href.substring(index+1);
@@ -488,8 +513,15 @@
                type: 'json',
                success: function(resultJsonObject) {
                   console.log(resultJsonObject);
+                  alert(resultJsonObject.orderStatusNo);
                   let html = my_account_order(resultJsonObject);
-                  $('#modalContent').html(html); 
+                  $('#modalContent').html(html);
+                  if(resultJsonObject.orderStatusNo==3){
+                	  alert('실행');
+                	  $('.form-select form-select-sm').val('3'); // '배송준비' 옵션을 선택
+                	   $('.form-select form-select-sm option:not(:selected)').prop('disabled', true);
+                  }
+                  // 셀렉티드 시키면 되겠다~
                }
             }); 
             
@@ -875,6 +907,9 @@
 		   // e.preventDefault(); // 기본 이벤트 방지
 		    
 		  });
+			
+			
+			// 날짜 지정스토리지 설정
 			
 			
 
