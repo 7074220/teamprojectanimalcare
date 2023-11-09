@@ -1,10 +1,9 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="layout/layout(title='ReportBoardView')">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='ReportBoardView')">
 
 <head>
-<title>Safira - blog details</title>
+	<title>Safira - blog details</title>
 </head>
 
 <body>
@@ -24,7 +23,7 @@
 					<div class="row">
 						<div class="col-lg-9 col-md-12">
 							<!--blog grid area start-->
-							<div class="blog_wrapper blog_wrapper_details" >
+							<div class="blog_wrapper blog_wrapper_details">
 								<article class="single_blog" th:id="${reportBoard.boardNo}">
 									<figure>
 										<div class="post_header">
@@ -41,18 +40,17 @@
 										</div>
 										<div class="blog_thumb">
 											<!-- 첨부된 이미지 파일 -->
-											<a href="#"><img src="assets/img/blog/blog-big1.jpg"
-												alt=""
-												th:src="@{/image/reportboard/} + ${reportBoard.getBoardImage}"></a>
+											<a href="#"><img src="assets/img/blog/blog-big1.jpg" alt=""
+													th:src="@{/image/reportboard/} + ${reportBoard.getBoardImage}"></a>
 										</div>
 										<figcaption class="blog_content">
 											<div class="post_content">
 												<blockquote th:text="${reportBoard.boardContent}">
 													<p>글 내용</p>
 												</blockquote>
-											
+
 											</div>
-							
+
 										</figcaption>
 									</figure>
 								</article>
@@ -173,13 +171,14 @@
 
 
 
-									<div class="tab-pane fade active show" id="reviews"
-										role="tabpanel" th:each="replyBoard : ${replyBoardList}">
+									<div class="tab-pane fade active show" id="reviews" role="tabpanel"
+										th:each="replyBoard : ${replyBoardList}">
 										<input type="hidden" id="productNo" />
 										<div id="reviewContent">
 											<div class="reviews_wrapper">
 												<h7
-													th:text="${#dates.format(replyBoard.replyBoardRegisterDate, 'yyyy-MM-dd HH:mm')}">roadthemes</h7>
+													th:text="${#dates.format(replyBoard.replyBoardRegisterDate, 'yyyy-MM-dd HH:mm')}">
+													roadthemes</h7>
 
 												<div class="reviews_comment_box">
 													<div class="comment_thmb">
@@ -219,57 +218,75 @@
 													<textarea name="comment" id="replyComment"></textarea>
 												</div>
 											</div>
-											<button class="button" id="postCommentButton" type="button" onclick="replyInsert()">Post
-												Comment</button>
+											<button class="button" th:if="${session.userNo!=null}"
+												id="postCommentButton" type="button" onclick="replyInsert()">Post</button>
+											<button class="button" th:if="${session.userNo==null}"
+												id="postCommentButton" type="button" onclick="loginPopUp()">Post
+													Comment</button>
 										</form>
 									</div>
 								</div>
 
-                    
-            					</div>
+
+							</div>
 
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		
+
 		<script type="text/javascript">
-	
-	function ajaxRequest(method, url, sendJsonObject) {
-		let returnResultJsonObject={};
-		$.ajax({
-			async:false,
-			method: method,
-			url: url,
-			contentType: 'application/json;UTF-8',
-			data: JSON.stringify(sendJsonObject),
-			type: 'json',
-			success: function(resultJsonObject) {
-				returnResultJsonObject = resultJsonObject;
-				//console.log(resultJsonObject);
+
+			function ajaxRequest(method, url, sendJsonObject) {
+				let returnResultJsonObject = {};
+				$.ajax({
+					async: false,
+					method: method,
+					url: url,
+					contentType: 'application/json;UTF-8',
+					data: JSON.stringify(sendJsonObject),
+					type: 'json',
+					success: function (resultJsonObject) {
+						returnResultJsonObject = resultJsonObject;
+						//console.log(resultJsonObject);
+					}
+				});
+				return returnResultJsonObject;
 			}
-		});
-		return returnResultJsonObject;
-	}
-		
-		function replyInsert(){
-			let boardNo = $('.single_blog').attr('id');
-			let replyBoardContent = document.getElementById('replyComment').value;
-			
-			let send = {
-					replyBoardContent : replyBoardContent,
-					reportNo : boardNo
+
+			function replyInsert() {
+				let boardNo = $('.single_blog').attr('id');
+				let replyBoardContent = document.getElementById('replyComment').value;
+
+				let send = {
+					replyBoardContent: replyBoardContent,
+					reportNo: boardNo
+				}
+				ajaxRequest('POST', 'reply/inserted', send);
+				location.href = "/teamproject_animalcare/reportBoardView?boardNo=" + boardNo;
 			}
-			ajaxRequest('POST','reply/inserted',send);
-			location.href="/teamproject_animalcare/reportBoardView?boardNo="+boardNo;
-		}
-	
-	</script>
-		
+			function loginPopUp() {
+				// URL 및 창 속성 설정
+				var url = "loginPopUp";
+				var windowName = "로그인"; // 새 창의 이름
+				var windowFeatures = "width=800,height=600,scrollbars=yes"; // 창 속성
+
+				// 새 창 열기
+				window.open(url, windowName, windowFeatures);
+				
+				// 새 창 제어 (예: 창을 닫기)
+				// newWindow.close(); // 새 창 닫기
+				
+				// 창 속성 설정을 통해 창의 크기, 스크롤바 여부 등을 조절할 수 있습니다.
+
+			}
+
+		</script>
+
 	</th:block>
 
-	
+
 
 
 
@@ -282,7 +299,3 @@
 </body>
 
 </html>
-                              
-                                                                                                        
-                                    
-                                   

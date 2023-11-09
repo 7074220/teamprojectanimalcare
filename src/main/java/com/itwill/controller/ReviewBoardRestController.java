@@ -58,30 +58,33 @@ public class ReviewBoardRestController {
 		dto.setUserNo(userNo);
 		
 		ReviewBoard reviewBoardEntity = ReviewBoardDto.toEntity(dto);
+		System.out.println(">>>>>>>>>>>>>>>아이템번호:"+dto.getOiNo());
 		OrderItem orderItem = orderItemRepository.findById(dto.getOiNo()).get();
+		
+		System.out.println(orderItem);
 		
 		reviewBoardEntity.setOrderItem(orderItem);
 		
 		ReviewBoard preReviewBoard = reviewBoardService.findByOrderItemNo(orderItem.getOiNo());
 		
+		//;
 		if(preReviewBoard==null) {
+			// 리뷰작성
 			reviewBoardService.create(reviewBoardEntity);
 		}else {
-			preReviewBoard.setBoardContent(reviewBoardEntity.getBoardContent());
-			preReviewBoard.setBoardStar(reviewBoardEntity.getBoardStar());
-			
-			reviewBoardService.update(preReviewBoard);
+			// 업뎃
+			//preReviewBoard.setBoardContent(reviewBoardEntity.getBoardContent());
+			//preReviewBoard.setBoardStar(reviewBoardEntity.getBoardStar());
+			Long boardNo = preReviewBoard.getBoardNo();
+			reviewBoardEntity.setBoardNo(boardNo);
+			System.out.println(reviewBoardEntity);
+			reviewBoardService.update(reviewBoardEntity);
 
 	        // 업데이트된 리뷰 정보를 반환
-	        ReviewBoardDto updatedReviewDto = ReviewBoardDto.toDto(preReviewBoard);
-	        return new ResponseEntity<>(updatedReviewDto, HttpStatus.OK); // HttpStatus.OK를 사용하여 성공 상태 반환
+	        //ReviewBoardDto updatedReviewDto = ReviewBoardDto.toDto(preReviewBoard);
+	        //return new ResponseEntity<>(updatedReviewDto, HttpStatus.OK); // HttpStatus.OK를 사용하여 성공 상태 반환
 			
 		}
-		
-	    
-	  
-	    System.out.println(">>>>>>>>>>>>>>"+dto.getUserNo());
-		System.out.println(">>>>>>>>>>>>>>"+dto.getProductNo());
 	    
 	    HttpHeaders httpHeaders = new HttpHeaders();
 	    httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
@@ -107,11 +110,23 @@ public class ReviewBoardRestController {
 	}
 	
 	@PostMapping("/reviewBoardView")
-	public ResponseEntity<ReviewBoardDto> findByUserNoByProductNo(@RequestBody ReviewBoardDto reviewBoardDto){
-		ReviewBoard reviewBoard = reviewBoardService.findByOrderItemNo(reviewBoardDto.getOiNo());
+	public ResponseEntity<ReviewBoardDto> findByUserNoByProductNo(@RequestBody ReviewBoardDto reviewBoardDto,HttpSession session){
+		Long userNo = (Long)session.getAttribute("userNo");
 		
-		ReviewBoardDto dto = ReviewBoardDto.toDto(reviewBoard);
-		dto.setOiNo(reviewBoardDto.getOiNo());
+		ReviewBoard reviewBoard = reviewBoardService.findByOrderItemNo(reviewBoardDto.getOiNo());
+		System.out.println(">>>>>>>>>>>>"+reviewBoard);
+		ReviewBoardDto dto = null;
+		
+		if(reviewBoard==null) {
+			dto = ReviewBoardDto.builder().build();
+			dto.setOiNo(reviewBoardDto.getOiNo());
+			dto.setUserNo(userNo);	
+		}else {
+			dto = ReviewBoardDto.toDto(reviewBoard);
+			dto.setOiNo(reviewBoardDto.getOiNo());
+			dto.setUserNo(userNo);	
+		}
+		
 		System.out.println(">>>>>>>>>>>>"+dto);
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
