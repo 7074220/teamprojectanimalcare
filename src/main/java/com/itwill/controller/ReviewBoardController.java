@@ -93,7 +93,7 @@ public class ReviewBoardController {
 	}
 	
 	
-	
+	/*
 	// 로그인 후 마이페이지에서 리뷰작성
 	@PostMapping("/create-reviewBoard")
 	public String createReviewBoard(@RequestParam Double boardStar, @RequestParam String boardContent, HttpSession session, Model model) throws Exception {
@@ -109,14 +109,14 @@ public class ReviewBoardController {
 
 	    model.addAttribute("userinfo", userinfo);
 	    
-	    return "redirect:/my-account-orders";
+	    return "order-list";
 	}
-
+	*/
 	
 	
 	/*
 	// 로그인 후 마이페이지에서 리뷰작성
-	@PostMapping("/create-reviewBoard")
+	@GetMapping("/volunteerByUserNo")
 	public String createReviewBoard(@RequestParam Double boardStar, @RequestParam String boardContent,
 			HttpSession session, Model model) throws Exception {
 		Long userNo = (Long) session.getAttribute("userNo");
@@ -129,12 +129,14 @@ public class ReviewBoardController {
 		Userinfo userinfo = userInfoService.findUserByNo(userNo);
 		reviewBoard.setUserinfo(userinfo);
 		// reviewBoard.setProduct(product);
-
+		List<ReviewBoard> userReviews = reviewBoardService.findByUserNo(userNo);
 		model.addAttribute("userinfo", userinfo);
+		model.addAttribute("userReviews", userReviews);
 
-		return "redirect:/my-account-orders";
+		return "order-list";
 	}
 	*/
+
 
 
 }

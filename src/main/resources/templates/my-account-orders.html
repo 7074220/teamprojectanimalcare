@@ -11,9 +11,14 @@
 			/* 회원탈퇴창 가운데 정도로 떨어트림 */
 		}
 		
-		
-		
+		#ordersTable{
+			width: 1055px;
+		}
+
 	</style>
+	
+	
+
 
 <!-- 별점 css 위치 -->
 
@@ -68,6 +73,7 @@
 	</style>
 
 
+>>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 
 </head>
 
@@ -261,7 +267,7 @@
 
 								<div id="orders">
 									<h3>주문목록</h3>
-									<div class="table-responsive">
+									<div class="table-responsive" id="ordersTable">
 										<table class="table">
 											<thead>
 												<tr>
@@ -306,12 +312,12 @@
 <!--주문 상세 모달창 -->
 								<div class="modal fade" id="orderDetailsModal" tabindex="-1"
 									aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content" style="width: 800px; height: 500px;">
+									<div class="modal-dialog" >
+										<div class="modal-content" style="width: 900px; height: auto;  border-radius: 10px;">
 											<div class="modal-header">
 												<h5 class="modal-title" id="orderDetailsModalLabel">주문 상세</h5>
 												<button type="button" class="close" data-dismiss="modal"
-													aria-label="Close" style="border: none; padding: 7px;">X
+													aria-label="Close" style="border: none;">X
 													<!--<span aria-hidden="true">&times;</span>-->
 												</button>
 											</div>
@@ -365,7 +371,7 @@
 					
 	<script>
       function my_account_order(responseJsonObject = {}) {
-         alert('asd');
+
          let htmltemplate =
          `<div class="modal-body" id="modalContent">
                                     <!-- 주문 상세 내용이 여기에 로드됩니다 -->
@@ -444,7 +450,7 @@
 <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog">
-		<div class="modal-content" style="border: 3px solid black; height: 400px;">
+		<div class="modal-content" style="border: 2px solid green; height: 380px; top: 20px; margin: 20px;  border-radius: 10px; width: 600px;">
 			<div class="modal-header">
 				<h5 class="modal-title" id="orderDetailsModalLabel">리뷰 작성</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"
@@ -518,15 +524,15 @@
 
 								<div class="col-12">
 									<label for="review_comment">Comment </label>
-									<div> <textarea name="comment" id="review_comment" style="height: 50px;"></textarea>
+									<div> <textarea name="comment" id="review_comment" style="height: 90px;"></textarea>
 									</div>
 
 								</div>
 							</div>
 							<!--<button class="button" type="submit">Post Comment</button>-->
-							<div class="modal-footer">
+							<div class="modal-footer" style="height: 40px;">
 								<!--   <button type="button" class="btn btn-primary">리뷰 저장</button>-->
-								<button type="submit" class="submit" data-dismiss="modal">작성 완료</button>
+								<button type="submit" class="submit" data-dismiss="modal" style="background: white;">작성 완료</button>
 							</div>
 						</form>
 					</div>
@@ -595,8 +601,12 @@
 					
 				});
 		
-		function reviewWrite(e){
-			alert('클릭햇다');
+
+		
+			
+
+		function reviewWrite(e){			
+
 			e.preventDefault();
 			$('#reviewModal').modal('show');
 		}
@@ -640,63 +650,121 @@
 				}
 			
 			
-			$('.submit').on('click', function(event) {
-	        event.preventDefault();
-	       
-	       const now = new Date();
-		   const year = now.getFullYear();
-		   const month = (now.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더하고 2자리로 포맷팅
-		   const day = now.getDate().toString().padStart(2, '0'); // 일을 2자리로 포맷팅
-    	   const formattedDate = `${year}-${month}-${day}`;
-    	  
-	       let boardStar = $('.rate:checked').val();
-	    
-		   let review_comment = $('#review_comment').val();
-		  
-		   let userNo = $('#userNo').val();
-		   let productNo = $('.write-review').attr('id');
-	  
-	        let sendJsonObject = {
-				userNo:userNo,
-				productNo : productNo,
-	            boardStar: boardStar,
-	            boardContent: review_comment,
-	         	boardDate:formattedDate
-	        };
-	        console.log(sendJsonObject)
-	       let responseObject=ajaxRequest('POST','reviewBoard/createReviewBoard',sendJsonObject);
-	       console.log(responseObject)	
-	      	
-	  		if(responseObject.userNo == null){
-				alert('로그인이 필요합니다.');
-				window.location.href = 'index';	// 로그인 창으로 이동
-			}else{
-				alert("리뷰작성이 완료되었습니다.");
-				updateSubmitButton();
-			}
-	  		
+		
+			$(document).ready(function () {
+				
+				// 리뷰 데이터를 저장하는 JavaScript 객체
+				 const reviewData = JSON.parse(localStorage.getItem('reviewData')) || {};
+				
+				// 모달 창이 열릴 때 이벤트 핸들러
+				$('#orderDetailsModal').on('shown.bs.modal', function () {
+					const orderNo  = $(this).find('.view').data('orderNo');
+					
+					const review = reviewData[orderNo];
+
+					if (review) {
+						$('.write-review').text('리뷰완료');
+					} else {
+						$('.write-review').text('리뷰쓰기');
+					}
+					
+					 
+					
+				});
+				
+				
+				// 모달 창이 닫힐 때 이벤트 핸들러
+				$('#orderDetailsModal').on('hidden.bs.modal', function () {
+					// 모달이 닫힐 때 리뷰 상태에 따라 버튼 상태를 초기화
+					if (!localStorage.getItem('sendJsonObject')) {
+						$('.write-review').text('리뷰쓰기');
+					}
+				});
+				
+				 // 리뷰 작성 완료 버튼 클릭 이벤트
+					$('.submit').on('click', function (event) {
+					event.preventDefault();
+
+					// const orderNo = $('#orderDetailsModal .view').data('orderNo');
+					
+
+					const now = new Date();
+					const year = now.getFullYear();
+					const month = (now.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더하고 2자리로 포맷팅
+					const day = now.getDate().toString().padStart(2, '0'); // 일을 2자리로 포맷팅
+					const formattedDate = `${year}-${month}-${day}`;
+
+					let boardStar = $('.rate:checked').val();
+
+					let review_comment = $('#review_comment').val();
+
+					let userNo = $('#userNo').val();
+					let productNo = $('.write-review').attr('id');
+
+
+					let sendJsonObject = {
+						userNo: userNo,
+						productNo: productNo,
+						boardStar: boardStar,
+						boardContent: review_comment,
+						boardDate: formattedDate
+					};
+					console.log(sendJsonObject)
+					let responseObject = ajaxRequest('POST', 'reviewBoard/createReviewBoard', sendJsonObject);
+					console.log(responseObject)
+
+				
+						
+		
+
+        // 로컬 스토리지에 리뷰 데이터 저장
+        localStorage.setItem('reviewData', JSON.stringify(reviewData));
+
+        	 // 페이지가 로드될 때 리뷰 데이터 초기화
+    if (!localStorage.getItem('sendJsonObject')) {
+        $('.write-review').text('리뷰쓰기');
+    }
+						
+
+
+					if (responseObject.userNo == null) {
+						alert('로그인이 필요합니다.');
+						window.location.href = 'index';	// 로그인 창으로 이동
+					} else {
+						alert("리뷰작성이 완료되었습니다.");
+						updateSubmitButton();
+					
+					}
+					
+					
+					
 	    });
 			
-
-
-
-
-
 			
-			// 삭제
-			$(".order_remove").on('click', function(e) {
-		   // e.preventDefault(); // 기본 이벤트 방지
-		    let orderNo = $(e.target).attr('id');
-		    // AJAX 요청 보내기
-			ajaxRequest("DELETE","order/" + orderNo);
-		    
-		    $(".order_remove, .order_no, .order_date, .order_desc, .order_price, .order_volunteer").each(function() {
-	            if ($(this).attr("id") === orderNo) {
-	                $(this).closest("tr").remove();
-	            }
-	        });
-		    
-		  });
+
+			});	
+
+
+	
+	
+
+
+
+
+		// 삭제
+		$(".order_remove").on('click', function (e) {
+			// e.preventDefault(); // 기본 이벤트 방지
+			let orderNo = $(e.target).attr('id');
+			// AJAX 요청 보내기
+			ajaxRequest("DELETE", "order/" + orderNo);
+
+			$(".order_remove, .order_no, .order_date, .order_desc, .order_price, .order_volunteer").each(function () {
+				if ($(this).attr("id") === orderNo) {
+					$(this).closest("tr").remove();
+				}
+			});
+
+		});
 		  
 		  
 	
