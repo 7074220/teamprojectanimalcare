@@ -27,9 +27,9 @@ class ReportBoardServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	@Transactional
 	@Rollback(false)
-	@Disabled
+	//@Disabled
 	void test() {
-		Userinfo userinfo = userInfoDao.findByUserId("전아현");
+		Userinfo userinfo = userInfoDao.findByUserId("ccc@naver.com");
 		ReportBoard reportBoard = ReportBoard.builder()
 									.boardContent("내용")
 									.boardReadCount(0)
@@ -79,7 +79,7 @@ class ReportBoardServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	 @Transactional
 	 @Rollback(false)
-	 //@Disabled
+	 @Disabled
 	void test6() {
 		System.out.println(reportBoardService.findAll()); 
 	
