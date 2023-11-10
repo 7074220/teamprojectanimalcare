@@ -709,7 +709,7 @@
 
 								<!-- <button data-role="grid_list" type="button"  class="btn-list" data-toggle="tooltip" title="List"></button> -->
 							</div>
-							<div class="product_tab_btn">
+							<div class="product_tab_btn" style="margin-top: 0;">
 							
 							
 							
@@ -810,10 +810,10 @@
 						<div class="row shop_wrapper" id="listContent">
 							<div class="col-lg-4 col-md-4 col-sm-6 col-12" th:each="product:${productList}">
 								<div class="single_product">
-									<div class="product_thumb">
+									<div class="product_thumb" style="width: 250px; height: 300px;">
 										<a class="primary_img" href="product-details.html"
 											th:href="@{productDetail(productNo=${product.productNo})}"><img src="#"
-												alt="" th:src="@{/image/product/} + ${product.getProductImage}"></a>
+												alt="" th:src="@{/image/product/} + ${product.getProductImage}" style="width: 250px; height: 300px;"></a>
 
 										<!-- <a class="secondary_img" href="product-details.html"><img src="assets/img/product/productbig2.jpg" alt=""></a>-->
 										
