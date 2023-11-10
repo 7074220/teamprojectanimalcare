@@ -82,7 +82,7 @@ public class ReportController {
 	    String savedFileName = uuid.toString() + "_" + originalFileName;
 
 	    File newFile = new File(uploadPath + savedFileName);
-
+	    System.out.println(uploadPath);
 	    file.transferTo(newFile);
 	    
 	    Long userNo =(Long)session.getAttribute("userNo");
@@ -93,6 +93,7 @@ public class ReportController {
 	    }
 	    
 	    ReportBoard writeReportBoard = ReportBoard.builder()
+	    										.boardNo(1L)
 	    										.boardContent(boardContent)
 	    										.boardFindDate(boardFindDate)
 	    										.boardFindName(boardFindName)
