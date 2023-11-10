@@ -50,10 +50,11 @@ public class AdoptController {
 	private CenterService centerService;
 	// 입양신청
 	@GetMapping(value = "/adopt")
-	public String apply(Model model, @RequestParam(name = "petNo") Long petNo, @RequestParam(name = "centerNo", required = false) Long centerNo) {
+	public String apply(Model model, @RequestParam(name = "petNo") Long petNo ) {
 		Pet pet = petService.petFindById(petNo);
+		Center center=pet.getCenter();
 		model.addAttribute("pet", pet);
-		Center center=centerService.findByCenterNo(centerNo);
+		//Center center=centerService.findByCenterNo(centerNo);
 		model.addAttribute("center", center);
 		return "adopt";
 	}
