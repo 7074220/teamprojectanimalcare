@@ -30,6 +30,8 @@ public class CartDto {
 	private Integer cartQty;
 	private Long productNo;
 	private Long userNo;
+	private Integer productQty;
+	private Integer status;
 	
 	public static Cart toEntity(CartDto dto) {
 		Cart inserCart = Cart.builder()

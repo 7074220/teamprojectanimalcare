@@ -43,6 +43,35 @@
 }
 </style>
 
+
+<script>
+//당일예약 불가(날짜)
+//페이지 로드 시 실행
+window.onload = function() {
+    let adoptDate = document.getElementById('adoptDate');
+    let today = new Date();
+    // 한국 시간대 (UTC+9)로 변경
+    today.setHours(today.getHours() + 9);
+    let afterTomorrow = new Date(today);
+    afterTomorrow.setDate(afterTomorrow.getDate() + 1); // 내일 날짜 계산
+    let afterTomorrowString = afterTomorrow.toISOString().slice(0, 10);
+
+    adoptDate.value = afterTomorrowString;
+
+    let minDate = new Date(today);
+    minDate.setHours(9, 0, 0, 0);
+	if (today.getHours() >= 9) { 
+        minDate.setDate(minDate.getDate() + 1);
+    }
+	let minDateString = minDate.toISOString().slice(0, 10);
+    adoptDate.setAttribute('min', minDateString);
+
+    adoptDate.removeAttribute('max');
+};
+</script> 
+
+
+
 </head>
 
 <body>
@@ -78,6 +107,9 @@
 					<div class="col-lg-6 col-md-6">
 						<div class="contact_message content">
 							<h3 style="font-weight: bold">펫 정보</h3>
+							  <p>
+								센터: <span th:text="${center.centerName}"></span>
+							</p>   
 							<p>
 								펫 종류: <span th:text="${pet.petType}"></span>
 							</p>
@@ -123,7 +155,8 @@
 									<textarea placeholder="Message *" name="message" class="form-control2"></textarea>
 								</div> -->
 								<div>
-									<span>방문 날짜</span> <input type="date" name="adoptDate"
+									<span>방문 날짜</span> 
+									<input type="date" name="adoptDate"
 										id="adoptDate" placeholder="날짜를 선택해주세요" required="required" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
 								</div>
 								<div>
@@ -157,9 +190,7 @@
 
 								<button type="submit" class="submit">신청하기</button>
 								<!-- <p class="form-messege"></p> -->
-								<!-- <div th:if="${msg!=null}">
-									<p th:text="${msg}" class="success-message"></p>
-								</div> -->
+								
 							</form>
 
 						</div>
@@ -209,47 +240,15 @@
 				window.location.href = 'index';	// 로그인 창으로 이동
 			}else{
 				alert("입양신청이 완료되었습니다.");
-				window.location.href='index'; // 메인페이지로 이동
+				window.location.href='adoptByUserNo'; // 메인페이지로 이동
 			}
 	  		
 	    });
 		
-		/*
-		$('.submit').on('click', function(event) {
-    event.preventDefault();
-    let petNo = $(this).data('petNo');
-    let adoptDate = $('#adoptDate').val();
-    let adoptTime = $('#adoptTimeSelect').val();
-
-    let sendJsonObject = {
-        petNo: petNo,
-        adoptDate: adoptDate,
-        adoptTime: adoptTime
-    };
-
-    $.ajax({
-        type: 'POST',
-        url: 'adopt/create-adopt', // 요청 URL을 상대 경로로 수정
-        contentType: 'application/json;UTF-8',
-        data: JSON.stringify(sendJsonObject),
-        dataType: 'json', // 서버에서 반환하는 데이터 형식을 JSON으로 설정
-        success: function(responseObject) {
-            if (responseObject.status === 1) {
-                alert('로그인이 필요합니다.'); // 로그인이 필요한 경우 알림
-            } else {
-                alert('입양신청이 완료되었습니다.');
-                window.location.href = 'index'; // 성공적인 신청 후 이동할 페이지 설정
-            }
-        },
-        error: function(xhr, status, error) {
-            alert('오류가 발생했습니다');
-        }
-    });
-});
-		*/
 		
 		
-
+		
+		/* 
 			// 현재 날짜를 가져오는 함수
 			function getCurrentDate() {
 				var currentDate = new Date();
@@ -264,8 +263,8 @@
 				var adoptDate = document.getElementById('adoptDate');
 				// 현재 날짜로 설정
 				adoptDate.setAttribute('min', getCurrentDate());
-			};
-		
+			}; */
+	
 
 	
 	

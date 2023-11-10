@@ -81,11 +81,11 @@ class WishServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	}
 	
 	@Test
-	@Disabled
+	//@Disabled
 	@Transactional
 	@Rollback(false)
 	void existWish() {
-		Boolean tf = wishService.existsByUserinfo_UserNoAndProduct_ProductNo(19L, 1L);
+		Boolean tf = wishService.existsByUserinfo_UserNoAndProduct_ProductNo(19L, 2L);
 		System.out.println(tf);
 	}
 }
