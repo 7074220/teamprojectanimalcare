@@ -12,8 +12,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -51,7 +53,7 @@ public class VolunteerController {
 	}
 	
 	
-	// 봉사버튼 클릭시 로그인이면 신청, 비회원이면 페이지 이동
+	// 봉사버튼 클릭시 로그인이면 신청완료, 비회원이면 로그인 페이지 이동
 	@PostMapping("/create-volunteer")
 	public String createVolunteer(@RequestParam("volunteerDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date volunteerDate,
 	        @RequestParam("volunteerTime") int selectedHour, @RequestParam Long centerNo, HttpSession session, Model model) throws Exception {
@@ -76,7 +78,7 @@ public class VolunteerController {
 	        // 로그인이 필요한 경우 모델에 추가
 	        model.addAttribute("error", "로그인이 필요합니다.");
 	    }
-	    return "center-list"; // 뷰 페이지의 이름을 반환
+	    return "centerList"; // 뷰 페이지의 이름을 반환
 	    
 	}
 	
@@ -85,7 +87,7 @@ public class VolunteerController {
 	public String volunteerList(Model model) {
 		List<Volunteer> volunteers = volunteerService.findAllVolunteers();    
 	    model.addAttribute("volunteers", volunteers);
-	    return "my-account";
+	    return "my-account-volunteer";
 	}
 	
 	/*
@@ -105,7 +107,7 @@ public class VolunteerController {
 	*/
 	
 	
-	/* // 이게 원본
+	
 	// userNo 로 봉사 리스트 조회. 로그인한 회원
 	@GetMapping("/volunteerByUserNo") 
 	public String findByVolunteerListUserNo(Model model, HttpSession session) throws Exception {
@@ -117,30 +119,42 @@ public class VolunteerController {
 	    volunteerList.sort((v1, v2) -> v2.getVolunteerNo().compareTo(v1.getVolunteerNo()));
 	    model.addAttribute("userNo", userNo);
 		model.addAttribute("volunteerList", volunteerList);
-		return "my-account-volunteer"; //이게 원본임
-		//return "order-list"; // 오더리스트 - 리뷰쓰기 연결
+		return "my-account-volunteer";
 	}
-	*/
-	
-	
-	/*
-	// order-list 임시 연결
-	@GetMapping("/volunteerByUserNo") 
-	public String findByVolunteerListUserNo(Model model, HttpSession session) throws Exception {
-		Long userNo=(Long)session.getAttribute("userNo");
-		Userinfo user=userInfoService.findUserByNo(userNo);
 		
-		List<Volunteer> volunteerList = volunteerService.findVolunteertByUserNo(user.getUserNo());		
-		// volunteerNo를 내림차순으로 정렬
-	    //volunteerList.sort((v1, v2) -> v2.getVolunteerNo().compareTo(v1.getVolunteerNo()));
-	    
-	    model.addAttribute("userNo", userNo);
-		model.addAttribute("volunteerList", volunteerList);
-		return "order-list"; // 오더리스트 - 리뷰쓰기 연결
-	}
+	/*
+	@GetMapping("/volunteerUpdate")
+    public String getVolunteerPage(@RequestParam Long volunteerNo, @RequestParam Long centerNo, Model model) {
+
+        Volunteer volunteer = volunteerService.findByVolunteerNo(volunteerNo);
+        Center center = centerService.findByCenterNo(centerNo);
+        //System.out.println(">>>>>>>>>>"+volunteerNo);
+        //System.out.println(">>>>>>>>>>"+centerNo);
+
+        model.addAttribute("volunteer", volunteer);
+        model.addAttribute("volunteerNo", volunteerNo);
+        model.addAttribute("center", center);
+
+        return "volunteerUpdate";
+    }
+	
+
+    @PutMapping("/update-volunteer")
+    public String updateVolunteer(@ModelAttribute Volunteer volunteer, @RequestParam(value = "volunteerNo") Long volunteerNo, 
+            HttpSession session, Model model) throws Exception {
+        Long userNo = (Long) session.getAttribute("userNo");
+        if (userNo != null) {
+            Volunteer findVolunteer = volunteerService.findByVolunteerNo(volunteerNo);
+
+            //findVolunteer.setCenter(volunteer.getCenter());
+            findVolunteer.setVolunteerDate(volunteer.getVolunteerDate());
+            findVolunteer.setVolunteerTime(volunteer.getVolunteerTime());
+
+            volunteerService.updateVolunteer(findVolunteer);
+        }
+        return "my-account-volunteer"; // 수정 실패 페이지로 이동
+    }
 	*/
-	
-	
-	
+
 	
 }

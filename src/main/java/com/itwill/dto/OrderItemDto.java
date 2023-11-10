@@ -34,7 +34,8 @@ private Long oiNo;
 	private Orderstatus orderstatus=new Orderstatus();
 	@Default
 	private Product product=new Product();
-	
+	private String reviewStatus;
+	private int orderStatusNo;
 //	private Long orderId;
 	
 	public static OrderItemDto toDto(OrderItem entity) {

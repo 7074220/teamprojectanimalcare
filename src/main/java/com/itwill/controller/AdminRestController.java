@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,14 +22,38 @@ import com.itwill.entity.Adopt;
 import com.itwill.entity.Center;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Volunteer;
+import com.itwill.service.AdoptService;
+import com.itwill.service.CartService;
+import com.itwill.service.CenterService;
+import com.itwill.service.MyPetService;
+import com.itwill.service.OrderService;
+import com.itwill.service.PetService;
+import com.itwill.service.ProductService;
+import com.itwill.service.UserInfoService;
+import com.itwill.service.VolunteerService;
+import com.itwill.service.WishService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpSession;
 
 public class AdminRestController {
 
+	@Autowired
+	private CenterService centerService;
+	@Autowired
+	private ProductService productService;
+	@Autowired
+	private AdoptService adoptService;
+	@Autowired
+	private VolunteerService volunteerService;
+	@Autowired
+	private PetService petService;
 	
-/*
+	
+
+	/******************************* Adopt ************************************/
+	
+	
 	@Operation(summary = "no로 삭제")
 	@DeleteMapping("/{adoptNo}")
 	public ResponseEntity<Map> deleteAdopt(@PathVariable(value = "adoptNo") Long adoptNo) throws Exception {
@@ -41,13 +66,6 @@ public class AdminRestController {
 	}
 	
 	
-		
-	
-	
-	
-	
-	
-	
 	
 	
 	@Operation(summary = "봉사삭제")
@@ -58,6 +76,7 @@ public class AdminRestController {
 	} // DELETE
 	
 	
+
 	
 	
 	@Operation(summary = "봉사 부분 업데이트") 
@@ -92,6 +111,9 @@ public class AdminRestController {
 	
 	
 	
+	/******************************* Pet ************************************/
+	
+	
 	@Operation(summary = "펫 삭제")	
 	@DeleteMapping("/{petNo}")
 	public ResponseEntity<Map> petDelete(@PathVariable(name = "petNo") Long petNo) throws Exception{
@@ -107,6 +129,11 @@ public class AdminRestController {
 	
 	
 	
+	
+	/******************************* Product ************************************/
+	
+	
+	
 	@Operation(summary = "상품 삭제 (관리자)")
 	@DeleteMapping("/{no}")
 	// delete
@@ -117,5 +144,5 @@ public class AdminRestController {
 		productService.deleteProduct(no);
 		return new ResponseEntity(httpHeaders, HttpStatus.OK);
 	}
-	*/
+	
 }
