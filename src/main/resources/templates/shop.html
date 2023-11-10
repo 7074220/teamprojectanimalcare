@@ -846,6 +846,7 @@
 												th:text="${product.productName}"
 												th:href="@{productDetail(productNo=${product.productNo})}">상품 이름</a>
 										</h4>
+										<h5 class="old_price" th:text="${'별점 : ' + product.productStarAvg}">$362.00</h5>
 										<p><a href="#" th:text="${product.productPetCategory}">펫 카테고리</a></p>
 										<div class="price_box">
 											<span class="current_price" th:text="${#numbers.formatInteger(product.productPrice, 3, 'COMMA') + '원'}">상품 가격</span>
