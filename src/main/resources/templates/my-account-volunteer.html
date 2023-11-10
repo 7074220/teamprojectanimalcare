@@ -189,9 +189,9 @@
                                 <li><a href="adoptByUserNo"  class="nav-link">입양</a></li>
 								<li><a href="volunteerByUserNo" class="nav-link">봉사</a></li>   
 								<li><a href="visitByUserNo" class="nav-link">견학</a></li>
-                                <li> <a th:if="${session.userName == '관리자'}" href="ordersList" class="nav-link">관리자
+                                <li> <a th:if="${session.userName == '어드민'}" href="ordersList" class="nav-link">관리자
 											전용주문목록</a></li>
-								<li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li>
+								<li> <a th:if="${session.userName != '어드민'}" href="orders" class="nav-link">주문목록</a></li>
                                 <li><a href="logout" class="nav-link">로그아웃</a></li>
                                 <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li>
 
@@ -213,7 +213,7 @@
                                                 <th>Date</th>
                                                 <th>Center</th>
                                                 <th>Status</th>    
-                                                <!--<th>관리자버튼</th>  관리자 전용 -->   
+                                                  
                                             </tr>
                                         </thead>
                                         <tbody>

@@ -106,7 +106,7 @@ function navigate() {
 			}
 			const responseJsonObject = ajaxRequest('POST','user',sendJsonObject);
 			
-			ajaxRequest('POST','user/login',sendJsonObject);
+			
 			
 			window.location.href = 'index';
 		}
