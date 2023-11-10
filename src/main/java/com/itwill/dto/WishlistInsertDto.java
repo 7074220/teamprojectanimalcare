@@ -20,10 +20,10 @@ public class WishlistInsertDto {
 	private Long wishNo;
 	private Long productNo;
 	private Long userNo;
+	private Integer status;
 	
 	public static Wish toEntity(WishlistInsertDto dto) {
 		Wish insertWishlist = Wish.builder()
-				.wishNo(dto.getWishNo())
 				.userinfo(Userinfo.builder().userNo(dto.getUserNo()).build())
 				.product(Product.builder().productNo(dto.getProductNo()).build())
 				.build();
@@ -32,7 +32,6 @@ public class WishlistInsertDto {
 	
 	public static WishlistInsertDto toDto(Wish wish) {
 		return WishlistInsertDto.builder()
-				.wishNo(wish.getWishNo())
 				.userNo(wish.getUserinfo().getUserNo())
 				.productNo(wish.getProduct().getProductNo())
 				.build();

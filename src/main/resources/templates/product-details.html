@@ -736,7 +736,7 @@
 
 									<div class=" product_d_action">
 										<ul>
-											<li><a href="#" title="Add to wishlist">
+											<li><a href="" title="Add to wishlist">
 													<button class="button" type="button" onclick="addToWish()">+ Add to
 														Wishlist</button>
 												</a></li>
@@ -779,7 +779,214 @@
 				</div>
 			</div>
 			<!-- 상품 디테일 끝 -->
+			<br>
+			<br>
+			<br>
+			<section class="product_area related_products">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="section_title">
+							<h2>관련 상품</h2>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<div class="product_carousel product_column5 owl-carousel">
 
+
+
+
+
+							<!-- 관련 상품 시작 -->
+
+
+							<article class="single_product" th:each="product:${products}">
+								<figure>
+									<div class="product_thumb">
+										<a class="primary_img" href="product-details.html"
+											th:href="@{productDetail(productNo=${product.productNo})}"><img src="#"
+												alt="" th:src="@{/image/product/} + ${product.getProductImage}"></a>
+										<!--  <a class="secondary_img" href="product-details.html"><img src="assets/img/product/product21.jpg" alt=""></a> -->
+										<!--  <div class="label_product">
+                                        <span class="label_sale">Sale</span>
+                                        <span class="label_new">New</span>
+                                    </div> -->
+										<!-- <div class="action_links">
+											<ul>
+												<li class="add_to_cart"><a href="cart.html" title="Add to cart"><span
+															class="lnr lnr-cart"></span></a></li>
+												<li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
+												<li class="wishlist"><a href="wishlist.html"
+														title="Add to Wishlist"><span class="lnr lnr-heart"></span></a>
+												</li>
+												<li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li>
+											</ul>
+										</div> -->
+									</div>
+									<figcaption class="product_content">
+										<h4 class="product_name"><a href="product-details.html"
+												th:text="${product.productName}">Quisque In Arcu</a></h4>
+										<p><a href="#" th:text="${product.productPetCategory}">Fruits</a></p>
+										<div class="price_box">
+											<span class="current_price" th:text="${product.productPrice}">$55.00</span>
+											<!-- <span class="old_price">$235.00</span> -->
+										</div>
+									</figcaption>
+								</figure>
+							</article>
+
+
+
+							<!-- 관련 상품 끝 -->
+
+
+
+							<!--  <article class="single_product">
+                            <figure>
+                                <div class="product_thumb">
+                                    <a class="primary_img" href="product-details.html"><img src="assets/img/product/product15.jpg" alt=""></a>
+                                    <a class="secondary_img" href="product-details.html"><img src="assets/img/product/product14.jpg" alt=""></a>
+                                    <div class="label_product">
+                                        <span class="label_sale">Sale</span>
+                                    </div>
+                                    <div class="action_links">
+                                        <ul>
+                                            <li class="add_to_cart"><a href="cart.html" title="Add to cart"><span class="lnr lnr-cart"></span></a></li>
+                                            <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
+                                             <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>  
+                                            <li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <figcaption class="product_content">
+                                    <h4 class="product_name"><a href="product-details.html">Cas Meque Metus</a></h4>
+                                    <p><a href="#">Fruits</a></p>
+                                    <div class="price_box"> 
+                                        <span class="current_price">$26.00</span>
+                                        <span class="old_price">$362.00</span>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </article>
+                        <article class="single_product">
+                            <figure>
+                                <div class="product_thumb">
+                                    <a class="primary_img" href="product-details.html"><img src="assets/img/product/product17.jpg" alt=""></a>
+                                    <a class="secondary_img" href="product-details.html"><img src="assets/img/product/product16.jpg" alt=""></a>
+                                    <div class="label_product">
+                                        <span class="label_sale">Sale</span>
+                                    </div>
+                                    <div class="action_links">
+                                        <ul>
+                                            <li class="add_to_cart"><a href="cart.html" title="Add to cart"><span class="lnr lnr-cart"></span></a></li>
+                                            <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
+                                             <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>  
+                                            <li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <figcaption class="product_content">
+                                    <h4 class="product_name"><a href="product-details.html">Aliquam Consequat</a></h4>
+                                    <p><a href="#">Fruits</a></p>
+                                    <div class="price_box"> 
+                                        <span class="current_price">$26.00</span>
+                                        <span class="old_price">$362.00</span>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </article>
+                        <article class="single_product">
+                            <figure>
+                                <div class="product_thumb">
+                                    <a class="primary_img" href="product-details.html"><img src="assets/img/product/product14.jpg" alt=""></a>
+                                    <a class="secondary_img" href="product-details.html"><img src="assets/img/product/product15.jpg" alt=""></a>
+                                    <div class="label_product">
+                                        <span class="label_sale">Sale</span>
+                                        <span class="label_new">New</span>
+                                    </div>
+                                    <div class="action_links">
+                                        <ul>
+                                            <li class="add_to_cart"><a href="cart.html" title="Add to cart"><span class="lnr lnr-cart"></span></a></li>
+                                            <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
+                                             <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>  
+                                            <li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <figcaption class="product_content">
+                                    <h4 class="product_name"><a href="product-details.html">Mauris Vel Tellus</a></h4>
+                                    <p><a href="#">Fruits</a></p>
+                                    <div class="price_box"> 
+                                        <span class="current_price">$48.00</span>
+                                        <span class="old_price">$257.00</span>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </article>
+                        <article class="single_product">
+                            <figure>
+                                <div class="product_thumb">
+                                    <a class="primary_img" href="product-details.html"><img src="assets/img/product/product16.jpg" alt=""></a>
+                                    <a class="secondary_img" href="product-details.html"><img src="assets/img/product/product17.jpg" alt=""></a>
+                                    <div class="label_product">
+                                        <span class="label_sale">Sale</span>
+                                    </div>
+                                    <div class="action_links">
+                                        <ul>
+                                            <li class="add_to_cart"><a href="cart.html" title="Add to cart"><span class="lnr lnr-cart"></span></a></li>
+                                            <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
+                                             <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>  
+                                            <li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <figcaption class="product_content">
+                                    <h4 class="product_name"><a href="product-details.html">Nunc Neque Eros</a></h4>
+                                    <p><a href="#">Fruits</a></p>
+                                    <div class="price_box"> 
+                                        <span class="current_price">$35.00</span>
+                                        <span class="old_price">$245.00</span>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </article>
+                        <article class="single_product">
+                            <figure>
+                                <div class="product_thumb">
+                                    <a class="primary_img" href="product-details.html"><img src="assets/img/product/product18.jpg" alt=""></a>
+                                    <a class="secondary_img" href="product-details.html"><img src="assets/img/product/product19.jpg" alt=""></a>
+                                    <div class="label_product">
+                                        <span class="label_sale">Sale</span>
+                                    </div>
+                                    <div class="action_links">
+                                        <ul>
+                                            <li class="add_to_cart"><a href="cart.html" title="Add to cart"><span class="lnr lnr-cart"></span></a></li>
+                                            <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
+                                             <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>  
+                                            <li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <figcaption class="product_content">
+                                    <h4 class="product_name"><a href="product-details.html">Proin Lectus Ipsum</a></h4>
+                                    <p><a href="#">Fruits</a></p>
+                                    <div class="price_box"> 
+                                        <span class="current_price">$26.00</span>
+                                        <span class="old_price">$362.00</span>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </article> -->
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 			<!--product info start-->
 			<div class="product_d_info mb-65">
 				<div class="container">
@@ -944,215 +1151,11 @@
 		<!--product info end-->
 
 		<!--product area start-->
-		<section class="product_area related_products">
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
-						<div class="section_title">
-							<h2>관련 상품</h2>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						<div class="product_carousel product_column5 owl-carousel">
-
-
-
-
-
-							<!-- 관련 상품 시작 -->
-
-
-							<article class="single_product" th:each="product:${products}">
-								<figure>
-									<div class="product_thumb">
-										<a class="primary_img" href="product-details.html"
-											th:href="@{productDetail(productNo=${product.productNo})}"><img src="#"
-												alt="" th:src="@{/image/product/} + ${product.getProductImage}"></a>
-										<!--  <a class="secondary_img" href="product-details.html"><img src="assets/img/product/product21.jpg" alt=""></a> -->
-										<!--  <div class="label_product">
-                                        <span class="label_sale">Sale</span>
-                                        <span class="label_new">New</span>
-                                    </div> -->
-										<div class="action_links">
-											<ul>
-												<li class="add_to_cart"><a href="cart.html" title="Add to cart"><span
-															class="lnr lnr-cart"></span></a></li>
-												<!-- <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li> -->
-												<li class="wishlist"><a href="wishlist.html"
-														title="Add to Wishlist"><span class="lnr lnr-heart"></span></a>
-												</li>
-												<!-- <li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li> -->
-											</ul>
-										</div>
-									</div>
-									<figcaption class="product_content">
-										<h4 class="product_name"><a href="product-details.html"
-												th:text="${product.productName}">Quisque In Arcu</a></h4>
-										<p><a href="#" th:text="${product.productPetCategory}">Fruits</a></p>
-										<div class="price_box">
-											<span class="current_price" th:text="${product.productPrice}">$55.00</span>
-											<!-- <span class="old_price">$235.00</span> -->
-										</div>
-									</figcaption>
-								</figure>
-							</article>
-
-
-
-							<!-- 관련 상품 끝 -->
-
-
-
-							<!--  <article class="single_product">
-                            <figure>
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="product-details.html"><img src="assets/img/product/product15.jpg" alt=""></a>
-                                    <a class="secondary_img" href="product-details.html"><img src="assets/img/product/product14.jpg" alt=""></a>
-                                    <div class="label_product">
-                                        <span class="label_sale">Sale</span>
-                                    </div>
-                                    <div class="action_links">
-                                        <ul>
-                                            <li class="add_to_cart"><a href="cart.html" title="Add to cart"><span class="lnr lnr-cart"></span></a></li>
-                                            <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
-                                             <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>  
-                                            <li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <figcaption class="product_content">
-                                    <h4 class="product_name"><a href="product-details.html">Cas Meque Metus</a></h4>
-                                    <p><a href="#">Fruits</a></p>
-                                    <div class="price_box"> 
-                                        <span class="current_price">$26.00</span>
-                                        <span class="old_price">$362.00</span>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </article>
-                        <article class="single_product">
-                            <figure>
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="product-details.html"><img src="assets/img/product/product17.jpg" alt=""></a>
-                                    <a class="secondary_img" href="product-details.html"><img src="assets/img/product/product16.jpg" alt=""></a>
-                                    <div class="label_product">
-                                        <span class="label_sale">Sale</span>
-                                    </div>
-                                    <div class="action_links">
-                                        <ul>
-                                            <li class="add_to_cart"><a href="cart.html" title="Add to cart"><span class="lnr lnr-cart"></span></a></li>
-                                            <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
-                                             <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>  
-                                            <li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <figcaption class="product_content">
-                                    <h4 class="product_name"><a href="product-details.html">Aliquam Consequat</a></h4>
-                                    <p><a href="#">Fruits</a></p>
-                                    <div class="price_box"> 
-                                        <span class="current_price">$26.00</span>
-                                        <span class="old_price">$362.00</span>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </article>
-                        <article class="single_product">
-                            <figure>
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="product-details.html"><img src="assets/img/product/product14.jpg" alt=""></a>
-                                    <a class="secondary_img" href="product-details.html"><img src="assets/img/product/product15.jpg" alt=""></a>
-                                    <div class="label_product">
-                                        <span class="label_sale">Sale</span>
-                                        <span class="label_new">New</span>
-                                    </div>
-                                    <div class="action_links">
-                                        <ul>
-                                            <li class="add_to_cart"><a href="cart.html" title="Add to cart"><span class="lnr lnr-cart"></span></a></li>
-                                            <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
-                                             <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>  
-                                            <li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <figcaption class="product_content">
-                                    <h4 class="product_name"><a href="product-details.html">Mauris Vel Tellus</a></h4>
-                                    <p><a href="#">Fruits</a></p>
-                                    <div class="price_box"> 
-                                        <span class="current_price">$48.00</span>
-                                        <span class="old_price">$257.00</span>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </article>
-                        <article class="single_product">
-                            <figure>
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="product-details.html"><img src="assets/img/product/product16.jpg" alt=""></a>
-                                    <a class="secondary_img" href="product-details.html"><img src="assets/img/product/product17.jpg" alt=""></a>
-                                    <div class="label_product">
-                                        <span class="label_sale">Sale</span>
-                                    </div>
-                                    <div class="action_links">
-                                        <ul>
-                                            <li class="add_to_cart"><a href="cart.html" title="Add to cart"><span class="lnr lnr-cart"></span></a></li>
-                                            <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
-                                             <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>  
-                                            <li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <figcaption class="product_content">
-                                    <h4 class="product_name"><a href="product-details.html">Nunc Neque Eros</a></h4>
-                                    <p><a href="#">Fruits</a></p>
-                                    <div class="price_box"> 
-                                        <span class="current_price">$35.00</span>
-                                        <span class="old_price">$245.00</span>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </article>
-                        <article class="single_product">
-                            <figure>
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="product-details.html"><img src="assets/img/product/product18.jpg" alt=""></a>
-                                    <a class="secondary_img" href="product-details.html"><img src="assets/img/product/product19.jpg" alt=""></a>
-                                    <div class="label_product">
-                                        <span class="label_sale">Sale</span>
-                                    </div>
-                                    <div class="action_links">
-                                        <ul>
-                                            <li class="add_to_cart"><a href="cart.html" title="Add to cart"><span class="lnr lnr-cart"></span></a></li>
-                                            <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
-                                             <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>  
-                                            <li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <figcaption class="product_content">
-                                    <h4 class="product_name"><a href="product-details.html">Proin Lectus Ipsum</a></h4>
-                                    <p><a href="#">Fruits</a></p>
-                                    <div class="price_box"> 
-                                        <span class="current_price">$26.00</span>
-                                        <span class="old_price">$362.00</span>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </article> -->
-
-
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+		
 		<!--product area end-->
 
 		<!--product area start-->
-		<section class="product_area upsell_products">
+<!-- 		<section class="product_area upsell_products">
 			<div class="container">
 				<div class="row">
 					<div class="col-12">
@@ -1384,12 +1387,27 @@
 					</div>
 				</div>
 			</div>
-		</section>
+		</section> -->
 		<!--product area end-->
 
 		<script type="text/javascript">
 
-
+			function ajaxRequest(method, url, sendJsonObject) {
+				let returnResultJsonObject={};
+				$.ajax({
+					async:false,
+					method: method,
+					url: url,
+					contentType: 'application/json;UTF-8',
+					data: JSON.stringify(sendJsonObject),
+					type: 'json',
+					success: function(resultJsonObject) {
+						returnResultJsonObject = resultJsonObject;
+					}
+				});
+				return returnResultJsonObject;
+			}
+				
 			function addCart() {
 				var url = window.location.href;
 				var productNo = url.substring(url.lastIndexOf("=") + 1);
@@ -1398,42 +1416,28 @@
 				window.location.href = "cart?productNo=" + productNo + "&productQty=" + productQty;
 			}
 
-			/*
 			 function addToWish() {
 				var url = window.location.href;
 				var productNo = url.substring(url.lastIndexOf("=") + 1);
+				let send={
+					productNo : productNo
+				}
+				let response = ajaxRequest('POST','wish',send);
+				
 				//var productQty = document.getElementById("productQty").value;
-				alert("위시리스트에 상품이 담겼습니다.");
-				window.location.href = "insertWish?productNo=" + productNo + "&productQty=" + 1;
+				
+				if (response.status == 1) {
+					alert("위시리스트에 상품이 이미 존재합니다.");
+				} else if (response.status == 2) {
+					alert("위시리스트에 상품이 담겼습니다.");
+					window.location.href = "wish?productNo=" + productNo + "&productQty=1";
+				}
+				
 			}
-			 */
+			 
 			
 			
-			function addToWish() {
-			    var url = window.location.href;
-			    var productNo = url.substring(url.lastIndexOf("=") + 1);
-
-			    // Ajax를 사용하여 서버의 컨트롤러에 요청 보내기
-			    $.ajax({
-			        type: "GET",
-			        url: "wish/checkWish",
-			        data: {
-			            productNo: productNo
-			        },
-			        success: function(response) {
-			            alert(response);
-			            if (response === "위시리스트에 상품이 담겼습니다.") {
-			                // 서버에서 응답이 '위시리스트에 상품이 담겼습니다.'일 때, insertWish 컨트롤러로 이동
-			                window.location.replace = "insertWish?productNo=" + productNo + "&productQty=1";
-			            } else {
-			            	alert("됐나");
-			            }
-			        },
-			        error: function(error) {
-			            console.error(error);
-			        }
-			    });
-			}
+			
 			
 
 
