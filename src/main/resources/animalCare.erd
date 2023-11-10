@@ -2218,7 +2218,7 @@
                         <supportSize>true</supportSize>
                         <type>12</type>
                       </columnType>
-                      <size>50</size>
+                      <size>4000</size>
                       <notNull>false</notNull>
                       <primaryKey>false</primaryKey>
                       <description></description>
