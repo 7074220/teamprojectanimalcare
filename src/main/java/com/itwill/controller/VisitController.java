@@ -1,7 +1,5 @@
 package com.itwill.controller;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -11,11 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.itwill.dto.VisitDto;
 import com.itwill.entity.Center;
 import com.itwill.entity.Userinfo;
 import com.itwill.entity.Visit;
@@ -24,7 +21,6 @@ import com.itwill.service.CenterService;
 import com.itwill.service.UserInfoService;
 import com.itwill.service.VisitService;
 
-import groovy.transform.AutoImplement;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -101,16 +97,33 @@ public class VisitController {
 		model.addAttribute("visitList", visitList);
 		return "my-account-visit";
 	}
-	@GetMapping("/visitUpdate")
-    public String getVolunteerPage(@RequestParam Long visitNo, @RequestParam Long centerNo, Model model) throws Exception{
+	
+	  @PutMapping("/update-visit")
+	    public String updateVolunteer(@ModelAttribute Visit visit, @RequestParam(value = "visitNo") Long visitNo, 
+	            HttpSession session, Model model) throws Exception {
+	        Long userNo = (Long) session.getAttribute("userNo");
+	        if (userNo != null) {
+	            Visit findVisit= visitService.findByVisitNo(visitNo);
 
-        Visit visit = visitService.findByVisitNo(visitNo);
-        Center center = centerService.findByCenterNo(centerNo);
-        
-        model.addAttribute("visit", visit);
-        model.addAttribute("visitNo", visitNo);
-        model.addAttribute("center", center);
+	           
+	            findVisit.setVisitDate(visit.getVisitDate());
+	            findVisit.setVisitTime(visit.getVisitTime());
 
-        return "visitUpdate";
-    }
+	            visitService.updateVisit(findVisit);
+	        }
+	        return "my-account-visit"; // 수정 실패 페이지로 이동
+	    }
+	  
+	  @GetMapping("/visitUpdate")
+	    public String getVisitPage(@RequestParam Long visitNo, @RequestParam Long centerNo, Model model) throws Exception{
+
+	        Visit visit = visitService.findByVisitNo(visitNo);
+	        Center center = centerService.findByCenterNo(centerNo);
+	        
+	        model.addAttribute("visit", visit);
+	        model.addAttribute("visitNo", visitNo);
+	        model.addAttribute("center", center);
+
+	        return "visitUpdate";
+	    }
 }

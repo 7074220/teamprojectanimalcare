@@ -9,17 +9,17 @@ export function user_login_form(responseJsonObject = {}) {
 
          <div class="customer_login">
             <div class="container">
-               <div class="row">
+               <div class="row" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
                   <!--login area start-->
                   <div class="col-lg-6 col-md-6">
                      <form name="f" id = "loginForm">
                      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-                     <div class="form-floating">
+                     <div class="form-floating" style="margin-bottom:10px;">
                         <label>Id</label>
                         <input type="email" class="form-control" id="loginUserId"
                            placeholder="name@example.com">
                      </div>
-                     <div class="form-floating">
+                     <div class="form-floating" style="margin-bottom:10px;">
                         <label>Password</label>
                         <input type="password" class="form-control" id="loginPassword"
                            placeholder="Password">
@@ -28,9 +28,9 @@ export function user_login_form(responseJsonObject = {}) {
                      <a></a>
                      <a></a>
                      <a></a>
-	  				<a class="navi-link" href="#/findUserInfo">아이디/비밀번호 찾기</a>
+	  				<a class="navi-link" href="#/findUserInfo" style="color:red;">아이디/비밀번호 찾기</a>
                      
-                     <button class="btn btn-success w-100 py-1" type="button" data-navigate="/login">Sign in</button>
+                     <button class="btn btn-success w-100 py-1" type="button" data-navigate="/login" style="margin-top:20px;">Sign in</button>
                      <!--<button type="button" data-navigate="/login">Sign in</button>-->
                   </div>
                   </form>
