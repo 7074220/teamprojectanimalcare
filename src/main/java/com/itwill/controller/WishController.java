@@ -120,7 +120,11 @@ public class WishController {
 			productNameDto.add(ProductNameDto.toDto(productName));
 		}
 		int wishCount = wishService.findAllWishByUserNo(userNo).size();
+		Wish wishProductCount = wishService.findByUserNoProductNo(userNo, productNo);
+		
 		session.setAttribute("wishCount", wishCount);
+		session.setAttribute("wishProductCount", wishProductCount);
+		
 		model.addAttribute("product", product);
 		model.addAttribute("products", productListDto);
 		model.addAttribute("productName", productNameDto);
