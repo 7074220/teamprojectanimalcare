@@ -67,7 +67,10 @@ public class WishRestController {
 			
 			wishlist.setUserinfo(userinfoService.findUserByNo(userNo));
 			wishlist.setProduct(productService.findByProductNo(dto.getProductNo()));
+			
 			wishService.insertWish(wishlist);
+			int wishCount = wishService.findAllWishByUserNo(userNo).size();
+			session.setAttribute("wishCount", wishCount);
 			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+wishlist);
 		}
 		
