@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itwill.dto.AdminUserListDto;
 import com.itwill.dto.PetDto;
 import com.itwill.dto.ProductInsertDto;
 import com.itwill.dto.ProductListDto;
@@ -59,15 +60,31 @@ public class AdminController {
 		/******************************* Userinfo ************************************/
 		
 		
+		@GetMapping(value = "/adminUserList")
 		// 관리자 --> 회원정보 리스트
-		@GetMapping(value = "/userList")
-		public String list(Model model) throws Exception {
-			List<Userinfo> userList = userInfoService.findUserList();
-			model.addAttribute("userList", userList);
-			return "userList";
+		// 번호, 아이디, 이름, 포인트, 성별, 주소, 연락처
+		public String adminUserList(Model model) throws Exception {
+			
+			List<AdminUserListDto> adminUserList = new ArrayList<>();
+			List<Userinfo> userList = new ArrayList<>();
+			
+			userList = userInfoService.findUserList();
+			
+			for (Userinfo userinfo : userList) {
+				adminUserList.add(AdminUserListDto.toDto(userinfo));
+			}
+			
+			model.addAttribute("adminUserList", adminUserList);
+			
+			return "admin-userinfo";
 		}
 		
 		
+		
+		
+		/*
+		 
+		  ~~~~~~~~~~~~~~~~~~~~ 팀장 이거 수정해달라 ~~~~~~~~~~~~~~~~~~~~~~
 		
 		// 관리자 --> 회원 탈퇴
 		@GetMapping("userDelete")
@@ -97,20 +114,21 @@ public class AdminController {
 			
 			return "index";
 		}
-		
+		*/
 		
 		
 		/******************************* Adopt ************************************/
 		
 		
+		@GetMapping("/adminAdoptList")
 		// 관리자 --> 입양신청 리스트
-		@GetMapping("/adoptList")
+		// 
 		public String adoptList(Model model) {
 			
 			List<Adopt> adoptList = adoptService.findAdoptList();
 			
-			model.addAttribute("adoptList", adoptList);
-			return "my-account";
+			model.addAttribute("adminAdoptList", adoptList);
+			return "admin-adopt";
 		}
 		
 		

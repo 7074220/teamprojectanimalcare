@@ -863,7 +863,8 @@
 										</select>
 										<div id="reviewContent">
 										<div class="reviews_wrapper" th:each="review:${reviewList}">
-											<h2 th:text="${review.boardDate}">roadthemes</h2>
+											<h2 th:text="${#dates.format(review.boardDate, 'yyyy-MM-dd HH:mm')}">roadthemes</h2>
+
 											<div class="reviews_comment_box">
 												<div class="comment_thmb">
 													<p><strong th:text="${review.userinfo.userName}">adm </strong></p>
@@ -898,7 +899,7 @@
 											</div>
 										</div>
 										</div>
-											 <div class="comment_title">
+									<!--		 <div class="comment_title">
                                         <h2>Add a review </h2>
                                         <p>Your email address will not be published.  Required fields are marked </p>
                                     </div>
@@ -931,7 +932,7 @@
                                             </div>
                                             <button type="submit">Submit</button>
                                          </form>   
-                                    </div>
+                                    </div>-->
 									</div>
 								</div>
 							</div>
@@ -1397,15 +1398,43 @@
 				window.location.href = "cart?productNo=" + productNo + "&productQty=" + productQty;
 			}
 
-			function addToWish() {
+			/*
+			 function addToWish() {
 				var url = window.location.href;
 				var productNo = url.substring(url.lastIndexOf("=") + 1);
 				//var productQty = document.getElementById("productQty").value;
-				alert("장바구니에 상품이 담겼습니다.");
+				alert("위시리스트에 상품이 담겼습니다.");
 				window.location.href = "insertWish?productNo=" + productNo + "&productQty=" + 1;
 			}
+			 */
+			
+			
+			function addToWish() {
+			    var url = window.location.href;
+			    var productNo = url.substring(url.lastIndexOf("=") + 1);
 
-
+			    // Ajax를 사용하여 서버의 컨트롤러에 요청 보내기
+			    $.ajax({
+			        type: "GET",
+			        url: "wish/checkWish",
+			        data: {
+			            productNo: productNo
+			        },
+			        success: function(response) {
+			            alert(response);
+			            if (response === "위시리스트에 상품이 담겼습니다.") {
+			                // 서버에서 응답이 '위시리스트에 상품이 담겼습니다.'일 때, insertWish 컨트롤러로 이동
+			                window.location.replace = "insertWish?productNo=" + productNo + "&productQty=1";
+			            } else {
+			            	alert("됐나");
+			            }
+			        },
+			        error: function(error) {
+			            console.error(error);
+			        }
+			    });
+			}
+			
 
 
 			/*

@@ -11,20 +11,20 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style type="text/css">
-#volunteerDate {
+#volunteerDate,#volunteerTime {
 	border: 1px solid black;
 	position: relative;
-	width: 100%;
+	width: 200px;
 	padding: 10px;
 	background-color: transparent;
-	border-radius: 8px;
 	text-align: center;
 	font-size: 100%;
 	margin-bottom: 20px;
 	
 }
 
-#volunteerDate::-webkit-calendar-picker-indicator {
+#volunteerDate::-webkit-calendar-picker-indicator,
+#volunteerTime::-webkit-calendar-picker-indicator {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -47,7 +47,8 @@
 </style>
 
 
-<script> // body 안에 있으면 적용 안됨...
+<!-- 당일 날짜 선택 불가. body 안에 있으면 적용 안됨 -->
+<script>
 //페이지 로드 시 실행
 window.onload = function() {
     var volunteerDate = document.getElementById('volunteerDate');
@@ -110,11 +111,11 @@ window.onload = function() {
 							
 							<!-- 센터 정보 -->
 							<h2>센터 정보</h2>
-							<p>센터 번호: <span th:text="${center.centerNo}">10</span></p>
+							<!-- <p>센터 번호: <span th:text="${center.centerNo}">10</span></p> -->
 							<p>센터 이름: <span th:text="${center.centerName}">10</span></p>
-							<p>전화번호: <span th:text="${center.centerPhoneNumber}">10</span></p>
-							<p>로컬: <span th:text="${center.centerLocal}">10</span></p>
-							<p>오픈/클로즈 시간: <span th:text="${center.centerOpenCloseTime}">10</span></p>
+							<p>전화 번호: <span th:text="${center.centerPhoneNumber}">10</span></p>
+							<p>지역: <span th:text="${center.centerLocal}">10</span></p>
+							<p>영업 시간: <span th:text="${center.centerOpenCloseTime}">10</span></p>
 							
 						</div>
 					</div>
@@ -130,21 +131,20 @@ window.onload = function() {
 								<input type="hidden" id="centerid" name="centerNo" th:value="${center.centerNo}" />
 								
 								<div>
-									<span>방문예약</span> 
+									<span>방문 예약</span> 
 									<!-- <input type="date" name="volunteerDate"> -->
 									<!--  th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" 이 코드 추가시 현재 날짜 보여줌 -->
 									<input type="date" name="volunteerDate"
-										id="volunteerDate" placeholder="날짜를 선택해주세요"  required="required" >  
-									
-						
-
+										id="volunteerDate" placeholder="날짜를 선택해주세요"  required="required" 
+										th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">  
 								</div>
+								
 								
 								<div>
 									<span>방문 시간</span>
 									
 									<!-- <input type="time" name="volunteerTime" > -->
-									<select name="volunteerTime" id="volunteerTime">
+									<select name="volunteerTime" id="volunteerTime" style="width: 200px; padding: 10px;">
 										<option value="09">09 AM</option>
 										<option value="10">10 AM</option>
 										<option value="11">11 AM</option>
@@ -154,12 +154,14 @@ window.onload = function() {
 										<option value="15">15 PM</option>
 										<option value="16">16 PM</option>
 										<option value="17">17 PM</option>
-										<option value="18">18 PM</option>
-									</select>																	
-								</div>
+										<option value="18">18 PM</option>										
+									</select>
+									
+									
+									</div>
 								
 								
-								<button type="submit" class="submit">submit</button>
+								<button type="submit" class="submit">신청</button>
 								<!-- <p class="form-messege"></p> -->
 								
 								
@@ -174,8 +176,10 @@ window.onload = function() {
 				</div>
 			</div>
 		</div>
-	
-<script> 
+
+
+
+<script>
 function ajaxRequest(method, url, sendJsonObject) {
 		let returnResultJsonObject={};
 		$.ajax({
@@ -192,7 +196,7 @@ function ajaxRequest(method, url, sendJsonObject) {
 		return returnResultJsonObject;
 	}
 
-//AJAX 요청. 봉사 신청시 회원, 비회원 확인
+//AJAX 요청
 $('.submit').on('click', function (event) {
     event.preventDefault();
     let centerNo = $('#centerid').val(); // 센터 번호를 정의
@@ -209,15 +213,13 @@ $('.submit').on('click', function (event) {
     let response = ajaxRequest('POST','volunteer/create-volunteer',sendJsonObject);
     if(response.userNo!=null){
     	alert('신청이 완료되었습니다.');
-    	window.location.href = 'volunteerByUserNo'; // 마이페이지-봉사 이동
+    	window.location.href = 'volunteerByUserNo'; // my-account 페이지로 이동
     }else{
     	alert('로그인이 필요합니다.');
-        window.location.href = 'index#/login_form'; // 로그인 페이지로 이동 수정하기
+        window.location.href = 'logout#/login_form'; // 로그인 페이지로 이동
     }
 });
 </script> 
-
-
 
 
 

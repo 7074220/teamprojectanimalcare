@@ -69,6 +69,11 @@ public class WishServiceImpl implements WishService {
 		return wishDao.countWishlist(userNo);
 	}
 
+	@Override
+	public boolean existsByUserinfo_UserNoAndProduct_ProductNo(Long userNo, Long productNo) {
+		return wishDao.existsByUserinfo_UserNoAndProduct_ProductNo(userNo, productNo);
+	}
+
 
 	
 }

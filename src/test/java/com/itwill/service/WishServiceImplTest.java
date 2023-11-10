@@ -1,6 +1,5 @@
 package com.itwill.service;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
@@ -79,6 +78,15 @@ class WishServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	void countWishlist() {
 		Integer count = wishService.countWishlist(14L);
 		System.out.println(count);
+	}
+	
+	@Test
+	@Disabled
+	@Transactional
+	@Rollback(false)
+	void existWish() {
+		Boolean tf = wishService.existsByUserinfo_UserNoAndProduct_ProductNo(19L, 1L);
+		System.out.println(tf);
 	}
 }
 
