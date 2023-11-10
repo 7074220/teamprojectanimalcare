@@ -17,27 +17,8 @@
 	<link rel="stylesheet" href="assets/css/plugins.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	
-	
-	<script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
-	<script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
-	
-	
-	<script defer type="text/javascript" src="assets/js/vendor/jquery.validate.js"></script>
-	<script defer src="assets/js/custom/userApp.js" type="module"></script>
-	<script defer src="assets/js/custom/productApp.js" type="module"></script>
-	<script defer src="assets/js/custom/reviewBoardApp.js" type="module"></script>
-	<script defer src="assets/js/custom/orderApp.js" type="module"></script>
-	
+	<style>
 
-</head>
-
-<body>
-
-
-
-    <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -115,6 +96,21 @@
         display: block !important;
       }
     </style>
+	
+	<script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
+	<script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
+	
+	
+	<script defer type="text/javascript" src="assets/js/vendor/jquery.validate.js"></script>
+	<script defer src="assets/js/custom/userApp.js" type="module"></script>
+	<script defer src="assets/js/custom/productApp.js" type="module"></script>
+	<script defer src="assets/js/custom/reviewBoardApp.js" type="module"></script>
+	<script defer src="assets/js/custom/orderApp.js" type="module"></script>
+</head>
+
+<body>
 	<!--header area start-->
 
 	<!--offcanvas menu area start-->
@@ -132,25 +128,6 @@
 					<div class="row">
 						<!--login area start-->
 						<div class="col-lg-6 col-md-6">
-							<!--<div class="account_form">
-                    <h2>로그인</h2>
-                    <form name="f" action="my-account.html" onsubmit="return validateLoginForm()">
-                        
-                        <p>   
-                            <label>아이디 <span>*</span></label>
-                            <input type="text" id="loginUserId">
-                         </p>
-                         <p>   
-                            <label>비밀번호 <span>*</span></label>
-                            <input type="password" id="loginPassword">
-                         </p>   
-                        <div class="login_submit">
-                           <a href="#"></a>
-                            <label for="remember">
-                                <input id="remember" type="checkbox">
-                                Remember me
-                            </label>
-                            <button type="button">로그인</button>-->
 							<form name="f" id="loginForm">
 							<h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 							<div class="form-floating">
@@ -198,7 +175,6 @@
 <script>
 	$('#loginForm').on('submit',function(e){
 		$('#loginForm').validate(
-			
 			{
 		rules: {
 			floatingInput: {
@@ -231,8 +207,6 @@
 					}
 				}
 			}
-		
-			
 		},
 		messages: {
 			floatingInput: {
@@ -248,11 +222,7 @@
 		errorClass: 'error',
 		validClass: 'valid'
 	}
-			
-			
 		);
-		
-		
 		e.preventDefault();
 		let floatingInput = $('#floatingInput').val();
 		let floatingPassword = $('#floatingPassword').val();
@@ -273,68 +243,6 @@
 			}
 		});
 	});
-	
-	$(document).ready(function(){
-		
-		$('#loginForm').validate(
-			
-			{
-		rules: {
-			userId: {
-				required: true,
-				email : true,
-				remote: {
-					url: 'user/idcheck',
-					type: 'GET',
-					data: {
-						userId: function() {
-							return !($('#floatingInput').val());
-						}
-					
-					}
-				}
-			},
-			password: {
-				required: true,
-				remote:{
-					url: 'user/passcheck',
-					type: 'GET',
-					data: {
-						userId: function() {
-							return !($('#floatingInput').val());
-						},
-						password:function(){
-							return $('#floatingPassword').val();
-						}
-					
-					}
-				}
-			}
-		
-			
-		},
-		messages: {
-			userId: {
-				required: '아이디를 입력하세요.',
-				remote: '존재하지 않는 아이디입니다.'
-			},
-			password: {
-				required: '패스워드를 입력하세요.',
-				remote:'비밀번호가 일치하지 않습니다.'
-			},
-			
-		},
-		errorClass: 'error',
-		validClass: 'valid'
-	}
-			
-			
-		);
-		
-		
-	});
-	
-	
 </script>
 </body>
 
