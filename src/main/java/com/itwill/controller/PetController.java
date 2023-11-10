@@ -60,10 +60,10 @@ UserInfoService userInfoService;
 		int pag = page.getPageNumber();
 		int size = page.getPageSize();
 		
-		Pageable pageable= PageRequest.of(pag+1,size);
+		Pageable pageable= PageRequest.of(pag,size);
 		List<PetDto> petDtoList = new ArrayList<>();
 		
-		Page<Pet> petList= petService.petFindAllPage(page);
+		Page<Pet> petList= petService.petFindAllPage(pageable);
 		for (Pet pet : petList) {
 			petDtoList.add(PetDto.toDto(pet));
 		}
