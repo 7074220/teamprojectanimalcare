@@ -5,13 +5,9 @@
 <head>
     <title>Safira - my account</title>
     <style>
-    .modal-dialog {
+        .modal-dialog {
         margin: auto;
         margin-top: 20vh; /* 회원탈퇴창 가운데 정도로 떨어트림 */
-    }
-    
-    #volunteerTable{
-    	width: 1000px;
     }
 
     </style>
@@ -193,9 +189,9 @@
                                 <li><a href="adoptByUserNo"  class="nav-link">입양</a></li>
 								<li><a href="volunteerByUserNo" class="nav-link">봉사</a></li>   
 								<li><a href="visitByUserNo" class="nav-link">견학</a></li>
-                                <li> <a th:if="${session.userName == '관리자'}" href="ordersList" class="nav-link">관리자
+                                <li> <a th:if="${session.userName == '어드민'}" href="ordersList" class="nav-link">관리자
 											전용주문목록</a></li>
-								<li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li>
+								<li> <a th:if="${session.userName != '어드민'}" href="orders" class="nav-link">주문목록</a></li>
                                 <li><a href="logout" class="nav-link">로그아웃</a></li>
                                 <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li>
 
@@ -208,7 +204,7 @@
                         
 		                 <!--<div class="tab-pane fade" id="volunteer">-->
                                 <h3>봉사</h3>
-                                <div class="table-responsive" id="volunteerTable">
+                                <div class="table-responsive">
                                     <table class="table">
                                         <thead>
                                             <tr>
@@ -217,30 +213,26 @@
                                                 <th>Date</th>
                                                 <th>Center</th>
                                                 <th>Status</th>    
-                                                <!-- <th>Delete</th> -->
-                                                <!-- <th>Update</th>  -->                                   
+                                                  
                                             </tr>
                                         </thead>
                                         <tbody>
 											
 											<tr th:each="volunteer, rowStat : ${volunteerList}">
+												<!-- <td th:text="${volunteer.volunteerNo}"></td> -->
+												<!-- <td th:text="${rowStat.index + 1}"></td> 오름차순임-->
 												<td th:text="${volunteerList.size() - rowStat.index}"></td>								
-												<td th:text="${volunteer.volunteerTime}"></td>																						
+												<td th:text="${volunteer.volunteerTime}"></td>
+												<!-- !!!!! <td th:text="${#strings.substring(volunteer.volunteerTime.toString(), 0, 2)}"></td> -->
+												
+												<!-- <td th:text="${volunteer.volunteerDate}"></td> -->
+												<!-- 시간전체를 잘라서 날짜만 나올수있게 yyyy-mm-dd -->
 												<!-- <td th:text="${#strings.substring(volunteer.volunteerDate.toString(), 0, 10)}"></td> -->
 												<td th:text="${#dates.format(volunteer.volunteerDate, 'yyyy-MM-dd')}"></td>
 												
-												<td th:text="${volunteer.Center.centerName}"></td>
+												<td th:text="${volunteer.center.centerName}"></td>
 												<td th:text="${volunteer.volunteerStatus}"><span class="success">봉사신청</span></td>
-												
-												<!-- <td>
-												<a th:href="@{'/update-volunteer?volunteerNo=' +${volunteer.volunteerNo} + '&centerNo='+ ${volunteer.Center.centerNo}}" >수정</a>								
-												<a th:href="@{'/volunteerUpdate?volunteerNo=' + ${volunteerNo} + '&centerNo=' + ${centerNo}}">수정</a>
-												<a th:href="@{/volunteerUpdate(volunteerNo=${volunteerNo}, centerNo=${centerNo})}">수정</a>
-												</td> -->
-												
-												<!-- <td> 삭제
-													<button type="submit" class="deleteBtn" th:id="'deleteBtn-' + ${volunteer.volunteerNo}">취소</button>
-												</td> -->																						
+											
 											</tr>
 
                                         </tbody>
@@ -288,89 +280,7 @@
     });
 
 </script> -->
-
-
-<!-- <script>
-	$('.deleteBtn').on('click', function(e) {
-		e.preventDefault();
-		let id = $(this).attr('id');
-		let no = id.split('-')[1];
-
-		if (isNaN(no)) {
-			alert('volunteerNo 가져오기실패')
-			return;
-		}
-
-		let sendJsonObject = {volunteerNo : no};
-		let $row = $(this).closest('tr');
-
-		$.ajax({
-			type : 'DELETE',
-			url : 'volunteer/' + no,
-			data : JSON.stringify(sendJsonObject),
-			contentType : 'application/json;UTF-8',
-			success : function(response) {
-				if (response && response.volunteerNo == null) {
-					alert('신청내역이 없음');
-				} else {
-					alert('예약취소가 완료되었습니다.');
-					$row.remove();
-					window.location.href = "volunteerByUserNo"
-				}
-			},
-			error : function() {
-				alert('취소 요청중 오류가 발생했습니다.');
-			}
-		});
-	});
-</script> -->
-
-<!-- <script>
-	$('.updateBtn').on('click', function(e) {
-		e.preventDefault();
-		let id = $(this).attr('id');
-		let no = id.split('-')[1];
-
-		if (isNaN(no)) {
-			alert('volunteerNo 가져오기실패')
-			return;
-		}
-
-		let sendJsonObject = {volunteerNo : no};
-		//let $row = $(this).closest('tr');
-		
-		let updateData = {
-			volunteerNo: volunteerNo, 
-			volunteerDate:volunteerDate,
-			volunteerTime:volunteerTime,
-			centerNo:centerNo
-		};
-		
-
-		$.ajax({
-			type : 'GET',
-			url : '/volunteerUpdate?volunteerNo=' + volunteerNo + '&centerNo=' + centerNo,
-			data : JSON.stringify(updateData),
-			contentType : 'application/json;UTF-8',
-			success : function(response) {
-				if (response && response.volunteerNo == null) {
-					alert('신청내역이 없음');
-				} else {
-					$('#centerNo').val(response.centerNo);
-					$('#volunteerNo').val(response.volunteerNo);
-					$('#volunteerDate').val(response.volunteerDate);
-					$('#volunteerTime').val(response.volunteerTime);
-				}
-			},
-			error : function() {
-				alert('수정 요청중 오류가 발생했습니다.');
-			}
-		});
-	});
-</script> -->
-
-
-	</th:block>		
+</th:block>		
 
 
 
