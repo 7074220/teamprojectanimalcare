@@ -778,10 +778,11 @@
 								<form class="select_option" action="#">
 
 									<select name="orderby" id="short" onchange="a()">
-										<option selected value="1">별점순</option>
-										<option value="2">낮은가격순</option>
-										<option value="3">높은가격순</option>
-										<option value="4">등록일순</option>
+										<option selected value="1">선택</option>
+										<option value="2">별점순</option>
+										<option value="3">낮은가격순</option>
+										<option value="4">높은가격순</option>
+										<option value="5">등록일순</option>
 										<!--    <option value="5">Sort by price: high to low</option>
                                     <option value="6">Product Name: Z</option> -->
 									</select>
@@ -1445,16 +1446,16 @@
 		        alert(location.substring(location.lastIndexOf("/")));
 		        
 		        switch (selectedValue) {
-		            case "1":
+		            case "2":
 		                redirectPath = "productStarDesc?path=" + path;
 		                break;
-		            case "2":
+		            case "3":
 		                redirectPath = "productPriceAsc?path=" + path;
 		                break;
-		            case "3":
+		            case "4":
 		                redirectPath = "productPriceDesc?path=" + path;
 		                break;
-		            case "4":
+		            case "5":
 		                redirectPath = "productDateDesc?path=" + path;
 		                break;
 		            default:

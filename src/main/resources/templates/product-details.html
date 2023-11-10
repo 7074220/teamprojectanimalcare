@@ -863,7 +863,8 @@
 										</select>
 										<div id="reviewContent">
 										<div class="reviews_wrapper" th:each="review:${reviewList}">
-											<h2 th:text="${review.boardDate}">roadthemes</h2>
+											<h2 th:text="${#dates.format(review.boardDate, 'yyyy-MM-dd HH:mm')}">roadthemes</h2>
+
 											<div class="reviews_comment_box">
 												<div class="comment_thmb">
 													<p><strong th:text="${review.userinfo.userName}">adm </strong></p>
@@ -898,7 +899,7 @@
 											</div>
 										</div>
 										</div>
-											 <div class="comment_title">
+									<!--		 <div class="comment_title">
                                         <h2>Add a review </h2>
                                         <p>Your email address will not be published.  Required fields are marked </p>
                                     </div>
@@ -931,7 +932,7 @@
                                             </div>
                                             <button type="submit">Submit</button>
                                          </form>   
-                                    </div>
+                                    </div>-->
 									</div>
 								</div>
 							</div>

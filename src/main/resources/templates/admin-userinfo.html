@@ -1,28 +1,29 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
-	   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-       layout:decorate="layout/layout(title='마이페이지')">
-<head>
-    <title>Safira - my account</title>
-    <style>
-        .modal-dialog {
-        margin: auto;
-        margin-top: 20vh; /* 회원탈퇴창 가운데 정도로 떨어트림 */
-    }
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='관리자 회원관리')">
 
-	#adoptTable{
-		width: 1000px;
+<head>
+	<title>Safira - my account</title>
+	<style>
+		.modal-dialog {
+			margin: auto;
+			margin-top: 20vh;
+			/* 회원탈퇴창 가운데 정도로 떨어트림 */
+			
 	}
-    </style>
+			#visitTable{
+		width: 1000px;
+		}
+	</style>
 
 </head>
 
 <body>
 
-   <!--header area start-->
-    <th:block layout:fragment="content">
-    <!--offcanvas menu area start-->
-    <!-- <div class="off_canvars_overlay">
+	<!--header area start-->
+	<th:block layout:fragment="content">
+		<!--offcanvas menu area start-->
+		<!-- <div class="off_canvars_overlay">
                 
     </div>
     <div class="offcanvas_menu">
@@ -154,13 +155,13 @@
             </div>
         </div>
     </div> -->
-    <!--offcanvas menu area end-->
-    
+		<!--offcanvas menu area end-->
 
-    <!--header area end-->
-    
-    <!--breadcrumbs area start-->
-    <!-- <div class="breadcrumbs_area">
+
+		<!--header area end-->
+
+		<!--breadcrumbs area start-->
+		<!-- <div class="breadcrumbs_area">
         <div class="container">   
             <div class="row">
                 <div class="col-12">
@@ -175,211 +176,157 @@
             </div>
         </div>         
     </div> -->
-    <!--breadcrumbs area end-->
-    
-    <!-- my account start  -->
-    <section class="main_content_area">
-        <div class="container">   
-            <div class="account_dashboard">
-                <div class="row">
-                    <div class="col-sm-12 col-md-3 col-lg-3">
-                        <!-- Nav tabs -->
-                        <div class="dashboard_tab_button">
-                            <ul role="tablist" class="nav flex-column dashboard-list">
-                                <li><a href="userinfo" class="nav-link">내정보</a></li>
-                                <li><a href="mypet"  class="nav-link">마이펫</a></li>
-                                <li><a href="couponList"  class="nav-link">쿠폰</a></li>
-                                <li><a href="adoptByUserNo"  class="nav-link">입양</a></li>
-								<li><a href="volunteerByUserNo"  class="nav-link">봉사</a></li>
-                                <li><a href="visitByUserNo" class="nav-link">견학</a></li>
-                                <li> <a th:if="${session.userName == '관리자'}" href="ordersList" class="nav-link">관리자
-											전용주문목록</a></li>
-								<li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li>
-                                <li><a href="logout" class="nav-link">로그아웃</a></li>
-                                <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li>
+		<!--breadcrumbs area end-->
 
-                            </ul>
-                        </div>    
-                    </div>
-                    <div class="col-sm-12 col-md-9 col-lg-9">
-                        <!-- Tab panes -->
-                        <div class="tab-content dashboard_content">
-                            
-                            
+		<!-- my account start  -->
+		<section class="main_content_area">
+			<div class="container">
+				<div class="account_dashboard">
+					<div class="row">
+						<div class="col-sm-12 col-md-3 col-lg-3">
+							<!-- Nav tabs -->
+							<div class="dashboard_tab_button">
+	                            <ul role="tablist" class="nav flex-column dashboard-list">
+	                                <li><a href="userinfo" class="nav-link">회원 관리</a></li>
+	                                <li><a href="mypet"  class="nav-link">상품 관리</a></li>
+	                                <li> <a th:if="${session.userName == '관리자'}" href="ordersList" class="nav-link">주문 관리</a></li>
+	                                <!-- <li><a href="couponList"  class="nav-link">주문 관리</a></li> -->
+	                                <li><a href="adoptByUserNo"  class="nav-link">입양 관리</a></li>
+									<li><a href="volunteerByUserNo"  class="nav-link">봉사 관리</a></li>
+	                                <!-- <li><a href="visitByUserNo" class="nav-link">견학</a></li> -->
+									<!-- <li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li> -->
+	                                <li><a href="logout" class="nav-link">로그아웃</a></li>
+	                                <!-- <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li> -->
+	                            </ul>
+                       		 </div>    
+							</div>
+						<div class="col-sm-12 col-md-9 col-lg-9">
+							<!-- Tab panes -->
+							<div class="tab-content dashboard_content">
 
-                            <!--<div class="tab-pane fade" id="adopt">-->
-                                <h3>입양</h3>
-                                <div class="table-responsive" id="adoptTable">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>시간</th>
-                                                <th>날짜</th>
-                                                <th>펫번호</th>
-                                                <th>처리상태</th>
-                                                <th>변경/취소</th>                 
-                                            </tr>
-                                        </thead>
+
+
+
+
+								<!--  <div class="tab-pane fade" id="visit">-->
+								<h3>회원관리</h3>
+								<div class="table-responsive" id="visitTable">
+									<table class="table" >
+										<thead>
+											<tr>
+												<th>번호</th>
+												<th>아이디</th>
+												<th>이름</th>
+												<th>포인트</th>
+												<th>성별</th>
+												<th>주소</th>
+												<th>연락처</th>
+											</tr>
+										</thead>
 										<tbody>
-											<tr th:each="adopt, rowStat : ${adoptList}">
-												<td th:text="${adoptList.size() - rowStat.index}"></td>
-												<td th:text="${adopt.adoptTime}"></td>
-												<td th:text="${#strings.substring(adopt.adoptDate.toString(),0,10)}"></span></td>
-												<td th:text="${adopt.Pet.petNo}"></td>
-												<td th:text="${adopt.adoptStatus}"><!--<span class="success">입양신청</span>--></td>
-												<td><!--<button type="submit" class="updateBtn" th:id="'updateBtn-' + ${adopt.adoptNo}">수정</button>-->
-													<a th:href="@{'/adoptUpdate?adoptNo=' + ${adopt.adoptNo} + '&petNo=' + ${adopt.Pet.petNo}}">수정</a>
-													<!--<a th:href="@{'/adoptUpdate?adoptNo=' + ${adopt.adoptNo} + '&userNo=' + ${adopt.Userinfo.userNo} + '&petNo=' + ${adopt.Pet.petNo}}">수정</a>-->
-													<button type="submit" class="deleteBtn" th:id="'deleteBtn-' + ${adopt.adoptNo}">취소</button>
+											<tr th:each="visit,visitLatest : ${visitList}">
+												<!-- <td th:text="${visit.visitNo}"></td>-->
+												<td th:text="${회원번호}"></td>
+												<td th:text="${아이디}"></td>
+												<td th:text="${이름}"></td>
+												<td th:text="${포인트}"></td>
+												<td th:text="${성별}"><span class="success">견학신청</span></td>
+												<td th:text="${주소}"></td>
+												<td th:text="${연락처}"></td>
+												<td>
+													<button type="submit" class="deleteBtn"
+														th:id="'deleteBtn-' + ${visit.visitNo}">취소</button>
 												</td>
 											</tr>
-											
 										</tbody>
-                                    </table>
-                                </div>
-                            <!--</div>-->
-                            
-                            <!--<div class="tab-pane fade" id="account-details">-->
-                          
-                           <!--   </div>-->
-                        </div>
-                    </div>
-                </div>
-            </div>  
-        </div>        	
-    </section>	
-    
-    <!-- my account end   --> 
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
-      <!--footer area start-->
-  
- 
-    <!--footer area end-->
 
+		<!-- my account end   -->
+
+		<!--footer area start-->
+
+
+		<!--footer area end-->
+
+
+		<!-- 회원탈퇴  -->
+		<!-- <script>
+    $('#confirmDelete').on('click', function() {
+        const selectedReason = $('input[name="reason"]:checked').val();
+        if (selectedReason) {
+            console.log("회원탈퇴 이유:", selectedReason);
+            // 여기에 탈퇴 로직 
+            // 탈퇴가 완료되면 index.html로 리다이렉트
+        window.location.href = 'index.html';
+        } else {
+            alert("탈퇴하시려면 이유를 선택해주세요.");
+        }
+    });
+</script>
+
+
+주문한 상품 리뷰쓰기 
 <script>
-	/*
-	function ajaxRequest(method, url, sendJsonObject) {
-			let returnResultJsonObject = {};
-			$.ajax({
-				async: true,
-				method: method,
-				url: url,
-				contentType: 'application/json;UTF-8',
-				data: JSON.stringify(sendJsonObject),
-				type: 'json',
-				success: function (resultJsonObject) {
-					returnResultJsonObject = resultJsonObject;
-				}
-			});
-			return returnResultJsonObject;
-		}
-	 */	
-	 
-	 $('.deleteBtn').on('click', function (e) {
-			e.preventDefault();
-			let id = $(this).attr('id'); // 버튼의 id를 가져옴
-			let no = id.split('-')[1]; // "deleteBtn-" 다음의 값을 추출함
 
-			if (isNaN(no)) {
-				alert('올바른 adoptNo 값을 가져오지 못했습니다.');
-				return; // adoptNo가 숫자가 아니면 요청을 중지
-			}
+    // 마이페이지 상품주문 완료된 항목에서 주문상세를 누르면 창이 뜨고 이 창에서만 리뷰를 쓸수 있음
+    // 주문 상세 링크를 클릭할 때 이벤트 핸들러
+    document.querySelector('.table').addEventListener('click', function(e) {
+    if (e.target.classList.contains('view')) {
+        e.preventDefault();
+        
+        // 주문상세 정보를 로드 하기
+        
 
-			let sendJsonObject = {adoptNo: no}; // 삭제 요청에 사용할 객체 생성
-			let $row = $(this).closest('tr');
-			// 삭제 요청을 서버로 보내는 코드
-			$.ajax({
-				type: 'DELETE',
-				url: 'adopt/' + no,
-				data: JSON.stringify(sendJsonObject),
-				contentType: 'application/json;UTF-8',
-				success: function (response) {
-					if (response && response.adoptNo == null) {
-						alert('신청내역이 존재하지 않습니다.');
-					} else {
-						alert('취소가 완료되었습니다.');
-						// 성공한 경우, 해당 <tr> 요소를 삭제
-						$row.remove();
-						window.location.href = "index";
-					}
-				},
-				error: function () {
-					alert('입양 취소 요청 중 오류가 발생했습니다.');
-				}
-			});
-		});
-	 	
-	 
-	 	
-	 	$('.updateBtn').on('click', function (e) {
+        // 모달창 표시
+        $('#orderDetailsModal').modal('show');
+    }
+    });
+
+</script> -->
+		<script>
+			$('.deleteBtn').on('click', function (e) {
 				e.preventDefault();
-				let id = $(this).attr('id'); // 버튼의 id를 가져옴
-				let no = id.split('-')[1]; // id 값을 정수로 변환
+				let id = $(this).attr('id');
+				let no = id.split('-')[1];
 
 				if (isNaN(no)) {
-					alert('올바른 adoptNo 값을 가져오지 못했습니다.');
-					return; // adoptNo가 숫자가 아니면 요청을 중지
+					alert('visitNo 가져오기실패')
+					return;
 				}
-				
-				let sendJsonObject = {adoptNo: no};
 
-				// 수정할 데이터를 이곳에서 준비, 예: input 요소에서 데이터를 가져올 수 있음
+				let sendJsonObject = {visitNo: no};
+				let $row = $(this).closest('tr');
 
-				let updateData = {
-					adoptNo: no, // 수정할 입양의 adoptNo
-					adoptDate:adoptDate,
-					adoptTime:adoptTime
-					// 필요한 다른 수정 사항들을 추가
-					// 예: adoptDate, adoptStatus, adoptTime
-				};
-
-				
 				$.ajax({
-					type: 'GET',
-					url:  '/adoptUpdate?adoptNo=' + adoptNo + '&petNo=' + petNo, // 서버의 엔드포인트 URL
-					data: JSON.stringify(updateData), // 수정 데이터를 JSON으로 변환
+					type: 'DELETE',
+					url: 'visit/' + no,
+					data: JSON.stringify(sendJsonObject),
 					contentType: 'application/json;UTF-8',
 					success: function (response) {
-						if (response && response.adoptNo == null) {
-							alert('입양 정보가 없습니다.');
+						if (response && response.visitNo == null) {
+							alert('신청내역이 없음');
 						} else {
-							 $('#adoptNo').val(response.adoptNo);
-							$('#adoptDate').val(response.adoptDate);
-							$('#adoptTime').val(response.adoptTime);
-							
-							
+							alert('예약취소가 완료되었습니다.');
+							$row.remove();
+							window.location.href = "index"
 						}
 					},
 					error: function () {
-						alert('입양 수정 중 오류가 발생했습니다.');
+						alert('취소 요청중 오류가 발생했습니다.');
 					}
 				});
 			});
 
-
-
-		
-	 	
-	 	
-	
-	
-</script>
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-</th:block>		
+		</script>
+	</th:block>
 
 
 
