@@ -96,36 +96,39 @@ public class VIsitRestController {
 		}
 	}
 	
-//	@Operation(summary = "견학리스트업데이트")
-//	@PutMapping("/{centerNo}")
-//	public ResponseEntity<VisitDto> updateVisit(@PathVariable(name = "centerNo") Long visitNo, @RequestBody VisitDto dto) {
-//		Visit existingVisit = visitService.findByVisitNo(visitNo);
-//		
-//		if (existingVisit != null) {
-//			if (dto.getCenterNo() != null) {
-//				 Center center = Center.builder().centerNo(dto.getCenterNo()).build();
-//				  existingVisit.setCenter(center);
-//			}
-//			if (dto.getUserNo() != null) {
-//				Userinfo userinfo = Userinfo.builder().userNo(dto.getUserNo()).build();
-//				  existingVisit.setUserinfo(userinfo);
-//			}
-//			if (dto.getVisitDate() != null) {
-//				existingVisit.setVisitDate(dto.getVisitDate());
-//			}
-//			if (dto.getVisitTime() != null) {
-//				existingVisit.setVisitTime(dto.getVisitTime());
-//			}
-//			if (dto.getVisitStatus() != null) {
-//				existingVisit.setVisitStatus(dto.getVisitStatus());
-//			}
-//			
-//			visitService.updateVisit(existingVisit);
-//			return new ResponseEntity<>(VisitDto.toDto(existingVisit),HttpStatus.OK);
-//		} else {
-//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//		}
-//	}
+	
+	@PutMapping("/update-visit")
+	public ResponseEntity<VisitDto> updateVisit(@RequestBody VisitDto dto, HttpServletRequest request, HttpSession session) throws Exception {
+	    
+		Long userNo =(Long)session.getAttribute("userNo");
+		dto.setUserNo(userNo);
+		
+		Visit findVisit = visitService.findByVisitNo(dto.getVisitNo());
+		Userinfo findUserinfo = userInfoService.findUserByNo(userNo);
+		
+		findVisit.setUserinfo(findUserinfo);
+		if(findVisit != null) {
+			if(dto.getVisitDate()!=null) {
+				findVisit.setVisitDate(dto.getVisitDate());
+			}
+			if(dto.getVisitTime()!=null) {
+				findVisit.setVisitTime(dto.getVisitTime());
+			}
+			
+			Visit updateVisit = visitService.updateVisit(findVisit);
+			VisitDto updatedVisitDto = VisitDto.toDto(updateVisit);
+			
+			HttpHeaders httpHeaders = new HttpHeaders();
+			httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+			
+			return new ResponseEntity<VisitDto>(updatedVisitDto, httpHeaders, HttpStatus.OK);
+		
+		} else {
+			        
+			return new ResponseEntity<VisitDto>(HttpStatus.NOT_FOUND);
+		}    
+	} 
+	
 	
 	
 //	@PutMapping("update-visit")

@@ -167,10 +167,10 @@ public class VolunteerRestController {
 	
 	
 	
-	
-	// 봉사 상태를 봉사 완료로 변경하고 포인트를 적립하는 메서드
+	/*
+	// 봉사완료 변경, 포인트 적립
 	@PostMapping("/complete-volunteer/{volunteerId}")
-	public ResponseEntity<String> completeVolunteer(@PathVariable Long volunteerId, HttpSession session) {
+	public ResponseEntity<String> completeVolunteer(@PathVariable Long volunteerNo, HttpSession session) {
 	    try {
 	        // 세션에서 관리자 정보 가져오기
 	        Userinfo adminUser = userInfoService.findUserByNo(59L);
@@ -183,7 +183,7 @@ public class VolunteerRestController {
 	            // 관리자로 로그인한 경우 아래 코드 실행
 
 	            // 봉사 정보 가져오기
-	            Optional<Volunteer> volunteerOptional = volunteerRepository.findById(volunteerId);
+	            Optional<Volunteer> volunteerOptional = volunteerRepository.findById(volunteerNo);
 
 	            if (volunteerOptional.isPresent()) {
 	                Volunteer volunteer = volunteerOptional.get();
@@ -201,20 +201,20 @@ public class VolunteerRestController {
 	                    session.setAttribute("userPoint", userPoint);
 	                }
 
-	                return ResponseEntity.ok("봉사 상태가 완료로 변경되었습니다. 포인트 3000이 지급되었습니다.");
+	                return ResponseEntity.ok("봉사상태 완료변경");
 	            } else {
 	                // 봉사 정보가 없는 경우에 대한 처리
-	                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("봉사 정보를 찾을 수 없습니다.");
+	                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("봉사정보 찾을 수 없음");
 	            }
 	        } else {
 	            // 관리자가 아닌 경우 또는 로그인하지 않은 경우에 대한 처리
-	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 필요");
 	        }
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류가 발생했습니다.");
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버오류 발생");
 	    }
 	}
-
+	*/
 	
 }
