@@ -11,7 +11,7 @@
 			/* 회원탈퇴창 가운데 정도로 떨어트림 */
 			
 	}
-			#visitTable{
+			#volunteerTable{
 		width: 1000px;
 		}
 	</style>
@@ -212,43 +212,54 @@
 
 
 								<!--  <div class="tab-pane fade" id="visit">-->
-								<h3>견학</h3>
-								<div class="table-responsive" id="visitTable">
-									<table class="table" >
-										<thead>
-											<tr>
-												<th>No</th>
-												<th>Time</th>
-												<th>Date</th>
-												<th>Center</th>
-												<th>Status</th>
-												<th>Delete</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr th:each="visit,visitLatest : ${visitList}">
-												<!-- <td th:text="${visit.visitNo}"></td>-->
-												<td th:text="${visitList.size() - visitLatest.index}"></td>
-												<td th:text="${visit.visitTime}"></td>
-												<td th:text="${#strings.substring(visit.visitDate.toString(), 0, 10)}">
-												</td>
-												<td th:text="${visit.Center.centerName}"></td>
-												<td th:text="${visit.visitStatus}"><span class="success">견학신청</span>
-												</td>
+								<h3>봉사목록</h3>
+								<div class="table-responsive" id="volunteerTable">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="volunteer_no">봉사번호</th>
+                                                <th class="volunteer_userNo" th:if="${session.userName == '관리자'}">사용자</th>
+                                                <th class="volunteer_date">봉사날짜</th>
+                                                <th class="volunteer_time">봉사시간</th>
+                                                <th class="volunteer_center">센터이름</th>
+                                                <th th:if="${session.userName == '관리자'}" class="volunteer_status">상태변경</th>    
+                                                <!--<th>Update</th>-->
+												<th th:if="${session.userName == '관리자'}" class="volunteer_remove">삭제</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+											
+											<tr th:each="volunteer: ${volunteerList}" th:if="volunteer!=null">
+												<td class="volunteer_no" th<!---->:text="${volunteer.volunteerNo}">volunteerNo</td>	
+												<td class="volunteer_userNo" th:if="${session.userName == '관리자'}" th:text="${volunteer.userinfo.userId}" >사용자 ID</td>						
+												<td class="volunteer_date" th:text="${#strings.substring(volunteer.volunteerDate.toString(), 0, 10)}"></td>
+													
+												<td class="volunteer_time">시간 <!-- 13PM, 14PM ... 18PM -->
+												    <span th:if="${volunteer.volunteerTime < 12}" th:text="${volunteer.volunteerTime + ' AM'}"></span>
+												    <span th:if="${volunteer.volunteerTime >= 12}" th:text="${volunteer.volunteerTime + ' PM'}"></span>
+												</td>											
+												<td class="volunteer_center" th:text="${volunteer.center.centerName}">센터이름</td>
+												
+												<!--<td th:text="${volunteer.volunteerStatus}"><span class="success">봉사신청</span></td>-->												
 												<td>
-													<button type="submit" class="deleteBtn"
-														th:id="'deleteBtn-' + ${visit.visitNo}">취소</button>
+												    <button th:if="${volunteer.volunteerStatus eq '봉사신청'}" class="btn btn-primary">봉사신청</button>
+												    <button th:if="${volunteer.volunteerStatus eq '봉사완료'}" class="btn btn-success">봉사완료</button>												    
 												</td>
+																					
+												<td>
+												<!--<a th:href="@{'/volunteerUpdate?volunteerNo=' + ${volunteer.volunteerNo} + '&amp;centerNo=' + ${volunteer.Center.centerNo}}">수정</a>-->																						
+												<button type="submit" class="deleteBtn" th:id="'deleteBtn-' + ${volunteer.volunteerNo} " >취소</button>		
+												</td>												
 											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>          	
+    </section>	
 
 
 		<!-- my account end   -->
