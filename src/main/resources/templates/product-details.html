@@ -679,12 +679,12 @@
 
 									<div class=" product_ratting">
 										<ul>
-											<li><a href="#"><i class="icon-star"></i></a></li>
-											<li><a href="#"><i class="icon-star"></i></a></li>
-											<li><a href="#"><i class="icon-star"></i></a></li>
-											<li><a href="#"><i class="icon-star"></i></a></li>
-											<li><a href="#"><i class="icon-star"></i></a></li>
-											<li class="review"><a href="#">(고객 리뷰)</a></li>
+											<li class="review"><a href="#">별점 : </a></li>
+											<li th:if="${product.productStarAvg >= 1}"><a href="#"><i class="icon-star"></i></a></li>
+											<li th:if="${product.productStarAvg >= 2}"><a href="#"><i class="icon-star"></i></a></li>
+											<li th:if="${product.productStarAvg >= 3}"><a href="#"><i class="icon-star"></i></a></li>
+											<li th:if="${product.productStarAvg >= 4}"><a href="#"><i class="icon-star"></i></a></li>
+											<li th:if="${product.productStarAvg >= 5}"><a href="#"><i class="icon-star"></i></a></li>
 										</ul>
 									</div>
 									<div class="price_box">
@@ -1542,6 +1542,19 @@
 				
 			}
 
+			
+			
+			
+			
+			
+			
+			
+			
+			 	
+			    
+			    
+			    
+			    
 		</script>
 
 
