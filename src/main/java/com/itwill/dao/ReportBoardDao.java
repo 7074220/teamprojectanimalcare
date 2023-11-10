@@ -33,6 +33,6 @@ public interface ReportBoardDao {
 	//게시판 전체 뽑기 
 	public List<ReportBoard> findAll();
 	
-	
+	public List<ReportBoard> findByBoardNoOrderByBoardNoDesc();
 	
 }

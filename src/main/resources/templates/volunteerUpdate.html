@@ -46,9 +46,7 @@
 }
 </style>
 
-
-<!-- 당일 날짜 선택 불가. body 안에 있으면 적용 안됨 -->
-<script>
+<script> <!-- 당일 날짜 선택 불가 -->
 //페이지 로드 시 실행
 window.onload = function() {
     var volunteerDate = document.getElementById('volunteerDate');
@@ -70,8 +68,8 @@ window.onload = function() {
     volunteerDate.setAttribute('min', minDateString);
 
     volunteerDate.removeAttribute('max');
-};
-</script> 
+}; 
+</script>
 
 
 </head>
@@ -112,14 +110,13 @@ window.onload = function() {
 							<!-- 센터 정보 -->
 							<h2>센터 정보</h2>
 							<!--<p>센터 번호: <span th:text="${center.centerNo}">10</span></p>-->
+							<p><img th:src="@{image/center/} + ${center.centerImage}"></p>
 							<p>센터 이름: <span th:text="${center.centerName}">10</span></p>
 							<p>전화 번호: <span th:text="${center.centerPhoneNumber}">10</span></p>
 							<p>지역: <span th:text="${center.centerLocal}">10</span></p>
-							<p>영업 시간: <span th:text="${center.centerOpenCloseTime}">10</span></p>
-							
+							<p>영업 시간: <span th:text="${center.centerOpenCloseTime}">10</span></p>							
 						</div>
-					</div>
-					
+					</div>					
 					
 					<div class="col-lg-6 col-md-6">
 						<div class="contact_message form">
@@ -132,13 +129,9 @@ window.onload = function() {
 								<input type="hidden" id="centerid" name="centerNo" th:value="${center.centerNo}" />
 								
 								<div>
-									<span>방문 예약</span> 
-									<!-- <input type="date" name="volunteerDate"> -->
-									<!--  th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" 이 코드 추가시 현재 날짜 보여줌 -->
-									<input type="date" name="volunteerDate"
-										id="volunteerDate" placeholder="날짜를 선택해주세요"  required="required" 
-										th:value="${#dates.format(volunteer.volunteerDate, 'yyyy-MM-dd')}">  
-									
+									<span>방문 예약</span> 									
+									<input type="date" name="volunteerDate" id="volunteerDate" placeholder="날짜를 선택해주세요" required="required" th:value="${selectedDate}">
+
 								</div>
 								
 								<div>
@@ -155,20 +148,16 @@ window.onload = function() {
 										<option value="15" th:selected="${volunteer.volunteerTime == 15}" >15 PM</option>
 										<option value="16" th:selected="${volunteer.volunteerTime == 16}" >16 PM</option>
 										<option value="17" th:selected="${volunteer.volunteerTime == 17}" >17 PM</option>
-										<option value="18" th:selected="${volunteer.volunteerTime == 18}" >18 PM</option>
-										
+										<option value="18" th:selected="${volunteer.volunteerTime == 18}" >18 PM</option>										
 									</select>																	
 								</div>
-								
-								
+																
 								<button type="submit" class="submit">수정</button>
 								<!-- <p class="form-messege"></p> -->
-								
-								
+															
 								<p th:text="${message}" class="success-message"></p>
 								<p th:text="${error}" class="error-message"></p>
-								
-								
+
 							</form>
 
 						</div>
@@ -178,7 +167,7 @@ window.onload = function() {
 		</div>
 
 
-<script>
+<script> 
 function ajaxRequest(method, url, sendJsonObject) {
 			let returnResultJsonObject={};
 			$.ajax({
@@ -208,8 +197,6 @@ $('.submit').on('click', function (event) {
         volunteerDate: volunteerDate,
         volunteerTime: volunteerTime,
     };
-	
-	
 	
 	let responseObject=ajaxRequest('PUT','volunteer/update-volunteer',sendJsonObject);
 	      	
