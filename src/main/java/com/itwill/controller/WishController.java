@@ -129,6 +129,7 @@ public class WishController {
 		model.addAttribute("products", productListDto);
 		model.addAttribute("productName", productNameDto);
 		
+		
 		return "product-details";
 	}
 	

@@ -27,6 +27,7 @@ public interface ReportBoardRepository extends JpaRepository<ReportBoard, Long>{
 	@Query(value="update reportboard set board_read_count=board_read_count+1 where board_no=?1",nativeQuery = true)
 	public void countReadCount(Long boardNo);
 	
-	
+	@Query(value="select * from reportboard order by board_no desc",nativeQuery = true)
+	public List<ReportBoard> findByBoardNoOrderByBoardNoDesc();
 
 }
