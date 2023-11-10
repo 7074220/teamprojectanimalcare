@@ -192,7 +192,7 @@
 	                                <li> <a th:if="${session.userName == '관리자'}" href="ordersList" class="nav-link">주문 관리</a></li>
 	                                <!-- <li><a href="couponList"  class="nav-link">주문 관리</a></li> -->
 	                                <li><a href="adoptByUserNo"  class="nav-link">입양 관리</a></li>
-									<li><a href="volunteerByUserNo"  class="nav-link">봉사 관리</a></li>
+									<li><a th:if="${session.userName == '관리자'}" href="volunteerList" class="nav-link">봉사 관리</a></li>
 	                                <!-- <li><a href="visitByUserNo" class="nav-link">견학</a></li> -->
 									<!-- <li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li> -->
 	                                <li><a href="logout" class="nav-link">로그아웃</a></li>
