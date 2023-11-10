@@ -1398,19 +1398,43 @@
 				window.location.href = "cart?productNo=" + productNo + "&productQty=" + productQty;
 			}
 
-			function addToWish() {
+			/*
+			 function addToWish() {
 				var url = window.location.href;
 				var productNo = url.substring(url.lastIndexOf("=") + 1);
 				//var productQty = document.getElementById("productQty").value;
-				if(url){
 				alert("위시리스트에 상품이 담겼습니다.");
 				window.location.href = "insertWish?productNo=" + productNo + "&productQty=" + 1;
-			} else {
-				alert("이미 존재하는 상품입니다.");
-				}
 			}
+			 */
+			
+			
+			function addToWish() {
+			    var url = window.location.href;
+			    var productNo = url.substring(url.lastIndexOf("=") + 1);
 
-
+			    // Ajax를 사용하여 서버의 컨트롤러에 요청 보내기
+			    $.ajax({
+			        type: "GET",
+			        url: "wish/checkWish",
+			        data: {
+			            productNo: productNo
+			        },
+			        success: function(response) {
+			            alert(response);
+			            if (response === "위시리스트에 상품이 담겼습니다.") {
+			                // 서버에서 응답이 '위시리스트에 상품이 담겼습니다.'일 때, insertWish 컨트롤러로 이동
+			                window.location.replace = "insertWish?productNo=" + productNo + "&productQty=1";
+			            } else {
+			            	alert("됐나");
+			            }
+			        },
+			        error: function(error) {
+			            console.error(error);
+			        }
+			    });
+			}
+			
 
 
 			/*
