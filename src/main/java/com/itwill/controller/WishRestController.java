@@ -43,7 +43,7 @@ public class WishRestController {
 	
 	
 	
-	/*
+	
 	@Operation(summary = "위시리스트 추가")
 	@PostMapping
 	// insert
@@ -61,7 +61,7 @@ public class WishRestController {
 		
 		return new ResponseEntity<WishlistInsertDto>(dto, httpHeaders, HttpStatus.CREATED);
 	}
-	*/
+	
 	
 	@Operation(summary = "위시리스트에 담긴 갯수 출력")
 	@GetMapping("/countWishlist/{userNo}")
