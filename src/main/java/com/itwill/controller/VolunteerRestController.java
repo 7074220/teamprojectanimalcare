@@ -110,6 +110,43 @@ public class VolunteerRestController {
 	} // DELETE
 	
 	
+	@Operation(summary = "봉사 수정") 
+	@PutMapping("/update-volunteer")
+	public ResponseEntity<VolunteerDto> updateVolunteer(@RequestBody VolunteerDto dto, HttpServletRequest request, HttpSession session) throws Exception {
+	    
+		Long userNo =(Long)session.getAttribute("userNo");
+		dto.setUserNo(userNo);
+		
+		Volunteer findVolunteer = volunteerService.findByVolunteerNo(dto.getVolunteerNo());
+		Userinfo findUserinfo = userInfoService.findUserByNo(userNo);
+		
+		findVolunteer.setUserinfo(findUserinfo);
+		if(findVolunteer != null) {
+			if(dto.getVolunteerDate()!=null) {
+				findVolunteer.setVolunteerDate(dto.getVolunteerDate());
+			}
+			if(dto.getVolunteerTime()!=null) {
+				findVolunteer.setVolunteerTime(dto.getVolunteerTime());
+			}
+			
+			Volunteer updateVolunteer = volunteerService.updateVolunteer(findVolunteer);
+			VolunteerDto updatedVolunteerDto = VolunteerDto.toDto(updateVolunteer);
+			
+			HttpHeaders httpHeaders = new HttpHeaders();
+			httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+			
+			return new ResponseEntity<VolunteerDto>(updatedVolunteerDto, httpHeaders, HttpStatus.OK);
+		
+		} else {
+			        
+			return new ResponseEntity<VolunteerDto>(HttpStatus.NOT_FOUND);
+		}    
+	} // UPDATE
+	
+	
+	
+	
+	/*
 	@Operation(summary = "봉사 부분 업데이트") 
 	@PutMapping("/{volunteerNo}")
 	public ResponseEntity<VolunteerDto> updateVolunteer(@PathVariable(name = "volunteerNo") Long volunteerNo, @RequestBody VolunteerDto dto) throws Exception {
@@ -137,7 +174,7 @@ public class VolunteerRestController {
 	        return new ResponseEntity<>(updatedVolunteerDto, HttpStatus.OK);
 	    }
 	} // UPDATE
-	
+	*/
 
 	
 
@@ -188,6 +225,9 @@ public class VolunteerRestController {
 	
 	
 	/*
+	
+	포인트 적립
+	
 	@Operation(summary = "포인트3000생성 (관리자)")
 	@PostMapping("/insertVolunteerPoint")
 	public ResponseEntity<VolunteerTimePointDto> insertVolunteerPoint( @RequestBody VolunteerTimePointDto timePointDto,

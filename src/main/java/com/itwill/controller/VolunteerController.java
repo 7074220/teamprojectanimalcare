@@ -42,8 +42,6 @@ public class VolunteerController {
 	private CenterService centerService;
 	@Autowired
 	private UserInfoService userInfoService;
-	@Autowired
-	private ReviewBoardService reviewBoardService;
 	
 	@GetMapping(value = "/volunteer", params = "centerNo") // 봉사 신청
 	public String insert_action(Model model, @RequestParam Long centerNo) throws Exception {				
@@ -78,7 +76,7 @@ public class VolunteerController {
 	        // 로그인이 필요한 경우 모델에 추가
 	        model.addAttribute("error", "로그인이 필요합니다.");
 	    }
-	    return "volunteerByUserNo"; // 뷰 페이지의 이름을 반환
+	    return "volunteerByUserNo"; // my-account 페이지로 이동
 	    
 	}
 	
@@ -122,9 +120,9 @@ public class VolunteerController {
 		return "my-account-volunteer"; //이게 원본임
 	}
 		
-	/*
+	
 	@GetMapping("/volunteerUpdate")
-    public String getVolunteerPage(@RequestParam Long volunteerNo, @RequestParam Long centerNo, Model model) {
+    public String getVolunteerPage(@RequestParam Long volunteerNo, @RequestParam Long centerNo, Model model) throws Exception{
 
         Volunteer volunteer = volunteerService.findByVolunteerNo(volunteerNo);
         Center center = centerService.findByCenterNo(centerNo);
@@ -152,7 +150,7 @@ public class VolunteerController {
         }
         return "my-account-volunteer"; // 수정 실패 페이지로 이동
     }
-	*/
+	
 
 	
 }

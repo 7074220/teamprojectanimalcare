@@ -11,20 +11,20 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style type="text/css">
-#volunteerDate {
+#volunteerDate,#volunteerTime {
 	border: 1px solid black;
 	position: relative;
-	width: 100%;
+	width: 200px;
 	padding: 10px;
 	background-color: transparent;
-	border-radius: 8px;
 	text-align: center;
 	font-size: 100%;
 	margin-bottom: 20px;
 	
 }
 
-#volunteerDate::-webkit-calendar-picker-indicator {
+#volunteerDate::-webkit-calendar-picker-indicator,
+#volunteerTime::-webkit-calendar-picker-indicator {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -131,11 +131,12 @@ window.onload = function() {
 								<input type="hidden" id="centerid" name="centerNo" th:value="${center.centerNo}" />
 								
 								<div>
-									<span>방문예약</span> 
+									<span>방문 예약</span> 
 									<!-- <input type="date" name="volunteerDate"> -->
 									<!--  th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" 이 코드 추가시 현재 날짜 보여줌 -->
 									<input type="date" name="volunteerDate"
-										id="volunteerDate" placeholder="날짜를 선택해주세요"  required="required" >  
+										id="volunteerDate" placeholder="날짜를 선택해주세요"  required="required" 
+										th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">  
 								</div>
 								
 								
@@ -143,7 +144,7 @@ window.onload = function() {
 									<span>방문 시간</span>
 									
 									<!-- <input type="time" name="volunteerTime" > -->
-									<select name="volunteerTime" id="volunteerTime">
+									<select name="volunteerTime" id="volunteerTime" style="width: 200px; padding: 10px;">
 										<option value="09">09 AM</option>
 										<option value="10">10 AM</option>
 										<option value="11">11 AM</option>
@@ -160,7 +161,7 @@ window.onload = function() {
 									</div>
 								
 								
-								<button type="submit" class="submit">submit</button>
+								<button type="submit" class="submit">신청</button>
 								<!-- <p class="form-messege"></p> -->
 								
 								
@@ -178,9 +179,7 @@ window.onload = function() {
 
 
 
-
 <script>
-
 function ajaxRequest(method, url, sendJsonObject) {
 		let returnResultJsonObject={};
 		$.ajax({
@@ -214,83 +213,12 @@ $('.submit').on('click', function (event) {
     let response = ajaxRequest('POST','volunteer/create-volunteer',sendJsonObject);
     if(response.userNo!=null){
     	alert('신청이 완료되었습니다.');
-    	window.location.href = 'volunteerByUserNo'; // 센터 페이지로 이동
+    	window.location.href = 'volunteerByUserNo'; // my-account 페이지로 이동
     }else{
     	alert('로그인이 필요합니다.');
         window.location.href = 'logout#/login_form'; // 로그인 페이지로 이동
     }
 });
-
-/*
-    $.ajax({
-        method: 'POST',
-        url: '/create-volunteer',
-        contentType: 'application/json; charset=UTF-8',
-        data: JSON.stringify(sendJsonObject),
-        dataType: 'json',
-        success: function (response) {
-        	 if (response === 1) {
-                 alert('로그인이 필요합니다.');
-                 window.location.href = '/index'; // 로그인 페이지로 이동
-             } else {
-                 alert('봉사신청이 완료되었습니다.');
-                 window.location.href = '/index'; // 센터 페이지로 이동
-             }
-         },
-        error: function (error) {
-            console.error('AJAX 요청 실패:', error);
-            alert('봉사신청 중 오류가 발생했습니다.');
-        }
-    });
-//AJAX 요청
-$('.submit').on('click', function (event) {
-    event.preventDefault();
-    let centerNo = $('#centerid').val(); // 센터 번호를 정의
-    let volunteerDate = $('#volunteerDate').val();
-    let volunteerTime = $('#volunteerTime').val();
-	
-    
-    let sendJsonObject = {
-        centerNo: centerNo,
-        volunteerDate: volunteerDate,
-        volunteerTime: volunteerTime,
-        volunteerStatus: "봉사신청"
-    };
-    let responseObject=ajaxRequest('POST','volunteer/create-volunteer',sendJsonObject);
-	
-    if(responseObject.status == null){
-		alert('로그인이 필요합니다.');
-		window.location.href = 'index';	// 로그인 창으로 이동
-	}else{
-		alert('봉사신청이 완료되었습니다.');
-		window.location.href = 'center-list'; // 센터 페이지로 이동
-	}
-    
-});   
-
-    // AJAX 요청
-     $.ajax({
-        method: 'POST',
-        url: '/volunteer/create-volunteer',
-        contentType: 'application/json; charset=UTF-8',
-        data: JSON.stringify(sendJsonObject),
-        dataType: 'json',
-        success: function(responseObject) {
-            if (responseObject.status === 401) {
-                alert('로그인이 필요합니다.');
-                window.location.href = '/index/login.html'; // 수정된 로그인 페이지 URL로 이동
-            } else if (responseObject.status === 201) {
-                alert('봉사 신청이 완료되었습니다.');
-            }
-        }, 
-         error: function(error) {
-            console.error('AJAX 요청 실패:', error);
-            alert('로그인이 필요합니다.');
-        }
-    });
-*/
-
-
 </script> 
 
 
