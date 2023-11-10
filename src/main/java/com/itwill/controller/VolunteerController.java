@@ -51,7 +51,7 @@ public class VolunteerController {
 	}
 	
 	
-	// 봉사버튼 클릭시 로그인이면 신청, 비회원이면 페이지 이동
+	// 회원일경우 봉사 신청가능, 비회원일경우 로그인 페이지로 이동.
 	@PostMapping("/create-volunteer")
 	public String createVolunteer(@RequestParam("volunteerDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date volunteerDate,
 	        @RequestParam("volunteerTime") int selectedHour, @RequestParam Long centerNo, HttpSession session, Model model) throws Exception {
@@ -117,10 +117,10 @@ public class VolunteerController {
 	    volunteerList.sort((v1, v2) -> v2.getVolunteerNo().compareTo(v1.getVolunteerNo()));
 	    model.addAttribute("userNo", userNo);
 		model.addAttribute("volunteerList", volunteerList);
-		return "my-account-volunteer"; //이게 원본임
+		return "my-account-volunteer";
 	}
 		
-	
+	// my-account 에서 수정
 	@GetMapping("/volunteerUpdate")
     public String getVolunteerPage(@RequestParam Long volunteerNo, @RequestParam Long centerNo, Model model) throws Exception{
 
@@ -129,12 +129,11 @@ public class VolunteerController {
         
         model.addAttribute("volunteer", volunteer);
         model.addAttribute("volunteerNo", volunteerNo);
-        model.addAttribute("center", center);
+        model.addAttribute("center", center);        
 
         return "volunteerUpdate";
     }
 	
-
     @PutMapping("/update-volunteer")
     public String updateVolunteer(@ModelAttribute Volunteer volunteer, @RequestParam(value = "volunteerNo") Long volunteerNo, 
             HttpSession session, Model model) throws Exception {
@@ -148,7 +147,7 @@ public class VolunteerController {
 
             volunteerService.updateVolunteer(findVolunteer);
         }
-        return "my-account-volunteer"; // 수정 실패 페이지로 이동
+        return "my-account-volunteer"; // 수정 완료시 이동
     }
 	
 

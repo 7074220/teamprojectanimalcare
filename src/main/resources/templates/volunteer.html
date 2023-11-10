@@ -70,8 +70,8 @@ window.onload = function() {
     volunteerDate.setAttribute('min', minDateString);
 
     volunteerDate.removeAttribute('max');
-};
-</script> 
+}; 
+</script>
 
 
 </head>
@@ -112,11 +112,11 @@ window.onload = function() {
 							<!-- 센터 정보 -->
 							<h2>센터 정보</h2>
 							<!-- <p>센터 번호: <span th:text="${center.centerNo}">10</span></p> -->
+							<p><img th:src="@{image/center/} + ${center.centerImage}"></p>
 							<p>센터 이름: <span th:text="${center.centerName}">10</span></p>
 							<p>전화 번호: <span th:text="${center.centerPhoneNumber}">10</span></p>
 							<p>지역: <span th:text="${center.centerLocal}">10</span></p>
-							<p>영업 시간: <span th:text="${center.centerOpenCloseTime}">10</span></p>
-							
+							<p>영업 시간: <span th:text="${center.centerOpenCloseTime}">10</span></p>							
 						</div>
 					</div>
 					
@@ -125,9 +125,7 @@ window.onload = function() {
 						<div class="contact_message form">
 							<h3 style="font-weight: bold">신청 양식</h3>
 							
-							<form th:action="@{/create-volunteer}" method="post" th:object="${volunteer}">
-							
-								
+							<form th:action="@{/create-volunteer}" method="post" th:object="${volunteer}">														
 								<input type="hidden" id="centerid" name="centerNo" th:value="${center.centerNo}" />
 								
 								<div>
@@ -141,8 +139,7 @@ window.onload = function() {
 								
 								
 								<div>
-									<span>방문 시간</span>
-									
+									<span>방문 시간</span>									
 									<!-- <input type="time" name="volunteerTime" > -->
 									<select name="volunteerTime" id="volunteerTime" style="width: 200px; padding: 10px;">
 										<option value="09">09 AM</option>
@@ -155,22 +152,16 @@ window.onload = function() {
 										<option value="16">16 PM</option>
 										<option value="17">17 PM</option>
 										<option value="18">18 PM</option>										
-									</select>
-									
-									
-									</div>
-								
-								
+									</select>																	
+								</div>
+																
 								<button type="submit" class="submit">신청</button>
 								<!-- <p class="form-messege"></p> -->
 								
-								
 								<p th:text="${message}" class="success-message"></p>
 								<p th:text="${error}" class="error-message"></p>
-								
-								
+																
 							</form>
-
 						</div>
 					</div>
 				</div>
@@ -179,7 +170,7 @@ window.onload = function() {
 
 
 
-<script>
+<script> // 회원일경우 봉사 신청가능, 비회원일경우 로그인 페이지로 이동.
 function ajaxRequest(method, url, sendJsonObject) {
 		let returnResultJsonObject={};
 		$.ajax({

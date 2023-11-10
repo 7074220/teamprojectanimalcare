@@ -109,7 +109,7 @@ public class VolunteerRestController {
 		}		
 	} // DELETE
 	
-	
+	// my-account 에서 수정 
 	@Operation(summary = "봉사 수정") 
 	@PutMapping("/update-volunteer")
 	public ResponseEntity<VolunteerDto> updateVolunteer(@RequestBody VolunteerDto dto, HttpServletRequest request, HttpSession session) throws Exception {
@@ -142,9 +142,6 @@ public class VolunteerRestController {
 			return new ResponseEntity<VolunteerDto>(HttpStatus.NOT_FOUND);
 		}    
 	} // UPDATE
-	
-	
-	
 	
 	/*
 	@Operation(summary = "봉사 부분 업데이트") 
