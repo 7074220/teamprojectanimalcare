@@ -28,6 +28,39 @@ class VolunteerDaoImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Autowired
 	CenterDao centerDao;
 	
+	@Test
+	@Transactional
+	@Rollback(false)
+	@Disabled
+	void findVolunteerListWithPoints() { // 봉사와 포인트 정보 함께 조회
+		Userinfo userinfo = new Userinfo();
+		userinfo.setUserNo(6L);
+		userinfo.setUserPoint(8000);
+		
+		Volunteer volunteer = new Volunteer();
+		volunteer.setVolunteerNo(62L);
+		
+		System.out.println(userinfo);
+		System.out.println(volunteer);		
+	}
+		
+	@Test
+	@Transactional
+	@Rollback(false)
+	@Disabled
+	void addPointsToVolunteer() {  // 봉사에 포인트 적립
+		Userinfo userinfo = new Userinfo();
+	    userinfo.setUserNo(6L);  // 유저 번호 설정
+	    userinfo.setUserPoint(2000);  // 초기 포인트 설정
+
+	    Volunteer volunteer = new Volunteer();
+	    volunteer.setVolunteerNo(62L);  // 봉사 번호
+	    volunteer.setVolunteerTime(3);  // 봉사 시간 고정
+	    volunteer.setUserinfo(userinfo);  // 유저 정보 설정
+
+	    volunteerDao.addPointsToVolunteer(62L, 3000);
+	}
+	
 
 	@Test
 	@Transactional

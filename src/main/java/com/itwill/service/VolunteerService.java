@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.itwill.dto.VolunteerTimePointDto;
 import com.itwill.entity.Volunteer;
 
 public interface VolunteerService {
@@ -21,4 +22,12 @@ public interface VolunteerService {
 	List<Volunteer> findVolunteertByUserNo(Long no); // userNo 로 목록 검색
 
 	
+	
+	List<Volunteer> findVolunteerListWithPoints(Volunteer volunteer, Integer userPoint);
+	// 봉사와 포인트 정보 함께 조회
+	
+	void addPointsToVolunteer(Long volunteerNo, Integer pointsToAdd);
+	// 봉사에 포인트 적립
+
+		
 }

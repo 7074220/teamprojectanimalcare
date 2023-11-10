@@ -51,6 +51,21 @@ public class VolunteerServiceImpl implements VolunteerService{
 	public List<Volunteer> findVolunteertByUserNo(Long no){
 		return volunteerRepository.findVolunteertByUserNo(no);
 	} // userNo로 봉사 목록
+
+	
+	
+	
+	@Override
+	public List<Volunteer> findVolunteerListWithPoints(Volunteer volunteer, Integer userPoint) {
+		// 봉사와 포인트 정보 함께 조회
+		return volunteerRepository.findVolunteerListWithPoints(userPoint);
+	}
+
+	@Override
+	public void addPointsToVolunteer(Long volunteerNo, Integer pointsToAdd) {
+		// 봉사에 포인트 적립
+		volunteerDao.addPointsToVolunteer(volunteerNo, pointsToAdd);		
+	}
 	
 	
 	
