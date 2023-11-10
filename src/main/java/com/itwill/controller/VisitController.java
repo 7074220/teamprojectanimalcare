@@ -19,6 +19,7 @@ import com.itwill.dto.VisitDto;
 import com.itwill.entity.Center;
 import com.itwill.entity.Userinfo;
 import com.itwill.entity.Visit;
+import com.itwill.entity.Volunteer;
 import com.itwill.service.CenterService;
 import com.itwill.service.UserInfoService;
 import com.itwill.service.VisitService;
@@ -36,39 +37,42 @@ public class VisitController {
 	@Autowired
 	private UserInfoService userInfoService;
 
-	// 견학신청
-	@GetMapping(value = "/visit", params = "centerNo")
-	public String apply(Model model, @RequestParam Long centerNo) {
+	@GetMapping(value = "/visit", params = "centerNo") // 
+	public String insert_action(Model model, @RequestParam Long centerNo) throws Exception {				
 		Center center = centerService.findByCenterNo(centerNo);
-	
 		model.addAttribute("center", center);
 		return "visit";
 	}
-
+	
+	
+	
 	@PostMapping("/create-visit")
-	public String createVisit(@RequestParam("visitDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date visitDate,
-			@RequestParam("visitTime") int selectedHour, @RequestParam Long centerNo, HttpSession session, Model model)
-			throws Exception {
+	public String createvisit(@RequestParam("visitDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date visitDate,
+	        @RequestParam("visitTime") int selectedHour, @RequestParam Long centerNo, HttpSession session, Model model) throws Exception {
+	    Long userNo = (Long) session.getAttribute("userNo");
+	    
+	    if (userNo != null) {
+	        Visit visit = new Visit();
+	        visit.setVisitDate(visitDate);
+	        visit.setVisitStatus("견학신청");
+	        visit.setVisitTime(selectedHour);
 
-		Long userNo = (Long)session.getAttribute("userNo");
-		if (userNo!=null) {
-			Visit visit = new Visit();
-			visit.setVisitDate(visitDate);
-			visit.setVisitTime(selectedHour);
-			visit.setVisitStatus("접수중");
+	        Center center = centerService.findByCenterNo(centerNo);
+	        Userinfo userinfo = userInfoService.findUserByNo(userNo);
+	        visit.setUserinfo(userinfo);
+	        visit.setCenter(center);
+	        
+	        model.addAttribute("userinfo", userinfo);
 
-			Center center = centerService.findByCenterNo(centerNo);
-			Userinfo userinfo = userInfoService.findUserByNo(userNo);
-			visit.setUserinfo(userinfo);
-			visit.setCenter(center);
-			visitService.createVisit(visit);
-			model.addAttribute("userinfo", userinfo);
-		} else {
-			throw new Exception("로그인을 해주세요.");
-		}
-		return "center-list"; // 뷰 페이지의 이름을 반환
+	        
+	        model.addAttribute("message", "신청이 완료되었습니다.");
+	    } else {
+	      
+	        model.addAttribute("error", "로그인이 필요합니다.");
+	    }
+	    return "visitByUserNo"; // my-account 페이지로 이동
+	    
 	}
-
 	/*
 	 * // 관리자 견학리스트 전체출력
 	 * 
@@ -97,5 +101,16 @@ public class VisitController {
 		model.addAttribute("visitList", visitList);
 		return "my-account-visit";
 	}
+	@GetMapping("/visitUpdate")
+    public String getVolunteerPage(@RequestParam Long visitNo, @RequestParam Long centerNo, Model model) throws Exception{
 
+        Visit visit = visitService.findByVisitNo(visitNo);
+        Center center = centerService.findByCenterNo(centerNo);
+        
+        model.addAttribute("visit", visit);
+        model.addAttribute("visitNo", visitNo);
+        model.addAttribute("center", center);
+
+        return "visitUpdate";
+    }
 }
