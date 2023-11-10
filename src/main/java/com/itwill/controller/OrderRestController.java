@@ -34,11 +34,16 @@ import com.itwill.entity.Cart;
 import com.itwill.entity.OrderItem;
 import com.itwill.entity.Orders;
 import com.itwill.entity.Orderstatus;
+import com.itwill.entity.ReviewBoard;
+import com.itwill.entity.Userinfo;
 import com.itwill.repository.OrderStatusRepository;
 import com.itwill.service.CartService;
+import com.itwill.service.CouponService;
 import com.itwill.service.OrderItemService;
 import com.itwill.service.OrderService;
 import com.itwill.service.OrderStatusService;
+import com.itwill.service.ReviewBoardService;
+import com.itwill.service.UserInfoService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.persistence.criteria.Order;
@@ -54,28 +59,96 @@ public class OrderRestController {
 	private CartService cartService;
 	@Autowired
 	OrderStatusRepository orderStatusRepository;
-
+	
+	@Autowired
+	private UserInfoService userInfoService;
+	
+	@Autowired
+	private CouponService couponService;
 
 	@Autowired
 	OrderItemService itemService;
 	
+	@Autowired
+	private ReviewBoardService reviewBoardService;
+	
 	
 	@Operation(summary = "주문 등록")
 	@Transactional
-	@PostMapping()
+	@PostMapping("/insert")
 	public ResponseEntity<OrdersDto> insert_Order(@RequestBody OrdersDto orderDto, HttpSession session)throws Exception {
-		
-		  if (session.getAttribute("userNo") == null) {
+		if (session.getAttribute("userNo") == null) {
 			  
 			  throw new
 		 Exception("로그인 하세요."); 
 		  
-		  }
-		  
-		  
+		}
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>맵핑");
 		 
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		Long userNo = (Long) session.getAttribute("userNo");
+		Userinfo userinfo = userInfoService.findUserByNo(userNo);
+		//Integer point=Integer.parseInt(orderDto.getUserPoint());
+		Orderstatus orderstatus= orderStatusRepository.findById(1L).get();
+		Long osNo = orderstatus.getOsNo();
+		List<Cart> carts = cartService.findAllCartByUserId(userNo);
+		
+		System.out.println(">>>>>>>>>>>>이게cart>>>"+carts);
+		Userinfo findUserinfo = userInfoService.findUserByNo(userNo);
+		Orders orders = Orders.builder().userinfo(findUserinfo).orderAddress(orderDto.getOrderAddress()).orderPrice(orderDto.getOrderPrice()).build();
+		if(carts.size()>1) {
+			orders.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+(carts.size()-1)+"개 상품");
+		}else {
+			orders.setOrderDesc(carts.get(0).getProduct().getProductName());
+		}
+		Orders newOrder = orderService.insertOrder(orders);
+		
+		//Orders insertOrder = orderService.insertOrder(OrdersDto.toEntity(orderDto));
+		List<OrderItemDto> orderItemDtos = new ArrayList<OrderItemDto>();
+		
+		for (Cart cart : carts) {
+			OrderItemDto tempOrderItemDto=OrderItemDto.builder().build();
+			tempOrderItemDto.setOiQty(cart.getCartQty());
+			tempOrderItemDto.setOrderNo(newOrder.getOrderNo());
+			tempOrderItemDto.setOrderstatus(orderstatus);
+			tempOrderItemDto.setProduct(cart.getProduct());
+			
+			itemService.insertOrderItem(OrderItemDto.toEntity(tempOrderItemDto));
+			orderItemDtos.add(tempOrderItemDto);
+			
+		}
+		OrdersDto orderdto = OrdersDto.toDto(newOrder);
+		orderdto.setOrderItemDtos(orderItemDtos);
+		orderdto.setUserNo(userNo);
+		
+			
+		if (orderDto.getUserPoint() != null && !orderDto.getUserPoint().isEmpty()) {
+		    userinfo.setUserPoint(userinfo.getUserPoint() - Integer.parseInt(orderDto.getUserPoint()));
+		}
+		
+		
+		/*
+		//insertOrder.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+(carts.size()-1)+"개 상품");
+		//insertOrder.setOrderAddress(orderDto.getOrderAddress());
+		
+		orderService.insertOrder(OrdersDto.toEntity(orderDto));
+		 */
+		//쿠폰 삭제 기능
+		if (orderDto.getCouponId() != null && !orderDto.getCouponId().isEmpty()) {
+	        couponService.Delete(Long.parseLong(orderDto.getCouponId()));
+	    }
+			
+		
+		cartService.deleteByUserId(userNo);
+		/*
+		  if (session.getAttribute("userNo") == null) {
+			  
+			  throw new
+		 Exception("로그인 하세요."); 
+		  }
+		  
 		Long userNo = (Long) session.getAttribute("userNo");
 		Orderstatus orderstatus= orderStatusRepository.findById(1L).get();
 		Long osNo = orderstatus.getOsNo();
@@ -103,7 +176,7 @@ public class OrderRestController {
 		
 		orderService.insertOrder(orderDto.toEntity(orderDto));
 		cartService.deleteByUserId(userNo);
-		
+		*/
 		return new ResponseEntity<OrdersDto>(orderDto,httpHeaders,HttpStatus.CREATED);
 	}
 	
@@ -111,19 +184,24 @@ public class OrderRestController {
 	
 	@Operation(summary = "주문 번호로 조회")
 	@GetMapping("/{orderNo}")
-	public ResponseEntity<OrdersDto> findOrdersByNo(@PathVariable(name = "orderNo") Long no, HttpSession session) throws Exception {
+	public OrdersDto findOrdersByNo(@PathVariable(name = "orderNo") Long no, HttpSession session) throws Exception {
 		if (session.getAttribute("userNo") == null) {
 			throw new Exception("로그인 하세요.");
 		}
 		
 		Orders findOrder = orderService.findOrderByNo(no);
+		
+		
+		
 		OrdersDto ordersDto = OrdersDto.toDto(findOrder);
 		
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		//HttpHeaders httpHeaders = new HttpHeaders();
+		//httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-		return new ResponseEntity<OrdersDto>(ordersDto, httpHeaders, HttpStatus.OK);
+		return ordersDto; //new ResponseEntity<OrdersDto>(ordersDto, httpHeaders, HttpStatus.OK);
 	}
+	
+	
 	
 	
 	/*
@@ -224,22 +302,26 @@ public class OrderRestController {
 	}
 	
 	
-	@Operation(summary = "날짜별 기간으로 조회(아이디별)")
-	@GetMapping("/{startDate}/{endDate}/{userNo}")
-	public ResponseEntity<List<OrdersDto>> findAllByOrdersByOrderDateByUserNo(@PathVariable(name = "startDate") Date startDate, @PathVariable(name = "endDate") Date endDate, @PathVariable(name = "userNo") Long userNo){
-		List<OrdersDto> ordersListDto = new ArrayList<OrdersDto>();
-		List<Orders> ordersList = orderService.findAllByOrdersByOrderDateByUserNo(startDate, endDate, userNo);
-		
-		for (Orders orders : ordersList) {
-			OrdersDto ordersDto = OrdersDto.toDto(orders);
-			ordersListDto.add(ordersDto);
-		}
-		
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		
-		return new ResponseEntity<List<OrdersDto>>(ordersListDto, httpHeaders, HttpStatus.OK);
-	}
+	/*
+	 * @Operation(summary = "날짜별 기간으로 조회(아이디별)")
+	 * 
+	 * @GetMapping("/{startDate}/{endDate}/{userNo}") public
+	 * ResponseEntity<List<OrdersDto>>
+	 * findAllByOrdersByOrderDateByUserNo(@PathVariable(name = "startDate") Date
+	 * startDate, @PathVariable(name = "endDate") Date endDate, @PathVariable(name =
+	 * "userNo") Long userNo){ List<OrdersDto> ordersListDto = new
+	 * ArrayList<OrdersDto>(); List<Orders> ordersList =
+	 * orderService.findAllByOrdersByOrderDateByUserNo(startDate, endDate, userNo);
+	 * 
+	 * for (Orders orders : ordersList) { OrdersDto ordersDto =
+	 * OrdersDto.toDto(orders); ordersListDto.add(ordersDto); }
+	 * 
+	 * HttpHeaders httpHeaders = new HttpHeaders(); httpHeaders.setContentType(new
+	 * MediaType("application", "json", Charset.forName("UTF-8")));
+	 * 
+	 * return new ResponseEntity<List<OrdersDto>>(ordersListDto, httpHeaders,
+	 * HttpStatus.OK); }
+	 */
 	
 	
 	@Operation(summary = "사용자 주문후 배송지변경")
@@ -264,6 +346,8 @@ public class OrderRestController {
 			throw new Exception("로그인 하세요.");
 		}
 		orderService.removeOrderByOrderNo(orderNo);
+		
+	
 	}
 
 	@Operation(summary = "오더아이템 리스트 확인")
@@ -272,11 +356,21 @@ public class OrderRestController {
 		if (session.getAttribute("userNo") == null) {
 			throw new Exception("로그인 하세요.");
 		}
+		
 		Orders orders=orderService.findOrderByNo(orderNo);
 		OrdersDto ordersDto = OrdersDto.toDto(orders);
 		
 		List<OrderItemDto> orderItemDtos = ordersDto.getOrderItemDtos();
-		
+		for (OrderItemDto orderItemDto : orderItemDtos) {
+			orderItemDto.setOrderStatusNo(3);
+			ReviewBoard reviewBoard = reviewBoardService.findByOrderItemNo(orderItemDto.getOiNo());
+			if(reviewBoard!=null) {
+				orderItemDto.setReviewStatus("수정/완료");
+			}else {
+				orderItemDto.setReviewStatus("리뷰쓰기");
+			}
+		}
+		System.out.println(">>>>>>>>>>"+orderItemDtos);
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		

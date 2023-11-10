@@ -2,13 +2,18 @@ package com.itwill.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.itwill.dao.ProductDao;
 import com.itwill.entity.Product;
 
 @Transactional
 public interface ProductService {
 
+	
 	Product insertProduct(Product product);
 	
 	Product updateProduct(Product updateProduct) throws Exception;
@@ -64,4 +69,15 @@ public interface ProductService {
 	List<Product> findAllByOrderByProductByPetCategoryByProductCategoryStarAvgDesc(String productPetCategory, String productCategory);
 	
 	List<Product> findAllByOrderByProductByPetCategoryByProductCategoryNoDesc(String productPetCategory, String productCategory);
+	
+	/**************** 페이징 **************/
+	public Page<Product> findProductList(Pageable pageable) throws Exception;
+	
+	/************** 페이징에 필요 ****************/
+	// 펫 카테고리가 일치하는 모든 상품 출력(query 사용 X)
+	Page<Product> findAllByProductPetCategory(String productPetCategory, Pageable pageable);
+	
+	// 상품의 카테고리와 펫 카테고리가 일치하는 모든 상품 출력(query 사용 X)
+	Page<Product> findAllByProductCategoryAndProductPetCategory(String productCategory, String productPetCategory,  Pageable pageable);
+	boolean existsById(Long productNo);
 }

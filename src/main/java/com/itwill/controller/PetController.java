@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -47,21 +52,45 @@ UserInfoService userInfoService;
 		
 		return "pet-list";
 	}
-	//펫 리스트
+	//펫 페이징 리스트
 	//center dto가져와야함.
-	@GetMapping("/petList")
-	public String petList(Model model) {
+	@GetMapping("/petListPage")
+	public String petList(Model model,@PageableDefault(page =0,size = 5,sort = "petNo",direction = Sort.Direction.DESC) Pageable page)throws Exception {
+		
+		int pag = page.getPageNumber();
+		int size = page.getPageSize();
+		
+		Pageable pageable= PageRequest.of(pag+1,size);
 		List<PetDto> petDtoList = new ArrayList<>();
-		List<Pet> petList = petService.petFindAll();
+		
+		Page<Pet> petList= petService.petFindAllPage(page);
 		for (Pet pet : petList) {
 			petDtoList.add(PetDto.toDto(pet));
 		}
 		
 		
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>"+petDtoList.get(0).getPetType());
-		model.addAttribute("petList",petDtoList);
+		model.addAttribute("petList",petList);
 		return "pet-list" ;
 	}
+	
+	//펫 리스트
+		//center dto가져와야함.
+		@GetMapping("/petList")
+		public String petList(Model model) {
+			List<PetDto> petDtoList = new ArrayList<>();
+			List<Pet> petList = petService.petFindAll();
+			for (Pet pet : petList) {
+				petDtoList.add(PetDto.toDto(pet));
+			}
+			
+			
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>"+petDtoList.get(0).getPetType());
+			model.addAttribute("petList",petDtoList);
+			return "pet-list" ;
+		}
+	
+	
+	
 	//펫 삭제 관리자만
 	@GetMapping("/deletepet")
 	public String delete_action(@RequestParam(name = "petNo") Long petNo,HttpSession session) throws Exception{

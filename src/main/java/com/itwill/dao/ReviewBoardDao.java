@@ -20,7 +20,7 @@ public interface ReviewBoardDao {
 
 	List<ReviewBoard> findByProductNo(Long productNo); // productNo로 reviewboard 리스트 검색
 
-	public List<ReviewBoard> findByStarAll(Long star); //선택한 별점으로 찾기
+	public List<ReviewBoard> findByStarAll(Double star); //선택한 별점으로 찾기
 
 	 public List<ReviewBoard> findByUserNo(Long no); // 선택된 userId 리뷰 리스트만 나오기
 
@@ -38,5 +38,12 @@ public interface ReviewBoardDao {
 
 	 public double calculateAverageStarRating(Long productNo);//상품 번호를 사용하여 별점 평균계산
 	
+	 public List<ReviewBoard> findAllByProductNoAndOrderByBoardStarDesc(Long productNo);//별점높음
+	
+	 public List<ReviewBoard> findByProductProductNoOrderByBoardDateDesc(Long productNo);//최신
+	 
+	 public List<ReviewBoard> findByUserNoAndProductNo(Long userNo, Long productNo);
+	 
+	 public ReviewBoard findByOrderItemNo(Long oiNo);
 	
 }		

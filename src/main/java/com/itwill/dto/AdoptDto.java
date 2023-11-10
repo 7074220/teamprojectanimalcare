@@ -1,8 +1,11 @@
 package com.itwill.dto;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.itwill.entity.Adopt;
 import com.itwill.entity.Pet;

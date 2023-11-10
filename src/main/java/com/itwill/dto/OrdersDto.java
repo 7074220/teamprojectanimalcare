@@ -13,6 +13,7 @@ import com.itwill.service.UserInfoService;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -30,22 +31,31 @@ public class OrdersDto {
 	private String orderAddress;
 	private String orderDesc;
 	private Long userNo;
+	
+	private String couponId;
+	private String userPoint;
+	
+	private Userinfo userinfo;
 	private List<OrderItemDto> orderItemDtos = new ArrayList();
-
+	private int reviewStatus;
 	
 	public static OrdersDto toDto(Orders entity) {
-		OrdersDto orderDto = OrdersDto.builder().orderNo(entity.getOrderNo()).orderDate(entity.getOrderDate())
-				.orderAddress(entity.getOrderAddress()).orderDesc(entity.getOrderDesc())
-				.userNo(entity.getUserinfo().getUserNo())
-				.orderPrice(entity.getOrderPrice())
-				.build();
+		OrdersDto orderDto = OrdersDto.builder()
+										.orderNo(entity.getOrderNo())
+										.orderDate(entity.getOrderDate())
+										.orderAddress(entity.getOrderAddress())
+										.orderDesc(entity.getOrderDesc())
+										.userNo(entity.getUserinfo().getUserNo())
+										.orderPrice(entity.getOrderPrice())
+										.build();
 
 		List<OrderItemDto> orderItemDtoList = new ArrayList<>();
 		for (OrderItem orderItem : entity.getOrderItems()) {
+			
 			orderItemDtoList.add(OrderItemDto.toDto(orderItem));
 		}
 		orderDto.setOrderItemDtos(orderItemDtoList);
-
+		
 		return orderDto;
 	}
 

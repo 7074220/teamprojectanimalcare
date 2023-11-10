@@ -22,7 +22,9 @@ import com.itwill.dto.CartDto;
 import com.itwill.dto.CartOverlapDto;
 import com.itwill.dto.CartTotalPriceDto;
 import com.itwill.entity.Cart;
+import com.itwill.entity.Userinfo;
 import com.itwill.service.CartService;
+import com.itwill.service.UserInfoService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpSession;
@@ -33,6 +35,8 @@ public class CartRestController {
 
 	@Autowired
 	private CartService cartService;
+	@Autowired
+	private UserInfoService userInfoService;
 
 	/*
 	@Operation(summary = "카트 추가")
@@ -63,8 +67,11 @@ public class CartRestController {
 		if (session.getAttribute("userNo") == null) {
 			throw new Exception("로그인 하세요.");
 		}
-		
+		Long loginUserNo=(Long) session.getAttribute("userNo");
+		Userinfo loginUserCheck = userInfoService.findUserByNo(loginUserNo);
 		cartService.deleteById(cartNo);
+		int cartCount = cartService.findAllCartByUserId(loginUserCheck.getUserNo()).size();
+		session.setAttribute("cartCount", cartCount);
 	}
 
 	
@@ -90,7 +97,7 @@ public class CartRestController {
 		if (session.getAttribute("userNo") == null) {
 			throw new Exception("로그인 하세요.");
 		}
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>업뎃");
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>업뎃"+cartNo);
 		Cart findCart = cartService.findByCartNo(cartNo);
 
 		findCart.setCartQty(dto.getCartQty());

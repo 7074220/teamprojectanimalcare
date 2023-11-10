@@ -64,6 +64,11 @@ public class WishServiceImpl implements WishService {
 		return selectedWish;
 	}
 
+	@Override
+	public Integer countWishlist(Long userNo) {
+		return wishDao.countWishlist(userNo);
+	}
+
 
 	
 }

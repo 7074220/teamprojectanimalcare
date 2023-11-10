@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,10 +26,16 @@ private PetDao petDao;
 	}
 	
 	@Override
-	public List<Pet> petFindAll() {
-		List<Pet> petList = petDao.petFindAll();
+	public Page<Pet> petFindAllPage(Pageable pageable){
+		Page<Pet> petList=petDao.petFindAllPage(pageable);
 		return petList;
 	}
+	
+	
+	 public List<Pet> petFindAll() { 
+		 List<Pet> petList = petDao.petFindAll();
+	  return petList; }
+	 
 
 	@Override
 	public Pet petSave(Pet pet) {

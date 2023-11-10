@@ -12,10 +12,10 @@ public interface ReplyBoardService {
 
 	public List<ReplyBoard> findByUserNo(Long userNo);
 
-	public List<ReplyBoard> findAllByOrderByReplyBoardNoAsc();
+	public List<ReplyBoard> findAllByOrderByReplyBoardNoAsc(Long boardNo);
 
 	// 댓글 삭제
-	public void deleteByReplyBoardStepBoardDepthBoardGroupNo(Integer ReplyBoardStep,Integer ReplyBoardDepth,Integer ReplyBoardGroupNo);
+	public void deleteByReplyBoardStepBoardDepthBoardGroupNo(Integer replyBoardStep,Integer replyBoardDepth,Integer replyBoardGroupNo);
 	
 	//댓글 하나 찾기 
 	public ReplyBoard findByReplyBoardNo(Long replyBoardNo);

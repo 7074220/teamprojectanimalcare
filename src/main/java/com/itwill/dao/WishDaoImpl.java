@@ -40,6 +40,11 @@ public class WishDaoImpl implements WishDao{
 		return wishRepository.findByUserNoProductNo(userNo, productNo);
 	}
 
+	@Override
+	public Integer countWishlist(Long userNo) {
+		return wishRepository.countWishlist(userNo);
+	}
+
 	
 
 

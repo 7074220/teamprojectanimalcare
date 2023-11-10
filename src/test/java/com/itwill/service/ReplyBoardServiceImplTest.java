@@ -24,11 +24,11 @@ class ReplyBoardServiceImplTest extends TeamprojectAnimalcareApplicationTest{
 	@Test
 	void insert() {
 		ReplyBoard replyBoard = ReplyBoard.builder()
-								.ReplyBoardContent("내용")
-								.ReplyBoardDepth(null)
-								.ReplyBoardGroupNo(null)
-								.ReplyBoardRegisterDate(null)
-								.ReplyBoardStep(null)
+								.replyBoardContent("내용")
+								.replyBoardDepth(null)
+								.replyBoardGroupNo(null)
+								.replyBoardRegisterDate(null)
+								.replyBoardStep(null)
 								.userinfo(null)
 								.reportBoard(null)
 								.build();

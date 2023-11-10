@@ -2,6 +2,7 @@ package com.itwill.service;
 
 import java.util.List;
 
+import com.itwill.dto.UserLoginActionDto;
 import com.itwill.dto.UserWriteActionDto;
 import com.itwill.entity.Userinfo;
 
@@ -48,5 +49,13 @@ public interface UserInfoService {
 	
 	/* 아이디 중복체크 */
 	boolean countByUserId(String userId) throws Exception;
+	
+	boolean checkPassword(UserLoginActionDto userLoginActionDto) throws Exception;
+	
+	
+	
+	public Userinfo findUserIdByNameAndPhoneNumber(String userName,String userPhoneNumber);
+	
+	public Userinfo findPasswordByUserIdPhoneNumber(String userId, String userPhoneNumber);
 	
 }

@@ -20,6 +20,15 @@ function createInitializer() {
 			Handlebars.registerHelper('toUpper', function(str) {
 				return str.toUpperCase();
 			});
+			Handlebars.registerHelper('starNumber',function(boardStar,star){
+				//assets/img/icon/star-icon2.png
+				//"assets/img/icon/star-icon.png"
+				if(boardStar >= star){
+					return "assets/img/icon/star-icon2.png";
+				}else{
+					return "assets/img/icon/star-icon.png"
+				}
+			});
 			Handlebars.registerHelper('ifCond', function(v1, operator, v2, options) {
 				switch (operator) {
 					case '==':
@@ -121,8 +130,57 @@ function createInitializer() {
 		errorClass: 'error',
 		validClass: 'valid'
 	});
+		},
+		validatorUserFindFormSetDefault: function() {
+			$.validator.setDefaults({
+		rules: {
+			name:{
+				required : true
+			},
+			phone:{
+				required : true,
+				phone : true
+			}
+		},
+		messages: {
+			name:{
+				required : '이름을 입력하세요'
+			},
+			phone: {
+				required: '전화번호를 입력하세요',
+				phone : '휴대폰 번호를 입력하세요.'
+			}
+		},
+		errorClass: 'error',
+		validClass: 'valid'
+	});
+		},
+		validatorUserPasswordFormSetDefault: function() {
+			$.validator.setDefaults({
+		rules: {
+			userId:{
+				required : true,
+				email : true
+			},
+			phone:{
+				required : true,
+				phone : true
+			}
+		},
+		messages: {
+			userId:{
+				required : '아이디를 입력하세요',
+				email : '이메일 형식으로 입력하세요'
+			},
+			phone: {
+				required: '전화번호를 입력하세요',
+				phone : '휴대폰 번호를 입력하세요.'
+			}
+		},
+		errorClass: 'error',
+		validClass: 'valid'
+	});
 		}
-		
 
 	}
 

@@ -11,6 +11,7 @@ import com.itwill.entity.Userinfo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -26,13 +27,15 @@ public class OrderItemDto {
 private Long oiNo;
 	
 	private Integer oiQty;
-	
-
-	
 	private Long orderNo;
-	private Long productNo;
-	private Long osNo;
 	
+	
+	@Default
+	private Orderstatus orderstatus=new Orderstatus();
+	@Default
+	private Product product=new Product();
+	private String reviewStatus;
+	private int orderStatusNo;
 //	private Long orderId;
 	
 	public static OrderItemDto toDto(OrderItem entity) {
@@ -40,8 +43,8 @@ private Long oiNo;
 									.oiNo(entity.getOiNo())
 									.oiQty(entity.getOiQty())
 									.orderNo(entity.getOrders().getOrderNo())
-									.productNo(entity.getProduct().getProductNo())
-									.osNo(entity.getOrderStatus().getOsNo())
+									.product(entity.getProduct())
+									.orderstatus(entity.getOrderStatus())
 								 .build();
 		
 		return orderItemDto;
@@ -52,8 +55,8 @@ private Long oiNo;
 									.oiNo(dto.getOiNo())
 									.oiQty(dto.getOiQty())
 									.orders(Orders.builder().orderNo(dto.getOrderNo()).build())
-									.orderStatus(Orderstatus.builder().osNo(dto.getOsNo()).build())
-									.product(Product.builder().productNo(dto.getProductNo()).build())
+									.orderStatus(dto.getOrderstatus())
+									.product(dto.getProduct())
 								 .build();
 		
 		return orderItem;

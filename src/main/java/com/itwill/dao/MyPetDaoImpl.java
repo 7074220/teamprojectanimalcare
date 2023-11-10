@@ -49,8 +49,8 @@ public class MyPetDaoImpl implements MyPetDao {
 	}
 
 	@Override
-	public void deleteMypetByUserNo(Long userNo, Long mypetNo) {
-		myPetRepository.deleteMypetByUserNo(userNo, mypetNo);
+	public void deleteMypetByUserNo(Long mypetNo) {
+		myPetRepository.deleteMypetByUserNo(mypetNo);
 	}
 	
 	@Override

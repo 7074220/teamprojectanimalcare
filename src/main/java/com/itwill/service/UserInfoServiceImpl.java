@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.dao.UserInfoDao;
+import com.itwill.dto.UserLoginActionDto;
 import com.itwill.entity.Userinfo;
 import com.itwill.exception.ExistedUserException;
 import com.itwill.exception.PasswordMismatchException;
@@ -95,6 +96,37 @@ public class UserInfoServiceImpl implements UserInfoService{
 		}else {
 			return false;
 		}
+	}
+	
+	// 아이디 찾기
+	@Override
+	public Userinfo findUserIdByNameAndPhoneNumber(String userName, String userPhoneNumber) {
+		Userinfo userinfo = userInfoDao.findUserIdByNameAndPhoneNumber(userName, userPhoneNumber);
+		if(userinfo==null) {
+			userinfo = Userinfo.builder().userId("").build();
+		}
+		return userinfo;
+	}
+	
+	// 비밀번호 찾기
+	@Override
+	public Userinfo findPasswordByUserIdPhoneNumber(String userId, String userPhoneNumber) {
+		Userinfo userPassword= userInfoDao.findPasswordByUserIdPhoneNumber(userId, userPhoneNumber);
+		if(userPassword==null) {
+			Userinfo.builder().userPassword("").build();
+		}
+		return userPassword;
+	}
+	@Override
+	public boolean checkPassword(UserLoginActionDto userLoginActionDto) {
+	  Userinfo userinfo =userInfoDao.findByUserId( userLoginActionDto.getUserId());
+	  if(userinfo.getUserPassword().equals(userLoginActionDto.getUserPassword())) {
+		  return true;
+	  }else {
+		  
+		  return false;
+	  }
+	  
 	}
 	
 }

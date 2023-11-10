@@ -40,7 +40,7 @@ public class ReviewBoardDaoImpl implements ReviewBoardDao {
 	}
 
 	@Override
-	public List<ReviewBoard> findByStarAll(Long star) {
+	public List<ReviewBoard> findByStarAll(Double star) {
 		return reviewBoardRepository.findAllByBoardStar(star);
 	}
 
@@ -105,6 +105,28 @@ public class ReviewBoardDaoImpl implements ReviewBoardDao {
 	public double calculateAverageStarRating(Long productNo) {
 		//상품 번호를 사용하여 별점 평균계산
 		return reviewBoardRepository.calculateAverageStarRating(productNo);
+	}
+
+	@Override
+	public List<ReviewBoard> findAllByProductNoAndOrderByBoardStarDesc(Long productNo) {
+		// 별점높음
+		return reviewBoardRepository.findByProductProductNoOrderByBoardStarDesc(productNo);
+	}
+
+	@Override
+	public List<ReviewBoard> findByProductProductNoOrderByBoardDateDesc(Long productNo) {
+		// 최신
+		return reviewBoardRepository.findByProductProductNoOrderByBoardDateDesc(productNo);
+	}
+
+	@Override
+	public List<ReviewBoard> findByUserNoAndProductNo(Long userNo, Long productNo) {
+		return reviewBoardRepository.findByUserNoAndProductNo(userNo, productNo);
+	}
+
+	@Override
+	public ReviewBoard findByOrderItemNo(Long oiNo) {
+		return reviewBoardRepository.findByOrderItemNo(oiNo);
 	}
 
 }

@@ -45,13 +45,13 @@ public class Adopt {
 	 * N:1
 	 */
 	@Builder.Default
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_no")
 	@ToString.Exclude
 	private Userinfo userinfo = new Userinfo();
 
 	@Builder.Default
-	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@ToString.Exclude
 	@JoinColumn(name = "pet_no")
 	private Pet pet = new Pet();
