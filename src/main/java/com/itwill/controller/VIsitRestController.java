@@ -47,20 +47,20 @@ public class VIsitRestController {
 	private UserInfoService userInfoService;
 	
 		@Operation(summary = "견학신청")
-		@PostMapping("/create-VisitDto")
+		@PostMapping("/create-Visit")
 		public ResponseEntity<VisitDto> insertVolunteer(@RequestBody VisitDto dto, HttpSession session) throws Exception {
 	        Long userNo = (Long) session.getAttribute("userNo");
 	        
-	        Integer status = 0;
-	        if (userNo == null) {
-	            // 로그인하지 않은 사용자에 대한 처리
-	        	status = 1;
-	        	return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+	        System.out.println(">>>>>>>>>>>>>>>유저번호:"+userNo);
+	        if (userNo==null) {
+	            
+	        	throw new Exception("로그인 해주세요");
 	        }
 	        
 	        dto.setUserNo(userNo);
 	        Visit visit = VisitDto.toEntity(dto);
-	        visitService.createVisit(visit);        
+	        visitService.createVisit(visit); 
+	        
 	        HttpHeaders httpHeaders = new HttpHeaders();
 			httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 			return new ResponseEntity<VisitDto>(dto, httpHeaders, HttpStatus.CREATED);
