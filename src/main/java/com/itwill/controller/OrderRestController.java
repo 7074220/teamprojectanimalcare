@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.CartDto;
 import com.itwill.dto.OrderItemDto;
+import com.itwill.dto.OrderItemListResponse;
+import com.itwill.dto.OrderStatusDto;
 import com.itwill.dto.OrderUpdateDto;
 import com.itwill.dto.OrdersDto;
 import com.itwill.dto.ProductListDto;
@@ -349,20 +351,24 @@ public class OrderRestController {
 		
 	
 	}
-
 	@Operation(summary = "오더아이템 리스트 확인")
 	@GetMapping("/orderItemList/{orderNo}")
-	public ResponseEntity<List<OrderItemDto>> viewOrderItem(@PathVariable(name ="orderNo" ) Long orderNo,HttpSession session) throws Exception{
+	public ResponseEntity<OrderItemListResponse> viewOrderItem(@PathVariable(name ="orderNo" ) Long orderNo,HttpSession session) throws Exception{
 		if (session.getAttribute("userNo") == null) {
 			throw new Exception("로그인 하세요.");
 		}
 		
+		
+		List<Orderstatus> orderstatusList=orderStatusRepository.findAll();
+		List<OrderStatusDto> orderStatusDtoList=new ArrayList<>();
+		for (Orderstatus orderstatus : orderstatusList) {
+			orderStatusDtoList.add(OrderStatusDto.toDto(orderstatus));
+		}
 		Orders orders=orderService.findOrderByNo(orderNo);
 		OrdersDto ordersDto = OrdersDto.toDto(orders);
 		
 		List<OrderItemDto> orderItemDtos = ordersDto.getOrderItemDtos();
 		for (OrderItemDto orderItemDto : orderItemDtos) {
-			orderItemDto.setOrderStatusNo(3);
 			ReviewBoard reviewBoard = reviewBoardService.findByOrderItemNo(orderItemDto.getOiNo());
 			if(reviewBoard!=null) {
 				orderItemDto.setReviewStatus("수정/완료");
@@ -370,11 +376,13 @@ public class OrderRestController {
 				orderItemDto.setReviewStatus("리뷰쓰기");
 			}
 		}
+		
+		OrderItemListResponse orderItemListResponse=new OrderItemListResponse(orderItemDtos,orderStatusDtoList);
 		System.out.println(">>>>>>>>>>"+orderItemDtos);
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		
-		return new  ResponseEntity<List<OrderItemDto>>(orderItemDtos, httpHeaders, HttpStatus.OK);
+		return new  ResponseEntity<OrderItemListResponse>(orderItemListResponse, httpHeaders, HttpStatus.OK);
 	}
 	
 	/*

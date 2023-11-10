@@ -443,7 +443,7 @@
 	
 	
       function my_account_order(responseJsonObject = {}) {
-
+    	 
          let htmltemplate =
          `<div class="modal-body" id="modalContent">
                                     <!-- 주문 상세 내용이 여기에 로드됩니다 -->
@@ -461,21 +461,26 @@
                                              </tr>
                                           </thead>
                                           <tbody>
-                                          {{#each this}}
+                                          {{#each orderItemDtos}}
                                              <tr>
                                                 <td id="oiNo">{{oiNo}}</td>
                                                 <td>{{product.productPrice}}</td>
                                                 <td ><span class="success">{{product.productName}}</span></td>
                                                 <!-- <td>$25.00 for 1 item </td>-->
+                                                
                                                 <td> <select class="form-select form-select-sm"
                                                       aria-label="Large select example">
+                                               
                                                       <option selected>주문 상태</option>
-                                                      <option value="1">주문확인</option>
-                                                       <option value="2">배송준비</option>
-                                                      <option value="3">배송중</option>
-                                                      <option value="4">배송완료</option> 
+                                                      {{#select orderstatus.osNo }} 
+	                                                      <option value="1">주문확인</option>
+	                                                      <option value="2">주문ㅇㅇ</option>
+	                                                      <option value="3">주문3</option>
+                                                      {{/select}}
                                                    </select>
                                                 </td>
+                                                
+                                                
                                                 <td><button type="button" class="write-review" onclick="reviewWrite(event,{{oiNo}})" id="{{product.productNo}}">{{reviewStatus}}</button></td>
                                              </tr>
                                              {{/each}}
@@ -513,14 +518,9 @@
                type: 'json',
                success: function(resultJsonObject) {
                   console.log(resultJsonObject);
-                  alert(resultJsonObject.orderStatusNo);
                   let html = my_account_order(resultJsonObject);
                   $('#modalContent').html(html);
-                  if(resultJsonObject.orderStatusNo==3){
-                	  alert('실행');
-                	  $('.form-select form-select-sm').val('3'); // '배송준비' 옵션을 선택
-                	   $('.form-select form-select-sm option:not(:selected)').prop('disabled', true);
-                  }
+                
                   // 셀렉티드 시키면 되겠다~
                }
             }); 
