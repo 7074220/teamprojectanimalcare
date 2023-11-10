@@ -79,7 +79,6 @@ public class ReviewBoardRestController {
 			reviewBoardEntity.setBoardNo(boardNo);
 			System.out.println(reviewBoardEntity);
 			reviewBoardService.update(reviewBoardEntity);
-
 	        // 업데이트된 리뷰 정보를 반환
 	        //ReviewBoardDto updatedReviewDto = ReviewBoardDto.toDto(preReviewBoard);
 	        //return new ResponseEntity<>(updatedReviewDto, HttpStatus.OK); // HttpStatus.OK를 사용하여 성공 상태 반환

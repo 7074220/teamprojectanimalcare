@@ -21,6 +21,7 @@ public class ProductCatListDto {
 	private String productName;
 	private String productCategory;
 	private String productPetCategory;
+	private Double productStarAvg;
 	
 	public static Product toEntity(ProductCatListDto dto) {
 		Product product = Product.builder()
@@ -30,6 +31,7 @@ public class ProductCatListDto {
 				.productName(dto.getProductName())
 				.productCategory(dto.getProductCategory())
 				.productPetCategory(dto.getProductPetCategory())
+				.productStarAvg(dto.getProductStarAvg())
 				.build();
 		return product;
 	}
@@ -42,6 +44,7 @@ public class ProductCatListDto {
 				.productName(product.getProductName())
 				.productCategory(product.getProductCategory())
 				.productPetCategory(product.getProductPetCategory())
+				.productStarAvg(product.getProductStarAvg())
 				.build();
 		return productListDto;
 	}

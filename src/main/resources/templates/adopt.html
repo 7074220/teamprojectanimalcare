@@ -43,6 +43,9 @@
 }
 </style>
 
+
+
+
 </head>
 
 <body>
@@ -78,6 +81,9 @@
 					<div class="col-lg-6 col-md-6">
 						<div class="contact_message content">
 							<h3 style="font-weight: bold">펫 정보</h3>
+							  <p>
+								센터: <span th:text="${center.centerName}"></span>
+							</p>   
 							<p>
 								펫 종류: <span th:text="${pet.petType}"></span>
 							</p>
@@ -123,7 +129,8 @@
 									<textarea placeholder="Message *" name="message" class="form-control2"></textarea>
 								</div> -->
 								<div>
-									<span>방문 날짜</span> <input type="date" name="adoptDate"
+									<span>방문 날짜</span> 
+									<input type="date" name="adoptDate"
 										id="adoptDate" placeholder="날짜를 선택해주세요" required="required" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
 								</div>
 								<div>
@@ -157,9 +164,7 @@
 
 								<button type="submit" class="submit">신청하기</button>
 								<!-- <p class="form-messege"></p> -->
-								<!-- <div th:if="${msg!=null}">
-									<p th:text="${msg}" class="success-message"></p>
-								</div> -->
+								
 							</form>
 
 						</div>
@@ -209,7 +214,7 @@
 				window.location.href = 'index';	// 로그인 창으로 이동
 			}else{
 				alert("입양신청이 완료되었습니다.");
-				window.location.href='index'; // 메인페이지로 이동
+				window.location.href='adoptByUserNo'; // 메인페이지로 이동
 			}
 	  		
 	    });
