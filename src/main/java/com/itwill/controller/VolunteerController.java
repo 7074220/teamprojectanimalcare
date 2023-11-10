@@ -53,7 +53,6 @@ public class VolunteerController {
 	}
 	
 	
-	// 봉사버튼 클릭시 로그인이면 신청완료, 비회원이면 로그인 페이지 이동
 	@PostMapping("/create-volunteer")
 	public String createVolunteer(@RequestParam("volunteerDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date volunteerDate,
 	        @RequestParam("volunteerTime") int selectedHour, @RequestParam Long centerNo, HttpSession session, Model model) throws Exception {
@@ -129,9 +128,7 @@ public class VolunteerController {
 
         Volunteer volunteer = volunteerService.findByVolunteerNo(volunteerNo);
         Center center = centerService.findByCenterNo(centerNo);
-        //System.out.println(">>>>>>>>>>"+volunteerNo);
-        //System.out.println(">>>>>>>>>>"+centerNo);
-
+        
         model.addAttribute("volunteer", volunteer);
         model.addAttribute("volunteerNo", volunteerNo);
         model.addAttribute("center", center);
