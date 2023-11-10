@@ -1402,8 +1402,12 @@
 				var url = window.location.href;
 				var productNo = url.substring(url.lastIndexOf("=") + 1);
 				//var productQty = document.getElementById("productQty").value;
-				alert("장바구니에 상품이 담겼습니다.");
+				if(url){
+				alert("위시리스트에 상품이 담겼습니다.");
 				window.location.href = "insertWish?productNo=" + productNo + "&productQty=" + 1;
+			} else {
+				alert("이미 존재하는 상품입니다.");
+				}
 			}
 
 
