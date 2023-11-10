@@ -19,8 +19,8 @@ export function user_write_form(responseJsonObject = {}) {
                 <!--login area start-->
 
                 <!--register area start-->
-                <div class="col-lg-6 col-md-6">
-                    <div class="account_form register">
+                <div class="col-lg-6 col-md-6" style="margin-left: 300px;">
+                    <div class="account_form register" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
                         <h2 th:text="Register">회원가입</h2>
                         <form name="f" id="user_write_form" action="#" method="post" >
                             
