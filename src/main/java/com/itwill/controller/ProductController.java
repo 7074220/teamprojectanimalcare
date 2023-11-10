@@ -141,6 +141,7 @@ public class ProductController {
 			
 			for (Product product : productList) {
 				productListDto.add(ProductListDto.toDto(product));
+				System.out.println(product.getProductStarAvg());
 			}
 			
 			model.addAttribute("productList", productListDto);

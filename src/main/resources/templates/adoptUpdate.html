@@ -79,6 +79,9 @@
 						<div class="contact_message content">
 							<h3 style="font-weight: bold">펫 정보</h3>
 							<p>
+								센터: <span th:text="${center.centerName}"></span>
+							</p>
+							<p>
 								펫 종류: <span th:text="${pet.petType}"></span>
 							</p>
 							<p>
@@ -270,7 +273,7 @@
 				window.location.href = 'index';	// 로그인 창으로 이동
 			}else{
 				alert("수정이 완료되었습니다.");
-				
+				window.location.href='adoptByUserNo';
 			}
 	  		
 	    });
