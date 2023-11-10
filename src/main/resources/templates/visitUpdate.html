@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="layout/layout(title='volunteerUpdate')">
+	layout:decorate="layout/layout(title='visitUpdate')">
 
 
 
@@ -11,7 +11,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style type="text/css">
-#volunteerDate,#volunteerTime {
+#visitDate,#visitTime {
 	border: 1px solid black;
 	position: relative;
 	width: 200px;
@@ -23,8 +23,8 @@
 	
 }
 
-#volunteerDate::-webkit-calendar-picker-indicator,
-#volunteerTime::-webkit-calendar-picker-indicator {
+#visitDate::-webkit-calendar-picker-indicator,
+#visitTime::-webkit-calendar-picker-indicator {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -35,13 +35,13 @@
 	cursor: pointer;
 }
 
-#volunteerDate::before {
+#visitDate::before {
 	content: attr(placeholder);
 	width: 100%;
 	height: 100%;
 }
 
-#volunteerDate:valid::before {
+#visitDate:valid::before {
 	display: none;
 }
 </style>
