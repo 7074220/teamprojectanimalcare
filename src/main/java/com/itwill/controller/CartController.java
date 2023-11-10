@@ -69,7 +69,7 @@ public class CartController {
 		return "cart";
 	}
 	
-	
+	/*
 	@GetMapping(value = "/cart")
 	// 상품디테일에서 카트에 담기
 	public String insertCart(Model model, HttpSession session, @RequestParam Long productNo, @RequestParam Integer productQty) throws Exception{
@@ -129,7 +129,7 @@ public class CartController {
 		
 		return "product-details";
 	}
-	
+	*/
 	
 	
 	@GetMapping(value = "/insertCartMain")
