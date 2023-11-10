@@ -53,49 +53,7 @@ public class VolunteerRestController {
 	@Autowired
 	private UserinfoRepository userinfoRepository;
 	
-	/*
-	@Operation(summary = "포인트3000생성 (관리자)")
-	@PostMapping("/insertVolunteerPoint")
-	public ResponseEntity<VolunteerTimePointDto> insertVolunteerPoint( @RequestBody VolunteerTimePointDto timePointDto,
-	        HttpSession session) throws Exception {
-
-	    Long userNo = (Long) session.getAttribute("userNo");
-	    
-	    if (userNo == null) {
-	        // 세션에서 userNo가 없는 경우에 대한 처리
-	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-	    }
-
-	    timePointDto.setUserNo(userNo);
-
-	    try {
-	        // 세션에서 얻은 userNo를 사용하여 기존 UserInfo를 찾기
-	        Optional<Userinfo> userinfoOptional = userinfoRepository.findById(userNo);
-
-	        if (userinfoOptional.isPresent()) {
-	            // UserInfo가 존재한다면
-	            Userinfo userinfo = userinfoOptional.get();
-
-	            Volunteer volunteer = new Volunteer();
-	            volunteer.setVolunteerTime(3);
-	            volunteer.setUserinfo(userinfo);
-
-	            Volunteer createdVolunteer = volunteerService.insertVolunteer(volunteer);
-
-	            volunteerService.addPointsToVolunteer(createdVolunteer.getVolunteerNo(), 3000);
-
-	            VolunteerTimePointDto dto = VolunteerTimePointDto.toDto(createdVolunteer);
-	            return ResponseEntity.ok(dto);
-	        } else {
-	            // UserInfo가 존재하지 않는 경우에 대한 처리
-	            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-	    }
-	}
-	*/
+	
 	
 	// 봉사버튼 클릭시 로그인이면 저장, 비회원이면 메인 이동
 	@Operation(summary = "봉사신청")
@@ -132,6 +90,14 @@ public class VolunteerRestController {
 	*/
 
 	
+	/*
+	@Operation(summary = "봉사삭제")
+	@DeleteMapping("/{volunteerNo}")
+	public ResponseEntity<Map> VolunteerDelete(@PathVariable(name = "volunteerNo") Long volunteerNo) throws Exception{
+		volunteerService.deleteVolunteer(volunteerNo);	
+		return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>());
+	} // DELETE
+	 */
 	@Operation(summary = "봉사삭제")
 	@DeleteMapping("/{volunteerNo}")
 	public ResponseEntity<Map> VolunteerDelete(@PathVariable(name = "volunteerNo") Long volunteerNo) throws Exception{		
@@ -140,8 +106,7 @@ public class VolunteerRestController {
 			return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("volunteerNo", volunteerNo));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-		}
-		
+		}		
 	} // DELETE
 	
 	
@@ -189,6 +154,7 @@ public class VolunteerRestController {
 		return new ResponseEntity<VolunteerDto>(volunteerDto, httpHeaders, HttpStatus.OK);
 	} // 봉사 목록 찾기
 
+
 	
 	@Operation(summary = "userNo로 봉사목록 조회") 
 	@GetMapping("/user/{userNo}")
@@ -218,6 +184,53 @@ public class VolunteerRestController {
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));				
 		return new ResponseEntity<List<VolunteerDto>>(volunteerDtoList, httpHeaders, HttpStatus.OK);
 	} // 목록 전체 조회
+	
+	
+	
+	/*
+	@Operation(summary = "포인트3000생성 (관리자)")
+	@PostMapping("/insertVolunteerPoint")
+	public ResponseEntity<VolunteerTimePointDto> insertVolunteerPoint( @RequestBody VolunteerTimePointDto timePointDto,
+	        HttpSession session) throws Exception {
+
+	    Long userNo = (Long) session.getAttribute("userNo");
+	    
+	    if (userNo == null) {
+	        // 세션에서 userNo가 없는 경우에 대한 처리
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+	    }
+
+	    timePointDto.setUserNo(userNo);
+
+	    try {
+	        // 세션에서 얻은 userNo를 사용하여 기존 UserInfo를 찾기
+	        Optional<Userinfo> userinfoOptional = userinfoRepository.findById(userNo);
+
+	        if (userinfoOptional.isPresent()) {
+	            // UserInfo가 존재한다면
+	            Userinfo userinfo = userinfoOptional.get();
+
+	            Volunteer volunteer = new Volunteer();
+	            volunteer.setVolunteerTime(3);
+	            volunteer.setUserinfo(userinfo);
+
+	            Volunteer createdVolunteer = volunteerService.insertVolunteer(volunteer);
+
+	            volunteerService.addPointsToVolunteer(createdVolunteer.getVolunteerNo(), 3000);
+
+	            VolunteerTimePointDto dto = VolunteerTimePointDto.toDto(createdVolunteer);
+	            return ResponseEntity.ok(dto);
+	        } else {
+	            // UserInfo가 존재하지 않는 경우에 대한 처리
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+	    }
+	}
+	*/
+	
 	
 	/*
 	@PostMapping("/apply-points")

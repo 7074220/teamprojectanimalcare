@@ -47,8 +47,8 @@
 </style>
 
 
-
-<script> // body 안에 있으면 적용 안됨...
+<!-- 당일 날짜 선택 불가. body 안에 있으면 적용 안됨 -->
+<script>
 //페이지 로드 시 실행
 window.onload = function() {
     var volunteerDate = document.getElementById('volunteerDate');
@@ -111,11 +111,11 @@ window.onload = function() {
 							
 							<!-- 센터 정보 -->
 							<h2>센터 정보</h2>
-							<p>센터 번호: <span th:text="${center.centerNo}">10</span></p>
+							<!-- <p>센터 번호: <span th:text="${center.centerNo}">10</span></p> -->
 							<p>센터 이름: <span th:text="${center.centerName}">10</span></p>
-							<p>전화번호: <span th:text="${center.centerPhoneNumber}">10</span></p>
-							<p>로컬: <span th:text="${center.centerLocal}">10</span></p>
-							<p>오픈/클로즈 시간: <span th:text="${center.centerOpenCloseTime}">10</span></p>
+							<p>전화 번호: <span th:text="${center.centerPhoneNumber}">10</span></p>
+							<p>지역: <span th:text="${center.centerLocal}">10</span></p>
+							<p>영업 시간: <span th:text="${center.centerOpenCloseTime}">10</span></p>
 							
 						</div>
 					</div>
@@ -136,10 +136,8 @@ window.onload = function() {
 									<!--  th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" 이 코드 추가시 현재 날짜 보여줌 -->
 									<input type="date" name="volunteerDate"
 										id="volunteerDate" placeholder="날짜를 선택해주세요"  required="required" >  
-									
-						
-
 								</div>
+								
 								
 								<div>
 									<span>방문 시간</span>
@@ -179,7 +177,10 @@ window.onload = function() {
 		</div>
 
 
-<!-- <script>
+
+
+<script>
+
 function ajaxRequest(method, url, sendJsonObject) {
 		let returnResultJsonObject={};
 		$.ajax({
@@ -213,14 +214,84 @@ $('.submit').on('click', function (event) {
     let response = ajaxRequest('POST','volunteer/create-volunteer',sendJsonObject);
     if(response.userNo!=null){
     	alert('신청이 완료되었습니다.');
-    	window.location.href = 'center-list'; // 센터 페이지로 이동
+    	window.location.href = 'volunteerByUserNo'; // 센터 페이지로 이동
     }else{
     	alert('로그인이 필요합니다.');
         window.location.href = 'logout#/login_form'; // 로그인 페이지로 이동
     }
 });
-</script> -->
 
+/*
+    $.ajax({
+        method: 'POST',
+        url: '/create-volunteer',
+        contentType: 'application/json; charset=UTF-8',
+        data: JSON.stringify(sendJsonObject),
+        dataType: 'json',
+        success: function (response) {
+        	 if (response === 1) {
+                 alert('로그인이 필요합니다.');
+                 window.location.href = '/index'; // 로그인 페이지로 이동
+             } else {
+                 alert('봉사신청이 완료되었습니다.');
+                 window.location.href = '/index'; // 센터 페이지로 이동
+             }
+         },
+        error: function (error) {
+            console.error('AJAX 요청 실패:', error);
+            alert('봉사신청 중 오류가 발생했습니다.');
+        }
+    });
+//AJAX 요청
+$('.submit').on('click', function (event) {
+    event.preventDefault();
+    let centerNo = $('#centerid').val(); // 센터 번호를 정의
+    let volunteerDate = $('#volunteerDate').val();
+    let volunteerTime = $('#volunteerTime').val();
+	
+    
+    let sendJsonObject = {
+        centerNo: centerNo,
+        volunteerDate: volunteerDate,
+        volunteerTime: volunteerTime,
+        volunteerStatus: "봉사신청"
+    };
+    let responseObject=ajaxRequest('POST','volunteer/create-volunteer',sendJsonObject);
+	
+    if(responseObject.status == null){
+		alert('로그인이 필요합니다.');
+		window.location.href = 'index';	// 로그인 창으로 이동
+	}else{
+		alert('봉사신청이 완료되었습니다.');
+		window.location.href = 'center-list'; // 센터 페이지로 이동
+	}
+    
+});   
+
+    // AJAX 요청
+     $.ajax({
+        method: 'POST',
+        url: '/volunteer/create-volunteer',
+        contentType: 'application/json; charset=UTF-8',
+        data: JSON.stringify(sendJsonObject),
+        dataType: 'json',
+        success: function(responseObject) {
+            if (responseObject.status === 401) {
+                alert('로그인이 필요합니다.');
+                window.location.href = '/index/login.html'; // 수정된 로그인 페이지 URL로 이동
+            } else if (responseObject.status === 201) {
+                alert('봉사 신청이 완료되었습니다.');
+            }
+        }, 
+         error: function(error) {
+            console.error('AJAX 요청 실패:', error);
+            alert('로그인이 필요합니다.');
+        }
+    });
+*/
+
+
+</script> 
 
 
 
