@@ -46,8 +46,7 @@
 }
 </style>
 
-<!-- 당일 날짜 선택 불가. body 안에 있으면 적용 안됨 -->
-<script>
+<script> <!-- 당일 날짜 선택 불가 -->
 //페이지 로드 시 실행
 window.onload = function() {
     var volunteerDate = document.getElementById('volunteerDate');
@@ -69,7 +68,7 @@ window.onload = function() {
     volunteerDate.setAttribute('min', minDateString);
 
     volunteerDate.removeAttribute('max');
-};
+}; 
 </script>
 
 
@@ -111,6 +110,7 @@ window.onload = function() {
 							<!-- 센터 정보 -->
 							<h2>센터 정보</h2>
 							<!--<p>센터 번호: <span th:text="${center.centerNo}">10</span></p>-->
+							<p><img th:src="@{image/center/} + ${center.centerImage}"></p>
 							<p>센터 이름: <span th:text="${center.centerName}">10</span></p>
 							<p>전화 번호: <span th:text="${center.centerPhoneNumber}">10</span></p>
 							<p>지역: <span th:text="${center.centerLocal}">10</span></p>
@@ -129,13 +129,7 @@ window.onload = function() {
 								<input type="hidden" id="centerid" name="centerNo" th:value="${center.centerNo}" />
 								
 								<div>
-									<span>방문 예약</span> 
-									<!-- <input type="date" name="volunteerDate"> -->
-									<!--  th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" 이 코드 추가시 현재 날짜 보여줌 -->
-									
-									<!--<input type="date" name="volunteerDate" id="volunteerDate" placeholder="날짜를 선택해주세요"  
-									required="required"> --> 
-									
+									<span>방문 예약</span> 									
 									<input type="date" name="volunteerDate" id="volunteerDate" placeholder="날짜를 선택해주세요" required="required" th:value="${selectedDate}">
 
 								</div>
@@ -173,7 +167,7 @@ window.onload = function() {
 		</div>
 
 
-<script> // my-account 에서 수정 -> volunteer 페이지로 이동 -> 다시 수정 버튼 -> my-account 이동
+<script> 
 function ajaxRequest(method, url, sendJsonObject) {
 			let returnResultJsonObject={};
 			$.ajax({

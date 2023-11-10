@@ -47,8 +47,8 @@
 </style>
 
 
-<!-- 당일 날짜 선택 불가. body 안에 있으면 적용 안됨 -->
-<script>
+
+<script> <!-- 당일 날짜 선택 불가 -->
 //페이지 로드 시 실행
 window.onload = function() {
     var volunteerDate = document.getElementById('volunteerDate');
@@ -129,9 +129,7 @@ window.onload = function() {
 								<input type="hidden" id="centerid" name="centerNo" th:value="${center.centerNo}" />
 								
 								<div>
-									<span>방문 예약</span> 
-									<!-- <input type="date" name="volunteerDate"> -->
-									<!--  th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" 이 코드 추가시 현재 날짜 보여줌 -->
+									<span>방문 예약</span> 								
 									<input type="date" name="volunteerDate"
 										id="volunteerDate" placeholder="날짜를 선택해주세요"  required="required" 
 										th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">  
@@ -170,7 +168,7 @@ window.onload = function() {
 
 
 
-<script> // 회원일경우 봉사 신청가능, 비회원일경우 로그인 페이지로 이동.
+<script>
 function ajaxRequest(method, url, sendJsonObject) {
 		let returnResultJsonObject={};
 		$.ajax({
@@ -213,9 +211,6 @@ $('.submit').on('click', function (event) {
 </script> 
 
 
-
-	
-	
 	</th:block>
 	<!--contact area end-->
 
