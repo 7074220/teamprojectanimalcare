@@ -42,8 +42,6 @@ public class VolunteerController {
 	private CenterService centerService;
 	@Autowired
 	private UserInfoService userInfoService;
-	@Autowired
-	private ReviewBoardService reviewBoardService;
 	
 	@GetMapping(value = "/volunteer", params = "centerNo") // 봉사 신청
 	public String insert_action(Model model, @RequestParam Long centerNo) throws Exception {				
@@ -53,11 +51,11 @@ public class VolunteerController {
 	}
 	
 	
-	// 봉사버튼 클릭시 로그인이면 신청완료, 비회원이면 로그인 페이지 이동
+	// 봉사버튼 클릭시 로그인이면 신청, 비회원이면 페이지 이동
 	@PostMapping("/create-volunteer")
 	public String createVolunteer(@RequestParam("volunteerDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date volunteerDate,
 	        @RequestParam("volunteerTime") int selectedHour, @RequestParam Long centerNo, HttpSession session, Model model) throws Exception {
-	    Long userNo = (Long)session.getAttribute("userNo");
+	    Long userNo = (Long) session.getAttribute("userNo");
 	    
 	    if (userNo != null) {
 	        Volunteer volunteer = new Volunteer();
@@ -70,7 +68,6 @@ public class VolunteerController {
 	        volunteer.setUserinfo(userinfo);
 	        volunteer.setCenter(center);
 	        
-	        volunteerService.insertVolunteer(volunteer);
 	        model.addAttribute("userinfo", userinfo);
 
 	        // 봉사신청이 성공한 경우 모델에 추가
@@ -79,7 +76,7 @@ public class VolunteerController {
 	        // 로그인이 필요한 경우 모델에 추가
 	        model.addAttribute("error", "로그인이 필요합니다.");
 	    }
-	    return "center-list"; // 뷰 페이지의 이름을 반환
+	    return "volunteerByUserNo"; // my-account 페이지로 이동
 	    
 	}
 	
@@ -120,18 +117,16 @@ public class VolunteerController {
 	    volunteerList.sort((v1, v2) -> v2.getVolunteerNo().compareTo(v1.getVolunteerNo()));
 	    model.addAttribute("userNo", userNo);
 		model.addAttribute("volunteerList", volunteerList);
-		return "my-account-volunteer";
+		return "my-account-volunteer"; //이게 원본임
 	}
 		
-	/*
+	
 	@GetMapping("/volunteerUpdate")
-    public String getVolunteerPage(@RequestParam Long volunteerNo, @RequestParam Long centerNo, Model model) {
+    public String getVolunteerPage(@RequestParam Long volunteerNo, @RequestParam Long centerNo, Model model) throws Exception{
 
         Volunteer volunteer = volunteerService.findByVolunteerNo(volunteerNo);
         Center center = centerService.findByCenterNo(centerNo);
-        //System.out.println(">>>>>>>>>>"+volunteerNo);
-        //System.out.println(">>>>>>>>>>"+centerNo);
-
+        
         model.addAttribute("volunteer", volunteer);
         model.addAttribute("volunteerNo", volunteerNo);
         model.addAttribute("center", center);
@@ -155,7 +150,7 @@ public class VolunteerController {
         }
         return "my-account-volunteer"; // 수정 실패 페이지로 이동
     }
-	*/
+	
 
 	
 }
