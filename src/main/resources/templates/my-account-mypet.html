@@ -70,9 +70,6 @@
 												<tr>
 													<!--<label class="checkbox-inline">
 													</label>-->
-													<label class="checkbox-inline">
-														<input type="checkbox" id="allCheckBox" onclick="allChecked()" checked="true">
-													</label>
 													
 													<th>대표동물</th>
 													<th>No</th>
@@ -89,11 +86,12 @@
 													<!--<td th:text="${mypet.mypetNo}">1</td>-->
 
 													<td th:text="${mypet.mypetLeader}"></td>
-													<td th:text="${mypet.MypetSequence}" th:id="${mypet.mypetNo}"></td>
-													<td th:text="${mypet.mypetName}"></td>
-													<td th:text="${mypet.mypetBirthday}"></span></td>
-													<td th:text="${mypet.mypetKind}"></td>
-													<td class="mypet_remove" th:id="${mypet.mypetNo}"><a
+												 <td><a th:href="@{'/updateMyPet'}" th:text="${mypet.MypetSequence}">Link Text</a></td>
+												<!--	<td th:text="${mypet.MypetSequence}" th:id="${mypet.mypetNo}"></td>-->
+													<td><a th:href="@{'/updateMyPet'}" th:text="${mypet.mypetName}"></a></td>
+													<td><a th:href="@{'/updateMyPet'}" th:text="${mypet.mypetBirthday}"></a></td>
+													<td><a th:href="@{'/updateMyPet'}" th:text="${mypet.mypetKind}"></a></td>
+													<td><a class="mypet_remove" th:id="${mypet.mypetNo}"><a
 															class="deleteCart"><i class="fa fa-trash-o"
 																th:id="${mypet.mypetNo}"></i></a></td>
 

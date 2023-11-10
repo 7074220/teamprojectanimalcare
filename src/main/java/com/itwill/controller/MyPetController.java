@@ -69,10 +69,6 @@ public class MyPetController {
         	tempMypet.setMypetLeader(leader);
         	myPetListDtos.add(tempMypet);
 		}
-        
-      
-        
-        
         //model.addAttribute("Name", Name);
         model.addAttribute("myPetList",myPetListDtos);
         
@@ -83,11 +79,14 @@ public class MyPetController {
 
   @GetMapping("/registerMyPet") 
   public String registerMyPet(HttpSession session, Model model) {
-  
-  return "registerMyPet"; 
+	  return "registerMyPet"; 
   }
   
- 
+  @GetMapping("/updateMyPet") 
+  public String updateMyPet(HttpSession session, Model model) {
+	  return "updateMyPet"; 
+  }
+  
 }
 /*
  * @GetMapping("/registerMyPet") public String registerMyPet(HttpSession
