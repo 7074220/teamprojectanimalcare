@@ -70,6 +70,69 @@
             </div>
         </div>   
             </div> 
+            
+<script>
+	$('#reportBoard_write_form').on('submit',function(e){
+		$('#reportBoard_write_form').validate(
+			{
+		rules: {
+			boardTitle: {
+				required: true
+			},
+			floatingPassword: {
+				required: true,
+				remote:{
+					url: 'user/passcheck',
+					type: 'GET',
+					data: {
+						userId: function() {
+							return ($('#floatingInput').val());
+						},
+						password:function(){
+							return $('#floatingPassword').val();
+						}
+					
+					}
+				}
+			}
+		},
+		messages: {
+			floatingInput: {
+				required: '아이디를 입력하세요.',
+				remote: '존재하지 않는 아이디입니다.'
+			},
+			floatingPassword: {
+				required: '패스워드를 입력하세요.',
+				remote:'비밀번호가 일치하지 않습니다.'
+			},
+			
+		},
+		errorClass: 'error',
+		validClass: 'valid'
+	}
+		);
+		e.preventDefault();
+		let floatingInput = $('#floatingInput').val();
+		let floatingPassword = $('#floatingPassword').val();
+		let loginData = {
+			userId : floatingInput,
+			userPassword : floatingPassword
+		}
+		$.ajax({
+			url : "user/login",
+			method : "post",
+			data : JSON.stringify(loginData),
+			dataType:'json',
+			contentType:'application/json;chrset=UTF-8',
+			success:function(){
+				alert('로그인 성공시 페이지 새로고침을 하세요');
+				window.close();
+			
+			}
+		});
+	});
+</script>
+            
     </th:block>
     <!-- customer login end -->
 
