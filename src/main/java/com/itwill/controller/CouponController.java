@@ -41,11 +41,16 @@ public class CouponController {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedDate1 = couponService.findAllByUserNo(userNo).get(0).getCouponPayday().format(formatter);
         String formattedDate2 = couponService.findAllByUserNo(userNo).get(0).getCouponExpirationDate().format(formatter);
-
-		for (Coupon coupon : coupons) {
-			CouponDto couponDto = CouponDto.toDto(coupon);
-			couponList.add(couponDto);
-		}
+        
+        	for (Coupon coupon : coupons) {
+    			CouponDto couponDto = CouponDto.toDto(coupon);
+    			couponList.add(couponDto);
+    		}
+        
+        	
+        	
+        	
+        	
 		
 		model.addAttribute("couponList", couponList);
 		model.addAttribute("formattedDate1", formattedDate1);
