@@ -105,7 +105,7 @@
 								<figure>
 									<div class="product_thumb">
 										<a class="primary_img" href="#"  th:href="@{/adopt(petNo=${pet.petNo})}"><img src="#"
-												alt="" th:src="@{/image/pet/} + ${pet.getPetImage}"></a>
+												alt="" th:src="@{/image/pet/} + ${pet.getPetImage}" style="width: 300px;height: 250px"></a>
 										<!--  <a class="secondary_img" href="product-details.html"><img src="assets/img/product/product21.jpg" alt=""></a> -->
 										<!--  <div class="label_product">
                                         <span class="label_sale">Sale</span>
@@ -124,7 +124,7 @@
 										</div> -->
 									</div>
 									<figcaption class="product_content">
-										<h4 class="product_name"><span th:text="${'발견 장소 : '+pet.petFindPlace}">발견 장소</span>></h4>
+										<h4 class="product_name"><span th:text="${'발견 장소 : '+pet.petFindPlace}">발견 장소</span></h4>
 									<p><a href="#" th:text="${pet.center.centerName}" th:href="@{centerList}">센터 이름</a></p>
 										<div class="price_box">
 											<!-- <span class="current_price">센터 이름</span> -->
@@ -1396,7 +1396,7 @@
 									<div class="product_thumb">
 										<a class="primary_img" href="product-details.html"
 											><img src="#"
-												alt="" th:src="@{/image/reportboard/} + ${reportboard.boardImage}"></a>
+												alt="" th:src="@{/image/reportboard/} + ${reportboard.boardImage}" style="width: 300px;height: 250px"></a>
 										<!--  <a class="secondary_img" href="product-details.html"><img src="assets/img/product/product21.jpg" alt=""></a> -->
 										<!--  <div class="label_product">
                                         <span class="label_sale">Sale</span>
