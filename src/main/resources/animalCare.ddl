@@ -65,7 +65,7 @@ CREATE TABLE ReportBoard(
 		board_find_name               		VARCHAR2(50)		 NULL ,
 		board_find_phone              		VARCHAR2(50)		 NULL ,
 		user_no                       		NUMBER(10)		 NULL,
-		board_image                   		VARCHAR2(50)		 NULL 
+		board_image                   		VARCHAR2(4000)		 NULL 
 );
 
 DROP SEQUENCE ReportBoard_board_no_SEQ;
