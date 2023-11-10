@@ -21,4 +21,11 @@ public interface VolunteerDao {
 	public List<Volunteer> findVolunteertByUserNo(Long userNo);	
 	
 	
+	
+	// 봉사와 포인트 정보 함께 조회
+    public List<Volunteer> findVolunteerListWithPoints(Long volunteerNo,Integer userPoint);
+	
+    // 봉사에 포인트 적립
+    public void addPointsToVolunteer(Long volunteerNo, Integer pointsToAdd);
+	// pointsToAdd는 적립할 포인트의 양을 나타내는 변수?
 }

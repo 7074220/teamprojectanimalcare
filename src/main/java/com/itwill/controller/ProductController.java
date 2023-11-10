@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,6 +65,56 @@ public class ProductController {
 		return "redirect:shop.html";
 	}
 	*/
+	
+	@GetMapping("/insertProduct")
+	// 상품등록 (관리자)
+	public String insertProduct(@RequestBody ProductInsertDto dto) {
+		
+		productService.insertProduct(dto.toEntity(dto));
+		
+		return "shop";
+	}
+	
+	
+	@GetMapping("/updateProduct")
+	// 상품 업데이트 (관리자)
+	public String updateProduct(@RequestBody ProductListDto dto, Model model) throws Exception{
+		Product product = Product.builder().build();
+		
+		product.setProductPrice(dto.getProductPrice());
+		product.setProductImage(dto.getProductImage());
+		product.setProductName(dto.getProductName());
+		
+		productService.updateProduct(product);
+		
+		model.addAttribute("product", product);
+		
+		return "shop";
+	}
+	
+	
+	
+	// 펫카테고리별로 구분 --> 상품 리스트 출력
+	@GetMapping("/adminProductList")
+	public String adminProductList(Model model, HttpSession session) {
+		List<ProductListDto> productListDto = new ArrayList<>();
+		List<Product> productList = new ArrayList<>();
+		
+		Long userNo = (Long) session.getAttribute("userNo");
+		
+		productList = productService.findAllByOrderByProductNoDesc();
+		
+		for (Product product : productList) {
+			productListDto.add(ProductListDto.toDto(product));
+		}
+		
+		model.addAttribute("productList", productListDto);
+		
+		return "shop";
+	}
+	
+	
+	
 	
 	
 	// 펫카테고리별로 구분 --> 상품 리스트 출력
@@ -478,8 +529,8 @@ public class ProductController {
 		}
 		
 		model.addAttribute("product", product);
-		
-		model.addAttribute("nextExist",nextExist);
+		//model.addAttribute("nextExist",nextExist);
+		model.addAttribute("products", products);
 		model.addAttribute("productName", productNameDto);
 		
 		List<ReviewBoard> reviewList = reviewBoardService.findByProductNo(product.getProductNo());
