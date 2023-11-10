@@ -38,11 +38,11 @@
 						<div>
 							<h2>센터 정보</h2>
 							<p><img th:src="@{image/center/} + ${center.centerImage}"></p>
-							<p>센터 번호: <span th:text="${center.centerNo}">10</span></p>
-							<p>센터 이름: <span th:text="${center.centerName}">123</span></p>
+							
+							<p>이름: <span th:text="${center.centerName}">123</span></p>
 							<p>전화번호: <span th:text="${center.centerPhoneNumber}">123</span></p>
-							<p>로컬: <span th:text="${center.centerLocal}">123</span></p>
-							<p>오픈/클로즈 시간: <span th:text="${center.centerOpenCloseTime}">123</span></p>
+							<p>지역: <span th:text="${center.centerLocal}">123</span></p>
+							<p>영업 시간: <span th:text="${center.centerOpenCloseTime}">123</span></p>
 						</div>
 					</div>
 
