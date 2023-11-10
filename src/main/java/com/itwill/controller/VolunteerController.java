@@ -74,16 +74,25 @@ public class VolunteerController {
 	    return "volunteerByUserNo"; // my-account 페이지로 이동
 	    
 	}
-		
+	
+	
 	@GetMapping("/volunteerList") // 봉사 목록 전체 조회. 관리자
-	public String volunteerList(Model model) {
+	public String volunteerList(Model model, HttpSession session) throws Exception{
 		List<Volunteer> volunteers = volunteerService.findAllVolunteers();    
-	    model.addAttribute("volunteers", volunteers);
+		List<VolunteerDto> volunteersDto = new ArrayList<VolunteerDto>();
+			for (Volunteer volunteer : volunteers) {
+				Userinfo userinfo = volunteer.getUserinfo();
+				VolunteerDto dto = VolunteerDto.toDto(volunteer); 
+				dto.setUserinfo(userinfo);
+				volunteersDto.add(dto);
+			} 
+		
+	    model.addAttribute("volunteers", volunteersDto);
 	    return "my-account-volunteer";
 	}
 	
 	
-	@GetMapping("/volunteerByUserNo") 
+	@GetMapping("/volunteerByUserNo") // 봉사 목록 조회. 회원
 	public String findByVolunteerListUserNo(Model model, HttpSession session) throws Exception {
 		Long userNo=(Long)session.getAttribute("userNo");
 		Userinfo user=userInfoService.findUserByNo(userNo);
