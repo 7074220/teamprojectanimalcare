@@ -1408,14 +1408,59 @@
 				return returnResultJsonObject;
 			}
 				
-			function addCart() {
+			/* function addCart() {
 				var url = window.location.href;
 				var productNo = url.substring(url.lastIndexOf("=") + 1);
 				var productQty = document.getElementById("productQty").value;
 				alert("장바구니에 상품이 담겼습니다.");
 				window.location.href = "cart?productNo=" + productNo + "&productQty=" + productQty;
-			}
+			} */
+			
+			
+			function addCart() {
+			    var url = window.location.href;
+			    var productNo = url.substring(url.lastIndexOf("=") + 1);
+			    var productQty = document.getElementById("productQty").value;
 
+			    // 서버에 전송할 데이터를 객체로 생성
+			    var requestData = {
+			        productNo: productNo,
+			        productQty: productQty // 수량을 정수로 변환하여 전송
+			     	
+			    };
+			    let response = ajaxRequest('POST','cart/inserted',requestData);
+			    
+			    if(response.status==1){
+			    	alert("장바구니에 상품이 담겼습니다.");
+		            // 장바구니에 상품이 추가되고 난 후, 원하는 페이지로 리다이렉션
+		            window.location.href = "productDetail?productNo=" + productNo;
+			    }
+			    if(response.status==0){
+			    	alert('로그인 해주세요');
+			    	window.location.hash="/login_form";
+			    }
+			    
+			    // AJAX를 사용하여 서버에 추가 요청 전송
+			    /*
+			    $.ajax({
+			        type: "POST",
+			        url: "cart", // 실제 컨트롤러의 매핑 경로에 맞게 수정
+			        contentType: 'application/json;UTF-8',
+			        data: JSON.stringify(requestData),
+			        dataType: 'json',
+			        success: function(response) {
+			        	alert("장바구니에 상품이 담겼습니다.");
+			            // 장바구니에 상품이 추가되고 난 후, 원하는 페이지로 리다이렉션
+			            window.location.href = "productDetail?productNo=" + productNo;
+			        },
+			        error: function(error) {
+			            console.error(error);
+			        }
+			    });
+			    */
+			}
+			
+			
 			 function addToWish() {
 				var url = window.location.href;
 				var productNo = url.substring(url.lastIndexOf("=") + 1);
@@ -1497,6 +1542,48 @@
 				
 			}
 
+			
+			
+			
+			
+			
+			
+			
+			
+			 	var productNo = url.substring(url.lastIndexOf("=") + 1);
+			    var averageRating = 0; // 초기값 설정
+
+			    // Ajax 호출
+			    $.ajax({
+			        type: "GET",
+			        url: "averageRating/" + productNo,
+			        success: function(response) {
+			            averageRating = response.averageRating;
+			            updateStarRating(averageRating);
+			        },
+			        error: function(error) {
+			            console.error(error);
+			        }
+			    });
+
+			    // 별점 업데이트 함수
+			    function updateStarRating(avgRating) {
+			        // 평균 별점을 기반으로 별 모양 업데이트
+			        $(".product_ratting ul li").each(function(index) {
+			            var starNumber = index + 1;
+			            var starIcon = $(this).find("i");
+
+			            if (starNumber <= avgRating) {
+			                starIcon.addClass("filled-star");
+			            } else {
+			                starIcon.removeClass("filled-star");
+			            }
+			        });
+			    }
+			    
+			    
+			    
+			    
 		</script>
 
 
