@@ -83,7 +83,7 @@ public class UserInfoController {
 		userinfo.setUserPhoneNumber(userPhoneNumber);
 		userinfo.setUserAddress(userAddress);
 		userInfoService.update(userinfo);
-		
+		session.setAttribute("userName", userName);
 		model.addAttribute("userinfo", userinfo);
 		
 		return "my-account-userinfo";

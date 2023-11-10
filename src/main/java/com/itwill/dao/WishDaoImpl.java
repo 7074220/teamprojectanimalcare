@@ -46,6 +46,13 @@ public class WishDaoImpl implements WishDao{
 	}
 
 	
+	// 위시리스트에 있는지 확인
+	@Override
+	public boolean existsByUserinfo_UserNoAndProduct_ProductNo(Long userNo, Long productNo) {
+		return wishRepository.existsByUserinfo_UserNoAndProduct_ProductNo(userNo, productNo);
+	}
+
+	
 
 
 	

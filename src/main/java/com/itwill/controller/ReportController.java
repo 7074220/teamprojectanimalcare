@@ -43,8 +43,7 @@ public class ReportController {
 	@Operation(summary = "신고게시판 리스트")
 	@GetMapping("/reportlist")
 	public String ReportList(Model model) {
-		List<ReportBoard> reportBoards = reportBoardService.findAll();
-		System.out.println(">>>>>>"+reportBoards);
+		List<ReportBoard> reportBoards = reportBoardService.findByBoardNoOrderByBoardNoDesc();
 		model.addAttribute("reportBoardList", reportBoards);
 		return "reportList";
 	}
@@ -74,7 +73,7 @@ public class ReportController {
 	@PostMapping("/reportWrite")
 	  public String handleImagePost(@RequestParam("imageFile") MultipartFile file , @RequestParam("boardTitle")String boardTitle,
 			  @RequestParam("boardFindDate") @DateTimeFormat(pattern = "yyyy-MM-dd")Date boardFindDate, @RequestParam("boardFindName")String boardFindName,
-			  @RequestParam("boardFindPhone")String boardFindPhone, @RequestParam("boardContent")String boardContent , HttpSession session) throws Exception{
+			  @RequestParam("boardFindPhone")String boardFindPhone, @RequestParam("boardContent")String boardContent ,@RequestParam("boardFindPlace")String boardFindPlace ,HttpSession session, Model model) throws Exception{
 
 	    String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/reportboard/";
 	    String originalFileName = file.getOriginalFilename();
@@ -82,7 +81,7 @@ public class ReportController {
 	    String savedFileName = uuid.toString() + "_" + originalFileName;
 
 	    File newFile = new File(uploadPath + savedFileName);
-	    System.out.println(uploadPath);
+	    
 	    file.transferTo(newFile);
 	    
 	    Long userNo =(Long)session.getAttribute("userNo");
@@ -93,20 +92,24 @@ public class ReportController {
 	    }
 	    
 	    ReportBoard writeReportBoard = ReportBoard.builder()
-	    										.boardNo(1L)
 	    										.boardContent(boardContent)
 	    										.boardFindDate(boardFindDate)
 	    										.boardFindName(boardFindName)
 	    										.boardFindPhone(boardFindPhone)
-	    										.boardImage(newFile.getName())
+	    										.boardImage(savedFileName)
 	    										.boardTitle(boardTitle)
+	    										.boardRegisterDate(new Date())
+	    										.boardFindPlace(boardFindPlace)
 	    										.userinfo(userinfo)
 	    										.build();
 	    
-	    System.out.println(">>>>"+writeReportBoard);
+	    
 	    ReportBoard insertReportBoard = reportBoardService.Create(writeReportBoard);
-	    System.out.println(">>>>"+insertReportBoard);
-	    return "index";
+	    
+	    List<ReportBoard> reportBoards = reportBoardService.findByBoardNoOrderByBoardNoDesc();
+		model.addAttribute("reportBoardList", reportBoards);
+	    
+	    return "reportList";
 	  }
 	
 	/*

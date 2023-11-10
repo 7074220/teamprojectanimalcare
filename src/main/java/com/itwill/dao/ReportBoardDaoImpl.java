@@ -65,5 +65,10 @@ public class ReportBoardDaoImpl implements ReportBoardDao{
 	public List<ReportBoard> findAll() {
 		return reportBoardRepository.findAll();
 	}
+
+	@Override
+	public List<ReportBoard> findByBoardNoOrderByBoardNoDesc() {
+		return reportBoardRepository.findByBoardNoOrderByBoardNoDesc();
+	}
 	
 }
