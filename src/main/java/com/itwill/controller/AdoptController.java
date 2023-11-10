@@ -98,7 +98,7 @@ public class AdoptController {
 		List<Adopt> adoptList = adoptService.findAdoptList();
 		
 		model.addAttribute("adoptList", adoptList);
-		return "my-account";
+		return "my-account-adopt";
 	}
 
 	// userNo에 따른 입양리스트 조회
