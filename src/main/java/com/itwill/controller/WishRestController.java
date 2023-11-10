@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.CartDto;
@@ -108,4 +110,22 @@ public class WishRestController {
 		return new ResponseEntity<List<WishlistInsertDto>>(wishDtoList, httpHeaders, HttpStatus.OK);
 	}
 	
+	
+	
+	public ResponseEntity<String> checkWish(HttpSession session, @RequestParam Long productNo){
+		if (session.getAttribute("userNo") == null) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+	    }
+
+	    Long userNo = (Long) session.getAttribute("userNo");
+
+	    // WishService에 해당 메소드 추가해주세요.
+	    boolean existsInWish = wishService.existsByUserinfo_UserNoAndProduct_ProductNo(userNo, productNo);
+	    		
+	    if (existsInWish) {
+	        return ResponseEntity.ok("이미 존재하는 상품입니다.");
+	    } else {
+	        return ResponseEntity.ok("위시리스트에 상품이 담겼습니다.");
+	    }
+	}
 }
