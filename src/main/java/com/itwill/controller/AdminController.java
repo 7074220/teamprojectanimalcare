@@ -60,8 +60,9 @@ public class AdminController {
 		/******************************* Userinfo ************************************/
 		
 		
-		// 관리자 --> 회원정보 리스트
 		@GetMapping(value = "/adminUserList")
+		// 관리자 --> 회원정보 리스트
+		// 번호, 아이디, 이름, 포인트, 성별, 주소, 연락처
 		public String adminUserList(Model model) throws Exception {
 			
 			List<AdminUserListDto> adminUserList = new ArrayList<>();
@@ -77,6 +78,8 @@ public class AdminController {
 			
 			return "admin-userinfo";
 		}
+		
+		
 		
 		
 		/*
@@ -117,14 +120,15 @@ public class AdminController {
 		/******************************* Adopt ************************************/
 		
 		
+		@GetMapping("/adminAdoptList")
 		// 관리자 --> 입양신청 리스트
-		@GetMapping("/adoptList")
+		// 
 		public String adoptList(Model model) {
 			
 			List<Adopt> adoptList = adoptService.findAdoptList();
 			
-			model.addAttribute("adoptList", adoptList);
-			return "my-account";
+			model.addAttribute("adminAdoptList", adoptList);
+			return "admin-adopt";
 		}
 		
 		

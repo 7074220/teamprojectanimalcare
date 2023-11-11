@@ -115,6 +115,7 @@ public class OrderController {
 		 */
 		couponService.Delete(Long.parseLong(couponId)); //쿠폰삭제기능
 		cartService.deleteByUserId(userNo);
+		
 		return "index";
 	}
 	//관리자전용

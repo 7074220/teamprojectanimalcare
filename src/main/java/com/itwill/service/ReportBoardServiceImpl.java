@@ -89,6 +89,11 @@ public class ReportBoardServiceImpl implements ReportBoardService{
 	    }
 	    */
 	  }
+
+	@Override
+	public List<ReportBoard> findByBoardNoOrderByBoardNoDesc() {
+		return reportBoardDao.findByBoardNoOrderByBoardNoDesc();
+	}
 	
 
 }

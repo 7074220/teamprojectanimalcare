@@ -603,10 +603,10 @@
 									</td>
                                     <td class="product_thumb" th:id="${cart.cartNo}"><a href="#" th:href="@{productDetail(productNo=${cart.product.productNo})}"><img src="#" alt="" th:src="@{/image/product/} + ${cart.product.getProductImage}"></a></td>
                                     <td class="product_name" th:id="${cart.cartNo}"><a href="#" th:text="${cart.product.productName}" th:href="@{productDetail(productNo=${cart.product.productNo})}">상품명</a></td>
-                                    <td class="product-price" th:id="${cart.cartNo}" th:text="${#numbers.formatInteger(cart.product.productPrice, 3, 'COMMA') + '원'}">가격</td>
+                                    <td class="product-price" th:id="${cart.cartNo}" th:text='${cart.product.productPrice+"원"}'>가격</td>
                                     <td class="product_quantity" th:id="${cart.cartNo}"><label>수량</label> <input min="1" max="100" value="1" type="number" th:value="${cart.cartQty}" th:id="${cart.cartNo}"></td>
                                     <!--  상품가격 X 수량 = 총금액 수정해야댐 -->
-                                    <td class="product_total" th:id="${cart.cartNo}" th:text="${#numbers.formatInteger(cart.product.productPrice * cart.cartQty, 3, 'COMMA') + '원'}">총금액</td>
+                                    <td class="product_total" th:id="${cart.cartNo}" th:text="${cart.product.productPrice * cart.cartQty+'원'}">총금액</td>
                                     <td class="product_remove" th:id="${cart.cartNo}"><a class="deleteCart"><i class="fa fa-trash-o" th:id="${cart.cartNo}"></i></a></td>
                                 </tr>
                                 
@@ -678,11 +678,11 @@
                                    </div>-->
                                    <!--<a href="#">Calculate shipping</a>-->
                                    <div class="cart_subtotal">
-                                       <p>Total</p>
-                                       <p class="cart_amount1" th:text='${totalPrice+"원"}'>£215.00</p>
+                                       <p>총액</p>
+                                       <p class="cart_amount1" th:text='${totalPrice+"원"}'>주문할 상품 총 가격</p>
                                    </div>
-                                   <div class="checkout_btn">
-                                       <a href="orderView">Proceed to Checkout</a>
+                                 <div class="checkout_btn">
+                                       <a href="orderView">주문하기</a>
                                    </div>
                                 </div>
                             </div>
@@ -717,7 +717,8 @@
     		    $(".product_quantity input[type='number']").change(function(e){
     		        let price = parseInt($(e.target).parent().parent().find(".product-price").text());
     		        let qty = parseInt($(e.target).val());
-    		        $(e.target).parent().parent().find(".product_total").html(price*qty);
+    		        //$(e.target).parent().parent().find(".product_total").html(price*qty);
+    		        $(e.target).parent().parent().find(".product_total").html(price*qty + '원');
     		        let cartNo = $(e.target).attr('id');
     		        
     		        // 서버로 보낼 JSON 데이터를 준비합니다.
@@ -856,7 +857,10 @@
 
 					}
 				}
-			}    		 
+			}   
+			
+			
+			
     		
     </script>
       
