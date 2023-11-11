@@ -66,6 +66,18 @@ public class ProductController {
 	}
 	*/
 	
+	
+	@GetMapping("/searchProduct")
+	public String searchProduct() {
+		
+		productService.findByContains(null);
+		
+		return "shop";
+	}
+	
+	
+	
+	
 	@GetMapping("/insertProduct")
 	// 상품등록 (관리자)
 	public String insertProduct(@RequestBody ProductInsertDto dto) {
@@ -93,25 +105,7 @@ public class ProductController {
 	}
 	
 	
-	
-	// 펫카테고리별로 구분 --> 상품 리스트 출력
-	@GetMapping("/adminProductList")
-	public String adminProductList(Model model, HttpSession session) {
-		List<ProductListDto> productListDto = new ArrayList<>();
-		List<Product> productList = new ArrayList<>();
-		
-		Long userNo = (Long) session.getAttribute("userNo");
-		
-		productList = productService.findAllByOrderByProductNoDesc();
-		
-		for (Product product : productList) {
-			productListDto.add(ProductListDto.toDto(product));
-		}
-		
-		model.addAttribute("productList", productListDto);
-		
-		return "shop";
-	}
+
 	
 	
 	
@@ -135,7 +129,7 @@ public class ProductController {
 				} else {
 					productList = productService.findAllProductByPetCategory(myPet.getMypetKind());
 				}
-			}else {
+			} else {
 				myPet = MyPet.builder().mypetKind("강아지").build();
 			}
 			
@@ -278,9 +272,10 @@ public class ProductController {
 	public String ProductPriceDesc(Model model, HttpSession session, @RequestParam String path) {
 		List<ProductPriceDescDto> productPriceDescDto = new ArrayList<>();
 		// 상품가격 비싼 것부터
+		
 		List<Product> productList = productService.findAllByOrderByProductPriceDesc();
 		Long userNo = (Long) session.getAttribute("userNo");
-		MyPet myPet = MyPet.builder().build();
+		MyPet myPet = MyPet.builder().mypetKind("강아지").build();
 		
 		String kindPath = "";
 		String categoryPath = "";

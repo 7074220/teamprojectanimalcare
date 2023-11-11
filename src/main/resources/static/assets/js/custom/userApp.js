@@ -124,7 +124,7 @@ function navigate() {
 		
 		if(responseJsonObject.status == 1000){
 			if(responseJsonObject.userId=="admin@gmail.com"){
-				window.location.href='userinfo';
+				window.location.href='adminUserinfo';
 			}else{
 				window.location.href='index';	
 			}

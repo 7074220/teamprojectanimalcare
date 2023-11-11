@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +35,7 @@ import com.itwill.service.WishService;
 
 import jakarta.servlet.http.HttpSession;
 
+@Controller
 public class AdminController {
 
 	
@@ -80,7 +82,19 @@ public class AdminController {
 		}
 		
 		
-		
+		// 관리자 --> 마이페이지 이동
+		@GetMapping(value="/adminUserinfo")
+		public String view(Model model, HttpSession session) throws Exception{
+			Long userNo = (Long)session.getAttribute("userNo");
+			if(userNo==null) {
+				throw new Exception("로그인을 해주세요");
+			}
+			Userinfo userinfo = userInfoService.findUserByNo(userNo);
+			model.addAttribute("userinfo", userinfo);
+			
+			return "admin-userinfo";
+			
+		}
 		
 		/*
 		 
@@ -139,7 +153,7 @@ public class AdminController {
 		
 		
 		// 관리자 --> 봉사신청 리스트
-		@GetMapping("/volunteerList") // 봉사 목록 전체 조회. 관리자
+		@GetMapping("/adminVolunteerList") // 봉사 목록 전체 조회. 관리자
 		public String volunteerList(Model model) {
 			List<Volunteer> volunteers = volunteerService.findAllVolunteers();    
 		    model.addAttribute("volunteers", volunteers);
@@ -163,7 +177,7 @@ public class AdminController {
 			
 			Long userNo = (Long) session.getAttribute("userNo");
 			
-			productList = productService.findAllByOrderByProductNoDesc();
+			productList = productService.findAllByOrderByProductNoAsc();
 			
 			for (Product product : productList) {
 				productListDto.add(ProductListDto.toDto(product));
@@ -171,14 +185,14 @@ public class AdminController {
 			
 			model.addAttribute("productList", productListDto);
 			
-			return "shop";
+			return "admin-product";
 		}
 		
 		
 		
 		
 		// 관리자 --> 상품 추가
-		@GetMapping("insertProduct")
+		@GetMapping("/adminInsertProduct")
 		public String insertProduct(@RequestBody ProductInsertDto dto) {
 			
 			productService.insertProduct(dto.toEntity(dto));
@@ -190,7 +204,7 @@ public class AdminController {
 		
 		
 		// 관리자 --> 상품정보 수정
-		@GetMapping("/updateProduct")
+		@GetMapping("/adminUpdateProduct")
 		public String updateProduct(@RequestBody ProductListDto dto, Model model) throws Exception{
 			Product product = Product.builder().build();
 			
@@ -214,7 +228,7 @@ public class AdminController {
 		
 		
 		// 관리자 --> 펫 리스트
-		@GetMapping("/petList")
+		@GetMapping("/adminPetList")
 		public String petList(Model model) {
 			List<PetDto> petDtoList = new ArrayList<>();
 			List<Pet> petList = petService.petFindAll();
