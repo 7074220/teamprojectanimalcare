@@ -71,32 +71,46 @@
 										<thead>
 											<tr>
 												<th>No</th>
-												<th>Time</th>
 												<th>Date</th>
+												<th>Time</th>
 												<th>Center</th>
 												<th>Status</th>
-												<th>Delete</th>
+												<!-- <th>Update</th> -->
+												<th>Update/Delete</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr th:each="visit,visitLatest : ${visitList}">
-												<td th:text="${visit.visitNo}"></td>
-												<td th:text="${visitList.size() - visitLatest.index}"></td>
-												<td th:text="${visit.visitTime}"></td>
+											<tr th:each="visit, rowStat : ${visitList}">
+												<td th:text="${visitList.size() - rowStat.index}"></td>
 												<td th:text="${#strings.substring(visit.visitDate.toString(), 0, 10)}">
 												</td>
-												<td th:text="${visit.Center.centerName}"></td>
 
+
+
+												<td> <!-- 13PM, 14PM ... 18PM -->
+													<span th:if="${visit.visitTime < 12}"
+														th:text="${visit.visitTime + ' AM'}"></span>
+													<span th:if="${visit.visitTime >= 12}"
+														th:text="${visit.visitTime + ' PM'}"></span>
+												</td>
+
+
+												<td th:text="${visit.Center.centerName}"></td>
 
 
 												<td th:text="${visit.visitStatus}"><span class="success">견학신청</span>
 												</td>
+
+												
+
 												<td>
+													<a th:if="${session.userName == '관리자'}" th:href="@{/updateVisit/{visitNo}(visitNo=${visit.visitNo})}" class="updateBtn">완료</a>
+
 													<button type="submit" class="deleteBtn"
 														th:id="'deleteBtn-' + ${visit.visitNo}">취소</button>
 												</td>
-												
 
+												
 											</tr>
 										</tbody>
 									</table>
@@ -146,7 +160,7 @@
 				});
 			});
 
-			
+
 
 
 

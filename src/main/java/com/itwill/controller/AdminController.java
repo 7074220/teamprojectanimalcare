@@ -2,15 +2,12 @@ package com.itwill.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,17 +15,13 @@ import com.itwill.dto.AdminUserListDto;
 import com.itwill.dto.PetDto;
 import com.itwill.dto.ProductInsertDto;
 import com.itwill.dto.ProductListDto;
-import com.itwill.dto.VisitAdminDto;
-import com.itwill.dto.VisitDto;
 import com.itwill.entity.Adopt;
-import com.itwill.entity.MyPet;
-import com.itwill.entity.Orders;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Product;
 import com.itwill.entity.Userinfo;
 import com.itwill.entity.Visit;
 import com.itwill.entity.Volunteer;
-import com.itwill.entity.Wish;
+import com.itwill.repository.VisitRepository;
 import com.itwill.service.AdoptService;
 import com.itwill.service.CartService;
 import com.itwill.service.MyPetService;
@@ -66,7 +59,8 @@ public class AdminController {
 		private PetService petService;
 		@Autowired
 		private VisitService visitService;
-		
+		@Autowired
+		private VisitRepository visitRepository;
 		/******************************* Userinfo ************************************/
 		
 		
@@ -262,6 +256,28 @@ public class AdminController {
 		    model.addAttribute("visitList", visitList);
 		    return "admin-visit";
 		}
-	
+		@GetMapping("/updateVisit/{visitNo}")
+		public String updateVisit(@PathVariable Long visitNo, Model model, HttpSession session) throws Exception {
+		    Long userNo = (Long) session.getAttribute("userNo");
+		    Userinfo userinfo = userInfoService.findUserByNo(userNo);
+		    Visit findVisit = visitService.findByVisitNo(visitNo);
+
+		    // 로그를 이용한 디버깅
+		    System.out.println("Before update: " + findVisit.getVisitStatus());
+
+		    // Visit 업데이트 로직
+		    findVisit.setVisitStatus("견학완료"); 
+		    visitService.updateVisit(findVisit);
+
+		    // 로그를 이용한 디버깅
+		    System.out.println("After update: " + findVisit.getVisitStatus());
+
+		    // 변경된 상태를 DB에 반영
+		    visitRepository.save(findVisit);
+
+		    return "redirect:/adminVisitList";
+		}
+
+
 		
 }

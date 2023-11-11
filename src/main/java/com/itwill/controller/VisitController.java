@@ -130,7 +130,7 @@ public class VisitController {
 
 			visitService.updateVisit(findVisit);
 		}
-		return "my-account-visit"; // 수정 실패 페이지로 이동
+		return "my-account-visit";
 	}
 
 	@GetMapping("/visitUpdate")
