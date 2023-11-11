@@ -195,12 +195,12 @@
                         </div>
                         <div class="col-lg-10 col-md-6 col-sm-7 col-8">
                             <div class="header_right_info">
-								
-								
-								<!--productList가 null이 아닐 때만 검색창 노출-->
+
+
+
                                 <div class="search_container mobail_s_none" th:if="${productList != null}">
                                    <form action="#">
-                                       <!--<div class="hover_category">
+                                       <!-- <div class="hover_category">
                                             <select class="select_option" name="select" id="categori1">
                                                 <option selected value="1">Select a categories</option>
                                                 <option value="2">Accessories</option>
@@ -219,7 +219,7 @@
                                                 <option value="15">Watchs</option>
                                                 <option value="16">Electronic</option>
                                             </select>                        
-                                       </div>-->
+                                       </div> -->
                                         <div class="search_box">
                                             <input placeholder="상품 검색..." type="text">
                                              <button type="submit"><span class="lnr lnr-magnifier"></span></button>
@@ -614,7 +614,36 @@
             </div>
         </div> 
     </header>
-	
+		<script>
+			function ajaxRequest(method, url, sendJsonObject) {
+				let returnResultJsonObject={};
+				$.ajax({
+					async:false,
+					method: method,
+					url: url,
+					contentType: 'application/json;UTF-8',
+					data: JSON.stringify(sendJsonObject),
+					type: 'json',
+					success: function(resultJsonObject) {
+						returnResultJsonObject = resultJsonObject;
+					}
+				});
+				return returnResultJsonObject;
+			}
+			
+			function searchProduct() {
+				alert('aaa');
+    			var searchTerm = document.getElementById("searchInput").value;
+				
+				let send = {
+					productName : searchTerm
+				}
+				
+				ajaxRequest("POST", "products/search", send);
+}
+			
+			
+		</script>
     </div>
     <!--header area end-->
 
