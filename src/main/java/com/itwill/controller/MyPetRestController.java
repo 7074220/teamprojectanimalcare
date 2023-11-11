@@ -30,6 +30,7 @@ import com.itwill.entity.Userinfo;
 import com.itwill.service.MyPetService;
 import com.itwill.service.UserInfoService;
 
+import groovyjarjarantlr4.v4.parse.GrammarTreeVisitor.mode_return;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpSession;
 
@@ -66,7 +67,61 @@ public class MyPetRestController {
 			return new ResponseEntity<MypetDto>(mypetDto,httpHeaders ,HttpStatus.OK);
 		}
 	 
-	 
+	// 로그인 상태에서 펫 등록 누름
+	 @Operation(summary = "마이펫 수정")
+	 @PostMapping("/updated")
+	 public ResponseEntity<MypetDto> MypetUpdate(@RequestBody MypetDto mypetDto , HttpSession session) throws Exception{
+		 	System.out.println(">>>>>>>>>>>>>>>>>>>>>>>맵핑");
+		 	Long userNo = (Long)session.getAttribute("userNo");	
+		 	if(userNo==null) {
+		 		throw new Exception("로그인을 해주세요");
+		 	}
+		 	Userinfo userinfo=  userInfoService.findUserByNo(userNo);
+		 	if(mypetDto.getMypetStatus()==1) {
+		 		//원래 리더의 번호 
+		 		//Long myPetLeaderNo= myPetService.findLeaderMyPet(userNo).getMypetNo();
+		 		//List<MyPet> mypetList = myPetService.findMyPetListByuserNo(userNo);
+		 		//새로 업데이트 할 리더의 번호 
+		 		//Long mypetNewLeaderNo= mypetDto.getMypetNo();
+		 		//임시 보관함에 원래 리더의 번호 넣기
+		 		//Long myPetTempNo=myPetLeaderNo;
+		 		//myPetLeaderNo=mypetNewLeaderNo;
+		 		//mypetNewLeaderNo=myPetTempNo;
+		 		//mypetDto.setMypetNo(mypetNewLeaderNo);
+				
+		 		List<MyPet> mypetList = myPetService.findMyPetListByuserNo(userNo);
+		 		List<MyPet> tempList = new ArrayList<MyPet>();
+		 		for (MyPet myPet : mypetList) {
+					MyPet temp = MyPet.builder()
+										.mypetName(myPet.getMypetName())
+										.mypetKind(myPet.getMypetKind())
+										.mypetBirthday(myPet.getMypetBirthday())
+										.userinfo(userinfo)
+										.build();
+					if(mypetDto.getMypetNo()!=myPet.getMypetNo()) {
+						tempList.add(temp);
+						myPetService.Delete(myPet.getMypetNo());
+					}
+				}
+		 		MyPet dtopet = MypetDto.toEntity(mypetDto);
+		 		dtopet.setUserinfo(userinfo);
+		 		myPetService.Update(dtopet);
+		 		for (MyPet myPet : tempList) {
+					myPetService.Create(myPet);
+				}
+		 		
+		 	}else {
+		 		System.out.println(">>>>>>>>>>> 대표아냐");
+		 		MyPet myPet = MypetDto.toEntity(mypetDto);
+			 	myPet.setUserinfo(userinfo);
+			 	myPetService.Update(myPet);
+		 	}
+		 	
+			HttpHeaders httpHeaders = new HttpHeaders();
+			httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+			
+			return new ResponseEntity<MypetDto>(mypetDto,httpHeaders ,HttpStatus.OK);
+		}
 	 
 	 
 	/*
