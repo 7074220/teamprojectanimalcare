@@ -66,6 +66,18 @@ public class ProductController {
 	}
 	*/
 	
+	
+	@GetMapping("/searchProduct")
+	public String searchProduct() {
+		
+		productService.findByContains(null);
+		
+		return "shop";
+	}
+	
+	
+	
+	
 	@GetMapping("/insertProduct")
 	// 상품등록 (관리자)
 	public String insertProduct(@RequestBody ProductInsertDto dto) {
@@ -93,25 +105,7 @@ public class ProductController {
 	}
 	
 	
-	
-	// 펫카테고리별로 구분 --> 상품 리스트 출력
-	@GetMapping("/adminProductList")
-	public String adminProductList(Model model, HttpSession session) {
-		List<ProductListDto> productListDto = new ArrayList<>();
-		List<Product> productList = new ArrayList<>();
-		
-		Long userNo = (Long) session.getAttribute("userNo");
-		
-		productList = productService.findAllByOrderByProductNoDesc();
-		
-		for (Product product : productList) {
-			productListDto.add(ProductListDto.toDto(product));
-		}
-		
-		model.addAttribute("productList", productListDto);
-		
-		return "shop";
-	}
+
 	
 	
 	
