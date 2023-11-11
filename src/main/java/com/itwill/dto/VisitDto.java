@@ -31,6 +31,8 @@ public class VisitDto {
 
 	private Long centerNo;
 
+	private Userinfo userinfo;
+	
 	public static Visit toEntity(VisitDto dto) {
 		Visit visit = Visit.builder()
 				.visitNo(dto.getVisitNo())
