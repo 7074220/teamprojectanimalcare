@@ -135,7 +135,7 @@ public class ProductController {
 				} else {
 					productList = productService.findAllProductByPetCategory(myPet.getMypetKind());
 				}
-			}else {
+			} else {
 				myPet = MyPet.builder().mypetKind("강아지").build();
 			}
 			
@@ -278,9 +278,10 @@ public class ProductController {
 	public String ProductPriceDesc(Model model, HttpSession session, @RequestParam String path) {
 		List<ProductPriceDescDto> productPriceDescDto = new ArrayList<>();
 		// 상품가격 비싼 것부터
+		
 		List<Product> productList = productService.findAllByOrderByProductPriceDesc();
 		Long userNo = (Long) session.getAttribute("userNo");
-		MyPet myPet = MyPet.builder().build();
+		MyPet myPet = MyPet.builder().mypetKind("강아지").build();
 		
 		String kindPath = "";
 		String categoryPath = "";
