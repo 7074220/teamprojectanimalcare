@@ -86,11 +86,11 @@
 													<!--<td th:text="${mypet.mypetNo}">1</td>-->
 
 													<td th:text="${mypet.mypetLeader}"></td>
-												 <td><a th:href="@{'/updateMyPet'}" th:text="${mypet.MypetSequence}">Link Text</a></td>
+												 <td><a th:href="@{updateMyPet(mypetNo=${mypet.mypetNo})}" th:text="${mypet.MypetSequence}">Link Text</a></td>
 												<!--	<td th:text="${mypet.MypetSequence}" th:id="${mypet.mypetNo}"></td>-->
-													<td><a th:href="@{'/updateMyPet'}" th:text="${mypet.mypetName}"></a></td>
-													<td><a th:href="@{'/updateMyPet'}" th:text="${mypet.mypetBirthday}"></a></td>
-													<td><a th:href="@{'/updateMyPet'}" th:text="${mypet.mypetKind}"></a></td>
+													<td><a th:href="@{updateMyPet(mypetNo=${mypet.mypetNo})}" th:text="${mypet.mypetName}"></a></td>
+													<td><a th:href="@{updateMyPet(mypetNo=${mypet.mypetNo})}" th:text="${mypet.mypetBirthday}"></a></td>
+													<td><a th:href="@{updateMyPet(mypetNo=${mypet.mypetNo})}" th:text="${mypet.mypetKind}"></a></td>
 													<td><a class="mypet_remove" th:id="${mypet.mypetNo}"><a
 															class="deleteCart"><i class="fa fa-trash-o"
 																th:id="${mypet.mypetNo}"></i></a></td>
@@ -147,7 +147,7 @@
 
 			$(document).ready(function () {
 				// 특정 요소를 클릭할 때 그 요소의 부모 행을 삭제
-				$(".mypet_remove").on("click", function(e) {
+				$(".fa").on("click", function(e) {
 					$(this).closest("tr").remove();
 					let mypetNo = $(e.target).attr('id');
 					let send={

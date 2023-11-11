@@ -22,6 +22,7 @@ public class MypetDto {
 	private LocalDateTime mypetBirthday;
 	private String mypetKind; 
 	private Long userNo;
+	private Integer mypetStatus;
 	 
 	 public static MyPet toEntity(MypetDto mypetDto) {
 		 return MyPet.builder()
