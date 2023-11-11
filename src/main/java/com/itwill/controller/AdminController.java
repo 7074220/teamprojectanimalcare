@@ -3,11 +3,14 @@ package com.itwill.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -15,12 +18,15 @@ import com.itwill.dto.AdminUserListDto;
 import com.itwill.dto.PetDto;
 import com.itwill.dto.ProductInsertDto;
 import com.itwill.dto.ProductListDto;
+import com.itwill.dto.VisitAdminDto;
+import com.itwill.dto.VisitDto;
 import com.itwill.entity.Adopt;
 import com.itwill.entity.MyPet;
 import com.itwill.entity.Orders;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Product;
 import com.itwill.entity.Userinfo;
+import com.itwill.entity.Visit;
 import com.itwill.entity.Volunteer;
 import com.itwill.entity.Wish;
 import com.itwill.service.AdoptService;
@@ -30,6 +36,7 @@ import com.itwill.service.OrderService;
 import com.itwill.service.PetService;
 import com.itwill.service.ProductService;
 import com.itwill.service.UserInfoService;
+import com.itwill.service.VisitService;
 import com.itwill.service.VolunteerService;
 import com.itwill.service.WishService;
 
@@ -57,7 +64,8 @@ public class AdminController {
 		private VolunteerService volunteerService;
 		@Autowired
 		private PetService petService;
-		
+		@Autowired
+		private VisitService visitService;
 		
 		/******************************* Userinfo ************************************/
 		
@@ -241,7 +249,19 @@ public class AdminController {
 			return "pet-list" ;
 		}
 		
-		
-		
+		// 관리자 --> 견학 리스트
+		@GetMapping("/adminVisitList")
+		public String findOrders(Model model, HttpSession  session) throws Exception {
+			Long userNo = (Long) session.getAttribute("userNo");
+			Userinfo userinfo = userInfoService.findUserByNo(userNo);
+			
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>"+userinfo);
+			List<Visit> visitList;
+			visitList = visitService.selectAllVisits();
+			
+		    model.addAttribute("visitList", visitList);
+		    return "admin-visit";
+		}
+	
 		
 }
