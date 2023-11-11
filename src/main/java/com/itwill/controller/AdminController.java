@@ -16,6 +16,7 @@ import com.itwill.dto.PetDto;
 import com.itwill.dto.ProductInsertDto;
 import com.itwill.dto.ProductListDto;
 import com.itwill.entity.Adopt;
+import com.itwill.entity.Center;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Product;
 import com.itwill.entity.Userinfo;
@@ -24,6 +25,7 @@ import com.itwill.entity.Volunteer;
 import com.itwill.repository.VisitRepository;
 import com.itwill.service.AdoptService;
 import com.itwill.service.CartService;
+import com.itwill.service.CenterService;
 import com.itwill.service.MyPetService;
 import com.itwill.service.OrderService;
 import com.itwill.service.PetService;
@@ -61,6 +63,8 @@ public class AdminController {
 		private VisitService visitService;
 		@Autowired
 		private VisitRepository visitRepository;
+		@Autowired
+		private CenterService centerService;
 		/******************************* Userinfo ************************************/
 		
 		
@@ -242,7 +246,7 @@ public class AdminController {
 			model.addAttribute("petList",petDtoList);
 			return "pet-list" ;
 		}
-		
+		/******************************* visit ************************************/
 		// 관리자 --> 견학 리스트
 		@GetMapping("/adminVisitList")
 		public String findOrders(Model model, HttpSession  session) throws Exception {
@@ -278,6 +282,13 @@ public class AdminController {
 		    return "redirect:/adminVisitList";
 		}
 
-
+		/******************************* center ************************************/
+		
+		@GetMapping("/centerListAll")
+		public String centerList(Model model) {
+		    List<Center> centerList = centerService.findAllCenters();
+		    model.addAttribute("centerList", centerList);
+		    return "admin-center";
+		}
 		
 }
