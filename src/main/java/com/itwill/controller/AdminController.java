@@ -169,18 +169,18 @@ public class AdminController {
 		    
 		    Adopt findAdopt = adoptService.findByAdoptNo(adoptNo);
 
-		    // 로그를 이용한 디버깅
-		    System.out.println("Before update: " + findAdopt.getAdoptStatus());
-
+		    
 		    // Visit 업데이트 로직
 		    findAdopt.setAdoptStatus("입양완료"); 
 		    adoptService.updateAdopt(findAdopt);
-		    // 로그를 이용한 디버깅
-		    System.out.println("After update: " + findAdopt.getAdoptStatus());
-
+		   
+		    Long petNo=findAdopt.getPet().getPetNo();
 		    // 변경된 상태를 DB에 반영
-		    adoptRepository.save(findAdopt);
-
+		   // adoptRepository.save(findAdopt);
+		    
+		   // petService.petRemove(petNo);
+		    
+		    	System.out.println(petNo);
 		    return "redirect:/adminAdoptList";
 		}
 		
@@ -197,7 +197,9 @@ public class AdminController {
 			
 			List<Volunteer> volunteerList;
 			volunteerList = volunteerService.findAllVolunteers();
-			
+			// volunteerDate를 기준으로 내림차순으로 정렬
+		    volunteerList.sort((v1, v2) -> v2.getVolunteerDate().compareTo(v1.getVolunteerDate()));
+		
 		    model.addAttribute("volunteerList", volunteerList);
 		    return "admin-volunteer";
 		}
@@ -211,23 +213,18 @@ public class AdminController {
 		    
 		    Volunteer findVolunteer = volunteerService.findByVolunteerNo(volunteerNo);
 
-		    // 로그를 이용한 디버깅
 		    System.out.println("Before update: " + findVolunteer.getVolunteerStatus());
 
-		    // Visit 업데이트 로직
 		    findVolunteer.setVolunteerStatus("봉사완료"); 
 		    volunteerService.updateVolunteer(findVolunteer);
 
-		    // 로그를 이용한 디버깅
 		    System.out.println("After update: " + findVolunteer.getVolunteerStatus());
 
-		    // 변경된 상태를 DB에 반영
 		    volunteerRepository.save(findVolunteer);
 
 		    return "redirect:/adminVolunteerList";
 		}
-		
-		
+
 		
 		
 		

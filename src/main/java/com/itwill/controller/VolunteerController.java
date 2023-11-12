@@ -124,6 +124,8 @@ public class VolunteerController {
 	
 	
 	
+	
+	
 	// userNo 로 봉사 리스트 조회. 로그인한 회원
 	@GetMapping("/volunteerByUserNo") 
 	public String findByVolunteerListUserNo(Model model, HttpSession session) throws Exception {
