@@ -169,7 +169,7 @@ public class AdminController {
 		
 		// 관리자 -> 봉사 리스트 조회
 		@GetMapping("/adminVolunteerList")
-		public String volunteerList(Model model, HttpSession session) throws Exception{
+		public String findVolunteerList(Model model, HttpSession session) throws Exception{
 			Long userNo = (Long) session.getAttribute("userNo");
 			Userinfo userinfo = userInfoService.findUserByNo(userNo);
 			
@@ -177,7 +177,7 @@ public class AdminController {
 			volunteerList = volunteerService.findAllVolunteers();
 			
 		    model.addAttribute("volunteerList", volunteerList);
-		    return "my-account-volunteer";
+		    return "admin-volunteer";
 		}
 		
 		

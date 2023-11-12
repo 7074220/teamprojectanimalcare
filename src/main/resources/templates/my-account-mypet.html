@@ -43,7 +43,10 @@
 									<li><a href="mypet" class="nav-link">마이펫</a></li>
 									<li><a href="couponList" class="nav-link">쿠폰</a></li>
 									<li><a href="adoptByUserNo" class="nav-link">입양</a></li>
-									<li><a href="volunteerByUserNo" class="nav-link">봉사</a></li>
+									<li><a th:if="${session.userName == '관리자'}" href="adminVolunteerList"
+											class="nav-link">관리자 전용봉사목록</a></li>
+									<li><a th:if="${session.userName != '관리자'}" href="volunteerByUserNo"
+											class="nav-link">봉사</a></li>  
 									<li><a th:if="${session.userName == '관리자'}" href="adminVisitList"
 											class="nav-link">관리자 전용견학목록</a></li>
 									<li><a th:if="${session.userName != '관리자'}" href="visitByUserNo"
