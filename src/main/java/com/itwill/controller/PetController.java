@@ -28,9 +28,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fasterxml.jackson.core.sym.Name;
 import com.itwill.dto.PetDto;
 import com.itwill.dto.UserWriteActionDto;
+import com.itwill.entity.Adopt;
 import com.itwill.entity.Center;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Userinfo;
+import com.itwill.repository.AdoptRepository;
+import com.itwill.service.AdoptService;
 import com.itwill.service.PetService;
 import com.itwill.service.UserInfoService;
 
@@ -43,6 +46,10 @@ public class PetController {
 PetService petService;
 @Autowired
 UserInfoService userInfoService;
+@Autowired
+AdoptRepository adoptRepository;
+@Autowired
+AdoptService adoptService;
 //@Autowired
 //팻 등록
 	@PostMapping("/insert_action")
@@ -64,7 +71,13 @@ UserInfoService userInfoService;
 		
 		Page<Pet> petList= petService.petFindAllPage(pageable);
 		for (Pet pet : petList) {
-			petDtoList.add(PetDto.toDto(pet));
+			/*
+			if(findAdopt.getAdoptStatus().equals("입양완료")) {
+				//petService.petRemove(findAdopt.getPet().getPetNo());
+			}else {
+				petDtoList.add(PetDto.toDto(pet));
+			}
+			*/
 		}
 		
 		
