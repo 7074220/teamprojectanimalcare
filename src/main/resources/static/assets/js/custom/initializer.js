@@ -14,8 +14,16 @@ function createInitializer() {
 		
 		addCustomFunctionHandlebars: function() {
 			/*****Handlebars 함수등록 */
+			 window.Handlebars.registerHelper('select', function( value, options ){
+				var $el = $('<select />').html( options.fn(this) );
+		        $el.find('[value="' + value + '"]').attr({'selected':'selected'});
+		        return $el.html();
+		    });
 			Handlebars.registerHelper('substring', function(str, start, end) {
 				return str.substring(start, end);
+			});
+			Handlebars.registerHelper('intToString', function(i) {
+				return i+'';
 			});
 			Handlebars.registerHelper('toUpper', function(str) {
 				return str.toUpperCase();
