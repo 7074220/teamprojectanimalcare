@@ -2,11 +2,12 @@ package com.itwill.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -15,25 +16,28 @@ import com.itwill.dto.PetDto;
 import com.itwill.dto.ProductInsertDto;
 import com.itwill.dto.ProductListDto;
 import com.itwill.entity.Adopt;
-import com.itwill.entity.MyPet;
-import com.itwill.entity.Orders;
+import com.itwill.entity.Center;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Product;
 import com.itwill.entity.Userinfo;
+import com.itwill.entity.Visit;
 import com.itwill.entity.Volunteer;
-import com.itwill.entity.Wish;
+import com.itwill.repository.VisitRepository;
 import com.itwill.service.AdoptService;
 import com.itwill.service.CartService;
+import com.itwill.service.CenterService;
 import com.itwill.service.MyPetService;
 import com.itwill.service.OrderService;
 import com.itwill.service.PetService;
 import com.itwill.service.ProductService;
 import com.itwill.service.UserInfoService;
+import com.itwill.service.VisitService;
 import com.itwill.service.VolunteerService;
 import com.itwill.service.WishService;
 
 import jakarta.servlet.http.HttpSession;
 
+@Controller
 public class AdminController {
 
 	
@@ -55,8 +59,12 @@ public class AdminController {
 		private VolunteerService volunteerService;
 		@Autowired
 		private PetService petService;
-		
-		
+		@Autowired
+		private VisitService visitService;
+		@Autowired
+		private VisitRepository visitRepository;
+		@Autowired
+		private CenterService centerService;
 		/******************************* Userinfo ************************************/
 		
 		
@@ -80,7 +88,19 @@ public class AdminController {
 		}
 		
 		
-		
+		// 관리자 --> 마이페이지 이동
+		@GetMapping(value="/adminUserinfo")
+		public String view(Model model, HttpSession session) throws Exception{
+			Long userNo = (Long)session.getAttribute("userNo");
+			if(userNo==null) {
+				throw new Exception("로그인을 해주세요");
+			}
+			Userinfo userinfo = userInfoService.findUserByNo(userNo);
+			model.addAttribute("userinfo", userinfo);
+			
+			return "admin-userinfo";
+			
+		}
 		
 		/*
 		 
@@ -139,7 +159,7 @@ public class AdminController {
 		
 		
 		// 관리자 --> 봉사신청 리스트
-		@GetMapping("/volunteerList") // 봉사 목록 전체 조회. 관리자
+		@GetMapping("/adminVolunteerList") // 봉사 목록 전체 조회. 관리자
 		public String volunteerList(Model model) {
 			List<Volunteer> volunteers = volunteerService.findAllVolunteers();    
 		    model.addAttribute("volunteers", volunteers);
@@ -163,7 +183,7 @@ public class AdminController {
 			
 			Long userNo = (Long) session.getAttribute("userNo");
 			
-			productList = productService.findAllByOrderByProductNoDesc();
+			productList = productService.findAllByOrderByProductNoAsc();
 			
 			for (Product product : productList) {
 				productListDto.add(ProductListDto.toDto(product));
@@ -171,14 +191,14 @@ public class AdminController {
 			
 			model.addAttribute("productList", productListDto);
 			
-			return "shop";
+			return "admin-product";
 		}
 		
 		
 		
 		
 		// 관리자 --> 상품 추가
-		@GetMapping("insertProduct")
+		@GetMapping("/adminInsertProduct")
 		public String insertProduct(@RequestBody ProductInsertDto dto) {
 			
 			productService.insertProduct(dto.toEntity(dto));
@@ -190,7 +210,7 @@ public class AdminController {
 		
 		
 		// 관리자 --> 상품정보 수정
-		@GetMapping("/updateProduct")
+		@GetMapping("/adminUpdateProduct")
 		public String updateProduct(@RequestBody ProductListDto dto, Model model) throws Exception{
 			Product product = Product.builder().build();
 			
@@ -214,7 +234,7 @@ public class AdminController {
 		
 		
 		// 관리자 --> 펫 리스트
-		@GetMapping("/petList")
+		@GetMapping("/adminPetList")
 		public String petList(Model model) {
 			List<PetDto> petDtoList = new ArrayList<>();
 			List<Pet> petList = petService.petFindAll();
@@ -226,8 +246,49 @@ public class AdminController {
 			model.addAttribute("petList",petDtoList);
 			return "pet-list" ;
 		}
+		/******************************* visit ************************************/
+		// 관리자 --> 견학 리스트
+		@GetMapping("/adminVisitList")
+		public String findOrders(Model model, HttpSession  session) throws Exception {
+			Long userNo = (Long) session.getAttribute("userNo");
+			Userinfo userinfo = userInfoService.findUserByNo(userNo);
+			
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>"+userinfo);
+			List<Visit> visitList;
+			visitList = visitService.selectAllVisits();
+			
+		    model.addAttribute("visitList", visitList);
+		    return "admin-visit";
+		}
+		@GetMapping("/updateVisit/{visitNo}")
+		public String updateVisit(@PathVariable Long visitNo, Model model, HttpSession session) throws Exception {
+		    Long userNo = (Long) session.getAttribute("userNo");
+		    Userinfo userinfo = userInfoService.findUserByNo(userNo);
+		    Visit findVisit = visitService.findByVisitNo(visitNo);
+
+		    // 로그를 이용한 디버깅
+		    System.out.println("Before update: " + findVisit.getVisitStatus());
+
+		    // Visit 업데이트 로직
+		    findVisit.setVisitStatus("견학완료"); 
+		    visitService.updateVisit(findVisit);
+
+		    // 로그를 이용한 디버깅
+		    System.out.println("After update: " + findVisit.getVisitStatus());
+
+		    // 변경된 상태를 DB에 반영
+		    visitRepository.save(findVisit);
+
+		    return "redirect:/adminVisitList";
+		}
+
+		/******************************* center ************************************/
 		
-		
-		
+		@GetMapping("/centerListAll")
+		public String centerList(Model model) {
+		    List<Center> centerList = centerService.findAllCenters();
+		    model.addAttribute("centerList", centerList);
+		    return "admin-center";
+		}
 		
 }

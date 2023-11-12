@@ -195,8 +195,11 @@
                         </div>
                         <div class="col-lg-10 col-md-6 col-sm-7 col-8">
                             <div class="header_right_info">
+
+
+
                                 <div class="search_container mobail_s_none" th:if="${productList != null}">
-                                   <form action="#">
+                                   <form>
                                        <!-- <div class="hover_category">
                                             <select class="select_option" name="select" id="categori1">
                                                 <option selected value="1">Select a categories</option>
@@ -217,16 +220,19 @@
                                                 <option value="16">Electronic</option>
                                             </select>                        
                                        </div> -->
+										<div class="search_box">
+                                            <input id="searchInput1" placeholder="Search product..." type="text">
+                                             <button type="button" onclick="searchProduct(event)"><span class="lnr lnr-magnifier"></span></button>
+                                    	</div>	
                                         <!--<div class="search_box">
-                                            <input placeholder="Search product..." type="text">
+                                            <input placeholder="상품 검색..." type="text">
                                              <button type="submit"><span class="lnr lnr-magnifier"></span></button>
                                         </div>-->
-                                        <div class="search_box">
-                                            <input id="searchInput" placeholder="Search product..." type="text">
-                                             <button onclick="searchProduct()"><span class="lnr lnr-magnifier"></span></button>
-                                        </div>
                                     </form>
                                 </div>
+                                
+                                
+                                
                                 <div class="header_account_area">
                                     <div class="header_account_list register">
                                         <ul th:if="${session.userNo}==null">
@@ -329,7 +335,7 @@
                     <div class="row align-items-center">
                         <div class="col-12 col-md-6 mobail_s_block">
                             <div class="search_container">
-                               <form action="#">
+                               <form method="POST">
                                    <!--<div class="hover_category">
                                         <select class="select_option" name="select" id="categori2">
                                             <option selected value="1">Select a categories</option>
@@ -351,9 +357,13 @@
                                         </select>                        
                                    </div>-->
                                     <div class="search_box">
-                                        <input id="searchInput" placeholder="Search product..." type="text">
-                                         <button type="submit"><span class="lnr lnr-magnifier"></span></button>
+                                        <input id="searchInput2" placeholder="Search product..." type="text">
+                                         <button onclick="searchProduct()" type="button"><span class="lnr lnr-magnifier"></span></button>
                                     </div>
+                                   <!-- <div class="search_box">
+                                            <input id="searchInput" placeholder="Search product..." type="text">
+                                             <button onclick="searchProduct()"><span class="lnr lnr-magnifier"></span></button>
+                                    </div>-->
                                 </form>
                             </div>
                         </div>
@@ -629,15 +639,37 @@
 				return returnResultJsonObject;
 			}
 			
+			function shop_html(responseJsonObject = {}) {
+				let htmlTemplate =
+				`<div class="product_content grid_content">
+										<h4 class="product_name"><a href="product-details.html"
+												th:text="${product.productName}"
+												th:href="@{productDetail(productNo=${product.productNo})}">상품 이름</a>
+										</h4>
+										<h5 class="old_price" th:text="${'별점 : ' + product.productStarAvg}">$362.00</h5>
+										<p><a href="#" th:text="${product.productPetCategory}">펫 카테고리</a></p>
+										<div class="price_box">
+											<span class="current_price" th:text="${#numbers.formatInteger(product.productPrice, 3, 'COMMA') + '원'}">상품 가격</span>
+										</div>
+									</div>`;
+				
+				let bindTemplate = Handlebars.compile(htmlTemplate);
+				let resultTemplate = bindTemplate(responseJsonObject);
+				
+				return resultTemplate;
+			}
+			
 			function searchProduct() {
 				alert('aaa');
-    			var searchTerm = document.getElementById("searchInput").value;
+    			var searchTerm = $('#searchInput1').val();
 				
 				let send = {
 					productName : searchTerm
 				}
 				
-				ajaxRequest("POST", "products/search", send);
+				let responseJsonObject = ajaxRequest("POST", "product/products/search", send);
+				let html = shop_html(responseJsonObject);
+				$('#productList').html(html);
 			}
 			
 			

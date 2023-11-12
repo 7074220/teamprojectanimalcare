@@ -1,0 +1,242 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='마이페이지')">
+
+<head>
+	<title>Safira - my account</title>
+	<style>
+		.modal-dialog {
+			margin: auto;
+			margin-top: 20vh;
+			/* 회원탈퇴창 가운데 정도로 떨어트림 */
+
+		}
+
+		#visitTable {
+			width: 1000px;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<!--header area start-->
+	<th:block layout:fragment="content">
+
+		<!-- my account start  -->
+		<section class="main_content_area">
+			<div class="container">
+				<div class="account_dashboard">
+					<div class="row">
+						<div class="col-sm-12 col-md-3 col-lg-3">
+							<!-- Nav tabs -->
+							<div class="dashboard_tab_button">
+								<ul role="tablist" class="nav flex-column dashboard-list">
+									<li><a href="userinfo" class="nav-link">내정보</a></li>
+									<li><a href="userinfo/mypet" class="nav-link">마이펫</a></li>
+									<li><a href="couponList" class="nav-link">쿠폰</a></li>
+									<li><a href="adoptByUserNo" class="nav-link">입양</a></li>
+									<li> <a th:if="${session.userName == '관리자'}" href="volunteerList"
+											class="nav-link">관리자
+											전용봉사목록</a></li>
+									<li> <a th:if="${session.userName != '관리자'}" href="volunteerByUserNo"
+											class="nav-link">봉사</a></li>
+									<li><a th:if="${session.userName == '관리자'}" href="adminVisitList"
+											class="nav-link">관리자 전용견학목록</a></li>
+									<li><a th:if="${session.userName != '관리자'}" href="visitByUserNo"
+											class="nav-link">견학</a></li>
+									<li> <a th:if="${session.userName == '관리자'}" href="ordersList" class="nav-link">관리자
+											전용주문목록</a></li>
+									<li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a>
+									</li>
+									<li><a href="logout" class="nav-link">로그아웃</a></li>
+									<li><a href="#" data-toggle="modal" data-target="#deleteModal"
+											class="nav-link">회원탈퇴</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-9 col-lg-9">
+							<!-- Tab panes -->
+							<div class="tab-content dashboard_content">
+
+
+
+
+
+								<!--  <div class="tab-pane fade" id="visit">-->
+								<h3>견학</h3>
+								<button type="button" class="btn btn-primary" data-toggle="modal"
+									data-target="#addCenterModal">
+									추가
+								</button>
+								<!-- 모달 -->
+								<div class="modal fade" id="addCenterModal" tabindex="-1" role="dialog"
+									aria-labelledby="addCenterModalLabel" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="addCenterModalLabel">보호소 추가</h5>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<!-- 입력 폼 -->
+												<form id="addCenterForm"
+													onsubmit="event.preventDefault(); submitForm();">
+
+													<div class="form-group">
+														<label for="centerName">이름</label>
+														<input type="text" class="form-control" id="centerName"
+															required>
+													</div>
+													<div class="form-group">
+														<label for="centerPhoneNumber">연락처</label>
+														<input type="text" class="form-control" id="centerPhoneNumber"
+															required>
+													</div>
+													<div class="form-group">
+														<label for="centerLocal">지역</label>
+														<input type="text" class="form-control" id="centerLocal"
+															required>
+													</div>
+													<div class="form-group">
+														<label for="centerImage">이미지 URL</label>
+														<input type="text" class="form-control" id="centerImage"
+															required>
+													</div>
+													<div class="form-group">
+														<label for="centerOpenCloseTime">영업 시간</label>
+														<input type="text" class="form-control" id="centerOpenCloseTime"
+															required>
+													</div>
+													<button type="submit" class="btn btn-primary"
+														onclick="submitForm()">추가</button>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="table-responsive" id="visitTable">
+									<table class="table">
+										<thead>
+											<tr>
+												<th>번호</th>
+												<th>이름</th>
+												<th>연락처</th>
+												<th>지역</th>
+												<th>영업시간</th>
+
+												<th>Update/Delete</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="center: ${centerList}">
+												<td th:text="${center.centerNo}"></td>
+												<td th:text="${center.centerName}"></td>
+												<td th:text="${center.centerPhoneNumber}">
+												</td>
+												<td th:text="${center.centerLocal}"></td>
+												<td th:text="${center.centerOpenCloseTime}"></td>
+
+
+
+
+
+
+												<td>
+
+
+													<button type="submit" class="deleteBtn"
+														th:id="'deleteBtn-' + ${center.centerNo}">취소</button>
+												</td>
+
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<script>
+			$('.deleteBtn').on('click', function (e) {
+				e.preventDefault();
+				let id = $(this).attr('id');
+				let no = id.split('-')[1];
+
+				if (isNaN(no)) {
+					alert('centerNo 가져오기 실패');
+					return;
+				}
+
+				let sendJsonObject = {"centerNo": no};
+				let $row = $(this).closest('tr');
+
+				$.ajax({
+					type: 'DELETE',
+					url: 'center/' + no,
+					data: JSON.stringify(sendJsonObject),
+					contentType: 'application/json;UTF-8',
+					success: function (response) {
+						if (response && response.centerNo == null) {
+							alert('센터 정보가 없음');
+						} else {
+							alert('센터 삭제가 완료되었습니다.');
+							$row.remove();
+							// 다른 동작 수행
+						}
+					},
+					error: function () {
+						alert('삭제 요청 중 오류가 발생했습니다.');
+					}
+				});
+			});
+
+
+
+
+		</script>
+
+		<!--<script> 실패..
+			function submitForm() {
+				// 폼 데이터를 가져와서 서버로 전송
+				var formData = {
+					centerName: $('#centerName').val(),
+					phoneNumber: $('#centerPhoneNumber').val(),
+					centerLocal: $('#centerLocal').val(),
+					centerImage: $('#centerImage').val(),
+					centerOpenCloseTime: $('#centerOpenCloseTime').val()
+					
+				};
+
+				$.ajax({
+					type: 'POST',
+					url: '',
+					contentType: 'application/json',
+					data: JSON.stringify(formData),
+					success: function (data) {
+						// 성공 시 처리
+						console.log('데이터 추가 성공:', data);
+						$('#addCenterModal').modal('hide'); // 모달 닫기
+					},
+					error: function (error) {
+						// 에러 처리
+						console.error('데이터 추가 에러:', error);
+					}
+				});
+			}
+
+		</script>-->
+	</th:block>
+
+
+
+</body>
+
+</html>
