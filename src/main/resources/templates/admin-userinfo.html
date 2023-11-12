@@ -11,7 +11,7 @@
 			/* 회원탈퇴창 가운데 정도로 떨어트림 */
 			
 	}
-			#visitTable{
+			#userinfoTable{
 		width: 1000px;
 		}
 	</style>
@@ -187,7 +187,7 @@
 							<!-- Nav tabs -->
 							<div class="dashboard_tab_button">
 	                            <ul role="tablist" class="nav flex-column dashboard-list">
-	                                <li><a href="adminUserinfo" class="nav-link">회원 관리</a></li>
+	                                <li><a href="adminUserList" class="nav-link">회원 관리</a></li>
 	                                <li><a href="adminProductList"  class="nav-link">상품 관리</a></li>
 	                                <li> <a th:if="${session.userName == '관리자'}" href="ordersList" class="nav-link">주문 관리</a></li>
 	                                <!-- <li><a href="couponList"  class="nav-link">주문 관리</a></li> -->
@@ -217,7 +217,7 @@
 
 								<!--  <div class="tab-pane fade" id="visit">-->
 								<h3>회원관리</h3>
-								<div class="table-responsive" id="visitTable">
+								<div class="table-responsive" id="userinfoTable">
 									<table class="table" >
 										<thead>
 											<tr>
@@ -228,21 +228,21 @@
 												<th>성별</th>
 												<th>주소</th>
 												<th>연락처</th>
+												<th>탈퇴</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr th:each="visit,visitLatest : ${visitList}">
+											<tr th:each="userinfo:${adminUserList}">
 												<!-- <td th:text="${visit.visitNo}"></td>-->
-												<td th:text="${회원번호}"></td>
-												<td th:text="${아이디}"></td>
-												<td th:text="${이름}"></td>
-												<td th:text="${포인트}"></td>
-												<td th:text="${성별}"><span class="success">견학신청</span></td>
-												<td th:text="${주소}"></td>
-												<td th:text="${연락처}"></td>
+												<td th:text="${userinfo.userNo}"></td>
+												<td th:text="${userinfo.userId}"></td>
+												<td th:text="${userinfo.userName}"></td>
+												<td th:text="${userinfo.userPoint}"></td>
+												<td th:text="${userinfo.userGender}"><span class="success">견학신청</span></td>
+												<td th:text="${userinfo.userAddress}"></td>
+												<td th:text="${userinfo.userPhoneNumber}"></td>
 												<td>
-													<button type="submit" class="deleteBtn"
-														th:id="'deleteBtn-' + ${visit.visitNo}">취소</button>
+													<button type="submit" class="deleteBtn">탈퇴</button>
 												</td>
 											</tr>
 										</tbody>
