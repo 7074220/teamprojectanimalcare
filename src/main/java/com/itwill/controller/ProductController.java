@@ -84,11 +84,17 @@ public class ProductController {
         return "product_insert_form"; 
     }
 	
-	@GetMapping("/insertProduct")
+	
+	@GetMapping("/productUpdateForm")
+	public String productUpdateForm() {
+		return "product_update_form"; 
+	}
+	
+	/*
+	@PostMapping("/insertProduct")
 	// 상품등록 (관리자)
 	public String insertProduct(@RequestParam("imageFile1") MultipartFile file1, @RequestParam("imageFile2") MultipartFile file2, @RequestParam("productName") String productName, 
-								@RequestParam("productPrice") Integer productPrice, @RequestParam("productCategory") String productCategory, @RequestParam("productPetCategory") String productPetCategory, 
-								@RequestParam("productImage") String productImage, @RequestParam("productDetailImage") String productDetailImage) throws Exception {
+								@RequestParam("productPrice") Integer productPrice, @RequestParam("productCategory") String productCategory, @RequestParam("productPetCategory") String productPetCategory) throws Exception {
 		
 		String uploadPath1 = System.getProperty("user.dir") + "/src/main/resources/static/image/product/";
 	    String originalFileName1 = file1.getOriginalFilename();
@@ -102,7 +108,7 @@ public class ProductController {
 	    String uploadPath2 = System.getProperty("user.dir") + "/src/main/resources/static/image/product/";
 	    String originalFileName2 = file2.getOriginalFilename();
 	    UUID uuid2 = UUID.randomUUID();
-	    String savedFileName2 = uuid2.toString() + "_" + originalFileName1;
+	    String savedFileName2 = uuid2.toString() + "_" + originalFileName2;
 	    
 	    File newFile2 = new File(uploadPath2 + savedFileName2);
 	    
@@ -121,7 +127,7 @@ public class ProductController {
 		
 		return "shop";
 	}
-	
+	*/
 	
 	@GetMapping("/updateProduct")
 	// 상품 업데이트 (관리자)

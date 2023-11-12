@@ -1,19 +1,24 @@
 package com.itwill.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.dto.AdminUserListDto;
 import com.itwill.dto.OrdersDto;
@@ -177,9 +182,11 @@ public class AdminController {
 		    // Visit 업데이트 로직
 		    findAdopt.setAdoptStatus("입양완료"); 
 		    adoptService.updateAdopt(findAdopt);
-		   
+		   adoptService.deleteAdopt(findAdopt.getAdoptNo());
+		  Pet pet= petService.petFindById(findAdopt.getPet().getPetNo());
+		  petService.petRemove(pet.getPetNo());
 		    // 변경된 상태를 DB에 반영
-		    adoptRepository.save(findAdopt);
+		    //adoptRepository.save(findAdopt);
 		   
 		    
 		    return "redirect:/adminAdoptList";
@@ -228,6 +235,7 @@ public class AdminController {
 		}
 		*/
 		
+		//@Transactional
 		@GetMapping("/updateVolunteer/{volunteerNo}")
 		public String updateVolunteer(@PathVariable Long volunteerNo, Model model, HttpSession session) throws Exception {
 			try {
@@ -253,7 +261,7 @@ public class AdminController {
 
 		            // 봉사 완료 시 3000포인트 지급 및 누적 포인트 계산
 		            if (user != null) {
-		                userPoint = (userPoint != null) ? userPoint + 3000 : 3000;
+		                userPoint = (user.getUserPoint() != null) ? user.getUserPoint() + 3000 : 3000;
 		                user.setUserPoint(userPoint);
 		                userInfoService.update(user);
 		                // 세션에도 업데이트
@@ -307,31 +315,91 @@ public class AdminController {
 		
 		
 		// 관리자 --> 상품 추가
-		@GetMapping("/adminInsertProduct")
-		public String insertProduct(@RequestBody ProductInsertDto dto) {
-			
-			productService.insertProduct(dto.toEntity(dto));
-			
-			return "shop";
+		@PostMapping("/adminInsertProduct")
+		public String insertProduct(@RequestParam("imageFile1") MultipartFile file1, @RequestParam("imageFile2") MultipartFile file2, @RequestParam("productName") String productName, 
+				@RequestParam("productPrice") Integer productPrice, @RequestParam("productCategory") String productCategory, @RequestParam("productPetCategory") String productPetCategory, Model model) throws Exception {
+
+		String uploadPath1 = System.getProperty("user.dir") + "/src/main/resources/static/image/product/";
+		String originalFileName1 = file1.getOriginalFilename();
+		UUID uuid1 = UUID.randomUUID();
+		String savedFileName1 = uuid1.toString() + "_" + originalFileName1;
+		
+		File newFile1 = new File(uploadPath1 + savedFileName1);
+		
+		file1.transferTo(newFile1);
+		
+		String uploadPath2 = System.getProperty("user.dir") + "/src/main/resources/static/image/product/";
+		String originalFileName2 = file2.getOriginalFilename();
+		UUID uuid2 = UUID.randomUUID();
+		String savedFileName2 = uuid2.toString() + "_" + originalFileName2;
+		
+		File newFile2 = new File(uploadPath2 + savedFileName2);
+		
+		file2.transferTo(newFile2);
+		
+		Product createProduct = Product.builder()
+							.productName(productName)
+							.productPrice(productPrice)
+							.productCategory(productCategory)
+							.productPetCategory(productPetCategory)
+							.productImage(savedFileName1)
+							.productDetailImage(savedFileName2)
+							.productStarAvg(0D)
+							.productQty(0)
+							.build();
+		
+		productService.insertProduct(createProduct);
+		
+		List<ProductListDto> productListDto = new ArrayList<>();
+		List<Product> productList = new ArrayList<>();
+		
+		productList = productService.findAllByOrderByProductNoAsc();
+		
+		for (Product product : productList) {
+			productListDto.add(ProductListDto.toDto(product));
 		}
+		
+		model.addAttribute("productList", productListDto);
+		
+		return "admin-product";
+}
 		
 		
 		
 		
 		// 관리자 --> 상품정보 수정
-		@GetMapping("/adminUpdateProduct")
-		public String updateProduct(@RequestBody ProductListDto dto, Model model) throws Exception{
-			Product product = Product.builder().build();
+		@PostMapping("/adminUpdateProduct")
+		public String upateProduct(@RequestParam("imageFile") MultipartFile file, @RequestParam("productName") String productName, @RequestParam("productPrice") Integer productPrice, Model model) throws Exception {
+
+			String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/product/";
+			String originalFileName = file.getOriginalFilename();
+			UUID uuid = UUID.randomUUID();
+			String savedFileName = uuid.toString() + "_" + originalFileName;
 			
-			product.setProductPrice(dto.getProductPrice());
-			product.setProductImage(dto.getProductImage());
-			product.setProductName(dto.getProductName());
+			File newFile = new File(uploadPath + savedFileName);
 			
-			productService.updateProduct(product);
+			file.transferTo(newFile);
 			
-			model.addAttribute("product", product);
+			Product update = Product.builder().build();
 			
-			return "shop";
+			update.setProductName(productName);
+			update.setProductPrice(productPrice);
+			update.setProductImage(savedFileName);
+			
+			productService.updateProduct(update);
+			
+			List<ProductListDto> productListDto = new ArrayList<>();
+			List<Product> productList = new ArrayList<>();
+			
+			productList = productService.findAllByOrderByProductNoAsc();
+			
+			for (Product product : productList) {
+				productListDto.add(ProductListDto.toDto(product));
+			}
+			
+			model.addAttribute("productList", productListDto);
+			
+			return "admin-product";
 		}
 		
 		

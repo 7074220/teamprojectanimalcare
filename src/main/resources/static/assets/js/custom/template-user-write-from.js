@@ -79,14 +79,14 @@ export function user_write_form(responseJsonObject = {}) {
 								<label>우편주소<span></span></label>
 								<button type="button" class="btn btn-secondary btn-sm"
 									onclick="execution_daum_address()">주소찾기</button>
-								<input placeholder="우편번호" type="text" id="postcode">
+								<input placeholder="우편번호" type="text" id="postcode" name="postcode">
 								
 							</div>
 							<div class="col-12 mb-20">
 										<input placeholder="기본주소" input readonly="readonly"
-											id="ordersAddress1"> <input placeholder="기본주소" input
-											readonly="readonly" id="ordersAddress2"> <input
-											placeholder="상세주소" type="text" id="ordersAddress3">
+											id="ordersAddress1" name="ordersAddress1"> <input placeholder="기본주소" input
+											readonly="readonly" id="ordersAddress2" name="ordersAddress2"> <input
+											placeholder="상세주소" type="text" id="ordersAddress3" name="ordersAddress3">
 									</div>
                 			
                             <div class="login_submit">
