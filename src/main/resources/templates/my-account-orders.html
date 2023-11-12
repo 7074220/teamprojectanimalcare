@@ -463,6 +463,8 @@
                                           <tbody>
                                           {{#each orderItemDtos}}
                                              <tr>
+                                          {{#each this}}
+                                             <tr data-oiNo="{{oiNo}}">
                                                 <td id="oiNo">{{oiNo}}</td>
                                                 <td>{{product.productPrice}}</td>
                                                 <td ><span class="success">{{product.productName}}</span></td>
@@ -654,7 +656,6 @@
 			
 			function orderitemView(responseJsonObject = {}) {
 
-
 		         let htmltemplate =
 		         `<div class="modal-body" id="reviewContent">
 				<!-- 주문 상세 내용이 여기에 로드됩니다 -->
@@ -694,7 +695,7 @@
 					</div>
 				</div>
 			</div>`;
-		         
+			
 		         let bindTemplate = Handlebars.compile(htmltemplate);
 		         let resultTemplate = bindTemplate(responseJsonObject);
 		         
@@ -728,11 +729,11 @@
 			e.preventDefault();
 			let productNo = e.target.id;
 			let userNo = $('#userNo').val();
-			alert('리뷰쓰기');
+			//alert('리뷰쓰기');
 			
 			//let oiNo = $('#oiNo').text();
 			
-			alert(oiNo);
+			//alert(oiNo);
 			console.log('oiNo:', oiNo); // 콘솔에 oiNo를 출력하여 디버깅 정보 확인
 			let send = {
 				oiNo : oiNo
@@ -761,7 +762,7 @@
 		}
 		
 		function reviewComplete(e){
-			alert('리뷰완료!');
+			//alert('리뷰완료!');
 			
 			let oiNo = e.target.id;
 				
@@ -778,7 +779,7 @@
 			let productNo = $('.write-review').attr('id');
 		
 			
-			alert('템번호'+oiNo);
+			//alert('템번호'+oiNo);
 			
 			let sendJsonObject = {
 				userNo: userNo,
@@ -788,14 +789,17 @@
 				boardContent: review_comment,
 				boardDate: formattedDate
 			};
+			
 			let responseObject = ajaxRequest('POST', 'reviewBoard/createReviewBoard', sendJsonObject);
-
+			let button = $(`#modalContent tr[data-oiNo="${oiNo}"] .write-review`);
+			
 			if (responseObject.userNo == null) {
 				alert('로그인이 필요합니다.');
 				window.location.href = 'index';	// 로그인 창으로 이동
 			} else {
 				alert("리뷰작성이 완료되었습니다.");
-				$('.write-review').html('수정/완료');
+				//$('.write-review').html('수정/완료');
+				button.text("수정/완료");
 			}
 			
 			

@@ -27,9 +27,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwill.dto.AdoptDto;
 import com.itwill.entity.Adopt;
+import com.itwill.entity.Center;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Userinfo;
 import com.itwill.service.AdoptService;
+import com.itwill.service.CenterService;
 import com.itwill.service.PetService;
 import com.itwill.service.UserInfoService;
 
@@ -44,11 +46,16 @@ public class AdoptController {
 	private PetService petService;
 	@Autowired
 	private UserInfoService userInfoService;
+	@Autowired
+	private CenterService centerService;
 	// 입양신청
-	@GetMapping(value = "/adopt", params = "petNo")
-	public String apply(Model model, @RequestParam(name = "petNo") Long petNo) {
+	@GetMapping(value = "/adopt")
+	public String apply(Model model, @RequestParam(name = "petNo") Long petNo ) {
 		Pet pet = petService.petFindById(petNo);
+		Center center=pet.getCenter();
 		model.addAttribute("pet", pet);
+		//Center center=centerService.findByCenterNo(centerNo);
+		model.addAttribute("center", center);
 		return "adopt";
 	}
 
@@ -115,10 +122,13 @@ public class AdoptController {
         // adoptNo를 사용하여 입양 정보를 불러와 모델에 추가
         Adopt adopt = adoptService.findByAdoptNo(adoptNo);
         Pet pet=petService.petFindById(petNo);
+        Center center=pet.getCenter();
         
         model.addAttribute("adopt", adopt);
         model.addAttribute("adoptNo", adoptNo);
         model.addAttribute("pet", pet);
+        model.addAttribute("center", center);
+        
       //  model.addAttribute("userNo", userNo);
         return "adoptUpdate"; // adopt.html 페이지로 이동
     }

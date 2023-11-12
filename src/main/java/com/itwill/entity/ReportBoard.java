@@ -55,6 +55,7 @@ public class ReportBoard {
 	
 	// 유기견 대표이미지
 	private String boardImage;
+	private String boardFindPlace;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_no")

@@ -179,6 +179,9 @@ public class OrderRestController {
 		orderService.insertOrder(orderDto.toEntity(orderDto));
 		cartService.deleteByUserId(userNo);
 		*/
+		int cartCount = cartService.findAllCartByUserId(userNo).size();
+		session.setAttribute("cartCount", cartCount);
+		
 		return new ResponseEntity<OrdersDto>(orderDto,httpHeaders,HttpStatus.CREATED);
 	}
 	

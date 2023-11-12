@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="layout/layout(title='volunteer')">
+	layout:decorate="layout/layout(title='volunteerUpdate')">
 
 
 
@@ -47,11 +47,11 @@
 </style>
 
 
-
-<script> <!-- 당일 날짜 선택 불가 -->
+<!-- 당일 날짜 선택 불가. body 안에 있으면 적용 안됨 -->
+<script>
 //페이지 로드 시 실행
 window.onload = function() {
-    var volunteerDate = document.getElementById('volunteerDate');
+    var visitDate = document.getElementById('visitDate');
     var today = new Date();
     // 한국 시간대 (UTC+9)로 변경
     today.setHours(today.getHours() + 9);
@@ -59,7 +59,7 @@ window.onload = function() {
     afterTomorrow.setDate(afterTomorrow.getDate() + 1); // 내일 날짜 계산
     var afterTomorrowString = afterTomorrow.toISOString().slice(0, 10);
 
-    volunteerDate.value = afterTomorrowString;
+    visitDate.value = afterTomorrowString;
 
     var minDate = new Date(today);
     minDate.setHours(9, 0, 0, 0);
@@ -67,11 +67,11 @@ window.onload = function() {
         minDate.setDate(minDate.getDate() + 1);
     }
     var minDateString = minDate.toISOString().slice(0, 10);
-    volunteerDate.setAttribute('min', minDateString);
+    visitDate.setAttribute('min', minDateString);
 
-    volunteerDate.removeAttribute('max');
-}; 
-</script>
+    visitDate.removeAttribute('max');
+};
+</script> 
 
 
 </head>
@@ -111,55 +111,67 @@ window.onload = function() {
 							
 							<!-- 센터 정보 -->
 							<h2>센터 정보</h2>
-							<!-- <p>센터 번호: <span th:text="${center.centerNo}">10</span></p> -->
-							<p><img th:src="@{image/center/} + ${center.centerImage}"></p>
+							<!--<p>센터 번호: <span th:text="${center.centerNo}">10</span></p>-->
+								<p><img th:src="@{image/center/} + ${center.centerImage}"></p>
 							<p>센터 이름: <span th:text="${center.centerName}">10</span></p>
 							<p>전화 번호: <span th:text="${center.centerPhoneNumber}">10</span></p>
 							<p>지역: <span th:text="${center.centerLocal}">10</span></p>
-							<p>영업 시간: <span th:text="${center.centerOpenCloseTime}">10</span></p>							
+							<p>영업 시간: <span th:text="${center.centerOpenCloseTime}">10</span></p>
+							
 						</div>
 					</div>
 					
 					
 					<div class="col-lg-6 col-md-6">
 						<div class="contact_message form">
-							<h3 style="font-weight: bold">신청 양식</h3>
+							<h3 style="font-weight: bold">수정 양식</h3>
 							
-							<form th:action="@{/create-volunteer}" method="post" th:object="${volunteer}">														
+							<form id="update-form" th:action="@{/visit/update-visit}" th:object="${visit}" style="margin: 20px 0;">
+							
+								
+								<input type="hidden" id="visitid" name="visitNo" th:value="${visitNo}" />
 								<input type="hidden" id="centerid" name="centerNo" th:value="${center.centerNo}" />
 								
 								<div>
-									<span>방문 예약</span> 								
-									<input type="date" name="volunteerDate"
-										id="volunteerDate" placeholder="날짜를 선택해주세요"  required="required" 
-										th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">  
+									<span>방문 예약</span> 
+									<!-- <input type="date" name="volunteerDate"> -->
+									<!--  th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" 이 코드 추가시 현재 날짜 보여줌 -->
+									<input type="date" name="visitDate"
+										id="visitDate" placeholder="날짜를 선택해주세요"  required="required" 
+										th:value="${#dates.format(visit.visitDate, 'yyyy-MM-dd')}">  
+									
 								</div>
-								
 								
 								<div>
-									<span>방문 시간</span>									
+									<span>방문 시간</span>
+									
 									<!-- <input type="time" name="volunteerTime" > -->
-									<select name="volunteerTime" id="volunteerTime" style="width: 200px; padding: 10px;">
-										<option value="09">09 AM</option>
-										<option value="10">10 AM</option>
-										<option value="11">11 AM</option>
-										<option value="12">12 PM</option>
-										<option value="13">13 PM</option>
-										<option value="14">14 PM</option>
-										<option value="15">15 PM</option>
-										<option value="16">16 PM</option>
-										<option value="17">17 PM</option>
-										<option value="18">18 PM</option>										
+									<select name="visitTime" id="visitTime" style="width: 200px; padding: 10px;">
+										<option value="09" th:selected="${visit.visitTime == 9}" >09 AM</option>
+										<option value="10" th:selected="${visit.visitTime == 10}" >10 AM</option>
+										<option value="11" th:selected="${visit.visitTime == 11}" >11 AM</option>
+										<option value="12" th:selected="${visit.visitTime == 12}" >12 PM</option>
+										<option value="13" th:selected="${visit.visitTime == 13}" >13 PM</option>
+										<option value="14" th:selected="${visit.visitTime == 14}" >14 PM</option>
+										<option value="15" th:selected="${visit.visitTime == 15}" >15 PM</option>
+										<option value="16" th:selected="${visit.visitTime == 16}" >16 PM</option>
+										<option value="17" th:selected="${visit.visitTime == 17}" >17 PM</option>
+										<option value="18" th:selected="${visit.visitTime == 18}" >18 PM</option>
+										
 									</select>																	
 								</div>
-																
-								<button type="submit" class="submit">신청</button>
+								
+								
+								<button type="submit" class="submit">수정</button>
 								<!-- <p class="form-messege"></p> -->
+								
 								
 								<p th:text="${message}" class="success-message"></p>
 								<p th:text="${error}" class="error-message"></p>
-																
+								
+								
 							</form>
+
 						</div>
 					</div>
 				</div>
@@ -167,50 +179,53 @@ window.onload = function() {
 		</div>
 
 
-
 <script>
 function ajaxRequest(method, url, sendJsonObject) {
-		let returnResultJsonObject={};
-		$.ajax({
-			async:false,
-			method: method,
-			url: url,
-			contentType: 'application/json;UTF-8',
-			data: JSON.stringify(sendJsonObject),
-			type: 'json',
-			success: function(resultJsonObject) {
-				returnResultJsonObject = resultJsonObject;
-			}
-		});
-		return returnResultJsonObject;
-	}
+			let returnResultJsonObject={};
+			$.ajax({
+				async:false,
+				method: method,
+				url: url,
+				contentType: 'application/json;UTF-8',
+				data: JSON.stringify(sendJsonObject),
+				type: 'json',
+				success: function(resultJsonObject) {
+					returnResultJsonObject = resultJsonObject;
+				}
+			});
+			return returnResultJsonObject;
+		}
 
-//AJAX 요청
+// AJAX 요청. 신청 완료 후 수정하기
 $('.submit').on('click', function (event) {
     event.preventDefault();
-    let centerNo = $('#centerid').val(); // 센터 번호를 정의
-    let volunteerDate = $('#volunteerDate').val();
-    let volunteerTime = $('#volunteerTime').val();
+    
+    let visitNo = $('#visitid').val();
+    let visitDate = $('#visitDate').val();
+    let visitTime = $('#visitTime').val();
 
     let sendJsonObject = {
-        centerNo: centerNo,
-        volunteerDate: volunteerDate,
-        volunteerTime: volunteerTime,
-        volunteerStatus: "봉사신청"
+        visitNo: visitNo,
+        visitDate: visitDate,
+        visitTime: visitTime,
     };
-    
-    let response = ajaxRequest('POST','volunteer/create-volunteer',sendJsonObject);
-    if(response.userNo!=null){
-    	alert('신청이 완료되었습니다.');
-    	window.location.href = 'volunteerByUserNo'; // my-account 페이지로 이동
-    }else{
-    	alert('로그인이 필요합니다.');
-        window.location.href = 'logout#/login_form'; // 로그인 페이지로 이동
-    }
+	
+	
+	
+	let responseObject=ajaxRequest('PUT','visit/update-visit',sendJsonObject);
+	      	
+  		if(responseObject.userNo == null){
+			alert('로그인이 필요합니다.');
+			window.location.href = 'logout#/login_form'; // 로그인 창으로 이동
+		}else{
+			alert("수정이 완료되었습니다.");
+			window.location.href = 'visitByUserNo';
+		}
+
 });
-</script> 
+</script>
 
-
+	
 	</th:block>
 	<!--contact area end-->
 

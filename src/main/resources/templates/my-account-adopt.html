@@ -214,8 +214,8 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>시간</th>
                                                 <th>날짜</th>
+                                                <th>시간</th>
                                                 <th>펫번호</th>
                                                 <th>처리상태</th>
                                                 <th>변경/취소</th>                 
@@ -224,8 +224,8 @@
 										<tbody>
 											<tr th:each="adopt, rowStat : ${adoptList}">
 												<td th:text="${adoptList.size() - rowStat.index}"></td>
-												<td th:text="${adopt.adoptTime}"></td>
 												<td th:text="${#strings.substring(adopt.adoptDate.toString(),0,10)}"></span></td>
+												<td th:text="${adopt.adoptTime + '시'}"></td>
 												<td th:text="${adopt.Pet.petNo}"></td>
 												<td th:text="${adopt.adoptStatus}"><!--<span class="success">입양신청</span>--></td>
 												<td><!--<button type="submit" class="updateBtn" th:id="'updateBtn-' + ${adopt.adoptNo}">수정</button>-->
@@ -337,7 +337,7 @@
 				
 				$.ajax({
 					type: 'GET',
-					url:  '/adoptUpdate?adoptNo=' + adoptNo + '&petNo=' + petNo, // 서버의 엔드포인트 URL
+					url:  '/adoptUpdate?adoptNo=' + adoptNo + '&petNo=' + petNo,
 					data: JSON.stringify(updateData), // 수정 데이터를 JSON으로 변환
 					contentType: 'application/json;UTF-8',
 					success: function (response) {

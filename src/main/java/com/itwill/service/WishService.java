@@ -25,4 +25,7 @@ public interface WishService {
 
 	// 위시리스트에 있는 갯수 출력 (userNo)
 	Integer countWishlist(Long userNo);
+	
+	// 위시리스트에 있는지 확인
+	boolean existsByUserinfo_UserNoAndProduct_ProductNo(Long userNo, Long productNo);
 }

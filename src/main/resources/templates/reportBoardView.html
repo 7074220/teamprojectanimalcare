@@ -30,11 +30,17 @@
 											<h3 class="post_title" th:text="${reportBoard.boardTitle}">Aypi
 												non habent claritatem insitam</h3>
 											<div class="blog_meta">
+												<!--<p>
+													작성자 : <a href="#" th:text="${reportBoard.boardFindName}">admin</a>
+													/ 작성 날짜 : <a href="#"
+														th:text="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">April
+														10, 2019</a> / 발견 장소 : <a href="#">Company, Image, Travel</a>-->
+												
 												<p>
 													작성자 : <a href="#" th:text="${reportBoard.boardFindName}">admin</a>
 													/ 작성 날짜 : <a href="#"
 														th:text="${#dates.format(reportBoard.boardRegisterDate, 'yyyy-MM-dd')}">April
-														10, 2019</a> / 발견 장소 : <a href="#">Company, Image, Travel</a>
+														10, 2019</a> / 발견 장소 : <a href="#" th:text="${reportBoard.boardFindPlace}">Company, Image, Travel</a>
 												</p>
 											</div>
 										</div>
@@ -181,7 +187,7 @@
 													roadthemes</h7>
 
 												<div class="reviews_comment_box">
-													<div class="comment_thmb">
+													<div class="comment_thmb" style="width: 50px;">
 														<p>
 															<strong th:text="${replyBoard.userinfo.userName}">허승범
 															</strong>
