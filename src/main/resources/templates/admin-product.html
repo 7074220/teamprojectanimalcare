@@ -231,6 +231,14 @@
 								<!--  <div class="tab-pane fade" id="visit">-->
 								<div class="flex-container">
 								<h3>상품관리</h3>
+								<div class="search_container mobail_s_none">
+                                	<form>
+										<div class="search_box">
+                                            <input id="searchInput3" placeholder="Search product..." type="text" onkeydown="handleEnterKey2(event)">
+                                             <button type="button" onclick="searchProduct2(event)"><span class="lnr lnr-magnifier"></span></button>
+                                		</div>
+                                	</form>
+                                </div>
 								<a class="button" href="#" th:href="@{productInsertForm}">글쓰기</a>
 								</div>
 								<div class="table-responsive" id="productTable">
@@ -247,7 +255,7 @@
 												<th>삭제</th>
 											</tr>
 										</thead>
-										<tbody>
+										<tbody class="productTable">
 											<tr th:each="product:${productList}">
 												<td class="productNo" th:text="${product.productNo}"></td>
 												<td class="productName" th:text="${product.productName}"></td>
@@ -257,13 +265,26 @@
 												<td class="productPetCategory" th:text="${product.productPetCategory}"></td>
 												<td class="productImage" th:text="${product.productImage}"></td>
 												<td>
-													<a data-toggle="modal" data-target="#productUpdateModal"  th:href="@{#__${product.productNo}__}" class="view">수정</a>
+													<a href="#" th:href="@{productUpdateForm(productNo=${product.productNo})}">수정</a>
 													<a href="#" class="delete-link" th:id="${product.productNo}">삭제</a>
+													<!--<a data-toggle="modal" data-target="#productUpdateModal"  th:href="@{#__${product.productNo}__}" class="view">수정</a>-->
 													<!--<a data-toggle="modal" data-target="#orderDetailsModal"  th:href="@{#__${orders.orderNo}__}" class="view">주문상세</a>-->
 												</td>
 											</tr>
 										</tbody>
 									</table>
+									<div class="shop_toolbar t_bottom">
+						                    <div class="pagination" th:if="${productList.totalPages > 1}">
+						                        <ul th:with="pageNumber=${productList.number}, totalPages=${productList.totalPages}">
+						                            <li th:classappend="${productList.first} ? 'disabled'"><a href="#" th:href="${productList.first} ? '#' : @{adminProductList(page=${pageNumber - 1})}">&lt;</a></li>
+						
+						                            <li th:each="page: ${#numbers.sequence(0, totalPages - 1)}"
+						                                th:classappend="${page == pageNumber} ? 'current'"><a th:text="${page + 1}" th:href="@{adminProductList(page=${page})}"></a></li>
+						
+						                            <li th:classappend="${productList.last} ? 'disabled'"><a href="#" th:href="${productList.last} ? '#' : @{adminProductList(page=${pageNumber + 1})}">&gt;</a></li>
+						                        </ul>
+						                    </div>
+						                </div>
 								</div>
 							</div>
 							
@@ -512,6 +533,56 @@
 				        });
 					    location.href="adminProductList";
 				});
+				
+			/************************** 상품 검색 **************************/
+			function product_html(responseJsonObject = {}) {
+				let htmlTemplate =
+				`{{#each this}}
+										
+											<tr>
+												<td class="productNo">{{productNo}}</td>
+												<td class="productName">{{productName}}</td>
+												<td class="productPrice">{{productPrice}}</td>
+												<td class="productStarAvg">{{productStarAvg}}</td>
+												<td class="productCategory"><span class="success">{{productCategory}}</span></td>
+												<td class="productPetCategory">{{productPetCategory}}</td>
+												<td class="productImage">{{productImage}}</td>
+												<td>
+													<a data-toggle="modal" data-target="#productUpdateModal" id="{{productNo}}" class="view">수정</a>
+													<a href="#" class="delete-link" id="{{productNo}}">삭제</a>
+												</td>
+											</tr>
+										
+									
+							{{/each}}`;
+				
+				let bindTemplate = Handlebars.compile(htmlTemplate);
+				let resultTemplate = bindTemplate(responseJsonObject);
+				
+				return resultTemplate;
+			}
+			
+			// Enter 키를 눌렀을 때 검색 결과를 표시하고 툴바를 숨기는 함수
+			function handleEnterKey2(event) {
+			    if (event.key === 'Enter') {
+			        // 검색 로직을 수행한 후 결과가 있을 때
+			        // 검색 결과를 표시
+			        searchProduct2();
+        			event.preventDefault();
+			    }
+			}
+			
+			function searchProduct2() {
+    			var searchTerm = $('#searchInput3').val();
+    			alert(searchTerm);
+				let send = {
+					productName : searchTerm
+				}
+			
+				let responseJsonObject = ajaxRequest("POST", "admin/products/search", send);
+				let html = product_html(responseJsonObject);
+				$('.productTable').html(html);
+			}	
 
 		</script>
 	</th:block>

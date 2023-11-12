@@ -7,13 +7,20 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -282,6 +289,7 @@ public class AdminController {
 		}
 		*/
 		
+		//@Transactional
 		@GetMapping("/updateVolunteer/{volunteerNo}")
 		public String updateVolunteer(@PathVariable Long volunteerNo, Model model, HttpSession session) throws Exception {
 			try {
@@ -307,7 +315,7 @@ public class AdminController {
 
 		            // 봉사 완료 시 3000포인트 지급 및 누적 포인트 계산
 		            if (user != null) {
-		                userPoint = (userPoint != null) ? userPoint + 3000 : 3000;
+		                userPoint = (user.getUserPoint() != null) ? user.getUserPoint() + 3000 : 3000;
 		                user.setUserPoint(userPoint);
 		                userInfoService.update(user);
 		                // 세션에도 업데이트
@@ -337,10 +345,10 @@ public class AdminController {
 		/******************************* Product ************************************/
 		
 		
-		
+		/*
 		// 관리자 --> 상품목록 리스트
 		@GetMapping("/adminProductList")
-		public String adminProductList(Model model, HttpSession session) {
+		public String adminProductList(Model model, HttpSession session, @PageableDefault(page = 0, size = 10, sort = "productNo", direction = Sort.Direction.ASC) Pageable page) {
 			List<ProductListDto> productListDto = new ArrayList<>();
 			List<Product> productList = new ArrayList<>();
 			
@@ -353,6 +361,23 @@ public class AdminController {
 			}
 			
 			model.addAttribute("productList", productListDto);
+			
+			return "admin-product";
+		}
+		*/
+		
+		// 관리자 --> 상품목록 리스트
+		@GetMapping("/adminProductList")
+		public String adminProductList(Model model, HttpSession session, @PageableDefault(page = 0, size = 10, sort = "productNo", direction = Sort.Direction.ASC) Pageable page) {
+			int pag = page.getPageNumber();
+			int size = page.getPageSize();
+			
+			Pageable pageable = PageRequest.of(pag, size);
+			
+			Page<Product> productList = productService.productFindAllPage(pageable);
+			
+			model.addAttribute("products", productList.getContent());
+			model.addAttribute("productList", productList);
 			
 			return "admin-product";
 		}
@@ -414,19 +439,40 @@ public class AdminController {
 		
 		
 		// 관리자 --> 상품정보 수정
-		@GetMapping("/adminUpdateProduct")
-		public String updateProduct(@RequestBody ProductListDto dto, Model model) throws Exception{
-			Product product = Product.builder().build();
+
+		@PostMapping("/adminUpdateProduct/{productNo}")
+		public String upateProduct(@RequestParam("imageFile") MultipartFile file, @RequestParam("productName") String productName, @RequestParam("productPrice") Integer productPrice, @RequestParam("productNo") Long productNo, Model model) throws Exception {
+
+			String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/product/";
+			String originalFileName = file.getOriginalFilename();
+			UUID uuid = UUID.randomUUID();
+			String savedFileName = uuid.toString() + "_" + originalFileName;
 			
-			product.setProductPrice(dto.getProductPrice());
-			product.setProductImage(dto.getProductImage());
-			product.setProductName(dto.getProductName());
+			File newFile = new File(uploadPath + savedFileName);
 			
-			productService.updateProduct(product);
+			file.transferTo(newFile);
 			
-			model.addAttribute("product", product);
+			Product update = Product.builder().build();
 			
-			return "shop";
+			update.setProductNo(productNo);
+			update.setProductName(productName);
+			update.setProductPrice(productPrice);
+			update.setProductImage(savedFileName);
+			
+			productService.updateProduct(update);
+			
+			List<ProductListDto> productListDto = new ArrayList<>();
+			List<Product> productList = new ArrayList<>();
+			
+			productList = productService.findAllByOrderByProductNoAsc();
+			
+			for (Product product : productList) {
+				productListDto.add(ProductListDto.toDto(product));
+			}
+			
+			model.addAttribute("productList", productListDto);
+			
+			return "admin-product";
 		}
 		
 		

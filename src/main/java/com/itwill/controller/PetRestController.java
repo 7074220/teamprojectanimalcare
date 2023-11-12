@@ -104,18 +104,19 @@ public ResponseEntity<List<PetDto>> petDescList(){
 	
 	
 }
-@Operation(summary = "펫타입 리스트")	
-@GetMapping("/{petType}")
-public ResponseEntity<List<PetDto>> petTypeList(@RequestParam(name = "petType")String petType){
-		List<PetDto> petDtoList = new ArrayList<>();
-		List<Pet> petList = petService.findAllByOrderBypetType(petType);
-		for (Pet pet : petList) {
-			petDtoList.add(PetDto.toDto(pet));
-		}
-
-		return ResponseEntity.status(HttpStatus.OK).body(petDtoList);
-	
-	
-}
+/*
+ * @Operation(summary = "펫타입 리스트")
+ * 
+ * @GetMapping("/{petType}") public ResponseEntity<List<PetDto>>
+ * petTypeList(@RequestParam(name = "petType")String petType){ List<PetDto>
+ * petDtoList = new ArrayList<>(); List<Pet> petList =
+ * petService.findAllByOrderBypetType(petType); for (Pet pet : petList) {
+ * petDtoList.add(PetDto.toDto(pet)); }
+ * 
+ * return ResponseEntity.status(HttpStatus.OK).body(petDtoList);
+ * 
+ * 
+ * }
+ */
 
 }
