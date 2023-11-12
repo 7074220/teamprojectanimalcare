@@ -265,7 +265,7 @@
 												<td class="productPetCategory" th:text="${product.productPetCategory}"></td>
 												<td class="productImage" th:text="${product.productImage}"></td>
 												<td>
-													<a href="#" th:href="@{productUpdateForm}">수정</a>
+													<a href="#" th:href="@{productUpdateForm(productNo=${product.productNo})}">수정</a>
 													<a href="#" class="delete-link" th:id="${product.productNo}">삭제</a>
 													<!--<a data-toggle="modal" data-target="#productUpdateModal"  th:href="@{#__${product.productNo}__}" class="view">수정</a>-->
 													<!--<a data-toggle="modal" data-target="#orderDetailsModal"  th:href="@{#__${orders.orderNo}__}" class="view">주문상세</a>-->

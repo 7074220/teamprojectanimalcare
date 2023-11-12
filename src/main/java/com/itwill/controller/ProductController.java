@@ -86,7 +86,12 @@ public class ProductController {
 	
 	
 	@GetMapping("/productUpdateForm")
-	public String productUpdateForm() {
+	public String productUpdateForm(@RequestParam Long productNo, Model model) {
+		
+		Product product = productService.findByProductNo(productNo);
+		
+		model.addAttribute("product", product);
+		
 		return "product_update_form"; 
 	}
 	

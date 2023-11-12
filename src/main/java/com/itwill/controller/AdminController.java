@@ -369,7 +369,7 @@ public class AdminController {
 		
 		// 관리자 --> 상품정보 수정
 		@PostMapping("/adminUpdateProduct")
-		public String upateProduct(@RequestParam("imageFile") MultipartFile file, @RequestParam("productName") String productName, @RequestParam("productPrice") Integer productPrice, Model model) throws Exception {
+		public String upateProduct(@RequestParam("imageFile") MultipartFile file, @RequestParam("productNo") Long productNo, @RequestParam("productName") String productName, @RequestParam("productPrice") Integer productPrice, Model model) throws Exception {
 
 			String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/product/";
 			String originalFileName = file.getOriginalFilename();
@@ -382,6 +382,7 @@ public class AdminController {
 			
 			Product update = Product.builder().build();
 			
+			update.setProductNo(productNo);
 			update.setProductName(productName);
 			update.setProductPrice(productPrice);
 			update.setProductImage(savedFileName);
