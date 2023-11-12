@@ -68,23 +68,30 @@ AdoptService adoptService;
 		int size = page.getPageSize();
 		
 		Pageable pageable= PageRequest.of(pag,size);
+		
 		List<PetDto> petDtoList = new ArrayList<>();
 		
 		Page<Pet> petList= petService.petFindAllPage(pageable);
+		
 		for (Pet pet : petList) {
-			/*
-			if(findAdopt.getAdoptStatus().equals("입양완료")) {
-				//petService.petRemove(findAdopt.getPet().getPetNo());
-			}else {
-				petDtoList.add(PetDto.toDto(pet));
+			Adopt petAdopt = adoptRepository.findAdoptByPetNo(pet.getPetNo());
+				if(petAdopt==null) {
+					petDtoList.add(PetDto.toDto(pet));
+				}else {
+					if(!petAdopt.getAdoptStatus().equals("입양완료")) {
+						petDtoList.add(PetDto.toDto(pet));
+					}
+				}
 			}
-			*/
-		}
-		
-		
+
 		model.addAttribute("petList",petList);
 		return "pet-list" ;
 	}
+		
+		
+		
+		
+	
 	
 	//펫 리스트
 		//center dto가져와야함.

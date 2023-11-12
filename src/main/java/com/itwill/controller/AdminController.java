@@ -178,13 +178,10 @@ public class AdminController {
 		    findAdopt.setAdoptStatus("입양완료"); 
 		    adoptService.updateAdopt(findAdopt);
 		   
-		    Long petNo=findAdopt.getPet().getPetNo();
 		    // 변경된 상태를 DB에 반영
-		   // adoptRepository.save(findAdopt);
+		    adoptRepository.save(findAdopt);
+		   
 		    
-		   // petService.petRemove(petNo);
-		    
-		    	System.out.println(petNo);
 		    return "redirect:/adminAdoptList";
 		}
 		
