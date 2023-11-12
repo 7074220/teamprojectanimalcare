@@ -76,7 +76,8 @@ public class ReportController {
 		List<ReplyBoard> replyBoardList= replyBoardService.findAllByOrderByReplyBoardNoAsc(boardNo);
 		
 		for (ReplyBoard replyBoard : replyBoardList) {
-			Long userNo = replyBoard.getUserinfo().getUserNo();
+			Userinfo findUserinfo = replyBoard.getUserinfo();
+			Long userNo = findUserinfo.getUserNo();
 			Userinfo replyBoardUserinfo = userInfoService.findUserByNo(userNo);
 			replyBoard.setUserinfo(replyBoardUserinfo);
 		}

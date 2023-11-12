@@ -43,7 +43,7 @@
                                 </tr>
                             </div>
                             <small class="text-body-secondary">
-                                <span style="margin-left: 20px;" th:text="${#dates.format(reportboard.boardRegisterDate, 'yyyy년 MM월 dd일')}">작성 날짜</span>
+                                <span style="margin-left: 20px;" th:text=" ${#dates.format(reportboard.boardRegisterDate,  '작성날짜 : yyyy년 MM월 dd일')}">작성 날짜</span>
                             </small>
                         </div>
                     </div>
