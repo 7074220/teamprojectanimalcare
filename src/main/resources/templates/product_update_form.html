@@ -35,18 +35,22 @@
                         
                         <form name="f" id="product_update_form" action="#" method="POST" enctype="multipart/form-data"
                         	th:action="@{'/adminUpdateProduct'}">
+                        	<p>   
+                                <label for="productNo">상품 번호<span></span></label>
+								<input type="text" id="productNo" name="productNo">
+                            </p>
                             <p>   
                                 <label for="productName">상품 이름<span></span></label>
-								<input type="text" name="productName" >
+								<input type="text" id="productName" name="productName" >
                             </p>
                              <p>   
                                 <label>가격<span></span></label>
-                                <input type="text" name="productPrice">
+                                <input type="text" id="productPrice" name="productPrice">
                              </p>
                              
                              
                             <label>상품 이미지</label>
-                		    <input type="file" name="imageFile" style="border: none;" >
+                		    <input type="file" id="imageFile" name="imageFile" style="border: none;" >
                            <div class="login_submit" style="margin-top: 10px;">
 							   
 							   

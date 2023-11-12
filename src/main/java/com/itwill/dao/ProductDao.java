@@ -90,6 +90,9 @@ public interface ProductDao {
 	
 	boolean existsById(Long productNo);
 	
+	// 페이지 정렬
+	Page<Product> productFindAllPage(Pageable pageable);
+	
 }
 
 

@@ -176,8 +176,14 @@ public class ProductServiceImpl implements ProductService {
 	public boolean existsById(Long productNo) {
 		// TODO Auto-generated method stub
 		return productDao.existsById(productNo);
+	}
+
+	@Override
+	public Page<Product> productFindAllPage(Pageable pageable) {
+		Page<Product> productList = productDao.productFindAllPage(pageable);
+		
+		return productList;
 	} 
-	
 	
 	
 }

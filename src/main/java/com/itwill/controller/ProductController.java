@@ -85,8 +85,10 @@ public class ProductController {
     }
 	
 	
-	@GetMapping("/productUpdateForm")
-	public String productUpdateForm() {
+	@GetMapping("/productUpdateForm/{productNo}")
+	public String productUpdateForm(@PathVariable Long productNo) {
+		productService.findByProductNo(productNo);
+		
 		return "product_update_form"; 
 	}
 	

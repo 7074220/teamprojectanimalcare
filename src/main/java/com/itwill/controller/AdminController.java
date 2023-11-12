@@ -7,6 +7,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -291,10 +296,10 @@ public class AdminController {
 		/******************************* Product ************************************/
 		
 		
-		
+		/*
 		// 관리자 --> 상품목록 리스트
 		@GetMapping("/adminProductList")
-		public String adminProductList(Model model, HttpSession session) {
+		public String adminProductList(Model model, HttpSession session, @PageableDefault(page = 0, size = 10, sort = "productNo", direction = Sort.Direction.ASC) Pageable page) {
 			List<ProductListDto> productListDto = new ArrayList<>();
 			List<Product> productList = new ArrayList<>();
 			
@@ -307,6 +312,23 @@ public class AdminController {
 			}
 			
 			model.addAttribute("productList", productListDto);
+			
+			return "admin-product";
+		}
+		*/
+		
+		// 관리자 --> 상품목록 리스트
+		@GetMapping("/adminProductList")
+		public String adminProductList(Model model, HttpSession session, @PageableDefault(page = 0, size = 10, sort = "productNo", direction = Sort.Direction.ASC) Pageable page) {
+			int pag = page.getPageNumber();
+			int size = page.getPageSize();
+			
+			Pageable pageable = PageRequest.of(pag, size);
+			
+			Page<Product> productList = productService.productFindAllPage(pageable);
+			
+			model.addAttribute("products", productList.getContent());
+			model.addAttribute("productList", productList);
 			
 			return "admin-product";
 		}
@@ -368,8 +390,8 @@ public class AdminController {
 		
 		
 		// 관리자 --> 상품정보 수정
-		@PostMapping("/adminUpdateProduct")
-		public String upateProduct(@RequestParam("imageFile") MultipartFile file, @RequestParam("productName") String productName, @RequestParam("productPrice") Integer productPrice, Model model) throws Exception {
+		@PostMapping("/adminUpdateProduct/{productNo}")
+		public String upateProduct(@RequestParam("imageFile") MultipartFile file, @RequestParam("productName") String productName, @RequestParam("productPrice") Integer productPrice, @RequestParam("productNo") Long productNo, Model model) throws Exception {
 
 			String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/product/";
 			String originalFileName = file.getOriginalFilename();
