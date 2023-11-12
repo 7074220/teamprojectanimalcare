@@ -2,6 +2,7 @@ package com.itwill.dao;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -33,7 +34,9 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	
 	@Override
 	public Userinfo findByNo(Long userNo) {
-		return userinfoRepository.findById(userNo).get();
+		Optional<Userinfo> op = userinfoRepository.findById(userNo);
+		Userinfo findUserinfo = op.get();
+		return findUserinfo;
 	}
 	
 	@Override

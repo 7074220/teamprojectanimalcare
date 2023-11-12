@@ -28,9 +28,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fasterxml.jackson.core.sym.Name;
 import com.itwill.dto.PetDto;
 import com.itwill.dto.UserWriteActionDto;
+import com.itwill.entity.Adopt;
 import com.itwill.entity.Center;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Userinfo;
+import com.itwill.repository.AdoptRepository;
+import com.itwill.service.AdoptService;
 import com.itwill.service.PetService;
 import com.itwill.service.UserInfoService;
 
@@ -43,6 +46,10 @@ public class PetController {
 PetService petService;
 @Autowired
 UserInfoService userInfoService;
+@Autowired
+AdoptRepository adoptRepository;
+@Autowired
+AdoptService adoptService;
 //@Autowired
 //팻 등록
 	@PostMapping("/insert_action")
@@ -56,22 +63,34 @@ UserInfoService userInfoService;
 	//center dto가져와야함.
 	@GetMapping("/petListPage")
 	public String petList(Model model,@PageableDefault(page =0,size = 5,sort = "petNo",direction = Sort.Direction.DESC) Pageable page)throws Exception {
-		
 		int pag = page.getPageNumber();
 		int size = page.getPageSize();
 		
 		Pageable pageable= PageRequest.of(pag,size);
+		
 		List<PetDto> petDtoList = new ArrayList<>();
 		
 		Page<Pet> petList= petService.petFindAllPage(pageable);
+		
 		for (Pet pet : petList) {
-			petDtoList.add(PetDto.toDto(pet));
-		}
-		
-		
+			Adopt petAdopt = adoptRepository.findAdoptByPetNo(pet.getPetNo());
+				if(petAdopt==null) {
+					petDtoList.add(PetDto.toDto(pet));
+				}else {
+					if(!petAdopt.getAdoptStatus().equals("입양완료")) {
+						petDtoList.add(PetDto.toDto(pet));
+					}
+				}
+			}
+
 		model.addAttribute("petList",petList);
 		return "pet-list" ;
 	}
+		
+		
+		
+		
+	
 	
 	//펫 리스트
 		//center dto가져와야함.

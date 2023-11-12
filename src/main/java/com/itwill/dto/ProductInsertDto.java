@@ -20,12 +20,10 @@ public class ProductInsertDto {
 	private Integer productPrice;
 	private String productCategory;
 	private String productPetCategory;
-	private Integer productQty;
 	// 제품 대표이미지
 	private String productImage;
 	// 제품 상세이미지
 	private String productDetailImage;
-	private Double productStarAvg;
 	
 	public static Product toEntity(ProductInsertDto dto) {
 		Product insertProduct = Product.builder()
@@ -34,10 +32,8 @@ public class ProductInsertDto {
 				.productPrice(dto.getProductPrice())
 				.productCategory(dto.getProductCategory())
 				.productPetCategory(dto.getProductPetCategory())
-				.productQty(dto.getProductQty())
 				.productImage(dto.getProductImage())
 				.productDetailImage(dto.getProductDetailImage())
-				.productStarAvg(dto.getProductStarAvg())
 				.build();
 		return insertProduct;
 	}

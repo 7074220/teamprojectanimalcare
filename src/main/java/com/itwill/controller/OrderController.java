@@ -148,21 +148,18 @@ public class OrderController {
 			OrdersDto dto = OrdersDto.toDto(orders);
 			dto.setUserinfo(userinfo);
 			/*
-			if(reviewBoardService.findByUserNoProductNo()!=null) {
+			if(reviewBoardService.findByUserNoAndProductNo(userNo,)!=null) {
 				dto.setReviewStatus(1);
 			}else {
 				dto.setReviewStatus(0);
 			}
 			*/
 			ordersDtoList.add(dto);
-			
 		}
-		
-		
-		
 		model.addAttribute("ordersList",ordersDtoList);
 		return "my-account-orders";
 	}
+	
 	
 	//orderform
 	@GetMapping("orderView")
@@ -222,8 +219,6 @@ public class OrderController {
 		
 			return "orderItemView";
 		}
-		
-		
 		
 		
 		@GetMapping("/dateByOrder")

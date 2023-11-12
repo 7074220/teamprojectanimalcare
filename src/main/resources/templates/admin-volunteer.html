@@ -88,10 +88,11 @@
 										<tbody>
 											<tr th:each="volunteer, rowStat : ${volunteerList}">
 											
-												<td th:text="${volunteerList.size() - rowStat.index}"></td>		
+												<td th:text="${volunteerList.size() - rowStat.index}"></td>	
+												<!--<td th:text="${volunteer.Userinfo.userNo}"></td>-->	
 												<td th:text="${volunteer.Userinfo.userName}"></td>	
-												<td th:text="${#strings.substring(volunteer.volunteerDate.toString(), 0, 10)}"></td>
 												
+												<td th:text="${#strings.substring(volunteer.volunteerDate.toString(), 0, 10)}"></td>										
 												
 												<!--<td>  13PM, 14PM ... 18PM 
 													<span th:if="${volunteer.volunteerTime < 12}"
@@ -108,7 +109,6 @@
 												<td>
 													<a th:if="${session.userName == '관리자'}" th:href="@{/updateVolunteer/{volunteerNo}(volunteerNo=${volunteer.volunteerNo})}" class="updateBtn">완료</a>
 													
-												
 													<button type="submit" class="deleteBtn" th:id="'deleteBtn-' + ${volunteer.volunteerNo}">취소</button>
 												</td>
 											</tr>
@@ -166,6 +166,20 @@
 			});
 
 		</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	</th:block>
 
 
