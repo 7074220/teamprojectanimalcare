@@ -191,7 +191,7 @@
 	                                <li><a href="adminProductList"  class="nav-link">상품 관리</a></li>
 	                                <li> <a th:if="${session.userName == '관리자'}" href="ordersList" class="nav-link">주문 관리</a></li>
 	                                <!-- <li><a href="couponList"  class="nav-link">주문 관리</a></li> -->
-	                                <li><a href="adoptByUserNo"  class="nav-link">입양 관리</a></li>
+	                                <li><a href="adminAdoptList" class="nav-link">관리자 전용 입양목록</a></li>
 									<li><a th:if="${session.userName == '관리자'}" href="adminVolunteerList"
 											class="nav-link">관리자 전용봉사목록</a></li>
 									<li><a th:if="${session.userName != '관리자'}" href="volunteerByUserNo"

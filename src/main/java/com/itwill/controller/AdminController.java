@@ -150,15 +150,37 @@ public class AdminController {
 		@GetMapping("/adminAdoptList")
 		// 관리자 --> 입양신청 리스트
 		// 
-		public String adoptList(Model model) {
-			
+		public String adoptList(Model model, HttpSession session) throws Exception {
+			Long userNo = (Long) session.getAttribute("userNo");
+			Userinfo userinfo=userInfoService.findUserByNo(userNo);
 			List<Adopt> adoptList = adoptService.findAdoptList();
 			
-			model.addAttribute("adminAdoptList", adoptList);
+			model.addAttribute("adoptList", adoptList);
 			return "admin-adopt";
 		}
 		
 		
+		@GetMapping("/updateAdopt/{adoptNo}")
+		public String updateAdopt(@PathVariable Long adoptNo, Model model, HttpSession session) throws Exception {
+		    Long userNo = (Long) session.getAttribute("userNo");
+		    Userinfo userinfo = userInfoService.findUserByNo(userNo);
+		    
+		    Adopt findAdopt = adoptService.findByAdoptNo(adoptNo);
+
+		    // 로그를 이용한 디버깅
+		    System.out.println("Before update: " + findAdopt.getAdoptStatus());
+
+		    // Visit 업데이트 로직
+		    findAdopt.setAdoptStatus("입양완료"); 
+		    adoptService.updateAdopt(findAdopt);
+		    // 로그를 이용한 디버깅
+		    System.out.println("After update: " + findAdopt.getAdoptStatus());
+
+		    // 변경된 상태를 DB에 반영
+		    adoptRepository.save(findAdopt);
+
+		    return "redirect:/adminAdoptList";
+		}
 		
 		
 		
