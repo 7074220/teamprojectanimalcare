@@ -15,6 +15,7 @@ import com.itwill.dto.AdminUserListDto;
 import com.itwill.dto.PetDto;
 import com.itwill.dto.ProductInsertDto;
 import com.itwill.dto.ProductListDto;
+import com.itwill.dto.VolunteerDto;
 import com.itwill.entity.Adopt;
 import com.itwill.entity.Center;
 import com.itwill.entity.Pet;
@@ -22,7 +23,9 @@ import com.itwill.entity.Product;
 import com.itwill.entity.Userinfo;
 import com.itwill.entity.Visit;
 import com.itwill.entity.Volunteer;
+import com.itwill.repository.AdoptRepository;
 import com.itwill.repository.VisitRepository;
+import com.itwill.repository.VolunteerRepository;
 import com.itwill.service.AdoptService;
 import com.itwill.service.CartService;
 import com.itwill.service.CenterService;
@@ -56,7 +59,11 @@ public class AdminController {
 		@Autowired
 		private AdoptService adoptService;
 		@Autowired
+		private AdoptRepository adoptRepository;
+		@Autowired
 		private VolunteerService volunteerService;
+		@Autowired
+		private VolunteerRepository volunteerRepository;
 		@Autowired
 		private PetService petService;
 		@Autowired
@@ -158,12 +165,42 @@ public class AdminController {
 		/******************************* Volunteer ************************************/
 		
 		
-		// 관리자 --> 봉사신청 리스트
-		@GetMapping("/adminVolunteerList") // 봉사 목록 전체 조회. 관리자
-		public String volunteerList(Model model) {
-			List<Volunteer> volunteers = volunteerService.findAllVolunteers();    
-		    model.addAttribute("volunteers", volunteers);
-		    return "my-account";
+		// 관리자 -> 봉사 리스트 조회
+		@GetMapping("/adminVolunteerList")
+		public String volunteerList(Model model, HttpSession session) throws Exception{
+			Long userNo = (Long) session.getAttribute("userNo");
+			Userinfo userinfo = userInfoService.findUserByNo(userNo);
+			
+			List<Volunteer> volunteerList;
+			volunteerList = volunteerService.findAllVolunteers();
+			
+		    model.addAttribute("volunteerList", volunteerList);
+		    return "my-account-volunteer";
+		}
+		
+		
+		
+		@GetMapping("/updateVolunteer/{volunteerNo}")
+		public String updateVolunteer(@PathVariable Long volunteerNo, Model model, HttpSession session) throws Exception {
+		    Long userNo = (Long) session.getAttribute("userNo");
+		    Userinfo userinfo = userInfoService.findUserByNo(userNo);
+		    
+		    Volunteer findVolunteer = volunteerService.findByVolunteerNo(volunteerNo);
+
+		    // 로그를 이용한 디버깅
+		    System.out.println("Before update: " + findVolunteer.getVolunteerStatus());
+
+		    // Visit 업데이트 로직
+		    findVolunteer.setVolunteerStatus("봉사완료"); 
+		    volunteerService.updateVolunteer(findVolunteer);
+
+		    // 로그를 이용한 디버깅
+		    System.out.println("After update: " + findVolunteer.getVolunteerStatus());
+
+		    // 변경된 상태를 DB에 반영
+		    volunteerRepository.save(findVolunteer);
+
+		    return "redirect:/adminVolunteerList";
 		}
 		
 		
