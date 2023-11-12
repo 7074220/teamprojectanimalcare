@@ -2,6 +2,8 @@ package com.itwill.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.itwill.entity.ReportBoard;
@@ -36,5 +38,7 @@ public interface ReportBoardService {
 	public List<ReportBoard> findAll();
 	
 	public List<ReportBoard> findByBoardNoOrderByBoardNoDesc();
+	
+	public Page<ReportBoard> reportBoardFindAllPage(Pageable pageable); 
 	
 }

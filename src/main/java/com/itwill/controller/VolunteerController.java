@@ -88,16 +88,17 @@ public class VolunteerController {
 		
 		List<Volunteer> volunteerList = volunteerService.findAllVolunteers();    
 		
-		List<VolunteerDto> volunteerDto = new ArrayList<>();
-		
+		/*
+		List<VolunteerDto> volunteerDto = new ArrayList<>();	
 		for (Volunteer volunteer : volunteerList) {
 			Userinfo userinfo = volunteer.getUserinfo();
 			VolunteerDto dto = VolunteerDto.toDto(volunteer);
 			dto.setUserinfo(userinfo);
 			volunteerDto.add(dto);
 		}
+		*/
 		
-	    model.addAttribute("volunteerList", volunteerDto);
+	    model.addAttribute("volunteerList", volunteerList);
 	    return "my-account-volunteer";
 	}
 	
@@ -120,6 +121,8 @@ public class VolunteerController {
 		return "my-account-volunteer"; 
 	}
 	*/
+	
+	
 	
 	
 	

@@ -3,6 +3,8 @@ package com.itwill.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.itwill.entity.ReportBoard;
@@ -70,5 +72,13 @@ public class ReportBoardDaoImpl implements ReportBoardDao{
 	public List<ReportBoard> findByBoardNoOrderByBoardNoDesc() {
 		return reportBoardRepository.findByBoardNoOrderByBoardNoDesc();
 	}
+
+	@Override
+	public Page<ReportBoard> reportBoardFindAllPage(Pageable pageable) {
+		Page<ReportBoard> reportList= reportBoardRepository.findAll(pageable);
+		return reportList;
+	}
+
+
 	
 }
