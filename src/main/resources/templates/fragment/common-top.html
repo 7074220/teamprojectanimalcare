@@ -217,9 +217,13 @@
                                                 <option value="16">Electronic</option>
                                             </select>                        
                                        </div> -->
-                                        <div class="search_box">
+                                        <!--<div class="search_box">
                                             <input placeholder="Search product..." type="text">
                                              <button type="submit"><span class="lnr lnr-magnifier"></span></button>
+                                        </div>-->
+                                        <div class="search_box">
+                                            <input id="searchInput" placeholder="Search product..." type="text">
+                                             <button onclick="searchProduct()"><span class="lnr lnr-magnifier"></span></button>
                                         </div>
                                     </form>
                                 </div>
@@ -326,7 +330,7 @@
                         <div class="col-12 col-md-6 mobail_s_block">
                             <div class="search_container">
                                <form action="#">
-                                   <div class="hover_category">
+                                   <!--<div class="hover_category">
                                         <select class="select_option" name="select" id="categori2">
                                             <option selected value="1">Select a categories</option>
                                             <option value="2">Accessories</option>
@@ -345,9 +349,9 @@
                                             <option value="15">Watchs</option>
                                             <option value="16">Electronic</option>
                                         </select>                        
-                                   </div>
+                                   </div>-->
                                     <div class="search_box">
-                                        <input placeholder="Search product..." type="text">
+                                        <input id="searchInput" placeholder="Search product..." type="text">
                                          <button type="submit"><span class="lnr lnr-magnifier"></span></button>
                                     </div>
                                 </form>
@@ -634,7 +638,7 @@
 				}
 				
 				ajaxRequest("POST", "products/search", send);
-}
+			}
 			
 			
 		</script>
