@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.dto.AdminUserListDto;
+import com.itwill.dto.OrdersDto;
 import com.itwill.dto.PetDto;
 import com.itwill.dto.ProductInsertDto;
 import com.itwill.dto.ProductListDto;
 import com.itwill.dto.VolunteerDto;
 import com.itwill.entity.Adopt;
 import com.itwill.entity.Center;
+import com.itwill.entity.Orders;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Product;
 import com.itwill.entity.Userinfo;
@@ -266,6 +268,27 @@ public class AdminController {
 		
 		
 		
+		/******************************* Orders ************************************/
+		
+		
+		//관리자전용
+		@GetMapping("/adminOrdersList")
+		public String adminOrderList(Model model,HttpSession session) throws Exception {
+			List<Orders> orderList = orderService.findOrders();
+			List<OrdersDto> ordersDto = new ArrayList<OrdersDto>();
+				for (Orders orders : orderList) {
+					Userinfo userinfo = orders.getUserinfo();
+					OrdersDto dto = OrdersDto.toDto(orders);
+					dto.setUserinfo(userinfo);
+					ordersDto.add(dto);
+				}
+				model.addAttribute("adminOrdersList",ordersDto);
+				return "admin-orders";
+			
+		}
+		
+		
+		
 		/******************************* Pet ************************************/
 		
 		
@@ -283,6 +306,9 @@ public class AdminController {
 			model.addAttribute("petList",petDtoList);
 			return "pet-list" ;
 		}
+		
+		
+		
 		/******************************* visit ************************************/
 		// 관리자 --> 견학 리스트
 		@GetMapping("/adminVisitList")
