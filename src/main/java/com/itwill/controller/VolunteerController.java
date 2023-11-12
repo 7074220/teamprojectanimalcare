@@ -82,11 +82,12 @@ public class VolunteerController {
 	    
 	}
 	
-	// 봉사 목록 전체 조회. 관리자
+	// (관리자) 봉사 목록 전체 조회. 
 	@GetMapping("/volunteerList") 
-	public String volunteerList(Model model) throws Exception{
+	public String findVolunteerList(Model model) throws Exception{
 		
 		List<Volunteer> volunteerList = volunteerService.findAllVolunteers();    
+		
 		List<VolunteerDto> volunteerDto = new ArrayList<>();
 		
 		for (Volunteer volunteer : volunteerList) {
