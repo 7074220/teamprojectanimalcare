@@ -56,7 +56,6 @@ UserInfoService userInfoService;
 	//center dto가져와야함.
 	@GetMapping("/petListPage")
 	public String petList(Model model,@PageableDefault(page =0,size = 5,sort = "petNo",direction = Sort.Direction.DESC) Pageable page)throws Exception {
-		
 		int pag = page.getPageNumber();
 		int size = page.getPageSize();
 		

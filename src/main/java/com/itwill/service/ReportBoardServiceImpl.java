@@ -3,6 +3,8 @@ package com.itwill.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -93,6 +95,12 @@ public class ReportBoardServiceImpl implements ReportBoardService{
 	@Override
 	public List<ReportBoard> findByBoardNoOrderByBoardNoDesc() {
 		return reportBoardDao.findByBoardNoOrderByBoardNoDesc();
+	}
+
+	@Override
+	public Page<ReportBoard> reportBoardFindAllPage(Pageable pageable) {
+		Page<ReportBoard> reportList=reportBoardDao.reportBoardFindAllPage(pageable);
+		return reportList;
 	}
 	
 

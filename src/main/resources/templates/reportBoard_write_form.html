@@ -150,7 +150,7 @@
     // 한국 시간대 (UTC+9)로 변경
     today.setHours(today.getHours() + 9);
     var beforeToday = new Date(today);
-    beforeToday.setDate(beforeToday.getDate() ); // 어제 날짜 계산
+    beforeToday.setDate(beforeToday.getDate()-1); // 어제 날짜 계산
     var beforeTodayString = beforeToday.toISOString().slice(0, 10);
 
     boardFindDate.value = beforeTodayString;
