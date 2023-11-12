@@ -1,8 +1,10 @@
 package com.itwill.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.dto.AdminUserListDto;
 import com.itwill.dto.OrdersDto;
@@ -307,13 +310,43 @@ public class AdminController {
 		
 		
 		// 관리자 --> 상품 추가
-		@GetMapping("/adminInsertProduct")
-		public String insertProduct(@RequestBody ProductInsertDto dto) {
-			
-			productService.insertProduct(dto.toEntity(dto));
-			
-			return "shop";
-		}
+		@PostMapping("/adminInsertProduct")
+		public String insertProduct(@RequestParam("imageFile1") MultipartFile file1, @RequestParam("imageFile2") MultipartFile file2, @RequestParam("productName") String productName, 
+				@RequestParam("productPrice") Integer productPrice, @RequestParam("productCategory") String productCategory, @RequestParam("productPetCategory") String productPetCategory) throws Exception {
+
+		String uploadPath1 = System.getProperty("user.dir") + "/src/main/resources/static/image/product/";
+		String originalFileName1 = file1.getOriginalFilename();
+		UUID uuid1 = UUID.randomUUID();
+		String savedFileName1 = uuid1.toString() + "_" + originalFileName1;
+		
+		File newFile1 = new File(uploadPath1 + savedFileName1);
+		
+		file1.transferTo(newFile1);
+		
+		String uploadPath2 = System.getProperty("user.dir") + "/src/main/resources/static/image/product/";
+		String originalFileName2 = file2.getOriginalFilename();
+		UUID uuid2 = UUID.randomUUID();
+		String savedFileName2 = uuid2.toString() + "_" + originalFileName2;
+		
+		File newFile2 = new File(uploadPath2 + savedFileName2);
+		
+		file2.transferTo(newFile2);
+		
+		Product createProduct = Product.builder()
+							.productName(productName)
+							.productPrice(productPrice)
+							.productCategory(productCategory)
+							.productPetCategory(productPetCategory)
+							.productImage(savedFileName1)
+							.productDetailImage(savedFileName2)
+							.productStarAvg(0D)
+							.productQty(0)
+							.build();
+		
+		productService.insertProduct(createProduct);
+		
+		return "shop";
+}
 		
 		
 		
