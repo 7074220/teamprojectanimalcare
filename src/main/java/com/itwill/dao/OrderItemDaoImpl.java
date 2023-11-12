@@ -46,6 +46,12 @@ public class OrderItemDaoImpl implements OrderItemDao {
 	public List<OrderItem> findAll() {
 		return orderItemRepository.findAll();
 	}
+
+	@Override
+	public OrderItem findbyoiNo(Long oiNo) {
+		
+		return orderItemRepository.findById(oiNo).get();
+	}
 	
 	/*
 	@Override
