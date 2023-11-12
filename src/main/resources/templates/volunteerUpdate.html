@@ -137,7 +137,7 @@ window.onload = function() {
 									<!--<input type="date" name="volunteerDate" id="volunteerDate" placeholder="날짜를 선택해주세요"  
 									required="required"> --> 
 									
-									<input type="date" name="volunteerDate" id="volunteerDate" placeholder="날짜를 선택해주세요" required="required" th:value="${selectedDate}">
+									<input type="date" name="volunteerDate" id="volunteerDate" placeholder="날짜를 선택해주세요" required="required" th:value="${#dates.format(adopt.adoptDate, 'yyyy-MM-dd')}">
 
 								</div>
 								

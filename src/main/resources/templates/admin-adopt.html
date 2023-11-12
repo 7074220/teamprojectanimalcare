@@ -11,7 +11,7 @@
 			/* 회원탈퇴창 가운데 정도로 떨어트림 */
 			
 	}
-			#visitTable{
+			#adoptTable{
 		width: 1000px;
 		}
 	</style>
@@ -190,7 +190,7 @@
 									<li><a href="adminUserList" class="nav-link">회원</a></li>
 	                                <li><a href="adminProductList"  class="nav-link">상품</a></li>
 	                                <li><a href="adminOrdersList" class="nav-link">주문</a></li>
-	                                <li><a href="adoptByUserNo"  class="nav-link">입양</a></li>
+	                                <li><a href="adminAdoptList"  class="nav-link">입양</a></li>
 									<li><a href="adminVolunteerList"class="nav-link">봉사</a></li>
 	                                <li><a href="adminVisitList"class="nav-link">견학</a></li>
 									<li><a href="centerListAll"class="nav-link">보호소</a></li>
@@ -215,9 +215,10 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>No</th>
-                                                <th>날짜</th>
-                                                <th>시간</th>
+                                                <th>번호</th>
+                                                <th>이름</th>
+                                                <th>방문날짜</th>
+                                                <th>방문시간</th>
                                                 <th>펫번호</th>
                                                 <th>처리상태</th>
                                                 <th>수정/취소</th>                 
@@ -227,6 +228,7 @@
 										<tbody>
 											<tr th:each="adopt, rowStat : ${adoptList}">
 												<td th:text="${adoptList.size() - rowStat.index}"></td>
+												<td th:text="${adopt.Userinfo.userName}"></td>
 												<td th:text="${#strings.substring(adopt.adoptDate.toString(),0,10)}"></span></td>
 												<td th:text="${adopt.adoptTime + '시'}"></td>
 												<td th:text="${adopt.Pet.petNo}"></td>
