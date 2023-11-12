@@ -199,7 +199,7 @@
 
 
                                 <div class="search_container mobail_s_none" th:if="${productList != null}">
-                                   <form action="#">
+                                   <form>
                                        <!-- <div class="hover_category">
                                             <select class="select_option" name="select" id="categori1">
                                                 <option selected value="1">Select a categories</option>
@@ -220,10 +220,14 @@
                                                 <option value="16">Electronic</option>
                                             </select>                        
                                        </div> -->
-                                        <div class="search_box">
+										<div class="search_box">
+                                            <input id="searchInput1" placeholder="Search product..." type="text" onkeydown="handleEnterKey(event)">
+                                             <button type="button" onclick="searchProduct(event)"><span class="lnr lnr-magnifier"></span></button>
+                                    	</div>	
+                                        <!--<div class="search_box">
                                             <input placeholder="상품 검색..." type="text">
                                              <button type="submit"><span class="lnr lnr-magnifier"></span></button>
-                                        </div>
+                                        </div>-->
                                     </form>
                                 </div>
                                 
@@ -331,8 +335,8 @@
                     <div class="row align-items-center">
                         <div class="col-12 col-md-6 mobail_s_block">
                             <div class="search_container">
-                               <form action="#">
-                                   <div class="hover_category">
+                               <form method="POST">
+                                   <!--<div class="hover_category">
                                         <select class="select_option" name="select" id="categori2">
                                             <option selected value="1">Select a categories</option>
                                             <option value="2">Accessories</option>
@@ -351,11 +355,15 @@
                                             <option value="15">Watchs</option>
                                             <option value="16">Electronic</option>
                                         </select>                        
-                                   </div>
+                                   </div>-->
                                     <div class="search_box">
-                                        <input placeholder="Search product..." type="text">
-                                         <button type="submit"><span class="lnr lnr-magnifier"></span></button>
+                                        <input id="searchInput2" placeholder="Search product..." type="text" onkeydown="handleEnterKey(event)">
+                                         <button type="button" onclick="searchProduct(event)"><span class="lnr lnr-magnifier"></span></button>
                                     </div>
+                                   <!-- <div class="search_box">
+                                            <input id="searchInput" placeholder="Search product..." type="text">
+                                             <button onclick="searchProduct()"><span class="lnr lnr-magnifier"></span></button>
+                                    </div>-->
                                 </form>
                             </div>
                         </div>
@@ -631,18 +639,89 @@
 				return returnResultJsonObject;
 			}
 			
+			function shop_html(responseJsonObject = {}) {
+				let htmlTemplate =
+				`{{#each this}}
+				<div class="col-lg-4 col-md-4 col-sm-6 col-12" id="listContent">
+								<div class="single_product">
+									<div class="product_thumb" style="width: 250px; height: 300px;">
+										<a class="primary_img" href="productDetail?productNo={{productNo}}">
+											<img src="image/product/{{productImage}}" alt="" style="width: 250px; height: 300px;"></a>
+										<div class="action_links">
+											<ul>
+											<!-- 상품리스트에서 장바구니 추가하기 -->
+												<li class="add_to_cart"><a href="" title="Add to cart" id="{{productNo}}"><span class="lnr lnr-cart" ></span></a></li>
+											<!-- 상품리스트에서 장바구니 추가하기 -->				
+												<li class="wishlist"><a href="" title="Add to Wishlist" id="{{productNo}}"><span class="lnr lnr-heart"></span></a>
+												</li>
+											</ul>
+										</div>
+									</div>
+
+
+									<div class="product_content grid_content">
+										<h4 class="product_name"><a href="productDetail?productNo={{productNo}}"
+												text="{{productName}}">{{productName}}</a>
+										</h4>
+										<h5 class="old_price">별점 : {{productStarAvg}}</h5>
+										<p><a href="#">{{productPetCategory}}</a></p>
+										<div class="price_box">
+											<span class="current_price">{{formatPrice productPrice}}</span>
+											<!--<span class="old_price">$362.00</span>-->
+										</div>
+									</div>
+								</div>
+							</div>
+							{{/each}}`;
+				
+				let bindTemplate = Handlebars.compile(htmlTemplate);
+				let resultTemplate = bindTemplate(responseJsonObject);
+				
+				return resultTemplate;
+			}
+			
+			
+			function hideToolbar() {
+    			document.getElementById('shopToolbar').style.display = 'none';
+			}
+			
+
+			// Enter 키를 눌렀을 때 검색 결과를 표시하고 툴바를 숨기는 함수
+			function handleEnterKey(event) {
+			    if (event.key === 'Enter') {
+			        // 검색 로직을 수행한 후 결과가 있을 때
+			        // 검색 결과를 표시
+			        searchProduct();
+			        hideToolbar();
+        			event.preventDefault();
+			    }
+			}
+			
+			/*
+			function handleEnterKey(event) {
+    			if (event.key === "Enter") {
+        		// Enter 키를 눌렀을 때 검색 버튼 클릭 이벤트를 발생시킴
+        		searchProduct();
+        		event.preventDefault()
+    			}
+			}
+			*/
+			
 			function searchProduct() {
-				alert('aaa');
-    			var searchTerm = document.getElementById("searchInput").value;
+    			var searchTerm = $('#searchInput1').val();
 				
 				let send = {
 					productName : searchTerm
 				}
 				
-				ajaxRequest("POST", "products/search", send);
-}
+				let responseJsonObject = ajaxRequest("POST", "product/products/search", send);
+				let html = shop_html(responseJsonObject);
+				$('.shop_wrapper').html(html);
+			}
 			
-			
+			Handlebars.registerHelper('formatPrice', function(price) {
+    			return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '원';
+			});
 		</script>
     </div>
     <!--header area end-->

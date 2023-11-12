@@ -164,7 +164,6 @@ public class OrderController {
 		return "my-account-orders";
 	}
 	
-	
 	//orderform
 	@GetMapping("orderView")
 	public String orderView(HttpSession session,Model model) throws Exception{
@@ -223,6 +222,8 @@ public class OrderController {
 		
 			return "orderItemView";
 		}
+		
+		
 		
 		
 		@GetMapping("/dateByOrder")

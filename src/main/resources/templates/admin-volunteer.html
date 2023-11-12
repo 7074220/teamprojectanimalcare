@@ -10,8 +10,9 @@
 			margin-top: 20vh;
 			/* 회원탈퇴창 가운데 정도로 떨어트림 */
 			
-	}
-			#volunteerTable{
+		}
+		
+		#volunteerTable{
 		width: 1000px;
 		}
 	</style>
@@ -48,30 +49,16 @@
 							<!-- Nav tabs -->
 							<div class="dashboard_tab_button">
 								<ul role="tablist" class="nav flex-column dashboard-list">
-									<li><a href="userinfo" class="nav-link">내정보</a></li>
-									<li><a href="userinfo/mypet" class="nav-link">마이펫</a></li>
-									<li><a href="couponList" class="nav-link">쿠폰</a></li>
-									<li><a href="adoptByUserNo" class="nav-link">입양</a></li>
-									
-									<li> <a th:if="${session.userName == '관리자'}" href="volunteerList"
-											class="nav-link">관리자전용봉사목록</a></li>
-									<li> <a th:if="${session.userName != '관리자'}" href="volunteerByUserNo"
-											class="nav-link">봉사</a></li>
-									<li><a th:if="${session.userName == '관리자'}" href="adminVisitList"
-											class="nav-link">관리자 전용견학목록</a></li>
-									
-									<li><a th:if="${session.userName != '관리자'}" href="visitByUserNo"
-											class="nav-link">견학</a></li>
-									<li><a th:if="${session.userName == '관리자'}" href="centerListAll"
-											class="nav-link">관리자 보호소목록</a></li>
-									
-									<li> <a th:if="${session.userName == '관리자'}" href="ordersList" class="nav-link">관리자
-											전용주문목록</a></li>
-									<li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li>
-									<li><a href="logout" class="nav-link">로그아웃</a></li>
-									<li><a href="#" data-toggle="modal" data-target="#deleteModal"
-											class="nav-link">회원탈퇴</a></li>
-
+									<li><a href="adminUserList" class="nav-link">회원</a></li>
+	                                <li><a href="adminProductList"  class="nav-link">상품</a></li>
+	                                <li><a href="adminOrdersList" class="nav-link">주문</a></li>
+	                                <li><a href="adminAdoptList"  class="nav-link">입양</a></li>
+									<li><a href="adminVolunteerList"class="nav-link">봉사</a></li>
+	                                <li><a href="adminVisitList"class="nav-link">견학</a></li>
+									<li><a href="centerListAll"class="nav-link">보호소</a></li>
+									<!--<li><a th:if="${session.userName != '관리자'}" style="display: none;"class="nav-link"></a></li>-->
+									<!-- <li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li> -->
+	                                <li><a href="logout" class="nav-link">로그아웃</a></li>
 								</ul>
 							</div>
 						</div>
@@ -84,44 +71,45 @@
 
 
 								<!--  <div class="tab-pane fade" id="visit">-->
-								<h3>견학</h3>
-								<div class="table-responsive" id="visitTable">
+								<h3>봉사</h3>
+								<div class="table-responsive" id="volunteerTable">
 									<table class="table" >
 										<thead>
 											<tr>
-												<th>No</th>
-												<th>Time</th>
-												<th>Date</th>
-												<th>Center</th>
-												<th>Status</th>
-												<th>Update/Delete</th>
+												<th>번호</th>
+												<th>이름</th>
+												<th>방문날짜</th>
+												<th>방문시간</th>
+												<th>센터이름</th>
+												<th>처리상태</th>
+												<th>수정/취소</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr th:each="volunteer, rowStat : ${volunteerList}">
-												<td th:text="${volunteerList.size() - rowStat.index}"></td>			
+											
+												<td th:text="${volunteerList.size() - rowStat.index}"></td>		
+												<td th:text="${volunteer.Userinfo.userName}"></td>	
 												<td th:text="${#strings.substring(volunteer.volunteerDate.toString(), 0, 10)}"></td>
 												
 												
-												<td> <!-- 13PM, 14PM ... 18PM -->
+												<!--<td>  13PM, 14PM ... 18PM 
 													<span th:if="${volunteer.volunteerTime < 12}"
 														th:text="${volunteer.volunteerTime + ' AM'}"></span>
 													<span th:if="${volunteer.volunteerTime >= 12}"
 														th:text="${volunteer.volunteerTime + ' PM'}"></span>
-												</td>
+												</td>-->
 												
-												
+												<td th:text="${volunteer.volunteerTime + '시'}"></td>
 												<td th:text="${volunteer.Center.centerName}"></td>
 												
-												
-												<td th:text="${volunteer.volunteerStatus}"><span class="success">견학신청</span></td>
+												<td th:text="${volunteer.volunteerStatus}"><!--<span class="success">견학신청</span>--></td>
 												
 												<td>
 													<a th:if="${session.userName == '관리자'}" th:href="@{/updateVolunteer/{volunteerNo}(volunteerNo=${volunteer.volunteerNo})}" class="updateBtn">완료</a>
 													
 												
-													<button type="submit" class="deleteBtn"
-														th:id="'deleteBtn-' + ${volunteer.volunteerNo}">취소</button>
+													<button type="submit" class="deleteBtn" th:id="'deleteBtn-' + ${volunteer.volunteerNo}">취소</button>
 												</td>
 											</tr>
 										</tbody>
@@ -168,7 +156,7 @@
 						} else {
 							alert('예약취소가 완료되었습니다.');
 							$row.remove();
-							window.location.href = "adminVolunteerList"
+							//window.location.href = "adminVolunteerList"
 						}
 					},
 					error: function () {

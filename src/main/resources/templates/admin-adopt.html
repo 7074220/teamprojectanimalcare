@@ -11,7 +11,7 @@
 			/* 회원탈퇴창 가운데 정도로 떨어트림 */
 			
 	}
-			#visitTable{
+			#adoptTable{
 		width: 1000px;
 		}
 	</style>
@@ -187,30 +187,16 @@
 							<!-- Nav tabs -->
 							<div class="dashboard_tab_button">
 								<ul role="tablist" class="nav flex-column dashboard-list">
-									<li><a href="userinfo" class="nav-link">내정보</a></li>
-                                <li><a href="userinfo/mypet"  class="nav-link">마이펫</a></li>
-                                <li><a href="couponList"  class="nav-link">쿠폰</a></li>
-                                <li><a href="adoptByUserNo"  class="nav-link">입양</a></li> 							
-								
-								<li><a th:if="${session.userName == '관리자'}" href="adminVolunteerList"
-											class="nav-link">관리자 전용봉사목록</a></li>
-								<li><a th:if="${session.userName != '관리자'}" href="volunteerByUserNo"
-											class="nav-link">봉사</a></li>
-														  
-								<li><a th:if="${session.userName == '관리자'}" href="adminVisitList"
-											class="nav-link">관리자 전용견학목록</a></li>
-									<li><a th:if="${session.userName != '관리자'}" href="visitByUserNo"
-											class="nav-link">견학</a></li>	
-											<li><a th:if="${session.userName == '관리자'}" href="centerListAll"
-											class="nav-link">관리자 보호소목록</a></li>
-									<li><a th:if="${session.userName != '관리자'}" style="display: none;"
-											class="nav-link"></a></li>		
-                                <li> <a th:if="${session.userName == '관리자'}" href="ordersList" class="nav-link">관리자
-											전용주문목록</a></li>
-									<li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li>								
-                                <li><a href="logout" class="nav-link">로그아웃</a></li>
-                                <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li>	class="nav-link">회원탈퇴</a></li>
-
+									<li><a href="adminUserList" class="nav-link">회원</a></li>
+	                                <li><a href="adminProductList"  class="nav-link">상품</a></li>
+	                                <li><a href="adminOrdersList" class="nav-link">주문</a></li>
+	                                <li><a href="adminAdoptList"  class="nav-link">입양</a></li>
+									<li><a href="adminVolunteerList"class="nav-link">봉사</a></li>
+	                                <li><a href="adminVisitList"class="nav-link">견학</a></li>
+									<li><a href="centerListAll"class="nav-link">보호소</a></li>
+									<!--<li><a th:if="${session.userName != '관리자'}" style="display: none;"class="nav-link"></a></li>-->
+									<!-- <li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li> -->
+	                                <li><a href="logout" class="nav-link">로그아웃</a></li>
 								</ul>
 							</div>
 						</div>
@@ -223,36 +209,39 @@
 
 
 								<!--  <div class="tab-pane fade" id="visit">-->
-								<h3>견학</h3>
-								<div class="table-responsive" id="visitTable">
-									<table class="table" >
-										<thead>
-											<tr>
-												<th>No</th>
-												<th>Time</th>
-												<th>Date</th>
-												<th>Center</th>
-												<th>Status</th>
-												<th>Delete</th>
-											</tr>
-										</thead>
+								<h3>입양</h3>
+
+                                <div class="table-responsive" id="adoptTable">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>번호</th>
+                                                <th>이름</th>
+                                                <th>방문날짜</th>
+                                                <th>방문시간</th>
+                                                <th>펫번호</th>
+                                                <th>처리상태</th>
+                                                <th>수정/취소</th>                 
+                                            </tr>
+                                        </thead>
+
 										<tbody>
-											<tr th:each="visit,visitLatest : ${visitList}">
-												<!-- <td th:text="${visit.visitNo}"></td>-->
-												<td th:text="${visitList.size() - visitLatest.index}"></td>
-												<td th:text="${visit.visitTime}"></td>
-												<td th:text="${#strings.substring(visit.visitDate.toString(), 0, 10)}">
-												</td>
-												<td th:text="${visit.Center.centerName}"></td>
-												<td th:text="${visit.visitStatus}"><span class="success">견학신청</span>
-												</td>
-												<td>
-													<button type="submit" class="deleteBtn"
-														th:id="'deleteBtn-' + ${visit.visitNo}">취소</button>
+											<tr th:each="adopt, rowStat : ${adoptList}">
+												<td th:text="${adoptList.size() - rowStat.index}"></td>
+												<td th:text="${adopt.Userinfo.userName}"></td>
+												<td th:text="${#strings.substring(adopt.adoptDate.toString(),0,10)}"></span></td>
+												<td th:text="${adopt.adoptTime + '시'}"></td>
+												<td th:text="${adopt.Pet.petNo}"></td>
+												<td th:text="${adopt.adoptStatus}"><!--<span class="success">입양신청</span>--></td>
+												<td><!--<button type="submit" class="updateBtn" th:id="'updateBtn-' + ${adopt.adoptNo}">수정</button>-->
+													<a th:if="${session.userName == '관리자'}" th:href="@{/updateAdopt/{adoptNo}(adoptNo=${adopt.adoptNo})}" class="updateBtn">완료</a>
+													<!--<a th:href="@{'/adoptUpdate?adoptNo=' + ${adopt.adoptNo} + '&userNo=' + ${adopt.Userinfo.userNo} + '&petNo=' + ${adopt.Pet.petNo}}">수정</a>-->
+													<button type="submit" class="deleteBtn" th:id="'deleteBtn-' + ${adopt.adoptNo}">취소</button>
 												</td>
 											</tr>
+											
 										</tbody>
-									</table>
+                                    </table>
 								</div>
 							</div>
 						</div>
@@ -306,37 +295,38 @@
 </script> -->
 		<script>
 			$('.deleteBtn').on('click', function (e) {
-				e.preventDefault();
-				let id = $(this).attr('id');
-				let no = id.split('-')[1];
+			e.preventDefault();
+			let id = $(this).attr('id'); // 버튼의 id를 가져옴
+			let no = id.split('-')[1]; // "deleteBtn-" 다음의 값을 추출함
 
-				if (isNaN(no)) {
-					alert('visitNo 가져오기실패')
-					return;
-				}
+			if (isNaN(no)) {
+				alert('올바른 adoptNo 값을 가져오지 못했습니다.');
+				return; // adoptNo가 숫자가 아니면 요청을 중지
+			}
 
-				let sendJsonObject = {visitNo: no};
-				let $row = $(this).closest('tr');
-
-				$.ajax({
-					type: 'DELETE',
-					url: 'visit/' + no,
-					data: JSON.stringify(sendJsonObject),
-					contentType: 'application/json;UTF-8',
-					success: function (response) {
-						if (response && response.visitNo == null) {
-							alert('신청내역이 없음');
-						} else {
-							alert('예약취소가 완료되었습니다.');
-							$row.remove();
-							window.location.href = "index"
-						}
-					},
-					error: function () {
-						alert('취소 요청중 오류가 발생했습니다.');
+			let sendJsonObject = {adoptNo: no}; // 삭제 요청에 사용할 객체 생성
+			let $row = $(this).closest('tr');
+			// 삭제 요청을 서버로 보내는 코드
+			$.ajax({
+				type: 'DELETE',
+				url: 'adopt/' + no,
+				data: JSON.stringify(sendJsonObject),
+				contentType: 'application/json;UTF-8',
+				success: function (response) {
+					if (response && response.adoptNo == null) {
+						alert('신청내역이 존재하지 않습니다.');
+					} else {
+						alert('취소가 완료되었습니다.');
+						// 성공한 경우, 해당 <tr> 요소를 삭제
+						$row.remove();
+						//window.location.href = "index";
 					}
-				});
+				},
+				error: function () {
+					alert('입양 취소 요청 중 오류가 발생했습니다.');
+				}
 			});
+		});
 
 		</script>
 	</th:block>
