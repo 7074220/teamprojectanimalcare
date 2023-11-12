@@ -480,14 +480,16 @@
                                                       aria-label="Large select example">
                                                
                                                       <option selected>주문 상태</option>
-                                                      {{#select orderstatus.osNo }} 
+                                                    {{#select orderstatus.osNo}} 
 	                                                      <option value="1">주문확인</option>
 	                                                      <option value="2">주문ㅇㅇ</option>
 	                                                      <option value="3">주문3</option>
                                                       {{/select}}
+                                                      
+                                                      
                                                    </select>
                                                 </td>
-                                                
+                                               
                                                 
                                                 <td><button type="button" class="write-review" onclick="reviewWrite(event,{{oiNo}})" id="{{product.productNo}}">{{reviewStatus}}</button></td>
                                              </tr>
@@ -514,6 +516,7 @@
           	   $('.form-select form-select-sm option:not(:selected)').prop('disabled', true);
             } */
          $('#orderDetailsModal').on('show.bs.modal',function(e){
+	
             let index=e.relatedTarget.href.lastIndexOf('#')
             let orderNo=e.relatedTarget.href.substring(index+1);
             console.log(orderNo);
@@ -525,9 +528,10 @@
                data: {},
                type: 'json',
                success: function(resultJsonObject) {
-                  console.log(resultJsonObject);
-                  let html = my_account_order(resultJsonObject);
-                  $('#modalContent').html(html);
+	console.log(resultJsonObject);
+              let html = my_account_order(resultJsonObject);
+               $('#modalContent').html(html);
+                
                 
                   // 셀렉티드 시키면 되겠다~
                }

@@ -18,18 +18,18 @@ initialize.addCustomFunctionHandlebars();
 
 const initialize2=createInitializer();
 
-jQuery.validator.addMethod("phone", function(phone_number, element) {
+/*jQuery.validator.addMethod("phone", function(phone_number, element) {
     phone_number = phone_number.replace(/\s+/g, "");
     return this.optional(element) || phone_number.length > 9 && 
     phone_number.match(/010-\d{4}-\d{4}$/);
-}, "핸드폰 번호 형식으로 써주세요");
+}, "핸드폰 번호 형식으로 써주세요");*/
 
-jQuery.validator.addMethod("resident", function(resident_number, element) {
+/*jQuery.validator.addMethod("resident", function(resident_number, element) {
     resident_number = resident_number.replace(/\s+/g, "");
     return this.optional(element) || resident_number.length > 13 && 
     resident_number.match(/^\d{6}-\d{7}$/);
 }, "주민등록번호 형식으로 써주세요");
-
+*/
 
 
 
