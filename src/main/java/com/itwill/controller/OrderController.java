@@ -148,18 +148,14 @@ public class OrderController {
 			OrdersDto dto = OrdersDto.toDto(orders);
 			dto.setUserinfo(userinfo);
 			/*
-			if(reviewBoardService.findByUserNoProductNo()!=null) {
+			if(reviewBoardService.findByUserNoAndProductNo(userNo,)!=null) {
 				dto.setReviewStatus(1);
 			}else {
 				dto.setReviewStatus(0);
 			}
 			*/
 			ordersDtoList.add(dto);
-			
 		}
-		
-		
-		
 		model.addAttribute("ordersList",ordersDtoList);
 		return "my-account-orders";
 	}
@@ -238,6 +234,16 @@ public class OrderController {
 			}
 			
 			model.addAttribute("ordersList",ordersListDto);
+			
+			return "my-account-orders";
+			
+		}
+		
+		@GetMapping("/updateosNo")
+		public String updateosNo(String oiNo,String osNo,HttpSession session,Model model){
+			OrderItem orderItem=itemService.findByOiNo(Long.parseLong(oiNo));
+			Orderstatus orderstatus=orderStatusRepository.findById(Long.parseLong(osNo)).get();
+			orderItem.setOrderStatus(orderstatus);
 			
 			return "my-account-orders";
 			

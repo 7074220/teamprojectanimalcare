@@ -1,5 +1,6 @@
 package com.itwill.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itwill.dto.OrdersDto;
+import com.itwill.dto.VisitDto;
 import com.itwill.entity.Center;
+import com.itwill.entity.Orders;
 import com.itwill.entity.Userinfo;
 import com.itwill.entity.Visit;
 import com.itwill.entity.Volunteer;
@@ -33,41 +37,39 @@ public class VisitController {
 	@Autowired
 	private UserInfoService userInfoService;
 
-	@GetMapping(value = "/visit", params = "centerNo") // 
-	public String insert_action(Model model, @RequestParam Long centerNo) throws Exception {				
+	@GetMapping(value = "/visit", params = "centerNo") //
+	public String insert_action(Model model, @RequestParam Long centerNo) throws Exception {
 		Center center = centerService.findByCenterNo(centerNo);
 		model.addAttribute("center", center);
 		return "visit";
 	}
-	
-	
-	
+
 	@PostMapping("/create-visit")
 	public String createvisit(@RequestParam("visitDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date visitDate,
-	        @RequestParam("visitTime") int selectedHour, @RequestParam Long centerNo, HttpSession session, Model model) throws Exception {
-	    Long userNo = (Long) session.getAttribute("userNo");
-	    
-	    if (userNo != null) {
-	        Visit visit = new Visit();
-	        visit.setVisitDate(visitDate);
-	        visit.setVisitStatus("견학신청");
-	        visit.setVisitTime(selectedHour);
+			@RequestParam("visitTime") int selectedHour, @RequestParam Long centerNo, HttpSession session, Model model)
+			throws Exception {
+		Long userNo = (Long) session.getAttribute("userNo");
 
-	        Center center = centerService.findByCenterNo(centerNo);
-	        Userinfo userinfo = userInfoService.findUserByNo(userNo);
-	        visit.setUserinfo(userinfo);
-	        visit.setCenter(center);
-	        
-	        model.addAttribute("userinfo", userinfo);
+		if (userNo != null) {
+			Visit visit = new Visit();
+			visit.setVisitDate(visitDate);
+			visit.setVisitStatus("견학신청");
+			visit.setVisitTime(selectedHour);
 
-	        
-	        model.addAttribute("message", "신청이 완료되었습니다.");
-	    } else {
-	      
-	        model.addAttribute("error", "로그인이 필요합니다.");
-	    }
-	    return "visitByUserNo"; // my-account 페이지로 이동
-	    
+			Center center = centerService.findByCenterNo(centerNo);
+			Userinfo userinfo = userInfoService.findUserByNo(userNo);
+			visit.setUserinfo(userinfo);
+			visit.setCenter(center);
+
+			model.addAttribute("userinfo", userinfo);
+
+			model.addAttribute("message", "신청이 완료되었습니다.");
+		} else {
+
+			model.addAttribute("error", "로그인이 필요합니다.");
+		}
+		return "visitByUserNo"; // my-account 페이지로 이동
+
 	}
 	/*
 	 * // 관리자 견학리스트 전체출력
@@ -97,33 +99,50 @@ public class VisitController {
 		model.addAttribute("visitList", visitList);
 		return "my-account-visit";
 	}
-	
-	  @PutMapping("/update-visit")
-	    public String updateVolunteer(@ModelAttribute Visit visit, @RequestParam(value = "visitNo") Long visitNo, 
-	            HttpSession session, Model model) throws Exception {
-	        Long userNo = (Long) session.getAttribute("userNo");
-	        if (userNo != null) {
-	            Visit findVisit= visitService.findByVisitNo(visitNo);
 
-	           
-	            findVisit.setVisitDate(visit.getVisitDate());
-	            findVisit.setVisitTime(visit.getVisitTime());
-
-	            visitService.updateVisit(findVisit);
-	        }
-	        return "my-account-visit"; // 수정 실패 페이지로 이동
+	// 관리자
+	@GetMapping("/visitList")
+	public String findOrders(Model model) throws Exception {
+	    List<Visit> visitList = visitService.selectAllVisits();
+	    
+	    List<VisitDto> visitDto = new ArrayList<>();
+	    for (Visit visit : visitList) {
+	        Userinfo userinfo = visit.getUserinfo();
+	        VisitDto dto = VisitDto.toDto(visit);
+	        dto.setUserinfo(userinfo);
+	        visitDto.add(dto);
 	    }
-	  
-	  @GetMapping("/visitUpdate")
-	    public String getVisitPage(@RequestParam Long visitNo, @RequestParam Long centerNo, Model model) throws Exception{
 
-	        Visit visit = visitService.findByVisitNo(visitNo);
-	        Center center = centerService.findByCenterNo(centerNo);
-	        
-	        model.addAttribute("visit", visit);
-	        model.addAttribute("visitNo", visitNo);
-	        model.addAttribute("center", center);
+	    model.addAttribute("visitList", visitDto);
+	    return "my-account-visit";
+	}
 
-	        return "visitUpdate";
-	    }
+
+	@PutMapping("/update-visit")
+	public String updateVolunteer(@ModelAttribute Visit visit, @RequestParam(value = "visitNo") Long visitNo,
+			HttpSession session, Model model) throws Exception {
+		Long userNo = (Long) session.getAttribute("userNo");
+		if (userNo != null) {
+			Visit findVisit = visitService.findByVisitNo(visitNo);
+
+			findVisit.setVisitDate(visit.getVisitDate());
+			findVisit.setVisitTime(visit.getVisitTime());
+
+			visitService.updateVisit(findVisit);
+		}
+		return "my-account-visit";
+	}
+
+	@GetMapping("/visitUpdate")
+	public String getVisitPage(@RequestParam Long visitNo, @RequestParam Long centerNo, Model model) throws Exception {
+
+		Visit visit = visitService.findByVisitNo(visitNo);
+		Center center = centerService.findByCenterNo(centerNo);
+
+		model.addAttribute("visit", visit);
+		model.addAttribute("visitNo", visitNo);
+		model.addAttribute("center", center);
+
+		return "visitUpdate";
+	}
 }

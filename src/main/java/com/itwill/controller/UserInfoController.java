@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.dao.OrderItemDao;
+import com.itwill.dto.AdminUserListDto;
 import com.itwill.dto.PetDto;
 import com.itwill.entity.MyPet;
 import com.itwill.entity.OrderItem;
@@ -93,7 +94,6 @@ public class UserInfoController {
 	public String delete(HttpSession session) throws Exception {
 		Long userNo = (Long)session.getAttribute("userNo");
 		
-		userInfoService.remove(userNo);
 		cartService.deleteByUserId(userNo);
 		
 		List<Orders> orderList = orderService.findOrderById(userNo);
@@ -112,10 +112,13 @@ public class UserInfoController {
 			myPetService.Delete(myPet.getMypetNo());
 		}
 		
+		userInfoService.remove(userNo);
 		session.invalidate();
 		
 		return "index";
 	}
+	
+	
 	
 	@GetMapping(value="/logout")
 	public String logout(HttpSession session, Model model) {

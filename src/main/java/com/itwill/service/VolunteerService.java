@@ -20,6 +20,8 @@ public interface VolunteerService {
 	List<Volunteer> findAllVolunteers(); // 봉사 목록 전체 찾기
 
 	List<Volunteer> findVolunteertByUserNo(Long no); // userNo 로 목록 검색
+	
+	//List<Volunteer> findByVolunteerListAdmin(Volunteer volunteer); // admin로그인후 date 기준으로 정렬
 
 	
 	

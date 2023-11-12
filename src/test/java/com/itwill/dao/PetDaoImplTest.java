@@ -9,6 +9,9 @@ import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -108,17 +111,27 @@ void test2() {
 	@Test
 	@Disabled
 	void findallPetType() {
-		List<Pet> pet = petDao.findAllByOrderByPetType("강아지");
-	System.out.println(pet);
+		
+		Pageable pageable = PageRequest.of(0, 5);
+		
+		Page<Pet> pet = petDao.findAllByOrderByPetType("강아지",pageable);
+		System.out.println("Content: " + pet.getContent());
+	}
+	@Test
+void findallPetType2() {
+		
+		Pageable pageable = PageRequest.of(0, 5);
+		
+		Page<Pet> pet = petDao.findAllByPetLocal("서울특별시",pageable);
+		System.out.println("Content: " + pet.getContent());
 	}
 	
-	//펫 타입리스트
-		@Test
-		//@Disabled
-		void findallPetLocal() {
-			List<Pet> pet = petDao.findAllByPetLocal("서울특별시");
-		System.out.println(pet);
-		}
+	/*
+	 * //펫 타입리스트
+	 * 
+	 * @Test //@Disabled void findallPetLocal() { List<Pet> pet =
+	 * petDao.findAllByPetLocal("서울특별시"); System.out.println(pet); }
+	 */
 }
 
 

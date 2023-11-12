@@ -33,7 +33,7 @@
 		<!-- my account start  -->
 		<section class="main_content_area">
 			<div class="container">
-				<div class="account_dashboard">
+				<div class="account_dashboard" style="margin-right:250px">
 					<div class="row">
 						<div class="col-sm-12 col-md-3 col-lg-3">
 							<!-- Nav tabs -->
@@ -43,8 +43,16 @@
 									<li><a href="mypet" class="nav-link">마이펫</a></li>
 									<li><a href="couponList" class="nav-link">쿠폰</a></li>
 									<li><a href="adoptByUserNo" class="nav-link">입양</a></li>
-									<li><a href="volunteerByUserNo" class="nav-link">봉사</a></li>
-									<li><a href="visitByUserNo" class="nav-link">견학</a></li>
+									<li><a th:if="${session.userName == '관리자'}" href="adminVolunteerList"
+											class="nav-link">관리자 전용봉사목록</a></li>
+									<li><a th:if="${session.userName != '관리자'}" href="volunteerByUserNo"
+											class="nav-link">봉사</a></li>  
+									<li><a th:if="${session.userName == '관리자'}" href="adminVisitList"
+											class="nav-link">관리자 전용견학목록</a></li>
+									<li><a th:if="${session.userName != '관리자'}" href="visitByUserNo"
+											class="nav-link">견학</a></li>
+											<li><a th:if="${session.userName == '관리자'}" href="centerListAll"
+											class="nav-link">관리자 보호소목록</a></li>
 									<li> <a th:if="${session.userName == '관리자'}" href="ordersList" class="nav-link">관리자
 											전용주문목록</a></li>
 									<li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li>
@@ -70,9 +78,6 @@
 												<tr>
 													<!--<label class="checkbox-inline">
 													</label>-->
-													<label class="checkbox-inline">
-														<input type="checkbox" id="allCheckBox" onclick="allChecked()" checked="true">
-													</label>
 													
 													<th>대표동물</th>
 													<th>No</th>
@@ -84,22 +89,24 @@
 											</thead>
 
 											<tbody>
+												
 												<tr th:each="mypet : ${myPetList}">
 													<!--<td th:text="${mypet.mypetNo}">1</td>-->
 
 													<td th:text="${mypet.mypetLeader}"></td>
-													<td th:text="${mypet.MypetSequence}" th:id="${mypet.mypetNo}"></td>
-													<td th:text="${mypet.mypetName}"></td>
-													<td th:text="${mypet.mypetBirthday}"></span></td>
-													<td th:text="${mypet.mypetKind}"></td>
-													<td class="mypet_remove" th:id="${mypet.mypetNo}"><a
+												 <td><a th:href="@{updateMyPet(mypetNo=${mypet.mypetNo})}" th:text="${mypet.MypetSequence}">Link Text</a></td>
+												<!--	<td th:text="${mypet.MypetSequence}" th:id="${mypet.mypetNo}"></td>-->
+													<td><a th:href="@{updateMyPet(mypetNo=${mypet.mypetNo})}" th:text="${mypet.mypetName}"></a></td>
+													<td><a th:href="@{updateMyPet(mypetNo=${mypet.mypetNo})}" th:text="${mypet.mypetBirthday}"></a></td>
+													<td><a th:href="@{updateMyPet(mypetNo=${mypet.mypetNo})}" th:text="${mypet.mypetKind}"></a></td>
+													<td><a class="mypet_remove" th:id="${mypet.mypetNo}"><a
 															class="deleteCart"><i class="fa fa-trash-o"
 																th:id="${mypet.mypetNo}"></i></a></td>
 
 
 
 												</tr>
-
+											
 											</tbody>
 										</table>
 
@@ -148,7 +155,7 @@
 
 			$(document).ready(function () {
 				// 특정 요소를 클릭할 때 그 요소의 부모 행을 삭제
-				$(".mypet_remove").on("click", function(e) {
+				$(".fa").on("click", function(e) {
 					$(this).closest("tr").remove();
 					let mypetNo = $(e.target).attr('id');
 					let send={

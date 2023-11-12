@@ -63,7 +63,7 @@ public class UserInfoRestController {
 	@GetMapping("/idcheck")
 	public boolean user_id_check(@RequestParam(name="userId") String userId) throws Exception{
 		System.out.println(">>>>> user_id_check: " + userId);
-		return userInfoService.countByUserId(userId);
+		return !userInfoService.countByUserId(userId);
 	}
 	
 	@GetMapping("/passcheck")
@@ -76,6 +76,7 @@ public class UserInfoRestController {
 	@Operation(summary = "회원가입")
 	@PostMapping()
 	public ResponseEntity<UserWriteActionDto> user_write_action(@RequestBody UserWriteActionDto dto) throws Exception {
+		dto.setUserPoint(0);
 		Userinfo createUserinfo = userInfoService.create(UserWriteActionDto.toEntity(dto));
 		List<MyPet> myPets = dto.getMyPets();
 		for (MyPet myPet : myPets) {

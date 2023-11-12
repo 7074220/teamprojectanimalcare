@@ -1,278 +1,76 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="layout/layout(title='reportList')">
+      layout:decorate="layout/layout(title='reportList')">
 
 <head>
-	<title>Insert title here</title>
-	<style>
-		.fixed-image {
-		    width: 100%; /* 원하는 가로 크기 */
-		    height: 225px; /* 원하는 세로 크기 */
-		    object-fit: cover; /* 이미지를 비율 유지하면서 크기에 맞게 조절 */
-		  }
-		
-	</style>
+    <title>Insert title here</title>
+    <style>
+        .fixed-image {
+            width: 100%;
+            height: 225px;
+            object-fit: cover;
+        }
+    </style>
 </head>
 
 <body>
 
-	<script type="text/javascript">
-		function boardCreate() {
-			location.href = "/reportlist";
-		}
-	</script>
+<script type="text/javascript">
+    function boardCreate() {
+        location.href = "/reportlist";
+    }
+</script>
 
+<th:block layout:fragment="content">
+    <div id="content">
+        <div class="album py-5 bg-body-tertiary">
+            <div class="container">
 
-	<th:block layout:fragment="content">
-		<div id="content">
-		<div class="album py-5 bg-body-tertiary">
-			<div class="container">
+                <a class="button" href="#" th:href="@{reportWriteForm}">글쓰기</a>
+                <br>
+                <br>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+                    <div class="col" th:each="reportboard : ${reportList.content}">
+                        <div class="card shadow-sm">
+                            <a href="#" th:href="@{reportBoardView(boardNo=${reportboard.boardNo})}">
+                                <img class="fixed-image" src="#" th:src="@{/image/reportboard/} + ${reportboard.boardImage}">
+                            </a>
 
-					<a class="button" href="#" th:href="@{reportWriteForm}">글쓰기</a>
-					 <!-- <button class="button" type="submit">글쓰기</button> -->
-					 <br>
-					 <br>
-				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
-					<div class="col" th:each="reportboard : ${reportBoardList}">
-                  <!--  <div class="card shadow-sm">-->
-						<div class="card shadow-sm">
-							<a  href="#" th:href="@{reportBoardView(boardNo=${reportboard.boardNo})}" ><img class="fixed-image"
-								src="#" th:src="@{/image/reportboard/} + ${reportboard.boardImage}"></a>
-								
-
-												<title>Placeholder</title>
-								
-								<rect width="100%" height="100%" fill="#55595c" />
-								<!--
-								<text x="50%" y="50%" fill="#eceeef" dy=".3em">이미지넣을공간</text>-->
-								
-							</img>
-							
-							<div class="card-body">
-									<tr>
-										<th width=280 align=center bgcolor="E6ECDE" th:text="${reportboard.boardTitle}">제목</th></br>
-										<th width=280 align=center bgcolor="E6ECDE" th:text='${"발견장소 : " + reportboard.boardTitle}'>발견 장소</th></br>
-									</tr>
-							</div>
-							<small class="text-body-secondary"><span style="margin-left: 20px;" th:text="${#dates.format(reportboard.boardRegisterDate, 'yyyy년 MM월 dd일')}">작성 날짜</span> </small>
-						<!--</div>-->
-					</div>
-					
-					
-			<!--		<form name="f" method="post" action="">
-								<table border="0" cellpadding="0" cellspacing="1" width="590"
-									bgcolor="BBBBBB">
-
-									<tr>
-										<td width=280 align=center bgcolor="E6ECDE">제목</td>
-										<td width=120 align=center bgcolor="E6ECDE">지역</td>
-										<td width=120 align=center bgcolor="E6ECDE">글쓴이</td>
-										
-									</tr>
-									<tr th:each="reportboard:${reportBoardList}">
-										<td width=280 bgcolor="ffffff" style="padding-left: 10px"
-											align="left"><a th:href='@{reportboardView(reportboardno=${reportboard.repoortboardno}' th:text='${reportboard.boardTitle}'> 게시판타이틀1688 </a>
-										</td>
-										<td width=120 align=center bgcolor="ffffff" th:text="${reportboard.boardFindName}">김경호1688</td>
-										<td width=120 bgcolor="ffffff" style="padding-left: 10px"
-											align="center" th:text="${#temporals.format(reportboard.boardRegisterDate, 'yyyy-MM-dd')}">2023-08-18</td>
-									</tr>
-								</table>
-								
-							</form>
-					-->
-					
-					
-					
-					
-					
-					
-	<!--				<div class="col">
-						<div class="card shadow-sm">
-							<svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-								xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: صورة مصغرة"
-								preserveAspectRatio="xMidYMid slice" focusable="false">
-								<title>Placeholder</title>
-								<rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-									dy=".3em">صورة مصغرة</text>
-							</svg>
-							<div class="card-body">
-								<p class="card-text">هذه بطاقة أوسع مع نص داعم أدناه كمقدمة طبيعية لمحتوى إضافي. هذا
-									المحتوى أطول قليلاً.</p>
-								<div class="d-flex justify-content-between align-items-center">
-									<div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">عرض</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">تعديل</button>
+                            <div class="card-body">
+                                <tr>
+                                    <th width=280 align=center bgcolor="E6ECDE" th:text="${reportboard.boardTitle}">제목</th></br>
+                                    <th width=280 align=center bgcolor="E6ECDE" th:text='${"발견장소 : " + reportboard.boardTitle}'>발견 장소</th></br>
+                                </tr>
+                            </div>
+                            <small class="text-body-secondary">
+                                <span style="margin-left: 20px;" th:text=" ${#dates.format(reportboard.boardRegisterDate,  '작성날짜 : yyyy년 MM월 dd일')}">작성 날짜</span>
+                            </small>
+                        </div>
+                    </div>
                 </div>
-									<small class="text-body-secondary">9 دقائق</small>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card shadow-sm">
-							<svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-								xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: صورة مصغرة"
-								preserveAspectRatio="xMidYMid slice" focusable="false">
-								<title>Placeholder</title>
-								<rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-									dy=".3em">صورة مصغرة</text>
-							</svg>
-							<div class="card-body">
-								<p class="card-text">هذه بطاقة أوسع مع نص داعم أدناه كمقدمة طبيعية لمحتوى إضافي. هذا
-									المحتوى أطول قليلاً.</p>
-								<div class="d-flex justify-content-between align-items-center">
-									<div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">عرض</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">تعديل</button>
-                </div>
-									<small class="text-body-secondary">9 دقائق</small>
-								</div>
-							</div>
-						</div>
-					</div>
 
-					<div class="col">
-						<div class="card shadow-sm">
-							<svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-								xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: صورة مصغرة"
-								preserveAspectRatio="xMidYMid slice" focusable="false">
-								<title>Placeholder</title>
-								<rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-									dy=".3em">صورة مصغرة</text>
-							</svg>
-							<div class="card-body">
-								<p class="card-text">هذه بطاقة أوسع مع نص داعم أدناه كمقدمة طبيعية لمحتوى إضافي. هذا
-									المحتوى أطول قليلاً.</p>
-								<div class="d-flex justify-content-between align-items-center">
-									<div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">عرض</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">تعديل</button>
-                </div>
-									<small class="text-body-secondary">9 دقائق</small>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card shadow-sm">
-							<svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-								xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: صورة مصغرة"
-								preserveAspectRatio="xMidYMid slice" focusable="false">
-								<title>Placeholder</title>
-								<rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-									dy=".3em">صورة مصغرة</text>
-							</svg>
-							<div class="card-body">
-								<p class="card-text">هذه بطاقة أوسع مع نص داعم أدناه كمقدمة طبيعية لمحتوى إضافي. هذا
-									المحتوى أطول قليلاً.</p>
-								<div class="d-flex justify-content-between align-items-center">
-									 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">عرض</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">تعديل</button>
-                </div>
-									<small class="text-body-secondary">9 دقائق</small>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card shadow-sm">
-							<svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-								xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: صورة مصغرة"
-								preserveAspectRatio="xMidYMid slice" focusable="false">
-								<title>Placeholder</title>
-								<rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-									dy=".3em">صورة مصغرة</text>
-							</svg>
-							<div class="card-body">
-								<p class="card-text">هذه بطاقة أوسع مع نص داعم أدناه كمقدمة طبيعية لمحتوى إضافي. هذا
-									المحتوى أطول قليلاً.</p>
-								<div class="d-flex justify-content-between align-items-center">
-									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-outline-secondary">عرض</button>
-										<button type="button" class="btn btn-sm btn-outline-secondary">تعديل</button>
-									</div>
-									<small class="text-body-secondary">9 دقائق</small>
-								</div>
-							</div>
-						</div>
-					</div>
+                <div class="shop_toolbar t_bottom">
+                    <div class="pagination" th:if="${reportList.totalPages > 1}">
+                        <ul th:with="pageNumber=${reportList.number}, totalPages=${reportList.totalPages}">
+                            <li th:classappend="${reportList.first} ? 'disabled'"><a href="#" th:href="${reportList.first} ? '#' : @{reportlist(page=${pageNumber - 1})}">&lt;</a></li>
 
-					<div class="col">
-						<div class="card shadow-sm">
-							<svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-								xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: صورة مصغرة"
-								preserveAspectRatio="xMidYMid slice" focusable="false">
-								<title>Placeholder</title>
-								<rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-									dy=".3em">صورة مصغرة</text>
-							</svg>
-							<div class="card-body">
-								<p class="card-text">هذه بطاقة أوسع مع نص داعم أدناه كمقدمة طبيعية لمحتوى إضافي. هذا
-									المحتوى أطول قليلاً.</p>
-								<div class="d-flex justify-content-between align-items-center">
-									 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">عرض</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">تعديل</button>
+                            <li th:each="page: ${#numbers.sequence(0, totalPages - 1)}"
+                                th:classappend="${page == pageNumber} ? 'current'"><a th:text="${page + 1}" th:href="@{reportlist(page=${page})}"></a></li>
+
+                            <li th:classappend="${reportList.last} ? 'disabled'"><a href="#" th:href="${reportList.last} ? '#' : @{reportlist(page=${pageNumber + 1})}">&gt;</a></li>
+                        </ul>
+                    </div>
                 </div>
-									<small class="text-body-secondary">9 دقائق</small>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card shadow-sm">
-							<svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-								xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: صورة مصغرة"
-								preserveAspectRatio="xMidYMid slice" focusable="false">
-								<title>Placeholder</title>
-								<rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-									dy=".3em">صورة مصغرة</text>
-							</svg>
-							<div class="card-body">
-								<p class="card-text">هذه بطاقة أوسع مع نص داعم أدناه كمقدمة طبيعية لمحتوى إضافي. هذا
-									المحتوى أطول قليلاً.</p>
-								<div class="d-flex justify-content-between align-items-center">
-									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-outline-secondary">عرض</button>
-										<button type="button" class="btn btn-sm btn-outline-secondary">تعديل</button>
-									</div>
-									<small class="text-body-secondary">9 دقائق</small>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card shadow-sm">
-							<svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-								xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: صورة مصغرة"
-								preserveAspectRatio="xMidYMid slice" focusable="false">
-								<title>Placeholder</title>
-								<rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-									dy=".3em">صورة مصغرة</text>
-							</svg>
-							<div class="card-body">
-								<p class="card-text">هذه بطاقة أوسع مع نص داعم أدناه كمقدمة طبيعية لمحتوى إضافي. هذا
-									المحتوى أطول قليلاً.</p>
-								<div class="d-flex justify-content-between align-items-center">
-									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-outline-secondary">عرض</button>
-										<button type="button" class="btn btn-sm btn-outline-secondary">تعديل</button>
-									</div>
-									<small class="text-body-secondary">9 دقائق</small>
-								</div>
-							</div>
-						</div>
-					</div>-->
-				</div>
-			<!-- </parent> -->
-		</div>
-		</div>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-	</th:block>
+
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+</th:block>
+
 </body>
+</html>

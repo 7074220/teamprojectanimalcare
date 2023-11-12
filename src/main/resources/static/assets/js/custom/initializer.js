@@ -14,8 +14,16 @@ function createInitializer() {
 		
 		addCustomFunctionHandlebars: function() {
 			/*****Handlebars 함수등록 */
+			 window.Handlebars.registerHelper('select', function( value, options ){
+				var $el = $('<select />').html( options.fn(this) );
+		        $el.find('[value="' + value + '"]').attr({'selected':'selected'});
+		        return $el.html();
+		    });
 			Handlebars.registerHelper('substring', function(str, start, end) {
 				return str.substring(start, end);
+			});
+			Handlebars.registerHelper('intToString', function(i) {
+				return i+'';
 			});
 			Handlebars.registerHelper('toUpper', function(str) {
 				return str.toUpperCase();
@@ -76,7 +84,6 @@ function createInitializer() {
 						userId: function() {
 							return $('#userId').val();
 						}
-					
 					}
 				}
 			},
@@ -98,9 +105,19 @@ function createInitializer() {
 				required: true,
 				resident : true
 			},
-			address:{
+			gender : {
 				required : true
+			},
+			postcode :{
+				required:true
+			},
+			ordersAddress1:{
+				required:true
+			},
+			ordersAddress3:{
+				required:true
 			}
+			
 		},
 		messages: {
 			userId: {
@@ -123,8 +140,17 @@ function createInitializer() {
 			residentNumber :{
 				required: '주민등록번호를 입력하세요.',
 			},
-			address :{
-				required: '주소를 입력하세요.',
+			gender :{
+				required: '성별을 선택하세요.',
+			},
+			postcode :{
+				required:'우편번호를 입력하세요.'
+			},
+			ordersAddress1:{
+				required:'주소를 입력하세요.'
+			},
+			ordersAddress3:{
+				required:'주소를 입력하세요.'
 			}
 		},
 		errorClass: 'error',
