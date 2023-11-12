@@ -572,16 +572,7 @@
 								<div class="widget_list widget_categories">
 									<h3>카테고리</h3>
 									<ul>
-										<li class="widget_sub_categories sub_categories1"><a
-												href="javascript:void(0)">고양이</a>
-											<ul class="widget_dropdown_categories dropdown_categories1">
-												<li><a href="#" th:href="@{productCatList?category=1}">사료</a></li>
-												<li><a href="#" th:href="@{productCatList?category=2}">간식</a></li>
-												<li><a href="#" th:href="@{productCatList?category=3}">캔</a></li>
-												<li><a href="#" th:href="@{productCatList?category=4}">모래</a></li>
-												<li><a href="#" th:href="@{productCatList?category=5}">미용</a></li>
-											</ul>
-										</li>
+										<li><a href="productList">모든상품</a></li>
 										<li class="widget_sub_categories sub_categories2"><a
 												href="javascript:void(0)">강아지</a>
 											<ul class="widget_dropdown_categories dropdown_categories2">
@@ -590,6 +581,16 @@
 												<li><a href="#" th:href="@{productDogList?category=3}">캔</a></li>
 												<li><a href="#" th:href="@{productDogList?category=4}">위생</a></li>
 												<li><a href="#" th:href="@{productDogList?category=5}">미용</a></li>
+											</ul>
+										</li>
+										<li class="widget_sub_categories sub_categories1"><a
+												href="javascript:void(0)">고양이</a>
+											<ul class="widget_dropdown_categories dropdown_categories1">
+												<li><a href="#" th:href="@{productCatList?category=1}">사료</a></li>
+												<li><a href="#" th:href="@{productCatList?category=2}">간식</a></li>
+												<li><a href="#" th:href="@{productCatList?category=3}">캔</a></li>
+												<li><a href="#" th:href="@{productCatList?category=4}">모래</a></li>
+												<li><a href="#" th:href="@{productCatList?category=5}">미용</a></li>
 											</ul>
 										</li>
 										<!-- <li class="widget_sub_categories sub_categories3"><a href="javascript:void(0)">Clothing</a>
@@ -700,7 +701,7 @@
 					<div class="col-lg-9 col-md-12">
 						<!--shop wrapper start-->
 						<!--shop toolbar start-->
-						<div class="shop_toolbar_wrapper">
+						<div class="shop_toolbar_wrapper" id="shopToolbar">
 							<div class="shop_toolbar_btn">
 
 								<!--  <button data-role="grid_3" type="button" class="active btn-grid-3" data-toggle="tooltip" title="3"></button> -->
@@ -807,8 +808,8 @@
 
 
 
-						<div class="row shop_wrapper" id="listContent">
-							<div class="col-lg-4 col-md-4 col-sm-6 col-12" th:each="product:${productList}">
+						<div class="row shop_wrapper">
+							<div class="col-lg-4 col-md-4 col-sm-6 col-12" th:each="product:${productList}" id="listContent">
 								<div class="single_product">
 									<div class="product_thumb" style="width: 250px; height: 300px;">
 										<a class="primary_img" href="product-details.html"

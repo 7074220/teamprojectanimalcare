@@ -221,7 +221,7 @@
                                             </select>                        
                                        </div> -->
 										<div class="search_box">
-                                            <input id="searchInput1" placeholder="Search product..." type="text">
+                                            <input id="searchInput1" placeholder="Search product..." type="text" onkeydown="handleEnterKey(event)">
                                              <button type="button" onclick="searchProduct(event)"><span class="lnr lnr-magnifier"></span></button>
                                     	</div>	
                                         <!--<div class="search_box">
@@ -357,8 +357,8 @@
                                         </select>                        
                                    </div>-->
                                     <div class="search_box">
-                                        <input id="searchInput2" placeholder="Search product..." type="text">
-                                         <button onclick="searchProduct()" type="button"><span class="lnr lnr-magnifier"></span></button>
+                                        <input id="searchInput2" placeholder="Search product..." type="text" onkeydown="handleEnterKey(event)">
+                                         <button type="button" onclick="searchProduct(event)"><span class="lnr lnr-magnifier"></span></button>
                                     </div>
                                    <!-- <div class="search_box">
                                             <input id="searchInput" placeholder="Search product..." type="text">
@@ -641,17 +641,38 @@
 			
 			function shop_html(responseJsonObject = {}) {
 				let htmlTemplate =
-				`<div class="product_content grid_content">
-										<h4 class="product_name"><a href="product-details.html"
-												th:text="${product.productName}"
-												th:href="@{productDetail(productNo=${product.productNo})}">상품 이름</a>
-										</h4>
-										<h5 class="old_price" th:text="${'별점 : ' + product.productStarAvg}">$362.00</h5>
-										<p><a href="#" th:text="${product.productPetCategory}">펫 카테고리</a></p>
-										<div class="price_box">
-											<span class="current_price" th:text="${#numbers.formatInteger(product.productPrice, 3, 'COMMA') + '원'}">상품 가격</span>
+				`{{#each this}}
+				<div class="col-lg-4 col-md-4 col-sm-6 col-12" id="listContent">
+								<div class="single_product">
+									<div class="product_thumb" style="width: 250px; height: 300px;">
+										<a class="primary_img" href="productDetail?productNo={{productNo}}">
+											<img src="image/product/{{productImage}}" alt="" style="width: 250px; height: 300px;"></a>
+										<div class="action_links">
+											<ul>
+											<!-- 상품리스트에서 장바구니 추가하기 -->
+												<li class="add_to_cart"><a href="" title="Add to cart" id="{{productNo}}"><span class="lnr lnr-cart" ></span></a></li>
+											<!-- 상품리스트에서 장바구니 추가하기 -->				
+												<li class="wishlist"><a href="" title="Add to Wishlist" id="{{productNo}}"><span class="lnr lnr-heart"></span></a>
+												</li>
+											</ul>
 										</div>
-									</div>`;
+									</div>
+
+
+									<div class="product_content grid_content">
+										<h4 class="product_name"><a href="productDetail?productNo={{productNo}}"
+												text="{{productName}}">{{productName}}</a>
+										</h4>
+										<h5 class="old_price">별점 : {{productStarAvg}}</h5>
+										<p><a href="#">{{productPetCategory}}</a></p>
+										<div class="price_box">
+											<span class="current_price">{{formatPrice productPrice}}</span>
+											<!--<span class="old_price">$362.00</span>-->
+										</div>
+									</div>
+								</div>
+							</div>
+							{{/each}}`;
 				
 				let bindTemplate = Handlebars.compile(htmlTemplate);
 				let resultTemplate = bindTemplate(responseJsonObject);
@@ -659,8 +680,34 @@
 				return resultTemplate;
 			}
 			
+			
+			function hideToolbar() {
+    			document.getElementById('shopToolbar').style.display = 'none';
+			}
+			
+
+			// Enter 키를 눌렀을 때 검색 결과를 표시하고 툴바를 숨기는 함수
+			function handleEnterKey(event) {
+			    if (event.key === 'Enter') {
+			        // 검색 로직을 수행한 후 결과가 있을 때
+			        // 검색 결과를 표시
+			        searchProduct();
+			        hideToolbar();
+        			event.preventDefault();
+			    }
+			}
+			
+			/*
+			function handleEnterKey(event) {
+    			if (event.key === "Enter") {
+        		// Enter 키를 눌렀을 때 검색 버튼 클릭 이벤트를 발생시킴
+        		searchProduct();
+        		event.preventDefault()
+    			}
+			}
+			*/
+			
 			function searchProduct() {
-				alert('aaa');
     			var searchTerm = $('#searchInput1').val();
 				
 				let send = {
@@ -669,10 +716,12 @@
 				
 				let responseJsonObject = ajaxRequest("POST", "product/products/search", send);
 				let html = shop_html(responseJsonObject);
-				$('#productList').html(html);
+				$('.shop_wrapper').html(html);
 			}
 			
-			
+			Handlebars.registerHelper('formatPrice', function(price) {
+    			return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '원';
+			});
 		</script>
     </div>
     <!--header area end-->
