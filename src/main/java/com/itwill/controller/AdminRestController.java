@@ -176,15 +176,15 @@ public class AdminRestController {
 //        }
 //    }
 	@Operation(summary = "센터삭제")
-	@DeleteMapping("/{centerNo}")
-	public ResponseEntity<Map> CenterDelete(@PathVariable(name = "centerNo") Long centerNo) {
-	    try {
-	        centerService.deleteCenter(centerNo);
-	        return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("centerNo", centerNo));
-	    } catch (Exception e) {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-	    }
-	}
+	 @DeleteMapping("/center/{centerNo}")
+    public ResponseEntity<Map> deleteCenter(@PathVariable(name = "centerNo") Long centerNo) {
+        try {
+            centerService.deleteCenter(centerNo);
+            return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("centerNo", centerNo));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 
 	
 }
