@@ -234,7 +234,7 @@ public class AdminController {
 		}
 		*/
 		
-		@Transactional
+		//@Transactional
 		@GetMapping("/updateVolunteer/{volunteerNo}")
 		public String updateVolunteer(@PathVariable Long volunteerNo, Model model, HttpSession session) throws Exception {
 			try {
@@ -260,7 +260,7 @@ public class AdminController {
 
 		            // 봉사 완료 시 3000포인트 지급 및 누적 포인트 계산
 		            if (user != null) {
-		                userPoint = (userPoint != null) ? userPoint + 3000 : 3000;
+		                userPoint = (user.getUserPoint() != null) ? user.getUserPoint() + 3000 : 3000;
 		                user.setUserPoint(userPoint);
 		                userInfoService.update(user);
 		                // 세션에도 업데이트
