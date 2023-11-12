@@ -59,6 +59,16 @@ AdoptService adoptService;
 		
 		return "pet-list";
 	}
+	
+	@GetMapping("/petinsertform")
+	public String petinsertform() throws Exception {
+		
+		
+		
+		return "pet_insert_form";
+	}
+	
+	
 	//펫 페이징 리스트
 	//center dto가져와야함.
 	@GetMapping("/petListPage")
@@ -86,8 +96,6 @@ AdoptService adoptService;
 		model.addAttribute("petList",petList);
 		return "pet-list" ;
 	}
-		
-		
 		
 		
 	
