@@ -32,5 +32,10 @@ public class OrderItemServiceImpl implements OrderItemService {
 	public List<OrderItem> findAll() {
 		return orderItemDao.findAll();
 	}
+	@Override
+	public OrderItem findByOiNo(Long oiNo) {
+		
+		return orderItemDao.findbyoiNo(oiNo);
+	}
  
 }

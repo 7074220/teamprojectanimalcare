@@ -13,7 +13,7 @@
 		}
 		
 		#volunteerTable{
-		width: 1000px;
+		width: 1100px;
 		}
 	</style>
 
@@ -43,7 +43,7 @@
 		<!-- my account start  -->
 		<section class="main_content_area">
 			<div class="container">
-				<div class="account_dashboard">
+				<div class="account_dashboard" style="margin-right:280px">
 					<div class="row">
 						<div class="col-sm-12 col-md-3 col-lg-3">
 							<!-- Nav tabs -->
@@ -88,7 +88,8 @@
 										<tbody>
 											<tr th:each="volunteer, rowStat : ${volunteerList}">
 											
-												<td th:text="${volunteerList.size() - rowStat.index}"></td>		
+												<td th:text="${volunteerList.size() - rowStat.index}"></td>	
+												<!--<td th:text="${volunteer.Userinfo.userNo}"></td>-->	
 												<td th:text="${volunteer.Userinfo.userName}"></td>	
 												
 												<td th:text="${#strings.substring(volunteer.volunteerDate.toString(), 0, 10)}"></td>										
@@ -165,6 +166,20 @@
 			});
 
 		</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	</th:block>
 
 

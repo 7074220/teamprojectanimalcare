@@ -15,6 +15,7 @@ public interface OrderItemDao {
 	
 	public List<OrderItem> findAll();
 	
+	public  OrderItem findbyoiNo(Long oiNo);
 
 
 

@@ -246,7 +246,7 @@
 
 		<section class="main_content_area">
 			<div class="container">
-				<div class="account_dashboard">
+				<div class="account_dashboard" style="margin-right:250px">
 					<div class="row">
 						<div class="col-sm-12 col-md-3 col-lg-3">
 							<!-- Nav tabs -->
@@ -376,7 +376,7 @@
 												<!--   <button type="button" class="btn btn-primary">리뷰 저장</button>-->
 												<button type="button" class="btn btn-secondary"
 													data-dismiss="modal">닫기</button>
-													<!-- <button type="button" class="btn btn-primary">저장</button>-->
+													 <button type="button" class="btn btn-primary"data-dismiss="modal" id="updateosNo">저장</button>
 
 											</div>
 										</div>
@@ -467,19 +467,22 @@
                                              </tr>
                                           </thead>
                                           <tbody>
-                                          {{#each this}}
+                                          {{#each orderItemDtos}}
                                              <tr data-oiNo="{{oiNo}}">
                                                 <td id="oiNo">{{oiNo}}</td>
                                                 <td>{{product.productPrice}}</td>
                                                 <td ><span class="success">{{product.productName}}</span></td>
                                                 <!-- <td>$25.00 for 1 item </td>-->
-                                                <td> <select class="form-select form-select-sm"
+                                                 <td> <select class="form-select form-select-sm"
                                                       aria-label="Large select example">
+                                               
                                                       <option selected>주문 상태</option>
-                                                      <option value="1">주문확인</option>
-                                                       <option value="2">배송준비</option>
-                                                      <option value="3">배송중</option>
-                                                      <option value="4">배송완료</option> 
+                                                      {{#select orderstatus.osNo }} 
+	                                                      <option value="1">주문확인</option>
+	                                                      <option value="2">배송준비</option>
+	                                                      <option value="3">배송중</option>
+	                                                      <option value="4">배송완료</option>
+                                                      {{/select}}
                                                    </select>
                                                 </td>
                                                 <td><button type="button" class="write-review" onclick="reviewWrite(event,{{oiNo}})" id="{{product.productNo}}">{{reviewStatus}}</button></td>
@@ -519,20 +522,28 @@
                type: 'json',
                success: function(resultJsonObject) {
                   console.log(resultJsonObject);
-                  alert(resultJsonObject.orderStatusNo);
                   let html = my_account_order(resultJsonObject);
                   $('#modalContent').html(html);
-                  if(resultJsonObject.orderStatusNo==3){
-                	  alert('실행');
-                	  $('.form-select form-select-sm').val('3'); // '배송준비' 옵션을 선택
-                	   $('.form-select form-select-sm option:not(:selected)').prop('disabled', true);
-                  }
                   // 셀렉티드 시키면 되겠다~
                }
             }); 
             
          });
          
+         
+         $('#updateosNo').click(function(){
+		
+	alert('저장');
+	var oiNo = $('#oiNo').val();
+	var osNo=$('form-select form-select-sm').val();
+	alert(oiNo);
+	alert(oiNo);
+	
+	//window.location.href = "updateosNo?oiNo="
+									//+ orderAddress1 + orderAddress2
+									//+ orderAddress3 + "&osNo="
+									//+ orderPrice;
+});
          
          
 

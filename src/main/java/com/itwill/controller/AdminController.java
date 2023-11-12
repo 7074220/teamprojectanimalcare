@@ -1,15 +1,22 @@
 package com.itwill.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.dto.AdminUserListDto;
 import com.itwill.dto.OrdersDto;
@@ -173,14 +180,13 @@ public class AdminController {
 		    // Visit 업데이트 로직
 		    findAdopt.setAdoptStatus("입양완료"); 
 		    adoptService.updateAdopt(findAdopt);
-		   
-		    Long petNo=findAdopt.getPet().getPetNo();
+		   adoptService.deleteAdopt(findAdopt.getAdoptNo());
+		  Pet pet= petService.petFindById(findAdopt.getPet().getPetNo());
+		  petService.petRemove(pet.getPetNo());
 		    // 변경된 상태를 DB에 반영
-		   // adoptRepository.save(findAdopt);
+		    //adoptRepository.save(findAdopt);
+		   
 		    
-		   // petService.petRemove(petNo);
-		    
-		    	System.out.println(petNo);
 		    return "redirect:/adminAdoptList";
 		}
 		
@@ -205,7 +211,7 @@ public class AdminController {
 		}
 		
 		
-		
+		/*
 		@GetMapping("/updateVolunteer/{volunteerNo}")
 		public String updateVolunteer(@PathVariable Long volunteerNo, Model model, HttpSession session) throws Exception {
 		    Long userNo = (Long) session.getAttribute("userNo");
@@ -217,6 +223,7 @@ public class AdminController {
 
 		    findVolunteer.setVolunteerStatus("봉사완료"); 
 		    volunteerService.updateVolunteer(findVolunteer);
+		    
 
 		    System.out.println("After update: " + findVolunteer.getVolunteerStatus());
 
@@ -224,7 +231,56 @@ public class AdminController {
 
 		    return "redirect:/adminVolunteerList";
 		}
+		*/
+		
+		@GetMapping("/updateVolunteer/{volunteerNo}")
+		public String updateVolunteer(@PathVariable Long volunteerNo, Model model, HttpSession session) throws Exception {
+			try {
+		        String userName = (String) session.getAttribute("userName");
 
+		        // userName이 '관리자'인 경우에만 실행
+		        if ("관리자".equals(userName)) {
+		            // 봉사 정보 가져오기
+		            Volunteer findVolunteer = volunteerService.findByVolunteerNo(volunteerNo);
+
+		            // 봉사 상태를 '봉사완료'로 변경
+		            findVolunteer.setVolunteerStatus("봉사완료"); 
+		            volunteerService.updateVolunteer(findVolunteer);
+
+		            // 해당 봉사에 연결된 사용자의 userNo 가져오기
+		            Long userNo = findVolunteer.getUserinfo().getUserNo();
+
+		            // 세션에서 사용자의 포인트 정보 가져오기
+		            Integer userPoint = (Integer) session.getAttribute("userPoint");
+
+		            // 사용자 정보 가져오기
+		            Userinfo user = userInfoService.findUserByNo(userNo);
+
+		            // 봉사 완료 시 3000포인트 지급 및 누적 포인트 계산
+		            if (user != null) {
+		                userPoint = (userPoint != null) ? userPoint + 3000 : 3000;
+		                user.setUserPoint(userPoint);
+		                userInfoService.update(user);
+		                // 세션에도 업데이트
+		                session.setAttribute("userPoint", userPoint);
+		            }
+
+		            // 봉사 정보 저장
+		            volunteerRepository.save(findVolunteer);
+		        } else {
+		            // '관리자'가 아닌 경우에 대한 처리 (예: 에러 페이지로 리다이렉트)
+		            return "redirect:/error"; // 적절한 에러 페이지로 변경하세요.
+		        }
+
+		        return "redirect:/adminVolunteerList";
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        // 예외 처리에 대한 추가적인 로직이 필요하다면 여기에 추가하세요.
+		        return "redirect:/error"; // 혹은 다른 적절한 에러 페이지로 리다이렉트할 수 있습니다.
+		    }
+		}
+		
+		
 		
 		
 		
@@ -256,13 +312,54 @@ public class AdminController {
 		
 		
 		// 관리자 --> 상품 추가
-		@GetMapping("/adminInsertProduct")
-		public String insertProduct(@RequestBody ProductInsertDto dto) {
-			
-			productService.insertProduct(dto.toEntity(dto));
-			
-			return "shop";
+		@PostMapping("/adminInsertProduct")
+		public String insertProduct(@RequestParam("imageFile1") MultipartFile file1, @RequestParam("imageFile2") MultipartFile file2, @RequestParam("productName") String productName, 
+				@RequestParam("productPrice") Integer productPrice, @RequestParam("productCategory") String productCategory, @RequestParam("productPetCategory") String productPetCategory, Model model) throws Exception {
+
+		String uploadPath1 = System.getProperty("user.dir") + "/src/main/resources/static/image/product/";
+		String originalFileName1 = file1.getOriginalFilename();
+		UUID uuid1 = UUID.randomUUID();
+		String savedFileName1 = uuid1.toString() + "_" + originalFileName1;
+		
+		File newFile1 = new File(uploadPath1 + savedFileName1);
+		
+		file1.transferTo(newFile1);
+		
+		String uploadPath2 = System.getProperty("user.dir") + "/src/main/resources/static/image/product/";
+		String originalFileName2 = file2.getOriginalFilename();
+		UUID uuid2 = UUID.randomUUID();
+		String savedFileName2 = uuid2.toString() + "_" + originalFileName2;
+		
+		File newFile2 = new File(uploadPath2 + savedFileName2);
+		
+		file2.transferTo(newFile2);
+		
+		Product createProduct = Product.builder()
+							.productName(productName)
+							.productPrice(productPrice)
+							.productCategory(productCategory)
+							.productPetCategory(productPetCategory)
+							.productImage(savedFileName1)
+							.productDetailImage(savedFileName2)
+							.productStarAvg(0D)
+							.productQty(0)
+							.build();
+		
+		productService.insertProduct(createProduct);
+		
+		List<ProductListDto> productListDto = new ArrayList<>();
+		List<Product> productList = new ArrayList<>();
+		
+		productList = productService.findAllByOrderByProductNoAsc();
+		
+		for (Product product : productList) {
+			productListDto.add(ProductListDto.toDto(product));
 		}
+		
+		model.addAttribute("productList", productListDto);
+		
+		return "admin-product";
+}
 		
 		
 		

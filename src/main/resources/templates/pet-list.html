@@ -5,6 +5,21 @@
 
 <head>
 <script>
+	$(document).ready(
+			function() {
+				
+				$('#petsubmit').click(function(){
+					
+					var pet =$('#short').val();
+					
+					alert('dd');
+					
+					
+				});
+				
+				
+				});
+
 	function confirmDelete(petNo) {
 		var confirmDelete = confirm("삭제하시겠습니까?");
 		if (confirmDelete) {
@@ -92,8 +107,8 @@
 								</div>
 								<div class=" niceselect_option">
 									<form class="select_option" action="#" name="pet"
-										data-navigate="/guest_write_form">
-										<select name="orderby" id="short" onchange="petType()">
+										>
+										<select name="petType" id="short" >
 
 											<!---->
 											<option selected value="1">동물전체</option>
@@ -103,13 +118,7 @@
                                     <option value="5">Sort by price: high to low</option>
                                     <option value="6">Product Name: Z</option> -->
 										</select>
-									</form>
-
-									<!-- 지역선택은 하나더추가 -->
-								</div>
-								<div class=" niceselect_option">
-									<form class="select_option" action="#" name="">
-										<select name="orderby" id="local" onchange="petLocal()">
+										<select name="petLocal" id="local" >
 
 											<option selected value="1">지역전체</option>
 											<option value="서울특별시">서울특별시</option>
@@ -124,10 +133,33 @@
                                     <option value="5">Sort by price: high to low</option>
                                     <option value="6">Product Name: Z</option> -->
 										</select>
+								<input class="btn btn-primary" type="submit" value="조회" id="petsubmit">
+									</form>
+
+									<!-- 지역선택은 하나더추가 -->
+								</div>
+								
+								<!--<div class=" niceselect_option">
+									<form class="select_option" action="#" name="">
+										<select name="orderby" id="local" >
+
+											<option selected value="1">지역전체</option>
+											<option value="서울특별시">서울특별시</option>
+											<option value="경기도">경기도</option>
+											<option value="강원도">강원도</option>
+											<option value="충청남도">충청남도</option>
+											<option value="충청북도">충청북도</option>
+											<option value="경상남도">경상남도</option>
+											<option value="경상북도">경상북도</option>
+											<option value="제주도">제주도</option>
+											  <option value="4">Sort by price: low to high</option>
+                                    <option value="5">Sort by price: high to low</option>
+                                    <option value="6">Product Name: Z</option> 
+										</select>
 									</form>
 
 
-								</div>
+								</div>-->
 								<!-- <div class="page_amount">
                             <p>Showing 1–9 of 21 results</p>
                         </div> -->
