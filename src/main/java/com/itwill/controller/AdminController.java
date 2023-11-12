@@ -177,9 +177,11 @@ public class AdminController {
 		    // Visit 업데이트 로직
 		    findAdopt.setAdoptStatus("입양완료"); 
 		    adoptService.updateAdopt(findAdopt);
-		   
+		   adoptService.deleteAdopt(findAdopt.getAdoptNo());
+		  Pet pet= petService.petFindById(findAdopt.getPet().getPetNo());
+		  petService.petRemove(pet.getPetNo());
 		    // 변경된 상태를 DB에 반영
-		    adoptRepository.save(findAdopt);
+		    //adoptRepository.save(findAdopt);
 		   
 		    
 		    return "redirect:/adminAdoptList";
