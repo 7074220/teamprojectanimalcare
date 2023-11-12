@@ -189,23 +189,15 @@
 							
 							<div class="dashboard_tab_button">
 	                            <ul role="tablist" class="nav flex-column dashboard-list">
-	                                <li><a href="adminUserinfo" class="nav-link">회원 관리</a></li>
-	                                <li><a href="adminProductList"  class="nav-link">상품 관리</a></li>
-	                                <li> <a th:if="${session.userName == '관리자'}" href="ordersList" class="nav-link">주문 관리</a></li>
-	                                <!-- <li><a href="couponList"  class="nav-link">주문 관리</a></li> -->
-	                                <li><a href="adminAdoptList" class="nav-link">관리자 전용 입양목록</a></li>
-									<li><a th:if="${session.userName == '관리자'}" href="adminVolunteerList"
-											class="nav-link">관리자 전용봉사목록</a></li>
-									<li><a th:if="${session.userName != '관리자'}" href="volunteerByUserNo"
-											class="nav-link">봉사</a></li>
-	                                <li><a th:if="${session.userName == '관리자'}" href="adminVisitList"
-											class="nav-link">관리자 전용견학목록</a></li>
-									<li><a th:if="${session.userName != '관리자'}" href="visitByUserNo"
-											class="nav-link">견학</a></li>
-											<li><a th:if="${session.userName == '관리자'}" href="centerListAll"
-											class="nav-link">관리자 보호소목록</a></li>
-									<li><a th:if="${session.userName != '관리자'}" style="display: none;"
-											class="nav-link"></a></li>
+									<li><a href="adminUserList" class="nav-link">회원</a></li>
+	                                <li><a href="adminProductList"  class="nav-link">상품</a></li>
+	                                <li><a href="adminOrdersList" class="nav-link">주문</a></li>
+	                                <li><a href="adoptByUserNo"  class="nav-link">입양</a></li>
+									<li><a href="adminVolunteerList"class="nav-link">봉사</a></li>
+	                                <li><a href="adminVisitList"class="nav-link">견학</a></li>
+									<li><a href="centerListAll"class="nav-link">보호소</a></li>
+									<!--<li><a th:if="${session.userName != '관리자'}" style="display: none;"class="nav-link"></a></li>-->
+									<!-- <li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li> -->	                               
 									<!-- <li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li> -->
 	                                <li><a href="logout" class="nav-link">로그아웃</a></li>
 	                                <!-- <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li> -->
@@ -223,7 +215,7 @@
 
 
 								<!--  <div class="tab-pane fade" id="visit">-->
-								<h3>견학</h3>
+								<h3>상품관리</h3>
 								<div class="table-responsive" id="productTable">
 									<table class="table" >
 										<thead>
