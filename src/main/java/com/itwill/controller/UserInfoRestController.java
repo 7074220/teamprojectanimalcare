@@ -76,6 +76,7 @@ public class UserInfoRestController {
 	@Operation(summary = "회원가입")
 	@PostMapping()
 	public ResponseEntity<UserWriteActionDto> user_write_action(@RequestBody UserWriteActionDto dto) throws Exception {
+		dto.setUserPoint(0);
 		Userinfo createUserinfo = userInfoService.create(UserWriteActionDto.toEntity(dto));
 		List<MyPet> myPets = dto.getMyPets();
 		for (MyPet myPet : myPets) {
