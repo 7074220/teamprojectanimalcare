@@ -79,28 +79,7 @@ public class VolunteerRestController {
 		return new ResponseEntity<VolunteerDto>(dto, httpHeaders, HttpStatus.CREATED);
     }
 	
-	
-	/*
-	@Operation(summary = "봉사신청") 
-	@PostMapping
-	public ResponseEntity<VolunteerDto> insertVolunteer(@RequestBody VolunteerDto dto, HttpSession httpSession) throws Exception{
-		Volunteer volunteerEntity = VolunteerDto.toEntity(dto);		
-		volunteerService.insertVolunteer(volunteerEntity);	
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));		
-		return new ResponseEntity<>(dto, httpHeaders, HttpStatus.CREATED);		
-	} // INSERT
-	*/
 
-	
-	/*
-	@Operation(summary = "봉사삭제")
-	@DeleteMapping("/{volunteerNo}")
-	public ResponseEntity<Map> VolunteerDelete(@PathVariable(name = "volunteerNo") Long volunteerNo) throws Exception{
-		volunteerService.deleteVolunteer(volunteerNo);	
-		return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>());
-	} // DELETE
-	 */
 	@Operation(summary = "봉사삭제")
 	@DeleteMapping("/{volunteerNo}")
 	public ResponseEntity<Map> VolunteerDelete(@PathVariable(name = "volunteerNo") Long volunteerNo) throws Exception{		

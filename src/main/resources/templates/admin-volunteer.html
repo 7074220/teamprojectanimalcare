@@ -101,19 +101,15 @@
 												</td>-->
 												
 												<td th:text="${volunteer.volunteerTime + '시'}"></td>
-												
-												
 												<td th:text="${volunteer.Center.centerName}"></td>
 												
-												
-												<td th:text="${volunteer.volunteerStatus}"><span class="success">견학신청</span></td>
+												<td th:text="${volunteer.volunteerStatus}"><!--<span class="success">견학신청</span>--></td>
 												
 												<td>
 													<a th:if="${session.userName == '관리자'}" th:href="@{/updateVolunteer/{volunteerNo}(volunteerNo=${volunteer.volunteerNo})}" class="updateBtn">완료</a>
 													
 												
-													<button type="submit" class="deleteBtn"
-														th:id="'deleteBtn-' + ${volunteer.volunteerNo}">취소</button>
+													<button type="submit" class="deleteBtn" th:id="'deleteBtn-' + ${volunteer.volunteerNo}">취소</button>
 												</td>
 											</tr>
 										</tbody>
@@ -160,7 +156,7 @@
 						} else {
 							alert('예약취소가 완료되었습니다.');
 							$row.remove();
-							window.location.href = "adminVolunteerList"
+							//window.location.href = "adminVolunteerList"
 						}
 					},
 					error: function () {
