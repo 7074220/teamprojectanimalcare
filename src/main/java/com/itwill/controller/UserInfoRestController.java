@@ -66,6 +66,12 @@ public class UserInfoRestController {
 		return !userInfoService.countByUserId(userId);
 	}
 	
+	@GetMapping("/passcheck")
+	public boolean user_pass_check(@RequestBody UserLoginActionDto loginActionDto) throws Exception{
+		System.out.println(">>>>> user_pass_check: " + loginActionDto.getUserPassword());
+		return userInfoService.checkPassword(loginActionDto);
+	}
+	
 	// 회원가입
 	@Operation(summary = "회원가입")
 	@PostMapping()

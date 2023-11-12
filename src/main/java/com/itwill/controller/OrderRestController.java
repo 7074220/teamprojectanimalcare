@@ -34,6 +34,7 @@ import com.itwill.entity.Cart;
 import com.itwill.entity.OrderItem;
 import com.itwill.entity.Orders;
 import com.itwill.entity.Orderstatus;
+import com.itwill.entity.ReviewBoard;
 import com.itwill.entity.Userinfo;
 import com.itwill.repository.OrderStatusRepository;
 import com.itwill.service.CartService;
@@ -41,6 +42,7 @@ import com.itwill.service.CouponService;
 import com.itwill.service.OrderItemService;
 import com.itwill.service.OrderService;
 import com.itwill.service.OrderStatusService;
+import com.itwill.service.ReviewBoardService;
 import com.itwill.service.UserInfoService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -66,6 +68,9 @@ public class OrderRestController {
 
 	@Autowired
 	OrderItemService itemService;
+	
+	@Autowired
+	private ReviewBoardService reviewBoardService;
 	
 	
 	@Operation(summary = "주문 등록")
@@ -107,7 +112,7 @@ public class OrderRestController {
 			OrderItemDto tempOrderItemDto=OrderItemDto.builder().build();
 			tempOrderItemDto.setOiQty(cart.getCartQty());
 			tempOrderItemDto.setOrderNo(newOrder.getOrderNo());
-			tempOrderItemDto.setOsNo(osNo);
+			tempOrderItemDto.setOrderstatus(orderstatus);
 			tempOrderItemDto.setProduct(cart.getProduct());
 			
 			itemService.insertOrderItem(OrderItemDto.toEntity(tempOrderItemDto));
@@ -119,7 +124,10 @@ public class OrderRestController {
 		orderdto.setUserNo(userNo);
 		
 			
-		userinfo.setUserPoint(userinfo.getUserPoint()-Integer.parseInt(orderDto.getUserPoint()));
+		if (orderDto.getUserPoint() != null && !orderDto.getUserPoint().isEmpty()) {
+		    userinfo.setUserPoint(userinfo.getUserPoint() - Integer.parseInt(orderDto.getUserPoint()));
+		}
+		
 		
 		/*
 		//insertOrder.setOrderDesc(carts.get(0).getProduct().getProductName()+"외"+(carts.size()-1)+"개 상품");
@@ -127,8 +135,10 @@ public class OrderRestController {
 		
 		orderService.insertOrder(OrdersDto.toEntity(orderDto));
 		 */
-		
-			couponService.Delete(Long.parseLong(orderDto.getCouponId())); //쿠폰삭제기능
+		//쿠폰 삭제 기능
+		if (orderDto.getCouponId() != null && !orderDto.getCouponId().isEmpty()) {
+	        couponService.Delete(Long.parseLong(orderDto.getCouponId()));
+	    }
 			
 		
 		cartService.deleteByUserId(userNo);
@@ -167,6 +177,9 @@ public class OrderRestController {
 		orderService.insertOrder(orderDto.toEntity(orderDto));
 		cartService.deleteByUserId(userNo);
 		*/
+		int cartCount = cartService.findAllCartByUserId(userNo).size();
+		session.setAttribute("cartCount", cartCount);
+		
 		return new ResponseEntity<OrdersDto>(orderDto,httpHeaders,HttpStatus.CREATED);
 	}
 	
@@ -292,22 +305,26 @@ public class OrderRestController {
 	}
 	
 	
-	@Operation(summary = "날짜별 기간으로 조회(아이디별)")
-	@GetMapping("/{startDate}/{endDate}/{userNo}")
-	public ResponseEntity<List<OrdersDto>> findAllByOrdersByOrderDateByUserNo(@PathVariable(name = "startDate") Date startDate, @PathVariable(name = "endDate") Date endDate, @PathVariable(name = "userNo") Long userNo){
-		List<OrdersDto> ordersListDto = new ArrayList<OrdersDto>();
-		List<Orders> ordersList = orderService.findAllByOrdersByOrderDateByUserNo(startDate, endDate, userNo);
-		
-		for (Orders orders : ordersList) {
-			OrdersDto ordersDto = OrdersDto.toDto(orders);
-			ordersListDto.add(ordersDto);
-		}
-		
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		
-		return new ResponseEntity<List<OrdersDto>>(ordersListDto, httpHeaders, HttpStatus.OK);
-	}
+	/*
+	 * @Operation(summary = "날짜별 기간으로 조회(아이디별)")
+	 * 
+	 * @GetMapping("/{startDate}/{endDate}/{userNo}") public
+	 * ResponseEntity<List<OrdersDto>>
+	 * findAllByOrdersByOrderDateByUserNo(@PathVariable(name = "startDate") Date
+	 * startDate, @PathVariable(name = "endDate") Date endDate, @PathVariable(name =
+	 * "userNo") Long userNo){ List<OrdersDto> ordersListDto = new
+	 * ArrayList<OrdersDto>(); List<Orders> ordersList =
+	 * orderService.findAllByOrdersByOrderDateByUserNo(startDate, endDate, userNo);
+	 * 
+	 * for (Orders orders : ordersList) { OrdersDto ordersDto =
+	 * OrdersDto.toDto(orders); ordersListDto.add(ordersDto); }
+	 * 
+	 * HttpHeaders httpHeaders = new HttpHeaders(); httpHeaders.setContentType(new
+	 * MediaType("application", "json", Charset.forName("UTF-8")));
+	 * 
+	 * return new ResponseEntity<List<OrdersDto>>(ordersListDto, httpHeaders,
+	 * HttpStatus.OK); }
+	 */
 	
 	
 	@Operation(summary = "사용자 주문후 배송지변경")
@@ -342,11 +359,21 @@ public class OrderRestController {
 		if (session.getAttribute("userNo") == null) {
 			throw new Exception("로그인 하세요.");
 		}
+		
 		Orders orders=orderService.findOrderByNo(orderNo);
 		OrdersDto ordersDto = OrdersDto.toDto(orders);
 		
 		List<OrderItemDto> orderItemDtos = ordersDto.getOrderItemDtos();
-		
+		for (OrderItemDto orderItemDto : orderItemDtos) {
+			orderItemDto.setOrderStatusNo(3);
+			ReviewBoard reviewBoard = reviewBoardService.findByOrderItemNo(orderItemDto.getOiNo());
+			if(reviewBoard!=null) {
+				orderItemDto.setReviewStatus("수정/완료");
+			}else {
+				orderItemDto.setReviewStatus("리뷰쓰기");
+			}
+		}
+		System.out.println(">>>>>>>>>>"+orderItemDtos);
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		

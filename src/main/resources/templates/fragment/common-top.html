@@ -190,14 +190,17 @@
                     <div class="row align-items-center">
                         <div class="col-lg-2 col-md-3 col-sm-3 col-3">
                             <div class="logo">
-                                <a href="index"><img src="assets/img/logo/logo.png" alt=""></a>
+                                <a href="" th:href="@{/}"><img src="assets/img/logo/logo.png" alt=""></a>
                             </div>
                         </div>
                         <div class="col-lg-10 col-md-6 col-sm-7 col-8">
                             <div class="header_right_info">
-                                <div class="search_container mobail_s_none">
+
+
+
+                                <div class="search_container mobail_s_none" th:if="${productList != null}">
                                    <form action="#">
-                                       <div class="hover_category">
+                                       <!-- <div class="hover_category">
                                             <select class="select_option" name="select" id="categori1">
                                                 <option selected value="1">Select a categories</option>
                                                 <option value="2">Accessories</option>
@@ -216,13 +219,16 @@
                                                 <option value="15">Watchs</option>
                                                 <option value="16">Electronic</option>
                                             </select>                        
-                                       </div>
+                                       </div> -->
                                         <div class="search_box">
-                                            <input placeholder="Search product..." type="text">
+                                            <input placeholder="상품 검색..." type="text">
                                              <button type="submit"><span class="lnr lnr-magnifier"></span></button>
                                         </div>
                                     </form>
                                 </div>
+                                
+                                
+                                
                                 <div class="header_account_area">
                                     <div class="header_account_list register">
                                         <ul th:if="${session.userNo}==null">
@@ -243,7 +249,7 @@
                                     
                                     
                                    <!--  위시리스트 버튼 -->
-                                    <div class="header_account_list header_wishlist" th:if="${session.userNo}!=null">
+                                    <div class="header_account_list header_wishlist" th:if="${session.userNo !=null and session.userName != '관리자'}">
                                         <a href="wishList"><span class="lnr lnr-heart"></span> <span class="item_count" th:text=${session.wishCount}>3</span> </a>
                                     </div>
                                     
@@ -251,7 +257,7 @@
                                     
                                     
                                     
-                                    <div class="header_account_list  mini_cart_wrapper" th:if="${session.userNo}!=null">
+                                    <div class="header_account_list  mini_cart_wrapper" th:if="${session.userNo !=null and session.userName != '관리자'}">
                                        <a href="cartList"><span class="lnr lnr-cart"></span><span class="item_count" th:text=${session.cartCount}>2</span></a>
                                         <!--mini cart-->
                                     <!--    <div class="mini_cart">
@@ -483,7 +489,7 @@
                             <div class="main_menu menu_position"> 
                                 <nav>  
                                     <ul>
-                                        <li><a class="active" href="index">home<!--<i class="fa fa-angle-down"></i>--></a>
+                                        <li><a class="active" href="" th:href="@{/}">home<!--<i class="fa fa-angle-down"></i>--></a>
                                             <!--<ul class="sub_menu">
                                                 <li><a href="index.html">Home shop 1</a></li>
                                                 <li><a href="index-2.html">Home shop 2</a></li>
@@ -538,7 +544,7 @@
                                             </ul>
                                         </li>-->
                                        
-                                        <li><a href="petList">입양<!--<i class="fa fa-angle-down"></i>--></a>
+                                        <li><a href="petListPage">입양<!--<i class="fa fa-angle-down"></i>--></a>
                                            
                                         </li> 
                                        
@@ -608,7 +614,36 @@
             </div>
         </div> 
     </header>
-	
+		<script>
+			function ajaxRequest(method, url, sendJsonObject) {
+				let returnResultJsonObject={};
+				$.ajax({
+					async:false,
+					method: method,
+					url: url,
+					contentType: 'application/json;UTF-8',
+					data: JSON.stringify(sendJsonObject),
+					type: 'json',
+					success: function(resultJsonObject) {
+						returnResultJsonObject = resultJsonObject;
+					}
+				});
+				return returnResultJsonObject;
+			}
+			
+			function searchProduct() {
+				alert('aaa');
+    			var searchTerm = document.getElementById("searchInput").value;
+				
+				let send = {
+					productName : searchTerm
+				}
+				
+				ajaxRequest("POST", "products/search", send);
+}
+			
+			
+		</script>
     </div>
     <!--header area end-->
 

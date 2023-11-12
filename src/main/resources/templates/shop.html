@@ -709,7 +709,7 @@
 
 								<!-- <button data-role="grid_list" type="button"  class="btn-list" data-toggle="tooltip" title="List"></button> -->
 							</div>
-							<div class="product_tab_btn">
+							<div class="product_tab_btn" style="margin-top: 0;">
 							
 							
 							
@@ -778,10 +778,11 @@
 								<form class="select_option" action="#">
 
 									<select name="orderby" id="short" onchange="a()">
-										<option selected value="1">별점순</option>
-										<option value="2">낮은가격순</option>
-										<option value="3">높은가격순</option>
-										<option value="4">등록일순</option>
+										<option selected value="1">선택</option>
+										<option value="2">별점순</option>
+										<option value="3">낮은가격순</option>
+										<option value="4">높은가격순</option>
+										<option value="5">등록일순</option>
 										<!--    <option value="5">Sort by price: high to low</option>
                                     <option value="6">Product Name: Z</option> -->
 									</select>
@@ -809,14 +810,14 @@
 						<div class="row shop_wrapper" id="listContent">
 							<div class="col-lg-4 col-md-4 col-sm-6 col-12" th:each="product:${productList}">
 								<div class="single_product">
-									<div class="product_thumb">
+									<div class="product_thumb" style="width: 250px; height: 300px;">
 										<a class="primary_img" href="product-details.html"
 											th:href="@{productDetail(productNo=${product.productNo})}"><img src="#"
-												alt="" th:src="@{/image/product/} + ${product.getProductImage}"></a>
+												alt="" th:src="@{/image/product/} + ${product.getProductImage}" style="width: 250px; height: 300px;"></a>
 
 										<!-- <a class="secondary_img" href="product-details.html"><img src="assets/img/product/productbig2.jpg" alt=""></a>-->
 										
-										
+										  
 										
 										<div class="action_links">
 											<ul>
@@ -824,15 +825,14 @@
 											<!-- 상품리스트에서 장바구니 추가하기 -->
 											
 											
-												<li class="add_to_cart"><a href="#" title="Add to cart" th:href="@{'insertCartMain?productNo=' + ${product.productNo} + '&productQty=1'}" th:id="${product.productNo}"><span
-															class="lnr lnr-cart" ></span></a></li>
+												<li class="add_to_cart"><a href="" title="Add to cart" th:id="${product.productNo}"><span class="lnr lnr-cart" ></span></a></li>
 															
 															
 											<!-- 상품리스트에서 장바구니 추가하기 -->				
 															
 															
 												<!--<li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>-->
-												<li class="wishlist"><a href="#" title="Add to Wishlist" th:href="@{'insertWishMain?productNo=' + ${product.productNo}}"><span class="lnr lnr-heart"></span></a>
+												<li class="wishlist"><a href="" title="Add to Wishlist" th:id="${product.productNo}"><span class="lnr lnr-heart"></span></a>
 												</li>
 												<!--<li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li>-->
 											</ul>
@@ -845,9 +845,10 @@
 												th:text="${product.productName}"
 												th:href="@{productDetail(productNo=${product.productNo})}">상품 이름</a>
 										</h4>
+										<h5 class="old_price" th:text="${'별점 : ' + product.productStarAvg}">$362.00</h5>
 										<p><a href="#" th:text="${product.productPetCategory}">펫 카테고리</a></p>
 										<div class="price_box">
-											<span class="current_price" th:text="${product.productPrice}">상품 가격</span>
+											<span class="current_price" th:text="${#numbers.formatInteger(product.productPrice, 3, 'COMMA') + '원'}">상품 가격</span>
 											<!-- <span class="old_price">$362.00</span>-->
 										</div>
 									</div>
@@ -857,29 +858,29 @@
 
 
 
-									<div class="product_content list_content">
+									<!-- <div class="product_content list_content">
 										<h4 class="product_name"><a href="product-details.html"
 												th:text="${product.productName}">상품 이름</a></h4>
 										<p><a href="#" th:text="${product.productPetCategory}">펫 카테고리</a></p>
-										<div class="price_box">
-											<span class="current_price" th:text="${product.productPrice}">$26.00</span>
-											<!--<span class="old_price">$362.00</span>-->
+										<div class="price_box" >
+											<span class="current_price" th:text="${#numbers.formatInteger(product.productPrice, 3, 'COMMA') + '원'}">$26.00</span>
+											<span class="old_price">$362.00</span>
 										</div>
-										<!--  <div class="product_desc">
+										 <div class="product_desc">
                                         <p>Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Viva..</p>
-                                    </div> -->
+                                    </div>
 										<div class="action_links list_action_right">
 											<ul>
 												<li class="add_to_cart"><a href="cart.html" title="Add to cart">Add to
 														Cart</a></li>
-												<!--  <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li> -->
+												 <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
 												<li class="wishlist"><a href="wishlist.html"
 														title="Add to Wishlist"><span class="lnr lnr-heart"></span></a>
 												</li>
-												<!-- <li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li> -->
+												<li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li>
 											</ul>
 										</div>
-									</div>
+									</div> -->
 								</div>
 							</div>
 
@@ -1430,6 +1431,41 @@
 		</div>
 
 		<script type="text/javascript">
+			function ajaxRequest(method, url, sendJsonObject) {
+				let returnResultJsonObject={};
+				$.ajax({
+					async:false,
+					method: method,
+					url: url,
+					contentType: 'application/json;UTF-8',
+					data: JSON.stringify(sendJsonObject),
+					type: 'json',
+					success: function(resultJsonObject) {
+						returnResultJsonObject = resultJsonObject;
+					}
+				});
+				return returnResultJsonObject;
+			}
+			
+			$('.add_to_cart').click(function(e){
+				let productNo = $(e.target).attr('id');
+				let send = {
+					productNo : productNo,
+					productQty : 1
+				}
+				ajaxRequest('POST','cart/inserted',send);
+				
+			});
+			
+			$('.wishlist').click(function(e){
+				let productNo = $(e.target).attr('id');
+				let send = {
+					productNo : productNo,
+				}
+				ajaxRequest('POST','wish',send);
+				
+			});
+			
 			function a() {
 				var select = document.getElementById("short");
 		        var selectedValue = select.value;
@@ -1445,16 +1481,16 @@
 		        alert(location.substring(location.lastIndexOf("/")));
 		        
 		        switch (selectedValue) {
-		            case "1":
+		            case "2":
 		                redirectPath = "productStarDesc?path=" + path;
 		                break;
-		            case "2":
+		            case "3":
 		                redirectPath = "productPriceAsc?path=" + path;
 		                break;
-		            case "3":
+		            case "4":
 		                redirectPath = "productPriceDesc?path=" + path;
 		                break;
-		            case "4":
+		            case "5":
 		                redirectPath = "productDateDesc?path=" + path;
 		                break;
 		            default:

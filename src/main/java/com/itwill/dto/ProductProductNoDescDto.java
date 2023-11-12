@@ -18,6 +18,7 @@ public class ProductProductNoDescDto {
 	private String productName;
 	private String productCategory;
 	private String productPetCategory;
+	private Double productStarAvg;
 	
 	public static Product toEntity(ProductListDto dto) {
 		Product product = Product.builder()
@@ -27,6 +28,7 @@ public class ProductProductNoDescDto {
 				.productName(dto.getProductName())
 				.productCategory(dto.getProductCategory())
 				.productPetCategory(dto.getProductPetCategory())
+				.productStarAvg(dto.getProductStarAvg())
 				.build();
 		return product;
 	}
@@ -39,6 +41,7 @@ public class ProductProductNoDescDto {
 				.productName(product.getProductName())
 				.productCategory(product.getProductCategory())
 				.productPetCategory(product.getProductPetCategory())
+				.productStarAvg(product.getProductStarAvg())
 				.build();
 		return dto;
 	}

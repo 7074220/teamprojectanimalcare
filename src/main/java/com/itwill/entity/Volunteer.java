@@ -54,5 +54,15 @@ public class Volunteer {
 	@ToString.Exclude
 	private Center center = new Center();
 	
-
+	
+	/*
+	이렇게 하면 포인트 지금 가능하지만, 센터에서 날짜 신청하면 에러 발생함.
+	@Builder.Default
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "center_no")
+	@ToString.Exclude
+	private Center center = new Center();
+	
+	*/
 }
+

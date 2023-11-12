@@ -21,8 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itwill.dto.CartDto;
 import com.itwill.dto.CartOverlapDto;
 import com.itwill.dto.CartTotalPriceDto;
+import com.itwill.dto.ProductListDto;
+import com.itwill.dto.ProductNameDto;
 import com.itwill.entity.Cart;
+import com.itwill.entity.Product;
+import com.itwill.entity.Userinfo;
 import com.itwill.service.CartService;
+import com.itwill.service.ProductService;
+import com.itwill.service.UserInfoService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpSession;
@@ -33,29 +39,47 @@ public class CartRestController {
 
 	@Autowired
 	private CartService cartService;
-
-	/*
+	@Autowired
+	private UserInfoService userInfoService;
+	@Autowired
+	private ProductService productService;
+	
 	@Operation(summary = "카트 추가")
-	@GetMapping
-	public ResponseEntity<CartDto> insertCart(CartDto dto, HttpSession session) throws Exception{
-
-		if (session.getAttribute("userNo") == null) {
-			throw new Exception("로그인 하세요.");
-			
-		} else if (session.getAttribute("userNo") != null && dto.getCartQty() == 0) {
-			throw new Exception("수량을 입력하세요.");
-			
-		} else if (session.getAttribute("userNo") != null && dto.getCartQty() != 0) {
-			cartService.insertCart(CartDto.toEntity(dto));
-
-		}
+	@PostMapping("/inserted")
+	public ResponseEntity<CartDto> insertCart(@RequestBody CartDto dto, HttpSession session) throws Exception{
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		dto.setStatus(1);
+		System.out.println(session.getAttribute("userNo"));
+		if (session.getAttribute("userNo") == null) {
+			dto.setStatus(0);
+			return new ResponseEntity<CartDto>(dto, httpHeaders, HttpStatus.CREATED);
+		}
+		System.out.println(">>>>>>>>>>>>>"+dto);
+		// session에서 userNo가져오기
+		Long userNo=(Long)session.getAttribute("userNo");
+		// userNo로 user 찾기
+		Userinfo user = userInfoService.findUserByNo(userNo);
+		// productNo로 product 정보 가져오기
+		Long productNo = dto.getProductNo();
+		Product product = productService.findByProductNo(dto.getProductNo());
+		
+		Cart selectCart = Cart.builder().build();
+		selectCart.setUserinfo(user);
+		selectCart.setProduct(product);
+		selectCart.setCartQty(dto.getProductQty());
+		
+		cartService.updateOverlapCart(selectCart);
+		
+		int cartCount = cartService.findAllCartByUserId(userNo).size();
+		session.setAttribute("cartCount", cartCount);
+		
 
 		return new ResponseEntity<CartDto>(dto, httpHeaders, HttpStatus.CREATED);
 	}
-	*/
+	
 	
 	@Operation(summary = "카트 번호로 한 개 삭제")
 	@DeleteMapping("/delete/{cartNo}")
@@ -63,8 +87,11 @@ public class CartRestController {
 		if (session.getAttribute("userNo") == null) {
 			throw new Exception("로그인 하세요.");
 		}
-		
+		Long loginUserNo=(Long) session.getAttribute("userNo");
+		Userinfo loginUserCheck = userInfoService.findUserByNo(loginUserNo);
 		cartService.deleteById(cartNo);
+		int cartCount = cartService.findAllCartByUserId(loginUserCheck.getUserNo()).size();
+		session.setAttribute("cartCount", cartCount);
 	}
 
 	

@@ -29,10 +29,12 @@ import com.itwill.entity.Center;
 import com.itwill.entity.Userinfo;
 import com.itwill.entity.Visit;
 import com.itwill.entity.Volunteer;
+import com.itwill.service.UserInfoService;
 import com.itwill.service.VisitService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.persistence.criteria.Path;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
@@ -41,27 +43,32 @@ public class VIsitRestController {
 	
 	@Autowired
 	private VisitService visitService ;
+	@Autowired
+	private UserInfoService userInfoService;
+	
+
+	
+	@Operation(summary = "견학신청")
+	@PostMapping("/create-visit")
+	public ResponseEntity<VisitDto> insertvisit(@RequestBody VisitDto dto, HttpSession session) throws Exception {
+        Long userNo = (Long) session.getAttribute("userNo");
+        
+        Integer status = 0;
+        if (userNo == null) {
+            // 로그인하지 않은 사용자에 대한 처리
+        	status = 1;
+        	return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        
+        dto.setUserNo(userNo);
+        Visit visit = VisitDto.toEntity(dto);
+        visitService.createVisit(visit);        
+        HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		return new ResponseEntity<VisitDto>(dto, httpHeaders, HttpStatus.CREATED);
+    }
 	
 	
-		@Operation(summary = "견학신청")
-		@PostMapping("/create-VisitDto")
-		public ResponseEntity<VisitDto> insertVolunteer(@RequestBody VisitDto dto, HttpSession session) throws Exception {
-	        Long userNo = (Long) session.getAttribute("userNo");
-	        
-	        Integer status = 0;
-	        if (userNo == null) {
-	            // 로그인하지 않은 사용자에 대한 처리
-	        	status = 1;
-	        	return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-	        }
-	        
-	        dto.setUserNo(userNo);
-	        Visit visit = VisitDto.toEntity(dto);
-	        visitService.createVisit(visit);        
-	        HttpHeaders httpHeaders = new HttpHeaders();
-			httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-			return new ResponseEntity<VisitDto>(dto, httpHeaders, HttpStatus.CREATED);
-	    }
 	@Operation(summary = "견학리스트조회")
 	@GetMapping("/visits")
 	public ResponseEntity<List<VisitDto>> visitList() {
@@ -89,37 +96,58 @@ public class VIsitRestController {
 		}
 	}
 	
-	@Operation(summary = "견학리스트업데이트")
-	@PutMapping("/{centerNo}")
-	public ResponseEntity<VisitDto> updateVisit(@PathVariable(name = "centerNo") Long visitNo, @RequestBody VisitDto dto) {
-		Visit existingVisit = visitService.findByVisitNo(visitNo);
+	
+	@PutMapping("/update-visit")
+	public ResponseEntity<VisitDto> updateVisit(@RequestBody VisitDto dto, HttpServletRequest request, HttpSession session) throws Exception {
+	    
+		Long userNo =(Long)session.getAttribute("userNo");
+		dto.setUserNo(userNo);
 		
-		if (existingVisit != null) {
-			if (dto.getCenterNo() != null) {
-				 Center center = Center.builder().centerNo(dto.getCenterNo()).build();
-				  existingVisit.setCenter(center);
+		Visit findVisit = visitService.findByVisitNo(dto.getVisitNo());
+		Userinfo findUserinfo = userInfoService.findUserByNo(userNo);
+		
+		findVisit.setUserinfo(findUserinfo);
+		if(findVisit != null) {
+			if(dto.getVisitDate()!=null) {
+				findVisit.setVisitDate(dto.getVisitDate());
 			}
-			if (dto.getUserNo() != null) {
-				Userinfo userinfo = Userinfo.builder().userNo(dto.getUserNo()).build();
-				  existingVisit.setUserinfo(userinfo);
-			}
-			if (dto.getVisitDate() != null) {
-				existingVisit.setVisitDate(dto.getVisitDate());
-			}
-			if (dto.getVisitTime() != null) {
-				existingVisit.setVisitTime(dto.getVisitTime());
-			}
-			if (dto.getVisitStatus() != null) {
-				existingVisit.setVisitStatus(dto.getVisitStatus());
+			if(dto.getVisitTime()!=null) {
+				findVisit.setVisitTime(dto.getVisitTime());
 			}
 			
-			visitService.updateVisit(existingVisit);
-			return new ResponseEntity<>(VisitDto.toDto(existingVisit),HttpStatus.OK);
+			Visit updateVisit = visitService.updateVisit(findVisit);
+			VisitDto updatedVisitDto = VisitDto.toDto(updateVisit);
+			
+			HttpHeaders httpHeaders = new HttpHeaders();
+			httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+			
+			return new ResponseEntity<VisitDto>(updatedVisitDto, httpHeaders, HttpStatus.OK);
+		
 		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
+			        
+			return new ResponseEntity<VisitDto>(HttpStatus.NOT_FOUND);
+		}    
+	} 
 	
+	
+	
+//	@PutMapping("update-visit")
+//	public ResponseEntity<VisitDto> updateVisit(@RequestBody VisitDto dto,HttpServletRequest request, HttpSession session) {
+//		Long userNo = (Long)session.getAttribute("userNo");
+//		
+//		dto.setUserNo(userNo);
+//		Visit findVisitNo = visitService.findByVisitNo(dto.getVisitNo());
+//		Userinfo findUserNo = userInfoService.findUserByNo(userNo);
+//		findVisitNo.setUserinfo(findUserNo);
+//		if (findVisitNo != null) {
+//			if (dto.getVisitDate() != null) {
+//				findVisitNo.setVisitDate(dto.getVisitDate());
+//			}
+//				 
+//		}
+//		return null;
+//		
+//	}
 	
 	@Operation(summary = "견학번호검색")
 	@GetMapping("/centers/search")

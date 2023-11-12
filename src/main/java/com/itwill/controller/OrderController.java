@@ -1,6 +1,7 @@
 package com.itwill.controller;
 
 import java.nio.charset.Charset;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +37,7 @@ import com.itwill.service.CartService;
 import com.itwill.service.CouponService;
 import com.itwill.service.OrderItemService;
 import com.itwill.service.OrderService;
+import com.itwill.service.ReviewBoardService;
 import com.itwill.service.UserInfoService;
 
 import groovyjarjarantlr4.v4.parse.ANTLRParser.parserRule_return;
@@ -56,6 +58,8 @@ public class OrderController {
 	UserInfoService userInfoService;
 	@Autowired
 	CouponService couponService;
+	@Autowired
+	private ReviewBoardService reviewBoardService;
 	
 	@Operation(summary = "주문 등록")
 	@GetMapping("/orderInsert")
@@ -92,7 +96,7 @@ public class OrderController {
 			OrderItemDto tempOrderItemDto=OrderItemDto.builder().build();
 			tempOrderItemDto.setOiQty(cart.getCartQty());
 			tempOrderItemDto.setOrderNo(newOrder.getOrderNo());
-			tempOrderItemDto.setOsNo(osNo);
+			tempOrderItemDto.setOrderstatus(orderstatus);
 			tempOrderItemDto.setProduct(cart.getProduct());
 			
 			itemService.insertOrderItem(OrderItemDto.toEntity(tempOrderItemDto));
@@ -111,6 +115,7 @@ public class OrderController {
 		 */
 		couponService.Delete(Long.parseLong(couponId)); //쿠폰삭제기능
 		cartService.deleteByUserId(userNo);
+		
 		return "index";
 	}
 	//관리자전용
@@ -142,7 +147,15 @@ public class OrderController {
 			Userinfo userinfo = orders.getUserinfo();
 			OrdersDto dto = OrdersDto.toDto(orders);
 			dto.setUserinfo(userinfo);
+			/*
+			if(reviewBoardService.findByUserNoProductNo()!=null) {
+				dto.setReviewStatus(1);
+			}else {
+				dto.setReviewStatus(0);
+			}
+			*/
 			ordersDtoList.add(dto);
+			
 		}
 		
 		
@@ -209,6 +222,25 @@ public class OrderController {
 		model.addAttribute("orderItemList",orderitemDtos);
 		
 			return "orderItemView";
+		}
+		
+		
+		@GetMapping("/dateByOrder")
+		public String dateByOrder(@RequestParam("startDate")Date startDate,@RequestParam("endDate") Date endDate, HttpSession session,Model model){
+			List<OrdersDto> ordersListDto = new ArrayList<OrdersDto>();
+			System.out.println(">>>>>>>>파라미터 왔을까");
+			Long userNo=(Long)session.getAttribute("userNo");
+			List<Orders> ordersList = orderService.findAllByOrdersByOrderDateByUserNo(startDate, endDate, userNo);
+			
+			for (Orders orders : ordersList) {
+				OrdersDto ordersDto = OrdersDto.toDto(orders);
+				ordersListDto.add(ordersDto);
+			}
+			
+			model.addAttribute("ordersList",ordersListDto);
+			
+			return "my-account-orders";
+			
 		}
 		
 	

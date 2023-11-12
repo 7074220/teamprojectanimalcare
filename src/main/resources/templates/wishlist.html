@@ -599,7 +599,7 @@
 											</td>
                                             <td class="product_thumb" th:id="${wish.wishNo}"><a href="#" th:href="@{productDetail(productNo=${wish.product.productNo})}"><img src="#" alt="" th:src="@{/image/product/} + ${wish.product.getProductImage}"></a></td>
                                             <td class="product_name" th:id="${wish.wishNo}"><a href="#" th:text="${wish.product.productName}" th:href="@{productDetail(productNo=${wish.product.productNo})}">상품명</a></td>
-                                            <td class="product-price"  th:id="${wish.wishNo}" th:text="${wish.product.productPrice}">가격</td>
+                                            <td class="product-price"  th:id="${wish.wishNo}" th:text="${#numbers.formatInteger(wish.product.productPrice, 3, 'COMMA') + '원'}">가격</td>
                                             <td class="product_quantity" th:id="${wish.wishNo}" th:text="${wish.product.productCategory}">In Stock</td>
                                            <td class="product_remove" th:id="${wish.wishNo}"><a class="deleteWish"><i class="fa fa-trash-o" th:id="${wish.wishNo}"></i></a></td>
                                             <!--<td class="product_total"><a href="#">Add To Cart</a></td>-->
@@ -691,6 +691,7 @@
 	                 $(this).closest("tr").remove();
 	            }
 	        });
+	        location.href="wishList";
 		    
 		  });
 		  

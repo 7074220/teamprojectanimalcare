@@ -41,6 +41,8 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/adopt")
 public class AdoptRestController {
 
+	
+	
 	@Autowired
 	private AdoptService adoptService;
 	@Autowired

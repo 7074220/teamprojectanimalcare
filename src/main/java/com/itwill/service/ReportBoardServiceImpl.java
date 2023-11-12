@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.dao.ReportBoardDao;
 import com.itwill.entity.ReportBoard;
@@ -63,6 +64,36 @@ public class ReportBoardServiceImpl implements ReportBoardService{
 		return reportBoardDao.findAll();
 	}
 	
+	public void saveImageFile(Long recipeId, MultipartFile file) {
+	    System.out.println("saveImageFile in ImageService");
+
+	    //Optional<Recipe> recipeOptioanl = recipeRepository.findById(recipeId);
+
+	    //Recipe recipe = null;
+	    /*
+	    if (recipeOptioanl.isPresent()) {
+	      try {
+	        recipe = recipeOptioanl.get();
+	        Byte[] imageBytes = new Byte[file.getBytes().length];
+	        int index = 0;
+	        for (byte b: file.getBytes()) 
+	          imageBytes[index++]=b;
+	        
+	        recipe.setImage(imageBytes);
+	      } catch (IOException e) {
+	        e.printStackTrace();
+	      }
+	      recipeRepository.save(recipe);
+	    } else {
+	      throw new RuntimeException("Recipe not found with id :: " + recipeId);
+	    }
+	    */
+	  }
+
+	@Override
+	public List<ReportBoard> findByBoardNoOrderByBoardNoDesc() {
+		return reportBoardDao.findByBoardNoOrderByBoardNoDesc();
+	}
 	
 
 }

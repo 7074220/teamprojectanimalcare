@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -66,6 +67,50 @@ public class ProductController {
 	*/
 	
 	
+	@GetMapping("/searchProduct")
+	public String searchProduct() {
+		
+		productService.findByContains(null);
+		
+		return "shop";
+	}
+	
+	
+	
+	
+	@GetMapping("/insertProduct")
+	// 상품등록 (관리자)
+	public String insertProduct(@RequestBody ProductInsertDto dto) {
+		
+		productService.insertProduct(dto.toEntity(dto));
+		
+		return "shop";
+	}
+	
+	
+	@GetMapping("/updateProduct")
+	// 상품 업데이트 (관리자)
+	public String updateProduct(@RequestBody ProductListDto dto, Model model) throws Exception{
+		Product product = Product.builder().build();
+		
+		product.setProductPrice(dto.getProductPrice());
+		product.setProductImage(dto.getProductImage());
+		product.setProductName(dto.getProductName());
+		
+		productService.updateProduct(product);
+		
+		model.addAttribute("product", product);
+		
+		return "shop";
+	}
+	
+	
+
+	
+	
+	
+	
+	
 	// 펫카테고리별로 구분 --> 상품 리스트 출력
 		@GetMapping("/productList")
 		public String productList(Model model, HttpSession session) {
@@ -84,12 +129,13 @@ public class ProductController {
 				} else {
 					productList = productService.findAllProductByPetCategory(myPet.getMypetKind());
 				}
-			}else {
+			} else {
 				myPet = MyPet.builder().mypetKind("강아지").build();
 			}
 			
 			for (Product product : productList) {
 				productListDto.add(ProductListDto.toDto(product));
+				System.out.println(product.getProductStarAvg());
 			}
 			
 			model.addAttribute("productList", productListDto);
@@ -226,9 +272,10 @@ public class ProductController {
 	public String ProductPriceDesc(Model model, HttpSession session, @RequestParam String path) {
 		List<ProductPriceDescDto> productPriceDescDto = new ArrayList<>();
 		// 상품가격 비싼 것부터
+		
 		List<Product> productList = productService.findAllByOrderByProductPriceDesc();
 		Long userNo = (Long) session.getAttribute("userNo");
-		MyPet myPet = MyPet.builder().build();
+		MyPet myPet = MyPet.builder().mypetKind("강아지").build();
 		
 		String kindPath = "";
 		String categoryPath = "";
@@ -240,7 +287,7 @@ public class ProductController {
 				myPet.setMypetKind("강아지");
 			}
 			productList = productService.findAllByOrderByProductByPetCategoryPriceDesc(myPet.getMypetKind());
-		}else {
+		} else {
 			kindPath = path.substring(1,path.lastIndexOf("?"));
 			categoryPath = path.substring(path.lastIndexOf("=")+1);
 		}
@@ -313,9 +360,13 @@ public class ProductController {
 		String categoryPath = "";
 		
 		if(path.equals("/productList")) {
-			myPet.setMypetKind(myPetService.findLeaderMyPet(userNo).getMypetKind());
+			if(myPetService.findLeaderMyPet(userNo)!=null) {
+				myPet.setMypetKind(myPetService.findLeaderMyPet(userNo).getMypetKind());	
+			}else {
+				myPet.setMypetKind("강아지");
+			}
 			productList = productService.findAllByOrderByProductByPetCategoryPriceAsc(myPet.getMypetKind());
-		}else {
+		} else {
 			kindPath = path.substring(1,path.lastIndexOf("?"));
 			categoryPath = path.substring(path.lastIndexOf("=")+1);
 		}
@@ -388,9 +439,13 @@ public class ProductController {
 		String categoryPath = "";
 		
 		if(path.equals("/productList")) {
-			myPet.setMypetKind(myPetService.findLeaderMyPet(userNo).getMypetKind());
+			if(myPetService.findLeaderMyPet(userNo)!=null) {
+				myPet.setMypetKind(myPetService.findLeaderMyPet(userNo).getMypetKind());	
+			}else {
+				myPet.setMypetKind("강아지");
+			}
 			productList = productService.findAllByOrderByProductByPetCategoryNoDesc(myPet.getMypetKind());
-		}else {
+		} else {
 			kindPath = path.substring(1,path.lastIndexOf("?"));
 			categoryPath = path.substring(path.lastIndexOf("=")+1);
 		}
@@ -451,11 +506,94 @@ public class ProductController {
 		return "shop";
 	}
 	
+	@GetMapping("/productStarDesc")
+	public String productStarDesc(Model model, HttpSession session, @RequestParam String path) {
+		List<ProductProductNoDescDto> productProductNoDescDto = new ArrayList<>();
+		// 상품가격 등록일순
+		List<Product> productList = productService.findAllByOrderByProductNoDesc();
+		Long userNo = (Long) session.getAttribute("userNo");
+		MyPet myPet = MyPet.builder().build();
+		
+		String kindPath = "";
+		String categoryPath = "";
+		
+		if(path.equals("/productList")) {
+			if(myPetService.findLeaderMyPet(userNo)!=null) {
+				myPet.setMypetKind(myPetService.findLeaderMyPet(userNo).getMypetKind());	
+			}else {
+				myPet.setMypetKind("강아지");
+			}
+			productList = productService.findAllByOrderByProductByPetCategoryStarAvgDesc(myPet.getMypetKind());
+		} else {
+			kindPath = path.substring(1,path.lastIndexOf("?"));
+			categoryPath = path.substring(path.lastIndexOf("=")+1);
+		}
+		
+		if(kindPath.equals("productDogList")) {
+			myPet.setMypetKind("강아지");
+			productList = productService.findAllProductByPetCategory("강아지");
+			if(categoryPath.equals("All")) {
+				productList = productService.findAllByOrderByProductByPetCategoryStarAvgDesc("강아지");
+			}
+			if(categoryPath.equals("1")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryStarAvgDesc("강아지", "사료");
+			}
+			if(categoryPath.equals("2")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryStarAvgDesc("강아지", "간식");
+			}
+			if(categoryPath.equals("3")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryStarAvgDesc("강아지", "캔");
+			}
+			if(categoryPath.equals("4")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryStarAvgDesc("강아지", "위생");
+			}
+			if(categoryPath.equals("5")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryStarAvgDesc("강아지", "미용");
+			}
+		}
+		
+		if(kindPath.equals("productCatList")) {
+			myPet.setMypetKind("고양이");
+			productList = productService.findAllProductByPetCategory("고양이");
+			if(categoryPath.equals("All")) {
+				productList = productService.findAllByOrderByProductByPetCategoryStarAvgDesc("고양이");
+			}
+			if(categoryPath.equals("1")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryStarAvgDesc("고양이", "사료");
+			}
+			if(categoryPath.equals("2")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryStarAvgDesc("고양이", "간식");
+			}
+			if(categoryPath.equals("3")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryStarAvgDesc("고양이", "캔");
+			}
+			if(categoryPath.equals("4")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryStarAvgDesc("고양이", "모래");
+			}
+			if(categoryPath.equals("5")) {
+				productList = productService.findAllByOrderByProductByPetCategoryByProductCategoryStarAvgDesc("고양이", "미용");
+			}
+		}
+		
+		for (Product product : productList) {
+			productProductNoDescDto.add(ProductProductNoDescDto.toDto(product));
+		}
+		
+		model.addAttribute("productList", productProductNoDescDto);
+		model.addAttribute("myPet", myPet);
+		
+		return "shop";
+	}
+	
+	
+	
 	@GetMapping(value = "/productDetail", params = "productNo")
 	public String productDetail(@RequestParam Long productNo,Model model,HttpServletRequest request) {
 		System.out.println(">>>>>>>>>"+request.getRequestURI());
 		Product product = productService.findByProductNo(productNo);
 		String findProductName = productService.findByProductNo(productNo).getProductName();
+		boolean nextExist = productService.existsById(productNo+1);
+		System.out.println("-------------->"+nextExist);
 		int firstSpaceIndex = findProductName.indexOf(" ");
 		
 		if (firstSpaceIndex >= 0) {
@@ -476,7 +614,8 @@ public class ProductController {
 		}
 		
 		model.addAttribute("product", product);
-		model.addAttribute("products", productListDto);
+		//model.addAttribute("nextExist",nextExist);
+		model.addAttribute("products", products);
 		model.addAttribute("productName", productNameDto);
 		
 		List<ReviewBoard> reviewList = reviewBoardService.findByProductNo(product.getProductNo());

@@ -65,7 +65,8 @@ CREATE TABLE ReportBoard(
 		board_find_name               		VARCHAR2(50)		 NULL ,
 		board_find_phone              		VARCHAR2(50)		 NULL ,
 		user_no                       		NUMBER(10)		 NULL,
-		board_image                   		VARCHAR2(50)		 NULL 
+		board_image                   		VARCHAR2(4000)		 NULL,
+		board_find_place					VARCHAR2(100)		 NULL
 );
 
 DROP SEQUENCE ReportBoard_board_no_SEQ;
@@ -264,7 +265,8 @@ CREATE TABLE ReviewBoard(
 		board_date                    		DATE		 NULL ,
 		board_star                    		DOUBLE PRECISION		 NULL ,
 		product_no                    		NUMBER(10)		 NULL ,
-		user_no                       		NUMBER(10)		 NULL 
+		user_no                       		NUMBER(10)		 NULL ,
+		oi_no                         		NUMBER(10)		 NULL 
 );
 
 DROP SEQUENCE ReviewBoard_board_no_SEQ;

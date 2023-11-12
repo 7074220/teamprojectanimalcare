@@ -191,10 +191,17 @@
                                 <li><a href="couponList"  class="nav-link">쿠폰</a></li>
                                 <li><a href="adoptByUserNo"  class="nav-link">입양</a></li>
 								<li><a href="volunteerByUserNo"  class="nav-link">봉사</a></li>
-                                <li><a href="visitByUserNo" class="nav-link">견학</a></li>
-                                <li> <a th:if="${session.userName == '어드민'}" href="ordersList" class="nav-link">관리자
+                               <li><a th:if="${session.userName == '관리자'}" href="adminVisitList"
+											class="nav-link">관리자 전용견학목록</a></li>
+									<li><a th:if="${session.userName != '관리자'}" href="visitByUserNo"
+											class="nav-link">견학</a></li>
+											<li><a th:if="${session.userName == '관리자'}" href="centerListAll"
+											class="nav-link">관리자 보호소목록</a></li>
+									<li><a th:if="${session.userName != '관리자'}" style="display: none;"
+											class="nav-link"></a></li>
+                                <li> <a th:if="${session.userName == '관리자'}" href="ordersList" class="nav-link">관리자
 											전용주문목록</a></li>
-								<li> <a th:if="${session.userName != '어드민'}" href="orders" class="nav-link">주문목록</a></li>
+								<li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li>
                                 <li><a href="logout" class="nav-link">로그아웃</a></li>
                                 <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li>
 
@@ -214,8 +221,8 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>시간</th>
                                                 <th>날짜</th>
+                                                <th>시간</th>
                                                 <th>펫번호</th>
                                                 <th>처리상태</th>
                                                 <th>변경/취소</th>                 
@@ -224,8 +231,8 @@
 										<tbody>
 											<tr th:each="adopt, rowStat : ${adoptList}">
 												<td th:text="${adoptList.size() - rowStat.index}"></td>
-												<td th:text="${adopt.adoptTime}"></td>
 												<td th:text="${#strings.substring(adopt.adoptDate.toString(),0,10)}"></span></td>
+												<td th:text="${adopt.adoptTime + '시'}"></td>
 												<td th:text="${adopt.Pet.petNo}"></td>
 												<td th:text="${adopt.adoptStatus}"><!--<span class="success">입양신청</span>--></td>
 												<td><!--<button type="submit" class="updateBtn" th:id="'updateBtn-' + ${adopt.adoptNo}">수정</button>-->
@@ -301,7 +308,7 @@
 						alert('취소가 완료되었습니다.');
 						// 성공한 경우, 해당 <tr> 요소를 삭제
 						$row.remove();
-						window.location.href = "index";
+						//window.location.href = "index";
 					}
 				},
 				error: function () {
@@ -337,7 +344,7 @@
 				
 				$.ajax({
 					type: 'GET',
-					url:  '/adoptUpdate?adoptNo=' + adoptNo + '&petNo=' + petNo, // 서버의 엔드포인트 URL
+					url:  '/adoptUpdate?adoptNo=' + adoptNo + '&petNo=' + petNo,
 					data: JSON.stringify(updateData), // 수정 데이터를 JSON으로 변환
 					contentType: 'application/json;UTF-8',
 					success: function (response) {

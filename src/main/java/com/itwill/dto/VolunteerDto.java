@@ -26,6 +26,8 @@ public class VolunteerDto {
 	private String volunteerStatus;
 	private Long centerNo;
 	
+	private Userinfo userinfo;
+	
 	public static Volunteer toEntity(VolunteerDto dto) {
 		Volunteer volunteer = Volunteer.builder()
 						.userinfo(Userinfo.builder().userNo(dto.getUserNo()).build())
@@ -49,5 +51,6 @@ public class VolunteerDto {
 								.build();
 		return volunteerDto;
 	}
+	
 	
 }

@@ -27,14 +27,15 @@ public class OrderItemDto {
 private Long oiNo;
 	
 	private Integer oiQty;
-	
-
-	
 	private Long orderNo;
-	private Long osNo;
+	
+	
+	@Default
+	private Orderstatus orderstatus=new Orderstatus();
 	@Default
 	private Product product=new Product();
-	
+	private String reviewStatus;
+	private int orderStatusNo;
 //	private Long orderId;
 	
 	public static OrderItemDto toDto(OrderItem entity) {
@@ -43,7 +44,7 @@ private Long oiNo;
 									.oiQty(entity.getOiQty())
 									.orderNo(entity.getOrders().getOrderNo())
 									.product(entity.getProduct())
-									.osNo(entity.getOrderStatus().getOsNo())
+									.orderstatus(entity.getOrderStatus())
 								 .build();
 		
 		return orderItemDto;
@@ -54,7 +55,7 @@ private Long oiNo;
 									.oiNo(dto.getOiNo())
 									.oiQty(dto.getOiQty())
 									.orders(Orders.builder().orderNo(dto.getOrderNo()).build())
-									.orderStatus(Orderstatus.builder().osNo(dto.getOsNo()).build())
+									.orderStatus(dto.getOrderstatus())
 									.product(dto.getProduct())
 								 .build();
 		

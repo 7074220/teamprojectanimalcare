@@ -29,108 +29,141 @@
                 <!--login area start-->
 
                 <!--register area start-->
-                <div class="col-lg-6 col-md-6">
-                    <div class="account_form register">
-                        <h2 th:text="실종신고">실종신고 글쓰기</h2>
-                        <form name="f" id="reportBoard_write_form" action="my-account" method="post" enctype="multipart/form-data">
-                            
+                <div class="col-lg-6 col-md-6" style="margin-left: 300px;">
+                    <div class="account_form register" style="display: flex; flex-direction: column; justify-content: center; align-items: center;" >
+                        <h2>실종&#47;제보</h2>
+                        
+                        <form name="f" id="reportBoard_write_form" action="#" method="post" enctype="multipart/form-data"
+                        	th:action="@{'/reportWrite'}">
                             <p>   
-                                <label>아이디 <span>*</span></label>
-                                <input type="text" id="userId">
-                                <span id="userIdError" style="color:red;"></span>
+                                <label>글 제목<span>*</span></label>
+                                <input type="text" id="boardTitle" name="boardTitle">
+                                <span id="boardTitleError" style="color:red;"></span>
                              </p>
-                
-                             <p>
-                                <label>비밀번호 <span>*</span></label>
-                                <input type="password" id="password">
-                                <span id="passwordError" style="color:red;"></span>
-                            </p>
-                            <p>
-                                <label>비밀번호 확인 <span>*</span></label>
-                                <input type="password" id="confirmPassword">
-                                <span id="confirmPasswordError" style="color:red;"></span>
-                            </p>
+                            <!-- <p>
+                                <label>찾은날짜<span>*</span></label>
+                                <input type="text" id="boardFindDate" name="boardFindDate">
+                                <span id="boardFindDateError" style="color:red;"></span>
+                            </p>-->
+             				 <p>
+							<div>
+								<label>찾은 날짜</label>
+								<input type="date" name="boardFindDate" id="boardFindDate" placeholder="날짜를 선택해주세요"
+									required="required" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
+							</div>
+             				 </p>
                             <p>   
-                                <label>이름  <span>*</span></label>
-                                <input type="text" id="name">
+                                <label>찾은사람이름<span>*</span></label>
+                                <input type="text" id="boardFindName" name="boardFindName">
                                 <span id="nameError" style="color:red;"></span>
                              </p>
-                
-                            <p>   
-                                <label>주민번호  <span>*</span></label>
-                                <input type="text" id="residentNumber">
-                                <span id="nameError" style="color:red;"></span>
-                             </p>
-                
-                             <p>
-                                <label>성별  <span>*</span></label>
-                                <select id="gender">
-                                    <option value="">성별 선택</option>
-                                    <option value="남">남</option>
-                                    <option value="여">여</option>
-                                </select>
-                                <span id="genderError" style="color:red;"></span>
-                             </p>
-                
                              <p>   
-                                <label>핸드폰번호  <span>*</span></label>
-                                <input type="text" id="phone">
+                                <label>발견된 장소<span>*</span></label>
+                                <input type="text" id="boardFindPlace" name="boardFindPlace">
+                                <span id="placeError" style="color:red;"></span>
+                             </p>
+                             <p>   
+                                <label>휴대폰번호<span>*</span></label>
+                                <input type="text" id="boardFindPhone" name="boardFindPhone">
                                 <span id="phoneError" style="color:red;"></span>
                              </p>
-
-                             <p>   
-                                <label>주소  <span>*</span></label>
-                                <input type="text" id="address">
-                                
-                                <span id="addressError" style="color:red;"></span>
+                            <p>   
+                                <label>내용<span>*</span></label>
+                                <textarea id="boardContent" name="boardContent" style="width: 520px; height: 200px; resize: none;"></textarea>
                             </p>
-                			
-                			
-                			
-                            <div class="login_submit">
-                                <button type="button" data-navigate="#/user_write_action">확인</button>
-                            </div>
+                            <label>Select image</label>
+                		    <input type="file" id="imageFile" name="imageFile" style="border: none;" >
+                           <div class="login_submit" style="margin-top: 10px;">
+                                <button type="submit" th:text="글쓰기">확인</button>
+                           </div>
 						</form>
                         </div>
                     
                     </div>    
-            
-             
-                 <!--login area start-->
-
-                <!--register area start-->
-                <!-- <div class="col-lg-6 col-md-6">
-                    <div class="account_form register">
-                        <h2 th:text="MyPet">Register</h2>
-                        <form action="#">
-                            <p>   
-                                <label th:text="이름">Email address  <span>*</span></label>
-                                <input type="text">
-                             </p>
-                             <p>   
-                                <label th:text="생일">Passwords <span>*</span></label>
-                                <input type="text">
-                             </p>
-                              <p>
-                                <label>종류  <span>*</span></label>
-                                <select id="kind">
-                                    <option value="">종류 선택</option>
-                                    <option value="남" th:text="강아지" th:value="강아지">남</option>
-                                    <option value="여" th:text="고양이" th:value="고양이">여</option>
-                                </select>
-                                <span id="kindError" style="color:red;"></span>
-                             </p>
-                
-                            <div class="login_submit">
-                                <button type="submit" th:text="등록">Register</button>
-                            </div>
-                        </form>
-                    </div>    
-                </div> -->
-                <!--register area end-->
             </div>
         </div>   
             </div> 
+            
+<script>
+	
+	$('#reportBoard_write_form').validate({
+			rules: {
+			boardTitle: {
+				required: true
+			},
+			boardFindDate: {
+				required: true
+			},
+			boardFindName: {
+				required: true
+			},
+			boardFindPlace: {
+				required: true
+			},
+			boardFindPhone: {
+				required: true,
+				phone:true
+			},
+			boardContent: {
+				required: true
+			}
+		},
+		messages: {
+			boardTitle: {
+				required: '제목을 입력하세요.'
+			},
+			boardFindDate: {
+				required: '날짜를 입력하세요.'
+			},
+			boardFindName: {
+				required: '이름을 입력하세요.'
+			},
+			boardFindPlace: {
+				required: '발견장소를 입력하세요.'
+			},
+			boardFindPhone: {
+				required: '번호를 입력하세요.',
+				phone:'번호 양식에 맞춰 써주세요.(예시:010-1234-1234)'
+			},
+			boardContent: {
+				required: '내용을 입력하세요.'
+			}
+			
+		},
+		errorClass: 'error',
+		validClass: 'valid'
+	}
+		
+		);
+	
+		$('#reportBoard_write_form').on('submit',function(e) {
+        // 폼이 유효하지 않으면 전송을 중지
+        if (!$(this).valid()) {
+            e.preventDefault();
+        }
+    });
+
+	window.onload = function() {
+		
+    var boardFindDate = document.getElementById('boardFindDate');
+    var today = new Date();
+    // 한국 시간대 (UTC+9)로 변경
+    today.setHours(today.getHours() + 9);
+    var beforeToday = new Date(today);
+    beforeToday.setDate(beforeToday.getDate() ); // 어제 날짜 계산
+    var beforeTodayString = beforeToday.toISOString().slice(0, 10);
+
+    boardFindDate.value = beforeTodayString;
+
+    var maxDate = new Date(today);
+    maxDate.setHours(0, 0, 0, 0); // 날짜 부분만 사용
+    var maxDateString = maxDate.toISOString().slice(0, 10);
+    boardFindDate.setAttribute('max', maxDateString);
+
+    boardFindDate.removeAttribute('min');
+};
+</script>
+            
     </th:block>
     <!-- customer login end -->
 
