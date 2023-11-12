@@ -98,6 +98,8 @@ public class MyPetController {
 		  model.addAttribute("leader",false);
 	  }
 	  
+	  model.addAttribute("updatepet",updatepet);
+	  
 	  return "updateMyPet"; 
   }
   

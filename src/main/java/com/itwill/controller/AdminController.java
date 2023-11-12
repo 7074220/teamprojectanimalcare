@@ -26,12 +26,14 @@ import com.itwill.dto.ProductListDto;
 import com.itwill.dto.VolunteerDto;
 import com.itwill.entity.Adopt;
 import com.itwill.entity.Center;
+import com.itwill.entity.MyPet;
 import com.itwill.entity.Orders;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Product;
 import com.itwill.entity.Userinfo;
 import com.itwill.entity.Visit;
 import com.itwill.entity.Volunteer;
+import com.itwill.entity.Wish;
 import com.itwill.repository.AdoptRepository;
 import com.itwill.repository.VisitRepository;
 import com.itwill.repository.VolunteerRepository;
@@ -118,6 +120,53 @@ public class AdminController {
 			
 		}
 		
+		@GetMapping(value = "adminUpdateUser")
+		public String update(Model model,@RequestParam Long userNo) throws Exception{
+			
+			
+			Userinfo userinfo = userInfoService.findUserByNo(userNo);
+			
+			model.addAttribute("userinfo", userinfo);
+			
+			return "adminUpdateUserInfo";
+		}
+		
+		
+		
+		@GetMapping("/adminUserDelete")
+		public String delete(@RequestParam Long userNo,Model model) throws Exception {
+			cartService.deleteByUserId(userNo);
+			
+			List<Orders> orderList = orderService.findOrderById(userNo);
+			
+			for (Orders orders : orderList) {
+				orderService.removeOrderByOrderNo(orders.getOrderNo());
+			}
+			
+			List<Wish> wishs = wishService.findAllWishByUserNo(userNo);
+			for (Wish wish : wishs) {
+				wishService.deleteWish(wish.getWishNo());
+			}
+
+			List<MyPet> myPets = myPetService.findMyPetListByuserNo(userNo);
+			for (MyPet myPet : myPets) {
+				myPetService.Delete(myPet.getMypetNo());
+			}
+			userInfoService.remove(userNo);
+			
+			List<AdminUserListDto> adminUserList = new ArrayList<>();
+			List<Userinfo> userList = new ArrayList<>();
+			
+			userList = userInfoService.findUserList();
+			
+			for (Userinfo userinfo : userList) {
+				adminUserList.add(AdminUserListDto.toDto(userinfo));
+			}
+			
+			model.addAttribute("adminUserList", adminUserList);
+			
+			return "admin-userinfo";
+		}
 		/*
 		 
 		  ~~~~~~~~~~~~~~~~~~~~ 팀장 이거 수정해달라 ~~~~~~~~~~~~~~~~~~~~~~

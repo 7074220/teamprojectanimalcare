@@ -237,7 +237,8 @@
 												<td th:text="${userinfo.userAddress}"></td>
 												<td th:text="${userinfo.userPhoneNumber}"></td>
 												<td>
-													<button type="submit" class="deleteBtn">탈퇴</button>
+													<a th:if="${session.userName == '관리자'}" th:href="@{/adminUpdateUser?userNo={userNo}(userNo=${userinfo.userNo})}" class="updateBtn">수정</a>
+													<button type="button" class="deleteBtn" onclick="userDelete(event)" th:id="${userinfo.userNo}">탈퇴</button>
 												</td>
 											</tr>
 										</tbody>
@@ -294,39 +295,29 @@
 
 </script> -->
 		<script>
-			$('.deleteBtn').on('click', function (e) {
-				e.preventDefault();
-				let id = $(this).attr('id');
-				let no = id.split('-')[1];
-
-				if (isNaN(no)) {
-					alert('visitNo 가져오기실패')
-					return;
-				}
-
-				let sendJsonObject = {visitNo: no};
-				let $row = $(this).closest('tr');
-
+			function ajaxRequest(method, url, sendJsonObject) {
+				let returnResultJsonObject={};
 				$.ajax({
-					type: 'DELETE',
-					url: 'visit/' + no,
-					data: JSON.stringify(sendJsonObject),
+					async:false,
+					method: method,
+					url: url,
 					contentType: 'application/json;UTF-8',
-					success: function (response) {
-						if (response && response.visitNo == null) {
-							alert('신청내역이 없음');
-						} else {
-							alert('예약취소가 완료되었습니다.');
-							$row.remove();
-							window.location.href = "index"
-						}
-					},
-					error: function () {
-						alert('취소 요청중 오류가 발생했습니다.');
+					data: JSON.stringify(sendJsonObject),
+					type: 'json',
+					success: function(resultJsonObject) {
+						returnResultJsonObject = resultJsonObject;
 					}
 				});
-			});
-
+				return returnResultJsonObject;
+			}
+			
+			function userDelete(e){
+				let id = $(e.target).attr('id');
+				alert(id);
+				window.location.href="adminUserDelete?userNo="+id;
+			}
+			
+			
 		</script>
 	</th:block>
 
