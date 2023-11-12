@@ -84,7 +84,6 @@ function createInitializer() {
 						userId: function() {
 							return $('#userId').val();
 						}
-					
 					}
 				}
 			},

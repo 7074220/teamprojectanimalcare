@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.itwill.dto.VolunteerDto;
 import com.itwill.entity.Center;
 import com.itwill.entity.Userinfo;
+import com.itwill.entity.Visit;
 import com.itwill.entity.Volunteer;
+import com.itwill.repository.VolunteerRepository;
 import com.itwill.service.CenterService;
 import com.itwill.service.ReviewBoardService;
 import com.itwill.service.UserInfoService;
@@ -50,6 +52,8 @@ public class VolunteerController {
 		return "volunteer";
 	}
 	
+	
+	// 회원일경우 봉사 신청가능, 비회원일경우 로그인 페이지로 이동.
 	@PostMapping("/create-volunteer")
 	public String createVolunteer(@RequestParam("volunteerDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date volunteerDate,
 	        @RequestParam("volunteerTime") int selectedHour, @RequestParam Long centerNo, HttpSession session, Model model) throws Exception {
@@ -64,25 +68,63 @@ public class VolunteerController {
 	        Center center = centerService.findByCenterNo(centerNo);
 	        Userinfo userinfo = userInfoService.findUserByNo(userNo);
 	        volunteer.setUserinfo(userinfo);
-	        volunteer.setCenter(center);	        
+	        volunteer.setCenter(center);
+	        
 	        model.addAttribute("userinfo", userinfo);
 
+	        // 봉사신청이 성공한 경우 모델에 추가
 	        model.addAttribute("message", "신청이 완료되었습니다.");
 	    } else {
+	        // 로그인이 필요한 경우 모델에 추가
 	        model.addAttribute("error", "로그인이 필요합니다.");
 	    }
 	    return "volunteerByUserNo"; // my-account 페이지로 이동
 	    
 	}
+	
+	// (관리자) 봉사 목록 전체 조회. 
+	@GetMapping("/volunteerList") 
+	public String findVolunteerList(Model model) throws Exception{
 		
-	@GetMapping("/volunteerList") // 봉사 목록 전체 조회. 관리자
-	public String volunteerList(Model model) {
-		List<Volunteer> volunteers = volunteerService.findAllVolunteers();    
-	    model.addAttribute("volunteers", volunteers);
+		List<Volunteer> volunteerList = volunteerService.findAllVolunteers();    
+		
+		/*
+		List<VolunteerDto> volunteerDto = new ArrayList<>();	
+		for (Volunteer volunteer : volunteerList) {
+			Userinfo userinfo = volunteer.getUserinfo();
+			VolunteerDto dto = VolunteerDto.toDto(volunteer);
+			dto.setUserinfo(userinfo);
+			volunteerDto.add(dto);
+		}
+		*/
+		
+	    model.addAttribute("volunteerList", volunteerList);
 	    return "my-account-volunteer";
 	}
 	
 	
+
+
+	
+	/*
+	// userNo 로 봉사 목록 조회. 로그인한 회원
+	@GetMapping("/volunteerList/{userNo}")
+	public String findByUserNoVolunteerList(Model model, HttpSession httpSession, @PathVariable(name = "userNo") Long userNo) throws Exception{		
+		List<Volunteer> volunteerList = volunteerService.findVolunteertByUserNo(userNo);
+		
+		List<VolunteerDto> volunteerDtoUserNoList = new ArrayList<>();		
+		for (Volunteer volunteer : volunteerList) {
+			volunteerDtoUserNoList.add(VolunteerDto.toDto(volunteer));
+		}
+		
+		model.addAttribute("volunteerList", volunteerList);
+		return "my-account-volunteer"; 
+	}
+	*/
+	
+	
+	
+	// userNo 로 봉사 리스트 조회. 로그인한 회원
 	@GetMapping("/volunteerByUserNo") 
 	public String findByVolunteerListUserNo(Model model, HttpSession session) throws Exception {
 		Long userNo=(Long)session.getAttribute("userNo");

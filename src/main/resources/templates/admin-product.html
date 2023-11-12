@@ -11,7 +11,7 @@
 			/* 회원탈퇴창 가운데 정도로 떨어트림 */
 			
 	}
-			#visitTable{
+			#productTable{
 		width: 1000px;
 		}
 	</style>
@@ -185,23 +185,26 @@
 					<div class="row">
 						<div class="col-sm-12 col-md-3 col-lg-3">
 							<!-- Nav tabs -->
+							
+							
 							<div class="dashboard_tab_button">
-								<ul role="tablist" class="nav flex-column dashboard-list">
-									<li><a href="userinfo" class="nav-link">내정보</a></li>
-									<li><a href="userinfo/mypet" class="nav-link">마이펫</a></li>
-									<li><a href="couponList" class="nav-link">쿠폰</a></li>
-									<li><a href="adoptByUserNo" class="nav-link">입양</a></li>
-									<li><a href="volunteerByUserNo" class="nav-link">봉사</a></li>
-									<li><a href="visitByUserNo" class="nav-link">견학</a></li>
-									<li> <a th:if="${session.userName == '관리자'}" href="ordersList" class="nav-link">관리자
-											전용주문목록</a></li>
-									<li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li>
-									<li><a href="logout" class="nav-link">로그아웃</a></li>
-									<li><a href="#" data-toggle="modal" data-target="#deleteModal"
-											class="nav-link">회원탈퇴</a></li>
+	                            <ul role="tablist" class="nav flex-column dashboard-list">
+									<li><a href="adminUserList" class="nav-link">회원</a></li>
+	                                <li><a href="adminProductList"  class="nav-link">상품</a></li>
+	                                <li><a href="adminOrdersList" class="nav-link">주문</a></li>
+	                                <li><a href="adminAdoptList"  class="nav-link">입양</a></li>
+									<li><a href="adminVolunteerList"class="nav-link">봉사</a></li>
+	                                <li><a href="adminVisitList"class="nav-link">견학</a></li>
+									<li><a href="centerListAll"class="nav-link">보호소</a></li>
+									<!--<li><a th:if="${session.userName != '관리자'}" style="display: none;"class="nav-link"></a></li>-->
+									<!-- <li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li> -->	                               
+									<!-- <li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li> -->
+	                                <li><a href="logout" class="nav-link">로그아웃</a></li>
+	                                <!-- <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li> -->
+	                            </ul>
+                       		 </div>
 
-								</ul>
-							</div>
+
 						</div>
 						<div class="col-sm-12 col-md-9 col-lg-9">
 							<!-- Tab panes -->
@@ -212,32 +215,33 @@
 
 
 								<!--  <div class="tab-pane fade" id="visit">-->
-								<h3>견학</h3>
-								<div class="table-responsive" id="visitTable">
+								<h3>상품관리</h3>
+								<div class="table-responsive" id="productTable">
 									<table class="table" >
 										<thead>
 											<tr>
-												<th>No</th>
-												<th>Time</th>
-												<th>Date</th>
-												<th>Center</th>
-												<th>Status</th>
-												<th>Delete</th>
+												<th>번호</th>
+												<th>상품명</th>
+												<th>가격</th>
+												<th>별점</th>
+												<th>카테고리</th>
+												<th>펫 카테고리</th>
+												<th>이미지명</th>
+												<th>삭제</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr th:each="visit,visitLatest : ${visitList}">
+											<tr th:each="product:${productList}">
 												<!-- <td th:text="${visit.visitNo}"></td>-->
-												<td th:text="${visitList.size() - visitLatest.index}"></td>
-												<td th:text="${visit.visitTime}"></td>
-												<td th:text="${#strings.substring(visit.visitDate.toString(), 0, 10)}">
-												</td>
-												<td th:text="${visit.Center.centerName}"></td>
-												<td th:text="${visit.visitStatus}"><span class="success">견학신청</span>
-												</td>
+												<td th:text="${product.productNo}"></td>
+												<td th:text="${product.productName}"></td>
+												<td th:text="${product.productPrice}"></td>
+												<td th:text="${product.productStarAvg}"></td>
+												<td th:text="${product.productCategory}"><span class="success">견학신청</span></td>
+												<td th:text="${product.productPetCategory}"></td>
+												<td th:text="${product.productImage}"></td>
 												<td>
-													<button type="submit" class="deleteBtn"
-														th:id="'deleteBtn-' + ${visit.visitNo}">취소</button>
+													<button type="submit" class="deleteBtn">취소</button>
 												</td>
 											</tr>
 										</tbody>

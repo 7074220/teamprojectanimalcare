@@ -57,6 +57,8 @@ public class VolunteerRestController {
 	private VolunteerRepository volunteerRepository;
 	
 	
+	
+	// 봉사버튼 클릭시 로그인이면 저장, 비회원이면 메인 이동
 	@Operation(summary = "봉사신청")
 	@PostMapping("/create-volunteer")
 	public ResponseEntity<VolunteerDto> insertVolunteer(@RequestBody VolunteerDto dto, HttpSession session) throws Exception {
@@ -77,6 +79,7 @@ public class VolunteerRestController {
 		return new ResponseEntity<VolunteerDto>(dto, httpHeaders, HttpStatus.CREATED);
     }
 	
+
 	@Operation(summary = "봉사삭제")
 	@DeleteMapping("/{volunteerNo}")
 	public ResponseEntity<Map> VolunteerDelete(@PathVariable(name = "volunteerNo") Long volunteerNo) throws Exception{		
@@ -122,6 +125,38 @@ public class VolunteerRestController {
 		}    
 	} // UPDATE
 	
+	/*
+	@Operation(summary = "봉사 부분 업데이트") 
+	@PutMapping("/{volunteerNo}")
+	public ResponseEntity<VolunteerDto> updateVolunteer(@PathVariable(name = "volunteerNo") Long volunteerNo, @RequestBody VolunteerDto dto) throws Exception {
+	    Volunteer existingVolunteer = volunteerService.findByVolunteerNo(volunteerNo);
+
+	    if (existingVolunteer == null) {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    } else {
+	        if (dto.getVolunteerTime() != null) {
+	            existingVolunteer.setVolunteerTime(dto.getVolunteerTime());
+	        }
+	        if (dto.getVolunteerDate() != null) {
+	            existingVolunteer.setVolunteerDate(dto.getVolunteerDate());
+	        }
+	        if (dto.getVolunteerStatus() != null) {
+	            existingVolunteer.setVolunteerStatus(dto.getVolunteerStatus());
+	        }	
+	        if (dto.getCenterNo() != null) {
+	        	Center center = centerService.findByCenterNo(dto.getCenterNo());
+	            existingVolunteer.setCenter(center);
+	        }
+  
+	        volunteerService.updateVolunteer(existingVolunteer);
+	        VolunteerDto updatedVolunteerDto = VolunteerDto.toDto(existingVolunteer);
+	        return new ResponseEntity<>(updatedVolunteerDto, HttpStatus.OK);
+	    }
+	} // UPDATE
+	*/
+
+	
+
 	@Operation(summary = "volunteerNo로 봉사신청 보기") 
 	@GetMapping("/{volunteerNo}") 
 	public ResponseEntity<VolunteerDto> findByVolunteerNo(@PathVariable(name = "volunteerNo") Long no,  HttpSession httpSession) throws Exception{		
@@ -134,6 +169,7 @@ public class VolunteerRestController {
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));		
 		return new ResponseEntity<VolunteerDto>(volunteerDto, httpHeaders, HttpStatus.OK);
 	} // 봉사 목록 찾기
+
 
 	
 	@Operation(summary = "userNo로 봉사목록 조회") 
@@ -154,6 +190,7 @@ public class VolunteerRestController {
 	@Operation(summary = "봉사리스트") 
 	@GetMapping("/volunteers")
 	public ResponseEntity<List<VolunteerDto>> findAllVolunteers() {
+		
 		List<Volunteer> volunteerList = volunteerService.findAllVolunteers();
 		List<VolunteerDto> volunteerDtoList = new ArrayList<VolunteerDto>();
 		
@@ -162,12 +199,13 @@ public class VolunteerRestController {
 		}	
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));				
+		
 		return new ResponseEntity<List<VolunteerDto>>(volunteerDtoList, httpHeaders, HttpStatus.OK);
 	} // 목록 전체 조회
 	
 	
 	
-	
+	/*
 	// 봉사 상태를 봉사 완료로 변경하고 포인트를 적립하는 메서드
 	@PostMapping("/complete-volunteer/{volunteerId}")
 	public ResponseEntity<String> completeVolunteer(@PathVariable Long volunteerId, HttpSession session) {
@@ -215,6 +253,77 @@ public class VolunteerRestController {
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류가 발생했습니다.");
 	    }
 	}
+	*/
+
+	
+	/*// 포인트 적립	
+	@Operation(summary = "포인트3000생성 (관리자)")
+	@PostMapping("/insertVolunteerPoint")
+	public ResponseEntity<VolunteerTimePointDto> insertVolunteerPoint( @RequestBody VolunteerTimePointDto timePointDto,
+	        HttpSession session) throws Exception {		
+	    Long userNo = (Long) session.getAttribute("userNo");	    
+	    if (userNo == null) {
+	        // 세션에서 userNo가 없는 경우에 대한 처리
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+	    }
+	    timePointDto.setUserNo(userNo);
+	    try {
+	        // 세션에서 얻은 userNo를 사용하여 기존 UserInfo를 찾기
+	        Optional<Userinfo> userinfoOptional = userinfoRepository.findById(userNo);
+
+	        if (userinfoOptional.isPresent()) {
+	            // UserInfo가 존재한다면
+	            Userinfo userinfo = userinfoOptional.get();
+	            Volunteer volunteer = new Volunteer();
+	            volunteer.setVolunteerTime(3);
+	            volunteer.setUserinfo(userinfo);
+	            Volunteer createdVolunteer = volunteerService.insertVolunteer(volunteer);
+	            volunteerService.addPointsToVolunteer(createdVolunteer.getVolunteerNo(), 3000);
+	            VolunteerTimePointDto dto = VolunteerTimePointDto.toDto(createdVolunteer);
+	            return ResponseEntity.ok(dto);
+	        } else {
+	            // UserInfo가 존재하지 않는 경우에 대한 처리
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+	    }
+	}	
+	@PostMapping("/apply-points")
+	public ResponseEntity<String> applyPoints(HttpSession session, @RequestParam String selectedTime) {
+	    Long userNo = (Long) session.getAttribute("userNo");
+	    Integer userPoint = (Integer) session.getAttribute("userPoint");
+	    if (userNo == null) {
+	        // 로그인하지 않은 사용자에 대한 처리
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+	    }
+	    // 선택한 시간에 따라 포인트 적립
+	    int pointsToAdd = 0;
+	    switch (selectedTime) {
+	        case "09":
+	        case "10":
+	        case "11":
+	        case "12":
+	        case "13":
+	        case "14":
+	        case "15":
+	        case "16":
+	        case "17":
+	        case "18":
+	            pointsToAdd = 1000;
+	            break;
+	        default:
+	            pointsToAdd = 0;
+	            break;
+	    }
+	    // 누적 포인트 계산
+	    userPoint += pointsToAdd;
+	    // 사용자의 세션에 포인트 정보 저장
+	    session.setAttribute("userPoint", userPoint);
+	    return ResponseEntity.ok("포인트가 성공적으로 적립되었습니다.");
+	}
+	*/
 
 	
 }

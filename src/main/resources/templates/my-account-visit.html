@@ -10,7 +10,7 @@
         margin-top: 20vh; /* 회원탈퇴창 가운데 정도로 떨어트림 */
     }
     
-    #volunteerTable{
+    #visitTable{
     	width: 1000px;
     }
 
@@ -45,8 +45,18 @@
                                 <li><a href="userinfo/mypet"  class="nav-link">마이펫</a></li>
                                 <li><a href="couponList"  class="nav-link">쿠폰</a></li>
                                 <li><a href="adoptByUserNo"  class="nav-link">입양</a></li>
-								<li><a href="volunteerByUserNo" class="nav-link">봉사</a></li>   
-								<li><a href="visitByUserNo" class="nav-link">견학</a></li>
+								<li><a th:if="${session.userName == '관리자'}" href="adminVolunteerList"
+											class="nav-link">관리자 전용봉사목록</a></li>
+								<li><a th:if="${session.userName != '관리자'}" href="volunteerByUserNo"
+											class="nav-link">봉사</a></li>  
+								<li><a th:if="${session.userName == '관리자'}" href="adminVisitList"
+											class="nav-link">관리자 전용견학목록</a></li>
+									<li><a th:if="${session.userName != '관리자'}" href="visitByUserNo"
+											class="nav-link">견학</a></li>
+											<li><a th:if="${session.userName == '관리자'}" href="centerListAll"
+											class="nav-link">관리자 보호소목록</a></li>
+									<li><a th:if="${session.userName != '관리자'}" style="display: none;"
+											class="nav-link"></a></li>
                                 <li> <a th:if="${session.userName == '관리자'}" href="ordersList" class="nav-link">관리자
 											전용주문목록</a></li>
 									<li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li>
@@ -77,23 +87,28 @@
                                         </thead>
                                         <tbody>
 											
+											
 											<tr th:each="visit, rowStat : ${visitList}">
 												<td th:text="${visitList.size() - rowStat.index}"></td>								
 												<td th:text="${#strings.substring(visit.visitDate.toString(), 0, 10)}"></td>
-									
 											
+												
+										 		
 												<td> <!-- 13PM, 14PM ... 18PM -->
 												    <span th:if="${visit.visitTime < 12}" th:text="${visit.visitTime + ' AM'}"></span>
 												    <span th:if="${visit.visitTime >= 12}" th:text="${visit.visitTime + ' PM'}"></span>
 												</td>
-								
-												<td th:text="${visit.center.centerName}"></td>
+												
+										
+											<td th:text="${visit.Center.centerName}"></td>
+
+
 												<td th:text="${visit.visitStatus}"><span class="success">견학신청</span></td>
 												
-												<td>							
+												<td>												
 							
 												
-												<a th:href="@{'/visitUpdate?visitNo=' + ${visit.visitNo} + '&amp;centerNo=' + ${visit.Center.centerNo}}">수정</a>																						
+												<a th:href="@{'/?visitNo=' + ${visit.visitNo} + '&amp;centerNo=' + ${visit.Center.centerNo}}">수정</a>
 												<button type="submit" class="deleteBtn" th:id="'deleteBtn-' + ${visit.visitNo} " >취소</button>		
 												
 											
@@ -165,7 +180,7 @@
 
 		$.ajax({
 			type: 'DELETE',
-			url: 'volunteer/' + no,
+			url: 'visit/' + no,
 			data: JSON.stringify(sendJsonObject),
 			contentType: 'application/json;UTF-8',
 			success: function (response) {

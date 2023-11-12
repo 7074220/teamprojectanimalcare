@@ -69,7 +69,7 @@ public class CartController {
 		return "cart";
 	}
 	
-	
+	/*
 	@GetMapping(value = "/cart")
 	// 상품디테일에서 카트에 담기
 	public String insertCart(Model model, HttpSession session, @RequestParam Long productNo, @RequestParam Integer productQty) throws Exception{
@@ -129,7 +129,7 @@ public class CartController {
 		
 		return "product-details";
 	}
-	
+	*/
 	
 	
 	@GetMapping(value = "/insertCartMain")
@@ -159,8 +159,6 @@ public class CartController {
 		
 		model.addAttribute("cart", selectCart);
 		
-		
-		
 		List<ProductListDto> productListDto = new ArrayList<>();
 		List<Product> productList = new ArrayList<>();
 		
@@ -172,8 +170,12 @@ public class CartController {
 			myPet = myPetService.findLeaderMyPet(userNo);
 			if (myPet == null) {
 				myPet = MyPet.builder().build();
-			} else {
-				productList = productService.findAllProductByPetCategory(myPet.getMypetKind());
+			} else if (product.getProductPetCategory().equals("강아지")) {
+				myPet.setMypetKind("강아지");
+				productList = productService.findAllProductByPetCategory("강아지");
+			} else if (product.getProductPetCategory().equals("고양이")) {
+				myPet.setMypetKind("고양이");
+				productList = productService.findAllProductByPetCategory("고양이");
 			}
 		}
 		

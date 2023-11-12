@@ -63,7 +63,7 @@ public class UserInfoRestController {
 	@GetMapping("/idcheck")
 	public boolean user_id_check(@RequestParam(name="userId") String userId) throws Exception{
 		System.out.println(">>>>> user_id_check: " + userId);
-		return userInfoService.countByUserId(userId);
+		return !userInfoService.countByUserId(userId);
 	}
 	
 	@GetMapping("/passcheck")
