@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -181,9 +182,11 @@ public class AdminController {
 		    // Visit 업데이트 로직
 		    findAdopt.setAdoptStatus("입양완료"); 
 		    adoptService.updateAdopt(findAdopt);
-		   
+		   adoptService.deleteAdopt(findAdopt.getAdoptNo());
+		  Pet pet= petService.petFindById(findAdopt.getPet().getPetNo());
+		  petService.petRemove(pet.getPetNo());
 		    // 변경된 상태를 DB에 반영
-		    adoptRepository.save(findAdopt);
+		    //adoptRepository.save(findAdopt);
 		   
 		    
 		    return "redirect:/adminAdoptList";
@@ -232,6 +235,7 @@ public class AdminController {
 		}
 		*/
 		
+		//@Transactional
 		@GetMapping("/updateVolunteer/{volunteerNo}")
 		public String updateVolunteer(@PathVariable Long volunteerNo, Model model, HttpSession session) throws Exception {
 			try {
@@ -257,7 +261,7 @@ public class AdminController {
 
 		            // 봉사 완료 시 3000포인트 지급 및 누적 포인트 계산
 		            if (user != null) {
-		                userPoint = (userPoint != null) ? userPoint + 3000 : 3000;
+		                userPoint = (user.getUserPoint() != null) ? user.getUserPoint() + 3000 : 3000;
 		                user.setUserPoint(userPoint);
 		                userInfoService.update(user);
 		                // 세션에도 업데이트

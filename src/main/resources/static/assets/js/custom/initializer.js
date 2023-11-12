@@ -105,9 +105,19 @@ function createInitializer() {
 				required: true,
 				resident : true
 			},
-			address:{
+			gender : {
 				required : true
+			},
+			postcode :{
+				required:true
+			},
+			ordersAddress1:{
+				required:true
+			},
+			ordersAddress3:{
+				required:true
 			}
+			
 		},
 		messages: {
 			userId: {
@@ -130,8 +140,17 @@ function createInitializer() {
 			residentNumber :{
 				required: '주민등록번호를 입력하세요.',
 			},
-			address :{
-				required: '주소를 입력하세요.',
+			gender :{
+				required: '성별을 선택하세요.',
+			},
+			postcode :{
+				required:'우편번호를 입력하세요.'
+			},
+			ordersAddress1:{
+				required:'주소를 입력하세요.'
+			},
+			ordersAddress3:{
+				required:'주소를 입력하세요.'
 			}
 		},
 		errorClass: 'error',
