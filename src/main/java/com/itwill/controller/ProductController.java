@@ -84,7 +84,7 @@ public class ProductController {
         return "product_insert_form"; 
     }
 	
-	@GetMapping("/insertProduct")
+	@PostMapping("/insertProduct")
 	// 상품등록 (관리자)
 	public String insertProduct(@RequestParam("imageFile1") MultipartFile file1, @RequestParam("imageFile2") MultipartFile file2, @RequestParam("productName") String productName, 
 								@RequestParam("productPrice") Integer productPrice, @RequestParam("productCategory") String productCategory, @RequestParam("productPetCategory") String productPetCategory, 
