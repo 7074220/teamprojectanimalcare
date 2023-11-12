@@ -9,14 +9,31 @@
 			function() {
 				
 				$('#petsubmit').click(function(){
-					
 					var pet =$('#short').val();
-					
-					alert('dd');
-					
+					var local=$('#local').val();
+					var url='';
+					 
+       
+
+        // 선택된 값에 따라 URL 변경
+         if (pet !== '1' && local !== '1') {
+            url = 'petTotal?petType=' + pet + '&petLocal=' + local;
+        } else if (pet !== '1' && local == '1') {
+            url = 'pets?petType=' + pet;
+        } else if (local !== '1' && pet == '1') {
+            
+            url='petLocal?petLocal=' + local;
+        } else {
+            url = 'petListPage';
+        }
+
+        window.location.href = url;
 					
 				});
-				
+				$('#petForm').submit(function(event) {
+    event.preventDefault();
+    // 추가 코드
+});
 				
 				});
 
@@ -54,6 +71,11 @@
 			window.location.href = 'petListPage';
 		}
 	}
+	
+	
+	
+	
+	
 
 	document.addEventListener('DOMContentLoaded', function() {
 		var selectedValue1 = sessionStorage.getItem('selectedPetLocal');
@@ -107,7 +129,7 @@
 								</div>
 								<div class=" niceselect_option">
 									<form class="select_option" action="#" name="pet"
-										>
+										id="petForm">
 										<select name="petType" id="short" >
 
 											<!---->
@@ -309,6 +331,7 @@
 									</ul>
 								</div>
 							</div>
+
 
 
 

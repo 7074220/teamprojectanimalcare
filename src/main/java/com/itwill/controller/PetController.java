@@ -59,6 +59,16 @@ AdoptService adoptService;
 		
 		return "pet-list";
 	}
+	
+	@GetMapping("/petinsertform")
+	public String petinsertform() throws Exception {
+		
+		
+		
+		return "pet_insert_form";
+	}
+	
+	
 	//펫 페이징 리스트
 	//center dto가져와야함.
 	@GetMapping("/petListPage")
@@ -86,8 +96,6 @@ AdoptService adoptService;
 		model.addAttribute("petList",petList);
 		return "pet-list" ;
 	}
-		
-		
 		
 		
 	
@@ -152,24 +160,26 @@ AdoptService adoptService;
 	
 	@Operation(summary = "펫타입 리스트")	
 	@GetMapping("/pets")
-	public String petTypeList(@RequestParam(name = "petType")String petType,Model model){
+	public String petTypeList(@RequestParam(name = "petType")String petType,Model model,@PageableDefault(page =0,size = 5,sort = "pet_no",direction = Sort.Direction.DESC) Pageable page){
 			List<PetDto> petDtoList = new ArrayList<>();
-			List<Pet> petList = petService.findAllByOrderBypetType(petType);
+			
+			
+			
+			Page<Pet> petList = petService.findAllByOrderBypetType(petType,page);
 			for (Pet pet : petList) {
 				petDtoList.add(PetDto.toDto(pet));
 			}
 
 		model.addAttribute("petList",petDtoList);
-		model.addAttribute("petType", petType);
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>"+petDtoList);
 		return "pet-list";
 	}
 	
 	//펫 지역 리스트
 	@GetMapping("/petLocal")
-	public String petLocalList(@RequestParam(name = "petLocal")String petLocal,Model model){
+	public String petLocalList(@RequestParam(name = "petLocal")String petLocal,Model model,@PageableDefault(page =0,size = 5,sort = "pet_no",direction = Sort.Direction.DESC) Pageable page){
 			List<PetDto> petDtoList = new ArrayList<>();
-			List<Pet> petList = petService.findAllByPetLocal(petLocal);
+			Page<Pet> petList = petService.findAllByPetLocal(petLocal,page);
 			for (Pet pet : petList) {
 				petDtoList.add(PetDto.toDto(pet));
 			}
@@ -179,6 +189,36 @@ AdoptService adoptService;
 		return "pet-list";
 	}
 
+	
+	//펫 페이징 리스트
+	//center dto가져와야함.
+	@GetMapping("/petTotal")
+	public String petTotal(@RequestParam(name = "petType")String petType,@RequestParam(name = "petLocal")String petLocal,Model model,@PageableDefault(page =0,size = 5,sort = "pet_no",direction = Sort.Direction.DESC) Pageable page)throws Exception {
+		int pag = page.getPageNumber();
+		int size = page.getPageSize();
+		
+		Pageable pageable= PageRequest.of(pag,size);
+		
+		List<PetDto> petDtoList = new ArrayList<>();
+		
+		Page<Pet> petList= petService.findAllByPetTypeByPetLocal(petType,petLocal,pageable);
+		
+		for (Pet pet : petList) {
+			Adopt petAdopt = adoptRepository.findAdoptByPetNo(pet.getPetNo());
+				if(petAdopt==null) {
+					petDtoList.add(PetDto.toDto(pet));
+				}else {
+					if(!petAdopt.getAdoptStatus().equals("입양완료")) {
+						petDtoList.add(PetDto.toDto(pet));
+					}
+				}
+			}
+
+		model.addAttribute("petList",petList);
+		return "pet-list" ;
+	}
+	
+	
 	
 
 }

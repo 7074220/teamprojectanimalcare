@@ -390,6 +390,7 @@ public class AdminController {
 		
 		
 		// 관리자 --> 상품정보 수정
+
 		@PostMapping("/adminUpdateProduct/{productNo}")
 		public String upateProduct(@RequestParam("imageFile") MultipartFile file, @RequestParam("productName") String productName, @RequestParam("productPrice") Integer productPrice, @RequestParam("productNo") Long productNo, Model model) throws Exception {
 
@@ -404,6 +405,7 @@ public class AdminController {
 			
 			Product update = Product.builder().build();
 			
+			update.setProductNo(productNo);
 			update.setProductName(productName);
 			update.setProductPrice(productPrice);
 			update.setProductImage(savedFileName);

@@ -4,7 +4,7 @@
        layout:decorate="layout/layout(title='product_update_form')">
 
 <head>
-    <title>Register</title>
+    <title>입양동물 등록</title>
 </head>
 
 <body>
@@ -31,25 +31,21 @@
                 <!--register area start-->
                 <div class="col-lg-6 col-md-6" style="margin-left: 300px;">
                     <div class="account_form register" style="display: flex; flex-direction: column; justify-content: center; align-items: center;" >
-                        <h2>상품 수정</h2>
+                        <h2>입양 등록</h2>
                         
                         <form name="f" id="product_update_form" action="#" method="POST" enctype="multipart/form-data"
-                        	th:action="@{'/adminUpdateProduct'}">
-                        	
+                        	th:action="@{'/insert_action'}">
                             <p>   
-                                <label for="productNo">상품 번호<span></span></label>
-								<input type="text" name="productNo" th:value="${product.productNo}" readonly="readonly">
-                            </p>
-                            <p>   
-                                <label for="productName">상품 이름<span></span></label>
-								<input type="text" name="productName" th:value="${product.productName}">
+                                <label for="petLocal">ㅍ<span></span></label>
+								<input type="text" name="productName" >
                             </p>
                              <p>   
-                                <label for="productPrice">가격<span></span></label>
-                                <input type="text" name="productPrice" th:value="${product.productPrice}">
+                                <label>가격<span></span></label>
+                                <input type="text" name="productPrice">
                              </p>
                              
-                            <label for="productImage">상품 이미지</label>
+                             
+                            <label>상품 이미지</label>
                 		    <input type="file" name="imageFile" style="border: none;" >
                            <div class="login_submit" style="margin-top: 10px;">
 							   
