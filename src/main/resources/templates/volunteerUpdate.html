@@ -46,7 +46,8 @@
 }
 </style>
 
-<script> <!-- 당일 날짜 선택 불가 -->
+<!-- 당일 날짜 선택 불가. body 안에 있으면 적용 안됨 -->
+<script>
 //페이지 로드 시 실행
 window.onload = function() {
     var volunteerDate = document.getElementById('volunteerDate');
@@ -68,7 +69,7 @@ window.onload = function() {
     volunteerDate.setAttribute('min', minDateString);
 
     volunteerDate.removeAttribute('max');
-}; 
+};
 </script>
 
 
@@ -129,7 +130,13 @@ window.onload = function() {
 								<input type="hidden" id="centerid" name="centerNo" th:value="${center.centerNo}" />
 								
 								<div>
-									<span>방문 예약</span> 									
+									<span>방문 예약</span> 
+									<!-- <input type="date" name="volunteerDate"> -->
+									<!--  th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" 이 코드 추가시 현재 날짜 보여줌 -->
+									
+									<!--<input type="date" name="volunteerDate" id="volunteerDate" placeholder="날짜를 선택해주세요"  
+									required="required"> --> 
+									
 									<input type="date" name="volunteerDate" id="volunteerDate" placeholder="날짜를 선택해주세요" required="required" th:value="${selectedDate}">
 
 								</div>
