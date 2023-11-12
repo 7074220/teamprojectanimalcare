@@ -58,22 +58,37 @@ public class PetDaoImpl implements PetDao {
 		return petList;
 	}
 	
-	//펫타입으로 정렬
-		@Override
-		public List<Pet> findAllByOrderByPetType(String petType) {
-			List<Pet> petList = petRepository.findByPetType(petType);
-			return petList;
-		}
-
-		@Override
-		public List<Pet> findAllByPetLocal(String petLocal) {
-			List<Pet> petList = petRepository.findByPetLocal(petLocal);
-			return petList;
-		}
+	/*
+	 * //펫타입으로 정렬
+	 * 
+	 * @Override public List<Pet> findAllByOrderByPetType(String petType) {
+	 * List<Pet> petList = petRepository.findByPetType(petType); return petList; }
+	 * 
+	 * @Override public List<Pet> findAllByPetLocal(String petLocal) { List<Pet>
+	 * petList = petRepository.findByPetLocal(petLocal); return petList; }
+	 */
 
 		@Override
 		public List<Pet> petFindAll() {
 			List<Pet> petList = petRepository.findAll();
+			return petList;
+		}
+
+		@Override
+		public Page<Pet> findAllByPetLocal(String petLocal, Pageable pageable) {
+			Page<Pet> petList = petRepository.findByPetLocal(petLocal,pageable);
+			return petList;
+		}
+
+		@Override
+		public Page<Pet> findAllByOrderByPetType(String petType, Pageable pageable) {
+			Page<Pet> petList = petRepository.findByPetType(petType,pageable);
+			return petList;
+		}
+
+		@Override
+		public Page<Pet> findAllByPetTypeByPetLocal(String petType, String petLocal, Pageable pageable) {
+			Page<Pet> petList = petRepository.findAllPetTypeByPetLocal(petType,petLocal,pageable);
 			return petList;
 		}
 	

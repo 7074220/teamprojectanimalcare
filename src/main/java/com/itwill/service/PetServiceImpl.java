@@ -1,16 +1,25 @@
 package com.itwill.service;
 
 import java.lang.StackWalker.Option;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.dao.PetDao;
+import com.itwill.dto.PetDto;
+import com.itwill.entity.Adopt;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Product;
 @Transactional
@@ -61,14 +70,32 @@ private PetDao petDao;
 	}
 
 	@Override
-	public List<Pet> findAllByOrderBypetType(String petType) {
-		return petDao.findAllByOrderByPetType(petType);
+	public Page<Pet> findAllByOrderBypetType(String petType, Pageable pageable) {
+		return petDao.findAllByOrderByPetType(petType, pageable);
 	}
-	
+
 	@Override
-	public List<Pet> findAllByPetLocal(String petLocal) {
-		
-		return petDao.findAllByPetLocal(petLocal);
+	public Page<Pet> findAllByPetLocal(String petLocal, Pageable pageable) {
+		return petDao.findAllByPetLocal(petLocal, pageable);
 	}
+
+	@Override
+	public Page<Pet> findAllByPetTypeByPetLocal(String petType, String petLocal, Pageable pageable) {
+		return petDao.findAllByPetTypeByPetLocal(petType,petLocal, pageable);
+	}
+
+	/*
+	 * @Override public Page<Pet> findAllByOrderBypetType(String petType) { return
+	 * petDao.findAllByOrderByPetType(petType); }
+	 * 
+	 * @Override public Page<Pet> findAllByPetLocal(String petLocal) {
+	 * 
+	 * return petDao.findAllByPetLocal(petLocal); }
+	 */
+	
+	
+	
+
+	
 	
 }
