@@ -312,7 +312,7 @@ public class AdminController {
 		// 관리자 --> 상품 추가
 		@PostMapping("/adminInsertProduct")
 		public String insertProduct(@RequestParam("imageFile1") MultipartFile file1, @RequestParam("imageFile2") MultipartFile file2, @RequestParam("productName") String productName, 
-				@RequestParam("productPrice") Integer productPrice, @RequestParam("productCategory") String productCategory, @RequestParam("productPetCategory") String productPetCategory) throws Exception {
+				@RequestParam("productPrice") Integer productPrice, @RequestParam("productCategory") String productCategory, @RequestParam("productPetCategory") String productPetCategory, Model model) throws Exception {
 
 		String uploadPath1 = System.getProperty("user.dir") + "/src/main/resources/static/image/product/";
 		String originalFileName1 = file1.getOriginalFilename();
@@ -345,7 +345,18 @@ public class AdminController {
 		
 		productService.insertProduct(createProduct);
 		
-		return "shop";
+		List<ProductListDto> productListDto = new ArrayList<>();
+		List<Product> productList = new ArrayList<>();
+		
+		productList = productService.findAllByOrderByProductNoAsc();
+		
+		for (Product product : productList) {
+			productListDto.add(ProductListDto.toDto(product));
+		}
+		
+		model.addAttribute("productList", productListDto);
+		
+		return "admin-product";
 }
 		
 		
