@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
 	   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-       layout:decorate="layout/layout(title='reportBoard_write_form')">
+       layout:decorate="layout/layout(title='product_insert_form')">
 
 <head>
     <title>Register</title>
@@ -97,7 +97,7 @@
 		var selectedPetCategory = document.getElementById("productPetCategory").value;
 		var selectedCategory = document.getElementById("productCategory").value;
 		
-		console.log(">>>>>>>>>>>>>>>>>" + selectedPetCategory, selectedCategory);
+		//console.log(">>>>>>>>>>>>>>>>>" + selectedPetCategory, selectedCategory);
 	}
 	
 	$('#product_insert_form').on('submit',function(e) {

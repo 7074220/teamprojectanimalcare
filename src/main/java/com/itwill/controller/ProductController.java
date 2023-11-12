@@ -84,6 +84,12 @@ public class ProductController {
         return "product_insert_form"; 
     }
 	
+	
+	@GetMapping("/productUpdateForm")
+	public String productUpdateForm() {
+		return "product_update_form"; 
+	}
+	
 	/*
 	@PostMapping("/insertProduct")
 	// 상품등록 (관리자)

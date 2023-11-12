@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -363,19 +364,38 @@ public class AdminController {
 		
 		
 		// 관리자 --> 상품정보 수정
-		@GetMapping("/adminUpdateProduct")
-		public String updateProduct(@RequestBody ProductListDto dto, Model model) throws Exception{
-			Product product = Product.builder().build();
+		@PostMapping("/adminUpdateProduct")
+		public String upateProduct(@RequestParam("imageFile") MultipartFile file, @RequestParam("productName") String productName, @RequestParam("productPrice") Integer productPrice, Model model) throws Exception {
+
+			String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/product/";
+			String originalFileName = file.getOriginalFilename();
+			UUID uuid = UUID.randomUUID();
+			String savedFileName = uuid.toString() + "_" + originalFileName;
 			
-			product.setProductPrice(dto.getProductPrice());
-			product.setProductImage(dto.getProductImage());
-			product.setProductName(dto.getProductName());
+			File newFile = new File(uploadPath + savedFileName);
 			
-			productService.updateProduct(product);
+			file.transferTo(newFile);
 			
-			model.addAttribute("product", product);
+			Product update = Product.builder().build();
 			
-			return "shop";
+			update.setProductName(productName);
+			update.setProductPrice(productPrice);
+			update.setProductImage(savedFileName);
+			
+			productService.updateProduct(update);
+			
+			List<ProductListDto> productListDto = new ArrayList<>();
+			List<Product> productList = new ArrayList<>();
+			
+			productList = productService.findAllByOrderByProductNoAsc();
+			
+			for (Product product : productList) {
+				productListDto.add(ProductListDto.toDto(product));
+			}
+			
+			model.addAttribute("productList", productListDto);
+			
+			return "admin-product";
 		}
 		
 		
