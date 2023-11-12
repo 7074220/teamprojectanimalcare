@@ -239,5 +239,15 @@ public class OrderController {
 			
 		}
 		
+		@GetMapping("/updateosNo")
+		public String updateosNo(String oiNo,String osNo,HttpSession session,Model model){
+			OrderItem orderItem=itemService.findByOiNo(Long.parseLong(oiNo));
+			Orderstatus orderstatus=orderStatusRepository.findById(Long.parseLong(osNo)).get();
+			orderItem.setOrderStatus(orderstatus);
+			
+			return "my-account-orders";
+			
+		}
+		
 	
 }

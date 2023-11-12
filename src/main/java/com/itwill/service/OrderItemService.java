@@ -14,4 +14,6 @@ public interface OrderItemService {
 	public void deleteOrderItem(OrderItem orderItem);
 	
 	public List<OrderItem> findAll();
+	
+	public OrderItem findByOiNo(Long oiNo);
 }
