@@ -34,6 +34,7 @@ import com.itwill.entity.Pet;
 import com.itwill.entity.Userinfo;
 import com.itwill.repository.AdoptRepository;
 import com.itwill.service.AdoptService;
+import com.itwill.service.CenterService;
 import com.itwill.service.PetService;
 import com.itwill.service.UserInfoService;
 
@@ -50,6 +51,8 @@ UserInfoService userInfoService;
 AdoptRepository adoptRepository;
 @Autowired
 AdoptService adoptService;
+@Autowired
+CenterService centerService;
 //@Autowired
 //팻 등록
 	@PostMapping("/insert_action")
@@ -61,13 +64,16 @@ AdoptService adoptService;
 	}
 	
 	@GetMapping("/petinsertform")
-	public String petinsertform() throws Exception {
+	public String petinsertform(Model model) throws Exception {
 		
+List<Center> centers=centerService.findAllCenters();
 		
-		
+		model.addAttribute("petCenter",centers);
 		return "pet_insert_form";
 	}
 	
+	
+
 	
 	//펫 페이징 리스트
 	//center dto가져와야함.
@@ -141,6 +147,8 @@ AdoptService adoptService;
 	@PostMapping("/update_action")
 	public String update_action(@RequestBody PetDto updatepetDto) throws Exception{
 		Optional<Pet> petOptional = Optional.of(petService.petFindById(updatepetDto.getPetNo()));
+		
+		Center center=centerService.findByCenterNo(updatepetDto.getCenterNo());
 		if(petOptional.isPresent()) {
 			Pet pet1 = petOptional.get();
 			pet1.setPetLocal(updatepetDto.getPetLocal());
@@ -149,7 +157,7 @@ AdoptService adoptService;
 			pet1.setPetRegisterDate(updatepetDto.getPetRegisterDate());
 			pet1.setPetFindPlace(updatepetDto.getPetFindPlace());
 			pet1.setPetCharacter(updatepetDto.getPetCharacter());
-			pet1.setCenter(updatepetDto.getCenter());
+			pet1.setCenter(center);
 			
 			
 			petService.petUpdate(pet1);
