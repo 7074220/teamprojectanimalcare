@@ -84,6 +84,7 @@ public class ProductController {
         return "product_insert_form"; 
     }
 	
+	/*
 	@PostMapping("/insertProduct")
 	// 상품등록 (관리자)
 	public String insertProduct(@RequestParam("imageFile1") MultipartFile file1, @RequestParam("imageFile2") MultipartFile file2, @RequestParam("productName") String productName, 
@@ -120,7 +121,7 @@ public class ProductController {
 		
 		return "shop";
 	}
-	
+	*/
 	
 	@GetMapping("/updateProduct")
 	// 상품 업데이트 (관리자)
