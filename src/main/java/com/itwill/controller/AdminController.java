@@ -2,12 +2,16 @@ package com.itwill.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -205,7 +209,7 @@ public class AdminController {
 		}
 		
 		
-		
+		/*
 		@GetMapping("/updateVolunteer/{volunteerNo}")
 		public String updateVolunteer(@PathVariable Long volunteerNo, Model model, HttpSession session) throws Exception {
 		    Long userNo = (Long) session.getAttribute("userNo");
@@ -217,6 +221,7 @@ public class AdminController {
 
 		    findVolunteer.setVolunteerStatus("봉사완료"); 
 		    volunteerService.updateVolunteer(findVolunteer);
+		    
 
 		    System.out.println("After update: " + findVolunteer.getVolunteerStatus());
 
@@ -224,7 +229,56 @@ public class AdminController {
 
 		    return "redirect:/adminVolunteerList";
 		}
+		*/
+		
+		@GetMapping("/updateVolunteer/{volunteerNo}")
+		public String updateVolunteer(@PathVariable Long volunteerNo, Model model, HttpSession session) throws Exception {
+			try {
+		        String userName = (String) session.getAttribute("userName");
 
+		        // userName이 '관리자'인 경우에만 실행
+		        if ("관리자".equals(userName)) {
+		            // 봉사 정보 가져오기
+		            Volunteer findVolunteer = volunteerService.findByVolunteerNo(volunteerNo);
+
+		            // 봉사 상태를 '봉사완료'로 변경
+		            findVolunteer.setVolunteerStatus("봉사완료"); 
+		            volunteerService.updateVolunteer(findVolunteer);
+
+		            // 해당 봉사에 연결된 사용자의 userNo 가져오기
+		            Long userNo = findVolunteer.getUserinfo().getUserNo();
+
+		            // 세션에서 사용자의 포인트 정보 가져오기
+		            Integer userPoint = (Integer) session.getAttribute("userPoint");
+
+		            // 사용자 정보 가져오기
+		            Userinfo user = userInfoService.findUserByNo(userNo);
+
+		            // 봉사 완료 시 3000포인트 지급 및 누적 포인트 계산
+		            if (user != null) {
+		                userPoint = (userPoint != null) ? userPoint + 3000 : 3000;
+		                user.setUserPoint(userPoint);
+		                userInfoService.update(user);
+		                // 세션에도 업데이트
+		                session.setAttribute("userPoint", userPoint);
+		            }
+
+		            // 봉사 정보 저장
+		            volunteerRepository.save(findVolunteer);
+		        } else {
+		            // '관리자'가 아닌 경우에 대한 처리 (예: 에러 페이지로 리다이렉트)
+		            return "redirect:/error"; // 적절한 에러 페이지로 변경하세요.
+		        }
+
+		        return "redirect:/adminVolunteerList";
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        // 예외 처리에 대한 추가적인 로직이 필요하다면 여기에 추가하세요.
+		        return "redirect:/error"; // 혹은 다른 적절한 에러 페이지로 리다이렉트할 수 있습니다.
+		    }
+		}
+		
+		
 		
 		
 		
