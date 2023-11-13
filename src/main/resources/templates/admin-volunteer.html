@@ -23,7 +23,7 @@
         }
 
         .volunteer-completed {
-            color: rgb(192, 192, 192); /* 봉사완료 글자색 초록색 */
+            color: rgb(192, 192, 192); /* 봉사완료 글자색 회색 */
             font-weight: bold;
         }
 		
@@ -117,7 +117,8 @@
 													th:class="${volunteer.volunteerStatus == '봉사완료'} ? 'volunteer-completed' : '' "><!--<<span class="success">봉사신청</span>-->처리상태</td>
 												
 												<td>
-													<a th:if="${session.userName == '관리자'}" th:href="@{/updateVolunteer/{volunteerNo}(volunteerNo=${volunteer.volunteerNo})}" class="updateBtn">완료</a>
+													<a  th:if="${session.userName == '관리자' && volunteer.volunteerStatus != '봉사완료'}" 
+														th:href="@{/updateVolunteer/{volunteerNo}(volunteerNo=${volunteer.volunteerNo})}" class="updateBtn">완료</a>
 													
 													<button type="submit" class="deleteBtn" th:id="'deleteBtn-' + ${volunteer.volunteerNo}">취소</button>
 												</td>
