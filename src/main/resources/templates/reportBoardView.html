@@ -188,11 +188,7 @@
 													th:text="${#dates.format(replyBoard.replyBoardRegisterDate, 'yyyy-MM-dd HH:mm')}">
 													roadthemes</h7>
 
-<<<<<<< HEAD
-												<div class="reviews_comment_box" id="">
-=======
 												<div class="reviews_comment_box">
->>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 													<div class="comment_thmb" style="width: 65px;">
 														<p>
 															<strong th:text="${replyBoard.userinfo.userName}">허승범
@@ -208,15 +204,13 @@
 															<div style="margin-left: 650px;">
 																<button
 																	style="border: none; background: transparent;"
-																	onclick="" th:class="${replyBoard.replyBoardNo}">수정</button>
+																	onclick="replyUpdate(event)" th:class="${replyBoard.replyBoardNo}">수정</button>
 																<button
 																	style="border: none; background: transparent;"
 																	onclick="replyDelete(event)" th:class="${replyBoard.replyBoardNo}">삭제</button>
 															</div>
-																<button style="border: none; background: transparent;">수정</button>
-																<button style="border: none; background: transparent;">삭제</button>
-															</div>
 														</div>
+													</div>
 													</div>
 												</div>
 											</div>
@@ -303,6 +297,34 @@
 			}
 			
 			function replyDelete(e){
+				let replyBoardNo = $(e.target).attr('class');
+				let send ={
+					replyBoardNo : replyBoardNo
+				}
+				ajaxRequest('DELETE','reply',send);
+				window.location.reload();
+			}
+			
+			function replyUpdateForm(responseJsonObject = {}) {
+				let htmlTemplate =
+				`<div class="reviews_meta">
+					<input>roadthemes</input>
+					<div style="margin-left: 650px;">
+						<button
+							style="border: none; background: transparent;"
+							onclick="replyUpdate(event)" th:class="${replyBoard.replyBoardNo}">수정</button>
+						<button
+							style="border: none; background: transparent;"
+							onclick="replyDelete(event)" th:class="${replyBoard.replyBoardNo}">삭제</button>
+					</div>
+				</div>`;
+				
+				let bindTemplate = Handlebars.compile(htmlTemplate);
+				let resultTemplate = bindTemplate(responseJsonObject);
+				return resultTemplate;
+			}
+			
+			function replyUpdate(e){
 				let replyBoardNo = $(e.target).attr('class');
 				let send ={
 					replyBoardNo : replyBoardNo
