@@ -9,9 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.itwill.dto.PetDto;
+import com.itwill.entity.Center;
 import com.itwill.entity.Pet;
 import com.itwill.entity.ReportBoard;
 import com.itwill.entity.Userinfo;
+import com.itwill.service.CenterService;
 import com.itwill.service.PetService;
 import com.itwill.service.ReportBoardService;
 import com.itwill.service.UserInfoService;
@@ -29,7 +31,8 @@ public class Controller1 {
 	private ReportBoardService reportBoardService;
 	@Autowired
 	private UserInfoService userInfoService;
-	
+	@Autowired
+	private CenterService centerService;
 	
 	/*
 	@GetMapping(value = "/")
@@ -57,9 +60,12 @@ public class Controller1 {
 		List<Pet> petList = petService.petFindAll();
 		
 		for (Pet pet : petList) {
-			petDtoList.add(PetDto.toDto(pet));
-			model.addAttribute("petList", petDtoList);
+			PetDto temp = PetDto.toDto(pet);
+			Center findcenter = centerService.findByCenterNo(temp.getCenterNo());
+			temp.setCenter(findcenter);
+			petDtoList.add(temp);
 		}
+		model.addAttribute("petList", petDtoList);
 		List<ReportBoard> reportBoards = reportBoardService.findAll();
 		model.addAttribute("reportBoardList", reportBoards);
 
@@ -74,10 +80,12 @@ public class Controller1 {
 		List<Pet> petList = petService.petFindAll();
 		
 		for (Pet pet : petList) {
-			petDtoList.add(PetDto.toDto(pet));
-			model.addAttribute("petList", petDtoList);
+			PetDto temp = PetDto.toDto(pet);
+			Center findcenter = centerService.findByCenterNo(temp.getCenterNo());
+			temp.setCenter(findcenter);
+			petDtoList.add(temp);
 		}
-		
+		model.addAttribute("petList", petDtoList);
 		List<ReportBoard> reportBoards = reportBoardService.findAll();
 		model.addAttribute("reportBoardList", reportBoards);
 		
