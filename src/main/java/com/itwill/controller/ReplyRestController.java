@@ -77,33 +77,20 @@ public class ReplyRestController {
 	
 	// 댓글 수정
 	@Operation(summary = "자신이 쓴 댓글 수정")
-	@PutMapping
-	public ResponseEntity<List<ReplyCreateDto>> update(ReplyCreateDto replyCreateDto, HttpSession session)
+	@PutMapping("/update")
+	public ResponseEntity<ReplyCreateDto> update(@RequestBody ReplyCreateDto replyCreateDto, HttpSession session)
 			throws Exception {
-		ReplyBoard replyBoard = ReplyCreateDto.toEntity(replyCreateDto);
-		Userinfo userinfo = userInfoService.findUserByNo(replyCreateDto.getUserNo());
-		ReportBoard reportBoard = reportBoardService.findByBoardNo(replyCreateDto.getReportNo());
-
-		replyBoard.setUserinfo(userinfo);
-		replyBoard.setReportBoard(reportBoard);
-
-		if (session.getAttribute("userNo") != null) {
-			replyCreateDto = ReplyCreateDto.toDto(replyBoardService.update(replyBoard));
-		} else {
-			throw new Exception("로그인을 해주세요");
-		}
-
-		List<ReplyBoard> replyBoardList = replyBoardService.findAllByReportBoardNo(replyCreateDto.getReportNo());
-		List<ReplyCreateDto> replyCreateDtoList = new ArrayList<ReplyCreateDto>();
-		for (ReplyBoard replyBoard2 : replyBoardList) {
-			ReplyCreateDto createDto = ReplyCreateDto.toDto(replyBoard2);
-			replyCreateDtoList.add(createDto);
-		}
-
+		
+		
+		ReplyBoard findReplyBoard = replyBoardService.findByReplyBoardNo(replyCreateDto.getReplyBoardNo());
+		findReplyBoard.setReplyBoardContent(replyCreateDto.getReplyBoardContent());
+		ReplyBoard updateReplyBoard = replyBoardService.update(findReplyBoard);
+		ReplyCreateDto sendDto = ReplyCreateDto.toDto(updateReplyBoard);
+		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-		return new ResponseEntity<List<ReplyCreateDto>>(replyCreateDtoList, httpHeaders, HttpStatus.OK);
+		return new ResponseEntity<ReplyCreateDto>(sendDto, httpHeaders, HttpStatus.OK);
 	}
 
 	// 댓글 삭제
@@ -175,5 +162,19 @@ public class ReplyRestController {
 		ReplyBoard saveReplyBoard= replyBoardService.Create(replyBoard);
 		
 		return new ResponseEntity<ReplyCreateDto>(ReplyCreateDto.toDto(saveReplyBoard), httpHeaders,HttpStatus.CREATED);
+	}
+	
+	// 댓글 수정폼으로 변경
+	@PutMapping("/updateForm")
+	public ResponseEntity<ReplyCreateDto> replyUpdateForm(@RequestBody ReplyCreateDto replyCreateDto,HttpSession session) {
+		Long userNo = (Long)session.getAttribute("userNo");
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		ReplyBoard findReplyBoard = replyBoardService.findByReplyBoardNo(replyCreateDto.getReplyBoardNo());
+		ReplyCreateDto findReplyBoardDto = ReplyCreateDto.toDto(findReplyBoard);
+		
+		return new ResponseEntity<ReplyCreateDto>(findReplyBoardDto, httpHeaders,HttpStatus.CREATED);
 	}
 }
