@@ -123,22 +123,12 @@ window.onload = function() {
 						<div class="contact_message form">
 							<h3 style="font-weight: bold">수정 양식</h3>
 							
-							<form id="update-form" th:action="@{/volunteer/update-volunteer}" th:object="${volunteer}" style="margin: 20px 0;">
-							
-								
+							<form id="update-form" th:action="@{/volunteer/update-volunteer}" th:object="${volunteer}" style="margin: 20px 0;">														
 								<input type="hidden" id="volunteerid" name="volunteerNo" th:value="${volunteerNo}" />
 								<input type="hidden" id="centerid" name="centerNo" th:value="${center.centerNo}" />
-								
 								<div>
-									<span>방문 예약</span> 
-									<!-- <input type="date" name="volunteerDate"> -->
-									<!--  th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" 이 코드 추가시 현재 날짜 보여줌 -->
-									
-									<!--<input type="date" name="volunteerDate" id="volunteerDate" placeholder="날짜를 선택해주세요"  
-									required="required"> --> 
-									
+									<span>방문 예약</span> 																		
 									<input type="date" name="volunteerDate" id="volunteerDate" placeholder="날짜를 선택해주세요" required="required" th:value="${#dates.format(volunteer.volunteerDate, 'yyyy-MM-dd')}">
-
 								</div>
 								
 								<div>
