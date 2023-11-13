@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.itwill.dao.CenterDao;
@@ -51,6 +53,12 @@ public class CenterServiceImpl implements CenterService {
 	public List<Center> findByName(String centerName) {
 		// 센터 이름으로 검색
 		return centerDao.findByName(centerName);
+	}
+	
+	@Override
+	public Page<Center> centerFindAllPage(Pageable pageable) {
+		Page<Center> centerList = centerDao.centerFindAllPage(pageable);
+		return centerList;
 	}
 	
 }

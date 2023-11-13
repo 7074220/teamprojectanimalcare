@@ -110,7 +110,7 @@ function navigate() {
 			
 			
 			
-			window.location.href = 'index';
+			window.location.hash = '/login_form';
 		}
 	}
 	if (path == '/login_form') {
