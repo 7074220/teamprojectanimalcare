@@ -33,8 +33,5 @@ public interface VolunteerService {
 	void addPointsToVolunteer(Long volunteerNo, Integer pointsToAdd);
 	// 봉사에 포인트 적립
 	
-	
-	public Page<Volunteer> findPageVolunteerList(Pageable pageable) throws Exception;
-	//페이지
 		
 }

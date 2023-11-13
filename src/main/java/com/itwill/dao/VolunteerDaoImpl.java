@@ -106,11 +106,6 @@ public class VolunteerDaoImpl implements VolunteerDao{
 	    }
 	}
 
-	//페이징
-	@Override
-	public Page<Volunteer> findPageVolunteerList(Pageable pageable) throws Exception {		
-		return volunteerRepository.findAll(pageable);
-	}
-	
+
 	
 }
