@@ -195,28 +195,16 @@
                         <!-- Nav tabs -->
                         <div class="dashboard_tab_button">
                             <ul role="tablist" class="nav flex-column dashboard-list">
-                                <li><a href="userinfo" class="nav-link">내정보</a></li>
-                                <li><a href="mypet"  class="nav-link">마이펫</a></li>
+                                 <li><a href="userinfo" class="nav-link">내정보</a></li>
+                                <li><a href="userinfo/mypet"  class="nav-link">마이펫</a></li>
                                 <li><a href="couponList"  class="nav-link">쿠폰</a></li>
-                                <li><a th:if="${session.userName == '관리자'}" href="adminAdoptList" 
-                                			class="nav-link">관리자 전용 입양목록</a></li>
-                                <li><a th:if="${session.userName != '관리자'}" href="adoptByUserNo"
-											class="nav-link">입양</a></li>  
-                                <li><a th:if="${session.userName == '관리자'}" href="adminVolunteerList"
-											class="nav-link">관리자 전용봉사목록</a></li>
-								<li><a th:if="${session.userName != '관리자'}" href="volunteerByUserNo"
-											class="nav-link">봉사</a></li>  
-                                <li><a th:if="${session.userName == '관리자'}" href="adminVisitList"
-											class="nav-link">관리자 전용견학목록</a></li>
-									<li><a th:if="${session.userName != '관리자'}" href="visitByUserNo"
-											class="nav-link">견학</a></li>
-											<li><a th:if="${session.userName == '관리자'}" href="centerListAll"
-											class="nav-link">관리자 보호소목록</a></li>
-                                <li> <a th:if="${session.userName == '관리자'}" href="ordersList" class="nav-link">관리자
-											전용주문목록</a></li>
-								<li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li>
+                                <li><a th:if="${session.userName != '관리자'}" href="adoptByUserNo" class="nav-link">입양</a></li> 
+								<li><a th:if="${session.userName != '관리자'}" href="volunteerByUserNo" class="nav-link">봉사</a></li>  
+								<li><a th:if="${session.userName != '관리자'}" href="visitByUserNo" class="nav-link">견학</a></li>
+								<li><a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li>
                                 <li><a href="logout" class="nav-link">로그아웃</a></li>
                                 <li><a href="userDelete" class="nav-link" onclick="call_confirm()">회원탈퇴</a></li>
+                                <!-- <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li> -->
 
                             </ul>
                         </div>    
