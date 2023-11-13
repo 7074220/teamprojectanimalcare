@@ -388,7 +388,7 @@ public class AdminController {
 		int pag = page.getPageNumber();
 		int size = page.getPageSize();
 		
-		Pageable pageable = PageRequest.of(pag, size);
+		Pageable pageable = PageRequest.of(pag, size, Sort.by(Sort.Order.desc("productNo")));
 		
 		Page<Product> productList = productService.productFindAllPage(pageable);
 		
