@@ -17,7 +17,7 @@
 	text-align: center;
 	font-size: 100%;
 	margin-bottom: 20px;
-	
+	margin-left: 20px;
 }
 
 #adoptDate::-webkit-calendar-picker-indicator,
@@ -40,6 +40,27 @@
 
 #adoptDate:valid::before {
 	display: none;
+}
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h3{
+	font-family: 'GmarketSansMedium';
+}
+
+p{
+	font-family: 'GmarketSansMedium';
+}
+
+span{
+	font-family: 'GmarketSansMedium';
+}
+button{
+	font-family: 'GmarketSansMedium';
 }
 </style>
 
@@ -79,7 +100,7 @@
 						<div class="contact_message content">
 							<h3 style="font-weight: bold">펫 정보</h3>
 							<img src="#" th:src="@{/image/pet/}+${pet.getPetImage}"
-								style="width: 250px; height:250px;">
+								style="width: 250px; height:250px; margin-bottom: 20px;">
 							<p>
 								센터: <span th:text="${center.centerName}"></span>
 							</p>

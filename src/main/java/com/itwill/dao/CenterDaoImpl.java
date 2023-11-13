@@ -3,9 +3,12 @@ package com.itwill.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.itwill.entity.Center;
+import com.itwill.entity.ReportBoard;
 import com.itwill.repository.CartRepository;
 import com.itwill.repository.CenterRepositoty;
 
@@ -45,6 +48,12 @@ public class CenterDaoImpl implements CenterDao{
 	public List<Center> findByName(String centerName) {
 	
 		return centerRepositoty.findByContains(centerName);
+	}
+
+	@Override
+	public Page<Center> centerFindAllPage(Pageable pageable) {
+		Page<Center> centerList = centerRepositoty.findAll(pageable);
+		return centerList;
 	}
 
 	
