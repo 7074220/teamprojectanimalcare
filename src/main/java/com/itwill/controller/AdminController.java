@@ -1,6 +1,7 @@
 package com.itwill.controller;
 
 import java.io.File;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.dto.AdminUserListDto;
 import com.itwill.dto.CenterDto;
+import com.itwill.dto.CenterListDto;
 import com.itwill.dto.OrdersDto;
 import com.itwill.dto.PetDto;
 import com.itwill.dto.ProductInsertDto;
@@ -464,8 +466,26 @@ public class AdminController {
 					dto.setUserinfo(userinfo);
 					ordersDto.add(dto);
 				}
-				model.addAttribute("adminOrdersList",ordersDto);
+				model.addAttribute("ordersList",ordersDto);
 				return "admin-orders";
+		}
+		
+		
+		@GetMapping("/dateByAdmin")
+		public String dateByOrder(@RequestParam("startDate")Date startDate,@RequestParam("endDate") Date endDate, HttpSession session,Model model){
+			List<OrdersDto> ordersListDto = new ArrayList<OrdersDto>();
+			System.out.println(">>>>>>>>파라미터 왔을까");
+			Long userNo=(Long)session.getAttribute("userNo");
+			List<Orders> ordersList = orderService.findAllByOrdersByOrderDate(startDate, endDate);
+			
+			for (Orders orders : ordersList) {
+				OrdersDto ordersDto = OrdersDto.toDto(orders);
+				ordersListDto.add(ordersDto);
+			}
+			
+			model.addAttribute("ordersList",ordersListDto);
+			
+			return "admin-orders";
 			
 		}
 		
@@ -535,50 +555,48 @@ public class AdminController {
 		    model.addAttribute("centerList", centerList);
 		    return "admin-center";
 		}
+	
+	@GetMapping("centerInsertForm")
+	public String updateCenterForm() {
 		
-		// 관리자 --> 센터생성 실패..
-//		 @PostMapping("/centerInsertForm")
-//		    public String insertCenter(@RequestParam("imageFile") MultipartFile file,
-//		                               @RequestParam("centerName") String centerName,
-//		                               @RequestParam("centerPhoneNumber") String centerPhoneNumber,
-//		                               @RequestParam("centerLocal") String centerLocal,
-//		                               @RequestParam("centerOpenCloseTime") String centerOpenCloseTime,
-//		                               Model model) throws Exception {
-//
-//		String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/center/";
-//		String originalFileName = file.getOriginalFilename();
-//		UUID uuid = UUID.randomUUID();
-//		String savedFileName = uuid.toString() + "_" + originalFileName;
-//		
-//		File newFile = new File(uploadPath + savedFileName);
-//		
-//		file.transferTo(newFile);
-//		
-//		
-//		Center createCenter = Center.builder()
-//							.centerName(centerName)
-//							.centerLocal(centerLocal)
-//							.centerImage(savedFileName)
-//							.centerOpenCloseTime(centerOpenCloseTime)
-//							.centerPhoneNumber(centerPhoneNumber)
-//							.build();
-//		
-//		centerService.createCenter(createCenter);
-//		
-//		List<CenterDto> centerListDto = new ArrayList<>();
-//		List<Center> centerList = new ArrayList<>();
-//		
-//		centerList = centerService.findAllCenters();
-//		
-//		for (Center center : centerList) {
-//			centerListDto.add(CenterDto.toDto(center));
-//		}
-//		
-//		model.addAttribute("centerList", centerListDto);
-//		
-//		return "admin-center";
-//}
-//		
-//		
+		return "center_insert_form";
+	}
 		
+	// 관리자 --> 센터생성
+		// 업뎃폼에서 버튼 눌렀을때~
+	@PostMapping("/centerInsert")
+	public String insertCenter(@RequestParam("imageFile") MultipartFile file,
+			@RequestParam("centerName") String centerName, @RequestParam("centerPhoneNumber") String centerPhoneNumber,
+			@RequestParam("centerLocal") String centerLocal,
+			@RequestParam("centerOpenCloseTime") String centerOpenCloseTime, Model model) throws Exception {
+
+		String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/center/";
+		String originalFileName = file.getOriginalFilename();
+		UUID uuid = UUID.randomUUID();
+		String savedFileName = uuid.toString() + "_" + originalFileName;
+
+		File newFile = new File(uploadPath + savedFileName);
+
+		file.transferTo(newFile);
+
+		Center createCenter = Center.builder().centerName(centerName).centerLocal(centerLocal)
+				.centerImage(savedFileName).centerOpenCloseTime(centerOpenCloseTime)
+				.centerPhoneNumber(centerPhoneNumber).build();
+
+		centerService.createCenter(createCenter);
+
+		List<CenterListDto> centerListDto = new ArrayList<>();
+		List<Center> centerList = new ArrayList<>();
+
+		centerList = centerService.findAllCenters();
+
+		for (Center center : centerList) {
+			centerListDto.add(CenterListDto.toDto(center));
+		}
+
+		model.addAttribute("centerList", centerListDto);
+
+		return "admin-center";
+	}
+
 }

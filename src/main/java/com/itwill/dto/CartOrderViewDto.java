@@ -27,10 +27,10 @@ import lombok.ToString;
 public class CartOrderViewDto {
 
 	private Long cartNo;
-	private Integer cartQty;
+	//private Integer cartQty;
 	
-	private Long userNo;
-	private ProductNameDto productNameDto;
+	//private Long userNo;
+//	private ProductNameDto productNameDto;
 	/*
 	 * public static Cart toEntity(CartOrderViewDto dto) { Cart inserCart =
 	 * Cart.builder() .cartNo(dto.getCartNo()) .cartQty(dto.getCartQty())
@@ -39,17 +39,16 @@ public class CartOrderViewDto {
 	 * .build(); return inserCart; }
 	 */
 	
-	public static CartOrderViewDto toDto(Cart cart) {
-		
-		return CartOrderViewDto.builder()
-				.cartNo(cart.getCartNo())
-				.cartQty(cart.getCartQty())
-				.productNameDto(ProductNameDto.builder().productNo(cart.getProduct().getProductNo()).build())
-				.userNo(cart.getUserinfo().getUserNo())
-				.build();
-				
-	}
-	
+	/*
+	 * public static CartOrderViewDto toDto(Cart cart) {
+	 * 
+	 * return CartOrderViewDto.builder() .cartNo(cart.getCartNo())
+	 * .cartQty(cart.getCartQty())
+	 * .productNameDto(ProductNameDto.builder().productNo(cart.getProduct().
+	 * getProductNo()).build()) .userNo(cart.getUserinfo().getUserNo()) .build();
+	 * 
+	 * }
+	 */
 	
 	
 /*

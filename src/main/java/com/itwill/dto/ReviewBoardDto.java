@@ -34,6 +34,7 @@ public class ReviewBoardDto {
 	private Long productNo;
 	private double averageRating;
 	private Long oiNo;
+	private String userName;
 	
 	public static ReviewBoard toEntity(ReviewBoardDto dto) {
 		ReviewBoard reviewBoard = ReviewBoard.builder()

@@ -27,22 +27,22 @@
 		<!-- my account start  -->
 		<section class="main_content_area">
 			<div class="container" style="margin-right: 600px;">
-				<div class="account_dashboard" >
+				<div class="account_dashboard">
 					<div class="row">
 						<div class="col-sm-12 col-md-3 col-lg-3">
 							<!-- Nav tabs -->
 							<div class="dashboard_tab_button">
 								<ul role="tablist" class="nav flex-column dashboard-list">
 									<li><a href="adminUserList" class="nav-link">회원</a></li>
-	                                <li><a href="adminProductList"  class="nav-link">상품</a></li>
-	                                <li><a href="adminOrdersList" class="nav-link">주문</a></li>
-	                                <li><a href="adminAdoptList"  class="nav-link">입양</a></li>
-									<li><a href="adminVolunteerList"class="nav-link">봉사</a></li>
-	                                <li><a href="adminVisitList"class="nav-link">견학</a></li>
-									<li><a href="centerListAll"class="nav-link">보호소</a></li>
+									<li><a href="adminProductList" class="nav-link">상품</a></li>
+									<li><a href="adminOrdersList" class="nav-link">주문</a></li>
+									<li><a href="adminAdoptList" class="nav-link">입양</a></li>
+									<li><a href="adminVolunteerList" class="nav-link">봉사</a></li>
+									<li><a href="adminVisitList" class="nav-link">견학</a></li>
+									<li><a href="centerListAll" class="nav-link">보호소</a></li>
 									<!--<li><a th:if="${session.userName != '관리자'}" style="display: none;"class="nav-link"></a></li>-->
 									<!-- <li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li> -->
-	                                
+
 									<li><a href="logout" class="nav-link">로그아웃</a></li>
 									<!--<li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li>-->
 								</ul>
@@ -74,7 +74,7 @@
 										<tbody>
 											<tr th:each="visit, rowStat : ${visitList}">
 												<td th:text="${visitList.size() - rowStat.index}"></td>
-												<td th:text="${visit.Userinfo.userName}"></td>	
+												<td th:text="${visit.Userinfo.userName}"></td>
 												<td th:text="${#strings.substring(visit.visitDate.toString(), 0, 10)}">
 												</td>
 
@@ -92,19 +92,24 @@
 												<td th:text="${visit.Center.centerName}"></td>
 
 
-												<td th:text="${visit.visitStatus}"><span class="success">견학신청</span>
+												<td th:text="${visit.visitStatus}"
+													th:class="${visit.visitStatus == '견학완료'} ? 'visit-completed' : '' ">
+													<span class="success"><!--<<span class="success">봉사신청</span>-->처리상태
 												</td>
 
-												
+
+
 
 												<td>
-													<a th:if="${session.userName == '관리자'}" th:href="@{/updateVisit/{visitNo}(visitNo=${visit.visitNo})}" class="updateBtn">완료</a>
+													<a th:if="${session.userName == '관리자' && visit.visitStatus != '견학완료'}"
+														th:href="@{/updateVisit/{visitNo}(visitNo=${visit.visitNo})}"
+														class="updateBtn">완료</a>
 
 													<button type="submit" class="deleteBtn"
 														th:id="'deleteBtn-' + ${visit.visitNo}">취소</button>
 												</td>
 
-												
+
 											</tr>
 										</tbody>
 									</table>
@@ -121,39 +126,44 @@
 
 
 		<script>
-			$('.deleteBtn').on('click', function (e) {
-				e.preventDefault();
-				let id = $(this).attr('id');
-				let no = id.split('-')[1];
+			$(document).ready(function () {
+				// '완료' 버튼 클릭 시
+				$('.updateBtn').on('click', function (e) {
+					e.preventDefault();
 
-				if (isNaN(no)) {
-					alert('visitNo 가져오기실패')
-					return;
-				}
+					$('.deleteBtn').on('click', function (e) {
+						e.preventDefault();
+						let id = $(this).attr('id');
+						let no = id.split('-')[1];
 
-				let sendJsonObject = {visitNo: no};
-				let $row = $(this).closest('tr');
-
-				$.ajax({
-					type: 'DELETE',
-					url: 'visit/' + no,
-					data: JSON.stringify(sendJsonObject),
-					contentType: 'application/json;UTF-8',
-					success: function (response) {
-						if (response && response.visitNo == null) {
-							alert('신청내역이 없음');
-						} else {
-							alert('예약취소가 완료되었습니다.');
-							$row.remove();
-							window.location.href = "adminVisitList"
+						if (isNaN(no)) {
+							alert('visitNo 가져오기실패')
+							return;
 						}
-					},
-					error: function () {
-						alert('취소 요청중 오류가 발생했습니다.');
-					}
-				});
-			});
 
+						let sendJsonObject = {visitNo: no};
+						let $row = $(this).closest('tr');
+
+						$.ajax({
+							type: 'DELETE',
+							url: 'visit/' + no,
+							data: JSON.stringify(sendJsonObject),
+							contentType: 'application/json;UTF-8',
+							success: function (response) {
+								if (response && response.visitNo == null) {
+									alert('신청내역이 없음');
+								} else {
+									alert('예약취소가 완료되었습니다.');
+									$row.remove();
+									window.location.href = "adminVisitList"
+								}
+							},
+							error: function () {
+								alert('취소 요청중 오류가 발생했습니다.');
+							}
+						});
+					});
+				});
 
 
 
