@@ -1,6 +1,7 @@
 package com.itwill.controller;
 
 import java.io.File;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.dto.AdminUserListDto;
+import com.itwill.dto.CenterDto;
+import com.itwill.dto.CenterListDto;
 import com.itwill.dto.OrdersDto;
 import com.itwill.dto.PetDto;
 import com.itwill.dto.ProductInsertDto;
@@ -265,29 +268,7 @@ public class AdminController {
 		    model.addAttribute("volunteerList", volunteerList);
 		    return "admin-volunteer";
 		}
-		
-		
-		/*
-		@GetMapping("/updateVolunteer/{volunteerNo}")
-		public String updateVolunteer(@PathVariable Long volunteerNo, Model model, HttpSession session) throws Exception {
-		    Long userNo = (Long) session.getAttribute("userNo");
-		    Userinfo userinfo = userInfoService.findUserByNo(userNo);
-		    
-		    Volunteer findVolunteer = volunteerService.findByVolunteerNo(volunteerNo);
 
-		    System.out.println("Before update: " + findVolunteer.getVolunteerStatus());
-
-		    findVolunteer.setVolunteerStatus("봉사완료"); 
-		    volunteerService.updateVolunteer(findVolunteer);
-		    
-
-		    System.out.println("After update: " + findVolunteer.getVolunteerStatus());
-
-		    volunteerRepository.save(findVolunteer);
-
-		    return "redirect:/adminVolunteerList";
-		}
-		*/
 		
 		//@Transactional
 		@GetMapping("/updateVolunteer/{volunteerNo}")
@@ -295,45 +276,29 @@ public class AdminController {
 			try {
 		        String userName = (String) session.getAttribute("userName");
 
-		        // userName이 '관리자'인 경우에만 실행
 		        if ("관리자".equals(userName)) {
-		            // 봉사 정보 가져오기
 		            Volunteer findVolunteer = volunteerService.findByVolunteerNo(volunteerNo);
-
-		            // 봉사 상태를 '봉사완료'로 변경
 		            findVolunteer.setVolunteerStatus("봉사완료"); 
 		            volunteerService.updateVolunteer(findVolunteer);
-
-		            // 해당 봉사에 연결된 사용자의 userNo 가져오기
 		            Long userNo = findVolunteer.getUserinfo().getUserNo();
-
-		            // 세션에서 사용자의 포인트 정보 가져오기
 		            Integer userPoint = (Integer) session.getAttribute("userPoint");
 
-		            // 사용자 정보 가져오기
 		            Userinfo user = userInfoService.findUserByNo(userNo);
-
-		            // 봉사 완료 시 3000포인트 지급 및 누적 포인트 계산
 		            if (user != null) {
 		                userPoint = (user.getUserPoint() != null) ? user.getUserPoint() + 3000 : 3000;
 		                user.setUserPoint(userPoint);
 		                userInfoService.update(user);
-		                // 세션에도 업데이트
 		                session.setAttribute("userPoint", userPoint);
 		            }
-
-		            // 봉사 정보 저장
 		            volunteerRepository.save(findVolunteer);
 		        } else {
-		            // '관리자'가 아닌 경우에 대한 처리 (예: 에러 페이지로 리다이렉트)
 		            return "redirect:/error"; // 적절한 에러 페이지로 변경하세요.
 		        }
 
 		        return "redirect:/adminVolunteerList";
 		    } catch (Exception e) {
 		        e.printStackTrace();
-		        // 예외 처리에 대한 추가적인 로직이 필요하다면 여기에 추가하세요.
-		        return "redirect:/error"; // 혹은 다른 적절한 에러 페이지로 리다이렉트할 수 있습니다.
+		        return "redirect:/error";
 		    }
 		}
 		
@@ -368,11 +333,11 @@ public class AdminController {
 		
 		// 관리자 --> 상품목록 리스트
 		@GetMapping("/adminProductList")
-		public String adminProductList(Model model, HttpSession session, @PageableDefault(page = 0, size = 10, sort = "productNo", direction = Sort.Direction.ASC) Pageable page) {
-			int pag = page.getPageNumber();
+		public String adminProductList(@PageableDefault(page = 0, size = 10, sort = "productNo", direction = Sort.Direction.DESC) Pageable page, Model model, HttpSession session) {
+			int pageNo = page.getPageNumber();
 			int size = page.getPageSize();
 			
-			Pageable pageable = PageRequest.of(pag, size);
+			Pageable pageable = PageRequest.of(pageNo, size, Sort.by(Sort.Order.asc("productNo")));
 			
 			Page<Product> productList = productService.productFindAllPage(pageable);
 			
@@ -388,7 +353,8 @@ public class AdminController {
 		// 관리자 --> 상품 추가
 		@PostMapping("/adminInsertProduct")
 		public String insertProduct(@RequestParam("imageFile1") MultipartFile file1, @RequestParam("imageFile2") MultipartFile file2, @RequestParam("productName") String productName, 
-				@RequestParam("productPrice") Integer productPrice, @RequestParam("productCategory") String productCategory, @RequestParam("productPetCategory") String productPetCategory, Model model) throws Exception {
+				@RequestParam("productPrice") Integer productPrice, @RequestParam("productCategory") String productCategory, @RequestParam("productPetCategory") String productPetCategory, Model model,
+				@PageableDefault(page = 0, size = 10, sort = "productNo", direction = Sort.Direction.ASC) Pageable page) throws Exception {
 
 		String uploadPath1 = System.getProperty("user.dir") + "/src/main/resources/static/image/product/";
 		String originalFileName1 = file1.getOriginalFilename();
@@ -421,27 +387,35 @@ public class AdminController {
 		
 		productService.insertProduct(createProduct);
 		
-		List<ProductListDto> productListDto = new ArrayList<>();
-		List<Product> productList = new ArrayList<>();
+		int pag = page.getPageNumber();
+		int size = page.getPageSize();
 		
-		productList = productService.findAllByOrderByProductNoAsc();
+		Pageable pageable = PageRequest.of(pag, size, Sort.by(Sort.Order.desc("productNo")));
 		
-		for (Product product : productList) {
-			productListDto.add(ProductListDto.toDto(product));
-		}
+		Page<Product> productList = productService.productFindAllPage(pageable);
 		
-		model.addAttribute("productList", productListDto);
+		model.addAttribute("products", productList.getContent());
+		model.addAttribute("productList", productList);
 		
 		return "admin-product";
 }
 		
-		
+		@GetMapping("/productUpdateForm")
+		public String productUpdateForm(@RequestParam Long productNo, Model model) {
+			
+			Product product = productService.findByProductNo(productNo);
+			
+			model.addAttribute("product", product);
+			
+			return "product_update_form"; 
+		}
 		
 		
 		// 관리자 --> 상품정보 수정
-
-		@PostMapping("/adminUpdateProduct/{productNo}")
-		public String upateProduct(@RequestParam("imageFile") MultipartFile file, @RequestParam("productName") String productName, @RequestParam("productPrice") Integer productPrice, @RequestParam("productNo") Long productNo, Model model) throws Exception {
+		// 수정버튼 누를떄임
+		@PostMapping("/adminUpdateProduct")
+		public String upateProduct(@RequestParam("imageFile") MultipartFile file, @RequestParam("productName") String productName, @RequestParam("productPrice") Integer productPrice, @RequestParam("productNo") Long productNo, Model model,
+				@PageableDefault(page = 0, size = 10, sort = "productNo", direction = Sort.Direction.ASC) Pageable page) throws Exception {
 
 			String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/product/";
 			String originalFileName = file.getOriginalFilename();
@@ -461,16 +435,15 @@ public class AdminController {
 			
 			productService.updateProduct(update);
 			
-			List<ProductListDto> productListDto = new ArrayList<>();
-			List<Product> productList = new ArrayList<>();
+			int pag = page.getPageNumber();
+			int size = page.getPageSize();
 			
-			productList = productService.findAllByOrderByProductNoAsc();
+			Pageable pageable = PageRequest.of(pag, size);
 			
-			for (Product product : productList) {
-				productListDto.add(ProductListDto.toDto(product));
-			}
+			Page<Product> productList = productService.productFindAllPage(pageable);
 			
-			model.addAttribute("productList", productListDto);
+			model.addAttribute("products", productList.getContent());
+			model.addAttribute("productList", productList);
 			
 			return "admin-product";
 		}
@@ -493,8 +466,30 @@ public class AdminController {
 					dto.setUserinfo(userinfo);
 					ordersDto.add(dto);
 				}
-				model.addAttribute("adminOrdersList",ordersDto);
+				model.addAttribute("ordersList",ordersDto);
 				return "admin-orders";
+		}
+		
+		
+		@GetMapping("/dateByAdmin")
+		public String dateByOrder(@RequestParam("startDate")Date startDate,@RequestParam("endDate") Date endDate, HttpSession session,Model model){
+			List<OrdersDto> ordersListDto = new ArrayList<OrdersDto>();
+			System.out.println(">>>>>>>>파라미터 왔을까");
+			Long userNo=(Long)session.getAttribute("userNo");
+			List<Orders> ordersList = orderService.findAllByOrdersByOrderDate(startDate, endDate);
+			
+			
+			System.out.println(">>>>>>>>어드민 데이트"+ordersList);
+			for (Orders orders : ordersList) {
+				OrdersDto ordersDto = OrdersDto.toDto(orders);
+				ordersListDto.add(ordersDto);
+			}
+			
+			System.out.println(">>>>>>>dto객체"+ordersListDto);
+			
+			model.addAttribute("ordersList",ordersList);
+			
+			return "admin-orders";
 			
 		}
 		
@@ -517,6 +512,46 @@ public class AdminController {
 			model.addAttribute("petList",petDtoList);
 			return "pet-list" ;
 		}
+		
+		
+		
+		
+		
+		@PostMapping("/insert_action")
+		public String insert_action(@RequestParam("imageFile") MultipartFile file,
+				@RequestParam("petType") String petType, @RequestParam("petGender") String petGender,
+				@RequestParam("petLocal") String petLocal,
+				@RequestParam("centerNo") String centerNo,@RequestParam("petFindPlace") String petFindPlace,@RequestParam("petCharacter") String petCharacter, Model model,@PageableDefault(page = 0, size = 5, sort = "petNo", direction = Sort.Direction.ASC) Pageable page) throws Exception {
+
+			String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/pet/";
+			String originalFileName = file.getOriginalFilename();
+			UUID uuid = UUID.randomUUID();
+			String savedFileName = uuid.toString() + "_" + originalFileName;
+
+			File newFile = new File(uploadPath + savedFileName);
+
+			file.transferTo(newFile);
+				
+			Center center=centerService.findByCenterNo(Long.parseLong(centerNo));
+			
+			Pet insertPet = Pet.builder().petType(petType).petGender(petGender)
+					.petImage(savedFileName).petLocal(petLocal)
+					.center(center).petFindPlace(petCharacter).petCharacter(petCharacter). build();
+
+			petService.petSave(insertPet);
+			
+			int pag = page.getPageNumber();
+			int size = page.getPageSize();
+			
+			Pageable pageable = PageRequest.of(pag, size, Sort.by(Sort.Order.desc("petNo")));
+			Page<Pet> petList= petService.petFindAllPage(pageable);
+			
+
+			model.addAttribute("petList",petList);
+			return "pet-list" ;
+
+		}
+
 		
 		
 		
@@ -564,5 +599,48 @@ public class AdminController {
 		    model.addAttribute("centerList", centerList);
 		    return "admin-center";
 		}
+	
+	@GetMapping("centerInsertForm")
+	public String updateCenterForm() {
 		
+		return "center_insert_form";
+	}
+		
+	// 관리자 --> 센터생성
+		// 업뎃폼에서 버튼 눌렀을때~
+	@PostMapping("/centerInsert")
+	public String insertCenter(@RequestParam("imageFile") MultipartFile file,
+			@RequestParam("centerName") String centerName, @RequestParam("centerPhoneNumber") String centerPhoneNumber,
+			@RequestParam("centerLocal") String centerLocal,
+			@RequestParam("centerOpenCloseTime") String centerOpenCloseTime, Model model) throws Exception {
+
+		String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/center/";
+		String originalFileName = file.getOriginalFilename();
+		UUID uuid = UUID.randomUUID();
+		String savedFileName = uuid.toString() + "_" + originalFileName;
+
+		File newFile = new File(uploadPath + savedFileName);
+
+		file.transferTo(newFile);
+
+		Center createCenter = Center.builder().centerName(centerName).centerLocal(centerLocal)
+				.centerImage(savedFileName).centerOpenCloseTime(centerOpenCloseTime)
+				.centerPhoneNumber(centerPhoneNumber).build();
+
+		centerService.createCenter(createCenter);
+
+		List<CenterListDto> centerListDto = new ArrayList<>();
+		List<Center> centerList = new ArrayList<>();
+
+		centerList = centerService.findAllCenters();
+
+		for (Center center : centerList) {
+			centerListDto.add(CenterListDto.toDto(center));
+		}
+
+		model.addAttribute("centerList", centerListDto);
+
+		return "admin-center";
+	}
+
 }

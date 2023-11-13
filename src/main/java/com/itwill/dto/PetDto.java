@@ -29,6 +29,7 @@ public class PetDto {
 	 private String petImage;
 	 
 	 private Long centerNo;
+	 private Center center;
 	 
 	 
 	 

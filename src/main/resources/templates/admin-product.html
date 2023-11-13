@@ -12,7 +12,7 @@
 			
 	}
 			#productTable{
-		width: 1200px;
+		width: 1250px;
 		}
 		
         .flex-container {
@@ -22,12 +22,37 @@
         }
 
         /* 추가적인 스타일링을 위해 사용 */
+        /*
         h3, a {
             margin: 0;
             padding: 10px;
         }
         
+        */
         
+        .table{
+			width: 100%; /* 테이블 너비를 100%로 설정 */
+        	margin: auto; /* 테이블을 페이지 가운데로 정렬 */
+        	table-layout: fixed; /* 테이블 레이아웃을 고정하여 열 너비 설정 가능하게 함 */
+		}
+		
+		.table th,
+    .table td {
+        text-align: center;
+    }
+
+    /* 테이블 헤더 셀의 폰트 크기 및 패딩 조정 */
+    .table th {
+        font-size: 14px;
+    
+    }
+
+    /* 테이블 셀의 폰트 크기 및 패딩 조정 */
+    .table td {
+        font-size: 12px;
+        
+    }
+		
 	</style>
 
 </head>
@@ -194,8 +219,8 @@
 
 		<!-- my account start  -->
 		<section class="main_content_area">
-			<div class="container">
-				<div class="account_dashboard" style="margin-right:280px">
+			<div class="container" style="margin-right: 600px;">
+				<div class="account_dashboard">
 					<div class="row">
 						<div class="col-sm-12 col-md-3 col-lg-3">
 							<!-- Nav tabs -->
@@ -229,7 +254,7 @@
 
 
 								<!--  <div class="tab-pane fade" id="visit">-->
-								<div class="flex-container">
+								<div class="flex-container" style="width: 1250px; margin-bottom: 30px;">
 								<h3>상품관리</h3>
 								<div class="search_container mobail_s_none">
                                 	<form>
@@ -259,11 +284,11 @@
 											<tr th:each="product:${productList}">
 												<td class="productNo" th:text="${product.productNo}"></td>
 												<td class="productName" th:text="${product.productName}"></td>
-												<td class="productPrice" th:text="${product.productPrice}"></td>
+												<td class="productPrice" th:text="${#numbers.formatInteger(product.productPrice, 3, 'COMMA') + '원'}"></td>
 												<td class="productStarAvg" th:text="${product.productStarAvg}"></td>
 												<td class="productCategory" th:text="${product.productCategory}"><span class="success"></span></td>
 												<td class="productPetCategory" th:text="${product.productPetCategory}"></td>
-												<td class="productImage" th:text="${product.productImage}"></td>
+												<td class="productImage" th:text="${product.productImage}" style="word-wrap: break-word;max-width: 200px; overflow: hidden; text-overflow: ellipsis;"></td>
 												<td>
 													<a href="#" th:href="@{productUpdateForm(productNo=${product.productNo})}">수정</a>
 													<a href="#" class="delete-link" th:id="${product.productNo}">삭제</a>
@@ -292,7 +317,7 @@
 							
 							
 							<!--상품 수정 모달창 시작-->
-							<div class="modal fade" id="productUpdateModal" tabindex="-1"
+							<!-- <div class="modal fade" id="productUpdateModal" tabindex="-1"
 									aria-labelledby="productUpdateModalLabel" aria-hidden="true">
 									<div class="modal-dialog" >
 										<div class="modal-content" style="width: 900px; height: auto;  border-radius: 10px;">
@@ -300,11 +325,11 @@
 												<h5 class="modal-title" id="productUpdateModalLabel">수정</h5>
 												<button type="button" class="close" data-dismiss="modal"
 													aria-label="Close" style="border: none;">X
-													<!--<span aria-hidden="true">&times;</span>-->
+													<span aria-hidden="true">&times;</span>
 												</button>
 											</div>
 											<div class="modal-body" id="modalContent">
-												<!-- 주문 상세 내용이 여기에 로드됩니다 -->
+												주문 상세 내용이 여기에 로드됩니다
 												
 												<div class="table-responsive">
 													<table class="table">
@@ -313,9 +338,9 @@
 																<th>이름</th>
 																<th>이미지</th>
 																<th>가격</th>
-																<!--<th>총가격</th>
+																<th>총가격</th>
 																<th>주문상태</th>
-																<th>리뷰</th>-->
+																<th>리뷰</th>
 															</tr>
 														</thead>
 														
@@ -335,7 +360,7 @@
 											</div>
 										</div>
 									</div>
-								</div>
+								</div> -->
 								<!--상품 수정 모달창 끝-->
 								
 								
@@ -444,76 +469,11 @@
 			});
 			
 			
-			// admin-product에서 product 수정 할 때 사용하는 모달창
-			function my_account_product(responseJsonObject = {}) {
-				
-				let htmltemplate =
-				`
-					<form name="f" id="productUpdateForm" action="#" method="post" enctype="multipart/form-data">
-						<table>
-							<tr>
-								<td><input style="width: 300px;" class="success updateName" value="{{productName}}" class="updateName"></input></td>
-								<td><input type="file" style="width: 250px;" class="success updateImage" value="{{productImage}}" class="updateImage"></input></td>
-								<td><input style="width: 100px;" class="success updatePrice" value="{{productPrice}}" class="updatePrice"></input></td>
-							</tr>
-						</table>
-					</form>
-				`;
-				
-				
-				let bindTemplate = Handlebars.compile(htmltemplate);
-				let resultTemplate = bindTemplate(responseJsonObject);
-				
-				return resultTemplate;
-			}
 			
 			
 			
-			$('#productUpdateModal').on('show.bs.modal',function(e){
-				let index = e.relatedTarget.href.lastIndexOf('#')
-				let productNo = e.relatedTarget.href.substring(index+1);
-				let send = {
-					productNo : productNo
-				}
-				let response = ajaxRequest('POST','product/detail',send);
-				let html = my_account_product(response);
-				$('.modaldata').html(html);
-			});
 			
 			
-			
-			/*********************************** 모달창 상품 수정 ************************************/
-			
-			$('#updateButton').on('click', function() {
-		    // 사용자가 입력한 값을 가져오기
-		    let updatedProductName = $('.updateName').val();
-		    let updatedProductImage = $('.updateImage').val();
-		    let updatedProductPrice = $('.updatePrice').val();
-		
-		    // 상품 번호 가져오기
-		    let index = e.relatedTarget.href.lastIndexOf('#')
-			let productNo = e.relatedTarget.href.substring(index+1);
-		
-		    // 서버로 보낼 데이터 구성
-		    let sendData = {
-		        productName: updatedProductName,
-		        productImage: updatedProductImage,
-		        productPrice: updatedProductPrice,
-		        productNo : productNo
-		    };
-		
-		    // AJAX를 통해 서버로 데이터 전송
-		    $.ajax({
-		        type: 'PUT',
-		        url: 'product/', // 해당 엔드포인트에 맞게 수정
-		        contentType: 'application/json;charset=UTF-8',
-		        data: JSON.stringify(sendData),
-		        success: function(response) {
-		            // 성공적으로 업데이트된 경우 모달을 닫거나 다른 작업 수행
-		            $('#productUpdateModal').modal('hide');
-		        }
-		    });
-});
 			
 			
 			
@@ -546,7 +506,7 @@
 												<td class="productStarAvg">{{productStarAvg}}</td>
 												<td class="productCategory"><span class="success">{{productCategory}}</span></td>
 												<td class="productPetCategory">{{productPetCategory}}</td>
-												<td class="productImage">{{productImage}}</td>
+												<td class="productImage" style="word-wrap: break-word;max-width: 200px; overflow: hidden; text-overflow: ellipsis;">{{productImage}}</td>
 												<td>
 													<a data-toggle="modal" data-target="#productUpdateModal" id="{{productNo}}" class="view">수정</a>
 													<a href="#" class="delete-link" id="{{productNo}}">삭제</a>
@@ -574,7 +534,6 @@
 			
 			function searchProduct2() {
     			var searchTerm = $('#searchInput3').val();
-    			alert(searchTerm);
 				let send = {
 					productName : searchTerm
 				}

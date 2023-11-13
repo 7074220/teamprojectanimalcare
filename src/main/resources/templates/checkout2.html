@@ -4,8 +4,15 @@
 	layout:decorate="layout/layout(title='order')">
 <head>
 <title>Safira - checkout page</title>
-<script
-	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+
+
+</head>
+
+<body>
+	<!--header area start-->
+	<th:block layout:fragment="content">
+		<script	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
 
@@ -48,7 +55,9 @@
 						alert('보유적립금을 초과합니다2.')
 						return;
 					}
-
+						
+					
+					
 					$('#discount').text('-' + loyaltyPointsValue);
 					// $('#discount').text('-'+loyaltyPointsValue);
 					var cartpirce = parseInt($('.cart_price').text());
@@ -73,7 +82,14 @@
 							var orderPrice = $('#total').text();
 							var userPoint = $('#loyaltyPoints').val();
 							var couponId = $('#hiddencoupon').val();
-
+							var cartNo = [];
+							
+							$('.cartNo').each(function(index, element) {
+								let no = element.id;
+								alert(no);
+								cartNo[cartNo.length] = no;
+							});
+							console.log(cartNo);
 							/*  console.log(orderAddress);
 							console.log(orderPrice);
 							console.log(userPoint);
@@ -104,10 +120,12 @@
 										orderAddress : orderAddress1+orderAddress2+orderAddress3,
 										orderPrice : orderPrice,
 										userPoint : userPoint,
-										couponId : couponId
+										couponId : couponId,
+										cartNo : cartNo
 								}
-								ajaxRequest('POST', 'order/insert', send);
-								window.location.href = "index";
+								let response=ajaxRequest('POST', 'order/insert', send);
+								
+								//window.location.href = "index";
 							
 							
 							
@@ -245,11 +263,6 @@
 				}).open();
 	}
 </script>
-</head>
-
-<body>
-	<!--header area start-->
-	<th:block layout:fragment="content">
 		<!--offcanvas menu area start-->
 		<form id="f">
 			
@@ -1136,7 +1149,7 @@
                                             <td>  Handbag elit	<strong> × 2</strong></td>
                                             <td> $50.00</td>
                                         </tr>-->
-										<tr>
+										<tr th:class="cartNo" th:id="${cart.cartNo}">
 											<td th:text="${cart.product.productName}">$50.00</td>
 											<td><img src="#" alt=""
 												th:src="@{/image/product/} + ${cart.product.getProductImage}">
@@ -1306,8 +1319,6 @@
         </div>  
     </footer>-->
 		<!--footer area end-->
-
-
 
 	</th:block>
 

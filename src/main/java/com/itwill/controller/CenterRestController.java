@@ -60,12 +60,12 @@ public class CenterRestController {
 
 	}
 
-	@Operation(summary = "센터삭제")
-	@DeleteMapping("/{centerNo}")
-	public void CenterDelete(@PathVariable(name = "centerNo") Long centerNo) {
-		centerService.deleteCenter(centerNo);
-	}
-
+	/*
+	 * @Operation(summary = "센터삭제")
+	 * 
+	 * @DeleteMapping("/{centerNo}") public void CenterDelete(@PathVariable(name =
+	 * "centerNo") Long centerNo) { centerService.deleteCenter(centerNo); }
+	 */
 	@Operation(summary = "센터이름검색")
 	@GetMapping("/centers/search")
 	public ResponseEntity<List<CenterDto>> searchCentersByName(@RequestParam(name = "name") String name) {

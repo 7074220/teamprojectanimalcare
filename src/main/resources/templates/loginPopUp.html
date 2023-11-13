@@ -128,20 +128,24 @@
 					<!--login area start-->
 					<div class="col-lg-6 col-md-6">
 						<form name="f" id="loginForm">
-							<h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+							<h1 class="h3 mb-3 fw-normal">로그인</h1>
 							<div class="form-floating">
+								<label for="floatingInput">이메일</label>
 								<input type="email" name="floatingInput" class="form-control" id="floatingInput"
 									placeholder="name@example.com">
-								<label for="floatingInput">Email address</label>
 							</div>
+							<br>
 							<div class="form-floating">
+								<label for="floatingPassword">비밀번호</label>
 								<input type="password" name="floatingPassword" class="form-control"
 									id="floatingPassword" placeholder="Password">
-								<label for="floatingPassword">Password</label>
 							</div>
+							<br>
 
-
-							<button class="btn btn-primary w-100 py-2" id="login-btn" type="submit">Sign in</button>
+							<button class="btn btn-primary w-100 py-2" id="login-btn" type="submit">로그인</button>
+							<br>
+							<br>
+							<button type="button" style="border: none; margin-left: 470px; background-color: transparent;" onclick="register(event)">회원가입</button>
 							<!--<button type="button" data-navigate="#/login">로그인</button>-->
 					</div>
 					</form>
@@ -222,6 +226,22 @@
 				}
 			});
 		});
+		
+		  $(document).ready(function () {
+		        // 윈도우 창 크기 조절
+		        resizeWindow(600, 550);
+		    });
+
+		    function resizeWindow(width, height) {
+		        window.resizeTo(width, height);
+		    }
+		    
+		    function register(e){
+		    	opener.location.hash="/user_write_form";
+		    	self.close();
+		    }
+		    
+		    
 	</script>
 </body>
 

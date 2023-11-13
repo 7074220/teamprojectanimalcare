@@ -4,6 +4,9 @@
 
 <head>
 	<title>Safira - shop fullwidth list</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Orbit&display=swap" rel="stylesheet">
 	<meta charset="utf-8">
 	<title>키워드로 장소검색하고 목록으로 표출하기</title>
 	<style>
@@ -192,6 +195,16 @@
 			cursor: default;
 			color: #777;
 		}
+		
+		#listTitle{
+			font-family: 'Orbit', sans-serif;
+			font-weight: bold;
+			font-size: 16px;
+		}
+		#listContent{
+			font-family: 'Orbit', sans-serif;
+		}
+		
 	</style>
 </head>
 
@@ -308,11 +321,12 @@
 										<div class="price_box" style="margin-bottom: 20px;">
 
 											<h4 class="product_name">
-												<p>센터 이름: <span th:text="${center.centerName}"></span></p>
+												<span id="listTitle">센터이름:</span> <span th:text="${center.centerName}" id="listContent"></span>
 											</h4>
-											<p>전화번호: <span th:text="${center.centerPhoneNumber}"></span></p>
-											<p>지역: <span th:text="${center.centerLocal}"></span></p>
-											<p>오픈/클로즈 시간: <span th:text="${center.centerOpenCloseTime}"></span></p>
+											<div><span id="listTitle">전화번호:</span> <span th:text="${center.centerPhoneNumber}" id="listContent"></span></div>
+											<div><span id="listTitle">지역:</span> <span th:text="${center.centerLocal}" id="listContent"></span></div>
+											<div><span id="listTitle">영업시간: </span><span th:text="${center.centerOpenCloseTime}" id="listContent"></span></div>
+											
 
 
 
@@ -328,12 +342,12 @@
 
 											<ul>
 												<li class="add_to_cart">
-													<a th:href="@{/visit(centerNo=${center.centerNo})}">
+													<a th:href="@{/visit(centerNo=${center.centerNo})}" id="listTitle">
 														견학하기
 													</a>
 												</li>
 												<li class="add_to_cart">
-													<a th:href="@{/volunteer(centerNo=${center.centerNo})}">
+													<a th:href="@{/volunteer(centerNo=${center.centerNo})}" id="listTitle">
 														봉사신청
 													</a>
 												</li>
@@ -861,7 +875,7 @@
                         </div>
                     </div>
 -->
-						<div class="shop_toolbar t_bottom">
+						<!--<div class="shop_toolbar t_bottom">
 							<div class="pagination">
 								<ul>
 									<li class="current">1</li>
@@ -871,7 +885,7 @@
 									<li><a href="#">>></a></li>
 								</ul>
 							</div>
-						</div>
+						</div>-->
 						<!--shop toolbar end-->
 						<!--shop wrapper end-->
 					</div>

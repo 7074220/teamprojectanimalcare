@@ -35,7 +35,18 @@
 									</select>
 									<span id="kindError" style="color:red;"></span>
 								</p>
+								<p>
+									<label class="checkbox-inline" th:if="${leader==true}">
+										<label th:text="대표동물">myPetLeader <span>*</span></label>
+										<label><input type="checkbox" id="checkbox" checked="true" value="1"></label>
+
+									</label>
 								<div class="login_submit">
+									</p>
+								
+								
+								
+								<!--<div class="login_submit">-->
 									<button id="registerMyPetButton" type="button" onclick="inserted(event)">확인</button>
 									<!--<button id="registerButton" type="button">등록</button>-->
 								</div>
@@ -78,12 +89,13 @@
     
 			let sendJsonObject={
 				mypetName:document.f.mypetName.value,
-				  mypetBirthday: mypetBirthdayLocalDateTime.toISOString(),
+			 mypetBirthday: mypetBirthdayLocalDateTime.toISOString(),
 				//mypetBirthday:document.f.mypetBirthday.value,
 				mypetKind:document.f.kind.value
 			};               
 			
 			ajaxRequest('POST','mypet/inserted',sendJsonObject);
+			//alert(mypetBirthday);
 			window.location.href = "mypet"; // 페이지 이동
 		}	
 		

@@ -11,7 +11,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style type="text/css">
-visit,#visitTime {
+#visitDate,#visitTime {
 	border: 1px solid black;
 	position: relative;
 	width: 200px;
@@ -20,7 +20,7 @@ visit,#visitTime {
 	text-align: center;
 	font-size: 100%;
 	margin-bottom: 20px;
-	
+	margin-left: 20px;
 }
 
 #visitDate::-webkit-calendar-picker-indicator,
@@ -43,6 +43,28 @@ visit,#visitTime {
 
 #visitDate:valid::before {
 	display: none;
+}
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h3{
+	font-family: 'GmarketSansMedium';
+}
+
+p{
+	font-family: 'GmarketSansMedium';
+}
+
+span{
+	font-family: 'GmarketSansMedium';
+}
+button{
+	font-family: 'GmarketSansMedium';
 }
 </style>
 
@@ -104,13 +126,13 @@ window.onload = function() {
 		<div class="contact_area" style="margin-top: 100px;">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-6 col-md-6">
-						<div class="contact_message content">
+					<div class="col-lg-6 col-md-6" style="width: 420px; margin-left: 100px;">
+						<div class="contact_message content" >
 							<div class="zoomWrapper single-zoom">								
 							</div>
 							
 							<!-- 센터 정보 -->
-							<h2>센터 정보</h2>
+							<h3>센터 정보</h3>
 								<p><img th:src="@{image/center/} + ${center.centerImage}"></p>
 							<p>센터 이름: <span th:text="${center.centerName}">10</span></p>
 							<p>전화 번호: <span th:text="${center.centerPhoneNumber}">10</span></p>
@@ -207,7 +229,7 @@ $('.submit').on('click', function (event) {
         centerNo: centerNo,
         visitDate: visitDate,
         visitTime: visitTime,
-        visitStatus: "봉사신청"
+        visitStatus: "견학신청중"
     };
     
     let response = ajaxRequest('POST','visit/create-visit',sendJsonObject);

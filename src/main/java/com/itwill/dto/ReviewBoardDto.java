@@ -1,5 +1,6 @@
 package com.itwill.dto;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,11 +30,12 @@ public class ReviewBoardDto {
 	private String boardContent;
 	//@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'") 
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'") 
-	private Date boardDate;
+	private LocalDateTime boardDate;
 	private Double boardStar;
 	private Long productNo;
 	private double averageRating;
 	private Long oiNo;
+	private String userName;
 	
 	public static ReviewBoard toEntity(ReviewBoardDto dto) {
 		ReviewBoard reviewBoard = ReviewBoard.builder()

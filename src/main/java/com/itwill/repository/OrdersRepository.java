@@ -27,11 +27,12 @@ public interface OrdersRepository extends JpaRepository<Orders, Long>{
 	List<Orders> findAllByUserNoDESC(@Param("user_no") Long userNo);
 
 	// 기간별로 주문목록 조회
-	@Query(value = "SELECT * FROM orders o WHERE o.order_date >= ?1 AND o.order_date <= ?2 + 1", nativeQuery = true)
+	@Query(value = "SELECT * FROM orders o WHERE o.order_date >= ?1 AND o.order_date <= ?2 ", nativeQuery = true)
 	List<Orders> findAllByOrdersByOrderDate(Date startDate, Date endDate);
 
 	// 회원 주문 목록 조회
-	@Query(value = "SELECT * FROM orders o WHERE o.order_date >= ?1 AND o.order_date <= ?2 + 1 AND o.user_no= ?3", nativeQuery = true)
+	@Query(value = "SELECT * FROM orders o WHERE o.order_date >= ?1 AND o.order_date <= ?2  AND o.user_no= ?3", nativeQuery = true)
 	List<Orders> findAllByOrdersByOrderDateByUserNo(Date startDate, Date endDate, Long userNo);
-
+	
+	
 }

@@ -58,5 +58,10 @@ public class ReplyBoardServiceImpl implements ReplyBoardService{
 		
 		return replyBoardDao.findAllByReportBoardNo(BoardNo);
 	}
+
+	@Override
+	public void DeleteByNo(Long replyBoardNo) {
+		replyBoardDao.DeleteByNo(replyBoardNo);
+	}
 	
 }

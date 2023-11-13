@@ -601,7 +601,7 @@
 											<input type="checkbox" name="chk" class="chk" onclick="chkClicked()" value="" th:value="(${cart.product.productPrice})*(${cart.cartQty})" th:id="${cart.cartNo}" checked="true">
 										</label>
 									</td>
-                                    <td class="product_thumb" th:id="${cart.cartNo}"><a href="#" th:href="@{productDetail(productNo=${cart.product.productNo})}"><img src="#" alt="" th:src="@{/image/product/} + ${cart.product.getProductImage}"></a></td>
+                                    <td class="product_thumb" th:id="${cart.cartNo}"><a href="#" th:href="@{productDetail(productNo=${cart.product.productNo})}"><img src="#" alt="" th:src="@{/image/product/} + ${cart.product.getProductImage}" style="width: 129px;height: 129px;"></a></td>
                                     <td class="product_name" th:id="${cart.cartNo}"><a href="#" th:text="${cart.product.productName}" th:href="@{productDetail(productNo=${cart.product.productNo})}">상품명</a></td>
                                     <td class="product-price" th:id="${cart.cartNo}" th:text='${cart.product.productPrice+"원"}'>가격</td>
                                     <td class="product_quantity" th:id="${cart.cartNo}"><label>수량</label> <input min="1" max="100" value="1" type="number" th:value="${cart.cartQty}" th:id="${cart.cartNo}"></td>
@@ -679,11 +679,22 @@
                                    <!--<a href="#">Calculate shipping</a>-->
                                    <div class="cart_subtotal">
                                        <p>총액</p>
-                                       <p class="cart_amount1" th:text='${totalPrice+"원"}'>주문할 상품 총 가격</p>
+                                       <p class="cart_amount1" th:text="${#numbers.formatInteger(totalPrice, 3, 'COMMA') + '원'}">주문할 상품 총 가격</p>
                                    </div>
-                                 <div class="checkout_btn">
-                                       <a href="orderView">주문하기</a>
-                                   </div>
+                                   
+                                   
+                                   
+    <!-- 기존의 폼 필드들 -->
+
+    <!-- 여기에 선택된 항목을 위한 숨겨진 입력 필드가 없습니다 -->
+
+    <div class="checkout_btn">
+        <a href="javascript:void(0);" onclick="placeOrder()">주문하기</a>
+    </div>
+                                   
+                                   
+                                   
+                                   
                                 </div>
                             </div>
                         </div>
@@ -693,6 +704,12 @@
             </form> 
         </div>     
     </div>
+    
+    
+        
+                               <form id="orderForm" action="orderView" method="post">
+  
+</form>
      <!--shopping cart area end -->
      
      <script type="text/javascript">
@@ -860,6 +877,26 @@
 			}   
 			
 			
+			
+			    function placeOrder() {
+			        $("input[name='chk']:checked").each(function () {
+			            var cartNo = $(this).attr("id");
+
+			            console.log("cartNo: " + cartNo);
+			            $("<input>")
+			                .attr("type", "hidden")
+			                .attr("name", "selectedItems")
+			                .val(cartNo)
+			                .appendTo("#orderForm");
+			        });
+
+			         if ($("input[name='selectedItems']").length === 0) {
+			            alert("하나이상의 주문을 선택하세요");
+			            return;
+			        } 
+
+			        $("#orderForm").submit();
+			    }
 			
     		
     </script>

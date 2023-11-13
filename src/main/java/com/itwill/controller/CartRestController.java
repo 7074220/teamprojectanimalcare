@@ -63,7 +63,7 @@ public class CartRestController {
 		// userNo로 user 찾기
 		Userinfo user = userInfoService.findUserByNo(userNo);
 		// productNo로 product 정보 가져오기
-		Long productNo = dto.getProductNo();
+		//Long productNo = dto.getProductNo();
 		Product product = productService.findByProductNo(dto.getProductNo());
 		
 		Cart selectCart = Cart.builder().build();
@@ -71,12 +71,14 @@ public class CartRestController {
 		selectCart.setProduct(product);
 		selectCart.setCartQty(dto.getProductQty());
 		
+		System.out.println(">>>>>>>>>>>>>"+selectCart);
+		
 		cartService.updateOverlapCart(selectCart);
 		
 		int cartCount = cartService.findAllCartByUserId(userNo).size();
 		session.setAttribute("cartCount", cartCount);
 		
-
+		System.out.println(">>>>>>>>>>>>>>>>>");
 		return new ResponseEntity<CartDto>(dto, httpHeaders, HttpStatus.CREATED);
 	}
 	

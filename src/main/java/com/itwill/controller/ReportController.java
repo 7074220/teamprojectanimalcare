@@ -49,12 +49,13 @@ public class ReportController {
 	
 	@Operation(summary = "신고게시판 리스트")
 	@GetMapping("/reportlist")
-	public String ReportList(Model model,@PageableDefault(page =0,size = 6,sort = "reportBoardNo",direction = Sort.Direction.DESC) Pageable page) {
+	public String ReportList(Model model,@PageableDefault(page =0,size = 9,sort = "boardNo",direction = Sort.Direction.DESC) Pageable page,HttpSession session) {
 		int pag = page.getPageNumber();
 		int size = page.getPageSize();
 		
-		Pageable pageable= PageRequest.of(pag,size);
-		
+		Pageable pageable= PageRequest.of(pag,size,Sort.by(Sort.Order.desc("boardNo")));
+		//Pageable pageable = PageRequest.of(pag, size, Sort.by(Sort.Order.desc("reportBoardNo")));
+
 		
 		List<ReportBoard> reportBoards = reportBoardService.findByBoardNoOrderByBoardNoDesc();
 		
@@ -64,7 +65,13 @@ public class ReportController {
 		
 
 	    Page<ReportBoard> reportList = reportBoardService.reportBoardFindAllPage(pageable);
-
+	    Long userNo = (Long)session.getAttribute("userNo");
+	    if(userNo!=null) {
+	    	model.addAttribute("userNo",userNo);
+	    }else {
+	    	model.addAttribute("userNo",0L);
+	    }
+	    
 	    model.addAttribute("reportBoardList", reportList.getContent()); // 페이지의 내용만을 보내기
 	    model.addAttribute("reportList", reportList); // 페이징 정보를 보내기
 		return "reportList";
@@ -85,11 +92,24 @@ public class ReportController {
 		model.addAttribute("reportBoard", reportBoard);
 		model.addAttribute("replyBoardList", replyBoardList);
 		
+		Long loginUserNo = (Long)session.getAttribute("userNo");
+		
+		if(loginUserNo!=null) {
+			model.addAttribute("loginUserNo",loginUserNo);
+		}else {
+			model.addAttribute("loginUserNo",0L);
+		}
+		
 		return "reportBoardView";
 	}
 	
 	@GetMapping("/reportWriteForm")
-    public String showReportForm() {
+    public String showReportForm(HttpSession session) throws Exception{
+		Long userNo = (Long)session.getAttribute("userNo");
+		String path = null;
+		if(userNo!=null) {
+			path = "reportBoard_write_form";
+		}
         return "reportBoard_write_form"; 
     }
 

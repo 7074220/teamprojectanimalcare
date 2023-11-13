@@ -145,6 +145,7 @@ public class CartController {
 		Userinfo user = userinfoService.findUserByNo(userNo);
 		// productNo로 product 정보 가져오기
 		Product product = productService.findByProductNo(productNo);
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+productNo);
 		
 		Cart selectCart = Cart.builder().build();
 		selectCart.setUserinfo(user);
