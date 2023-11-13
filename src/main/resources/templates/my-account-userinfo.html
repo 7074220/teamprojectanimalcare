@@ -18,6 +18,17 @@
 
    <!--header area start-->
     <th:block layout:fragment="content">
+    <script>
+    function call_confirm(){
+	
+	if(confirm("회원 탈퇴 하시겠습니까?")){
+		alert("정상적으로 탈퇴되었습니다.");
+	}else{
+		alert("탈퇴실패");
+	}
+	
+}
+</script>
     <!--offcanvas menu area start-->
     <!-- <div class="off_canvars_overlay">
                 
@@ -204,7 +215,7 @@
 											전용주문목록</a></li>
 								<li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li>
                                 <li><a href="logout" class="nav-link">로그아웃</a></li>
-                                <li><a href="userDelete" class="nav-link">회원탈퇴</a></li>
+                                <li><a href="userDelete" class="nav-link" onclick="call_confirm()">회원탈퇴</a></li>
 
                             </ul>
                         </div>    
@@ -274,7 +285,7 @@
                             
                                         <!-- 모달 푸터 -->
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" id="confirmDelete">탈퇴하기</button>
+                                            <button  type="button" class="btn btn-danger" id="confirmDelete">탈퇴하기</button>
                                         </div>
                                     </div>
                                 </div>
