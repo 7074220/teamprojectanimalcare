@@ -331,11 +331,11 @@ public class AdminController {
 		
 		// 관리자 --> 상품목록 리스트
 		@GetMapping("/adminProductList")
-		public String adminProductList(Model model, HttpSession session, @PageableDefault(page = 0, size = 10, sort = "productNo", direction = Sort.Direction.ASC) Pageable page) {
-			int pag = page.getPageNumber();
+		public String adminProductList(@PageableDefault(page = 0, size = 10, sort = "productNo", direction = Sort.Direction.DESC) Pageable page, Model model, HttpSession session) {
+			int pageNo = page.getPageNumber();
 			int size = page.getPageSize();
 			
-			Pageable pageable = PageRequest.of(pag, size);
+			Pageable pageable = PageRequest.of(pageNo, size, Sort.by(Sort.Order.desc("productNo")));
 			
 			Page<Product> productList = productService.productFindAllPage(pageable);
 			
