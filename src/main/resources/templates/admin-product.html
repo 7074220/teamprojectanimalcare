@@ -288,7 +288,7 @@
 												<td class="productStarAvg" th:text="${product.productStarAvg}"></td>
 												<td class="productCategory" th:text="${product.productCategory}"><span class="success"></span></td>
 												<td class="productPetCategory" th:text="${product.productPetCategory}"></td>
-												<td class="productImage" th:text="${product.productImage}"  style="word-wrap: break-word;max-width: 200px; overflow: hidden; text-overflow: ellipsis;"></td>
+												<td class="productImage" th:text="${product.productImage}" style="word-wrap: break-word;max-width: 200px; overflow: hidden; text-overflow: ellipsis;"></td>
 												<td>
 													<a href="#" th:href="@{productUpdateForm(productNo=${product.productNo})}">수정</a>
 													<a href="#" class="delete-link" th:id="${product.productNo}">삭제</a>
@@ -506,7 +506,7 @@
 												<td class="productStarAvg">{{productStarAvg}}</td>
 												<td class="productCategory"><span class="success">{{productCategory}}</span></td>
 												<td class="productPetCategory">{{productPetCategory}}</td>
-												<td class="productImage">{{productImage}}</td>
+												<td class="productImage" style="word-wrap: break-word;max-width: 200px; overflow: hidden; text-overflow: ellipsis;">{{productImage}}</td>
 												<td>
 													<a data-toggle="modal" data-target="#productUpdateModal" id="{{productNo}}" class="view">수정</a>
 													<a href="#" class="delete-link" id="{{productNo}}">삭제</a>
@@ -534,7 +534,6 @@
 			
 			function searchProduct2() {
     			var searchTerm = $('#searchInput3').val();
-    			alert(searchTerm);
 				let send = {
 					productName : searchTerm
 				}

@@ -19,7 +19,23 @@
 </head>
 
 <body>
-
+<script type="text/javascript">
+	function userDelete(){
+		window.location.href = 'userDelete';
+	}
+    $('#confirmDelete').on('click', function() {
+        const selectedReason = $('input[name="reason"]:checked').val();
+        if (selectedReason) {
+            console.log("회원탈퇴 이유:", selectedReason);
+            // 여기에 탈퇴 로직
+            userDelete(); 
+            // 탈퇴가 완료되면 index.html로 리다이렉트
+        	//window.location.href = 'index';
+        } else {
+            alert("탈퇴하시려면 이유를 선택해주세요.");
+        }
+    });
+</script>
    <!--header area start-->
     <th:block layout:fragment="content">
     <!--offcanvas menu area start-->
@@ -41,25 +57,13 @@
                         <!-- Nav tabs -->
                         <div class="dashboard_tab_button">
                             <ul role="tablist" class="nav flex-column dashboard-list">
-                                <li><a href="userinfo" class="nav-link">내정보</a></li>
-                                <li><a href="userinfo/mypet"  class="nav-link">마이펫</a></li>
+                            <li><a href="userinfo" class="nav-link">내정보</a></li>
+                                <li><a href="mypet"  class="nav-link">마이펫</a></li>
                                 <li><a href="couponList"  class="nav-link">쿠폰</a></li>
-                                <li><a href="adoptByUserNo"  class="nav-link">입양</a></li>
-								<li><a th:if="${session.userName == '관리자'}" href="adminVolunteerList"
-											class="nav-link">관리자 전용봉사목록</a></li>
-								<li><a th:if="${session.userName != '관리자'}" href="volunteerByUserNo"
-											class="nav-link">봉사</a></li>  
-								<li><a th:if="${session.userName == '관리자'}" href="adminVisitList"
-											class="nav-link">관리자 전용견학목록</a></li>
-									<li><a th:if="${session.userName != '관리자'}" href="visitByUserNo"
-											class="nav-link">견학</a></li>
-											<li><a th:if="${session.userName == '관리자'}" href="centerListAll"
-											class="nav-link">관리자 보호소목록</a></li>
-									<li><a th:if="${session.userName != '관리자'}" style="display: none;"
-											class="nav-link"></a></li>
-                                <li> <a th:if="${session.userName == '관리자'}" href="ordersList" class="nav-link">관리자
-											전용주문목록</a></li>
-									<li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li>
+                                <li><a th:if="${session.userName != '관리자'}" href="adoptByUserNo" class="nav-link">입양</a></li> 
+								<li><a th:if="${session.userName != '관리자'}" href="volunteerByUserNo" class="nav-link">봉사</a></li>  
+								<li><a th:if="${session.userName != '관리자'}" href="visitByUserNo" class="nav-link">견학</a></li>
+								<li><a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li>
                                 <li><a href="logout" class="nav-link">로그아웃</a></li>
                                 <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li>
 
@@ -76,13 +80,13 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>No</th>
-                                                <th>Date</th>
-                                                <th>Time</th>
-                                                <th>Center</th>
-                                                <th>Status</th>    
+                                                <th>번호</th>
+                                                <th>방문날짜</th>
+                                                <th>방문시간</th>
+                                                <th>센터이름</th>
+                                                <th>접수상태</th>    
                                                 <!-- <th>Update</th> -->
-                                                <th>Update</th>
+                                                <th>수정/삭제</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -108,7 +112,7 @@
 												<td>												
 							
 												
-												<a th:href="@{'/?visitNo=' + ${visit.visitNo} + '&amp;centerNo=' + ${visit.Center.centerNo}}">수정</a>
+												<a th:href="@{'/visitUpdate?visitNo=' + ${visit.visitNo} + '&amp;centerNo=' + ${visit.Center.centerNo}}">수정</a>	
 												<button type="submit" class="deleteBtn" th:id="'deleteBtn-' + ${visit.visitNo} " >취소</button>	
 												
 											
@@ -130,7 +134,41 @@
                 </div>
             </div>          	
     </section>	
-    
+    	<div class="modal fade" id="deleteModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <!-- 모달 헤더 -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">회원탈퇴 이유 선택</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+							              <!-- 회원탈퇴 모달 본문 -->
+                                        <div class="modal-body">
+                                            <form id="deleteReasonForm">
+                                                <!-- 탈퇴 이유 선택 -->
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="reason" id="reason1" value="Not satisfied">
+                                                    <label class="form-check-label" for="reason1">서비스에 만족하지 않음</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="reason" id="reason2" value="Found alternative">
+                                                    <label class="form-check-label" for="reason2">다른 서비스를 사용</label>
+                                                </div>
+                                                <!-- ... 다른 이유들도 추가 가능 ... -->
+                                            </form>
+                                        </div>
+						
+                            
+                          
+                            
+                                        <!-- 모달 푸터 -->
+                                        <div class="modal-footer">
+                                            <button  type="button" class="btn btn-danger" id="confirmDelete" name="confirmDelete">탈퇴하기</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>	
+							
     <!-- my account end   --> 
 
       <!--footer area start-->
@@ -198,7 +236,26 @@
 		});
 	});
 </script>
+<script>
+  // HTML이 모두 로드된 후에 함수를 실행하도록 window.onload 이벤트를 사용합니다.
+window.onload = function() {
+    // 버튼 요소를 가져옵니다.
+	function confirmDeleteFunction() {
+      // 이 함수에 버튼이 클릭될 때 실행할 코드를 작성합니다.
+      // 예를 들어, 사용자에게 확인 메시지를 표시하거나 다른 동작을 수행할 수 있습니다.
+      console.log("탈퇴하기 버튼이 클릭되었습니다.");
 
+      window.location.href="userDelete";
+    }
+	
+	$('#confirmDelete').on('click',function(e){
+		confirmDeleteFunction();
+	});
+    // 클릭 이벤트에 대한 함수를 정의합니다.
+   
+    
+  };
+</script>
 
 </th:block>		
 

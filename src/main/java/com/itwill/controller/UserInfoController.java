@@ -123,13 +123,15 @@ public class UserInfoController {
 	@GetMapping(value="/logout")
 	public String logout(HttpSession session, Model model) {
 		session.invalidate();
-		List<PetDto> petDtoList = new ArrayList<>();
+		/*
+		 * List<PetDto> petDtoList = new ArrayList<>();
 		List<Pet> petList = petService.petFindAll();
 		for (Pet pet : petList) {
 			petDtoList.add(PetDto.toDto(pet));
 			
 			model.addAttribute("petList", petDtoList);
 		}
+			*/
 		return "index";
 	}
 	

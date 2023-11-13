@@ -26,5 +26,6 @@ public interface ReplyBoardService {
 	//해당 게시물의 댓글 보여주기 
 	public List<ReplyBoard> findAllByReportBoardNo(Long BoardNo);
 	
-	
+	// 댓글 1개 삭제
+	public void DeleteByNo(Long replyBoardNo);
 }
