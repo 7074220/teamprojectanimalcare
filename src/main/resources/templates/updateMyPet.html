@@ -30,18 +30,20 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-6 col-md-6" style="margin-left: 300px;">
-						<div class="account_form register" th:id="${mypetNo}" name="mypetNo">
+						<div class="account_form register">
 							<h2 th:text="MyPet">Register</h2>
-							<form name="updateForm" id="updateForm" action="#" >
+							<form name="updateForm" id="updateForm" action="#">
+								<input type="hidden" th:id="mypetNo" name="mypetNo" th:value="${updatepet.mypetNo}">
+
 								<p>
 									<label th:text="이름">Email address <span>*</span></label>
-									<input type="text" id="mypetName" th:value="${updatepet.mypetName}">
+									<input type="text" id="mypetName" name="mypetName" th:value="${updatepet.mypetName}">
 								</p>
-								<!--	<p>
+									<!--<p>
 									<label th:text="생일">Passwords <span>*</span></label>
-									<input type="text" id="mypetBirthday">
-								</p>
-								-->
+									<input type="text" id="mypetBirthday" name="mypetBirthday">
+								</p>-->
+								
 								<p>
 									<label>생일 </label>
 									<input type="date" name="mypetBirthday" id="mypetBirthday" placeholder="날짜를 선택해주세요"
@@ -50,7 +52,7 @@
 								</p>
 								<p>
 									<label>종류 <span>*</span></label>
-									<select id="kind">
+									<select id="kind" name="kind">
 										<option value="">종류 선택</option>
 										<option value="남" th:text="강아지" th:value="강아지">남</option>
 										<option value="여" th:text="고양이" th:value="고양이">여</option>
@@ -79,6 +81,8 @@
 		</div>
 		<script>
 
+
+
 			function ajaxRequest(method, url, sendJsonObject) {
 				let returnResultJsonObject = {};
 				$.ajax({
@@ -94,81 +98,78 @@
 				});
 				return returnResultJsonObject;
 			}
-			
-			$('#checkbox').click(function(e) {
+
+			$('#checkbox').click(function (e) {
 				let check = $('#checkbox').val();
-				if(check==1){
+				if (check == 1) {
 					$('#checkbox').val(2);
-				}else{
+				} else {
 					$('#checkbox').val(1);
 				}
 			});
-			
-			const initialize=createInitializer();
-			initialize.addCustomFunctionHandlebars();
-			let validator = $('#updateForm').validate({rules:{
-							mypetName:{
-								required : true
-							},
-							mypetBirthday:{
-								required : true
-							},
-							kind:{
-								required:true
-							}
-							
-						},
-						messages:{
-							mypetName:{
-								required : "이름을 입력하세요"
-							},
-							mypetBirthday:{
-								required : "생일을 입력하세요"
-							},
-							kind:{
-								required: "종류를 선택하세요."
-							}
-						}});
-			initialize.setValidator(validator);
-			
-			function updated(e) {
-				//let mypetNo = document.f.id;
-				
-				if (initialize.getValidator().form()) {
-					let sendJsonObject = {
-					mypetNo:document.mypetNo.id,
-					mypetName: document.updateForm.mypetName.value,
-					mypetBirthday: mypetBirthdayLocalDateTime.toISOString(),
-					//mypetBirthday:document.f.mypetBirthday.value,
-					mypetKind: document.updateForm.kind.value,
-					mypetStatus : mypetStatus
-					};
-	
-					ajaxRequest('POST', 'mypet/updated', sendJsonObject);
+
+			let validator = $('#updateForm').validate({
+				rules: {
+					mypetName: {
+						required: true
+					},
+					mypetBirthday: {
+						required: true
+					},
+					kind: {
+						required: true
+					}
+				},
+				messages: {
+					mypetName: {
+						required: "이름을 입력하세요"
+					},
+					mypetBirthday: {
+						required: "생일을 입력하세요"
+					},
+					kind: {
+						required: "종류를 선택하세요"
+					}
 				}
-				
+			});
+			console.log(validator);
+
+			function updated(e) {
 				// 날짜 문자열을 Date 객체로 변환
-				const mypetBirthdayStr = document.f.mypetBirthday.value;
+				const mypetBirthdayStr = document.updateForm.mypetBirthday.value;
 				const mypetBirthdayDate = new Date(mypetBirthdayStr);
 
 				// Date 객체를 LocalDateTime으로 변환
 				const mypetBirthdayLocalDateTime = new Date(
 					mypetBirthdayDate.getTime() - mypetBirthdayDate.getTimezoneOffset() * 60000
 				);
-				
+
 				let check = $('#checkbox').val();
-				
+
 				let mypetStatus;
-				if(check==1){
-					mypetStatus=1;
-				}else{
-					mypetStatus=2;
+				if (check == 1) {
+					mypetStatus = 1;
+				} else {
+					mypetStatus = 2;
 				}
 				
-				
-				window.location.href = "mypet"; // 페이지 이동
-				
-				
+				if (validator.form()) {
+
+					let sendJsonObject = {
+						mypetNo: document.updateForm.mypetNo.value,
+						mypetName: document.updateForm.mypetName.value,
+						//mypetBirthday: mypetBirthdayLocalDateTime.toISOString(),
+						mypetBirthday: mypetBirthdayLocalDateTime,
+						mypetKind: document.updateForm.kind.value,
+						mypetStatus: mypetStatus
+					};
+
+					ajaxRequest('POST', 'mypet/updated', sendJsonObject);
+					window.location.href = "mypet"; // 페이지 이동
+				}
+
+
+
 			}
 
 			/*
@@ -197,12 +198,14 @@
 				mypetBirthday.setAttribute('max', maxDateString);
 
 				mypetBirthday.removeAttribute('min');
-				
-				
+
 			};
 
 
+
 		</script>
+
+		
 	</th:block>
 
 </body>
