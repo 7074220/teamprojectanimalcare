@@ -49,7 +49,7 @@ public class ReportController {
 	
 	@Operation(summary = "신고게시판 리스트")
 	@GetMapping("/reportlist")
-	public String ReportList(Model model,@PageableDefault(page =0,size = 6,sort = "boardNo",direction = Sort.Direction.DESC) Pageable page) {
+	public String ReportList(Model model,@PageableDefault(page =0,size = 9,sort = "boardNo",direction = Sort.Direction.DESC) Pageable page) {
 		int pag = page.getPageNumber();
 		int size = page.getPageSize();
 		
