@@ -64,14 +64,14 @@ private OrdersDao ordersDao;
 @Rollback(false)
 	void findAllByOrdersByOrderDate() {
 		
-	List<Orders> orders = ordersDao.findAllByOrdersByOrderDate(new Date(2023,10,23), new Date(2023,10,26));
-	System.out.println(orders);
+	List<Orders> orders = ordersDao.findAllByOrdersByOrderDate(new Date(2023,11,9), new Date(2023,11,10));
+	System.out.println(">>>>>>>>>>>>>>>>"+orders);
 	}
 
 //회원이 날짜별 기간으로 조회 
 //테스트 실패
 @Test
-//@Disabled
+@Disabled
 @Transactional
 @Rollback(false)
 	void findAllByOrdersByOrderDatebyuser() {

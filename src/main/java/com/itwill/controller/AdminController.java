@@ -1,6 +1,7 @@
 package com.itwill.controller;
 
 import java.io.File;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -465,8 +466,26 @@ public class AdminController {
 					dto.setUserinfo(userinfo);
 					ordersDto.add(dto);
 				}
-				model.addAttribute("adminOrdersList",ordersDto);
+				model.addAttribute("ordersList",ordersDto);
 				return "admin-orders";
+		}
+		
+		
+		@GetMapping("/dateByAdmin")
+		public String dateByOrder(@RequestParam("startDate")Date startDate,@RequestParam("endDate") Date endDate, HttpSession session,Model model){
+			List<OrdersDto> ordersListDto = new ArrayList<OrdersDto>();
+			System.out.println(">>>>>>>>파라미터 왔을까");
+			Long userNo=(Long)session.getAttribute("userNo");
+			List<Orders> ordersList = orderService.findAllByOrdersByOrderDate(startDate, endDate);
+			
+			for (Orders orders : ordersList) {
+				OrdersDto ordersDto = OrdersDto.toDto(orders);
+				ordersListDto.add(ordersDto);
+			}
+			
+			model.addAttribute("ordersList",ordersListDto);
+			
+			return "admin-orders";
 			
 		}
 		
