@@ -679,7 +679,7 @@
                                    <!--<a href="#">Calculate shipping</a>-->
                                    <div class="cart_subtotal">
                                        <p>총액</p>
-                                       <p class="cart_amount1" th:text='${totalPrice+"원"}'>주문할 상품 총 가격</p>
+                                       <p class="cart_amount1" th:text="${#numbers.formatInteger(totalPrice, 3, 'COMMA') + '원'}">주문할 상품 총 가격</p>
                                    </div>
                                    
                                    

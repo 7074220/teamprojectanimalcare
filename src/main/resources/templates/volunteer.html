@@ -11,7 +11,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style type="text/css">
-#volunteerDate,#volunteerTime {
+#volunteerDate, 
+#volunteerTime {
 	border: 1px solid black;
 	position: relative;
 	width: 200px;
@@ -20,11 +21,11 @@
 	text-align: center;
 	font-size: 100%;
 	margin-bottom: 20px;
-	
 }
 
-#volunteerDate::-webkit-calendar-picker-indicator,
-#volunteerTime::-webkit-calendar-picker-indicator {
+#volunteerDate::-webkit-calendar-picker-indicator, 
+#volunteerTime::-webkit-calendar-picker-indicator
+	{
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -47,30 +48,30 @@
 </style>
 
 
-<!-- 당일 날짜 선택 불가. body 안에 있으면 적용 안됨 -->
+<!-- 당일 날짜 선택 불가 -->
 <script>
-//페이지 로드 시 실행
-window.onload = function() {
-    var volunteerDate = document.getElementById('volunteerDate');
-    var today = new Date();
-    // 한국 시간대 (UTC+9)로 변경
-    today.setHours(today.getHours() + 9);
-    var afterTomorrow = new Date(today);
-    afterTomorrow.setDate(afterTomorrow.getDate() + 1); // 내일 날짜 계산
-    var afterTomorrowString = afterTomorrow.toISOString().slice(0, 10);
+	//페이지 로드 시 실행
+	window.onload = function() {
+		var volunteerDate = document.getElementById('volunteerDate');
+		var today = new Date();
+		// 한국 시간대 (UTC+9)로 변경
+		today.setHours(today.getHours() + 9);
+		var afterTomorrow = new Date(today);
+		afterTomorrow.setDate(afterTomorrow.getDate() + 1); // 내일 날짜 계산
+		var afterTomorrowString = afterTomorrow.toISOString().slice(0, 10);
 
-    volunteerDate.value = afterTomorrowString;
+		volunteerDate.value = afterTomorrowString;
 
-    var minDate = new Date(today);
-    minDate.setHours(9, 0, 0, 0);
-	if (today.getHours() >= 9) { 
-        minDate.setDate(minDate.getDate() + 1);
-    }
-    var minDateString = minDate.toISOString().slice(0, 10);
-    volunteerDate.setAttribute('min', minDateString);
+		var minDate = new Date(today);
+		minDate.setHours(9, 0, 0, 0);
+		if (today.getHours() >= 9) {
+			minDate.setDate(minDate.getDate() + 1);
+		}
+		var minDateString = minDate.toISOString().slice(0, 10);
+		volunteerDate.setAttribute('min', minDateString);
 
-    volunteerDate.removeAttribute('max');
-}; 
+		volunteerDate.removeAttribute('max');
+	};
 </script>
 
 
@@ -104,43 +105,46 @@ window.onload = function() {
 		<div class="contact_area" style="margin-top: 100px;">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-6 col-md-6">
+					<div class="col-lg-6 col-md-6" ㅇstyle="width: 420px; margin-left: 100px;">
 						<div class="contact_message content">
-							<div class="zoomWrapper single-zoom">								
-							</div>
-							
-							<!-- 센터 정보 -->
-							<h2>센터 정보</h2>
+							<div class="zoomWrapper single-zoom"></div>
+
+							<h3>센터 정보</h3>
 							<!-- <p>센터 번호: <span th:text="${center.centerNo}">10</span></p> -->
-							<p><img th:src="@{image/center/} + ${center.centerImage}"></p>
-							<p>센터 이름: <span th:text="${center.centerName}">10</span></p>
-							<p>전화 번호: <span th:text="${center.centerPhoneNumber}">10</span></p>
-							<p>지역: <span th:text="${center.centerLocal}">10</span></p>
-							<p>영업 시간: <span th:text="${center.centerOpenCloseTime}">10</span></p>							
+							<p>
+								<img th:src="@{image/center/} + ${center.centerImage}">
+							</p>
+							<p>
+								센터 이름: <span th:text="${center.centerName}">10</span>
+							</p>
+							<p>
+								전화 번호: <span th:text="${center.centerPhoneNumber}">10</span>
+							</p>
+							<p>
+								지역: <span th:text="${center.centerLocal}">10</span>
+							</p>
+							<p>
+								영업 시간: <span th:text="${center.centerOpenCloseTime}">10</span>
+							</p>
 						</div>
 					</div>
-					
-					
+
+
 					<div class="col-lg-6 col-md-6">
 						<div class="contact_message form">
 							<h3 style="font-weight: bold">신청 양식</h3>
-							
-							<form th:action="@{/create-volunteer}" method="post" th:object="${volunteer}">														
+
+							<form th:action="@{/create-volunteer}" method="post" th:object="${volunteer}">
 								<input type="hidden" id="centerid" name="centerNo" th:value="${center.centerNo}" />
-								
+
 								<div>
-									<span>방문 예약</span> 
-									<!-- <input type="date" name="volunteerDate"> -->
-									<!--  th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" 이 코드 추가시 현재 날짜 보여줌 -->
-									<input type="date" name="volunteerDate"
-										id="volunteerDate" placeholder="날짜를 선택해주세요"  required="required" 
-										th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">  
+									<span>방문 예약</span> <input type="date" name="volunteerDate"
+										id="volunteerDate" placeholder="날짜를 선택해주세요" required="required"
+										th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
 								</div>
-								
-								
+
 								<div>
-									<span>방문 시간</span>									
-									<!-- <input type="time" name="volunteerTime" > -->
+									<span>방문 시간</span>
 									<select name="volunteerTime" id="volunteerTime" style="width: 200px; padding: 10px;">
 										<option value="09">09 AM</option>
 										<option value="10">10 AM</option>
@@ -151,16 +155,15 @@ window.onload = function() {
 										<option value="15">15 PM</option>
 										<option value="16">16 PM</option>
 										<option value="17">17 PM</option>
-										<option value="18">18 PM</option>										
-									</select>																	
+										<option value="18">18 PM</option>
+									</select>
 								</div>
-																
+
 								<button type="submit" class="submit">신청</button>
-								<!-- <p class="form-messege"></p> -->
-								
+
 								<p th:text="${message}" class="success-message"></p>
 								<p th:text="${error}" class="error-message"></p>
-																
+
 							</form>
 						</div>
 					</div>
@@ -170,52 +173,49 @@ window.onload = function() {
 
 
 
-<script>
-function ajaxRequest(method, url, sendJsonObject) {
-		let returnResultJsonObject={};
-		$.ajax({
-			async:false,
-			method: method,
-			url: url,
-			contentType: 'application/json;UTF-8',
-			data: JSON.stringify(sendJsonObject),
-			type: 'json',
-			success: function(resultJsonObject) {
-				returnResultJsonObject = resultJsonObject;
+		<script>
+			function ajaxRequest(method, url, sendJsonObject) {
+				let returnResultJsonObject = {};
+				$.ajax({
+					async : false,
+					method : method,
+					url : url,
+					contentType : 'application/json;UTF-8',
+					data : JSON.stringify(sendJsonObject),
+					type : 'json',
+					success : function(resultJsonObject) {
+						returnResultJsonObject = resultJsonObject;
+					}
+				});
+				return returnResultJsonObject;
 			}
-		});
-		return returnResultJsonObject;
-	}
 
-//AJAX 요청
-$('.submit').on('click', function (event) {
-    event.preventDefault();
-    let centerNo = $('#centerid').val(); // 센터 번호를 정의
-    let volunteerDate = $('#volunteerDate').val();
-    let volunteerTime = $('#volunteerTime').val();
+			//AJAX 요청
+			$('.submit').on( 'click', function(event) {
+				event.preventDefault();
+				let centerNo = $('#centerid').val(); // 센터 번호를 정의
+				let volunteerDate = $('#volunteerDate').val();
+				let volunteerTime = $('#volunteerTime').val();
 
-    let sendJsonObject = {
-        centerNo: centerNo,
-        volunteerDate: volunteerDate,
-        volunteerTime: volunteerTime,
-        volunteerStatus: "봉사신청"
-    };
-    
-    let response = ajaxRequest('POST','volunteer/create-volunteer',sendJsonObject);
-    if(response.userNo!=null){
-    	alert('신청이 완료되었습니다.');
-    	window.location.href = 'volunteerByUserNo'; // my-account 페이지로 이동
-    }else{
-    	alert('로그인이 필요합니다.');
-        window.location.href = 'logout#/login_form'; // 로그인 페이지로 이동
-    }
-});
-</script> 
+				let sendJsonObject = {
+					centerNo : centerNo,
+					volunteerDate : volunteerDate,
+					volunteerTime : volunteerTime,
+					volunteerStatus : "봉사신청"
+				};
+
+				let response = ajaxRequest('POST', 'volunteer/create-volunteer', sendJsonObject);
+				if (response.userNo != null) {
+					alert('신청이 완료되었습니다.');
+					window.location.href = 'volunteerByUserNo'; // my-account 페이지로 이동
+				} else {
+					alert('로그인이 필요합니다.');
+					window.location.href = 'logout#/login_form'; // 로그인 페이지로 이동
+				}
+			});
+		</script>
 
 
-
-	
-	
 	</th:block>
 	<!--contact area end-->
 
