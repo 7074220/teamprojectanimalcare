@@ -217,10 +217,10 @@ VALUES (4,'배송완료.jpg','배송완료');
 
 
 -- wishlist
-insert into wish(wish_no, product_no, user_no) values(wish_wish_no_seq.nextval, 1, 15);
+insert into wish(wish_no, product_no, user_no) values(wish_wish_no_seq.nextval, 1, 19);
 
-insert into wish(wish_no, product_no, user_no) values(wish_wish_no_seq.nextval, 2, 15);
+insert into wish(wish_no, product_no, user_no) values(wish_wish_no_seq.nextval, 2, 19);
 
-insert into wish(wish_no, product_no, user_no) values(wish_wish_no_seq.nextval, 3, 15);
+insert into wish(wish_no, product_no, user_no) values(wish_wish_no_seq.nextval, 3, 19);
 
 commit;
