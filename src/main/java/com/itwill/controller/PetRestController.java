@@ -1,5 +1,6 @@
 package com.itwill.controller;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,7 +8,9 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.PetDto;
+import com.itwill.dto.ProductInsertDto;
 import com.itwill.entity.Center;
 import com.itwill.entity.Pet;
 import com.itwill.service.CenterService;
@@ -48,10 +52,13 @@ public class PetRestController {
 	 */
 	
 @Operation(summary = "펫 등록")	
-@PostMapping()
+@PostMapping("/insert_action")
 public ResponseEntity<PetDto> petSave(@RequestBody PetDto petdto){
 		petService.petSave(petdto.toEntity(petdto));
-		return ResponseEntity.status(HttpStatus.CREATED).body(petdto);
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<PetDto>(petdto, httpHeaders, HttpStatus.CREATED);
 	}
 
 

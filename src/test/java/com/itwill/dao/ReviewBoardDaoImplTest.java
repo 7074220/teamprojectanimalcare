@@ -1,10 +1,10 @@
 package com.itwill.dao;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
-import java.util.Date;
+
 import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
@@ -13,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.itwill.TeamprojectAnimalcareApplicationTest;
-import com.itwill.entity.Product;
 import com.itwill.entity.ReviewBoard;
-import com.itwill.entity.Userinfo;
 
 import jakarta.transaction.Transactional;
 
@@ -34,10 +31,15 @@ class ReviewBoardDaoImplTest {
 	@Transactional
 	@Rollback(false)
 	void testCreate() {
-		LocalDateTime currentDateTime=LocalDateTime.now();
-		ReviewBoard reviewBoard = ReviewBoard.builder().boardTitle("타이틀12").boardContent("내용12").boardDate(currentDateTime)
-				.boardStar((double) 3).userinfo(userInfoDao.findByNo(1L)).product(productDao.findByProductNo(5L))
-				.build();
+
+		LocalDateTime currentDateTime = LocalDateTime.now();
+		ReviewBoard reviewBoard = ReviewBoard.builder()
+				.boardTitle("타이틀12")
+				.boardContent("내용12")
+				.boardDate(currentDateTime)
+				.boardStar((double) 3)
+				.userinfo(userInfoDao.findByNo(1L))
+				.product(productDao.findByProductNo(5L)).build();
 
 		reviewBoardDao.create(reviewBoard);
 	}
