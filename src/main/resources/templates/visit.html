@@ -11,7 +11,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style type="text/css">
-visit,#visitTime {
+#visitDate,#visitTime {
 	border: 1px solid black;
 	position: relative;
 	width: 200px;
@@ -104,13 +104,13 @@ window.onload = function() {
 		<div class="contact_area" style="margin-top: 100px;">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-6 col-md-6">
-						<div class="contact_message content">
+					<div class="col-lg-6 col-md-6" style="width: 420px; margin-left: 100px;">
+						<div class="contact_message content" >
 							<div class="zoomWrapper single-zoom">								
 							</div>
 							
 							<!-- 센터 정보 -->
-							<h2>센터 정보</h2>
+							<h3>센터 정보</h3>
 								<p><img th:src="@{image/center/} + ${center.centerImage}"></p>
 							<p>센터 이름: <span th:text="${center.centerName}">10</span></p>
 							<p>전화 번호: <span th:text="${center.centerPhoneNumber}">10</span></p>
