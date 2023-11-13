@@ -4,6 +4,13 @@
 
 <head>
 	<title>Safira - product details</title>
+	<style>
+		.product_info_content{
+			text-align: center;
+		}
+		
+	</style>
+	
 </head>
 
 <body>
@@ -807,7 +814,7 @@
 									<div class="product_thumb">
 										<a class="primary_img" href="product-details.html"
 											th:href="@{productDetail(productNo=${product.productNo})}"><img src="#"
-												alt="" th:src="@{/image/product/} + ${product.getProductImage}"></a>
+												alt="" th:src="@{/image/product/} + ${product.getProductImage}" style="height: 260px;"></a>
 										<!--  <a class="secondary_img" href="product-details.html"><img src="assets/img/product/product21.jpg" alt=""></a> -->
 										<!--  <div class="label_product">
                                         <span class="label_sale">Sale</span>
