@@ -119,7 +119,6 @@
 
 		<script>
 			function ajaxRequest(method, url, sendJsonObject) {
-				alert('요청');
 				let returnResultJsonObject = {};
 				$.ajax({
 					async: false,
@@ -151,6 +150,7 @@
 						mypetNo : mypetNo
 					}
 					ajaxRequest('DELETE','mypet/'+mypetNo);
+					window.location.reload();
 				});
 			});
 

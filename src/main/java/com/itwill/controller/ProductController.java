@@ -139,7 +139,7 @@ public class ProductController {
 		return "shop";
 	}
 	
-	/*
+	
 	// 펫카테고리별로 구분 --> 상품 리스트 출력
 		@GetMapping("/productList")
 		public String productList(Model model, HttpSession session) {
@@ -172,8 +172,8 @@ public class ProductController {
 			// System.out.println(productList.get(0).getProductPetCategory());
 			return "shop";
 		}
-		*/
 		
+		/*
 		@GetMapping("/productList")
 		public String productList(@PageableDefault(page = 0, size = 9, sort = "productNo", direction = Sort.Direction.DESC) Pageable page, Model model, HttpSession session) {
 			int pageNo = page.getPageNumber();
@@ -211,6 +211,7 @@ public class ProductController {
 			// System.out.println(productList.get(0).getProductPetCategory());
 			return "shop";
 		}
+		*/
 		
 		// 펫카테고리별로 구분 --> 상품 리스트 출력
 	/*

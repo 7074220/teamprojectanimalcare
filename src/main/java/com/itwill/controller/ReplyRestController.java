@@ -109,7 +109,7 @@ public class ReplyRestController {
 	// 댓글 삭제
 	@Operation(summary = "자신이 쓴 댓글삭제")
 	@DeleteMapping
-	public ResponseEntity<List<ReplyCreateDto>> delete(ReplyCreateDto replyCreateDto, HttpSession session)
+	public ResponseEntity<List<ReplyCreateDto>> delete(@RequestBody ReplyCreateDto replyCreateDto, HttpSession session)
 			throws Exception {
 		Integer step = replyCreateDto.getReplyBoardStep();
 		Integer depth = replyCreateDto.getReplyBoardGroupNo();
@@ -117,8 +117,8 @@ public class ReplyRestController {
 		if (session.getAttribute("userNo") == null) {
 			throw new Exception("로그인을 해주세요");
 		}
-
-		replyBoardService.deleteByReplyBoardStepBoardDepthBoardGroupNo(step, depth, groupNo);
+		replyBoardService.DeleteByNo(replyCreateDto.getReplyBoardNo());
+		//replyBoardService.deleteByReplyBoardStepBoardDepthBoardGroupNo(step, depth, groupNo);
 
 		List<ReplyBoard> replyBoardList = replyBoardService.findAllByReportBoardNo(replyCreateDto.getReportNo());
 		List<ReplyCreateDto> replyCreateDtoList = new ArrayList<ReplyCreateDto>();

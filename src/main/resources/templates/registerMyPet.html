@@ -89,13 +89,13 @@
     
 			let sendJsonObject={
 				mypetName:document.f.mypetName.value,
-				  mypetBirthday: mypetBirthdayLocalDateTime.toISOString(),
+			 mypetBirthday: mypetBirthdayLocalDateTime.toISOString(),
 				//mypetBirthday:document.f.mypetBirthday.value,
 				mypetKind:document.f.kind.value
 			};               
 			
 			ajaxRequest('POST','mypet/inserted',sendJsonObject);
-			alert(mypetBirthday);
+			//alert(mypetBirthday);
 			window.location.href = "mypet"; // 페이지 이동
 		}	
 		
