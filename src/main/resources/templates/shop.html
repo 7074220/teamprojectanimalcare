@@ -698,6 +698,7 @@
 						</aside>
 						<!--sidebar widget end-->
 					</div>
+					
 					<div class="col-lg-9 col-md-12">
 						<!--shop wrapper start-->
 						<!--shop toolbar start-->
@@ -811,10 +812,10 @@
 						<div class="row shop_wrapper">
 							<div class="col-lg-4 col-md-4 col-sm-6 col-12" th:each="product:${productList}" id="listContent">
 								<div class="single_product">
-									<div class="product_thumb" style="width: 250px; height: 300px;">
+									<div class="product_thumb" style="width: 250px; height: 250px;">
 										<a class="primary_img" href="product-details.html"
 											th:href="@{productDetail(productNo=${product.productNo})}"><img src="#"
-												alt="" th:src="@{/image/product/} + ${product.getProductImage}" style="width: 250px; height: 300px;"></a>
+												alt="" th:src="@{/image/product/} + ${product.getProductImage}" style="width: 250px; height: 250px;"></a>
 
 										<!-- <a class="secondary_img" href="product-details.html"><img src="assets/img/product/productbig2.jpg" alt=""></a>-->
 										
@@ -1411,17 +1412,31 @@
 				</div>
 			</div>
 
-			<div class="shop_toolbar t_bottom">
+			<!-- <div class="shop_toolbar t_bottom">
 				<div class="pagination">
 					<ul>
 						<li class="current">1</li>
 						<li><a href="#">2</a></li>
 						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
 						<li class="next"><a href="#">next</a></li>
 						<li><a href="#">>></a></li>
 					</ul>
 				</div>
-			</div>
+			</div> -->
+			<div class="shop_toolbar t_bottom">
+						                    <div class="pagination" th:if="${productList.totalPages > 1}">
+						                        <ul th:with="pageNumber=${productList.number}, totalPages=${productList.totalPages}">
+						                            <li th:classappend="${productList.first} ? 'disabled'"><a href="#" th:href="${productList.first} ? '#' : @{productList(page=${pageNumber - 1})}">&lt;</a></li>
+						
+						                            <li th:each="page: ${#numbers.sequence(0, totalPages - 1)}"
+						                                th:classappend="${page == pageNumber} ? 'current'"><a th:text="${page + 1}" th:href="@{productList(page=${page})}"></a></li>
+						
+						                            <li th:classappend="${productList.last} ? 'disabled'"><a href="#" th:href="${productList.last} ? '#' : @{productList(page=${pageNumber + 1})}">&gt;</a></li>
+						                        </ul>
+						                    </div>
+						                </div>
 			<!--shop toolbar end-->
 			<!--shop wrapper end-->
 		</div>

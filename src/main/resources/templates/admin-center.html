@@ -13,7 +13,7 @@
 		}
 
 		#centerTable {
-			width: 1100px;
+			width: 1350px;
 		}
 	</style>
 
@@ -26,8 +26,10 @@
 
 		<!-- my account start  -->
 		<section class="main_content_area">
-			<div class="container" style="margin-right: 420px;">
+
+			<div class="container" style="margin-right: 600px;">
 				<div class="account_dashboard" >
+
 					<div class="row">
 						<div class="col-sm-12 col-md-3 col-lg-3">
 							<!-- Nav tabs -->
@@ -56,9 +58,9 @@
 
 								<!--  <div class="tab-pane fade" id="visit">-->
 								<h3>보호소</h3>
-								<form method="post"  th:action="@{/centerInsertForm}">
-									<button type="submit" class="button">보호소 추가</button>
-								</form>
+								
+								<a href="centerInsertForm">보호소 추가</a>
+								
 								<div class="table-responsive" id="centerTable">
 									<table class="table">
 										<thead>
@@ -81,19 +83,10 @@
 												<td th:text="${center.centerLocal}"></td>
 												<td th:text="${center.centerOpenCloseTime}"></td>
 												<td th:text="${center.centerImage}"></td>
-
-
-
-
-
 												<td>
-
-
 													<button type="submit" class="deleteBtn"
 														th:id="'deleteBtn-' + ${center.centerNo}">취소</button>
 												</td>
-
-
 											</tr>
 										</tbody>
 									</table>
@@ -160,36 +153,7 @@
 
 		</script>
 
-		<!--<script> 실패..
-			function submitForm() {
-				// 폼 데이터를 가져와서 서버로 전송
-				var formData = {
-					centerName: $('#centerName').val(),
-					phoneNumber: $('#centerPhoneNumber').val(),
-					centerLocal: $('#centerLocal').val(),
-					centerImage: $('#centerImage').val(),
-					centerOpenCloseTime: $('#centerOpenCloseTime').val()
-					
-				};
 
-				$.ajax({
-					type: 'POST',
-					url: '',
-					contentType: 'application/json',
-					data: JSON.stringify(formData),
-					success: function (data) {
-						// 성공 시 처리
-						console.log('데이터 추가 성공:', data);
-						$('#addCenterModal').modal('hide'); // 모달 닫기
-					},
-					error: function (error) {
-						// 에러 처리
-						console.error('데이터 추가 에러:', error);
-					}
-				});
-			}
-
-		</script>-->
 	</th:block>
 
 
