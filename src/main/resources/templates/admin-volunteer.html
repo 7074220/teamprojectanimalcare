@@ -81,10 +81,6 @@
 							<!-- Tab panes -->
 							<div class="tab-content dashboard_content">
 
-
-
-
-
 								<!--  <div class="tab-pane fade" id="visit">-->
 								<h3>봉사</h3>
 								<div class="table-responsive" id="volunteerTable">
@@ -102,8 +98,6 @@
 										</thead>
 										<tbody>
 											<tr th:each="volunteer, rowStat : ${volunteerList}">
-												
-											
 												<td th:text="${volunteerList.size() - rowStat.index}"></td>	
 												<td th:text="${volunteer.Userinfo.userName}">이름</td> 												
 												<td th:text="${#strings.substring(volunteer.volunteerDate.toString(), 0, 10)}">방문날짜</td>																																	
@@ -193,15 +187,6 @@
 			});			
 		});
 	</script>
-
-
-
-
-
-
-
-
-
 
 
 
