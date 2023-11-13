@@ -1076,7 +1076,9 @@
 										</select>
 										<div id="reviewContent">
 										<div class="reviews_wrapper" th:each="review:${reviewList}">
-											<h2 th:text="${#dates.format(review.boardDate, 'yyyy-MM-dd HH:mm')}">roadthemes</h2>
+											<h2 th:text="${#temporals.format(review.boardDate, 'yyyy-MM-dd HH:mm')}">roadthemes</h2>
+
+
 
 											<div class="reviews_comment_box">
 												<div class="comment_thmb" style="width: 50px;">

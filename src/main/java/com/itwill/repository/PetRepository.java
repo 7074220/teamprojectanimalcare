@@ -19,7 +19,7 @@ public interface PetRepository extends JpaRepository<Pet, Long>{
 	List<Pet> findAllByOrderByPetNoDesc();
 	
 	//펫 타입으로 정렬
-	@Query(value = "select * from Pet where pet_type like %:petType%", nativeQuery = true)
+	@Query(value = "select * from Pet where pet_type = :petType", nativeQuery = true)
 	Page<Pet> findByPetType(@Param("petType") String petType,Pageable pageable);
 	
 	

@@ -55,7 +55,9 @@
 								</p>
 
 								<label for="productImage">상품 이미지</label> <input type="file"
-									name="imageFile" style="border: none;">
+									name="imageFile" id="imageFile" th:value="${product.productImage}"
+									style="border: none;">
+									<img alt="" src="" id="imagePreview" width="300px" height="300px">
 								<div class="login_submit" style="margin-top: 10px;">
 
 
@@ -71,6 +73,53 @@
 		</div>
 
 		<script>
+			/*************************************/
+			function loadURLToInputFiled(url){
+				console.log(url);
+				  getImgURL(url, (imgBlob)=>{
+				    // Load img blob to input
+				    // WIP: UTF8 character error
+				    let fileName = '[[${product.productImage}]]';
+				    let file = new File([imgBlob], fileName,{type:"image/jpeg", lastModified:new Date().getTime()}, 'utf-8');
+				    let container = new DataTransfer(); 
+				    container.items.add(file);
+				    document.querySelector('input[type="file"]').files = container.files;
+				    document.querySelector('#imagePreview').src=url;
+				  });
+				}
+				// xmlHTTP return blob respond
+			function getImgURL(url, callback){
+			  var xhr = new XMLHttpRequest();
+			  xhr.onload = function() {
+			      callback(xhr.response+">>>>>>>>>>>>>");
+			      
+			      
+			  };
+			  xhr.open('GET', url);
+			  xhr.responseType = 'blob';
+			  xhr.send();
+			}
+			/*************************************/
+		
+		
+			/* const fileInput = document.querySelector('input[type="file"]');
+		    // Create a new File object
+	        const myFile = new File(['Hello World!'], '[[${product.productImage}]]', {
+	            type: 'text/plain',
+	            lastModified: new Date(),
+	        });
+	        // Now let's create a DataTransfer to get a FileList
+	        const dataTransfer = new DataTransfer();
+	        dataTransfer.items.add(myFile);
+	        fileInput.files = dataTransfer.files; */
+	        
+	        loadURLToInputFiled('image/product/[[${product.productImage}]]');
+			
+				
+				
+				
+				
+				
 			$('#product_update_form').on('submit', function(e) {
 				//alert('aaa');
 				// 폼이 유효하지 않으면 전송을 중지
@@ -80,7 +129,7 @@
 				}
 				//alert('안먹나?');
 				window.location.href = "adminProductList";
-			});
+			});	
 		</script>
 
 	</th:block>
