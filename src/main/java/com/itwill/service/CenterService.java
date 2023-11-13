@@ -2,6 +2,9 @@ package com.itwill.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.itwill.entity.Center;
 
 public interface CenterService {
@@ -17,4 +20,6 @@ public interface CenterService {
 	List<Center> findAllCenters();
 	
 	List<Center> findByName(String centerName);
+	
+	public Page<Center> centerFindAllPage(Pageable pageable);
 }
