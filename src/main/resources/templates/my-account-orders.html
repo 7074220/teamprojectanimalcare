@@ -299,7 +299,7 @@
 											</thead>
 											<tbody>
 												<tr th:each="orders:${ordersList}" th:if="orders!=null">
-													<td class="order_no" th<!---->:text="${orders.orderNo}">orderNo</td>
+													<td class="order_no" th:text="${orders.orderNo}">orderNo</td>
 													<td class="order_userNo" th:if="${session.userName == '관리자'}" th:text="${orders.userinfo.userId}" >사용자 ID</td>
 													<td class="order_date" th:text="${#dates.format(orders.orderDate, 'yyyy-MM-dd')}">주문날짜</td>
 													<td class="order_desc" th:text="${orders.orderDesc}"><span
