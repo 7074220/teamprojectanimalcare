@@ -597,7 +597,7 @@
 													<input type="checkbox" name="chk" class="chk" onclick="chkClicked()" value="" th:id="${wish.wishNo}" checked="true">
 												</label>
 											</td>
-                                            <td class="product_thumb" th:id="${wish.wishNo}"><a href="#" th:href="@{productDetail(productNo=${wish.product.productNo})}"><img src="#" alt="" th:src="@{/image/product/} + ${wish.product.getProductImage}"></a></td>
+                                            <td class="product_thumb" th:id="${wish.wishNo}"><a href="#" th:href="@{productDetail(productNo=${wish.product.productNo})}"><img src="#" alt="" th:src="@{/image/product/} + ${wish.product.getProductImage}" style="width: 129px;height: 129px;"></a></td>
                                             <td class="product_name" th:id="${wish.wishNo}"><a href="#" th:text="${wish.product.productName}" th:href="@{productDetail(productNo=${wish.product.productNo})}">상품명</a></td>
                                             <td class="product-price"  th:id="${wish.wishNo}" th:text="${#numbers.formatInteger(wish.product.productPrice, 3, 'COMMA') + '원'}">가격</td>
                                             <td class="product_quantity" th:id="${wish.wishNo}" th:text="${wish.product.productCategory}">In Stock</td>
