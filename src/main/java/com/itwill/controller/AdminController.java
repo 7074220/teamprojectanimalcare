@@ -536,8 +536,16 @@ public class AdminController {
 		    model.addAttribute("centerList", centerList);
 		    return "admin-center";
 		}
+	
+	@GetMapping("centerInsertForm")
+	public String updateCenterForm() {
+		
+		return "center_insert_form";
+	}
+		
 	// 관리자 --> 센터생성
-	@PostMapping("/centerInsertForm")
+		// 업뎃폼에서 버튼 눌렀을때~
+	@PostMapping("/centerInsert")
 	public String insertCenter(@RequestParam("imageFile") MultipartFile file,
 			@RequestParam("centerName") String centerName, @RequestParam("centerPhoneNumber") String centerPhoneNumber,
 			@RequestParam("centerLocal") String centerLocal,

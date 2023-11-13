@@ -9,9 +9,9 @@ export function reviewBoard(responseJsonObject = {}) {
         <h2>{{formatDate boardDate}}</h2>
         <div class="reviews_comment_box">
             <div class="comment_thmb">
-              <p><strong>{{userNo}}</strong></p>
+              <p><strong>{{userName}}</strong></p>
 
-                <p><strong>{{this.userInfo.userName}}</strong></p>
+              
 
 
             </div>

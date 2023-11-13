@@ -252,7 +252,7 @@ public class ReviewBoardRestController {
 	
 	@Operation(summary = "높은 평점순 정렬")
 	@PostMapping("/productDetail")
-	public ResponseEntity<List<ReviewBoardDto>> findByProductProductNoOrderByBoardStarDesc(@RequestBody ReviewBoardDto dto) {
+	public ResponseEntity<List<ReviewBoardDto>> findByProductProductNoOrderByBoardStarDesc(@RequestBody ReviewBoardDto dto) throws Exception {
 	    List<ReviewBoard> reviewBoards = reviewBoardService.findByProductProductNoOrderByBoardStarDesc(dto.getProductNo());
 	    List<ReviewBoardDto> reviewList = new ArrayList<>();
 	    
@@ -265,6 +265,8 @@ public class ReviewBoardRestController {
 	        reviewdto.setBoardStar(reviewBoard.getBoardStar());
 	        reviewdto.setUserNo(reviewBoard.getUserinfo().getUserNo());
 	        reviewdto.setProductNo(reviewBoard.getProduct().getProductNo());
+	        Userinfo findUserinfo = userInfoService.findUserByNo(reviewBoard.getUserinfo().getUserNo());
+	        reviewdto.setUserName(findUserinfo.getUserName());
 	        reviewList.add(reviewdto);
 	    }
 	    
@@ -306,7 +308,7 @@ public class ReviewBoardRestController {
 	
 	@Operation(summary = "최신 날짜순으로 정렬")
 	@PostMapping("productDetailDate")
-	public ResponseEntity<List<ReviewBoardDto>> findByProductProductNoOrderByBoardDateDesc(@RequestBody ReviewBoardDto dto) {
+	public ResponseEntity<List<ReviewBoardDto>> findByProductProductNoOrderByBoardDateDesc(@RequestBody ReviewBoardDto dto) throws Exception {
 		 List<ReviewBoard> reviewBoards = reviewBoardService.findByProductProductNoOrderByBoardDateDesc(dto.getProductNo());
 		    List<ReviewBoardDto> reviewList = new ArrayList<>();
 		    
@@ -319,6 +321,8 @@ public class ReviewBoardRestController {
 		        reviewdto.setBoardStar(reviewBoard.getBoardStar());
 		        reviewdto.setUserNo(reviewBoard.getUserinfo().getUserNo());
 		        reviewdto.setProductNo(reviewBoard.getProduct().getProductNo());
+		        Userinfo findUserinfo = userInfoService.findUserByNo(reviewBoard.getUserinfo().getUserNo());
+		        reviewdto.setUserName(findUserinfo.getUserName());
 		        reviewList.add(reviewdto);
 		    }
 

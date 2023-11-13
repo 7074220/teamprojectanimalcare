@@ -58,9 +58,9 @@
 
 								<!--  <div class="tab-pane fade" id="visit">-->
 								<h3>보호소</h3>
-								<form th:action="@{/centerInsertForm}" method="post" enctype="multipart/form-data">
-									<button type="submit">보호소 추가</button>
-								</form>
+								
+								<a href="centerInsertForm">보호소 추가</a>
+								
 								<div class="table-responsive" id="centerTable">
 									<table class="table">
 										<thead>
@@ -83,19 +83,10 @@
 												<td th:text="${center.centerLocal}"></td>
 												<td th:text="${center.centerOpenCloseTime}"></td>
 												<td th:text="${center.centerImage}"></td>
-
-
-
-
-
 												<td>
-
-
 													<button type="submit" class="deleteBtn"
 														th:id="'deleteBtn-' + ${center.centerNo}">취소</button>
 												</td>
-
-
 											</tr>
 										</tbody>
 									</table>
