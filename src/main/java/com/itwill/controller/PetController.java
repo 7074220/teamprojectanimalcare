@@ -55,13 +55,14 @@ AdoptService adoptService;
 CenterService centerService;
 //@Autowired
 //팻 등록
-	@PostMapping("/insert_action")
-	public String insert_action(@RequestBody PetDto petDto) throws Exception {
-		
-		petService.petSave(petDto.toEntity(petDto));
-		
-		return "pet-list";
-	}
+/*
+ * @PostMapping("/insert_action") public String insert_action(@RequestBody
+ * PetDto petDto) throws Exception {
+ * 
+ * petService.petSave(petDto.toEntity(petDto));
+ * 
+ * return "pet-list"; }
+ */
 	
 	@GetMapping("/petinsertform")
 	public String petinsertform(Model model) throws Exception {
