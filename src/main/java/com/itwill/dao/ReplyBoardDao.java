@@ -12,6 +12,9 @@ public interface ReplyBoardDao {
 	// 댓글 작성
 	public ReplyBoard Create(ReplyBoard replyBoard);
 	
+	// 댓글 하나 삭제
+	public void DeleteByNo(Long replyBoardNo);
+	
 	// 댓글 하나 선택
 	public ReplyBoard findByReplyBoardNo(Long replyBoardNo);
 	
