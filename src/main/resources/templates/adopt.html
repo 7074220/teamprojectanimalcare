@@ -107,6 +107,8 @@ window.onload = function() {
 					<div class="col-lg-6 col-md-6" style="width: 420px; margin-left: 100px;">
 						<div class="contact_message content">
 							<h3 style="font-weight: bold">펫 정보</h3>
+							<img src="#" th:src="@{/image/pet/}+${pet.getPetImage}"
+								style="width: 250px; height:250px;">
 							  <p>
 								센터: <span th:text="${center.centerName}"></span>
 							</p>   
@@ -119,8 +121,7 @@ window.onload = function() {
 							<p>
 								펫 특징: <span th:text="${pet.petCharacter}"></span>
 							</p>
-							<img src="#" th:src="@{/image/pet/}+${pet.getPetImage}"
-								style="width: 250px; height:250px;">
+							
 
 							<!--	<ul>
 								<li><i class="fa fa-fax"></i> 주소 : 서울시 강남구</li>

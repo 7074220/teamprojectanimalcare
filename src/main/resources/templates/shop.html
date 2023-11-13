@@ -1425,7 +1425,7 @@
 					</ul>
 				</div>
 			</div> -->
-			<div class="shop_toolbar t_bottom">
+			<!-- <div class="shop_toolbar t_bottom">
 						                    <div class="pagination" th:if="${productList.totalPages > 1}">
 						                        <ul th:with="pageNumber=${productList.number}, totalPages=${productList.totalPages}">
 						                            <li th:classappend="${productList.first} ? 'disabled'"><a href="#" th:href="${productList.first} ? '#' : @{productList(page=${pageNumber - 1})}">&lt;</a></li>
@@ -1436,7 +1436,7 @@
 						                            <li th:classappend="${productList.last} ? 'disabled'"><a href="#" th:href="${productList.last} ? '#' : @{productList(page=${pageNumber + 1})}">&gt;</a></li>
 						                        </ul>
 						                    </div>
-						                </div>
+						                </div> -->
 			<!--shop toolbar end-->
 			<!--shop wrapper end-->
 		</div>
@@ -1493,8 +1493,6 @@
 		        var location = window.location.href;
 		        
 		        var path = location.substring(location.lastIndexOf("/"))
-		        
-		        alert(location.substring(location.lastIndexOf("/")));
 		        
 		        switch (selectedValue) {
 		            case "2":
