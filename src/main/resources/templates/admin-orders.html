@@ -299,7 +299,7 @@
 													<td class="order_price"
 														th:text="${#numbers.formatInteger(orders.orderPrice, 3, 'COMMA') + '원'}">총가격</td>
 													<td><a  data-toggle="modal" data-target="#orderDetailsModal"  th:href="@{#__${orders.orderNo}__}" class="view">주문상세</a></td>
-													<td th:if="${session.userName == '관리자'}" class="order_remove" th:id="${orders.orderNo}"><a class="deleteOrder"><i class="fa fa-trash-o" th:id="${orders.orderNo}"></i></a></td>
+													<td  class="order_remove" th:id="${orders.orderNo}"><a class="deleteOrder"><i class="fa fa-trash-o" th:id="${orders.orderNo}"></i></a></td>
 												</tr>
 												<!-- <tr>
                                                 <td>2</td>
@@ -456,7 +456,6 @@
                                                 <th>상품명</th>
                                                 <!--<th>총가격</th>-->
                                                 <th>주문상태</th>
-                                                <th>리뷰</th>
                                              </tr>
                                           </thead>
                                           <tbody>
@@ -478,7 +477,6 @@
                                                       {{/select}}
                                                    </select>
                                                 </td>
-                                                <td><button type="button" class="write-review" onclick="reviewWrite(event,{{oiNo}})" id="{{product.productNo}}">{{reviewStatus}}</button></td>
                                              </tr>
                                              {{/each}}
                                           </tbody>

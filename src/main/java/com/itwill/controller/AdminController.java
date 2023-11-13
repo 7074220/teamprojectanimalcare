@@ -478,12 +478,16 @@ public class AdminController {
 			Long userNo=(Long)session.getAttribute("userNo");
 			List<Orders> ordersList = orderService.findAllByOrdersByOrderDate(startDate, endDate);
 			
+			
+			System.out.println(">>>>>>>>어드민 데이트"+ordersList);
 			for (Orders orders : ordersList) {
 				OrdersDto ordersDto = OrdersDto.toDto(orders);
 				ordersListDto.add(ordersDto);
 			}
 			
-			model.addAttribute("ordersList",ordersListDto);
+			System.out.println(">>>>>>>dto객체"+ordersListDto);
+			
+			model.addAttribute("ordersList",ordersList);
 			
 			return "admin-orders";
 			

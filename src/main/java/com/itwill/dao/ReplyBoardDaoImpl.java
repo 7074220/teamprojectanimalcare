@@ -96,6 +96,11 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 	public List<ReplyBoard> findAllByReportBoardNo(Long BoardNo) {
 		return replyBoardRepository.findAllByReportBoardNo(BoardNo);
 	}
+
+	@Override
+	public void DeleteByNo(Long replyBoardNo) {
+		replyBoardRepository.deleteById(replyBoardNo);
+	}
 	
 
 }

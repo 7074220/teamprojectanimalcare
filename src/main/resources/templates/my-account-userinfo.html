@@ -35,14 +35,14 @@
    <!--header area start-->
     <th:block layout:fragment="content">
     <script>
-    function call_confirm(){
-	
-	if(confirm("회원 탈퇴 하시겠습니까?")){
-		alert("정상적으로 탈퇴되었습니다.");
-	}else{
-		alert("탈퇴실패");
+	    function call_confirm(){
 		
-	}
+		if(confirm("회원 탈퇴 하시겠습니까?")){
+			alert("정상적으로 탈퇴되었습니다.");
+			window.location.href="userDelete"
+		}else{
+			alert("탈퇴실패");
+		}
 	
 }
 </script>
@@ -212,7 +212,7 @@
                         <div class="dashboard_tab_button">
                             <ul role="tablist" class="nav flex-column dashboard-list">
                                  <li><a href="userinfo" class="nav-link">내정보</a></li>
-                                <li><a href="userinfo/mypet"  class="nav-link">마이펫</a></li>
+                                <li><a href="mypet"  class="nav-link">마이펫</a></li>
                                 <li><a href="couponList"  class="nav-link">쿠폰</a></li>
                                 <li><a th:if="${session.userName != '관리자'}" href="adoptByUserNo" class="nav-link">입양</a></li> 
 								<li><a th:if="${session.userName != '관리자'}" href="volunteerByUserNo" class="nav-link">봉사</a></li>  
@@ -221,7 +221,6 @@
                                 <li><a href="logout" class="nav-link">로그아웃</a></li>
                                 <!-- <li><a href="userDelete" class="nav-link" onclick="call_confirm()">회원탈퇴</a></li> -->
                                 <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li>
-
                             </ul>
                         </div>    
                     </div>
@@ -349,19 +348,21 @@
 
 <script>
   // HTML이 모두 로드된 후에 함수를 실행하도록 window.onload 이벤트를 사용합니다.
-  window.onload = function() {
+window.onload = function() {
     // 버튼 요소를 가져옵니다.
-    var confirmDeleteButton = document.getElementById("confirmDelete");
-
-    // 클릭 이벤트에 대한 함수를 정의합니다.
-    function confirmDeleteFunction() {
+	function confirmDeleteFunction() {
       // 이 함수에 버튼이 클릭될 때 실행할 코드를 작성합니다.
       // 예를 들어, 사용자에게 확인 메시지를 표시하거나 다른 동작을 수행할 수 있습니다.
       console.log("탈퇴하기 버튼이 클릭되었습니다.");
 
       window.location.href="userDelete";
     }
-
+	
+	$('#confirmDelete').on('click',function(e){
+		confirmDeleteFunction();
+	});
+    // 클릭 이벤트에 대한 함수를 정의합니다.
+   
     
   };
 </script>

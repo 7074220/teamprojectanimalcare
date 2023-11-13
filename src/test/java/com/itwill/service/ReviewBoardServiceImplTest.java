@@ -2,6 +2,7 @@ package com.itwill.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -32,12 +33,12 @@ class ReviewBoardServiceImplTest {
 	@Transactional
 	@Rollback(false)
 	void testCreate() throws Exception {
-
+		LocalDateTime currentDateTime=LocalDateTime.now();
 		ReviewBoard reviewBoard = ReviewBoard.builder()
 			
 				.boardTitle("별로네요")
 				.boardContent("별로에요")
-				.boardDate(new Date())
+				.boardDate(currentDateTime)
 				.boardStar((double) 1)
 				.userinfo(userInfoService.findUserByNo(14L))
 				.product(productService.findByProductNo(15L))

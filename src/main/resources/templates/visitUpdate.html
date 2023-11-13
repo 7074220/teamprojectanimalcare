@@ -20,7 +20,7 @@
 	text-align: center;
 	font-size: 100%;
 	margin-bottom: 20px;
-	
+	margin-left: 20px;
 }
 
 #visitDate::-webkit-calendar-picker-indicator,
@@ -43,6 +43,27 @@
 
 #visitDate:valid::before {
 	display: none;
+}
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h3{
+	font-family: 'GmarketSansMedium';
+}
+
+p{
+	font-family: 'GmarketSansMedium';
+}
+
+span{
+	font-family: 'GmarketSansMedium';
+}
+button{
+	font-family: 'GmarketSansMedium';
 }
 </style>
 
@@ -110,7 +131,7 @@ window.onload = function() {
 							</div>
 							
 							<!-- 센터 정보 -->
-							<h2>센터 정보</h2>
+							<h3>센터 정보</h3>
 							<!--<p>센터 번호: <span th:text="${center.centerNo}">10</span></p>-->
 								<p><img th:src="@{image/center/} + ${center.centerImage}"></p>
 							<p>센터 이름: <span th:text="${center.centerName}">10</span></p>

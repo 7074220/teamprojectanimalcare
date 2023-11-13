@@ -2,6 +2,8 @@ package com.itwill.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.dto.VolunteerTimePointDto;
@@ -30,6 +32,6 @@ public interface VolunteerService {
 	
 	void addPointsToVolunteer(Long volunteerNo, Integer pointsToAdd);
 	// 봉사에 포인트 적립
-
+	
 		
 }

@@ -106,6 +106,9 @@
 			},
 			boardContent: {
 				required: true
+			},
+			imageFile:{
+				required:true
 			}
 		},
 		messages: {
@@ -127,6 +130,9 @@
 			},
 			boardContent: {
 				required: '내용을 입력하세요.'
+			},
+			imageFile:{
+				required: '이미지를 넣어주세요'
 			}
 			
 		},
@@ -141,9 +147,11 @@
         if (!$(this).valid()) {
             e.preventDefault();
             
-        }
+        }else{
+			location.href = "/reportlist";	
+		}
         //alert('안먹나?');
-        location.href = "/reportlist";
+        
     });
 
 	window.onload = function() {
