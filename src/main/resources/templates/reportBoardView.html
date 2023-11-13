@@ -196,7 +196,7 @@
 														</p>
 														<!-- <img src="assets/img/blog/comment2.jpg" alt="">-->
 													</div>
-													<div class="comment_text">
+													<div class="comment_text" th:id="${replyBoard.replyBoardNo}">
 														<div class="reviews_meta">
 															<!-- <p><strong th:text="${review.userinfo.userName}">adm </strong>- September 12, 2018</p>-->
 		
@@ -308,14 +308,14 @@
 			function replyUpdateForm(responseJsonObject = {}) {
 				let htmlTemplate =
 				`<div class="reviews_meta">
-					<input>roadthemes</input>
-					<div style="margin-left: 650px;">
+					<textarea style="border: none; width: 800px; height: 50px; resize: none;"></textarea>
+					<div style="margin-left: 700px;">
 						<button
 							style="border: none; background: transparent;"
-							onclick="replyUpdate(event)" th:class="${replyBoard.replyBoardNo}">수정</button>
+							onclick="replyUpdate(event)">수정</button>
 						<button
 							style="border: none; background: transparent;"
-							onclick="replyDelete(event)" th:class="${replyBoard.replyBoardNo}">삭제</button>
+							onclick="replyDelete(event)">삭제</button>
 					</div>
 				</div>`;
 				
@@ -329,8 +329,11 @@
 				let send ={
 					replyBoardNo : replyBoardNo
 				}
-				ajaxRequest('DELETE','reply',send);
-				window.location.reload();
+				//let response = ajaxRequest('PUT','reply',send);
+				let html = replyUpdateForm();
+				$('#'+replyBoardNo).html(html);
+				
+				//window.location.reload();
 			}
 			
 		</script>
