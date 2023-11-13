@@ -24,8 +24,7 @@ import lombok.ToString;
 @ToString
 public class OrderItemDto {
 
-private Long oiNo;
-	
+	private Long oiNo;
 	private Integer oiQty;
 	private Long orderNo;
 	
@@ -35,7 +34,8 @@ private Long oiNo;
 	@Default
 	private Product product=new Product();
 	private String reviewStatus;
-	private int orderStatusNo;
+	//private int orderStatusNo;
+	private Long osNo;
 //	private Long orderId;
 	
 	public static OrderItemDto toDto(OrderItem entity) {

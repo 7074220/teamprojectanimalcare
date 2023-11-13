@@ -31,12 +31,14 @@ import com.itwill.entity.Coupon;
 import com.itwill.entity.OrderItem;
 import com.itwill.entity.Orders;
 import com.itwill.entity.Orderstatus;
+import com.itwill.entity.Product;
 import com.itwill.entity.Userinfo;
 import com.itwill.repository.OrderStatusRepository;
 import com.itwill.service.CartService;
 import com.itwill.service.CouponService;
 import com.itwill.service.OrderItemService;
 import com.itwill.service.OrderService;
+import com.itwill.service.ProductService;
 import com.itwill.service.ReviewBoardService;
 import com.itwill.service.UserInfoService;
 
@@ -60,6 +62,8 @@ public class OrderController {
 	CouponService couponService;
 	@Autowired
 	private ReviewBoardService reviewBoardService;
+	@Autowired
+	private ProductService productService;
 	
 	@Operation(summary = "주문 등록")
 	@GetMapping("/orderInsert")
@@ -162,27 +166,49 @@ public class OrderController {
 	
 	
 	//orderform
-	@GetMapping("orderView")
-	public String orderView(HttpSession session,Model model) throws Exception{
+	@PostMapping("orderView")
+	public String orderView(@RequestParam("selectedItems") List<Long> selectedItems ,HttpSession session,Model model) throws Exception{
 		
 		Long userNo = (Long) session.getAttribute("userNo");
 		if (userNo == null) {
 			throw new Exception("로그인 하세요.");
 		}
+		
+		List<Cart> selectedCartList = new ArrayList<>();
+	    for (Long cartNo : selectedItems) {
+	        Cart cart = cartService.findByCartNo(cartNo);
+	        if (cart != null) {
+	            selectedCartList.add(cart);
+	        }
+	    }
+	    List<CartDto> cartDtos= new ArrayList<>();
+	    for (Cart cart : selectedCartList) {
+	    	CartDto temp = CartDto.toDto(cart);
+	    	Product tempProduct = productService.findByProductNo(temp.getProductNo());
+	    	temp.setProduct(tempProduct);
+			cartDtos.add(temp);
+		}
+	    
+	    Integer totalPrice=0;
+	    
+	    for (Cart cart : selectedCartList) {
+	    	totalPrice=totalPrice+cart.getProduct().getProductPrice()*cart.getCartQty();
+		}
+		
 		Userinfo userinfo=userInfoService.findUserByNo(userNo);
 		List<Coupon> coupons = userinfo.getCoupons();
 		List<CouponDto> couponDtos=new ArrayList<>();  
 		for (Coupon coupon : coupons) {
 			couponDtos.add(CouponDto.toDto(coupon));
 		}
-		Integer totalPrice=cartService.cartTotalPrice(userNo);
+		//Integer totalPrice=cartService.cartTotalPrice(userNo);
 		
 		System.out.println("?????"+couponDtos);
 		
-		List<Cart> carts = cartService.findAllCartByUserId(userNo);
-		System.out.println(">>>>>>>>>>>>>>>>"+carts);
-		System.out.println(">>>>>>>>>>>>>>>>"+carts.get(0).getUserinfo());
-		System.out.println(">>>>>>>>>>>>>>>>"+carts.get(0).getProduct());
+		//List<Cart> carts = cartService.findAllCartByUserId(userNo);
+		System.out.println(">>>>>>>>>>>>>>>>"+selectedCartList);
+		System.out.println(">>>>>>>>>>>>>>>>"+selectedCartList.get(0).getUserinfo());
+		System.out.println(">>>>>>>>>>>>>>>>"+selectedCartList.get(0).getProduct());
 		/*
 		List<CartOrderViewDto> cartDtos = new ArrayList<>();
 		for (Cart cart : carts) {
@@ -195,7 +221,7 @@ public class OrderController {
 	    //user정보가지고있는 dto 필요 Userinfo
 	    
 	    //model.addAttribute("user",UserOrderViewDto.toDto(userinfo));//userinfo는 서비스로 찾는지 의문
-	    model.addAttribute("cartList",carts);
+	    model.addAttribute("cartList",cartDtos);
 	    model.addAttribute("user",userinfo );
 	    model.addAttribute("coupons",couponDtos);
 	    model.addAttribute("cartTotalPrice",totalPrice);
@@ -239,15 +265,8 @@ public class OrderController {
 			
 		}
 		
-		@GetMapping("/updateosNo")
-		public String updateosNo(String oiNo,String osNo,HttpSession session,Model model){
-			OrderItem orderItem=itemService.findByOiNo(Long.parseLong(oiNo));
-			Orderstatus orderstatus=orderStatusRepository.findById(Long.parseLong(osNo)).get();
-			orderItem.setOrderStatus(orderstatus);
-			
-			return "my-account-orders";
-			
-		}
+		
+		
 		
 	
 }
