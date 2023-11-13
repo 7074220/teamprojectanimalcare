@@ -169,9 +169,10 @@
 
 
 			  $(document).ready(function() {
-        $(".write-review").on("click", function() {
-            var selectedCenterNo = $(this).closest("tr").find("#centerNo").text();
+        $(".write-review").on("click", function(e) {
+            var selectedCenterName = $(this).closest("tr").find("#centerName").text();
             alert(selectedCenterNo);
+            e.preventDefault();
             // 이전에 선택된 행 취소 (선택 사항)
             //$(".selected-row").removeClass("selected-row");
             
