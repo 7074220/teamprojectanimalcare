@@ -171,30 +171,44 @@ List<Center> centers=centerService.findAllCenters();
 	@Operation(summary = "펫타입 리스트")	
 	@GetMapping("/pets")
 	public String petTypeList(@RequestParam(name = "petType")String petType,Model model,@PageableDefault(page =0,size = 5,sort = "pet_no",direction = Sort.Direction.DESC) Pageable page){
-			List<PetDto> petDtoList = new ArrayList<>();
+		
+		int pag = page.getPageNumber();
+		int size = page.getPageSize();
+		
+		Pageable pageable= PageRequest.of(pag,size);	
+		
+		
+		
+		List<PetDto> petDtoList = new ArrayList<>();
 			
 			
 			
-			Page<Pet> petList = petService.findAllByOrderBypetType(petType,page);
+			Page<Pet> petList = petService.findAllByOrderBypetType(petType,pageable);
 			for (Pet pet : petList) {
 				petDtoList.add(PetDto.toDto(pet));
 			}
 
-		model.addAttribute("petList",petDtoList);
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>"+petDtoList);
+		model.addAttribute("petList",petList);
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>펫타입"+petDtoList);
 		return "pet-list";
 	}
 	
 	//펫 지역 리스트
 	@GetMapping("/petLocal")
 	public String petLocalList(@RequestParam(name = "petLocal")String petLocal,Model model,@PageableDefault(page =0,size = 5,sort = "pet_no",direction = Sort.Direction.DESC) Pageable page){
-			List<PetDto> petDtoList = new ArrayList<>();
-			Page<Pet> petList = petService.findAllByPetLocal(petLocal,page);
+		int pag = page.getPageNumber();
+		int size = page.getPageSize();
+		
+		Pageable pageable= PageRequest.of(pag,size);	
+		
+		
+		List<PetDto> petDtoList = new ArrayList<>();
+			Page<Pet> petList = petService.findAllByPetLocal(petLocal,pageable);
 			for (Pet pet : petList) {
 				petDtoList.add(PetDto.toDto(pet));
 			}
 
-		model.addAttribute("petList",petDtoList);
+		model.addAttribute("petList",petList);
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>"+petDtoList);
 		return "pet-list";
 	}

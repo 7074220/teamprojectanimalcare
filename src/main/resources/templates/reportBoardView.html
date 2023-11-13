@@ -187,7 +187,7 @@
 													roadthemes</h7>
 
 												<div class="reviews_comment_box">
-													<div class="comment_thmb" style="width: 50px;">
+													<div class="comment_thmb" style="width: 65px;">
 														<p>
 															<strong th:text="${replyBoard.userinfo.userName}">허승범
 															</strong>
@@ -197,12 +197,13 @@
 													<div class="comment_text">
 														<div class="reviews_meta">
 															<!-- <p><strong th:text="${review.userinfo.userName}">adm </strong>- September 12, 2018</p>-->
-
-
-															<h2>
-																<p></p>
-															</h2>
+		
 															<p th:text="${replyBoard.replyBoardContent}">roadthemes</p>
+															<div style="margin-left: 650px;">
+																<button style="border: none; background: transparent;">수정</button>
+																<button style="border: none; background: transparent;">삭제</button>
+															</div>
+															
 														</div>
 													</div>
 												</div>
