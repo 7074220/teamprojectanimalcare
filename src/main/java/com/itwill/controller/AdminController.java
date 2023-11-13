@@ -512,7 +512,41 @@ public class AdminController {
 			model.addAttribute("petList",petDtoList);
 			return "pet-list" ;
 		}
-		
+		@PostMapping("/insert_action")
+		public String insert_action(@RequestParam("imageFile") MultipartFile file,
+				@RequestParam("petType") String petType, @RequestParam("petGender") String petGender,
+				@RequestParam("petLocal") String petLocal,
+				@RequestParam("centerNo") String centerNo,@RequestParam("petFindPlace") String petFindPlace,@RequestParam("petCharacter") String petCharacter, Model model,@PageableDefault(page = 0, size = 5, sort = "petNo", direction = Sort.Direction.ASC) Pageable page) throws Exception {
+
+			String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/pet/";
+			String originalFileName = file.getOriginalFilename();
+			UUID uuid = UUID.randomUUID();
+			String savedFileName = uuid.toString() + "_" + originalFileName;
+
+			File newFile = new File(uploadPath + savedFileName);
+
+			file.transferTo(newFile);
+				
+			Center center=centerService.findByCenterNo(Long.parseLong(centerNo));
+			
+			Pet insertPet = Pet.builder().petType(petType).petGender(petGender)
+					.petImage(savedFileName).petLocal(petLocal)
+					.center(center).petFindPlace(petCharacter).petCharacter(petCharacter). build();
+
+			petService.petSave(insertPet);
+			
+			int pag = page.getPageNumber();
+			int size = page.getPageSize();
+			
+			Pageable pageable = PageRequest.of(pag, size, Sort.by(Sort.Order.desc("petNo")));
+			Page<Pet> petList= petService.petFindAllPage(pageable);
+			
+
+			model.addAttribute("petListPage",petList);
+			return "pet-list" ;
+
+		}
+
 		
 		
 		/******************************* visit ************************************/
