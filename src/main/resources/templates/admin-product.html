@@ -284,7 +284,7 @@
 											<tr th:each="product:${productList}">
 												<td class="productNo" th:text="${product.productNo}"></td>
 												<td class="productName" th:text="${product.productName}"></td>
-												<td class="productPrice" th:text="${product.productPrice}"></td>
+												<td class="productPrice" th:text="${#numbers.formatInteger(product.productPrice, 3, 'COMMA') + '원'}"></td>
 												<td class="productStarAvg" th:text="${product.productStarAvg}"></td>
 												<td class="productCategory" th:text="${product.productCategory}"><span class="success"></span></td>
 												<td class="productPetCategory" th:text="${product.productPetCategory}"></td>

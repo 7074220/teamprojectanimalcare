@@ -2,6 +2,25 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <!--header area start-->
     
+    <style>
+	@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+	
+	
+h2 {
+	font-family: 'GmarketSansMedium';
+	
+}
+
+li {
+	font-family: 'GmarketSansMedium';
+}
+</style>
+    
     <!--offcanvas menu area start-->
     <div  th:fragment="common-top" th:remove="tag">
     <div class="off_canvars_overlay">
@@ -237,9 +256,9 @@
                                     <div class="header_account_list register">
                                         <ul th:if="${session.userNo}==null">
 											<!--index가 없으면 reportList에서 resigter누르면 페이지를 부르지 못함 그래서 앞에 index붙임-->
-                                            <li><a href="#/user_write_form">Register</a></li>
-                                            <li><span>/</span></li>
-                                            <li><a href="#/login_form">Login</a></li>
+                                            <li><a href="#/user_write_form" style="font-size: 20px;">Register</a></li>
+                                            <li><span style="font-size: 20px;">/</span></li>
+                                            <li><a href="#/login_form" style="font-size: 20px;">Login</a></li>
                                         </ul>
                                         <ul th:if="${session.userNo}!=null">
                                             <!--<li><a href="userinfo" th:text="${session.userName} 님">Login</a></li>-->
@@ -501,7 +520,7 @@
                             <div class="main_menu menu_position"> 
                                 <nav>  
                                     <ul>
-                                        <li><a class="active" href="" th:href="@{/}">home<!--<i class="fa fa-angle-down"></i>--></a>
+                                        <li><a class="active" href="" th:href="@{/}" style="font-size: 23px;">home<!--<i class="fa fa-angle-down"></i>--></a>
                                             <!--<ul class="sub_menu">
                                                 <li><a href="index.html">Home shop 1</a></li>
                                                 <li><a href="index-2.html">Home shop 2</a></li>
@@ -556,18 +575,18 @@
                                             </ul>
                                         </li>-->
                                        
-                                        <li><a href="petListPage">입양<!--<i class="fa fa-angle-down"></i>--></a>
+                                        <li><a href="petListPage" style="font-size: 23px;">입양<!--<i class="fa fa-angle-down"></i>--></a>
                                            
                                         </li> 
                                        
 
                                        
-                                        <li><a href="centerList">센터<!--<i class="fa fa-angle-down"></i>--></a>
+                                        <li><a href="centerList" style="font-size: 23px;">센터<!--<i class="fa fa-angle-down"></i>--></a>
                                         </li>
                                        
                                        
                                        
-                                        <li><a href="reportlist">실종신고<!--<i class="fa fa-angle-down"></i>--></a>
+                                        <li><a href="reportlist" style="font-size: 23px;">실종신고<!--<i class="fa fa-angle-down"></i>--></a>
                                             <!--<ul class="sub_menu pages">
                                                 <li><a href="blog-details.html">blog details</a></li>
                                                 <li><a href="blog-fullwidth.html">blog fullwidth</a></li>
@@ -577,7 +596,7 @@
                                        
                                         
                                         
-                                         <li class="mega_items"><a href="productList">상품<!--<i class="fa fa-angle-down"></i>--></a> 
+                                         <li class="mega_items"><a href="productList" style="font-size: 23px;">상품<!--<i class="fa fa-angle-down"></i>--></a> 
                                             <!--<div class="mega_menu">
                                                <ul class="mega_menu_inner">
                                                     <li><a href="#">Shop Layouts</a>
