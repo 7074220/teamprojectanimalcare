@@ -52,7 +52,6 @@ import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/order")
-
 public class OrderRestController {
 	@Autowired
 	private OrderService orderService;
@@ -84,7 +83,7 @@ public class OrderRestController {
 		 Exception("로그인 하세요."); 
 		  
 		}
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>맵핑");
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>이게카트넘버>>"+orderDto.getCartNo());
 		 
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
@@ -94,7 +93,15 @@ public class OrderRestController {
 		//Integer point=Integer.parseInt(orderDto.getUserPoint());
 		Orderstatus orderstatus= orderStatusRepository.findById(1L).get();
 		Long osNo = orderstatus.getOsNo();
-		List<Cart> carts = cartService.findAllCartByUserId(userNo);
+		
+		List<Cart> carts = new ArrayList<>();
+		List<Long> cartNoList=orderDto.getCartNo();
+		for (Long cartNo : cartNoList) {
+			Cart cart=cartService.findByCartNo(cartNo);
+			
+			carts.add(cart);
+		}
+		
 		
 		System.out.println(">>>>>>>>>>>>이게cart>>>"+carts);
 		Userinfo findUserinfo = userInfoService.findUserByNo(userNo);
@@ -118,6 +125,7 @@ public class OrderRestController {
 			
 			itemService.insertOrderItem(OrderItemDto.toEntity(tempOrderItemDto));
 			orderItemDtos.add(tempOrderItemDto);
+			cartService.deleteById(cart.getCartNo());
 			
 		}
 		OrdersDto orderdto = OrdersDto.toDto(newOrder);
@@ -141,8 +149,10 @@ public class OrderRestController {
 	        couponService.Delete(Long.parseLong(orderDto.getCouponId()));
 	    }
 			
-		
-		cartService.deleteByUserId(userNo);
+		for (OrderItemDto orderItemDto : orderItemDtos) {
+			
+		}
+		//cartService.deleteById(userNo);
 		/*
 		  if (session.getAttribute("userNo") == null) {
 			  
@@ -408,7 +418,18 @@ public class OrderRestController {
 	 * HttpStatus.OK); }
 	 */
 	
-	
+	@PutMapping("/updateosNo")
+	public void updateosNo(@RequestBody OrderItemDto orderItemDto ){
+		System.out.println(">>>>>>>>>>>>>>>>>>"+orderItemDto);
+		OrderItem orderItem=itemService.findByOiNo(orderItemDto.getOiNo());
+		
+		Orderstatus orderstatus=orderStatusRepository.findById(orderItemDto.getOsNo()).get();
+		
+		orderItem.setOrderStatus(orderstatus);
+		itemService.updateOrderItem(orderItem);
+		
+		
+	}
 	
 	
 	
