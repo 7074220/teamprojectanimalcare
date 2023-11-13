@@ -33,7 +33,7 @@
         <div class="album py-5 bg-body-tertiary">
             <div class="container">
 
-                <a class="button" href="#" th:href="@{reportWriteForm}">글쓰기</a>
+                <button class="button" onclick="writeform(event)" style="border: none;" th:id="${userNo}">글쓰기</button>
                 <br>
                 <br>
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
@@ -77,6 +77,20 @@
         <br>
         <br>
     </div>
+    
+    <script>
+		function writeform(e){
+			let userNo = e.target.id;
+			if(userNo!=0){
+				window.location.href="reportWriteForm";	
+			}else{
+				alert('로그인을 해주세요');
+				window.location.hash = '/login_form';
+			}
+		}
+		
+	</script>
+    
 </th:block>
 
 </body>

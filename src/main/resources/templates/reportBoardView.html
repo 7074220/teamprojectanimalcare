@@ -197,17 +197,19 @@
 														<!-- <img src="assets/img/blog/comment2.jpg" alt="">-->
 													</div>
 													<div class="comment_text" th:id="${replyBoard.replyBoardNo}">
-														<div class="reviews_meta">
+														<div class="reviews_meta" th:id="${replyBoard.userinfo.userNo}">
 															<!-- <p><strong th:text="${review.userinfo.userName}">adm </strong>- September 12, 2018</p>-->
 		
 															<p th:text="${replyBoard.replyBoardContent}">roadthemes</p>
 															<div style="margin-left: 650px;">
 																<button
 																	style="border: none; background: transparent;"
-																	onclick="replyUpdate(event)" th:class="${replyBoard.replyBoardNo}">수정</button>
+																	onclick="replyUpdateForm(event)" th:class="${replyBoard.replyBoardNo}"
+																	th:if="${session.userNo==replyBoard.userinfo.userNo}">수정</button>
 																<button
 																	style="border: none; background: transparent;"
-																	onclick="replyDelete(event)" th:class="${replyBoard.replyBoardNo}">삭제</button>
+																	onclick="replyDelete(event)" th:class="${replyBoard.replyBoardNo}"
+																	th:if="${session.userNo==replyBoard.userinfo.userNo}">삭제</button>
 															</div>
 														</div>
 													</div>
@@ -227,7 +229,7 @@
 										<form name="f" action="#">
 											<div class="row">
 												<div class="col-12">
-													<label for="review_comment">Comment </label>
+													<label for="review_comment" class="review_comment" th:id="${loginUserNo}">Comment </label>
 													<textarea name="comment" id="replyComment"></textarea>
 												</div>
 											</div>
@@ -305,17 +307,17 @@
 				window.location.reload();
 			}
 			
-			function replyUpdateForm(responseJsonObject = {}) {
+			function replyUpdateHtml(responseJsonObject = {}) {
 				let htmlTemplate =
 				`<div class="reviews_meta">
-					<textarea style="border: none; width: 800px; height: 50px; resize: none;"></textarea>
+					<textarea style="border: none; width: 800px; height: 50px; resize: none;" class="{{replyBoardNo}}">{{replyBoardContent}}</textarea>
 					<div style="margin-left: 700px;">
 						<button
 							style="border: none; background: transparent;"
-							onclick="replyUpdate(event)">수정</button>
+							onclick="replyUpdate(event)" class="{{replyBoardNo}}">수정</button>
 						<button
 							style="border: none; background: transparent;"
-							onclick="replyDelete(event)">삭제</button>
+							onclick="replyDelete(event)" class="{{replyBoardNo}}">삭제</button>
 					</div>
 				</div>`;
 				
@@ -324,18 +326,49 @@
 				return resultTemplate;
 			}
 			
-			function replyUpdate(e){
+			function replyUpdateForm(e){
 				let replyBoardNo = $(e.target).attr('class');
 				let send ={
 					replyBoardNo : replyBoardNo
 				}
-				//let response = ajaxRequest('PUT','reply',send);
-				let html = replyUpdateForm();
+				let response = ajaxRequest('PUT','reply/updateForm',send);
+				let html = replyUpdateHtml(response);
 				$('#'+replyBoardNo).html(html);
-				
 				//window.location.reload();
 			}
 			
+			function replyUpdateHtml2(responseJsonObject = {}) {
+				let htmlTemplate =
+				`<div class="reviews_meta">
+					<p text="">{{replyBoardContent}}</p>
+					<div style="margin-left: 650px;">
+						<button
+							style="border: none; background: transparent;"
+							onclick="replyUpdateForm(event)" class="{{replyBoardNo}}">수정</button>
+						<button
+							style="border: none; background: transparent;"
+							onclick="replyDelete(event)" class="{{replyBoardNo}}">삭제</button>
+					</div>
+				</div>`;
+				
+				let bindTemplate = Handlebars.compile(htmlTemplate);
+				let resultTemplate = bindTemplate(responseJsonObject);
+				return resultTemplate;
+			}
+			
+			
+			
+			function replyUpdate(e){
+				let replyBoardNo = $(e.target).attr('class');
+				let replyBoardContent = $("textarea."+replyBoardNo).val();
+				let send ={
+					replyBoardNo : replyBoardNo,
+					replyBoardContent : replyBoardContent
+				}
+				let response = ajaxRequest('PUT','reply/update',send);
+				let html = replyUpdateHtml2(response);
+				$('#'+replyBoardNo).html(html);
+			}	
 		</script>
 
 	</th:block>
