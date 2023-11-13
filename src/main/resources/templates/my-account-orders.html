@@ -253,23 +253,15 @@
 							<!-- Nav tabs -->
 							<div class="dashboard_tab_button">
 								<ul role="tablist" class="nav flex-column dashboard-list">
-									<li><a href="userinfo" class="nav-link">내정보</a></li>
-									<li><a href="mypet" class="nav-link">마이펫</a></li>
-									<li><a href="couponList" class="nav-link">쿠폰</a></li>
-									<li><a href="adoptByUserNo" class="nav-link">입양</a></li>
-									<li><a th:if="${session.userName == '관리자'}" href="adminVolunteerList"
-											class="nav-link">관리자 전용봉사목록</a></li>
-									<li><a th:if="${session.userName != '관리자'}" href="volunteerByUserNo"
-											class="nav-link">봉사</a></li>  
-									<li><a th:if="${session.userName == '관리자'}" href="adminVisitList"
-											class="nav-link">관리자 전용견학목록</a></li>
-									<li><a th:if="${session.userName != '관리자'}" href="visitByUserNo"
-											class="nav-link">견학</a></li>
-									<li> <a th:if="${session.userName == '관리자'}" href="ordersList" class="nav-link">관리자전용 주문목록</a></li>
-									<li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li>
-									<li><a href="logout" class="nav-link">로그아웃</a></li>
-									<li><a href="#" data-toggle="modal" data-target="#deleteModal"
-											class="nav-link">회원탈퇴</a></li>
+									 <li><a href="userinfo" class="nav-link">내정보</a></li>
+                                <li><a href="userinfo/mypet"  class="nav-link">마이펫</a></li>
+                                <li><a href="couponList"  class="nav-link">쿠폰</a></li>
+                                <li><a th:if="${session.userName != '관리자'}" href="adoptByUserNo" class="nav-link">입양</a></li> 
+								<li><a th:if="${session.userName != '관리자'}" href="volunteerByUserNo" class="nav-link">봉사</a></li>  
+								<li><a th:if="${session.userName != '관리자'}" href="visitByUserNo" class="nav-link">견학</a></li>
+								<li><a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li>
+                                <li><a href="logout" class="nav-link">로그아웃</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#deleteModal" class="nav-link">회원탈퇴</a></li>
 
 								</ul>
 							</div>
@@ -474,18 +466,8 @@
                                                 <td>{{product.productPrice}}</td>
                                                 <td ><span class="success">{{product.productName}}</span></td>
                                                 <!-- <td>$25.00 for 1 item </td>-->
-                                                 <td> <select class="form-select form-select-sm"
-                                                      aria-label="Large select example">
-                                               
-                                                      <option selected>주문 상태</option>
-                                                      {{#select orderstatus.osNo }} 
-	                                                      <option value="1">주문확인</option>
-	                                                      <option value="2">배송준비</option>
-	                                                      <option value="3">배송중</option>
-	                                                      <option value="4">배송완료</option>
-                                                      {{/select}}
-                                                   </select>
-                                                </td>
+                                                 <td>{{orderstatus.osDesc}}
+                                                            </td>
                                                 <td><button type="button" class="write-review" onclick="reviewWrite(event,{{oiNo}})" id="{{product.productNo}}">{{reviewStatus}}</button></td>
                                              </tr>
                                              {{/each}}
@@ -531,21 +513,30 @@
             
          });
          
+         function selectchange(e){
+        	 let oiNo = e.target.id;
+        	 console.log(e.target.value);
+        	 
+        	 let send= {
+        		oiNo : oiNo,
+        		osNo : e.target.value
+        	 }
+        	 
+        	 ajaxRequest('PUT','order/updateosNo',send);
+        	 
+         }
          
+         /*
          $('#updateosNo').click(function(e){
 		
-	alert('저장');
-	var oiNo = $('').val();
-	var osNo=$('form-select form-select-sm').val();
-	alert(oiNo);
-	alert(oiNo);
-	
-	//window.location.href = "updateosNo?oiNo="
-									//+ orderAddress1 + orderAddress2
-									//+ orderAddress3 + "&osNo="
-									//+ orderPrice;
-});
-         
+			alert('저장');
+			
+			//window.location.href = "updateosNo?oiNo="
+											//+ orderAddress1 + orderAddress2
+											//+ orderAddress3 + "&osNo="
+											//+ orderPrice;
+		});
+         */
          
 
       </script>
