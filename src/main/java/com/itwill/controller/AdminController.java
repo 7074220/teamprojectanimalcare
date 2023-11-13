@@ -335,7 +335,7 @@ public class AdminController {
 			int pageNo = page.getPageNumber();
 			int size = page.getPageSize();
 			
-			Pageable pageable = PageRequest.of(pageNo, size, Sort.by(Sort.Order.desc("productNo")));
+			Pageable pageable = PageRequest.of(pageNo, size, Sort.by(Sort.Order.asc("productNo")));
 			
 			Page<Product> productList = productService.productFindAllPage(pageable);
 			
@@ -351,7 +351,8 @@ public class AdminController {
 		// 관리자 --> 상품 추가
 		@PostMapping("/adminInsertProduct")
 		public String insertProduct(@RequestParam("imageFile1") MultipartFile file1, @RequestParam("imageFile2") MultipartFile file2, @RequestParam("productName") String productName, 
-				@RequestParam("productPrice") Integer productPrice, @RequestParam("productCategory") String productCategory, @RequestParam("productPetCategory") String productPetCategory, Model model) throws Exception {
+				@RequestParam("productPrice") Integer productPrice, @RequestParam("productCategory") String productCategory, @RequestParam("productPetCategory") String productPetCategory, Model model,
+				@PageableDefault(page = 0, size = 10, sort = "productNo", direction = Sort.Direction.ASC) Pageable page) throws Exception {
 
 		String uploadPath1 = System.getProperty("user.dir") + "/src/main/resources/static/image/product/";
 		String originalFileName1 = file1.getOriginalFilename();
@@ -384,27 +385,35 @@ public class AdminController {
 		
 		productService.insertProduct(createProduct);
 		
-		List<ProductListDto> productListDto = new ArrayList<>();
-		List<Product> productList = new ArrayList<>();
+		int pag = page.getPageNumber();
+		int size = page.getPageSize();
 		
-		productList = productService.findAllByOrderByProductNoAsc();
+		Pageable pageable = PageRequest.of(pag, size, Sort.by(Sort.Order.desc("productNo")));
 		
-		for (Product product : productList) {
-			productListDto.add(ProductListDto.toDto(product));
-		}
+		Page<Product> productList = productService.productFindAllPage(pageable);
 		
-		model.addAttribute("productList", productListDto);
+		model.addAttribute("products", productList.getContent());
+		model.addAttribute("productList", productList);
 		
 		return "admin-product";
 }
 		
-		
+		@GetMapping("/productUpdateForm")
+		public String productUpdateForm(@RequestParam Long productNo, Model model) {
+			
+			Product product = productService.findByProductNo(productNo);
+			
+			model.addAttribute("product", product);
+			
+			return "product_update_form"; 
+		}
 		
 		
 		// 관리자 --> 상품정보 수정
-
-		@PostMapping("/adminUpdateProduct/{productNo}")
-		public String upateProduct(@RequestParam("imageFile") MultipartFile file, @RequestParam("productName") String productName, @RequestParam("productPrice") Integer productPrice, @RequestParam("productNo") Long productNo, Model model) throws Exception {
+		// 수정버튼 누를떄임
+		@PostMapping("/adminUpdateProduct")
+		public String upateProduct(@RequestParam("imageFile") MultipartFile file, @RequestParam("productName") String productName, @RequestParam("productPrice") Integer productPrice, @RequestParam("productNo") Long productNo, Model model,
+				@PageableDefault(page = 0, size = 10, sort = "productNo", direction = Sort.Direction.ASC) Pageable page) throws Exception {
 
 			String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/product/";
 			String originalFileName = file.getOriginalFilename();
@@ -424,16 +433,15 @@ public class AdminController {
 			
 			productService.updateProduct(update);
 			
-			List<ProductListDto> productListDto = new ArrayList<>();
-			List<Product> productList = new ArrayList<>();
+			int pag = page.getPageNumber();
+			int size = page.getPageSize();
 			
-			productList = productService.findAllByOrderByProductNoAsc();
+			Pageable pageable = PageRequest.of(pag, size);
 			
-			for (Product product : productList) {
-				productListDto.add(ProductListDto.toDto(product));
-			}
+			Page<Product> productList = productService.productFindAllPage(pageable);
 			
-			model.addAttribute("productList", productListDto);
+			model.addAttribute("products", productList.getContent());
+			model.addAttribute("productList", productList);
 			
 			return "admin-product";
 		}
