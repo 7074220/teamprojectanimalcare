@@ -188,7 +188,11 @@
 													th:text="${#dates.format(replyBoard.replyBoardRegisterDate, 'yyyy-MM-dd HH:mm')}">
 													roadthemes</h7>
 
+<<<<<<< HEAD
 												<div class="reviews_comment_box" id="">
+=======
+												<div class="reviews_comment_box">
+>>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 													<div class="comment_thmb" style="width: 65px;">
 														<p>
 															<strong th:text="${replyBoard.userinfo.userName}">허승범
@@ -199,7 +203,7 @@
 													<div class="comment_text">
 														<div class="reviews_meta">
 															<!-- <p><strong th:text="${review.userinfo.userName}">adm </strong>- September 12, 2018</p>-->
-
+		
 															<p th:text="${replyBoard.replyBoardContent}">roadthemes</p>
 															<div style="margin-left: 650px;">
 																<button
@@ -208,6 +212,9 @@
 																<button
 																	style="border: none; background: transparent;"
 																	onclick="replyDelete(event)" th:class="${replyBoard.replyBoardNo}">삭제</button>
+															</div>
+																<button style="border: none; background: transparent;">수정</button>
+																<button style="border: none; background: transparent;">삭제</button>
 															</div>
 														</div>
 													</div>
