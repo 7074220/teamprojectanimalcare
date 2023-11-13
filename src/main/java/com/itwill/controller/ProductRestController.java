@@ -69,10 +69,10 @@ public class ProductRestController {
 	
 	
 	@Operation(summary = "상품 수정 (관리자)")
-	@PutMapping("{productNo}")
+	@PutMapping
 	// update
-	public ResponseEntity<ProductListDto> updateProduct(@PathVariable(value = "productNo") Long productNo, @RequestBody ProductListDto dto) throws Exception{
-		Product findProduct = productService.findByProductNo(productNo);
+	public ResponseEntity<ProductListDto> updateProduct(@RequestBody ProductListDto dto) throws Exception{
+		Product findProduct = productService.findByProductNo(dto.getProductNo());
 		
 		 findProduct.setProductImage(dto.getProductImage());
 		 findProduct.setProductName(dto.getProductName());
@@ -254,6 +254,20 @@ public class ProductRestController {
 		
 		return new ResponseEntity<List<ProductListDto>>(productListDto, httpHeaders, HttpStatus.OK);
 	}
+	
+	@PostMapping("/detail")
+	public ResponseEntity<ProductUpdateDto> ProductDetail(@RequestBody ProductUpdateDto productUpdateDto) {
+		
+		Product product = productService.findByProductNo(productUpdateDto.getProductNo());
+		ProductUpdateDto dto = ProductUpdateDto.toDto(product);
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		return new ResponseEntity<ProductUpdateDto>(dto, httpHeaders, HttpStatus.OK);
+	}
+	
+	
 }
 
 

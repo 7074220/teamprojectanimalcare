@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+                                                                                                                          <!DOCTYPE html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='registerMyPet')">
 
@@ -21,8 +21,10 @@
 									<input type="text" id="mypetName">
 								</p>
 								<p>
-									<label th:text="생일">Passwords <span>*</span></label>
-									<input type="text" id="mypetBirthday">
+									<label>생일 </label>
+									<input type="date" name="mypetBirthday" id="mypetBirthday" placeholder="날짜를 선택해주세요"
+										required="required"
+										th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
 								</p>
 								<p>
 									<label>종류 <span>*</span></label>
@@ -92,6 +94,27 @@
 			
 		});
 		*/
+		
+		window.onload = function () {
+
+				var mypetBirthday = document.getElementById('mypetBirthday');
+				var today = new Date();
+				// 한국 시간대 (UTC+9)로 변경
+				today.setHours(today.getHours() + 9);
+				var beforeToday = new Date(today);
+				beforeToday.setDate(beforeToday.getDate()); // 어제 날짜 계산
+				var beforeTodayString = beforeToday.toISOString().slice(0, 10);
+
+				mypetBirthday.value = beforeTodayString;
+
+				var maxDate = new Date(today);
+				maxDate.setHours(0, 0, 0, 0); // 날짜 부분만 사용
+				var maxDateString = maxDate.toISOString().slice(0, 10);
+				mypetBirthday.setAttribute('max', maxDateString);
+
+				mypetBirthday.removeAttribute('min');
+			};
+
 	</script>
 	</th:block>
 	

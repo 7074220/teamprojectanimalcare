@@ -71,7 +71,7 @@ public ResponseEntity<Map> petDelete(@PathVariable(name = "petNo") Long petNo) t
 @PutMapping("/{petNo}")
 public ResponseEntity<PetDto> petUpdate(@PathVariable(name = "petNo") Long petNo,@RequestBody PetDto petdto) throws Exception{
 	Optional<Pet> petOptional = Optional.of(petService.petFindById(petNo));
-	Center center = centerService.findByCenterNo(petdto.getCenter().getCenterNo());
+	Center center = centerService.findByCenterNo(petdto.getCenterNo());
 	if(petOptional.isPresent()) {
 		Pet pet1 = petOptional.get();
 		pet1.setPetLocal(petdto.getPetLocal());
@@ -104,18 +104,19 @@ public ResponseEntity<List<PetDto>> petDescList(){
 	
 	
 }
-@Operation(summary = "펫타입 리스트")	
-@GetMapping("/{petType}")
-public ResponseEntity<List<PetDto>> petTypeList(@RequestParam(name = "petType")String petType){
-		List<PetDto> petDtoList = new ArrayList<>();
-		List<Pet> petList = petService.findAllByOrderBypetType(petType);
-		for (Pet pet : petList) {
-			petDtoList.add(PetDto.toDto(pet));
-		}
-
-		return ResponseEntity.status(HttpStatus.OK).body(petDtoList);
-	
-	
-}
+/*
+ * @Operation(summary = "펫타입 리스트")
+ * 
+ * @GetMapping("/{petType}") public ResponseEntity<List<PetDto>>
+ * petTypeList(@RequestParam(name = "petType")String petType){ List<PetDto>
+ * petDtoList = new ArrayList<>(); List<Pet> petList =
+ * petService.findAllByOrderBypetType(petType); for (Pet pet : petList) {
+ * petDtoList.add(PetDto.toDto(pet)); }
+ * 
+ * return ResponseEntity.status(HttpStatus.OK).body(petDtoList);
+ * 
+ * 
+ * }
+ */
 
 }

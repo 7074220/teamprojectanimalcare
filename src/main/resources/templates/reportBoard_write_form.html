@@ -140,7 +140,10 @@
         // 폼이 유효하지 않으면 전송을 중지
         if (!$(this).valid()) {
             e.preventDefault();
+            
         }
+        //alert('안먹나?');
+        location.href = "/reportlist";
     });
 
 	window.onload = function() {
@@ -150,7 +153,7 @@
     // 한국 시간대 (UTC+9)로 변경
     today.setHours(today.getHours() + 9);
     var beforeToday = new Date(today);
-    beforeToday.setDate(beforeToday.getDate() ); // 어제 날짜 계산
+    beforeToday.setDate(beforeToday.getDate()); // 어제 날짜 계산
     var beforeTodayString = beforeToday.toISOString().slice(0, 10);
 
     boardFindDate.value = beforeTodayString;

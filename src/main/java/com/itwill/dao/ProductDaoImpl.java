@@ -165,4 +165,11 @@ public class ProductDaoImpl implements ProductDao {
 		return productRepository.existsById(productNo);
 	}
 
+	@Override
+	public Page<Product> productFindAllPage(Pageable pageable) {
+		Page<Product> productList = productRepository.findAll(pageable);
+		
+		return productList;
+	}
+
 }

@@ -95,13 +95,15 @@ function navigate() {
 	if (path == '/user_write_action') {
 		/**************** /user_write_action******************/
 		if (initialize.getValidator().form()) {
+			let address = document.f.ordersAddress1.value+document.f.ordersAddress2.value + document.f.ordersAddress3.value;
 			let sendJsonObject = {
 					userId: document.f.userId.value,
 					userPassword: document.f.password.value,
 					userName: document.f.name.value,
 					userGender: document.f.gender.value,
 					userPhoneNumber: document.f.phone.value,
-					userAddress: document.f.address.value,
+					userAddress: address,
+					/*userAddress: document.f.postcode.value,*/
 					userResidentNumber : document.f.residentNumber.value
 			}
 			const responseJsonObject = ajaxRequest('POST','user',sendJsonObject);
@@ -124,7 +126,7 @@ function navigate() {
 		
 		if(responseJsonObject.status == 1000){
 			if(responseJsonObject.userId=="admin@gmail.com"){
-				window.location.href='userinfo';
+				window.location.href='adminUserList';
 			}else{
 				window.location.href='index';	
 			}

@@ -180,7 +180,7 @@
     <!-- my account start  -->
     <section class="main_content_area">
         <div class="container">   
-            <div class="account_dashboard">
+            <div class="account_dashboard" style="margin-right:250px">
                 <div class="row">
                     <div class="col-sm-12 col-md-3 col-lg-3">
                         <!-- Nav tabs -->
@@ -189,10 +189,19 @@
                                 <li><a href="userinfo" class="nav-link">내정보</a></li>
                                 <li><a href="mypet"  class="nav-link">마이펫</a></li>
                                 <li><a href="couponList"  class="nav-link">쿠폰</a></li>
-                                <li><a th:if="${session.userName != '관리자'}" href="adoptByUserNo"  class="nav-link">입양</a></li>
-                                <li><a th:if="${session.userName == '관리자'}" href="adoptList"  class="nav-link">관리자 전용 입양 목록</a></li>
-								<li><a href="volunteerByUserNo"  class="nav-link">봉사</a></li>
-                                <li><a href="visitByUserNo" class="nav-link">견학</a></li>
+                                <li><a href="adoptByUserNo"  class="nav-link">입양</a></li>
+								<li><a th:if="${session.userName == '관리자'}" href="adminVolunteerList"
+											class="nav-link">관리자 전용봉사목록</a></li>
+								<li><a th:if="${session.userName != '관리자'}" href="volunteerByUserNo"
+											class="nav-link">봉사</a></li>  
+                               <li><a th:if="${session.userName == '관리자'}" href="adminVisitList"
+											class="nav-link">관리자 전용견학목록</a></li>
+									<li><a th:if="${session.userName != '관리자'}" href="visitByUserNo"
+											class="nav-link">견학</a></li>
+											<li><a th:if="${session.userName == '관리자'}" href="centerListAll"
+											class="nav-link">관리자 보호소목록</a></li>
+									<li><a th:if="${session.userName != '관리자'}" style="display: none;"
+											class="nav-link"></a></li>
                                 <li> <a th:if="${session.userName == '관리자'}" href="ordersList" class="nav-link">관리자
 											전용주문목록</a></li>
 								<li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li>
@@ -219,7 +228,7 @@
                                                 <th>시간</th>
                                                 <th>펫번호</th>
                                                 <th>처리상태</th>
-                                                <th>변경/취소</th>                 
+                                                <th>변경</th>                 
                                             </tr>
                                         </thead>
 										<tbody>
@@ -232,7 +241,7 @@
 												<td><!--<button type="submit" class="updateBtn" th:id="'updateBtn-' + ${adopt.adoptNo}">수정</button>-->
 													<a th:href="@{'/adoptUpdate?adoptNo=' + ${adopt.adoptNo} + '&petNo=' + ${adopt.Pet.petNo}}">수정</a>
 													<!--<a th:href="@{'/adoptUpdate?adoptNo=' + ${adopt.adoptNo} + '&userNo=' + ${adopt.Userinfo.userNo} + '&petNo=' + ${adopt.Pet.petNo}}">수정</a>-->
-													<button type="submit" class="deleteBtn" th:id="'deleteBtn-' + ${adopt.adoptNo}">취소</button>
+													<!--<button type="submit" class="deleteBtn" th:id="'deleteBtn-' + ${adopt.adoptNo}">취소</button>-->
 												</td>
 											</tr>
 											

@@ -177,7 +177,7 @@
     <!-- my account start  -->
     <section class="main_content_area">
         <div class="container">   
-            <div class="account_dashboard">
+            <div class="account_dashboard"  style="margin-right:250px">
                 <div class="row">
                     <div class="col-sm-12 col-md-3 col-lg-3">
                         <!-- Nav tabs -->
@@ -186,10 +186,20 @@
                                 <li><a href="userinfo" class="nav-link">내정보</a></li>
                                 <li><a href="mypet"  class="nav-link">마이펫</a></li>
                                 <li><a href="couponList"  class="nav-link">쿠폰</a></li>
-                                <li><a th:if="${session.userName != '관리자'}" href="adoptByUserNo"  class="nav-link">입양</a></li>
-                                <li><a th:if="${session.userName == '관리자'}" href="adoptList"  class="nav-link">관리자 전용 입양 목록</a></li>
-                                <li><a href="volunteerByUserNo"  class="nav-link">봉사</a></li>
-                                <li><a href="visitByUserNo" class="nav-link">견학</a></li>
+                                <li><a th:if="${session.userName == '관리자'}" href="adminAdoptList" 
+                                			class="nav-link">관리자 전용 입양목록</a></li>
+                                <li><a th:if="${session.userName != '관리자'}" href="adoptByUserNo"
+											class="nav-link">입양</a></li>  
+                                <li><a th:if="${session.userName == '관리자'}" href="adminVolunteerList"
+											class="nav-link">관리자 전용봉사목록</a></li>
+								<li><a th:if="${session.userName != '관리자'}" href="volunteerByUserNo"
+											class="nav-link">봉사</a></li>  
+                                <li><a th:if="${session.userName == '관리자'}" href="adminVisitList"
+											class="nav-link">관리자 전용견학목록</a></li>
+									<li><a th:if="${session.userName != '관리자'}" href="visitByUserNo"
+											class="nav-link">견학</a></li>
+											<li><a th:if="${session.userName == '관리자'}" href="centerListAll"
+											class="nav-link">관리자 보호소목록</a></li>
                                 <li> <a th:if="${session.userName == '관리자'}" href="ordersList" class="nav-link">관리자
 											전용주문목록</a></li>
 								<li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li>
@@ -220,6 +230,9 @@
 												<label>핸드폰번호</label>
 												<input type="text" value="" name="userPhoneNumber"
 													th:value="${userinfo.userPhoneNumber}">
+												<label>회원포인트</label>
+												<input type="text" value="" name="userPoint" readonly="readonly"
+													th:value="${userinfo.userPoint}">
 												<label>주소</label>
 												<input type="text" value="" name="userAddress"
 													th:value="${userinfo.userAddress}">

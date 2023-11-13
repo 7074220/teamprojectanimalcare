@@ -5,6 +5,38 @@
 
 <head>
 <script>
+	$(document).ready(
+			function() {
+				
+				$('#petsubmit').click(function(){
+					var pet =$('#short').val();
+					var local=$('#local').val();
+					var url='';
+					 
+       
+
+        // 선택된 값에 따라 URL 변경
+         if (pet !== '1' && local !== '1') {
+            url = 'petTotal?petType=' + pet + '&petLocal=' + local;
+        } else if (pet !== '1' && local == '1') {
+            url = 'pets?petType=' + pet;
+        } else if (local !== '1' && pet == '1') {
+            
+            url='petLocal?petLocal=' + local;
+        } else {
+            url = 'petListPage';
+        }
+
+        window.location.href = url;
+					
+				});
+				$('#petForm').submit(function(event) {
+    event.preventDefault();
+    // 추가 코드
+});
+				
+				});
+
 	function confirmDelete(petNo) {
 		var confirmDelete = confirm("삭제하시겠습니까?");
 		if (confirmDelete) {
@@ -21,7 +53,7 @@
 			window.location.href = newUrl;
 			sessionStorage.setItem('selectedPetType', selectedValue);
 			if (selectedValue == 1) {
-				window.location.href = '/teamproject_animalcare/petListPage';
+				window.location.href = 'petListPage';
 			}
 		}
 	}
@@ -30,15 +62,20 @@
 		var selectElement = document.getElementById('local');
 		var selectedValue = selectElement.value;
 		if (selectedValue) {
-			var newUrl = '/teamproject_animalcare/petLocal?petLocal='
+			var newUrl = 'petLocal?petLocal='
 					+ selectedValue;
 			window.location.href = newUrl;
 			sessionStorage.setItem('selectedPetLocal', selectedValue);
 		}
 		if (selectedValue == 1) {
-			window.location.href = '/teamproject_animalcare/petListPage';
+			window.location.href = 'petListPage';
 		}
 	}
+	
+	
+	
+	
+	
 
 	document.addEventListener('DOMContentLoaded', function() {
 		var selectedValue1 = sessionStorage.getItem('selectedPetLocal');
@@ -81,19 +118,19 @@
 							<div class="shop_toolbar_wrapper">
 								<div class="shop_toolbar_btn">
 
-									<button data-role="grid_3" type="button" class=" btn-grid-3"
+									<!-- <button data-role="grid_3" type="button" class=" btn-grid-3"
 										data-toggle="tooltip" title="3"></button>
 
 									<button data-role="grid_4" type="button" class=" btn-grid-4"
 										data-toggle="tooltip" title="4"></button>
 
 									<button data-role="grid_list" type="button"
-										class="active btn-list" data-toggle="tooltip" title="List"></button>
+										class="active btn-list" data-toggle="tooltip" title="List"></button> -->
 								</div>
 								<div class=" niceselect_option">
 									<form class="select_option" action="#" name="pet"
-										data-navigate="/guest_write_form">
-										<select name="orderby" id="short" onchange="petType()">
+										id="petForm">
+										<select name="petType" id="short" >
 
 											<!---->
 											<option selected value="1">동물전체</option>
@@ -103,13 +140,7 @@
                                     <option value="5">Sort by price: high to low</option>
                                     <option value="6">Product Name: Z</option> -->
 										</select>
-									</form>
-
-									<!-- 지역선택은 하나더추가 -->
-								</div>
-								<div class=" niceselect_option">
-									<form class="select_option" action="#" name="">
-										<select name="orderby" id="local" onchange="petLocal()">
+										<select name="petLocal" id="local" >
 
 											<option selected value="1">지역전체</option>
 											<option value="서울특별시">서울특별시</option>
@@ -124,10 +155,33 @@
                                     <option value="5">Sort by price: high to low</option>
                                     <option value="6">Product Name: Z</option> -->
 										</select>
+								<input class="btn btn-primary" type="submit" value="조회" id="petsubmit">
+									</form>
+
+									<!-- 지역선택은 하나더추가 -->
+								</div>
+								
+								<!--<div class=" niceselect_option">
+									<form class="select_option" action="#" name="">
+										<select name="orderby" id="local" >
+
+											<option selected value="1">지역전체</option>
+											<option value="서울특별시">서울특별시</option>
+											<option value="경기도">경기도</option>
+											<option value="강원도">강원도</option>
+											<option value="충청남도">충청남도</option>
+											<option value="충청북도">충청북도</option>
+											<option value="경상남도">경상남도</option>
+											<option value="경상북도">경상북도</option>
+											<option value="제주도">제주도</option>
+											  <option value="4">Sort by price: low to high</option>
+                                    <option value="5">Sort by price: high to low</option>
+                                    <option value="6">Product Name: Z</option> 
+										</select>
 									</form>
 
 
-								</div>
+								</div>-->
 								<!-- <div class="page_amount">
                             <p>Showing 1–9 of 21 results</p>
                         </div> -->
@@ -277,6 +331,7 @@
 									</ul>
 								</div>
 							</div>
+
 
 
 

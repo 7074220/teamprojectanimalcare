@@ -3,6 +3,10 @@ package com.itwill.dao;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import com.itwill.entity.Pet;
 import com.itwill.entity.ReportBoard;
 
 public interface ReportBoardDao {
@@ -35,4 +39,6 @@ public interface ReportBoardDao {
 	
 	public List<ReportBoard> findByBoardNoOrderByBoardNoDesc();
 	
+	//페이지 정렬
+	public Page<ReportBoard> reportBoardFindAllPage(Pageable pageable);
 }

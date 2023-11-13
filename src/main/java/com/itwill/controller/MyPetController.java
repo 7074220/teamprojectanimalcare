@@ -3,6 +3,7 @@ package com.itwill.controller;
 import com.itwill.dto.MyPetListDto;
 import com.itwill.dto.MypetDto;
 import com.itwill.entity.MyPet;
+import com.itwill.repository.MyPetRepository;
 import com.itwill.service.MyPetService;
 import com.itwill.service.UserInfoService;
 import jakarta.servlet.http.HttpSession;
@@ -28,6 +29,8 @@ public class MyPetController {
 
 	@Autowired
 	private MyPetService myPetService;
+	@Autowired
+	private MyPetRepository myPetRepository;
 	@Autowired
 	private UserInfoService userInfoService;
 
@@ -69,10 +72,6 @@ public class MyPetController {
         	tempMypet.setMypetLeader(leader);
         	myPetListDtos.add(tempMypet);
 		}
-        
-      
-        
-        
         //model.addAttribute("Name", Name);
         model.addAttribute("myPetList",myPetListDtos);
         
@@ -83,11 +82,27 @@ public class MyPetController {
 
   @GetMapping("/registerMyPet") 
   public String registerMyPet(HttpSession session, Model model) {
-  
-  return "registerMyPet"; 
+	  return "registerMyPet"; 
   }
   
- 
+  @GetMapping("/updateMyPet") 
+  public String updateMyPet(@RequestParam Long mypetNo,HttpSession session, Model model) {
+	  model.addAttribute("mypetNo",mypetNo);
+	  Long userNo = (Long)session.getAttribute("userNo");
+	  MyPet updatepet = myPetRepository.findById(mypetNo).get();
+	  MyPet leader = myPetService.findLeaderMyPet(userNo);
+	  
+	  if(updatepet!=leader) {
+		  model.addAttribute("leader",true);
+	  }else {
+		  model.addAttribute("leader",false);
+	  }
+	  
+	  model.addAttribute("updatepet",updatepet);
+	  
+	  return "updateMyPet"; 
+  }
+  
 }
 /*
  * @GetMapping("/registerMyPet") public String registerMyPet(HttpSession

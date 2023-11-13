@@ -23,8 +23,12 @@ Pet petFindById(Long petNo); //pk로 찾기
 	
 	List<Pet> findAllByOrderBypetNoDesc();// 펫 no순으로 최신등록순 정렬
 	
-	List<Pet> findAllByOrderBypetType(String petType);// 펫 no순으로 최신등록순 정렬
-	 List<Pet> findAllByPetLocal(String petLocal);
+	//List<Pet> findAllByOrderBypetType(String petType);// 펫 no순으로 최신등록순 정렬
+	 //List<Pet> findAllByPetLocal(String petLocal);
 
 	Page<Pet> petFindAllPage(Pageable pageable);
+	Page<Pet> findAllByOrderBypetType(String petType,Pageable pageable);
+	Page<Pet> findAllByPetLocal(String petLocal,Pageable pageable);
+	Page<Pet> findAllByPetTypeByPetLocal(String petType,String petLocal,Pageable pageable);
 }
+	
