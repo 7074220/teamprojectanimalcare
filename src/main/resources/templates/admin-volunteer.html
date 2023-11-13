@@ -93,7 +93,7 @@
 												<th>방문시간</th>
 												<th>센터이름</th>
 												<th>처리상태</th>
-												<th>수정/취소</th>
+												<th>완료/취소</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -141,7 +141,7 @@
 				return;
 			}
 
-			let sendJsonObject = {visitNo: no};
+			let sendJsonObject = {volunteerNo: no};
 			let $row = $(this).closest('tr');
 
 			$.ajax({
@@ -153,7 +153,8 @@
 					if (response && response.volunteerNo == null) {
 						alert('신청내역이 없음');
 					} else {
-						alert('예약취소가 완료되었습니다.');
+						
+						alert('삭제가 완료되었습니다.');
 						$row.remove();
 					}
 				},
@@ -163,7 +164,12 @@
 			});
 		});
 	</script>
-
+	
+	
+	
+	
+	
+	
 	<script>
 		$(document).ready(function () {
 			// '완료' 버튼 클릭 시

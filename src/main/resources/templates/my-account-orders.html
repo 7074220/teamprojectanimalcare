@@ -495,18 +495,8 @@
                                                 <td>{{product.productPrice}}</td>
                                                 <td ><span class="success">{{product.productName}}</span></td>
                                                 <!-- <td>$25.00 for 1 item </td>-->
-                                                 <td> <select class="form-select form-select-sm"
-                                                      aria-label="Large select example">
-                                               
-                                                      <option selected>주문 상태</option>
-                                                      {{#select orderstatus.osNo }} 
-	                                                      <option value="1">주문확인</option>
-	                                                      <option value="2">배송준비</option>
-	                                                      <option value="3">배송중</option>
-	                                                      <option value="4">배송완료</option>
-                                                      {{/select}}
-                                                   </select>
-                                                </td>
+                                                 <td>{{orderstatus.osDesc}}
+                                                            </td>
                                                 <td><button type="button" class="write-review" onclick="reviewWrite(event,{{oiNo}})" id="{{product.productNo}}">{{reviewStatus}}</button></td>
                                              </tr>
                                              {{/each}}
@@ -552,21 +542,30 @@
 
 									});
 
+									function selectchange(e) {
+										let oiNo = e.target.id;
+										console.log(e.target.value);
 
-									$('#updateosNo').click(function (e) {
+										let send = {
+											oiNo: oiNo,
+											osNo: e.target.value
+										}
 
-										alert('저장');
-										var oiNo = $('').val();
-										var osNo = $('form-select form-select-sm').val();
-										alert(oiNo);
-										alert(oiNo);
+										ajaxRequest('PUT', 'order/updateosNo', send);
 
-										//window.location.href = "updateosNo?oiNo="
-										//+ orderAddress1 + orderAddress2
-										//+ orderAddress3 + "&osNo="
-										//+ orderPrice;
-									});
+									}
 
+									/*
+									$('#updateosNo').click(function(e){
+							   	
+									   alert('저장');
+								   	
+									   //window.location.href = "updateosNo?oiNo="
+																	   //+ orderAddress1 + orderAddress2
+																	   //+ orderAddress3 + "&osNo="
+																	   //+ orderPrice;
+								   });
+									*/
 
 
 								</script>
@@ -816,9 +815,7 @@
 				const year = now.getFullYear();
 				const month = (now.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더하고 2자리로 포맷팅
 				const day = now.getDate().toString().padStart(2, '0'); // 일을 2자리로 포맷팅
-				const hours = now.getHours().toString().padStart(2, '0');
-				const minutes = now.getMinutes().toString().padStart(2, '0');
-				const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}`;
+				const formattedDate = `${year}-${month}-${day}`;
 
 				let boardStar = $('.rate:checked').val();
 
@@ -906,7 +903,9 @@
 					const year = now.getFullYear();
 					const month = (now.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더하고 2자리로 포맷팅
 					const day = now.getDate().toString().padStart(2, '0'); // 일을 2자리로 포맷팅
-					const formattedDate = `${year}-${month}-${day}`;
+					const hours = now.getHours().toString().padStart(2, '0');
+					const minutes = now.getMinutes().toString().padStart(2, '0');
+					const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}`;
 
 					let boardStar = $('.rate:checked').val();
 
