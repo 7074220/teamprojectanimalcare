@@ -644,6 +644,10 @@
 			}
 			
 			function shop_html(responseJsonObject = {}) {
+				responseJsonObject.forEach(product => {
+		        product.formattedStarAvg = product.productStarAvg.toFixed(1);
+		   		});
+				
 				let htmlTemplate =
 				`{{#each this}}
 				<div class="col-lg-4 col-md-4 col-sm-6 col-12" id="listContent">
@@ -667,7 +671,7 @@
 										<h4 class="product_name"><a href="productDetail?productNo={{productNo}}"
 												text="{{productName}}">{{productName}}</a>
 										</h4>
-										<h5 class="old_price">별점 : {{productStarAvg}}</h5>
+										<h5 class="old_price">별점 : {{formattedStarAvg}}</h5>
 										<p><a href="#">{{productPetCategory}}</a></p>
 										<div class="price_box">
 											<span class="current_price">{{formatPrice productPrice}}</span>
