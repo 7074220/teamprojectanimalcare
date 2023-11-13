@@ -130,8 +130,6 @@ window.onload = function() {
 								
 								<div>
 									<span>방문 예약</span> 
-									<!-- <input type="date" name="volunteerDate"> -->
-									<!--  th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" 이 코드 추가시 현재 날짜 보여줌 -->
 									<input type="date" name="volunteerDate"
 										id="volunteerDate" placeholder="날짜를 선택해주세요"  required="required" 
 										th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">  

@@ -71,11 +71,8 @@ public class VolunteerController {
 	        volunteer.setCenter(center);
 	        
 	        model.addAttribute("userinfo", userinfo);
-
-	        // 봉사신청이 성공한 경우 모델에 추가
 	        model.addAttribute("message", "신청이 완료되었습니다.");
 	    } else {
-	        // 로그인이 필요한 경우 모델에 추가
 	        model.addAttribute("error", "로그인이 필요합니다.");
 	    }
 	    return "volunteerByUserNo"; // my-account 페이지로 이동
@@ -102,30 +99,7 @@ public class VolunteerController {
 	    return "my-account-volunteer";
 	}
 	
-	
 
-
-	
-	/*
-	// userNo 로 봉사 목록 조회. 로그인한 회원
-	@GetMapping("/volunteerList/{userNo}")
-	public String findByUserNoVolunteerList(Model model, HttpSession httpSession, @PathVariable(name = "userNo") Long userNo) throws Exception{		
-		List<Volunteer> volunteerList = volunteerService.findVolunteertByUserNo(userNo);
-		
-		List<VolunteerDto> volunteerDtoUserNoList = new ArrayList<>();		
-		for (Volunteer volunteer : volunteerList) {
-			volunteerDtoUserNoList.add(VolunteerDto.toDto(volunteer));
-		}
-		
-		model.addAttribute("volunteerList", volunteerList);
-		return "my-account-volunteer"; 
-	}
-	*/
-	
-	
-	
-	
-	
 	// userNo 로 봉사 리스트 조회. 로그인한 회원
 	@GetMapping("/volunteerByUserNo") 
 	public String findByVolunteerListUserNo(Model model, HttpSession session) throws Exception {
