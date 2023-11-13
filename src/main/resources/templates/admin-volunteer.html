@@ -130,44 +130,64 @@
 
 		<!--footer area end-->
 
-		
-		<script>
-			$('.deleteBtn').on('click', function (e) {
-				e.preventDefault();
-				let id = $(this).attr('id');
-				let no = id.split('-')[1];
+	<script>
+		$('.deleteBtn').on('click', function (e) {
+			e.preventDefault();
+			let id = $(this).attr('id');
+			let no = id.split('-')[1];
 
-				if (isNaN(no)) {
-					alert('volunteerNo 가져오기실패')
-					return;
+			if (isNaN(no)) {
+				alert('volunteerNo 가져오기실패')
+				return;
+			}
+
+			let sendJsonObject = {visitNo: no};
+			let $row = $(this).closest('tr');
+
+			$.ajax({
+				type: 'DELETE',
+				url: 'volunteer/' + no,
+				data: JSON.stringify(sendJsonObject),
+				contentType: 'application/json;UTF-8',
+				success: function (response) {
+					if (response && response.volunteerNo == null) {
+						alert('신청내역이 없음');
+					} else {
+						alert('예약취소가 완료되었습니다.');
+						$row.remove();
+						//window.location.href = "adminVolunteerList"
+					}
+				},
+				error: function () {
+					alert('취소 요청중 오류가 발생했습니다.');
 				}
+			});
+		});
+	</script>
 
-				let sendJsonObject = {visitNo: no};
-				let $row = $(this).closest('tr');
+	<script>
+		$(document).ready(function () {
+			// '완료' 버튼 클릭 시
+			$('.updateBtn').on('click', function (e) {
+				e.preventDefault();
 
+				// AJAX 요청
 				$.ajax({
-					type: 'DELETE',
-					url: 'volunteer/' + no,
-					data: JSON.stringify(sendJsonObject),
-					contentType: 'application/json;UTF-8',
-					success: function (response) {
-						if (response && response.volunteerNo == null) {
-							alert('신청내역이 없음');
-						} else {
-							alert('예약취소가 완료되었습니다.');
-							$row.remove();
-							//window.location.href = "adminVolunteerList"
-						}
+					type: 'GET', 
+					url: $(this).attr('href'),  
+					success: function (data) {
+						// 성공 시 팝업 표시
+						alert('봉사완료로 변경되었습니다. 포인트 3000점이 적립됩니다.');
+						location.reload();
 					},
 					error: function () {
-						alert('취소 요청중 오류가 발생했습니다.');
+						// 실패 시 에러 메시지 표시
+						alert('완료 요청중 오류가 발생했습니다.');
 					}
 				});
 			});
-
-		</script>
-
-
+		});
+	</script>
 
 
 
