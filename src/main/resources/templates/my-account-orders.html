@@ -14,7 +14,8 @@
 		
 		
 		#ordersTable{
-			width: 1055px;
+			width: 1200px;
+			margin-top:10px;
 		}
 
 	</style>
@@ -245,8 +246,8 @@
 		<!--breadcrumbs area end-->
 
 		<section class="main_content_area">
-			<div class="container">
-				<div class="account_dashboard" style="margin-right:250px">
+			<div class="container" style="margin-right:420px">
+				<div class="account_dashboard" >
 					<div class="row">
 						<div class="col-sm-12 col-md-3 col-lg-3">
 							<!-- Nav tabs -->
@@ -277,7 +278,7 @@
 							<!-- Tab panes -->
 							<div class="tab-content dashboard_content">
 
-								<div id="orders">
+								<div id="orders" style="margin-left: 10px;">
 									<h3>주문목록</h3>
 								<input readonly="readonly" id="datepicker1">
        							 <input readonly="readonly" id="datepicker2">
@@ -298,7 +299,7 @@
 											</thead>
 											<tbody>
 												<tr th:each="orders:${ordersList}" th:if="orders!=null">
-													<td class="order_no" th<!---->:text="${orders.orderNo}">orderNo</td>
+													<td class="order_no" th:text="${orders.orderNo}">orderNo</td>
 													<td class="order_userNo" th:if="${session.userName == '관리자'}" th:text="${orders.userinfo.userId}" >사용자 ID</td>
 													<td class="order_date" th:text="${#dates.format(orders.orderDate, 'yyyy-MM-dd')}">주문날짜</td>
 													<td class="order_desc" th:text="${orders.orderDesc}"><span
