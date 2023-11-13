@@ -111,6 +111,7 @@ public class ReplyRestController {
 	@DeleteMapping
 	public ResponseEntity<List<ReplyCreateDto>> delete(ReplyCreateDto replyCreateDto, HttpSession session)
 			throws Exception {
+		System.out.println(">>>>>>>>>>>>>>>맵핑");
 		Integer step = replyCreateDto.getReplyBoardStep();
 		Integer depth = replyCreateDto.getReplyBoardGroupNo();
 		Integer groupNo = replyCreateDto.getReplyBoardGroupNo();
