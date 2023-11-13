@@ -3,6 +3,7 @@ package com.itwill.dao;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -33,8 +34,8 @@ class ReviewBoardDaoImplTest {
 	@Transactional
 	@Rollback(false)
 	void testCreate() {
-
-		ReviewBoard reviewBoard = ReviewBoard.builder().boardTitle("타이틀12").boardContent("내용12").boardDate(new Date())
+		LocalDateTime currentDateTime=LocalDateTime.now();
+		ReviewBoard reviewBoard = ReviewBoard.builder().boardTitle("타이틀12").boardContent("내용12").boardDate(currentDateTime)
 				.boardStar((double) 3).userinfo(userInfoDao.findByNo(1L)).product(productDao.findByProductNo(5L))
 				.build();
 
