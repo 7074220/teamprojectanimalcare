@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -65,6 +67,15 @@ public class VolunteerServiceImpl implements VolunteerService{
 	public void addPointsToVolunteer(Long volunteerNo, Integer pointsToAdd) {
 		// 봉사에 포인트 적립
 		volunteerDao.addPointsToVolunteer(volunteerNo, pointsToAdd);		
+	}
+
+	
+	// 페이징
+	@Override
+	public Page<Volunteer> findPageVolunteerList(Pageable pageable) throws Exception {
+		
+		Page<Volunteer> volunteerListPage = volunteerDao.findPageVolunteerList(pageable);
+		return volunteerListPage;
 	}
 	
 	

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.itwill.entity.Userinfo;
@@ -102,6 +104,12 @@ public class VolunteerDaoImpl implements VolunteerDao{
 	    } else {
 	        throw new IllegalStateException("Userinfo not found for Volunteer with id: " + volunteerNo);
 	    }
+	}
+
+	//페이징
+	@Override
+	public Page<Volunteer> findPageVolunteerList(Pageable pageable) throws Exception {		
+		return volunteerRepository.findAll(pageable);
 	}
 	
 	
