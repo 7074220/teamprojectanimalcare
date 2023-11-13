@@ -179,7 +179,7 @@ public class ProductController {
 			int pageNo = page.getPageNumber();
 			int size = page.getPageSize();
 			
-			Pageable pageable = PageRequest.of(pageNo, size, Sort.by(Sort.Order.asc("productNo")));
+			Pageable pageable = PageRequest.of(pageNo, size, Sort.by(Sort.Order.desc("productNo")));
 			
 			Page<Product> productList = productService.productFindAllPage(pageable);
 			
