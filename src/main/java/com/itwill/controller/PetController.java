@@ -100,7 +100,7 @@ List<Center> centers=centerService.findAllCenters();
 				}
 			}
 
-		model.addAttribute("petList",petList);
+		model.addAttribute("petListPage",petList);
 		return "pet-list" ;
 	}
 		
