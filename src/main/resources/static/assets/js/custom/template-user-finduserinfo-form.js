@@ -9,6 +9,20 @@ export function user_finduserinfo_form(responseJsonObject = {}) {
                <!--login area start-->
                 <div class="col-lg-6 col-md-6">
                  <div class="account_form register">
+                 
+                  <style>
+                                @font-face {
+                                    font-family: 'GmarketSansMedium';
+                                    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+                                    font-weight: normal;
+                                    font-style: normal;
+                                }
+    
+                                .container {
+                                    font-family: 'GmarketSansMedium';
+                                }
+                   </style>
+                 
                         <h2>아이디 찾기</h2>
                         <form name="userFindIdForm" id="userFindIdForm" action="#">
                             <p>   
