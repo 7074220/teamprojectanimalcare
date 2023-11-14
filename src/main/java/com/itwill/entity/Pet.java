@@ -33,6 +33,8 @@ import lombok.ToString;
 @Data
 
 public class Pet {
+	
+	
 	@SequenceGenerator(name = "Pet_pet_no_SEQ",sequenceName = "Pet_pet_no_SEQ",initialValue = 1,allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Pet_pet_no_SEQ")
 	@Id

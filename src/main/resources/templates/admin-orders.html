@@ -1,8 +1,25 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='마이페이지')">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout/layout(title='마이페이지')">
 
 <head>
+<title>Safira - my account</title>
+<style>
+.modal-dialog {
+	margin: auto;
+	margin-top: 20vh;
+	/* 회원탈퇴창 가운데 정도로 떨어트림 */
+}
+
+#ordersTable {
+	margin-top: 20px;
+	width: 1350px;
+}
+</style>
+
+
+=======
 	<title>Safira - my account</title>
 	<style>
 		.modal-dialog {
@@ -33,63 +50,70 @@
 
 <!-- 별점 css 위치 -->
 
-	<style>
-		@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
-		.rate {
-			display: inline-block;
-			border: 0;
-			margin: 0 auto;
-			text-align: left;
-			direction: rtl;
-		}
-		.rate>input {
-			display: none;
-		}
-		.rate>label {
-			font-size: 3em;
-			color: #ddd;
-			position: relative;
-			display: inline-block;
-		}
-		.rate>label:before {
-			display: inline-block;
-			font-size: 1rem;
-			padding: .3rem .2rem;
-			margin: 0;
-			cursor: pointer;
-			font-family: FontAwesome;
-			content: "\f005 ";
-			text-align: left;
-		}
-		.rate .half:before {
-			content: "\f089 ";
-			position: absolute;
-			padding-right: 0;
-			left: 0;
-			/* 왼쪽에서 시작하도록 위치 조정 */
-		}
-		.rate input:checked~label,
-		.rate label:hover,
-		.rate label:hover~label {
-			width: auto;
-			color: #ffff00 !important;
-		}
-		.rate input:checked+.rate label:hover,
-		.rate input input:checked~label:hover,
-		.rate input:checked~.rate label:hover~label,
-		.rate label:hover~input:checked~label {
-			width: auto;
-			color: #ffff00 !important;
-		}
-	</style>
+<style>
+@import
+	url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+.rate {
+	display: inline-block;
+	border: 0;
+	margin: 0 auto;
+	text-align: left;
+	direction: rtl;
+}
+
+.rate>input {
+	display: none;
+}
+
+.rate>label {
+	font-size: 3em;
+	color: #ddd;
+	position: relative;
+	display: inline-block;
+}
+
+.rate>label:before {
+	display: inline-block;
+	font-size: 1rem;
+	padding: .3rem .2rem;
+	margin: 0;
+	cursor: pointer;
+	font-family: FontAwesome;
+	content: "\f005 ";
+	text-align: left;
+}
+
+.rate .half:before {
+	content: "\f089 ";
+	position: absolute;
+	padding-right: 0;
+	left: 0;
+	/* 왼쪽에서 시작하도록 위치 조정 */
+}
+
+.rate input:checked ~label, .rate label:hover, .rate label:hover ~label
+	{
+	width: auto;
+	color: #ffff00 !important;
+}
+
+.rate input:checked+.rate label:hover, .rate input input:checked ~label:hover,
+	.rate input:checked ~.rate label:hover ~label, .rate label:hover ~input:checked
+	 ~label {
+	width: auto;
+	color: #ffff00 !important;
+}
+</style>
 
 
 
 
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 </head>
 
@@ -262,15 +286,15 @@
 							<div class="dashboard_tab_button">
 								<ul role="tablist" class="nav flex-column dashboard-list">
 									<li><a href="adminUserList" class="nav-link">회원</a></li>
-	                                <li><a href="adminProductList"  class="nav-link">상품</a></li>
-	                                <li><a href="adminOrdersList" class="nav-link">주문</a></li>
-	                                <li><a href="adminAdoptList"  class="nav-link">입양</a></li>
-									<li><a href="adminVolunteerList"class="nav-link">봉사</a></li>
-	                                <li><a href="adminVisitList"class="nav-link">견학</a></li>
-									<li><a href="centerListAll"class="nav-link">보호소</a></li>
+									<li><a href="adminProductList" class="nav-link">상품</a></li>
+									<li><a href="adminOrdersList" class="nav-link">주문</a></li>
+									<li><a href="adminAdoptList" class="nav-link">입양</a></li>
+									<li><a href="adminVolunteerList" class="nav-link">봉사</a></li>
+									<li><a href="adminVisitList" class="nav-link">견학</a></li>
+									<li><a href="centerListAll" class="nav-link">보호소</a></li>
 									<!--<li><a th:if="${session.userName != '관리자'}" style="display: none;"class="nav-link"></a></li>-->
 									<!-- <li> <a th:if="${session.userName != '관리자'}" href="orders" class="nav-link">주문목록</a></li> -->
-	                                <li><a href="logout" class="nav-link">로그아웃</a></li>
+									<li><a href="logout" class="nav-link">로그아웃</a></li>
 								</ul>
 							</div>
 						</div>
@@ -280,34 +304,44 @@
 
 								<div id="orders">
 									<h3>주문목록</h3>
-								<input readonly="readonly" id="datepicker1" style="margin-right: 5px;">
-       							 <input readonly="readonly" id="datepicker2" style="margin-right: 5px;">
-       							 <button type="button" class="btn btn-secondary" id="datecheck">조회</button>
-      					
+									<input readonly="readonly" id="datepicker1"
+										style="margin-right: 5px;"> <input readonly="readonly"
+										id="datepicker2" style="margin-right: 5px;">
+									<button type="button" class="btn btn-secondary" id="datecheck">조회</button>
+
 									<div class="table-responsive" id="ordersTable">
 										<table class="table">
 											<thead>
 												<tr>
 													<th class="order_no">주문번호</th>
-													<th class="order_userNo" th:if="${session.userName == '관리자'}">사용자</th>
+													<th class="order_userNo"
+														th:if="${session.userName == '관리자'}">사용자</th>
 													<th class="order_date">주문날짜</th>
 													<th class="order_desc">상품명</th>
 													<th class="order_price">총가격</th>
 													<th class="order_volunteer">리뷰</th>
-													<th th:if="${session.userName == '관리자'}"class="order_remove">삭제</th>
+													<th th:if="${session.userName == '관리자'}"
+														class="order_remove">삭제</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr th:each="orders:${ordersList}" th:if="orders!=null">
 													<td class="order_no" th:text="${orders.orderNo}">orderNo</td>
-													<td class="order_userNo" th:if="${session.userName == '관리자'}" th:text="${orders.userinfo.userId}" >사용자 ID</td>
-													<td class="order_date" th:text="${#dates.format(orders.orderDate, 'yyyy-MM-dd')}">주문날짜</td>
+													<td class="order_userNo"
+														th:if="${session.userName == '관리자'}"
+														th:text="${orders.userinfo.userId}">사용자 ID</td>
+													<td class="order_date"
+														th:text="${#dates.format(orders.orderDate, 'yyyy-MM-dd')}">주문날짜</td>
 													<td class="order_desc" th:text="${orders.orderDesc}"><span
-															class="success">상품명</span></td>
+														class="success">상품명</span></td>
 													<td class="order_price"
 														th:text="${#numbers.formatInteger(orders.orderPrice, 3, 'COMMA') + '원'}">총가격</td>
-													<td><a  data-toggle="modal" data-target="#orderDetailsModal"  th:href="@{#__${orders.orderNo}__}" class="view">주문상세</a></td>
-													<td  class="order_remove" th:id="${orders.orderNo}"><a class="deleteOrder"><i class="fa fa-trash-o" th:id="${orders.orderNo}"></i></a></td>
+													<td><a data-toggle="modal"
+														data-target="#orderDetailsModal"
+														th:href="@{#__${orders.orderNo}__}" class="view">주문상세</a></td>
+													<td class="order_remove" th:id="${orders.orderNo}"><a
+														class="deleteOrder"><i class="fa fa-trash-o"
+															th:id="${orders.orderNo}"></i></a></td>
 												</tr>
 												<!-- <tr>
                                                 <td>2</td>
@@ -321,18 +355,23 @@
 									</div>
 
 								</div>
+								
+					
 
 
 								<!--   </div>-->
-<!--주문 상세 모달창 -->
+								<!--주문 상세 모달창 -->
 								<div class="modal fade" id="orderDetailsModal" tabindex="-1"
 									aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
-									<div class="modal-dialog" >
-										<div class="modal-content" style="width: 900px; height: auto;  border-radius: 10px;">
+									<div class="modal-dialog">
+										<div class="modal-content"
+											style="width: 900px; height: auto; border-radius: 10px;">
 											<div class="modal-header">
-												<h5 class="modal-title" id="orderDetailsModalLabel">주문 상세</h5>
+												<h5 class="modal-title" id="orderDetailsModalLabel">주문
+													상세</h5>
 												<button type="button" class="close" data-dismiss="modal"
-													aria-label="Close" style="border: none;">X
+													aria-label="Close" style="border: none;">
+													X
 													<!--<span aria-hidden="true">&times;</span>-->
 												</button>
 											</div>
@@ -357,34 +396,104 @@
 																<td>May 10, 2018</td>
 																<td><span class="success">고양이캔조림</span></td>
 																<!-- <td>$25.00 for 1 item </td>-->
-																<td> <select class="form-select form-select-sm"
-																		aria-label="Large select example">
+																<td><select class="form-select form-select-sm"
+																	aria-label="Large select example">
 																		<option selected>주문 상태</option>
 																		<option value="1">주문확인</option>
 																		<option value="2">배송준비</option>
 																		<option value="3">배송중</option>
 																		<option value="4">배송완료</option>
-																	</select>
-																</td>
-																<td><button  class="write-review">리뷰쓰기</button></td>
+																</select></td>
+																<td><button class="write-review">리뷰쓰기</button></td>
 															</tr>
 														</tbody>
 													</table>
 												</div>
 
 											</div>
+											
+											
 											<div class="modal-footer">
 												<!--   <button type="button" class="btn btn-primary">리뷰 저장</button>-->
 												<button type="button" class="btn btn-secondary"
 													data-dismiss="modal">닫기</button>
-													 <button type="button" class="btn btn-primary"data-dismiss="modal" id="updateosNo">저장</button>
+												<button type="button" class="btn btn-primary"
+													data-dismiss="modal" id="updateosNo">저장</button>
 
 											</div>
 										</div>
 									</div>
 								</div>
-					
-	<script>
+								
+								
+											   <div class="shop_toolbar t_bottom">
+								<div class="pagination" th:if="${!ordersList.isEmpty()}">
+									<ul
+										th:with="
+            pageNumber = ${ordersList.pageable.pageNumber},
+            pageSize = ${ordersList.pageable.pageSize},
+            totalPages = ${ordersList.totalPages},
+            startPage = ${T(java.lang.Math).floor(pageNumber / pageSize) * pageSize+1 },
+            tempEndPage = ${startPage + pageSize - 1},
+            endPage = (${tempEndPage < totalPages ? tempEndPage : totalPages})">
+
+	<!-- 이전페이지 이동 -->
+										<li th:classappend="${ordersList.first} ? 'disabled'"><a
+											href="#"
+											th:href="${ordersList.first} ? '#' : @{adminOrdersList(page=${pageNumber-1})}"><
+										</a></li>
+									 		<!-- 특정페이지 이동 -->
+										<li th:each="page: ${#numbers.sequence(startPage, endPage)}"
+											th:classappend="${page == pageNumber+1} ? 'current'"><a
+											th:text="${page}" th:href="@{adminOrdersList(page=${page-1})}"></a>
+
+										</li>
+										<!-- <li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li class="next"><a href="#">next</a></li> -->
+						
+						<!-- 다음페이지 이동 -->
+										<li th:classappend="${ordersList.last} ? 'disabled'"><a
+											href="#"
+											th:href="${ordersList.last} ? '#' : @{orders(page=${pageNumber +1})}">></a></li>
+									</ul>
+								</div>
+							</div>
+								<!-- <div class="shop_toolbar t_bottom">
+									<div class="pagination" th:if="${!ordersList.isEmpty()}">
+										<ul
+											th:with="
+            pageNumber = ${ordersList.pageable.pageNumber},
+            pageSize = ${ordersList.pageable.pageSize},
+            totalPages = ${ordersList.totalPages},
+            startPage = ${T(java.lang.Math).floor(pageNumber / pageSize) * pageSize+1 },
+            tempEndPage = ${startPage + pageSize - 1},
+            endPage = (${tempEndPage < totalPages ? tempEndPage : totalPages})">
+
+											이전페이지 이동
+											<li th:classappend="${ordersList.first} ? 'disabled'"><a
+												href="#"
+												th:href="${ordersList.first} ? '#' : @{adminOrdersList(page=${pageNumber-1})}"><
+											</a></li>
+											특정페이지 이동
+											<li th:each="page: ${#numbers.sequence(startPage, endPage)}"
+												th:classappend="${page == pageNumber+1} ? 'current'"><a
+												th:text="${page}"
+												th:href="@{adminOrdersList(page=${page-1})}"></a></li>
+											<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li class="next"><a href="#">next</a></li>
+
+											다음페이지 이동
+											<li th:classappend="${ordersList.last} ? 'disabled'"><a
+												href="#"
+												th:href="${ordersList.last} ? '#' : @{adminOrdersList(page=${pageNumber +1})}">></a></li>
+										</ul>
+									</div>
+								</div> -->
+								
+								
+								<script>
 	 
 	  $(function() {
           //input을 datepicker로 선언
@@ -556,77 +665,85 @@
          
 
       </script>
-					
-
-<!--리뷰 쓰기 모달창-->
-
-<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel"
-	aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content" style="border: 2px solid green; height: 380px; top: 20px; margin: 20px;  border-radius: 10px; width: 600px;">
-			<div class="modal-header">
-				<h5 class="modal-title" id="orderDetailsModalLabel">리뷰 작성</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"
-					style="border: none; padding: 7px;">X
-					<!--<span aria-hidden="true">&times;</span>-->
-				</button>
-			</div>
-			<div class="modal-body" id="reviewContent">
-				<!-- 주문 상세 내용이 여기에 로드됩니다 -->
-				<div>
-					<!--<h3>리뷰작성</h3>-->
-					<div class="comments_form">
-						<input type="hidden" id="userNo" th:value="${session.userNo}" />
-						<input type="hidden" id="productNo" th:value="${productNo}" />
-						
-						<form th:action="@{/reviewBoard/createReviewBoard}" class="mb-3" name="myform" id="myform"
-							method="post">
-							
-
-							<!--<input type="hidden" id="productNo" th:value="${user.userNo}"/>-->
 
 
-							<p>별점과 후기를 남겨주세요.</p>
+								<!--리뷰 쓰기 모달창-->
+
+								<div class="modal fade" id="reviewModal" tabindex="-1"
+									aria-labelledby="reviewModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content"
+											style="border: 2px solid green; height: 380px; top: 20px; margin: 20px; border-radius: 10px; width: 600px;">
+											<div class="modal-header">
+												<h5 class="modal-title" id="orderDetailsModalLabel">리뷰
+													작성</h5>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close" style="border: none; padding: 7px;">
+													X
+													<!--<span aria-hidden="true">&times;</span>-->
+												</button>
+											</div>
+											<div class="modal-body" id="reviewContent">
+												<!-- 주문 상세 내용이 여기에 로드됩니다 -->
+												<div>
+													<!--<h3>리뷰작성</h3>-->
+													<div class="comments_form">
+														<input type="hidden" id="userNo"
+															th:value="${session.userNo}" /> <input type="hidden"
+															id="productNo" th:value="${productNo}" />
+
+														<form th:action="@{/reviewBoard/createReviewBoard}"
+															class="mb-3" name="myform" id="myform" method="post">
 
 
-							<div class="row">
+															<!--<input type="hidden" id="productNo" th:value="${user.userNo}"/>-->
 
-								<div>별점</div>
 
-								<!-- 별점 위치 -->
+															<p>별점과 후기를 남겨주세요.</p>
 
-								<div class="rate" draggable="false">
-									<input type="radio" name="boardStar" id="star5" class="rate" value="5">
-									<label for="star5"></label>
-									<input type="radio" name="boardStar" id="star4" class="rate" value="4">
-									<label for="star4"></label>
-									<input type="radio" name="boardStar" id="star3" class="rate" value="3">
-									<label for="star3"></label>
-									<input type="radio" name="boardStar" id="star2" class="rate" value="2">
-									<label for="star2"></label>
-									<input type="radio" name="boardStar" id="star1" class="rate" value="1">
-									<label for="star1"></label>
-								</div>
 
-								<div class="col-12">
-									<label for="review_comment">Comment </label>
-									<div> <textarea name="comment" id="review_comment" style="height: 90px;"></textarea>
+															<div class="row">
+
+																<div>별점</div>
+
+																<!-- 별점 위치 -->
+
+																<div class="rate" draggable="false">
+																	<input type="radio" name="boardStar" id="star5"
+																		class="rate" value="5"> <label for="star5"></label>
+																	<input type="radio" name="boardStar" id="star4"
+																		class="rate" value="4"> <label for="star4"></label>
+																	<input type="radio" name="boardStar" id="star3"
+																		class="rate" value="3"> <label for="star3"></label>
+																	<input type="radio" name="boardStar" id="star2"
+																		class="rate" value="2"> <label for="star2"></label>
+																	<input type="radio" name="boardStar" id="star1"
+																		class="rate" value="1"> <label for="star1"></label>
+																</div>
+
+																<div class="col-12">
+																	<label for="review_comment">Comment </label>
+																	<div>
+																		<textarea name="comment" id="review_comment"
+																			style="height: 90px;"></textarea>
+																	</div>
+
+																</div>
+															</div>
+															<!--<button class="button" type="submit">Post Comment</button>-->
+															<div class="modal-footer" style="height: 40px;">
+																<!--   <button type="button" class="btn btn-primary">리뷰 저장</button>-->
+																<button type="submit" class="submit"
+																	data-dismiss="modal" style="background: white;">작성
+																	완료</button>
+															</div>
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
-
 								</div>
-							</div>
-							<!--<button class="button" type="submit">Post Comment</button>-->
-							<div class="modal-footer" style="height: 40px;">
-								<!--   <button type="button" class="btn btn-primary">리뷰 저장</button>-->
-								<button type="submit" class="submit" data-dismiss="modal" style="background: white;">작성 완료</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 
 
 
@@ -969,13 +1086,13 @@
 			
 
 		</script>
-		
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
+
 	</th:block>
 
 
