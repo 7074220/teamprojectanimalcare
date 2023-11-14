@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="layout/layout(title='pet_insert_form')">
+	layout:decorate="layout/layout(title='pet_update_form')">
 
 <head>
 	<title>입양동물 등록</title>
@@ -50,19 +50,19 @@
 					<div class="col-lg-6 col-md-6" style="margin-left: 300px;">
 						<div class="account_form register"
 							style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-							<h2>입양 등록</h2>
+							<h2>펫 수정</h2>
 
-							<form name="f" id="pet_form" action="insert_action" method="post" enctype="multipart/form-data"
+							<form name="f" id="pet_update_form" action="insert_action" method="post" enctype="multipart/form-data"
 								>
 								<label>종류</label>
-								<select class="form-select" aria-label="Default select example" name="petType" id="petType">
+								<select class="form-select" aria-label="Default select example" name="petType" id="petType" th:value="${pet.petType}" >
 									<label for="petType"><span>종류</span></label>
 									<option selected>종류를 고르세요</option>
 									<option value="강아지">강아지</option>
 									<option value="고양이">고양이</option>
 								</select>
 								<label>성별</label>
-								<select class="form-select" aria-label="Default select example" name="petGender" id="petGender">
+								<select class="form-select" aria-label="Default select example" name="petGender" id="petGender" th:value="${pet.petGender}">
 									<label for="petType"><span>종류</span></label>
 									<option selected>성별을 고르세요</option>
 									<option value="수컷">수컷</option>
@@ -70,8 +70,8 @@
 								</select>
 								<p>
 									<label>지역</label>
-									<select class="form-select" aria-label="Default select example" name="petLocal" id="petLocal">
-										<option selected>지역을 고르세요</option>
+									<select th:value="${pet.Local}" class="form-select" aria-label="Default select example" name="petLocal" id="petLocal">
+										<option >지역을 고르세요</option>
 										<option value="서울특별시">서울특별시</option>
 										<option value="경기도">경기도</option>
 										<option value="강원도">강원도</option>
@@ -89,32 +89,33 @@
 										data-target="#exampleModal" style="margin-bottom: 10px;">
 										보호소 선택
 									</button>
-									<input readonly="readonly" id="center" >
+									<input readonly="readonly" id="center" th:value="${pet.center.centerName}" >
 									
 									
 								<p>
 								
-								<input type="hidden" name="centerNo" id="centerNo" value="">
+								<input type="hidden" name="centerNo" id="centerNo" value="" >
 									<!-- Modal -->
 								
 
 								<p>
 									<label for="petFindPlace"><span>발견장소</span></label>
-									<input type="text" name="petFindPlace" id="petFindPlace">
+									<input type="text" name="petFindPlace" id="petFindPlace" th:value="${pet.petFindPlace}">
 								</p>
 								<p>
 									<label for="petCharacter"><span>특이사항/성격</span></label>
-									<input type="text" name="petCharacter" id="petCharacter">
+									<input type="text" name="petCharacter" id="petCharacter" th:value="${pet.petCharacter}">
 								</p>
 
 
 
-								<label>상품 이미지</label>
-								<input type="file" name="imageFile" style="border: none;">
+								<label for="productImage">펫 이미지</label> <input type="file"
+									name="imageFile" id="imageFile" th:value="${pet.petImage}"
+									style="border: none;">
 								<div class="login_submit" style="margin-top: 10px;">
 
 
-									<button type="submit" th:text="등록" id="insert">등록</button>
+									<button type="submit" th:text="수정" id="insert">수정</button>
 
 								</div>
 							</form>
@@ -125,7 +126,7 @@
 										<div class="modal-content"
 											style="width: 900px; height: auto;  border-radius: 10px;">
 											<div class="modal-header">
-												<h5 class="modal-title" id="orderDetailsModalLabel">주문 상세</h5>
+												<h5 class="modal-title" id="orderDetailsModalLabel">입양 보호소</h5>
 												<button type="button" class="close" data-dismiss="modal"
 													aria-label="Close" style="border: none;">X
 													<!--<span aria-hidden="true">&times;</span>-->
@@ -186,14 +187,8 @@
 
 
 		$('#pet_form').on('submit', function (e) {
+			 //폼이 유효하지 않으면 전송을 중지
 			
-			
-			 /* alert( $('#petLocal').val());
-			 alert( $('#petType').val());
-			 alert( $('#petGender').val());
-			 alert( $('#petFindPlace').val());
-			 alert( $('#petCharacter').val());
-			 alert( $('#centerNo').val()); */
 			
 			 window.location.href = "petList";
 			
@@ -210,7 +205,7 @@
 	         
 			};
 			
-	         
+			
 
             // 이전에 선택된 행 취소 (선택 사항)
             //$(".selected-row").removeClass("selected-row");
@@ -226,6 +221,31 @@
 
             // 폼을 서버로 전송
           //  $("#selectedCenterForm").submit();
+            function loadURLToInputFiled(url){
+				console.log(url);
+				  getImgURL(url, (imgBlob)=>{
+				    // Load img blob to input
+				    // WIP: UTF8 character error
+				    let fileName = '[[${pet.petImage}]]';
+				    let file = new File([imgBlob], fileName,{type:"image/jpeg", lastModified:new Date().getTime()}, 'utf-8');
+				    let container = new DataTransfer(); 
+				    container.items.add(file);
+				    document.querySelector('input[type="file"]').files = container.files;
+				    document.querySelector('#imagePreview').src=url;
+				  });
+				}
+            function getImgURL(url, callback){
+  			  var xhr = new XMLHttpRequest();
+  			  xhr.onload = function() {
+  			      callback(xhr.response+">>>>>>>>>>>>>");
+  			  };
+  			  xhr.open('GET', url);
+  			  xhr.responseType = 'blob';
+  			  xhr.send();
+  			}
+            
+            
+            loadURLToInputFiled('image/product/[[${pet.petImage}]]');
 		</script>
 
 	</th:block>

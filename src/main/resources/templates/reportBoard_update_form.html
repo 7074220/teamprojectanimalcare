@@ -34,7 +34,8 @@
                         <h2>실종&#47;제보</h2>
                         
                         <form name="f" id="reportBoard_write_form" action="#" method="post" enctype="multipart/form-data"
-                        	th:action="@{'/reportWrite'}">
+                        	th:action="@{'/reportUpdate'}">
+                        	<input type="hidden" id="boardNo" name="boardNo" th:value="${reportBoard.boardNo}"></input>
                             <p>   
                                 <label>글 제목<span>*</span></label>
                                 <input type="text" id="boardTitle" name="boardTitle" th:value="${reportBoard.boardTitle}">
@@ -78,7 +79,7 @@
 								<div class="login_submit" style="margin-top: 10px;">
 
 
-									<button type="submit" th:text="수정하기">수정</button>
+								<button type="submit" th:text="수정하기" th:id="${reportBoard.boardNo}">수정</button>
                            </div>
 						</form>
                         </div>
@@ -95,8 +96,16 @@
 				    // Load img blob to input
 				    // WIP: UTF8 character error
 				    let fileName = '[[${reportBoard.boardImage}]]';
+				   
+				    
 				    let file = new File([imgBlob], fileName,{type:"image/jpeg", lastModified:new Date().getTime()}, 'utf-8');
 				    let container = new DataTransfer(); 
+				    
+				    
+				   
+				    
+				    
+				    
 				    container.items.add(file);
 				    document.querySelector('input[type="file"]').files = container.files;
 				    document.querySelector('#imagePreview').src=url;
@@ -204,6 +213,7 @@
 	    // min 속성 제거
 	    boardFindDate.removeAttribute('min');
 };
+
 </script>
             
     </th:block>

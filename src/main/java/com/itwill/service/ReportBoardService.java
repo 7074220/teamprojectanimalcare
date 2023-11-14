@@ -41,4 +41,6 @@ public interface ReportBoardService {
 	
 	public Page<ReportBoard> reportBoardFindAllPage(Pageable pageable); 
 	
+	public List<ReportBoard> findByBoardImage(String boardImage);
+	
 }

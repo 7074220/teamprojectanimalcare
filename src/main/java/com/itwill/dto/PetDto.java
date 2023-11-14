@@ -59,6 +59,7 @@ public class PetDto {
 	         .petType(petEntity.getPetType())
 	         .petFindPlace(petEntity.getPetFindPlace())
 	         .centerNo(petEntity.getCenter().getCenterNo())
+	         .center(petEntity.getCenter())
 			.build();
 		  
 	 }

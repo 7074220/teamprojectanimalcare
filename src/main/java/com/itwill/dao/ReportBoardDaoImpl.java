@@ -79,6 +79,12 @@ public class ReportBoardDaoImpl implements ReportBoardDao{
 		return reportList;
 	}
 
+	@Override
+	public List<ReportBoard> findByBoardImage(String boardImage) {
+		
+		return reportBoardRepository.findByBoardImage(boardImage);
+	}
+
 
 	
 }
