@@ -1,7 +1,7 @@
 
 export function user_write_form(responseJsonObject = {}) {
 	let htmlTemplate =
-	`<!--header area start-->
+		`<!--header area start-->
     
     <!--offcanvas menu area start-->
     
@@ -93,7 +93,7 @@ export function user_write_form(responseJsonObject = {}) {
 								<label>우편주소<span></span></label>
 								<button type="button" class="btn btn-secondary btn-sm"
 									onclick="execution_daum_address()">주소찾기</button>
-								<input placeholder="우편번호" type="text" id="postcode" name="postcode">
+								<input placeholder="우편번호" type="text" id="postcode" name="postcode" input readonly="readonly">
 								
 							</div>
 							<div class="col-12 mb-20">
@@ -168,10 +168,22 @@ function execution_daum_address() {
 					// 우편번호와 주소 정보를 해당 필드에 넣는다.
 					document.getElementById('postcode').value = data.zonecode;
 					document.getElementById("ordersAddress1").value = addr;
+					
+				
 					// 커서를 상세주소 필드로 이동한다.
-					document.getElementById("ordersAddress3").focus();
+					
+					document.getElementById("postcode").focus();
+					
+					
+					
 				}
+			
+
 			}).open();
+			
+			
+			
+			
 }
    	</script>
     
@@ -181,7 +193,7 @@ function execution_daum_address() {
     <!--footer area start-->
     
     <!--footer area end-->`;
-	
+
 	let bindTemplate = Handlebars.compile(htmlTemplate);
 	let resultTemplate = bindTemplate(responseJsonObject);
 	return resultTemplate;
