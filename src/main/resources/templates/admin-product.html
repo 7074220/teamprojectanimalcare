@@ -1,6 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='마이페이지')">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='관리자 상품관리')">
 
 <head>
 	<title>Safira - my account</title>
@@ -307,7 +307,7 @@
 											</tr>
 										</tbody>
 									</table>
-									<div class="shop_toolbar t_bottom">
+									<!--<div class="shop_toolbar t_bottom">
 						                    <div class="pagination" th:if="${productList.totalPages > 1}">
 						                        <ul th:with="pageNumber=${productList.number}, totalPages=${productList.totalPages}">
 						                            <li th:classappend="${productList.first} ? 'disabled'"><a href="#" th:href="${productList.first} ? '#' : @{adminProductList(page=${pageNumber - 1})}">&lt;</a></li>
@@ -318,7 +318,7 @@
 						                            <li th:classappend="${productList.last} ? 'disabled'"><a href="#" th:href="${productList.last} ? '#' : @{adminProductList(page=${pageNumber + 1})}">&gt;</a></li>
 						                        </ul>
 						                    </div>
-						                </div>
+						                </div>-->
 								</div>
 							</div>
 							
