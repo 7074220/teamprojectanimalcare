@@ -19,6 +19,18 @@
 			margin-right: 5px;
 			/* 선택 사항: 간격 조절을 위한 마진 조절 */
 		}
+		 
+	@font-face {
+			font-family: 'GmarketSansMedium';
+			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+			font-weight: normal;
+			font-style: normal;
+		}
+	
+		.container {
+			font-family: 'GmarketSansMedium';
+		}
+
 	</style>
 
 
@@ -58,7 +70,7 @@
 												<label>우편주소<span></span></label>
 												<button type="button" class="btn btn-secondary btn-sm"
 													onclick="execution_daum_address()">주소찾기</button>
-												<input placeholder="우편번호" type="text" id="postcode" name="postcode">
+												<input placeholder="우편번호" type="text" id="postcode" name="postcode" style="margin-top: 5px;">
 
 											</div>
 											<div class="col-12 mb-20">
