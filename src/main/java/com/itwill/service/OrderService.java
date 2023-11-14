@@ -3,6 +3,9 @@ package com.itwill.service;
 import java.sql.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.itwill.entity.Orders;
 
 public interface OrderService {
@@ -19,9 +22,10 @@ public interface OrderService {
 	Orders findOrderByNo(Long orderNo);
 
 	// 주문 전체 조회 , 관리자전용
-	List<Orders> findOrders();
+	Page<Orders> findOrders(Pageable pageable);
 	
 	// 회원아이디로 주문조회
+	Page<Orders> findOrderById(Long userNo,Pageable pageable);
 	List<Orders> findOrderById(Long userNo);
 
 	List<Orders> findOrderByIdDesc(Long userNo);
