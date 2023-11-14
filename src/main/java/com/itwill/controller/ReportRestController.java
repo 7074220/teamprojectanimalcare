@@ -60,7 +60,7 @@ public class ReportRestController {
 	}
 	
 	@Operation(summary = "유기견삭제")
-	@DeleteMapping("/{boardNo}")
+	@DeleteMapping("/delete/{boardNo}")
 	public ResponseEntity<ReportBoardInsertDto> reportBoardDelete(@PathVariable(name = "boardNo") Long boardNo){
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
