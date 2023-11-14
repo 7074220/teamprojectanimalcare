@@ -238,7 +238,7 @@
 							<!--shop toolbar end-->
 
 							<!--펫 시작  -->
-							<div class="row shop_wrapper grid_list" th:each="pet:${petList}">
+							<div class="row shop_wrapper grid_list" th:each="pet:${petListLocal}">
 								<div class="col-12 ">
 									<div class="single_product">
 										<div class="product_thumb">
@@ -351,25 +351,25 @@
 
 
 							<div class="shop_toolbar t_bottom">
-								<div class="pagination" th:if="${pagingstatus==1}">
+								<div class="pagination" th:if="${!petListLocal.isEmpty()}">
 									<ul
 										th:with="
-					            pageNumber = ${petList.pageable.pageNumber},
-					            pageSize = ${petList.pageable.pageSize},
-					            totalPages = ${petList.totalPages},
-					            startPage = ${T(java.lang.Math).floor(pageNumber / pageSize) * pageSize+1 },
-					            tempEndPage = ${startPage + pageSize - 1},
-					            endPage = (${tempEndPage < totalPages ? tempEndPage : totalPages})">
+            pageNumber = ${petListLocal.pageable.pageNumber},
+            pageSize = ${petListLocal.pageable.pageSize},
+            totalPages = ${petListLocal.totalPages},
+            startPage = ${T(java.lang.Math).floor(pageNumber / pageSize) * pageSize+1 },
+            tempEndPage = ${startPage + pageSize - 1},
+            endPage = (${tempEndPage < totalPages ? tempEndPage : totalPages})">
 
 	<!-- 이전페이지 이동 -->
-										<li th:classappend="${petList.first} ? 'disabled'"><a
+										<li th:classappend="${petListLocal.first} ? 'disabled'"><a
 											href="#"
-											th:href="${petList.first} ? '#' : @{petListPage(page=${pageNumber-1})}"><
+											th:href="${petListLocal.first} ? '#' : @{petLocal(page=${pageNumber-1})}"><
 										</a></li>
 									 		<!-- 특정페이지 이동 -->
 										<li th:each="page: ${#numbers.sequence(startPage, endPage)}"
 											th:classappend="${page == pageNumber+1} ? 'current'"><a
-											th:text="${page}" th:href="@{petListPage(page=${page-1})}"></a>
+											th:text="${page}" th:href="@{petLocal(page=${page-1})}"></a>
 
 										</li>
 										<!-- <li><a href="#">2</a></li>
@@ -377,9 +377,9 @@
 						<li class="next"><a href="#">next</a></li> -->
 						
 						<!-- 다음페이지 이동 -->
-										<li th:classappend="${petList.last} ? 'disabled'"><a
+										<li th:classappend="${petListLocal.last} ? 'disabled'"><a
 											href="#"
-											th:href="${petList.last} ? '#' : @{petListPage(page=${pageNumber +1})}">></a></li>
+											th:href="${petListLocal.last} ? '#' : @{petLocal(page=${pageNumber +1})}">></a></li>
 									</ul>
 								</div>
 							</div>
