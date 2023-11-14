@@ -518,6 +518,19 @@ public class AdminController {
 			model.addAttribute("petList",petDtoList);
 			return "pet-list" ;
 		}
+		
+		@GetMapping("/petUpdateForm")
+		public String petUpdateForm(@RequestParam Long petNo, Model model) {
+	List<Center> centers=centerService.findAllCenters();
+			Pet updatePet = petService.petFindById(petNo);
+			PetDto petDto=PetDto.toDto(updatePet);
+			
+			model.addAttribute("pet", petDto);
+			model.addAttribute("petCenter", centers);
+			
+			return "pet_update_form"; 
+		}
+		
 		@PostMapping("/insert_action")
 		public String insert_action(@RequestParam("imageFile") MultipartFile file,
 				@RequestParam("petType") String petType, @RequestParam("petGender") String petGender,
