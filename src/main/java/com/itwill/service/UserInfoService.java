@@ -2,6 +2,9 @@ package com.itwill.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.itwill.dto.UserLoginActionDto;
 import com.itwill.dto.UserWriteActionDto;
 import com.itwill.entity.Userinfo;
@@ -57,5 +60,7 @@ public interface UserInfoService {
 	public Userinfo findUserIdByNameAndPhoneNumber(String userName,String userPhoneNumber);
 	
 	public Userinfo findPasswordByUserIdPhoneNumber(String userId, String userPhoneNumber);
+	
+	public Page<Userinfo> findAllPage(Pageable pageable);
 	
 }

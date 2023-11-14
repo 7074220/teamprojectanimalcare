@@ -63,8 +63,6 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class AdminController {
-
-	
 		@Autowired
 		private UserInfoService userInfoService;
 		@Autowired
@@ -99,22 +97,17 @@ public class AdminController {
 		@GetMapping(value = "/adminUserList")
 		// 관리자 --> 회원정보 리스트
 		// 번호, 아이디, 이름, 포인트, 성별, 주소, 연락처
-		public String adminUserList(Model model) throws Exception {
+		public String adminUserList(Model model,@PageableDefault(page =0,size = 10,sort = "boardNo",direction = Sort.Direction.ASC) Pageable page) throws Exception {
+			int pag = page.getPageNumber();
+			int size = page.getPageSize();
 			
-			List<AdminUserListDto> adminUserList = new ArrayList<>();
-			List<Userinfo> userList = new ArrayList<>();
+			Pageable pageable= PageRequest.of(pag,size,Sort.by(Sort.Order.asc("userNo")));
+			Page<Userinfo> userList = userInfoService.findAllPage(pageable);
 			
-			userList = userInfoService.findUserList();
-			
-			for (Userinfo userinfo : userList) {
-				adminUserList.add(AdminUserListDto.toDto(userinfo));
-			}
-			
-			model.addAttribute("adminUserList", adminUserList);
+			model.addAttribute("adminUserList", userList);
 			
 			return "admin-userinfo";
 		}
-		
 		
 		// 관리자 --> 마이페이지 이동
 		@GetMapping(value="/adminUserinfo")
@@ -518,6 +511,19 @@ public class AdminController {
 			model.addAttribute("petList",petDtoList);
 			return "pet-list" ;
 		}
+		
+		@GetMapping("/petUpdateForm")
+		public String petUpdateForm(@RequestParam Long petNo, Model model) {
+	List<Center> centers=centerService.findAllCenters();
+			Pet updatePet = petService.petFindById(petNo);
+			PetDto petDto=PetDto.toDto(updatePet);
+			
+			model.addAttribute("pet", petDto);
+			model.addAttribute("petCenter", centers);
+			
+			return "pet_update_form"; 
+		}
+		
 		@PostMapping("/insert_action")
 		public String insert_action(@RequestParam("imageFile") MultipartFile file,
 				@RequestParam("petType") String petType, @RequestParam("petGender") String petGender,

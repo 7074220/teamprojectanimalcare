@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,6 +74,12 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	@Override
 	public Userinfo findUserIdByNameAndPhoneNumber(String userName, String userPhoneNumber) {
 		return userinfoRepository.findUserIdByNameAndPhoneNumber(userName, userPhoneNumber);
+	}
+
+	@Override
+	public Page<Userinfo> findAllPage(Pageable pageable) {
+		Page<Userinfo> userList = userinfoRepository.findAll(pageable);
+		return userList;
 	}
 	
 }

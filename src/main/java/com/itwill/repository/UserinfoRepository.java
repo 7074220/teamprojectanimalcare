@@ -1,5 +1,8 @@
 package com.itwill.repository;
 
+import java.awt.print.Pageable;
+
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -23,5 +26,4 @@ public interface UserinfoRepository extends JpaRepository<Userinfo, Long>{
 	//아이디 찾기	
 	@Query(value ="select * from userinfo where user_name=?1 and user_phone_number=?2",nativeQuery = true) 
 	Userinfo findUserIdByNameAndPhoneNumber(String userName,String userPhoneNumber);
-	 
 }
