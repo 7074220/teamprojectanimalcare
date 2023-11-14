@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.dao.ProductDao;
 import com.itwill.entity.Product;
+import com.itwill.entity.ReportBoard;
 
 @Transactional
 public interface ProductService {
@@ -83,4 +84,6 @@ public interface ProductService {
 	
 	// 페이지 정렬
 	Page<Product> productFindAllPage(Pageable pageable);
+	
+	public List<Product> findByProductImage(String boardImage);
 }

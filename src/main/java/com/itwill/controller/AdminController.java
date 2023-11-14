@@ -303,10 +303,10 @@ public class AdminController {
 		/******************************* Product ************************************/
 		
 		
-		/*
+		
 		// 관리자 --> 상품목록 리스트
 		@GetMapping("/adminProductList")
-		public String adminProductList(Model model, HttpSession session, @PageableDefault(page = 0, size = 10, sort = "productNo", direction = Sort.Direction.ASC) Pageable page) {
+		public String adminProductList(Model model, HttpSession session) {
 			List<ProductListDto> productListDto = new ArrayList<>();
 			List<Product> productList = new ArrayList<>();
 			
@@ -322,8 +322,9 @@ public class AdminController {
 			
 			return "admin-product";
 		}
-		*/
 		
+		
+		/*
 		// 관리자 --> 상품목록 리스트
 		@GetMapping("/adminProductList")
 		public String adminProductList(@PageableDefault(page = 0, size = 10, sort = "productNo", direction = Sort.Direction.DESC) Pageable page, Model model, HttpSession session) {
@@ -339,9 +340,7 @@ public class AdminController {
 			
 			return "admin-product";
 		}
-		
-		
-		
+		*/
 		
 		// 관리자 --> 상품 추가
 		@PostMapping("/adminInsertProduct")
@@ -409,15 +408,23 @@ public class AdminController {
 		@PostMapping("/adminUpdateProduct")
 		public String upateProduct(@RequestParam("imageFile") MultipartFile file, @RequestParam("productName") String productName, @RequestParam("productPrice") Integer productPrice, @RequestParam("productNo") Long productNo, Model model,
 				@PageableDefault(page = 0, size = 10, sort = "productNo", direction = Sort.Direction.ASC) Pageable page) throws Exception {
-
-			String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/product/";
-			String originalFileName = file.getOriginalFilename();
-			UUID uuid = UUID.randomUUID();
-			String savedFileName = uuid.toString() + "_" + originalFileName;
 			
-			File newFile = new File(uploadPath + savedFileName);
+			List<Product> findProduct = productService.findByProductImage(file.getOriginalFilename());
+	
+			String savedFileName = "";
 			
-			file.transferTo(newFile);
+			if (findProduct.size() > 0) {
+				savedFileName = file.getOriginalFilename();
+			} else {
+				String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/product/";
+				String originalFileName = file.getOriginalFilename();
+				UUID uuid = UUID.randomUUID();
+				savedFileName = uuid.toString() + "_" + originalFileName;
+				
+				File newFile = new File(uploadPath + savedFileName);
+				
+				file.transferTo(newFile);
+			}
 			
 			Product update = Product.builder().build();
 			
