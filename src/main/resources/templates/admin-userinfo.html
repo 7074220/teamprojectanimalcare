@@ -267,6 +267,18 @@
 											</tr>
 										</tbody>
 									</table>
+									        <div class="shop_toolbar t_bottom">
+							                    <div class="pagination" th:if="${adminUserList.totalPages > 1}">
+							                        <ul th:with="pageNumber=${adminUserList.number}, totalPages=${adminUserList.totalPages}">
+							                            <li th:classappend="${adminUserList.first} ? 'disabled'"><a href="#" th:href="${adminUserList.first} ? '#' : @{adminUserList(page=${pageNumber - 1})}">&lt;</a></li>
+							
+							                            <li th:each="page: ${#numbers.sequence(0, totalPages - 1)}"
+							                                th:classappend="${page == pageNumber} ? 'current'"><a th:text="${page + 1}" th:href="@{adminUserList(page=${page})}"></a></li>
+							
+							                            <li th:classappend="${adminUserList.last} ? 'disabled'"><a href="#" th:href="${adminUserList.last} ? '#' : @{adminUserList(page=${pageNumber + 1})}">&gt;</a></li>
+							                        </ul>
+							                    </div>
+							                </div>
 								</div>
 							</div>
 						</div>

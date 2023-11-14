@@ -3,6 +3,9 @@ package com.itwill.dao;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.itwill.entity.Userinfo;
 
 public interface UserInfoDao {
@@ -30,6 +33,6 @@ public interface UserInfoDao {
 	//아이디찾기
 	public Userinfo findUserIdByNameAndPhoneNumber(String userName,String userPhoneNumber);
 	
-
+	public Page<Userinfo> findAllPage(Pageable pageable);
 	
 }
