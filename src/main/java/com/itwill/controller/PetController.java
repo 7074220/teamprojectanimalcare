@@ -64,15 +64,14 @@ CenterService centerService;
  * return "pet-list"; }
  */
 	
-	@GetMapping("/petinsertform")
-	public String petinsertform(Model model) throws Exception {
-		
-List<Center> centers=centerService.findAllCenters();
-		
-		model.addAttribute("petCenter",centers);
-		return "pet_insert_form";
-	}
-	
+/*
+ * @GetMapping("/petinsertform") public String petinsertform(Model model) throws
+ * Exception {
+ * 
+ * List<Center> centers=centerService.findAllCenters();
+ * 
+ * model.addAttribute("petCenter",centers); return "pet_insert_form"; }
+ */
 	
 
 	
@@ -102,6 +101,7 @@ List<Center> centers=centerService.findAllCenters();
 		
 
 		model.addAttribute("petList",petList);
+		model.addAttribute("pagingstatus",1);
 		
 		return "pet-list" ;
 	}
@@ -173,12 +173,12 @@ List<Center> centers=centerService.findAllCenters();
 	
 	@Operation(summary = "펫타입 리스트")	
 	@GetMapping("/pets")
-	public String petTypeList(@RequestParam(name = "petType")String petType,Model model,@PageableDefault(page =0,size = 5,sort = "pet_no",direction = Sort.Direction.DESC) Pageable page){
+	public String petTypeList(@RequestParam(name = "petType")String petType,Model model){
 		
-		int pag = page.getPageNumber();
-		int size = page.getPageSize();
+		//int pag = page.getPageNumber();
+		//int size = page.getPageSize();
 		
-		Pageable pageable= PageRequest.of(pag,size);	
+		//Pageable pageable= PageRequest.of(pag,size);	
 		
 		
 		
@@ -186,32 +186,34 @@ List<Center> centers=centerService.findAllCenters();
 			
 			
 			
-			Page<Pet> petList = petService.findAllByOrderBypetType(petType,pageable);
+			List<Pet> petList = petService.findAllByOrderBypetType(petType);
 			for (Pet pet : petList) {
 				petDtoList.add(PetDto.toDto(pet));
 			}
 
 		model.addAttribute("petList",petList);
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>펫타입"+petDtoList);
+		model.addAttribute("pagingstatus",0);
 		return "pet-list";
 	}
 	
 	//펫 지역 리스트
 	@GetMapping("/petLocal")
 	public String petLocalList(@RequestParam(name = "petLocal")String petLocal,Model model,@PageableDefault(page =0,size = 5,sort = "pet_no",direction = Sort.Direction.DESC) Pageable page){
-		int pag = page.getPageNumber();
-		int size = page.getPageSize();
+		//int pag = page.getPageNumber();
+		//int size = page.getPageSize();
 		
-		Pageable pageable= PageRequest.of(pag,size);	
+		//Pageable pageable= PageRequest.of(pag,size);	
 		
 		
 		List<PetDto> petDtoList = new ArrayList<>();
-			Page<Pet> petList = petService.findAllByPetLocal(petLocal,pageable);
+			List<Pet> petList = petService.findAllByPetLocal(petLocal);
 			for (Pet pet : petList) {
 				petDtoList.add(PetDto.toDto(pet));
 			}
 
 		model.addAttribute("petList",petList);
+		model.addAttribute("pagingstatus",0);
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>"+petDtoList);
 		return "pet-list";
 	}
@@ -221,14 +223,14 @@ List<Center> centers=centerService.findAllCenters();
 	//center dto가져와야함.
 	@GetMapping("/petTotal")
 	public String petTotal(@RequestParam(name = "petType")String petType,@RequestParam(name = "petLocal")String petLocal,Model model,@PageableDefault(page =0,size = 5,sort = "pet_no",direction = Sort.Direction.DESC) Pageable page)throws Exception {
-		int pag = page.getPageNumber();
-		int size = page.getPageSize();
+		//int pag = page.getPageNumber();
+		//int size = page.getPageSize();
 		
-		Pageable pageable= PageRequest.of(pag,size);
+		//Pageable pageable= PageRequest.of(pag,size);
 		
 		List<PetDto> petDtoList = new ArrayList<>();
 		
-		Page<Pet> petList= petService.findAllByPetTypeByPetLocal(petType,petLocal,pageable);
+		List<Pet> petList= petService.findAllByPetTypeByPetLocal(petType,petLocal);
 		
 		for (Pet pet : petList) {
 			Adopt petAdopt = adoptRepository.findAdoptByPetNo(pet.getPetNo());
@@ -242,6 +244,7 @@ List<Center> centers=centerService.findAllCenters();
 			}
 
 		model.addAttribute("petList",petList);
+		model.addAttribute("pagingstatus",0);
 		return "pet-list" ;
 	}
 	

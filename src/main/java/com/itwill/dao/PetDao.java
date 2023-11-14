@@ -24,9 +24,10 @@ public interface PetDao {
 	Pet petUpdate(Pet pet) throws Exception;// 펫 업데이트
 
 	List<Pet> findAllByOrderBypetNoDesc();// 펫 no순으로 최신등록순 정렬
-	// List<Pet> findAllByOrderByPetType(String petType);
+	 List<Pet> findAllByOrderByPetType(String petType);
 
-	// List<Pet> findAllByPetLocal(String petLocal);
+	 List<Pet> findAllByPetLocal(String petLocal);
+	 List<Pet> findAllByPetTypeByPetLocal(String petType, String petLocal);
 
 	Page<Pet> petFindAllPage(Pageable pageable);
 

@@ -25,15 +25,25 @@ public interface PetRepository extends JpaRepository<Pet, Long> {
 	// 펫 타입으로 정렬
 	@Query(value = "select * from Pet where pet_type = :petType", nativeQuery = true)
 	Page<Pet> findByPetType(@Param("petType") String petType, Pageable pageable);
+	
+	@Query(value = "select * from Pet where pet_type = :petType", nativeQuery = true)
+	List<Pet> findByPetType(@Param("petType") String petType);
 
 	// 지역으로 정렬
 	@Query(value = "select * from Pet where pet_local =:petLocal", nativeQuery = true)
 	Page<Pet> findByPetLocal(@Param("petLocal") String petLocal, Pageable pageable);
+	
+	@Query(value = "select * from Pet where pet_local =:petLocal", nativeQuery = true)
+	List<Pet> findByPetLocal(@Param("petLocal") String petLocal);
 
 	// 선택된 펫과 지역 모두 조회
 	@Query(value = "select * from Pet where pet_type = :petType and pet_local = :petLocal", nativeQuery = true)
 	Page<Pet> findAllPetTypeByPetLocal(@Param("petType") String petType, @Param("petLocal") String petLocal,
 			Pageable pageable);
+	
+	@Query(value = "select * from Pet where pet_type = :petType and pet_local = :petLocal", nativeQuery = true)
+	List<Pet> findAllPetTypeByPetLocal(@Param("petType") String petType, @Param("petLocal") String petLocal
+			);
 	
 	//해당센터넘버를 포함하는 펫삭제
 	@Modifying
