@@ -102,6 +102,12 @@ public class ReportBoardServiceImpl implements ReportBoardService{
 		Page<ReportBoard> reportList=reportBoardDao.reportBoardFindAllPage(pageable);
 		return reportList;
 	}
+
+	@Override
+	public List<ReportBoard> findByBoardImage(String boardImage) {
+		
+		return reportBoardDao.findByBoardImage(boardImage);
+	}
 	
 
 }

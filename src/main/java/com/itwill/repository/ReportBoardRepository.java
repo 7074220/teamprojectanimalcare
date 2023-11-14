@@ -29,5 +29,7 @@ public interface ReportBoardRepository extends JpaRepository<ReportBoard, Long>{
 	
 	@Query(value="select * from reportboard order by board_no desc",nativeQuery = true)
 	public List<ReportBoard> findByBoardNoOrderByBoardNoDesc();
-
+	
+	@Query(value="select * from reportboard where board_image=?1",nativeQuery = true)
+	public List<ReportBoard> findByBoardImage(String boardImage);
 }
