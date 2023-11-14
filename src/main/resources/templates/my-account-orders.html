@@ -17,6 +17,16 @@
 			width: 1200px;
 			margin-top: 10px;
 		}
+		@font-face {
+			font-family: 'GmarketSansMedium';
+			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+			font-weight: normal;
+			font-style: normal;
+		}
+	
+		.container {
+			font-family: 'GmarketSansMedium';
+		}
 	</style>
 
 
@@ -546,7 +556,11 @@
                                                 <!-- <td>$25.00 for 1 item </td>-->
                                                  <td>{{orderstatus.osDesc}}
                                                             </td>
-                                                <td><button type="button" class="write-review" onclick="reviewWrite(event,{{oiNo}})" id="{{product.productNo}}">{{reviewStatus}}</button></td>
+                                               <td>
+  												{{#ifEqual orderstatus.osDesc "배송완료"}}
+   												 <button type="button" class="write-review" onclick="reviewWrite(event,{{oiNo}})" id="{{product.productNo}}">{{reviewStatus}}</button>
+  												{{/ifEqual}}
+												</td>
                                              </tr>
                                              {{/each}}
                                           </tbody>

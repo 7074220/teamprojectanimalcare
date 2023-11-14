@@ -68,6 +68,12 @@ span{
 button{
 	font-family: 'GmarketSansMedium';
 }
+input{
+	font-family: 'GmarketSansMedium';
+}
+select{
+	font-family: 'GmarketSansMedium';
+}
 </style>
 
 
@@ -224,7 +230,7 @@ button{
 					centerNo : centerNo,
 					volunteerDate : volunteerDate,
 					volunteerTime : volunteerTime,
-					volunteerStatus : "봉사신청"
+					volunteerStatus : "봉사신청중"
 				};
 
 				let response = ajaxRequest('POST', 'volunteer/create-volunteer', sendJsonObject);
