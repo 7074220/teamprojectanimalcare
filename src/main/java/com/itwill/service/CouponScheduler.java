@@ -27,7 +27,7 @@ public class CouponScheduler {
 	@Autowired
 	private UserInfoService userInfoService;
 
-	@Scheduled(cron = "0 44 11 * * ?")
+	@Scheduled(cron = "0 0 0 * * ?")
 	@Transactional
 	public void CreateBirthdayCoupon() throws Exception {
 		List<Userinfo> userinfoList = userInfoService.findUserList();
@@ -47,6 +47,24 @@ public class CouponScheduler {
 							userInfoService.update(userinfo);
 						}
 					}
+				}
+			}
+		}
+	}
+	
+	@Scheduled(cron = "0 0 0 * * ?")
+	@Transactional
+	public void DeleteCoupon() throws Exception {
+		List<Coupon> couponList = couponService.findAll();
+		for (Coupon coupon : couponList) {
+			/*
+			 * if(LocalDateTime.now().getYear) {
+			 * 
+			 * }
+			 */
+			if(LocalDateTime.now().getMonthValue()==coupon.getCouponExpirationDate().getMonthValue()) {
+				if(LocalDateTime.now().getDayOfMonth()==coupon.getCouponExpirationDate().getDayOfMonth()) {
+					couponService.Delete(coupon.getCouponId());
 				}
 			}
 		}

@@ -28,10 +28,12 @@ public class PetDaoImpl implements PetDao {
 		Page<Pet> petList = petRepository.findAll(pageable);
 		return petList;
 	}
+	
 	/*
 	 * public List<Pet> petFindAll() { List<Pet> petList = petRepository.findAll();
 	 * return petList; }
 	 */
+	 
 	@Override
 	public Pet petInsert(Pet pet) {
 		Pet petSave = petRepository.save(pet);
@@ -58,15 +60,16 @@ public class PetDaoImpl implements PetDao {
 		return petList;
 	}
 	
-	/*
-	 * //펫타입으로 정렬
-	 * 
-	 * @Override public List<Pet> findAllByOrderByPetType(String petType) {
-	 * List<Pet> petList = petRepository.findByPetType(petType); return petList; }
-	 * 
-	 * @Override public List<Pet> findAllByPetLocal(String petLocal) { List<Pet>
-	 * petList = petRepository.findByPetLocal(petLocal); return petList; }
-	 */
+	
+	 @Override public List<Pet> findAllByOrderByPetType(String petType) {
+	 List<Pet> petList = petRepository.findByPetType(petType);
+	 return petList; }
+	  
+	 @Override public List<Pet> findAllByPetLocal(String petLocal) { 
+		 List<Pet>
+	  petList = petRepository.findByPetLocal(petLocal); 
+		 return petList; }
+	 
 
 		@Override
 		public List<Pet> petFindAll() {
@@ -97,11 +100,16 @@ public class PetDaoImpl implements PetDao {
 			List<Pet> petList = petRepository.findByCenterCenterNo(centerNo);
 			return petList;
 		}
-
+		
 		@Override
 		public void deleteByCenterNo(Long centerNo) {
 			petRepository.deleteByCenterNo(centerNo);
 			
+		}
+		@Override
+		public List<Pet> findAllByPetTypeByPetLocal(String petType, String petLocal) {
+			List<Pet> petList =petRepository.findAllPetTypeByPetLocal(petType, petLocal);
+			return petList;
 		}
 	
 	

@@ -106,6 +106,13 @@ public class VolunteerDaoImpl implements VolunteerDao{
 	    }
 	}
 
+	@Override
+	public Page<Volunteer> volunteerFindAllPage(Pageable pageable) {
+		Page<Volunteer> volunteerList = volunteerRepository.findAll(pageable);
+		
+		return volunteerList;
+	}
+
 
 	
 }

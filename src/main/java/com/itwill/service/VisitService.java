@@ -2,6 +2,9 @@ package com.itwill.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.itwill.entity.Visit;
 
 public interface VisitService {
@@ -19,4 +22,7 @@ public interface VisitService {
     
     List<Visit> getVisitsByUserNo(Long userNo);
 	//userid로 visit리스트 검색
+    
+    // 페이징
+ 	Page<Visit> visitFindAllPage(Pageable pageable);
 }

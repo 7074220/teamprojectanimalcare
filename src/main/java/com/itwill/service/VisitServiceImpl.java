@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.itwill.dao.VisitDao;
@@ -52,5 +54,12 @@ public class VisitServiceImpl implements VisitService {
 	public List<Visit> getVisitsByUserNo(Long userNo) {
 
 		return visitRepository.findByUserinfoUserNo(userNo);
+	}
+
+	@Override
+	public Page<Visit> visitFindAllPage(Pageable pageable) {
+		Page<Visit> visitList = visitDao.visitFindAllPage(pageable);
+		
+		return visitList;
 	}
 }

@@ -96,8 +96,8 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr th:each="visit, rowStat : ${visitList}">
-												<td th:text="${visitList.size() - rowStat.index}"></td>
+											<tr th:each="visit:${visitList}">
+												<td th:text="${visit.visitNo}"></td>
 												<td th:text="${visit.Userinfo.userName}"></td>
 												<td th:text="${#strings.substring(visit.visitDate.toString(), 0, 10)}">
 												</td>
@@ -137,6 +137,18 @@
 											</tr>
 										</tbody>
 									</table>
+										<div class="shop_toolbar t_bottom">
+							                    <div class="pagination" th:if="${visitList.totalPages > 1}">
+							                        <ul th:with="pageNumber=${visitList.number}, totalPages=${visitList.totalPages}">
+							                            <li th:classappend="${visitList.first} ? 'disabled'"><a href="#" th:href="${visitList.first} ? '#' : @{adminVolunteerList(page=${pageNumber - 1})}">&lt;</a></li>
+							
+							                            <li th:each="page: ${#numbers.sequence(0, totalPages - 1)}"
+							                                th:classappend="${page == pageNumber} ? 'current'"><a th:text="${page + 1}" th:href="@{adminVolunteerList(page=${page})}"></a></li>
+							
+							                            <li th:classappend="${visitList.last} ? 'disabled'"><a href="#" th:href="${visitList.last} ? '#' : @{adminVolunteerList(page=${pageNumber + 1})}">&gt;</a></li>
+							                        </ul>
+							                    </div>
+							                </div>
 								</div>
 							</div>
 						</div>

@@ -21,8 +21,8 @@ public class CouponDto {
 	private Long couponId;
 	private String couponName;
 	private Integer couponDiscount;
-	private LocalDateTime couponPayday;
-	private LocalDateTime couponExpirationDate;
+	private String couponPayday;
+	private String couponExpirationDate;
 	
 	public static CouponDto toDto(Coupon coupon) {
 		
@@ -30,8 +30,6 @@ public class CouponDto {
 				.couponId(coupon.getCouponId())
 				.couponName(coupon.getCouponName())
 				.couponDiscount(coupon.getCouponDiscount())
-				.couponExpirationDate(coupon.getCouponExpirationDate())
-				.couponPayday(coupon.getCouponPayday())
 				.build();
 		return couponDto;
 	}

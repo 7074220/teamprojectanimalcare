@@ -107,8 +107,8 @@
 												<tr th:each="coupon : ${couponList}">
 													<td th:text="${coupon.couponName}"></td>
 													<td th:text="${coupon.couponDiscount}"></td>
-													<td th:text="${formattedDate1}"></td>
-													<td th:text="${formattedDate2}"></td>
+													<td th:text="${coupon.couponPayday}"></td>
+													<td th:text="${coupon.couponExpirationDate}"></td>
 												</tr>
 									
 										
