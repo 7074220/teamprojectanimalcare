@@ -111,7 +111,7 @@ public class ReportController {
 		if(userNo!=null) {
 			path = "reportBoard_write_form";
 		}
-        return "reportBoard_write_form"; 
+        return "reportList"; 
     }
 
 	@PostMapping("/reportWrite")
