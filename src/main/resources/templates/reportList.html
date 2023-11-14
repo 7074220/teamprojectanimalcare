@@ -76,7 +76,9 @@ span {
                             <div class="card-body">
                                 <tr>
                                     <th width=280 align=center bgcolor="E6ECDE" th:text="${reportboard.boardTitle}">제목</th></br>
-                                    <th width=280 align=center bgcolor="E6ECDE" th:text='${"발견장소 : " + reportboard.boardTitle}'>발견 장소</th></br>
+                                    <th width=280 align=center bgcolor="E6ECDE" th:if="${#strings.contains(reportboard.boardTitle,'제보')}" th:text='${"발견장소 :" + reportboard.boardFindPlace}'>발견 장소</th>
+                                    <th width=280 align=center bgcolor="E6ECDE" th:if="${#strings.contains(reportboard.boardTitle,'실종')}" th:text='${"실종장소 :" + reportboard.boardFindPlace}'>발견 장소</th>
+                                    </br>
                                 </tr>
                             </div>
                             <small class="text-body-secondary">

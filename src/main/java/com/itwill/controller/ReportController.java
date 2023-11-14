@@ -74,6 +74,7 @@ public class ReportController {
 	    
 	    model.addAttribute("reportBoardList", reportList.getContent()); // 페이지의 내용만을 보내기
 	    model.addAttribute("reportList", reportList); // 페이징 정보를 보내기
+	    
 		return "reportList";
 	}
 	
@@ -117,8 +118,7 @@ public class ReportController {
 	  public String handleImagePost(@RequestParam("imageFile") MultipartFile file , @RequestParam("boardTitle")String boardTitle,
 			  @RequestParam("boardFindDate") @DateTimeFormat(pattern = "yyyy-MM-dd")Date boardFindDate, @RequestParam("boardFindName")String boardFindName,
 			  @RequestParam("boardFindPhone")String boardFindPhone, @RequestParam("boardContent")String boardContent ,@RequestParam("boardFindPlace")String boardFindPlace ,HttpSession session, Model model,
-			  @PageableDefault(page =0,size = 6,sort = "reportBoardNo",direction = Sort.Direction.DESC) Pageable page) throws Exception{
-
+			  @PageableDefault(page =0,size = 6,sort = "reportBoardNo",direction = Sort.Direction.DESC) Pageable page,@RequestParam("boardType")Integer boardType) throws Exception{
 	    String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/reportboard/";
 	    String originalFileName = file.getOriginalFilename();
 	    UUID uuid = UUID.randomUUID();
@@ -133,6 +133,12 @@ public class ReportController {
 	    Userinfo userinfo = Userinfo.builder().userName("비회원").build();
 	    if(userNo!=null) {
 	    	userinfo = userInfoService.findUserByNo(userNo);
+	    }
+	    
+	    if(boardType==1) {
+	    	boardTitle = "[실종]"+boardTitle;
+	    }else {
+	    	boardTitle = "[제보]"+boardTitle;
 	    }
 	    
 	    ReportBoard writeReportBoard = ReportBoard.builder()
@@ -162,7 +168,7 @@ public class ReportController {
 
 	    model.addAttribute("reportBoardList", reportList.getContent()); // 페이지의 내용만을 보내기
 	    model.addAttribute("reportList", reportList); // 페이징 정보를 보내기
-		
+	    
 	    return "reportList";
 	  }
 	
