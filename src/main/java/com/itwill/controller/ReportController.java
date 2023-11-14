@@ -111,7 +111,7 @@ public class ReportController {
 		if(userNo!=null) {
 			path = "reportBoard_write_form";
 		}
-        return "reportList"; 
+        return "reportBoard_write_form"; 
     }
 
 	  @PostMapping("/reportWrite")
@@ -190,22 +190,12 @@ public class ReportController {
 			  @RequestParam("boardFindDate") @DateTimeFormat(pattern = "yyyy-MM-dd")Date boardFindDate, @RequestParam("boardFindName")String boardFindName,
 			  @RequestParam("boardFindPhone")String boardFindPhone, @RequestParam("boardContent")String boardContent ,@RequestParam("boardFindPlace")String boardFindPlace ,HttpSession session, Model model,
 			  @PageableDefault(page =0,size = 9,sort = "boardNo",direction = Sort.Direction.DESC) Pageable page,@RequestParam("boardNo")Long boardNo) throws Exception{
-	    
-		List<ReportBoard> findreportBoard = reportBoardService.findByBoardImage(file.getName());
+	    System.out.println("###########"+file.getOriginalFilename());
+		List<ReportBoard> findreportBoard = reportBoardService.findByBoardImage(file.getOriginalFilename());
+		System.out.println("###############"+findreportBoard);
 		String savedFileName = "";
-		ReportBoard writeReportBoard = null;
 		if(findreportBoard.size()>0) {
-			savedFileName = file.getName();
-			  writeReportBoard = ReportBoard.builder()
-						.boardNo(boardNo)
-						.boardContent(boardContent)
-						.boardFindDate(boardFindDate)
-						.boardFindName(boardFindName)
-						.boardFindPhone(boardFindPhone)
-						.boardTitle(boardTitle)
-						.boardRegisterDate(new Date())
-						.boardFindPlace(boardFindPlace)
-						.build();
+			savedFileName = file.getOriginalFilename();
 		}else {
 			String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/reportboard/";
 		    String originalFileName = file.getOriginalFilename();
@@ -223,8 +213,8 @@ public class ReportController {
 	    if(userNo!=null) {
 	    	userinfo = userInfoService.findUserByNo(userNo);
 	    }
-	    
-	    writeReportBoard = ReportBoard.builder()
+	    System.out.println("############"+savedFileName);
+	    ReportBoard writeReportBoard = ReportBoard.builder()
 	    										.boardNo(boardNo)
 	    										.boardContent(boardContent)
 	    										.boardFindDate(boardFindDate)
@@ -239,7 +229,7 @@ public class ReportController {
 	    
 	    
 	    ReportBoard insertReportBoard = reportBoardService.update(writeReportBoard);
-	    
+	    System.out.println("##############"+insertReportBoard);
 	    int pag = page.getPageNumber();
 		int size = page.getPageSize();
 		
