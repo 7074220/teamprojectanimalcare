@@ -508,7 +508,11 @@
                                                 <!-- <td>$25.00 for 1 item </td>-->
                                                  <td>{{orderstatus.osDesc}}
                                                             </td>
-                                                <td><button type="button" class="write-review" onclick="reviewWrite(event,{{oiNo}})" id="{{product.productNo}}">{{reviewStatus}}</button></td>
+                                               <td>
+  												{{#ifEqual orderstatus.osDesc "배송완료"}}
+   												 <button type="button" class="write-review" onclick="reviewWrite(event,{{oiNo}})" id="{{product.productNo}}">{{reviewStatus}}</button>
+  												{{/ifEqual}}
+												</td>
                                              </tr>
                                              {{/each}}
                                           </tbody>
