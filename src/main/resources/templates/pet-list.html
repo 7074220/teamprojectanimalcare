@@ -44,6 +44,13 @@
 					+ petNo;
 		}
 	}
+	
+	function confirmUpdate(petNo) {
+		if (confirmDelete) {
+			window.location.href = 'petUpdateForm?petNo='
+					+ petNo;
+		}
+	}
 
 	function petType() {
 		var selectedValue = document.getElementById("short").value;
@@ -276,7 +283,7 @@
 											</div>
 										</div>
 
-										<div class="product_content list_content" style="margin-left: 50px;">
+										<div class="product_content list_content" style="margin-left: 50px; margin-top: 35px;">
 											<!-- <h4 class="pet_type"><a href="product-details.html" th:text="${pet.petType}" >Aliquam Consequat</a></h4>
                                     <p><a href="#" >Fruits</a></p> -->
 
@@ -318,6 +325,9 @@
 													<li class="add_to_cart"><a
 														th:href="@{/adopt(petNo=${pet.petNo})}" title="입양하기" id="listTitle">입양하기</a></li>
 													<!-- admin 계정 57번 admin계정에서만 삭제버튼 활성화 -->
+														<li class="add_to_cart"><a href="#"
+														th:onclick="'return confirmUpdate(\'' + ${pet.petNo} + '\');'"
+														title="수정하기" th:if="${session.userName == '관리자'}">수정</a></li>
 													<li class="add_to_cart"><a href="#"
 														th:onclick="'return confirmDelete(\'' + ${pet.petNo} + '\');'"
 														title="삭제하기" th:if="${session.userName == '관리자'}">삭제</a></li>

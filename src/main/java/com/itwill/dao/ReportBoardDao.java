@@ -41,4 +41,7 @@ public interface ReportBoardDao {
 	
 	//페이지 정렬
 	public Page<ReportBoard> reportBoardFindAllPage(Pageable pageable);
+	
+	//찾는 이미지 비교
+	public List<ReportBoard> findByBoardImage(String boardImage);
 }

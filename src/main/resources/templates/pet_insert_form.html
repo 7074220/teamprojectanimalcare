@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="layout/layout(title='product_update_form')">
+	layout:decorate="layout/layout(title='pet_insert_form')">
 
 <head>
 	<title>입양동물 등록</title>
@@ -186,13 +186,14 @@
 
 
 		$('#pet_form').on('submit', function (e) {
-			 //폼이 유효하지 않으면 전송을 중지
-			 alert( $('#petLocal').val());
+			
+			
+			 /* alert( $('#petLocal').val());
 			 alert( $('#petType').val());
 			 alert( $('#petGender').val());
 			 alert( $('#petFindPlace').val());
 			 alert( $('#petCharacter').val());
-			 alert( $('#centerNo').val());
+			 alert( $('#centerNo').val()); */
 			
 			 window.location.href = "petList";
 			

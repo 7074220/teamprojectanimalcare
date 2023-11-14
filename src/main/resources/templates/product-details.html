@@ -679,7 +679,7 @@
 
 									<!--   "<" 화살표 누르면 앞 상품으로 이동, ">" 화살표 누르면 뒷 상품으로 이동 -->
 
-									<div class="product_nav">
+									<!-- <div class="product_nav">
 										<ul>
 											<li th:if="${product.productNo != 1}" class="prev">
 											    <a th:href="@{productDetail(productNo=${product.productNo - 1})}">
@@ -703,7 +703,7 @@
 											</li>
 														
 										</ul>
-									</div>
+									</div> -->
 									<!--   "<" 화살표 누르면 앞 상품으로 이동, ">" 화살표 누르면 뒷 상품으로 이동 끝 -->
 
 
@@ -865,7 +865,7 @@
 												th:text="${product.productName}">Quisque In Arcu</a></h4>
 										<p><a href="#" th:text="${product.productPetCategory}">Fruits</a></p>
 										<div class="price_box">
-											<span class="current_price" th:text="${product.productPrice}">$55.00</span>
+											<span class="current_price" th:text="${#numbers.formatInteger(product.productPrice, 3, 'COMMA') + '원'}">$55.00</span>
 											<!-- <span class="old_price">$235.00</span> -->
 										</div>
 									</figcaption>
