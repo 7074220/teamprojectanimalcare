@@ -64,15 +64,14 @@ CenterService centerService;
  * return "pet-list"; }
  */
 	
-	@GetMapping("/petinsertform")
-	public String petinsertform(Model model) throws Exception {
-		
-List<Center> centers=centerService.findAllCenters();
-		
-		model.addAttribute("petCenter",centers);
-		return "pet_insert_form";
-	}
-	
+/*
+ * @GetMapping("/petinsertform") public String petinsertform(Model model) throws
+ * Exception {
+ * 
+ * List<Center> centers=centerService.findAllCenters();
+ * 
+ * model.addAttribute("petCenter",centers); return "pet_insert_form"; }
+ */
 	
 
 	

@@ -240,7 +240,7 @@ li {
                                             </select>                        
                                        </div> -->
 										<div class="search_box">
-                                            <input id="searchInput1" placeholder="Search product..." type="text" onkeydown="handleEnterKey(event)">
+                                            <input id="searchInput1" placeholder="검색어를 입력하세요" type="text" onkeydown="handleEnterKey(event)">
                                              <button type="button" onclick="searchProduct(event)"><span class="lnr lnr-magnifier"></span></button>
                                     	</div>	
                                         <!--<div class="search_box">
@@ -256,9 +256,9 @@ li {
                                     <div class="header_account_list register">
                                         <ul th:if="${session.userNo}==null">
 											<!--index가 없으면 reportList에서 resigter누르면 페이지를 부르지 못함 그래서 앞에 index붙임-->
-                                            <li><a href="#/user_write_form" style="font-size: 20px;">Register</a></li>
+                                            <li><a href="#/user_write_form" style="font-size: 20px;">회원가입</a></li>
                                             <li><span style="font-size: 20px;">/</span></li>
-                                            <li><a href="#/login_form" style="font-size: 20px;">Login</a></li>
+                                            <li><a href="#/login_form" style="font-size: 20px;">로그인</a></li>
                                         </ul>
                                         <ul th:if="${session.userNo}!=null">
                                             <!--<li><a href="userinfo" th:text="${session.userName} 님">Login</a></li>-->
@@ -671,9 +671,9 @@ li {
 				`{{#each this}}
 				<div class="col-lg-4 col-md-4 col-sm-6 col-12" id="listContent">
 								<div class="single_product">
-									<div class="product_thumb" style="width: 250px; height: 300px;">
+									<div class="product_thumb" style="width: 250px; height: 250px;">
 										<a class="primary_img" href="productDetail?productNo={{productNo}}">
-											<img src="image/product/{{productImage}}" alt="" style="width: 250px; height: 300px;"></a>
+											<img src="image/product/{{productImage}}" alt="" style="width: 250px; height: 250px;"></a>
 										<div class="action_links">
 											<ul>
 											<!-- 상품리스트에서 장바구니 추가하기 -->
