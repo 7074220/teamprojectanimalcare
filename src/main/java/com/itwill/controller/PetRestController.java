@@ -51,15 +51,17 @@ public class PetRestController {
 	 * return ResponseEntity.status(HttpStatus.OK).body(petDtoList); }
 	 */
 	
-@Operation(summary = "펫 등록")	
-@PostMapping("/insert_action")
-public ResponseEntity<PetDto> petSave(@RequestBody PetDto petdto){
-		petService.petSave(petdto.toEntity(petdto));
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		
-		return new ResponseEntity<PetDto>(petdto, httpHeaders, HttpStatus.CREATED);
-	}
+	/*
+	 * @Operation(summary = "펫 등록")
+	 * 
+	 * @PostMapping("/insert_action") public ResponseEntity<PetDto>
+	 * petSave(@RequestBody PetDto petdto){
+	 * petService.petSave(petdto.toEntity(petdto)); HttpHeaders httpHeaders = new
+	 * HttpHeaders(); httpHeaders.setContentType(new MediaType("application",
+	 * "json", Charset.forName("UTF-8")));
+	 * 
+	 * return new ResponseEntity<PetDto>(petdto, httpHeaders, HttpStatus.CREATED); }
+	 */
 
 
 @Operation(summary = "펫 삭제")	

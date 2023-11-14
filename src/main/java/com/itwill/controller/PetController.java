@@ -83,7 +83,7 @@ List<Center> centers=centerService.findAllCenters();
 		int pag = page.getPageNumber();
 		int size = page.getPageSize();
 		
-		Pageable pageable= PageRequest.of(pag,size);
+		Pageable pageable = PageRequest.of(pag, size, Sort.by(Sort.Order.desc("petNo")));
 		
 		List<PetDto> petDtoList = new ArrayList<>();
 		
@@ -99,8 +99,10 @@ List<Center> centers=centerService.findAllCenters();
 					}
 				}
 			}
+		
 
-		model.addAttribute("petListPage",petList);
+		model.addAttribute("petList",petList);
+		
 		return "pet-list" ;
 	}
 		
