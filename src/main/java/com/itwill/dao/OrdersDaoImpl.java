@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.itwill.entity.Orders;
@@ -32,10 +34,15 @@ public class OrdersDaoImpl implements OrdersDao{
 	}
 
 	@Override
-	public List<Orders> findAllOrders() {
-		List<Orders> Orders = ordersRepository.findAll();
+	public Page<Orders> findAllOrders(Pageable pageable) {
+		Page<Orders> Orders = ordersRepository.findAllOrdersByPage(pageable);
 		return Orders;
 		
+	}
+	@Override
+	public Page<Orders> findOrdersByuserNo(Long userNo, Pageable pageable) {
+		Page<Orders> Orders = ordersRepository.findAllByUserNo(userNo,pageable);
+		return Orders;
 	}
 	
 	@Override
@@ -64,18 +71,28 @@ public class OrdersDaoImpl implements OrdersDao{
 		return orders;
 	}
 
-	@Override
-	public List<Orders> findOrdersByuserNo(Long userNo) {
-		List<Orders> orders = ordersRepository.findAllByUserNo(userNo);
-		return orders;
-		
-	}
 
 	@Override
 	public List<Orders> findAllByUserNoDESC(Long userNo) {
 		List<Orders> orders = ordersRepository.findAllByUserNoDESC(userNo);
 		return orders;
 	}
+
+	@Override
+	public List<Orders> findAllOrders() {
+		List<Orders> orders = ordersRepository.findAll();
+		return orders;
+	}
+
+	@Override
+	public List<Orders> findOrdersByuserNo(Long userNo) {
+		List<Orders> orders = ordersRepository.findAllByUserNo(userNo);
+		return orders;
+	}
+
+	
+
+	
 
 	
 	

@@ -59,15 +59,18 @@ class OrderServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 		orderService.removeOrderByOrderNo(1L);
 	}
 
-	@Test
-	@Transactional
-	@Rollback(false)
-	@Disabled
-	void findOrders() throws Exception {
-		System.out.println(orderService.findOrders());
-
-	}
-
+	/*
+	 * @Test
+	 * 
+	 * @Transactional
+	 * 
+	 * @Rollback(false)
+	 * 
+	 * @Disabled void findOrders() throws Exception {
+	 * System.out.println(orderService.findOrders());
+	 * 
+	 * }
+	 */
 	@Test
 	@Transactional
 	@Rollback(false)

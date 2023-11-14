@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,9 +68,9 @@ public class OrderServiceImpl implements OrderService{
 	}
 	//전체주문 조회
 	@Override
-	public List<Orders> findOrders() {
+	public Page<Orders> findOrders(Pageable pageable) {
 	
-		return ordersDao.findAllOrders();
+		return ordersDao.findAllOrders(pageable);
 	}
 	//주문한개 조회
 	@Override
@@ -86,8 +88,8 @@ public class OrderServiceImpl implements OrderService{
 	}
 	//회원주문목록조회
 	@Override
-	public List<Orders> findOrderById(Long userNo) {
-		return ordersDao.findOrdersByuserNo(userNo);
+	public Page<Orders> findOrderById(Long userNo,Pageable pageable) {
+		return ordersDao.findOrdersByuserNo(userNo,pageable);
 	}
 	@Override
 	public List<Orders> findOrderByIdDesc(Long userNo) {
@@ -100,6 +102,10 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public List<Orders> findAllByOrdersByOrderDateByUserNo(Date startDate, Date endDate, Long userNo) {
 		return ordersDao.findAllByOrdersByOrderDateByUserNo(startDate,endDate,userNo);
+	}
+	@Override
+	public List<Orders> findOrderById(Long userNo) {
+		return ordersDao.findOrdersByuserNo(userNo);
 	}
 
 }

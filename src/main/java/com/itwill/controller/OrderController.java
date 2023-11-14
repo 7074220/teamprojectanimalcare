@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -122,30 +127,33 @@ public class OrderController {
 		
 		return "index";
 	}
-	//관리자전용
-	@GetMapping("/ordersList")
-	public String findOrders(Model model,HttpSession session) throws Exception {
-		List<Orders> orderList = orderService.findOrders();
-		List<OrdersDto> ordersDto = new ArrayList<OrdersDto>();
-			for (Orders orders : orderList) {
-				Userinfo userinfo = orders.getUserinfo();
-				OrdersDto dto = OrdersDto.toDto(orders);
-				dto.setUserinfo(userinfo);
-				ordersDto.add(dto);
-			}
-			model.addAttribute("ordersList",ordersDto);
-			return "my-account-orders";
-		
-	}
+
+	/*
+	 * //관리자전용
+	 * 
+	 * @GetMapping("/ordersList") public String findOrders(Model model,HttpSession
+	 * session) throws Exception { List<Orders> orderList =
+	 * orderService.findOrders(); List<OrdersDto> ordersDto = new
+	 * ArrayList<OrdersDto>(); for (Orders orders : orderList) { Userinfo userinfo =
+	 * orders.getUserinfo(); OrdersDto dto = OrdersDto.toDto(orders);
+	 * dto.setUserinfo(userinfo); ordersDto.add(dto); }
+	 * model.addAttribute("ordersList",ordersDto); return "my-account-orders";
+	 * 
+	 * }
+	 */
 	//회원 주문목록
 	@GetMapping("/orders")
-	public String findOrderByUser( HttpSession session,Model model) throws Exception {
+	public String findOrderByUser( HttpSession session,@PageableDefault(page =0,size = 10,sort = "ORDER_NO",direction = Sort.Direction.DESC) Pageable page,Model model) throws Exception {
 		if (session.getAttribute("userNo") == null) {
 			throw new Exception("로그인 하세요.");
 		}
 		Long userNo=(Long)session.getAttribute("userNo");
 		
-		List<Orders> orderList = orderService.findOrderById(userNo);
+		int pag = page.getPageNumber();
+		int size = page.getPageSize();
+		
+		Pageable pageable = PageRequest.of(pag, size, Sort.by(Sort.Order.desc("ORDER_NO")));
+		Page<Orders> orderList = orderService.findOrderById(userNo,pageable);
 		List<OrdersDto> ordersDtoList = new ArrayList<OrdersDto>();
 		for (Orders orders : orderList) {
 			Userinfo userinfo = orders.getUserinfo();
@@ -160,7 +168,7 @@ public class OrderController {
 			*/
 			ordersDtoList.add(dto);
 		}
-		model.addAttribute("ordersList",ordersDtoList);
+		model.addAttribute("ordersList",orderList);
 		return "my-account-orders";
 	}
 	
