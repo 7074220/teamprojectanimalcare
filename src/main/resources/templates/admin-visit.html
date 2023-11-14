@@ -15,25 +15,27 @@
 		#visitTable {
 			width: 1250px;
 		}
-		
-		
-		/* 색상 추가 */
-        .visit-request {
-            color: black; /* 봉사신청 글자색 블랙 */
-        }
 
-        .visit-completed {
-            color: rgb(192, 192, 192); /* 봉사완료 글자색 회색 */
-            font-weight: bold;
-        }
-		
+
+		/* 색상 추가 */
+		.visit-request {
+			color: black;
+			/* 봉사신청 글자색 블랙 */
+		}
+
+		.visit-completed {
+			color: rgb(192, 192, 192);
+			/* 봉사완료 글자색 회색 */
+			font-weight: bold;
+		}
+
 		@font-face {
 			font-family: 'GmarketSansMedium';
 			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
 			font-weight: normal;
 			font-style: normal;
 		}
-	
+
 		.container {
 			font-family: 'GmarketSansMedium';
 		}
@@ -144,48 +146,66 @@
 		</section>
 
 
-
-
-
 		<script>
 			$(document).ready(function () {
 				// '완료' 버튼 클릭 시
 				$('.updateBtn').on('click', function (e) {
 					e.preventDefault();
+					// AJAX 요청
+					$.ajax({
+						type: 'GET',
+						url: $(this).attr('href'),
+						success: function (data) {
+							// 성공 시 팝업 표시
 
-					$('.deleteBtn').on('click', function (e) {
-						e.preventDefault();
-						let id = $(this).attr('id');
-						let no = id.split('-')[1];
-
-						if (isNaN(no)) {
-							alert('visitNo 가져오기실패')
-							return;
+							location.reload();
+						},
+						error: function () {
+							// 실패 시 에러 메시지 표시
+							alert('완료 요청중 오류가 발생했습니다.');
 						}
-
-						let sendJsonObject = {visitNo: no};
-						let $row = $(this).closest('tr');
-
-						$.ajax({
-							type: 'DELETE',
-							url: 'visit/' + no,
-							data: JSON.stringify(sendJsonObject),
-							contentType: 'application/json;UTF-8',
-							success: function (response) {
-								if (response && response.visitNo == null) {
-									alert('신청내역이 없음');
-								} else {
-									alert('예약취소가 완료되었습니다.');
-									$row.remove();
-									window.location.href = "adminVisitList"
-								}
-							},
-							error: function () {
-								alert('취소 요청중 오류가 발생했습니다.');
-							}
-						});
 					});
 				});
+			});
+		</script>
+
+
+		<script>
+
+
+			$('.deleteBtn').on('click', function (e) {
+				e.preventDefault();
+				let id = $(this).attr('id');
+				let no = id.split('-')[1];
+
+				if (isNaN(no)) {
+					alert('visitNo 가져오기실패')
+					return;
+				}
+
+				let sendJsonObject = {visitNo: no};
+				let $row = $(this).closest('tr');
+
+				$.ajax({
+					type: 'DELETE',
+					url: 'visit/' + no,
+					data: JSON.stringify(sendJsonObject),
+					contentType: 'application/json;UTF-8',
+					success: function (response) {
+						if (response && response.visitNo == null) {
+							alert('신청내역이 없음');
+						} else {
+							alert('삭제가 완료되었습니다.');
+							$row.remove();
+							location.reload();
+						}
+					},
+					error: function () {
+						alert('취소 요청중 오류가 발생했습니다.');
+					}
+				});
+			});
+
 
 
 
