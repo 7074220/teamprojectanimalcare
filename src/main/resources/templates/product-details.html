@@ -4,7 +4,35 @@
 
 <head>
 	<title>Safira - product details</title>
+	
 	<style>
+		@font-face {
+		    font-family: 'GmarketSansMedium';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+			}
+			
+		.product_variant.quantity label,
+        .product_variant.quantity input,
+        .product_variant.quantity button {
+            font-family: 'GmarketSansMedium', sans-serif;
+        }
+        
+        .tab-pane.fade label,
+        .tab-pane.fade select,
+        .tab-pane.fade h2,
+        .tab-pane.fade p {
+            font-family: 'GmarketSansMedium', sans-serif;
+        }
+
+        .reviews_wrapper h2,
+        .reviews_wrapper p,
+        .reviews_wrapper a {
+            font-family: 'GmarketSansMedium', sans-serif;
+        }
+        
+	
 		.product_info_content{
 			text-align: center;
 		}
@@ -686,7 +714,7 @@
 
 									<div class=" product_ratting">
 										<ul>
-											<li class="review"><a href="#">별점 : </a></li>
+											<li class="review"><a href="#" style="margin-left: 0;">별점 : </a></li>
 											<li th:if="${product.productStarAvg >= 1}"><a href="#"><i class="icon-star"></i></a></li>
 											<li th:if="${product.productStarAvg >= 2}"><a href="#"><i class="icon-star"></i></a></li>
 											<li th:if="${product.productStarAvg >= 3}"><a href="#"><i class="icon-star"></i></a></li>
@@ -1076,7 +1104,9 @@
 										</select>
 										<div id="reviewContent">
 										<div class="reviews_wrapper" th:each="review:${reviewList}">
-											<h2 th:text="${#dates.format(review.boardDate, 'yyyy-MM-dd HH:mm')}">roadthemes</h2>
+											<h2 th:text="${#temporals.format(review.boardDate, 'yyyy-MM-dd HH:mm')}">roadthemes</h2>
+
+
 
 											<div class="reviews_comment_box">
 												<div class="comment_thmb" style="width: 50px;">

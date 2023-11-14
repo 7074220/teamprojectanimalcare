@@ -4,6 +4,19 @@
 
 <head>
     <title>Safira - cart page</title>
+   	<style>
+	@font-face {
+			font-family: 'GmarketSansMedium';
+			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+			font-weight: normal;
+			font-style: normal;
+		}
+	
+		.container {
+			font-family: 'GmarketSansMedium';
+		}	   
+		   
+	</style> 
 </head>
 
 <body>
@@ -601,7 +614,7 @@
 											<input type="checkbox" name="chk" class="chk" onclick="chkClicked()" value="" th:value="(${cart.product.productPrice})*(${cart.cartQty})" th:id="${cart.cartNo}" checked="true">
 										</label>
 									</td>
-                                    <td class="product_thumb" th:id="${cart.cartNo}"><a href="#" th:href="@{productDetail(productNo=${cart.product.productNo})}"><img src="#" alt="" th:src="@{/image/product/} + ${cart.product.getProductImage}"></a></td>
+                                    <td class="product_thumb" th:id="${cart.cartNo}"><a href="#" th:href="@{productDetail(productNo=${cart.product.productNo})}"><img src="#" alt="" th:src="@{/image/product/} + ${cart.product.getProductImage}" style="width: 129px;height: 129px;"></a></td>
                                     <td class="product_name" th:id="${cart.cartNo}"><a href="#" th:text="${cart.product.productName}" th:href="@{productDetail(productNo=${cart.product.productNo})}">상품명</a></td>
                                     <td class="product-price" th:id="${cart.cartNo}" th:text='${cart.product.productPrice+"원"}'>가격</td>
                                     <td class="product_quantity" th:id="${cart.cartNo}"><label>수량</label> <input min="1" max="100" value="1" type="number" th:value="${cart.cartQty}" th:id="${cart.cartNo}"></td>

@@ -7,11 +7,20 @@
 	<title>입양동물 등록</title>
 	
 <style>
-	.form-select{
+	.form-select {
 		margin-bottom: 10px;
 	}
-	
-</style>	
+
+	@font-face {
+		font-family: 'GmarketSansMedium';
+		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+		font-weight: normal;
+		font-style: normal;
+	}
+	.container{
+		font-family: 'GmarketSansMedium';
+	}
+</style>
 	
 	
 </head>
@@ -43,17 +52,17 @@
 							style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
 							<h2>입양 등록</h2>
 
-							<form name="f" id="pet_form" action="#" method="POST" enctype="multipart/form-data"
+							<form name="f" id="pet_form" action="insert_action" method="post" enctype="multipart/form-data"
 								>
 								<label>종류</label>
-								<select class="form-select" aria-label="Default select example">
+								<select class="form-select" aria-label="Default select example" name="petType" id="petType">
 									<label for="petType"><span>종류</span></label>
 									<option selected>종류를 고르세요</option>
-									<option value="1">강아지</option>
-									<option value="2">고양이</option>
+									<option value="강아지">강아지</option>
+									<option value="고양이">고양이</option>
 								</select>
 								<label>성별</label>
-								<select class="form-select" aria-label="Default select example">
+								<select class="form-select" aria-label="Default select example" name="petGender" id="petGender">
 									<label for="petType"><span>종류</span></label>
 									<option selected>성별을 고르세요</option>
 									<option value="수컷">수컷</option>
@@ -61,7 +70,7 @@
 								</select>
 								<p>
 									<label>지역</label>
-									<select class="form-select" aria-label="Default select example">
+									<select class="form-select" aria-label="Default select example" name="petLocal" id="petLocal">
 										<option selected>지역을 고르세요</option>
 										<option value="서울특별시">서울특별시</option>
 										<option value="경기도">경기도</option>
@@ -80,10 +89,37 @@
 										data-target="#exampleModal" style="margin-bottom: 10px;">
 										보호소 선택
 									</button>
-									<input readonly="readonly">
+									<input readonly="readonly" id="center" >
+									
+									
 								<p>
+								
+								<input type="hidden" name="centerNo" id="centerNo" value="">
 									<!-- Modal -->
-								<div class="modal fade" id="exampleModal" tabindex="-1"
+								
+
+								<p>
+									<label for="petFindPlace"><span>발견장소</span></label>
+									<input type="text" name="petFindPlace" id="petFindPlace">
+								</p>
+								<p>
+									<label for="petCharacter"><span>특이사항/성격</span></label>
+									<input type="text" name="petCharacter" id="petCharacter">
+								</p>
+
+
+
+								<label>상품 이미지</label>
+								<input type="file" name="imageFile" style="border: none;">
+								<div class="login_submit" style="margin-top: 10px;">
+
+
+									<button type="submit" th:text="등록" id="insert">등록</button>
+
+								</div>
+							</form>
+							
+							<div class="modal fade" id="exampleModal" tabindex="-1"
 									aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
 										<div class="modal-content"
@@ -117,7 +153,8 @@
 																<td th:text="${petcenter.centerPhoneNumber}">경기도파주시</td>
 																<td th:text="${petcenter.centerLocal}">경기도파주시</td>
 
-																<td><button >선택</button></td>
+																<td><button type="button" class="btn btn-primary" th:id="${petcenter.centerNo}" th:attr="data-center-name=${petcenter.centerName}" onclick="check(event)" data-dismiss="modal">선택</button></td>
+
 															</tr>
 														</tbody>
 													</table>
@@ -133,28 +170,11 @@
 										</div>
 									</div>
 								</div>
-
-
-								<p>
-									<label for="petFindPlace"><span>발견장소</span></label>
-									<input type="text" name="petFindPlace">
-								</p>
-								<p>
-									<label for="petCharacter"><span>특이사항/성격</span></label>
-									<input type="text" name="petCharacter">
-								</p>
-
-
-
-								<label>상품 이미지</label>
-								<input type="file" name="imageFile" style="border: none;">
-								<div class="login_submit" style="margin-top: 10px;">
-
-
-									<button type="submit" th:text="등록">등록</button>
-
-								</div>
-							</form>
+							<!-- <form id="insertform" action="insert_action" method="post">
+							
+							
+							
+							</form> -->
 						</div>
 
 					</div>
@@ -165,22 +185,32 @@
 		<script>
 
 
-			$('#product_update_form').on('submit', function (e) {
-				//alert('aaa');
-				// 폼이 유효하지 않으면 전송을 중지
-				if (!$(this).valid()) {
-					e.preventDefault();
+		$('#pet_form').on('submit', function (e) {
+			 //폼이 유효하지 않으면 전송을 중지
+			 alert( $('#petLocal').val());
+			 alert( $('#petType').val());
+			 alert( $('#petGender').val());
+			 alert( $('#petFindPlace').val());
+			 alert( $('#petCharacter').val());
+			 alert( $('#centerNo').val());
+			
+			 window.location.href = "petList";
+			
+		});
 
-				}
-				//alert('안먹나?');
-				window.location.href = "adminProductList";
-			});
+			function check(event) {
+	             var centerNo = event.target.id;
+	             var centerName = event.target.getAttribute('data-center-name');
+	             console.log("선택된 CenterNo: " + centerNo);
+	             console.log("선택된 centerName: " + centerName);
+	         $('#center').val(centerName);
+	         
+	         $('#centerNo').val(centerNo);
+	         
+			};
+			
+	         
 
-
-			  $(document).ready(function() {
-        $(".write-review").on("click", function() {
-            var selectedCenterNo = $(this).closest("tr").find("#centerNo").text();
-            alert(selectedCenterNo);
             // 이전에 선택된 행 취소 (선택 사항)
             //$(".selected-row").removeClass("selected-row");
             
@@ -195,8 +225,6 @@
 
             // 폼을 서버로 전송
           //  $("#selectedCenterForm").submit();
-        });
-    });
 		</script>
 
 	</th:block>

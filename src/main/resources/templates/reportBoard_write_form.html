@@ -34,7 +34,15 @@
                         <h2>실종&#47;제보</h2>
                         
                         <form name="f" id="reportBoard_write_form" action="#" method="post" enctype="multipart/form-data"
-                        	th:action="@{'/reportWrite'}">
+                        	th:action="@{/reportWrite}">
+							<label>구분 <span>*</span></label>
+							<p>
+								<select id="boardType" name="boardType" onchange="typeChange(event)">
+									<option value="1" >실종</option>
+									<option value="2" >제보</option>
+								</select>
+							</p>
+							
                             <p>   
                                 <label>글 제목<span>*</span></label>
                                 <input type="text" id="boardTitle" name="boardTitle">
@@ -47,18 +55,18 @@
                             </p>-->
              				 <p>
 							<div>
-								<label>찾은 날짜</label>
+								<label id="boardFindDateLabel" name="boardFindDateLabel">실종 날짜</label>
 								<input type="date" name="boardFindDate" id="boardFindDate" placeholder="날짜를 선택해주세요"
 									required="required" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
 							</div>
              				 </p>
                             <p>   
-                                <label>찾은사람이름<span>*</span></label>
+                                <label id="boardFindNameLabel" name="boardFindNameLabel">주인 이름<span>*</span></label>
                                 <input type="text" id="boardFindName" name="boardFindName">
                                 <span id="nameError" style="color:red;"></span>
                              </p>
                              <p>   
-                                <label>발견된 장소<span>*</span></label>
+                                <label id="boardFindPlaceLabel" name="boardFindPlaceLabel">실종 장소<span>*</span></label>
                                 <input type="text" id="boardFindPlace" name="boardFindPlace">
                                 <span id="placeError" style="color:red;"></span>
                              </p>
@@ -106,6 +114,9 @@
 			},
 			boardContent: {
 				required: true
+			},
+			imageFile:{
+				required:true
 			}
 		},
 		messages: {
@@ -127,6 +138,9 @@
 			},
 			boardContent: {
 				required: '내용을 입력하세요.'
+			},
+			imageFile:{
+				required: '이미지를 넣어주세요'
 			}
 			
 		},
@@ -140,31 +154,47 @@
         // 폼이 유효하지 않으면 전송을 중지
         if (!$(this).valid()) {
             e.preventDefault();
-            
-        }
+        }else{
+			alert('asdasd');
+			//location.href = "/reportlist";	
+		}
         //alert('안먹나?');
-        location.href = "/reportlist";
+        
     });
 
-	window.onload = function() {
-		
-    var boardFindDate = document.getElementById('boardFindDate');
-    var today = new Date();
-    // 한국 시간대 (UTC+9)로 변경
-    today.setHours(today.getHours() + 9);
-    var beforeToday = new Date(today);
-    beforeToday.setDate(beforeToday.getDate()); // 어제 날짜 계산
-    var beforeTodayString = beforeToday.toISOString().slice(0, 10);
+		window.onload = function() {
+		    var boardFindDate = document.getElementById('boardFindDate');
+		    var today = new Date();
+		    // 한국 시간대 (UTC+9)로 변경
+		    today.setHours(today.getHours() + 9);
+		    var todayString = today.toISOString().slice(0, 10);
 
-    boardFindDate.value = beforeTodayString;
+		    boardFindDate.value = todayString;
 
-    var maxDate = new Date(today);
-    maxDate.setHours(0, 0, 0, 0); // 날짜 부분만 사용
-    var maxDateString = maxDate.toISOString().slice(0, 10);
-    boardFindDate.setAttribute('max', maxDateString);
+		    // max 속성 설정
+		    var maxDate = new Date(today);
+		    maxDate.setDate(maxDate.getDate() ); // 내일로 설정
+		    var maxDateString = maxDate.toISOString().slice(0, 10);
+		    boardFindDate.setAttribute('max', maxDateString);
 
-    boardFindDate.removeAttribute('min');
-};
+		    // min 속성 제거
+		    boardFindDate.removeAttribute('min');
+		};
+	
+	function typeChange(e){
+		let selectValue = $('#boardType').val();
+		if(selectValue==1){
+			$('#boardFindDateLabel').text('실종 날짜');
+			$('#boardFindNameLabel').text('주인 이름');
+			$('#boardFindPlaceLabel').text('실종 장소');
+		}
+		if(selectValue==2){
+			$('#boardFindDateLabel').text('찾은 날짜');
+			$('#boardFindNameLabel').text('찾은사람이름');
+			$('#boardFindPlaceLabel').text('발견된 장소');
+		}
+	}
+	
 </script>
             
     </th:block>

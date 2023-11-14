@@ -2,13 +2,43 @@
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='shop')">
 
+
+
 <head>
 	<title>Safira - shop</title>
+	
+<style>
+
+	@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	
+	h3 {
+		  font-family: 'GmarketSansMedium', sans-serif;
+		
+	}
+	
+	h5 {
+		  font-family: 'GmarketSansMedium', sans-serif;
+		
+	}
+	
+	.niceselect_option label,
+    .niceselect_option select {
+        font-family: 'GmarketSansMedium', sans-serif;
+        }
+	
+</style>
 </head>
+
+
 
 <body>
 	<!--header area start-->
-	<th layout:fragment="content">
+	<th:block layout:fragment="content">
 <div id="content">
 			<!--offcanvas menu area start-->
 
@@ -570,7 +600,7 @@
 						<aside class="sidebar_widget">
 							<div class="widget_inner">
 								<div class="widget_list widget_categories">
-									<h3>카테고리</h3>
+									<h3 style=" font-family: 'GmarketSansMedium', sans-serif;">카테고리</h3>
 									<ul>
 										<li><a href="productList">모든상품</a></li>
 										<li class="widget_sub_categories sub_categories2"><a
@@ -827,14 +857,14 @@
 											<!-- 상품리스트에서 장바구니 추가하기 -->
 											
 											
-												<li class="add_to_cart"><a href="" title="Add to cart" th:id="${product.productNo}"><span class="lnr lnr-cart" ></span></a></li>
+												<li class="add_to_cart"><a href="" title="Add to cart" th:id=" ${product.productNo}"><span class="lnr lnr-cart" ></span></a></li>
 															
 															
 											<!-- 상품리스트에서 장바구니 추가하기 -->				
 															
 															
 												<!--<li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>-->
-												<li class="wishlist"><a href="" title="Add to Wishlist" th:id="${product.productNo}"><span class="lnr lnr-heart"></span></a>
+												<li class="wishlist"><a href="#" title="Add to Wishlist" th:id="${product.productNo}"><span class="lnr lnr-heart"></span></a>
 												</li>
 												<!--<li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li>-->
 											</ul>
@@ -847,7 +877,7 @@
 												th:text="${product.productName}"
 												th:href="@{productDetail(productNo=${product.productNo})}">상품 이름</a>
 										</h4>
-										<h5 class="old_price" th:text="${'별점 : ' + product.productStarAvg}">$362.00</h5>
+										<h5 class="old_price" th:text="${'별점 : ' + product.productStarAvg}">별점</h5>
 										<p><a href="#" th:text="${product.productPetCategory}">펫 카테고리</a></p>
 										<div class="price_box">
 											<span class="current_price" th:text="${#numbers.formatInteger(product.productPrice, 3, 'COMMA') + '원'}">상품 가격</span>
@@ -1425,7 +1455,7 @@
 					</ul>
 				</div>
 			</div> -->
-			<div class="shop_toolbar t_bottom">
+			<!-- <div class="shop_toolbar t_bottom">
 						                    <div class="pagination" th:if="${productList.totalPages > 1}">
 						                        <ul th:with="pageNumber=${productList.number}, totalPages=${productList.totalPages}">
 						                            <li th:classappend="${productList.first} ? 'disabled'"><a href="#" th:href="${productList.first} ? '#' : @{productList(page=${pageNumber - 1})}">&lt;</a></li>
@@ -1436,7 +1466,7 @@
 						                            <li th:classappend="${productList.last} ? 'disabled'"><a href="#" th:href="${productList.last} ? '#' : @{productList(page=${pageNumber + 1})}">&gt;</a></li>
 						                        </ul>
 						                    </div>
-						                </div>
+						                </div> -->
 			<!--shop toolbar end-->
 			<!--shop wrapper end-->
 		</div>
@@ -1464,25 +1494,29 @@
 			}
 			
 			$('.add_to_cart').click(function(e){
-				let productNo = $(e.target).attr('id');
+				let productNo = $(e.target).parent().attr('id');
+				
 				let send = {
 					productNo : productNo,
 					productQty : 1
 				}
-				ajaxRequest('POST','cart/inserted',send);
-				
+				console.log(send);
+				let a = ajaxRequest('POST','cart/inserted',send);
+				console.log(a);
+				// 새로고침!
+				window.location.reload();
 			});
 			
-			$('.wishlist').click(function(e){
-				let productNo = $(e.target).attr('id');
+		$('.wishlist').click(function(e){
+				let productNo = $(e.target).parent().attr('id');
 				let send = {
 					productNo : productNo,
 				}
 				ajaxRequest('POST','wish',send);
-				
-			});
+				window.location.reload();
+			}); 
 			
-			function a() {
+			 function a() {
 				var select = document.getElementById("short");
 		        var selectedValue = select.value;
 		        var redirectPath;
@@ -1493,8 +1527,6 @@
 		        var location = window.location.href;
 		        
 		        var path = location.substring(location.lastIndexOf("/"))
-		        
-		        alert(location.substring(location.lastIndexOf("/")));
 		        
 		        switch (selectedValue) {
 		            case "2":
@@ -1514,11 +1546,11 @@
 		        }
 
 		        window.location.href = redirectPath;
-			}
+			} 
 			
 			
 			// shop.html 배너 이미지 랜덤
-			var imagePaths = [
+			 var imagePaths = [
 	            "image/adopt/adopt1.jpg",
 	            "image/adopt/adopt2.jpg",
 	            "image/adopt/adopt3.jpg",
@@ -1541,7 +1573,7 @@
 	        window.onload = function () {
 	            updateRandomImage();
 	        }
-			
+			 
 		</script>
 		</th:block>
 

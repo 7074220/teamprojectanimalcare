@@ -49,7 +49,7 @@ public class ReportController {
 	
 	@Operation(summary = "신고게시판 리스트")
 	@GetMapping("/reportlist")
-	public String ReportList(Model model,@PageableDefault(page =0,size = 6,sort = "boardNo",direction = Sort.Direction.DESC) Pageable page) {
+	public String ReportList(Model model,@PageableDefault(page =0,size = 9,sort = "boardNo",direction = Sort.Direction.DESC) Pageable page,HttpSession session) {
 		int pag = page.getPageNumber();
 		int size = page.getPageSize();
 		
@@ -65,9 +65,16 @@ public class ReportController {
 		
 
 	    Page<ReportBoard> reportList = reportBoardService.reportBoardFindAllPage(pageable);
-
+	    Long userNo = (Long)session.getAttribute("userNo");
+	    if(userNo!=null) {
+	    	model.addAttribute("userNo",userNo);
+	    }else {
+	    	model.addAttribute("userNo",0L);
+	    }
+	    
 	    model.addAttribute("reportBoardList", reportList.getContent()); // 페이지의 내용만을 보내기
 	    model.addAttribute("reportList", reportList); // 페이징 정보를 보내기
+	    
 		return "reportList";
 	}
 	
@@ -86,20 +93,32 @@ public class ReportController {
 		model.addAttribute("reportBoard", reportBoard);
 		model.addAttribute("replyBoardList", replyBoardList);
 		
+		Long loginUserNo = (Long)session.getAttribute("userNo");
+		
+		if(loginUserNo!=null) {
+			model.addAttribute("loginUserNo",loginUserNo);
+		}else {
+			model.addAttribute("loginUserNo",0L);
+		}
+		
 		return "reportBoardView";
 	}
 	
 	@GetMapping("/reportWriteForm")
-    public String showReportForm() {
-        return "reportBoard_write_form"; 
+    public String showReportForm(HttpSession session) throws Exception{
+		Long userNo = (Long)session.getAttribute("userNo");
+		String path = null;
+		if(userNo!=null) {
+			path = "reportBoard_write_form";
+		}
+        return "reportList"; 
     }
 
 	@PostMapping("/reportWrite")
 	  public String handleImagePost(@RequestParam("imageFile") MultipartFile file , @RequestParam("boardTitle")String boardTitle,
 			  @RequestParam("boardFindDate") @DateTimeFormat(pattern = "yyyy-MM-dd")Date boardFindDate, @RequestParam("boardFindName")String boardFindName,
 			  @RequestParam("boardFindPhone")String boardFindPhone, @RequestParam("boardContent")String boardContent ,@RequestParam("boardFindPlace")String boardFindPlace ,HttpSession session, Model model,
-			  @PageableDefault(page =0,size = 6,sort = "reportBoardNo",direction = Sort.Direction.DESC) Pageable page) throws Exception{
-
+			  @PageableDefault(page =0,size = 9,sort = "boardNo",direction = Sort.Direction.DESC) Pageable page,@RequestParam("boardType")Integer boardType) throws Exception{
 	    String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/reportboard/";
 	    String originalFileName = file.getOriginalFilename();
 	    UUID uuid = UUID.randomUUID();
@@ -109,11 +128,17 @@ public class ReportController {
 	    
 	    file.transferTo(newFile);
 	    
-	    Long userNo =(Long)session.getAttribute("userNo");
+	    Long userNo = (Long)session.getAttribute("userNo");
 	    
 	    Userinfo userinfo = Userinfo.builder().userName("비회원").build();
 	    if(userNo!=null) {
 	    	userinfo = userInfoService.findUserByNo(userNo);
+	    }
+	    
+	    if(boardType==1) {
+	    	boardTitle = "[실종]"+boardTitle;
+	    }else {
+	    	boardTitle = "[제보]"+boardTitle;
 	    }
 	    
 	    ReportBoard writeReportBoard = ReportBoard.builder()
@@ -131,20 +156,32 @@ public class ReportController {
 	    
 	    ReportBoard insertReportBoard = reportBoardService.Create(writeReportBoard);
 	    
-	    List<ReportBoard> reportBoards = reportBoardService.findByBoardNoOrderByBoardNoDesc();
-		model.addAttribute("reportBoardList", reportBoards);
-	    
-		int pag = page.getPageNumber();
+	    int pag = page.getPageNumber();
 		int size = page.getPageSize();
 		
-		Pageable pageable= PageRequest.of(pag,size);
+		Pageable pageable= PageRequest.of(pag,size,Sort.by(Sort.Order.desc("boardNo")));
+		//Pageable pageable = PageRequest.of(pag, size, Sort.by(Sort.Order.desc("reportBoardNo")));
+
+		
+		List<ReportBoard> reportBoards = reportBoardService.findByBoardNoOrderByBoardNoDesc();
+		
+		//Page<ReportBoard> reportList= reportBoardService.reportBoardFindAllPage(pageable);
+		
+		//model.addAttribute("reportBoardList", reportBoards);
+		
 
 	    Page<ReportBoard> reportList = reportBoardService.reportBoardFindAllPage(pageable);
-
+	    userNo = (Long)session.getAttribute("userNo");
+	    if(userNo!=null) {
+	    	model.addAttribute("userNo",userNo);
+	    }else {
+	    	model.addAttribute("userNo",0L);
+	    }
+	    
 	    model.addAttribute("reportBoardList", reportList.getContent()); // 페이지의 내용만을 보내기
 	    model.addAttribute("reportList", reportList); // 페이징 정보를 보내기
-		
-	    return "reportList";
+	    
+	    return "redirect:reportlist";
 	  }
 	
 	/*
@@ -160,14 +197,17 @@ public class ReportController {
 		return "reportBoardView";
 	}
 	
+	 */
+	
 	@Operation(summary = "신고게시판 수정폼으로 이동")
-	@PutMapping("/{boardNo}")
+	@GetMapping("/reportUpdateForm")
 	public String ReportUpdate(Model model,@RequestParam(name = "boardNo")Long boardNo) {
 		ReportBoard reportBoard = reportBoardService.findByBoardNo(boardNo);
+		
 		model.addAttribute("reportBoard", reportBoard);
-		return "reportBoardUpdateForm";
+		
+		return "reportBoard_update_form";
 	}
-	*/
 	
 	
 	

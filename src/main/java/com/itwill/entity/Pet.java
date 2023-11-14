@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringExclude;
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.itwill.dto.PetDto;
 
@@ -32,6 +33,8 @@ import lombok.ToString;
 @Data
 
 public class Pet {
+	
+	
 	@SequenceGenerator(name = "Pet_pet_no_SEQ",sequenceName = "Pet_pet_no_SEQ",initialValue = 1,allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Pet_pet_no_SEQ")
 	@Id
@@ -39,6 +42,8 @@ public class Pet {
 	 private String petLocal;
 	 private String petType;
 	 private String petGender;
+	 
+	 @CreationTimestamp
 	 private Date  petRegisterDate;
 	 private String petFindPlace;
 	 private String petCharacter;

@@ -113,15 +113,23 @@
 		width: 85px;
 	}
 	
-	
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}	
 
 #listTitle{
-	font-family: 'Orbit', sans-serif;
+	font-family: 'GmarketSansMedium';
 	font-weight: bold;
 	font-size: 16px;
 }
 #listContent{
-	font-family: 'Orbit', sans-serif;
+	font-family: 'GmarketSansMedium';
+}
+.niceselect_option{
+	font-family: 'GmarketSansMedium';
 }
 </style>
 
@@ -312,7 +320,7 @@
 													<!-- admin 계정 57번 admin계정에서만 삭제버튼 활성화 -->
 													<li class="add_to_cart"><a href="#"
 														th:onclick="'return confirmDelete(\'' + ${pet.petNo} + '\');'"
-														title="삭제하기" th:if="${session.userNo == 57}">삭제</a></li>
+														title="삭제하기" th:if="${session.userName == '관리자'}">삭제</a></li>
 
 												</ul>
 											</div>

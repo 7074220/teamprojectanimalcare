@@ -142,7 +142,7 @@ span {
 								<figure>
 									<div class="product_thumb">
 										<a class="primary_img" href="#"  th:href="@{/adopt(petNo=${pet.petNo})}" style="font-size: 18px;"><img src="#"
-												alt="" th:src="@{/image/pet/} + ${pet.getPetImage}" style="height: 246px"></a>
+												alt="" th:src="@{/image/pet/} + ${pet.getPetImage}" style="width:246px;height: 246px"></a>
 										<!--  <a class="secondary_img" href="product-details.html"><img src="assets/img/product/product21.jpg" alt=""></a> -->
 										<!--  <div class="label_product">
                                         <span class="label_sale">Sale</span>
@@ -161,8 +161,8 @@ span {
 										</div> -->
 									</div>
 									<figcaption class="product_content">
-										<h4 class="product_name"><span th:text="${'발견 장소 : '+pet.petFindPlace}" style="font-size: 18px;">발견장소</span></h4>
-									<p style="font-size: 18px;"><a href="#" th:text="${pet.center.centerName}" th:href="@{centerList}" style="font-size: 15px;">센터 이름</a></p>
+										<h4 class="product_name" style="height:20px"><span th:text="${'발견 장소 : '+pet.petFindPlace}" style="font-size: 15px;">발견장소</span></h4>
+									<p style="font-size: 18px;"><a href="#" th:text="${pet.center.centerName}" th:href="@{centerList}" style="font-size: 13px;">센터 이름</a></p>
 										<div class="price_box">
 											<!-- <span class="current_price">센터 이름</span> -->
 											<!-- <span class="old_price">$235.00</span> -->

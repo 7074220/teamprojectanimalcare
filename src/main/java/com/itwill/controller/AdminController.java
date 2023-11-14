@@ -63,8 +63,6 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class AdminController {
-
-	
 		@Autowired
 		private UserInfoService userInfoService;
 		@Autowired
@@ -99,22 +97,17 @@ public class AdminController {
 		@GetMapping(value = "/adminUserList")
 		// 관리자 --> 회원정보 리스트
 		// 번호, 아이디, 이름, 포인트, 성별, 주소, 연락처
-		public String adminUserList(Model model) throws Exception {
+		public String adminUserList(Model model,@PageableDefault(page =0,size = 10,sort = "boardNo",direction = Sort.Direction.ASC) Pageable page) throws Exception {
+			int pag = page.getPageNumber();
+			int size = page.getPageSize();
 			
-			List<AdminUserListDto> adminUserList = new ArrayList<>();
-			List<Userinfo> userList = new ArrayList<>();
+			Pageable pageable= PageRequest.of(pag,size,Sort.by(Sort.Order.asc("userNo")));
+			Page<Userinfo> userList = userInfoService.findAllPage(pageable);
 			
-			userList = userInfoService.findUserList();
-			
-			for (Userinfo userinfo : userList) {
-				adminUserList.add(AdminUserListDto.toDto(userinfo));
-			}
-			
-			model.addAttribute("adminUserList", adminUserList);
+			model.addAttribute("adminUserList", userList);
 			
 			return "admin-userinfo";
 		}
-		
 		
 		// 관리자 --> 마이페이지 이동
 		@GetMapping(value="/adminUserinfo")
@@ -457,8 +450,14 @@ public class AdminController {
 		
 		//관리자전용
 		@GetMapping("/adminOrdersList")
-		public String adminOrderList(Model model,HttpSession session) throws Exception {
-			List<Orders> orderList = orderService.findOrders();
+		public String adminOrderList(Model model,HttpSession session,@PageableDefault(page =0,size = 10,sort = "ORDER_NO",direction = Sort.Direction.DESC) Pageable page) throws Exception {
+			int pag = page.getPageNumber();
+			int size = page.getPageSize();
+			
+			Pageable pageable = PageRequest.of(pag, size);
+			
+			Page<Orders> orderList = orderService.findOrders(pageable);
+			System.out.println(">>>>>>"+orderList);
 			List<OrdersDto> ordersDto = new ArrayList<OrdersDto>();
 				for (Orders orders : orderList) {
 					Userinfo userinfo = orders.getUserinfo();
@@ -466,7 +465,7 @@ public class AdminController {
 					dto.setUserinfo(userinfo);
 					ordersDto.add(dto);
 				}
-				model.addAttribute("ordersList",ordersDto);
+				model.addAttribute("ordersList",orderList);
 				return "admin-orders";
 		}
 		
@@ -478,12 +477,16 @@ public class AdminController {
 			Long userNo=(Long)session.getAttribute("userNo");
 			List<Orders> ordersList = orderService.findAllByOrdersByOrderDate(startDate, endDate);
 			
+			
+			System.out.println(">>>>>>>>어드민 데이트"+ordersList);
 			for (Orders orders : ordersList) {
 				OrdersDto ordersDto = OrdersDto.toDto(orders);
 				ordersListDto.add(ordersDto);
 			}
 			
-			model.addAttribute("ordersList",ordersListDto);
+			System.out.println(">>>>>>>dto객체"+ordersListDto);
+			
+			model.addAttribute("ordersList",ordersList);
 			
 			return "admin-orders";
 			
@@ -508,6 +511,45 @@ public class AdminController {
 			model.addAttribute("petList",petDtoList);
 			return "pet-list" ;
 		}
+		@PostMapping("/insert_action")
+		public String insert_action(@RequestParam("imageFile") MultipartFile file,
+				@RequestParam("petType") String petType, @RequestParam("petGender") String petGender,
+				@RequestParam("petLocal") String petLocal,
+				@RequestParam("centerNo") String centerNo,@RequestParam("petFindPlace") String petFindPlace,@RequestParam("petCharacter") String petCharacter, Model model,@PageableDefault(page = 0, size = 5, sort = "petNo", direction = Sort.Direction.ASC) Pageable page) throws Exception {
+
+			String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/pet/";
+			String originalFileName = file.getOriginalFilename();
+			UUID uuid = UUID.randomUUID();
+			String savedFileName = uuid.toString() + "_" + originalFileName;
+
+			File newFile = new File(uploadPath + savedFileName);
+
+			file.transferTo(newFile);
+				
+			Center center=centerService.findByCenterNo(Long.parseLong(centerNo));
+			
+			Pet insertPet = Pet.builder().petType(petType).petGender(petGender)
+					.petImage(savedFileName).petLocal(petLocal)
+					.center(center).petFindPlace(petCharacter).petCharacter(petCharacter). build();
+
+			petService.petSave(insertPet);
+			
+			int pag = page.getPageNumber();
+			int size = page.getPageSize();
+			
+			Pageable pageable = PageRequest.of(pag, size, Sort.by(Sort.Order.desc("petNo")));
+			Page<Pet> petList= petService.petFindAllPage(pageable);
+			
+
+			model.addAttribute("petList",petList);
+			return "redirect:petListPage" ;
+
+		}
+
+		
+		
+		
+	
 		
 		
 		

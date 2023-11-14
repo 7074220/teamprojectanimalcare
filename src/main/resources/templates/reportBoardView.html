@@ -17,7 +17,6 @@
 	<!--breadcrumbs area start-->
 	<th:block layout:fragment="content">
 		<div id="content">
-
 			<div class="blog_details">
 				<div class="container">
 					<div class="row">
@@ -35,14 +34,29 @@
 													/ 작성 날짜 : <a href="#"
 														th:text="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">April
 														10, 2019</a> / 발견 장소 : <a href="#">Company, Image, Travel</a>-->
-												
+
 												<p>
-													작성자 : <a href="#" th:text="${reportBoard.boardFindName}">admin</a>
-													/ 작성 날짜 : <a href="#"
-														th:text="${#dates.format(reportBoard.boardRegisterDate, 'yyyy-MM-dd')}">April
-														10, 2019</a> / 발견 장소 : <a href="#" th:text="${reportBoard.boardFindPlace}">Company, Image, Travel</a>
+													<label th:text="${'작성자 : '+reportBoard.userinfo.userName}">admin</label>
+													<label th:text="${'/ 작성 날짜 : '+#dates.format(reportBoard.boardRegisterDate, 'yyyy-MM-dd')}">April 10, 2019</label> / 
+													<label th:if="${#strings.contains(reportBoard.boardTitle,'제보')}" th:text="${'발견장소 : ' + reportBoard.boardFindPlace}">Company, Image, Travel</label>
+													<label th:if="${#strings.contains(reportBoard.boardTitle,'실종')}" th:text="${'실종장소 : ' + reportBoard.boardFindPlace}">Company, Image, Travel</label>
 												</p>
+													<div style="margin-left: 650px;">
+														<button style="border: none; background: transparent;" onclick="updateReportBoardForm(event)"
+														th:if="${session.userNo==reportBoard.userinfo.userNo}">수정</button>
+														<button style="border: none; background: transparent;" onclick="deleteReportBoard(event)"
+														th:if="${session.userNo==reportBoard.userinfo.userNo}">삭제</button>
+													</div>
 											</div>
+											
+											<!--	<div style="margin-left: 650px;">
+																<button
+																	style="border: none; background: transparent;"
+																	 onclick="" class="92">수정</button>
+																<button
+																	style="border: none; background: transparent;"
+																	onclick="" class="92">삭제</button>
+															</div>-->
 										</div>
 										<div class="blog_thumb">
 											<!-- 첨부된 이미지 파일 -->
@@ -187,23 +201,30 @@
 													roadthemes</h7>
 
 												<div class="reviews_comment_box">
-													<div class="comment_thmb" style="width: 50px;">
+													<div class="comment_thmb" style="width: 65px;">
 														<p>
 															<strong th:text="${replyBoard.userinfo.userName}">허승범
 															</strong>
 														</p>
 														<!-- <img src="assets/img/blog/comment2.jpg" alt="">-->
 													</div>
-													<div class="comment_text">
-														<div class="reviews_meta">
+													<div class="comment_text" th:id="${replyBoard.replyBoardNo}">
+														<div class="reviews_meta" th:id="${replyBoard.userinfo.userNo}">
 															<!-- <p><strong th:text="${review.userinfo.userName}">adm </strong>- September 12, 2018</p>-->
-
-
-															<h2>
-																<p></p>
-															</h2>
+		
 															<p th:text="${replyBoard.replyBoardContent}">roadthemes</p>
+															<div style="margin-left: 650px;">
+																<button
+																	style="border: none; background: transparent;"
+																	onclick="replyUpdateForm(event)" th:class="${replyBoard.replyBoardNo}"
+																	th:if="${session.userNo==replyBoard.userinfo.userNo}">수정</button>
+																<button
+																	style="border: none; background: transparent;"
+																	onclick="replyDelete(event)" th:class="${replyBoard.replyBoardNo}"
+																	th:if="${session.userNo==replyBoard.userinfo.userNo}">삭제</button>
+															</div>
 														</div>
+													</div>
 													</div>
 												</div>
 											</div>
@@ -220,15 +241,16 @@
 										<form name="f" action="#">
 											<div class="row">
 												<div class="col-12">
-													<label for="review_comment">Comment </label>
+													<label for="review_comment" class="review_comment" th:id="${loginUserNo}">Comment </label>
 													<textarea name="comment" id="replyComment"></textarea>
 												</div>
 											</div>
 											<button class="button" th:if="${session.userNo!=null}"
-												id="postCommentButton" type="button" onclick="replyInsert()">Post</button>
+												id="postCommentButton" type="button"
+												onclick="replyInsert()">Post</button>
 											<button class="button" th:if="${session.userNo==null}"
 												id="postCommentButton" type="button" onclick="loginPopUp()">Post
-													Comment</button>
+												Comment</button>
 										</form>
 									</div>
 								</div>
@@ -280,14 +302,122 @@
 
 				// 새 창 열기
 				window.open(url, windowName, windowFeatures);
-				
+
 				// 새 창 제어 (예: 창을 닫기)
 				// newWindow.close(); // 새 창 닫기
-				
+
 				// 창 속성 설정을 통해 창의 크기, 스크롤바 여부 등을 조절할 수 있습니다.
 
 			}
+			
+			
+		function updateReportBoardForm(e){
+			let boardNo = document.querySelector('.single_blog').id;
+			window.location.href='reportUpdateForm?boardNo='+boardNo;
+			/*
+			let data={
+					boardNo:boardNo
+			}
+			$.ajax({
+				async:false,
+				url: 'report/'+boardNo,
+				method: "put",
+				data: JSON.stringify(data),
+				dataType: 'json',
+				contentType: 'application/json;chrset=UTF-8',
+				success: function (response) {
+					alert("수정완료");
+				},
+				error:function(response){
+					alert("수정실패");
+				}
+					
+				
+			});
+			*/
+		}	
+		function deleteReportBoard(e){
+			let boardNo = document.querySelector('.single_blog').id;
+			if(confirm('정말 삭제하시겠습니까?')){
+				ajaxRequest('DELETE','report/delete/'+ boardNo);
+				window.location.href='reportlist';	
+			}
+		}	
+		
 
+			function replyDelete(e){
+				let replyBoardNo = $(e.target).attr('class');
+				if(confirm('정말 삭제하시겠습니까?')){
+					let send ={
+						replyBoardNo : replyBoardNo
+					}
+					ajaxRequest('DELETE','reply',send);
+					window.location.reload();
+				}
+			}
+			
+			function replyUpdateHtml(responseJsonObject = {}) {
+				let htmlTemplate =
+				`<div class="reviews_meta">
+					<textarea style="border: none; width: 800px; height: 50px; resize: none;" class="{{replyBoardNo}}">{{replyBoardContent}}</textarea>
+					<div style="margin-left: 700px;">
+						<button
+							style="border: none; background: transparent;"
+							onclick="replyUpdate(event)" class="{{replyBoardNo}}">수정</button>
+						<button
+							style="border: none; background: transparent;"
+							onclick="replyDelete(event)" class="{{replyBoardNo}}">삭제</button>
+					</div>
+				</div>`;
+				
+				let bindTemplate = Handlebars.compile(htmlTemplate);
+				let resultTemplate = bindTemplate(responseJsonObject);
+				return resultTemplate;
+			}
+			
+			function replyUpdateForm(e){
+				let replyBoardNo = $(e.target).attr('class');
+				let send ={
+					replyBoardNo : replyBoardNo
+				}
+				let response = ajaxRequest('PUT','reply/updateForm',send);
+				let html = replyUpdateHtml(response);
+				$('#'+replyBoardNo).html(html);
+				//window.location.reload();
+			}
+			
+			function replyUpdateHtml2(responseJsonObject = {}) {
+				let htmlTemplate =
+				`<div class="reviews_meta">
+					<p text="">{{replyBoardContent}}</p>
+					<div style="margin-left: 650px;">
+						<button
+							style="border: none; background: transparent;"
+							onclick="replyUpdateForm(event)" class="{{replyBoardNo}}">수정</button>
+						<button
+							style="border: none; background: transparent;"
+							onclick="replyDelete(event)" class="{{replyBoardNo}}">삭제</button>
+					</div>
+				</div>`;
+				
+				let bindTemplate = Handlebars.compile(htmlTemplate);
+				let resultTemplate = bindTemplate(responseJsonObject);
+				return resultTemplate;
+			}
+			
+			
+			
+			function replyUpdate(e){
+				let replyBoardNo = $(e.target).attr('class');
+				let replyBoardContent = $("textarea."+replyBoardNo).val();
+				let send ={
+					replyBoardNo : replyBoardNo,
+					replyBoardContent : replyBoardContent
+				}
+				let response = ajaxRequest('PUT','reply/update',send);
+				let html = replyUpdateHtml2(response);
+				$('#'+replyBoardNo).html(html);
+			}	
 		</script>
 
 	</th:block>

@@ -20,9 +20,9 @@
 			text-align: center;
 			font-size: 100%;
 			margin-bottom: 20px;
-
+			margin-left: 20px;
 		}
-
+	
 		#volunteerDate::-webkit-calendar-picker-indicator,
 		#volunteerTime::-webkit-calendar-picker-indicator {
 			position: absolute;
@@ -34,15 +34,46 @@
 			color: transparent;
 			cursor: pointer;
 		}
-
+	
 		#volunteerDate::before {
 			content: attr(placeholder);
 			width: 100%;
 			height: 100%;
 		}
-
+	
 		#volunteerDate:valid::before {
 			display: none;
+		}
+	
+		@font-face {
+			font-family: 'GmarketSansMedium';
+			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+			font-weight: normal;
+			font-style: normal;
+		}
+	
+		h3 {
+			font-family: 'GmarketSansMedium';
+		}
+	
+		p {
+			font-family: 'GmarketSansMedium';
+		}
+	
+		span {
+			font-family: 'GmarketSansMedium';
+		}
+	
+		button {
+			font-family: 'GmarketSansMedium';
+		}
+	
+		input {
+			font-family: 'GmarketSansMedium';
+		}
+	
+		select {
+			font-family: 'GmarketSansMedium';
 		}
 	</style>
 
@@ -103,13 +134,13 @@
 		<div class="contact_area" style="margin-top: 100px;">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-6 col-md-6">
+					<div class="col-lg-6 col-md-6" style="width: 420px; margin-left: 100px;">
 						<div class="contact_message content">
 							<div class="zoomWrapper single-zoom">
 							</div>
 
 							<!-- 센터 정보 -->
-							<h2>센터 정보</h2>
+							<h3>센터 정보</h3>
 							<!--<p>센터 번호: <span th:text="${center.centerNo}">10</span></p>-->
 							<p><img th:src="@{image/center/} + ${center.centerImage}"></p>
 							<p>센터 이름: <span th:text="${center.centerName}">10</span></p>
