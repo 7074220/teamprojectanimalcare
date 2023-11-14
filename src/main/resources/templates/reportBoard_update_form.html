@@ -33,8 +33,15 @@
                     <div class="account_form register" style="display: flex; flex-direction: column; justify-content: center; align-items: center;" >
                         <h2>실종&#47;제보</h2>
                         
-                        <form name="f" id="reportBoard_write_form" action="#" method="post" enctype="multipart/form-data"
+                        <form name="f" id="reportBoard_update_form" action="#" method="post" enctype="multipart/form-data"
                         	th:action="@{'/reportWrite'}">
+                        	<label>구분 <span>*</span></label>
+							<p>
+								<select id="boardType" name="boardType" onchange="typeChange(event)">
+									<option value="1" >실종</option>
+									<option value="2" >제보</option>
+								</select>
+							</p>
                             <p>   
                                 <label>글 제목<span>*</span></label>
                                 <input type="text" id="boardTitle" name="boardTitle" th:value="${reportBoard.boardTitle}">
@@ -117,7 +124,7 @@
 	        
 	        loadURLToInputFiled('image/reportboard/[[${reportBoard.boardImage}]]');
 	        
-	$('#reportBoard_write_form').validate({
+	$('#reportBoard_update_form').validate({
 			rules: {
 			boardTitle: {
 				required: true
@@ -173,14 +180,12 @@
 		
 		);
 	
-		$('#reportBoard_write_form').on('submit',function(e) {
+		$('#reportBoard_update_form').on('submit',function(e) {
         // 폼이 유효하지 않으면 전송을 중지
         if (!$(this).valid()) {
             e.preventDefault();
             
-        }else{
-			location.href = "/reportlist";	
-		}
+        }
         //alert('안먹나?');
         
     });
@@ -204,6 +209,19 @@
 	    // min 속성 제거
 	    boardFindDate.removeAttribute('min');
 };
+function typeChange(e){
+	let selectValue = $('#boardType').val();
+	if(selectValue==1){
+		$('#boardFindDateLabel').text('실종 날짜');
+		$('#boardFindNameLabel').text('주인 이름');
+		$('#boardFindPlaceLabel').text('실종 장소');
+	}
+	if(selectValue==2){
+		$('#boardFindDateLabel').text('찾은 날짜');
+		$('#boardFindNameLabel').text('찾은사람이름');
+		$('#boardFindPlaceLabel').text('발견된 장소');
+	}
+}	
 </script>
             
     </th:block>
