@@ -72,8 +72,6 @@ public class UserInfoController {
 		
 	}
 	
-	
-	
 	@GetMapping(value = "userUpdate")
 	public String update(Model model , HttpSession session , @RequestParam String userName , @RequestParam String userPassword,
 			@RequestParam String userPhoneNumber,@RequestParam String userAddress) throws Exception{
@@ -115,10 +113,8 @@ public class UserInfoController {
 		userInfoService.remove(userNo);
 		session.invalidate();
 		
-		return "index";
+		return "redirect:index";
 	}
-	
-	
 	
 	@GetMapping(value="/logout")
 	public String logout(HttpSession session, Model model) {
@@ -132,7 +128,7 @@ public class UserInfoController {
 			model.addAttribute("petList", petDtoList);
 		}
 			*/
-		return "index";
+		return "redirect:index";
 	}
 	
 	//아이디 찾기,비밀번호 찾기 폼으로 이동
