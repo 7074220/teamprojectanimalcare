@@ -113,13 +113,13 @@ function createInitializer() {
 			},
 			gender : {
 				required : true
-			},
+			}/*,
 			postcode :{
 				required:true
 			},
 			ordersAddress1:{
 				required:true
-			},
+			}*/,
 			ordersAddress3:{
 				required:true
 			}
@@ -149,13 +149,13 @@ function createInitializer() {
 			},
 			gender :{
 				required: '성별을 선택하세요.',
-			},
+			}/*,
 			postcode :{
 				required:'우편번호를 입력하세요.'
 			},
 			ordersAddress1:{
 				required:'주소를 입력하세요.'
-			},
+			}*/,
 			ordersAddress3:{
 				required:'주소를 입력하세요.'
 			}

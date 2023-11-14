@@ -79,5 +79,6 @@ public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpec
 	// 상품의 카테고리와 펫 카테고리가 일치하는 모든 상품 출력(query 사용 X)
 	Page<Product> findAllByProductCategoryAndProductPetCategory(String productCategory, String productPetCategory,  Pageable pageable);
 	
-	
+	@Query(value="select * from product where product_image=?1",nativeQuery = true)
+	public List<Product> findByProductImage(String productImage);
 }

@@ -105,4 +105,21 @@ public class PetServiceImpl implements PetService {
 		
 	}
 
+	@Override
+	public List<Pet> findAllByOrderBypetType(String petType) {
+		List<Pet> petList=petDao.findAllByOrderByPetType(petType);
+		return petList;
+	}
+	
+	@Override
+	public List<Pet> findAllByPetLocal(String petLocal) {
+		List<Pet> petList=petDao.findAllByPetLocal(petLocal);
+		return petList;
+	}
+
+	@Override
+	public List<Pet> findAllByPetTypeByPetLocal(String petType, String petLocal) {
+		return petDao.findAllByPetTypeByPetLocal(petType, petLocal);
+	}
+
 }

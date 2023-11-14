@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="layout/layout(title='petList')">
+	layout:decorate="layout/layout(title='입양 펫 리스트')">
 
 <head>
 <script>
@@ -126,7 +126,9 @@
     font-weight: normal;
     font-style: normal;
 }	
-
+.container{
+	font-family: 'GmarketSansMedium';
+}
 #listTitle{
 	font-family: 'GmarketSansMedium';
 	font-weight: bold;
@@ -351,15 +353,15 @@
 
 
 							<div class="shop_toolbar t_bottom">
-								<div class="pagination" th:if="${!petList.isEmpty()}">
+								<div class="pagination" th:if="${pagingstatus==1}">
 									<ul
 										th:with="
-            pageNumber = ${petList.pageable.pageNumber},
-            pageSize = ${petList.pageable.pageSize},
-            totalPages = ${petList.totalPages},
-            startPage = ${T(java.lang.Math).floor(pageNumber / pageSize) * pageSize+1 },
-            tempEndPage = ${startPage + pageSize - 1},
-            endPage = (${tempEndPage < totalPages ? tempEndPage : totalPages})">
+					            pageNumber = ${petList.pageable.pageNumber},
+					            pageSize = ${petList.pageable.pageSize},
+					            totalPages = ${petList.totalPages},
+					            startPage = ${T(java.lang.Math).floor(pageNumber / pageSize) * pageSize+1 },
+					            tempEndPage = ${startPage + pageSize - 1},
+					            endPage = (${tempEndPage < totalPages ? tempEndPage : totalPages})">
 
 	<!-- 이전페이지 이동 -->
 										<li th:classappend="${petList.first} ? 'disabled'"><a

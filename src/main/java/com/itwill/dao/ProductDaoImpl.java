@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.itwill.entity.Product;
 import com.itwill.repository.ProductRepository;
+import com.itwill.repository.ReportBoardRepository;
 
 @Repository
 public class ProductDaoImpl implements ProductDao {
@@ -170,6 +171,12 @@ public class ProductDaoImpl implements ProductDao {
 		Page<Product> productList = productRepository.findAll(pageable);
 		
 		return productList;
+	}
+
+	@Override
+	public List<Product> findByProductImage(String productImage) {
+		
+		return productRepository.findByProductImage(productImage);
 	}
 
 }

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.dao.ProductDao;
 import com.itwill.entity.Product;
+import com.itwill.entity.ReportBoard;
 import com.itwill.repository.ProductRepository;
 
 @Transactional
@@ -183,7 +184,13 @@ public class ProductServiceImpl implements ProductService {
 		Page<Product> productList = productDao.productFindAllPage(pageable);
 		
 		return productList;
-	} 
-	
+	}
+
+	@Override
+	public List<Product> findByProductImage(String boardImage) {
+		
+		return productDao.findByProductImage(boardImage);
+	}
+
 	
 }
