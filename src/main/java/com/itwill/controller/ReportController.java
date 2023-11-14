@@ -190,7 +190,8 @@ public class ReportController {
 			  @RequestParam("boardFindDate") @DateTimeFormat(pattern = "yyyy-MM-dd")Date boardFindDate, @RequestParam("boardFindName")String boardFindName,
 			  @RequestParam("boardFindPhone")String boardFindPhone, @RequestParam("boardContent")String boardContent ,@RequestParam("boardFindPlace")String boardFindPlace ,HttpSession session, Model model,
 			  @PageableDefault(page =0,size = 9,sort = "boardNo",direction = Sort.Direction.DESC) Pageable page,@RequestParam("boardNo")Long boardNo) throws Exception{
-	    System.out.println("###########"+file.getOriginalFilename());
+	   
+		  System.out.println("###########"+file.getOriginalFilename());
 		List<ReportBoard> findreportBoard = reportBoardService.findByBoardImage(file.getOriginalFilename());
 		System.out.println("###############"+findreportBoard);
 		String savedFileName = "";

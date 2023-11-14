@@ -27,14 +27,14 @@ export function user_login_form(responseJsonObject = {}) {
                     </style>
                             
                      <form name="f" id = "loginForm">
-                     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+                     <h1 class="h3 mb-3 fw-normal">로그인</h1>
                      <div class="form-floating" style="margin-bottom:10px;">
-                        <label>Id</label>
+                        <label>아이디</label>
                         <input type="email" class="form-control" id="loginUserId"
                            placeholder="name@example.com">
                      </div>
                      <div class="form-floating" style="margin-bottom:10px;">
-                        <label>Password</label>
+                        <label>비밀번호</label>
                         <input type="password" class="form-control" id="loginPassword"
                            placeholder="Password">
                      </div>
@@ -44,7 +44,7 @@ export function user_login_form(responseJsonObject = {}) {
                      <a></a>
 	  				<a class="navi-link" href="#/findUserInfo" style="color:red;">아이디/비밀번호 찾기</a>
                      
-                     <button class="btn btn-success w-100 py-1" type="button" data-navigate="/login" style="margin-top:20px;">Sign in</button>
+                     <button class="btn btn-success w-100 py-1" type="button" data-navigate="/login" style="margin-top:20px;">로그인</button>
                      <!--<button type="button" data-navigate="/login">Sign in</button>-->
                   </div>
                   </form>

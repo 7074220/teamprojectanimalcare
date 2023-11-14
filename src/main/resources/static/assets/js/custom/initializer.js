@@ -128,6 +128,7 @@ function createInitializer() {
 		messages: {
 			userId: {
 				required: '아이디를 입력하세요.',
+				email : '이메일로 입력해주세요.',
 				remote: '{0}는 중복된 아이디입니다.'
 			},
 			password: {
