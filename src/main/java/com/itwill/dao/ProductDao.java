@@ -93,6 +93,8 @@ public interface ProductDao {
 	// 페이지 정렬
 	Page<Product> productFindAllPage(Pageable pageable);
 	
+	public List<Product> findByProductImage(String productImage);
+	
 }
 
 
