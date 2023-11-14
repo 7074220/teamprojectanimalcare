@@ -17,7 +17,6 @@
 	<!--breadcrumbs area start-->
 	<th:block layout:fragment="content">
 		<div id="content">
-
 			<div class="blog_details">
 				<div class="container">
 					<div class="row">
@@ -44,16 +43,20 @@
 														th:text="${reportBoard.boardFindPlace}">Company, Image,
 														Travel</a>
 												</p>
+													<div style="margin-left: 650px;">
+																<button style="border: none; background: transparent;" onclick="updateReportBoard()">수정</button>
+																<button style="border: none; background: transparent;" onclick="deleteReportBoard()">삭제</button>
+															</div>
 											</div>
 											
-												<div style="margin-left: 650px;">
+											<!--	<div style="margin-left: 650px;">
 																<button
 																	style="border: none; background: transparent;"
 																	 onclick="" class="92">수정</button>
 																<button
 																	style="border: none; background: transparent;"
 																	onclick="" class="92">삭제</button>
-															</div>
+															</div>-->
 										</div>
 										<div class="blog_thumb">
 											<!-- 첨부된 이미지 파일 -->
@@ -307,6 +310,54 @@
 
 			}
 			
+			
+		function updateReportBoard(){
+			let boardNo = document.querySelector('.single_blog').id;
+			let data={
+					boardNo:boardNo
+			}
+			$.ajax({
+				async:false,
+				url: 'report/'+boardNo,
+				method: "put",
+				data: JSON.stringify(data),
+				dataType: 'json',
+				contentType: 'application/json;chrset=UTF-8',
+				success: function (response) {
+					alert("수정완료");
+				},
+				error:function(response){
+					alert("수정실패");
+				}
+					
+				
+			});
+		}	
+		function deleteReportBoard(){
+			$.ajax({
+				async:false,
+				url: "user/login",
+				method: "post",
+				data: JSON.stringify(loginData),
+				dataType: 'json',
+				contentType: 'application/json;chrset=UTF-8',
+				success: function (response) {
+					if (response.status == 1000) {
+						alert('로그인햇다!');
+						self.close();
+						opener.location.reload();
+					}
+					if ((response.status == 1001) || (response.status == 1002)) {
+						alert('아이디 혹은 비밀번호를 잘못 입력 하셨습니다. ');
+					}
+				}
+			});
+		}	
+		
+	
+		
+		
+
 			function replyDelete(e){
 				let replyBoardNo = $(e.target).attr('class');
 				let send ={

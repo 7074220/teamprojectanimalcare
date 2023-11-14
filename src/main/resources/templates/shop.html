@@ -12,8 +12,11 @@
 }
 	
 	
-	
 
+h5 {
+	  font-family: 'GmarketSansMedium', sans-serif;
+	
+}
 
 </style>
 
@@ -587,7 +590,7 @@
 						<aside class="sidebar_widget">
 							<div class="widget_inner">
 								<div class="widget_list widget_categories">
-									<h3>카테고리</h3>
+									<h3 style=" font-family: 'GmarketSansMedium', sans-serif;">카테고리</h3>
 									<ul>
 										<li><a href="productList">모든상품</a></li>
 										<li class="widget_sub_categories sub_categories2"><a
@@ -844,7 +847,7 @@
 											<!-- 상품리스트에서 장바구니 추가하기 -->
 											
 											
-												<li class="add_to_cart"><a href="#" title="Add to cart" th:id=" ${product.productNo}"><span class="lnr lnr-cart" ></span></a></li>
+												<li class="add_to_cart"><a href="" title="Add to cart" th:id=" ${product.productNo}"><span class="lnr lnr-cart" ></span></a></li>
 															
 															
 											<!-- 상품리스트에서 장바구니 추가하기 -->				
@@ -864,7 +867,7 @@
 												th:text="${product.productName}"
 												th:href="@{productDetail(productNo=${product.productNo})}">상품 이름</a>
 										</h4>
-										<h5 class="old_price" th:text="${'별점 : ' + product.productStarAvg}">$362.00</h5>
+										<h5 class="old_price" th:text="${'별점 : ' + product.productStarAvg}" style=" font-family: 'GmarketSansMedium', sans-serif;">$362.00</h5>
 										<p><a href="#" th:text="${product.productPetCategory}">펫 카테고리</a></p>
 										<div class="price_box">
 											<span class="current_price" th:text="${#numbers.formatInteger(product.productPrice, 3, 'COMMA') + '원'}">상품 가격</span>
@@ -1490,7 +1493,8 @@
 				console.log(send);
 				let a = ajaxRequest('POST','cart/inserted',send);
 				console.log(a);
-				location.href='productList';
+				// 새로고침!
+				window.location.reload();
 			});
 			
 		$('.wishlist').click(function(e){
@@ -1499,8 +1503,7 @@
 					productNo : productNo,
 				}
 				ajaxRequest('POST','wish',send);
-				location.href='productList';
-				
+				window.location.reload();
 			}); 
 			
 			 function a() {

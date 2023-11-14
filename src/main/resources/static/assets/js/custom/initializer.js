@@ -64,6 +64,12 @@ function createInitializer() {
 				}
 			});
 
+		
+		Handlebars.registerHelper('ifEqual', function(arg1, arg2, options) {
+  				return (arg1 === arg2) ? options.fn(this) : options.inverse(this);
+			});
+
+
 		},
 		getMessageScript: function() {
 			$.getScript(`js/localization/messages_${navigator.language}.js`);
