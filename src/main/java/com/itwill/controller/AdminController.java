@@ -457,8 +457,14 @@ public class AdminController {
 		
 		//관리자전용
 		@GetMapping("/adminOrdersList")
-		public String adminOrderList(Model model,HttpSession session) throws Exception {
-			List<Orders> orderList = orderService.findOrders();
+		public String adminOrderList(Model model,HttpSession session,@PageableDefault(page =0,size = 10,sort = "ORDER_NO",direction = Sort.Direction.DESC) Pageable page) throws Exception {
+			int pag = page.getPageNumber();
+			int size = page.getPageSize();
+			
+			Pageable pageable = PageRequest.of(pag, size);
+			
+			Page<Orders> orderList = orderService.findOrders(pageable);
+			System.out.println(">>>>>>"+orderList);
 			List<OrdersDto> ordersDto = new ArrayList<OrdersDto>();
 				for (Orders orders : orderList) {
 					Userinfo userinfo = orders.getUserinfo();
@@ -466,7 +472,7 @@ public class AdminController {
 					dto.setUserinfo(userinfo);
 					ordersDto.add(dto);
 				}
-				model.addAttribute("ordersList",ordersDto);
+				model.addAttribute("ordersList",orderList);
 				return "admin-orders";
 		}
 		
@@ -542,11 +548,16 @@ public class AdminController {
 			Page<Pet> petList= petService.petFindAllPage(pageable);
 			
 
-			model.addAttribute("petListPage",petList);
-			return "pet-list" ;
+			model.addAttribute("petList",petList);
+			return "redirect:petListPage" ;
 
 		}
 
+		
+		
+		
+	
+		
 		
 		
 		/******************************* visit ************************************/

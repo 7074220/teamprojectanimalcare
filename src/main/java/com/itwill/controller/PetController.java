@@ -83,7 +83,7 @@ List<Center> centers=centerService.findAllCenters();
 		int pag = page.getPageNumber();
 		int size = page.getPageSize();
 		
-		Pageable pageable= PageRequest.of(pag,size);
+		Pageable pageable = PageRequest.of(pag, size, Sort.by(Sort.Order.desc("petNo")));
 		
 		List<PetDto> petDtoList = new ArrayList<>();
 		
@@ -99,8 +99,10 @@ List<Center> centers=centerService.findAllCenters();
 					}
 				}
 			}
+		
 
-		model.addAttribute("petListPage",petList);
+		model.addAttribute("petList",petList);
+		
 		return "pet-list" ;
 	}
 		
@@ -135,14 +137,14 @@ List<Center> centers=centerService.findAllCenters();
 			throw new Exception("존재하지 않는 동물입니다.");
 		
 			}
-		if(userinfo.getUserName().equals("admin")) {
+		if(userinfo.getUserName().equals("관리자")) {
 			
 			petService.petRemove(petNo);
 		}else {
 			throw new Exception("올바르지 않은 경로입니다.");
 		}
 		
-		return "redirect:petList";
+		return "redirect:petListPage";
 	}
 	//펫 업데이트
 	@PostMapping("/update_action")
