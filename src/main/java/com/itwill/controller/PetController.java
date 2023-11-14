@@ -137,14 +137,14 @@ List<Center> centers=centerService.findAllCenters();
 			throw new Exception("존재하지 않는 동물입니다.");
 		
 			}
-		if(userinfo.getUserName().equals("admin")) {
+		if(userinfo.getUserName().equals("관리자")) {
 			
 			petService.petRemove(petNo);
 		}else {
 			throw new Exception("올바르지 않은 경로입니다.");
 		}
 		
-		return "redirect:petList";
+		return "redirect:petListPage";
 	}
 	//펫 업데이트
 	@PostMapping("/update_action")

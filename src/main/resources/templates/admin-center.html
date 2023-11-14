@@ -9,11 +9,22 @@
 			margin: auto;
 			margin-top: 20vh;
 			/* 회원탈퇴창 가운데 정도로 떨어트림 */
-
+	
 		}
-
+	
 		#centerTable {
 			width: 1350px;
+		}
+	
+		@font-face {
+			font-family: 'GmarketSansMedium';
+			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+			font-weight: normal;
+			font-style: normal;
+		}
+	
+		.container {
+			font-family: 'GmarketSansMedium';
 		}
 	</style>
 
@@ -28,7 +39,7 @@
 		<section class="main_content_area">
 
 			<div class="container" style="margin-right: 600px;">
-				<div class="account_dashboard" >
+				<div class="account_dashboard">
 
 					<div class="row">
 						<div class="col-sm-12 col-md-3 col-lg-3">
@@ -58,9 +69,10 @@
 
 								<!--  <div class="tab-pane fade" id="visit">-->
 								<h3>보호소</h3>
+
 								
-								<a href="centerInsertForm">보호소 추가</a>
-								
+								<a href="centerInsertForm" style="color:green">보호소 추가</a>
+
 								<div class="table-responsive" id="centerTable">
 									<table class="table">
 										<thead>
@@ -98,47 +110,23 @@
 			</div>
 		</section>
 		<script>
-
-			function ajaxRequest(method, url, sendJsonObject) {
-				let returnResultJsonObject = {};
-				$.ajax({
-					async: false,
-					method: method,
-					url: url,
-					contentType: 'application/json;UTF-8',
-					data: JSON.stringify(sendJsonObject),
-					type: 'json',
-					success: function (resultJsonObject) {
-						returnResultJsonObject = resultJsonObject;
-					}
-				});
-
-				return returnResultJsonObject;
-			}
-
-			$('.deleteBtn').on('click', function (e) {
-				e.preventDefault();
-				let id = $(this).attr('id');
-				let no = id.split('-')[1];
-
-				if (isNaN(no)) {
-					alert('centerNo 가져오기 실패');
-					return;
-				}
-
-				let sendJsonObject = {"centerNo": no};
+			function deleteCenterAndPets(centerNo) {
+				let sendJsonObject = {"centerNo": centerNo};
 				let $row = $(this).closest('tr');
 
 				$.ajax({
 					type: 'DELETE',
-					url: 'center/' + no,
+					url: 'center/' + centerNo,
 					data: JSON.stringify(sendJsonObject),
 					contentType: 'application/json;UTF-8',
 					success: function (response) {
 						if (response && response.centerNo == null) {
 							alert('센터 정보가 없음');
 						} else {
-							alert('센터 삭제가 완료되었습니다.');
+							// 센터 삭제가 완료되었으면 관련 펫도 삭제
+							deletePetsByCenterNo(centerNo);
+
+							alert('센터 및 관련 펫 삭제가 완료되었습니다.');
 							$row.remove();
 							// 다른 동작 수행
 						}
@@ -147,10 +135,35 @@
 						alert('삭제 요청 중 오류가 발생했습니다.');
 					}
 				});
+			}
+
+			function deletePetsByCenterNo(centerNo) {
+				$.ajax({
+					type: 'DELETE',
+					url: 'pet/center/' + centerNo,
+					contentType: 'application/json;UTF-8',
+					success: function (response) {
+						// 성공 시 추가 동작 수행
+					},
+					error: function () {
+						alert('펫 삭제 요청 중 오류가 발생했습니다.');
+					}
+				});
+			}
+
+			$('.deleteBtn').on('click', function (e) {
+				e.preventDefault();
+				let id = $(this).attr('id');
+				let centerNo = id.split('-')[1];
+
+				if (isNaN(centerNo)) {
+					alert('centerNo 가져오기 실패');
+					return;
+				}
+
+				// 센터 및 관련 펫 삭제 함수 호출
+				deleteCenterAndPets(centerNo);
 			});
-
-
-
 		</script>
 
 
