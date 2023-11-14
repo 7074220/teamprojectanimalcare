@@ -22,42 +22,42 @@ import com.itwill.dto.PetDto;
 import com.itwill.entity.Adopt;
 import com.itwill.entity.Pet;
 import com.itwill.entity.Product;
+
 @Transactional
 @Service
-public class PetServiceImpl implements PetService{
-@Autowired
-private PetDao petDao;
-	
+public class PetServiceImpl implements PetService {
+	@Autowired
+	private PetDao petDao;
+
 	@Override
 	public Pet petFindById(Long petNo) {
 		Pet pet = petDao.petFindById(petNo);
 		return pet;
 	}
-	
+
 	@Override
-	public Page<Pet> petFindAllPage(Pageable pageable){
-		Page<Pet> petList=petDao.petFindAllPage(pageable);
+	public Page<Pet> petFindAllPage(Pageable pageable) {
+		Page<Pet> petList = petDao.petFindAllPage(pageable);
 		return petList;
 	}
-	
-	
-	 public List<Pet> petFindAll() { 
-		 List<Pet> petList = petDao.petFindAll();
-	  return petList; }
-	 
+
+	public List<Pet> petFindAll() {
+		List<Pet> petList = petDao.petFindAll();
+		return petList;
+	}
 
 	@Override
 	public Pet petSave(Pet pet) {
-		 
+
 		return petDao.petInsert(pet);
 	}
 
 	@Override
 	public void petRemove(Long petNo) throws Exception {
-	
-	petDao.petDelete(petNo);
+
+		petDao.petDelete(petNo);
 	}
-	
+
 	@Override
 	public Pet petUpdate(Pet pet) throws Exception {
 		return petDao.petUpdate(pet);
@@ -65,7 +65,7 @@ private PetDao petDao;
 
 	@Override
 	public List<Pet> findAllByOrderBypetNoDesc() {
-	 
+
 		return petDao.findAllByOrderBypetNoDesc();
 	}
 
@@ -81,7 +81,7 @@ private PetDao petDao;
 
 	@Override
 	public Page<Pet> findAllByPetTypeByPetLocal(String petType, String petLocal, Pageable pageable) {
-		return petDao.findAllByPetTypeByPetLocal(petType,petLocal, pageable);
+		return petDao.findAllByPetTypeByPetLocal(petType, petLocal, pageable);
 	}
 
 	/*
@@ -92,10 +92,17 @@ private PetDao petDao;
 	 * 
 	 * return petDao.findAllByPetLocal(petLocal); }
 	 */
-	
-	
-	
 
-	
-	
+	@Override
+	public List<Pet> petFindCenterNo(Long centerNo) {
+		List<Pet> petList = petDao.petFindCenterNo(centerNo);
+		return petList;
+	}
+
+	@Override
+	public void deleteByCenterNo(Long centerNo) throws Exception {
+		petDao.deleteByCenterNo(centerNo);
+		
+	}
+
 }
