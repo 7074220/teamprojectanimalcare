@@ -179,14 +179,17 @@ public class ReportController {
 		return "reportBoardView";
 	}
 	
+	 */
+	
 	@Operation(summary = "신고게시판 수정폼으로 이동")
-	@PutMapping("/{boardNo}")
+	@GetMapping("/reportUpdateForm")
 	public String ReportUpdate(Model model,@RequestParam(name = "boardNo")Long boardNo) {
 		ReportBoard reportBoard = reportBoardService.findByBoardNo(boardNo);
+		
 		model.addAttribute("reportBoard", reportBoard);
-		return "reportBoardUpdateForm";
+		
+		return "reportBoard_update_form";
 	}
-	*/
 	
 	
 	
