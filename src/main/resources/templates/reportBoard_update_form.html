@@ -156,22 +156,22 @@
 
 	window.onload = function() {
 		
-    var boardFindDate = document.getElementById('boardFindDate');
-    var today = new Date();
-    // 한국 시간대 (UTC+9)로 변경
-    today.setHours(today.getHours() + 9);
-    var beforeToday = new Date(today);
-    beforeToday.setDate(beforeToday.getDate()); // 어제 날짜 계산
-    var beforeTodayString = beforeToday.toISOString().slice(0, 10);
+		var boardFindDate = document.getElementById('boardFindDate');
+	    var today = new Date();
+	    // 한국 시간대 (UTC+9)로 변경
+	    today.setHours(today.getHours() + 9);
+	    var todayString = today.toISOString().slice(0, 10);
 
-    boardFindDate.value = beforeTodayString;
+	    boardFindDate.value = todayString;
 
-    var maxDate = new Date(today);
-    maxDate.setHours(0, 0, 0, 0); // 날짜 부분만 사용
-    var maxDateString = maxDate.toISOString().slice(0, 10);
-    boardFindDate.setAttribute('max', maxDateString);
+	    // max 속성 설정
+	    var maxDate = new Date(today);
+	    maxDate.setDate(maxDate.getDate() ); // 내일로 설정
+	    var maxDateString = maxDate.toISOString().slice(0, 10);
+	    boardFindDate.setAttribute('max', maxDateString);
 
-    boardFindDate.removeAttribute('min');
+	    // min 속성 제거
+	    boardFindDate.removeAttribute('min');
 };
 </script>
             
