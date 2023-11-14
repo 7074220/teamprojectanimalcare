@@ -2,6 +2,11 @@
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='shop')">
 
+
+
+<head>
+	<title>Safira - shop</title>
+	
 <style>
 
 	@font-face {
@@ -9,19 +14,24 @@
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-}
+	}
 	
+	h3 {
+		  font-family: 'GmarketSansMedium', sans-serif;
+		
+	}
 	
+	h5 {
+		  font-family: 'GmarketSansMedium', sans-serif;
+		
+	}
 	
-h5 {
-	  font-family: 'GmarketSansMedium', sans-serif;
+	.niceselect_option label,
+    .niceselect_option select {
+        font-family: 'GmarketSansMedium', sans-serif;
+        }
 	
-}
-
 </style>
-
-<head>
-	<title>Safira - shop</title>
 </head>
 
 
@@ -867,7 +877,7 @@ h5 {
 												th:text="${product.productName}"
 												th:href="@{productDetail(productNo=${product.productNo})}">상품 이름</a>
 										</h4>
-										<h5 class="old_price" th:text="${'별점 : ' + product.productStarAvg}">$362.00</h5>
+										<h5 class="old_price" th:text="${'별점 : ' + product.productStarAvg}">별점</h5>
 										<p><a href="#" th:text="${product.productPetCategory}">펫 카테고리</a></p>
 										<div class="price_box">
 											<span class="current_price" th:text="${#numbers.formatInteger(product.productPrice, 3, 'COMMA') + '원'}">상품 가격</span>
