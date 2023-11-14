@@ -69,6 +69,13 @@ public class VolunteerServiceImpl implements VolunteerService{
 		volunteerDao.addPointsToVolunteer(volunteerNo, pointsToAdd);		
 	}
 
+	@Override
+	public Page<Volunteer> volunteerFindAllPage(Pageable pageable) {
+		Page<Volunteer> volunteerList = volunteerDao.volunteerFindAllPage(pageable);
+		
+		return volunteerList;
+	}
+
 	
 	
 	

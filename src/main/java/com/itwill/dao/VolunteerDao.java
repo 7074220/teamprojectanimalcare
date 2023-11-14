@@ -32,5 +32,7 @@ public interface VolunteerDao {
     public void addPointsToVolunteer(Long volunteerNo, Integer pointsToAdd);
 	// pointsToAdd는 적립할 포인트의 양을 나타내는 변수?
 
+    // 페이징
+    Page<Volunteer> volunteerFindAllPage(Pageable pageable);
     
 }

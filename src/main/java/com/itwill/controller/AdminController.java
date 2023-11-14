@@ -246,7 +246,41 @@ public class AdminController {
 		
 		/******************************* Volunteer ************************************/
 		
+		/*
+		// 관리자 --> 상품목록 리스트
+		@GetMapping("/adminProductList")
+		public String adminProductList(@PageableDefault(page = 0, size = 10, sort = "productNo", direction = Sort.Direction.DESC) Pageable page, Model model, HttpSession session) {
+			int pageNo = page.getPageNumber();
+			int size = page.getPageSize();
+			
+			Pageable pageable = PageRequest.of(pageNo, size, Sort.by(Sort.Order.asc("productNo")));
+			
+			Page<Product> productList = productService.productFindAllPage(pageable);
+			
+			model.addAttribute("products", productList.getContent());
+			model.addAttribute("productList", productList);
+			
+			return "admin-product";
+		}
+		*/
 		
+		// 관리자 -> 봉사 리스트 조회
+		@GetMapping("/adminVolunteerList")
+		public String findVolunteerList(@PageableDefault(page = 0, size = 10, sort = "volunteerNo", direction = Sort.Direction.DESC) Pageable page,Model model, HttpSession session) throws Exception{
+			int pageNo = page.getPageNumber();
+			int size = page.getPageSize();
+			
+			Pageable pageable = PageRequest.of(pageNo, size, Sort.by(Sort.Order.desc("volunteerNo")));
+			
+			Page<Volunteer> volunteerList = volunteerService.volunteerFindAllPage(pageable);
+				
+			model.addAttribute("volunteer", volunteerList.getContent());
+			model.addAttribute("volunteerList", volunteerList);
+			
+			return "admin-volunteer";	
+		}
+		
+		/*
 		// 관리자 -> 봉사 리스트 조회
 		@GetMapping("/adminVolunteerList")
 		public String findVolunteerList(Model model, HttpSession session) throws Exception{
@@ -261,6 +295,7 @@ public class AdminController {
 		    model.addAttribute("volunteerList", volunteerList);
 		    return "admin-volunteer";
 		}
+		*/
 
 		
 		//@Transactional
@@ -506,7 +541,7 @@ public class AdminController {
 		@GetMapping("/petinsertform")
 		public String petinsertform(Model model) throws Exception {
 			
-	List<Center> centers=centerService.findAllCenters();
+			List<Center> centers=centerService.findAllCenters();
 			
 			model.addAttribute("petCenter",centers);
 			return "pet_insert_form";
@@ -627,6 +662,23 @@ public class AdminController {
 		/******************************* visit ************************************/
 		// 관리자 --> 견학 리스트
 		@GetMapping("/adminVisitList")
+		public String findOrders(@PageableDefault(page = 0, size = 10, sort = "visitNo", direction = Sort.Direction.DESC) Pageable page,Model model, HttpSession  session) throws Exception {
+			int pageNo = page.getPageNumber();
+			int size = page.getPageSize();
+			
+			Pageable pageable = PageRequest.of(pageNo, size, Sort.by(Sort.Order.desc("visitNo")));
+					
+			Page<Visit> visitList = visitService.visitFindAllPage(pageable);
+					
+			model.addAttribute("visit", visitList.getContent());
+			model.addAttribute("visitList", visitList);			
+			
+			return "admin-visit";
+			}
+		
+		/*
+		// 관리자 --> 견학 리스트
+		@GetMapping("/adminVisitList")
 		public String findOrders(Model model, HttpSession  session) throws Exception {
 			Long userNo = (Long) session.getAttribute("userNo");
 			Userinfo userinfo = userInfoService.findUserByNo(userNo);
@@ -638,6 +690,8 @@ public class AdminController {
 		    model.addAttribute("visitList", visitList);
 		    return "admin-visit";
 		}
+		*/
+		
 		@GetMapping("/updateVisit/{visitNo}")
 		public String updateVisit(@PathVariable Long visitNo, Model model, HttpSession session) throws Exception {
 		    Long userNo = (Long) session.getAttribute("userNo");

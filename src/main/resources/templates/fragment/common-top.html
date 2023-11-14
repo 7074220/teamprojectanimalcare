@@ -220,7 +220,7 @@ li {
 
 
                                 <div class="search_container mobail_s_none" th:if="${productList != null}">
-                                   <form>
+                                   <form th:unless="${session.userName == '관리자'}">
                                        <!-- <div class="hover_category">
                                             <select class="select_option" name="select" id="categori1">
                                                 <option selected value="1">Select a categories</option>

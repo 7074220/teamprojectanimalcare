@@ -33,5 +33,6 @@ public interface VolunteerService {
 	void addPointsToVolunteer(Long volunteerNo, Integer pointsToAdd);
 	// 봉사에 포인트 적립
 	
-		
+	// 페이징
+    Page<Volunteer> volunteerFindAllPage(Pageable pageable);
 }

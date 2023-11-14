@@ -3,6 +3,8 @@ package com.itwill.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.itwill.entity.Userinfo;
@@ -46,5 +48,13 @@ public class VisitDaoImpl implements VisitDao {
 	    public List<Visit> getVisitsByUserNo(Long userNo) {
 	        return visitRepository.findByUserinfoUserNo(userNo);
 	    }
+
+	// 페이징
+	@Override
+	public Page<Visit> visitFindAllPage(Pageable pageable) {
+		Page<Visit> visitList = visitRepository.findAll(pageable);
+		
+		return visitList;
+	}
 
 }
