@@ -112,8 +112,8 @@
 												
 										 		
 												<td> <!-- 13PM, 14PM ... 18PM -->
-												    <span th:if="${visit.visitTime < 12}" th:text="${visit.visitTime + ' AM'}"></span>
-												    <span th:if="${visit.visitTime >= 12}" th:text="${visit.visitTime + ' PM'}"></span>
+												   
+												    <span th:text="${visit.visitTime + '시'}"></span>
 												</td>
 												
 										

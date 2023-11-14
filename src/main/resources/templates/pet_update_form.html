@@ -52,34 +52,36 @@
 							style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
 							<h2>펫 수정</h2>
 
-							<form name="f" id="pet_update_form" action="insert_action" method="post" enctype="multipart/form-data"
+							<form name="f" id="pet_update_form" action="pet_update_action" method="post" enctype="multipart/form-data"
 								>
+								<input type="hidden" name="petNo" id="petNo" value="" th:value="${pet.petNo}" >
+								
 								<label>종류</label>
-								<select class="form-select" aria-label="Default select example" name="petType" id="petType" th:value="${pet.petType}" >
+								<select class="form-select" aria-label="Default select example" name="petType" id="petType" th:value="${pet.petType}" th:selected="${pet.petType}">
 									<label for="petType"><span>종류</span></label>
 									<option selected>종류를 고르세요</option>
-									<option value="강아지">강아지</option>
-									<option value="고양이">고양이</option>
+									<option value="강아지" th:selected="${pet.petType == '강아지'}">강아지</option>
+									<option value="고양이" th:selected="${pet.petType == '고양이'}">고양이</option>
 								</select>
 								<label>성별</label>
 								<select class="form-select" aria-label="Default select example" name="petGender" id="petGender" th:value="${pet.petGender}">
 									<label for="petType"><span>종류</span></label>
 									<option selected>성별을 고르세요</option>
-									<option value="수컷">수컷</option>
-									<option value="암컷">암컷</option>
+									<option value="수컷" th:selected="${pet.petGender == '수컷'}">수컷</option>
+									<option value="암컷" th:selected="${pet.petGender == '암컷'}">암컷</option>
 								</select>
 								<p>
 									<label>지역</label>
-									<select th:value="${pet.Local}" class="form-select" aria-label="Default select example" name="petLocal" id="petLocal">
+									<select th:value="경기도" class="form-select" aria-label="Default select example" name="petLocal" id="petLocal">
 										<option >지역을 고르세요</option>
-										<option value="서울특별시">서울특별시</option>
-										<option value="경기도">경기도</option>
-										<option value="강원도">강원도</option>
-										<option value="충청북도">충청북도</option>
-										<option value="충청남도">충청남도</option>
-										<option value="경상북도">경상북도</option>
-										<option value="경상남도">경상남도</option>
-										<option value="제주도">제주도</option>
+										<option value="서울특별시" th:selected="${pet.petLocal == '서울특별시'}">서울특별시</option>
+										<option value="경기도" th:selected="${pet.petLocal == '경기도'}">경기도</option>
+										<option value="강원도" th:selected="${pet.petLocal == '강원도'}">강원도</option>
+										<option value="충청북도" th:selected="${pet.petLocal == '충청북도'}">충청북도</option>
+										<option value="충청남도" th:selected="${pet.petLocal == '충청남도'}">충청남도</option>
+										<option value="경상북도" th:selected="${pet.petLocal == '경상북도'}">경상북도</option>
+										<option value="경상남도" th:selected="${pet.petLocal == '경상남도'}">경상남도</option>
+										<option value="제주도" th:selected="${pet.petLocal == '제주도'}">제주도</option>
 									</select>
 								</p>
 								<!-- Button trigger modal -->
@@ -94,7 +96,7 @@
 									
 								<p>
 								
-								<input type="hidden" name="centerNo" id="centerNo" value="" >
+								<input type="hidden" name="centerNo" id="centerNo" value="" th:value="${pet.center.centerNo}" >
 									<!-- Modal -->
 								
 
@@ -115,7 +117,7 @@
 								<div class="login_submit" style="margin-top: 10px;">
 
 
-									<button type="submit" th:text="수정" id="insert">수정</button>
+									<button type="submit" th:text="수정" id="update">수정</button>
 
 								</div>
 							</form>
@@ -186,11 +188,10 @@
 		<script>
 
 
-		$('#pet_form').on('submit', function (e) {
+		$('#pet_update_form').on('submit', function (e) {
 			 //폼이 유효하지 않으면 전송을 중지
 			
-			
-			 window.location.href = "petList";
+			 window.location.href = "petListPage";
 			
 		});
 
@@ -231,7 +232,6 @@
 				    let container = new DataTransfer(); 
 				    container.items.add(file);
 				    document.querySelector('input[type="file"]').files = container.files;
-				    document.querySelector('#imagePreview').src=url;
 				  });
 				}
             function getImgURL(url, callback){
@@ -243,9 +243,7 @@
   			  xhr.responseType = 'blob';
   			  xhr.send();
   			}
-            
-            
-            loadURLToInputFiled('image/product/[[${pet.petImage}]]');
+            loadURLToInputFiled('image/pet/[[${pet.petImage}]]');
 		</script>
 
 	</th:block>

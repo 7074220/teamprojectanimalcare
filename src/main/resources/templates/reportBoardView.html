@@ -1,9 +1,21 @@
 <!doctype html>
 <html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='ReportBoardView')">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='')">
 
 <head>
 	<title>Safira - blog details</title>
+	<style>
+		@font-face {
+			font-family: 'GmarketSansMedium';
+			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+			font-weight: normal;
+			font-style: normal;
+		}
+	
+		.container {
+			font-family: 'GmarketSansMedium';
+		}
+	</style>
 </head>
 
 <body>
@@ -131,7 +143,7 @@
                        -->
 								<!--댓글리스트 시작-->
 								<div class="comments_box">
-									<h3>Comments</h3>
+									<h3>댓글</h3>
 									<!-- <div class="comment_list">
                                 <div class="comment_thumb">
                                     <img src="assets/img/blog/comment3.png.jpg" alt="">
@@ -234,9 +246,9 @@
 								</div>
 
 								<div class="comments_form">
-									<h3>Leave a Reply</h3>
+									<!--<h3>댓글</h3>
 									<p>Your phone number will not be published. Required fields
-										are marked *</p>
+										are marked *</p>-->
 									<div class="layout">
 										<form name="f" action="#">
 											<div class="row">
@@ -249,8 +261,7 @@
 												id="postCommentButton" type="button"
 												onclick="replyInsert()">Post</button>
 											<button class="button" th:if="${session.userNo==null}"
-												id="postCommentButton" type="button" onclick="loginPopUp()">Post
-												Comment</button>
+												id="postCommentButton" type="button" onclick="loginPopUp()">댓글 작성</button>
 										</form>
 									</div>
 								</div>

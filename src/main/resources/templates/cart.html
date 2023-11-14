@@ -1,6 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="kr" xmlns:th="https://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='cart')">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout(title='장바구니')">
 
 <head>
     <title>Safira - cart page</title>
@@ -590,12 +590,12 @@
 										<input type="checkbox" id="allCheckBox" onclick="allChecked()" checked="true">
 										</label>
 									</th>
-                                    <th class="product_thumb">Image</th>
-                                    <th class="product_name">Product</th>
-                                    <th class="product-price">Price</th>
-                                    <th class="product_quantity">Quantity</th>
-                                    <th class="product_total">Total</th>
-                                    <th class="product_remove">Delete</th>
+                                    <th class="product_thumb">상품이미지</th>
+                                    <th class="product_name">상품명</th>
+                                    <th class="product-price">가격</th>
+                                    <th class="product_quantity">수량</th>
+                                    <th class="product_total">총액</th>
+                                    <th class="product_remove">삭제</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -656,7 +656,7 @@
                         </table>   
                             </div>  
                             <div class="cart_submit">
-                                <button type="submit" onclick="cartDelete()">delete</button>
+                                <button type="submit" onclick="cartDelete()">삭제하기</button>
                                 <!--<button type="submit">update cart</button>-->
                             </div>      
                         </div>
@@ -692,7 +692,7 @@
                                    <!--<a href="#">Calculate shipping</a>-->
                                    <div class="cart_subtotal">
                                        <p>총액</p>
-                                       <p class="cart_amount1" th:text="${#numbers.formatInteger(totalPrice, 3, 'COMMA') + '원'}">주문할 상품 총 가격</p>
+                                       <p class="cart_amount1" th:text="${totalPrice+'원'}">주문할 상품 총 가격</p>
                                    </div>
                                    
                                    

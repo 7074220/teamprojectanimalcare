@@ -303,10 +303,10 @@ public class AdminController {
 		/******************************* Product ************************************/
 		
 		
-		/*
+		
 		// 관리자 --> 상품목록 리스트
 		@GetMapping("/adminProductList")
-		public String adminProductList(Model model, HttpSession session, @PageableDefault(page = 0, size = 10, sort = "productNo", direction = Sort.Direction.ASC) Pageable page) {
+		public String adminProductList(Model model, HttpSession session) {
 			List<ProductListDto> productListDto = new ArrayList<>();
 			List<Product> productList = new ArrayList<>();
 			
@@ -322,8 +322,9 @@ public class AdminController {
 			
 			return "admin-product";
 		}
-		*/
 		
+		
+		/*
 		// 관리자 --> 상품목록 리스트
 		@GetMapping("/adminProductList")
 		public String adminProductList(@PageableDefault(page = 0, size = 10, sort = "productNo", direction = Sort.Direction.DESC) Pageable page, Model model, HttpSession session) {
@@ -339,9 +340,7 @@ public class AdminController {
 			
 			return "admin-product";
 		}
-		
-		
-		
+		*/
 		
 		// 관리자 --> 상품 추가
 		@PostMapping("/adminInsertProduct")
@@ -409,15 +408,23 @@ public class AdminController {
 		@PostMapping("/adminUpdateProduct")
 		public String upateProduct(@RequestParam("imageFile") MultipartFile file, @RequestParam("productName") String productName, @RequestParam("productPrice") Integer productPrice, @RequestParam("productNo") Long productNo, Model model,
 				@PageableDefault(page = 0, size = 10, sort = "productNo", direction = Sort.Direction.ASC) Pageable page) throws Exception {
-
-			String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/product/";
-			String originalFileName = file.getOriginalFilename();
-			UUID uuid = UUID.randomUUID();
-			String savedFileName = uuid.toString() + "_" + originalFileName;
 			
-			File newFile = new File(uploadPath + savedFileName);
+			List<Product> findProduct = productService.findByProductImage(file.getOriginalFilename());
+	
+			String savedFileName = "";
 			
-			file.transferTo(newFile);
+			if (findProduct.size() > 0) {
+				savedFileName = file.getOriginalFilename();
+			} else {
+				String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/product/";
+				String originalFileName = file.getOriginalFilename();
+				UUID uuid = UUID.randomUUID();
+				savedFileName = uuid.toString() + "_" + originalFileName;
+				
+				File newFile = new File(uploadPath + savedFileName);
+				
+				file.transferTo(newFile);
+			}
 			
 			Product update = Product.builder().build();
 			
@@ -454,7 +461,7 @@ public class AdminController {
 			int pag = page.getPageNumber();
 			int size = page.getPageSize();
 			
-			Pageable pageable = PageRequest.of(pag, size);
+			Pageable pageable = PageRequest.of(pag, size, Sort.by(Sort.Order.asc("orderNo")));
 			
 			Page<Orders> orderList = orderService.findOrders(pageable);
 			System.out.println(">>>>>>"+orderList);
@@ -496,7 +503,14 @@ public class AdminController {
 		
 		/******************************* Pet ************************************/
 		
-		
+		@GetMapping("/petinsertform")
+		public String petinsertform(Model model) throws Exception {
+			
+	List<Center> centers=centerService.findAllCenters();
+			
+			model.addAttribute("petCenter",centers);
+			return "pet_insert_form";
+		}
 		
 		// 관리자 --> 펫 리스트
 		@GetMapping("/adminPetList")
@@ -507,7 +521,7 @@ public class AdminController {
 				petDtoList.add(PetDto.toDto(pet));
 			}
 			
-			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>"+petDtoList.get(0).getPetType());
+			//System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>"+petDtoList.get(0).getPetType());
 			model.addAttribute("petList",petDtoList);
 			return "pet-list" ;
 		}
@@ -546,6 +560,50 @@ public class AdminController {
 					.center(center).petFindPlace(petCharacter).petCharacter(petCharacter). build();
 
 			petService.petSave(insertPet);
+			
+			int pag = page.getPageNumber();
+			int size = page.getPageSize();
+			
+			Pageable pageable = PageRequest.of(pag, size, Sort.by(Sort.Order.desc("petNo")));
+			Page<Pet> petList= petService.petFindAllPage(pageable);
+			
+
+			model.addAttribute("petList",petList);
+			return "redirect:petListPage" ;
+
+		}
+		@PostMapping("/pet_update_action")
+		public String pet_update_action(@RequestParam("imageFile") MultipartFile file,PetDto petDto, Model model,@PageableDefault(page = 0, size = 5, sort = "petNo", direction = Sort.Direction.ASC) Pageable page) throws Exception {
+
+			String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/image/pet/";
+			String originalFileName = file.getOriginalFilename();
+			UUID uuid = UUID.randomUUID();
+			String savedFileName = uuid.toString() + "_" + originalFileName;
+
+			File newFile = new File(uploadPath + savedFileName);
+
+			file.transferTo(newFile);
+				
+			
+			System.out.println(">>>>>>>>>>펫타입"+petDto.getPetType());
+			System.out.println(">>>>>>>>>>펫젠더"+petDto.getPetGender());
+			System.out.println(">>>>>>>>>>펫넘버"+petDto.getPetNo());
+			System.out.println(">>>>>>>>>>플레이스"+petDto.getPetFindPlace());
+			System.out.println(">>>>>>>>>>펫설먕"+petDto.getPetCharacter());
+			System.out.println(">>>>>>>>>>펫넘버"+petDto.getCenterNo());
+			
+			Center center=centerService.findByCenterNo(petDto.getCenterNo());
+			
+			Pet pet=petService.petFindById(petDto.getPetNo());
+			System.out.println(">>>펫정보"+pet);
+			pet.setPetType(petDto.getPetType());
+			pet.setPetGender(petDto.getPetGender());
+			pet.setPetLocal(petDto.getPetLocal());
+			pet.setCenter(center);
+			pet.setPetFindPlace(petDto.getPetFindPlace());
+			pet.setPetCharacter(petDto.getPetCharacter());
+
+			petService.petUpdate(pet);
 			
 			int pag = page.getPageNumber();
 			int size = page.getPageSize();
