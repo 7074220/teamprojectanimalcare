@@ -847,7 +847,7 @@ h5 {
 											<!-- 상품리스트에서 장바구니 추가하기 -->
 											
 											
-												<li class="add_to_cart"><a href="#" title="Add to cart" th:id=" ${product.productNo}"><span class="lnr lnr-cart" ></span></a></li>
+												<li class="add_to_cart"><a href="" title="Add to cart" th:id=" ${product.productNo}"><span class="lnr lnr-cart" ></span></a></li>
 															
 															
 											<!-- 상품리스트에서 장바구니 추가하기 -->				
@@ -1493,7 +1493,8 @@ h5 {
 				console.log(send);
 				let a = ajaxRequest('POST','cart/inserted',send);
 				console.log(a);
-				location.href='productList';
+				// 새로고침!
+				window.location.reload();
 			});
 			
 		$('.wishlist').click(function(e){
@@ -1502,8 +1503,7 @@ h5 {
 					productNo : productNo,
 				}
 				ajaxRequest('POST','wish',send);
-				location.href='productList';
-				
+				window.location.reload();
 			}); 
 			
 			 function a() {
