@@ -170,6 +170,7 @@ function execution_daum_address() {
 					document.getElementById("ordersAddress1").value = addr;
 					// 커서를 상세주소 필드로 이동한다.
 					document.getElementById("ordersAddress3").focus();
+					
 				}
 			}).open();
 }
