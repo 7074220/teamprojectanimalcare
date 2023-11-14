@@ -67,7 +67,7 @@ public class VolunteerController {
 	    if (userNo != null) {
 	        Volunteer volunteer = new Volunteer();
 	        volunteer.setVolunteerDate(volunteerDate);
-	        volunteer.setVolunteerStatus("봉사신청");
+	        volunteer.setVolunteerStatus("봉사신청중");
 	        volunteer.setVolunteerTime(selectedHour);
 
 	        Center center = centerService.findByCenterNo(centerNo);
