@@ -57,6 +57,11 @@ public class CouponScheduler {
 	public void DeleteCoupon() throws Exception {
 		List<Coupon> couponList = couponService.findAll();
 		for (Coupon coupon : couponList) {
+			/*
+			 * if(LocalDateTime.now().getYear) {
+			 * 
+			 * }
+			 */
 			if(LocalDateTime.now().getMonthValue()==coupon.getCouponExpirationDate().getMonthValue()) {
 				if(LocalDateTime.now().getDayOfMonth()==coupon.getCouponExpirationDate().getDayOfMonth()) {
 					couponService.Delete(coupon.getCouponId());

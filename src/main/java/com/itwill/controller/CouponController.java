@@ -46,14 +46,12 @@ public class CouponController {
         	for(int i=0;i<couponService.findAllByUserNo(userNo).size();i++) {
 	        	formattedDate1 = couponService.findAllByUserNo(userNo).get(i).getCouponPayday().format(formatter);
 	        	formattedDate2 = couponService.findAllByUserNo(userNo).get(i).getCouponExpirationDate().format(formatter);
-        	}
-        	
-            model.addAttribute("formattedDate1", formattedDate1);
-            model.addAttribute("formattedDate2", formattedDate2);
-        	for (Coupon coupon : coupons) {
-    			CouponDto couponDto = CouponDto.toDto(coupon);
+	        	CouponDto couponDto = CouponDto.toDto(couponService.findAllByUserNo(userNo).get(i));
+	        	couponDto.setCouponPayday(formattedDate1);
+	        	couponDto.setCouponExpirationDate(formattedDate2);
     			couponList.add(couponDto);
-    		}	
+        	}
+			
         }else {
         	couponList.add(CouponDto.builder().build());
         }
