@@ -338,38 +338,24 @@
 			});
 			*/
 		}	
-		function deleteReportBoard(){
-			$.ajax({
-				async:false,
-				url: "user/login",
-				method: "post",
-				data: JSON.stringify(loginData),
-				dataType: 'json',
-				contentType: 'application/json;chrset=UTF-8',
-				success: function (response) {
-					if (response.status == 1000) {
-						alert('로그인햇다!');
-						self.close();
-						opener.location.reload();
-					}
-					if ((response.status == 1001) || (response.status == 1002)) {
-						alert('아이디 혹은 비밀번호를 잘못 입력 하셨습니다. ');
-					}
-				}
-			});
+		function deleteReportBoard(e){
+			let boardNo = document.querySelector('.single_blog').id;
+			if(confirm('정말 삭제하시겠습니까?')){
+				ajaxRequest('DELETE','report/delete/'+ boardNo);
+				window.location.href='reportlist';	
+			}
 		}	
-		
-	
-		
 		
 
 			function replyDelete(e){
 				let replyBoardNo = $(e.target).attr('class');
-				let send ={
-					replyBoardNo : replyBoardNo
+				if(confirm('정말 삭제하시겠습니까?')){
+					let send ={
+						replyBoardNo : replyBoardNo
+					}
+					ajaxRequest('DELETE','reply',send);
+					window.location.reload();
 				}
-				ajaxRequest('DELETE','reply',send);
-				window.location.reload();
 			}
 			
 			function replyUpdateHtml(responseJsonObject = {}) {

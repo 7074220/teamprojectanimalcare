@@ -91,6 +91,18 @@ public class PetDaoImpl implements PetDao {
 			Page<Pet> petList = petRepository.findAllPetTypeByPetLocal(petType,petLocal,pageable);
 			return petList;
 		}
+
+		@Override
+		public List<Pet> petFindCenterNo(Long centerNo) {
+			List<Pet> petList = petRepository.findByCenterCenterNo(centerNo);
+			return petList;
+		}
+
+		@Override
+		public void deleteByCenterNo(Long centerNo) {
+			petRepository.deleteByCenterNo(centerNo);
+			
+		}
 	
 	
 
