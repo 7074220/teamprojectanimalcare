@@ -679,7 +679,7 @@
 
 									<!--   "<" 화살표 누르면 앞 상품으로 이동, ">" 화살표 누르면 뒷 상품으로 이동 -->
 
-									<div class="product_nav">
+									<!-- <div class="product_nav">
 										<ul>
 											<li th:if="${product.productNo != 1}" class="prev">
 											    <a th:href="@{productDetail(productNo=${product.productNo - 1})}">
@@ -703,7 +703,7 @@
 											</li>
 														
 										</ul>
-									</div>
+									</div> -->
 									<!--   "<" 화살표 누르면 앞 상품으로 이동, ">" 화살표 누르면 뒷 상품으로 이동 끝 -->
 
 
@@ -751,7 +751,7 @@
 									<div class="product_variant quantity">
 										<label>수량</label>
 										<input min="1" max="100" value="1" type="number" id="productQty">
-										<button class="button" type="button" onclick="addCart()">add to cart</button>
+										<button class="button" type="button" onclick="addCart()">카트 담기</button>
 									</div>
 
 
@@ -772,8 +772,7 @@
 									<div class=" product_d_action">
 										<ul>
 											<li><a href="" title="Add to wishlist">
-													<button class="button" type="button" onclick="addToWish()">+ Add to
-														Wishlist</button>
+													<button class="button" type="button" onclick="addToWish()">위시리스트 담기</button>
 												</a></li>
 											<!-- <li><a href="#" title="Add to wishlist">+ Compare</a></li> -->
 										</ul>
