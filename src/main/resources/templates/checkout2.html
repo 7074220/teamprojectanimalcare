@@ -41,18 +41,29 @@
 					var cartPrice = parseInt($('.cart_price').text());
 					var couponPrice=parseInt($('#coupon').text());
 					var discountval = parseInt(loyaltyPointsValue);
+					
+					 userPointsValue = isNaN(userPointsValue) ? 0 : userPointsValue;
+					    loyaltyPointsValue = isNaN(loyaltyPointsValue) ? 0 : loyaltyPointsValue;
+					    cartPrice = isNaN(cartPrice) ? 0 : cartPrice;
+					    couponPrice = isNaN(couponPrice) ? 0 : couponPrice;
+
 
 					if (cartPrice < loyaltyPointsValue) {
 						loyaltyPointsValue = $('.cart_price').text();
 						alert('적립금이 상품금액을 초과합니다.');
 
 						if (userPointsValue < loyaltyPointsValue) {
-							alert('보유적립금을 초과합니다1.')
+							alert('보유적립금을 초과합니다.')
 							return;
 						}
 					}
 					if (userPointsValue < loyaltyPointsValue) {
-						alert('보유적립금을 초과합니다2.')
+						alert('보유적립금을 초과합니다.')
+						return;
+					}
+					else if (!userPointsValue){
+						alert('적립금이 없습니다.')
+						$('#loyaltyPoints').val(0);
 						return;
 					}
 						
@@ -61,9 +72,9 @@
 					$('#discount').text('-' + loyaltyPointsValue);
 					// $('#discount').text('-'+loyaltyPointsValue);
 					var cartpirce = parseInt($('.cart_price').text());
-					var total = (cartpirce - discountval)+couponPrice;
+					var total = (cartpirce - loyaltyPointsValue)+couponPrice;
 					if (total > 0) {
-						total = (cartpirce - discountval)+couponPrice;
+						total = (cartpirce - loyaltyPointsValue)+couponPrice;
 					} else {
 						total = 0;
 					}
@@ -76,6 +87,8 @@
 
 				$('.order_button').click(
 						function() {
+							
+							
 							var orderAddress1 = $('#ordersAddress1').val();
 							var orderAddress2 = $('#ordersAddress2').val();
 							var orderAddress3 = $('#ordersAddress3').val();
@@ -86,7 +99,7 @@
 							
 							$('.cartNo').each(function(index, element) {
 								let no = element.id;
-								alert(no);
+								//alert(no);
 								cartNo[cartNo.length] = no;
 							});
 							console.log(cartNo);
@@ -116,27 +129,36 @@
 								*/
 								
 								
-								let send = {
-										orderAddress : orderAddress1+orderAddress2+orderAddress3,
-										orderPrice : orderPrice,
-										userPoint : userPoint,
-										couponId : couponId,
-										cartNo : cartNo
-								}
-								let response=ajaxRequest('POST', 'order/insert', send);
-								
-								//window.location.href = "index";
-							
-							
-							
-							
-							// '#f'를 사용하여 폼을 선택합니다.
-							/*
-							$('#f').attr('action', 'orderInsert');
-							$('#f').attr('method', 'post');
-							$('#f').submit();
-							 */
+							var confirmOrder = confirm('주문하시겠습니까?');
+
+						    if (confirmOrder) {
+						        let send = {
+						            orderAddress: orderAddress1 + orderAddress2 + orderAddress3,
+						            orderPrice: orderPrice,
+						            userPoint: userPoint,
+						            couponId: couponId,
+						            cartNo: cartNo
+						        };
+
+						        // ajaxRequest 함수는 어디에 정의되어 있는지 확인이 필요합니다.
+						        let response = ajaxRequest('POST', 'order/insert', send);
+
+						        // 서버 응답에 따른 후속 처리를 할 수 있음
+
+						        // 페이지 이동
+						        window.location.href = "orders";
+						    } else {
+						        // 사용자가 취소를 선택한 경우
+						        // 추가적인 처리를 여기에 추가할 수 있습니다.
+						        console.log('주문이 취소되었습니다.');
+						    }
 						});
+
+
+
+
+
+
 
 				$('#findcoupon').click(function() {
 
@@ -1185,7 +1207,7 @@
 								</table>
 							</div>
 							<div class="payment_method">
-								<div class="panel-default">
+								<!-- <div class="panel-default">
 									<input id="payment" name="check_method" type="radio"
 										data-target="createp_account" /> <label for="payment"
 										data-toggle="collapse" data-target="#method"
@@ -1197,8 +1219,8 @@
 												Town, Store State / County, Store Postcode.</p>
 										</div>
 									</div>
-								</div>
-								<div class="panel-default">
+								</div> -->
+								<!-- <div class="panel-default">
 									<input id="payment_defult" name="check_method" type="radio"
 										data-target="createp_account" /> <label for="payment_defult"
 										data-toggle="collapse" data-target="#collapsedefult"
@@ -1212,9 +1234,9 @@
 												you don’t have a PayPal account.</p>
 										</div>
 									</div>
-								</div>
+								</div> -->
 								<div class="order_button">
-									<button type="button" id="insert">Proceed to PayPal</button>
+									<button type="button" id="insert">주문하기</button>
 								</div>
 							</div>
 							</form>

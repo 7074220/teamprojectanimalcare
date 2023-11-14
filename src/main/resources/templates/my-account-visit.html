@@ -13,7 +13,20 @@
     #visitTable{
     	width: 1000px;
     }
-
+    .visit-completed {
+        color: rgb(192, 192, 192); 
+        font-weight: bold;
+    }
+	@font-face {
+			font-family: 'GmarketSansMedium';
+			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+			font-weight: normal;
+			font-style: normal;
+		}
+	
+		.container {
+			font-family: 'GmarketSansMedium';
+		}
     </style>
 
 </head>
@@ -107,12 +120,14 @@
 											<td th:text="${visit.Center.centerName}"></td>
 
 
-												<td th:text="${visit.visitStatus}"><span class="success">견학신청</span></td>
+												<td th:text="${visit.visitStatus}" 
+													th:class="${visit.visitStatus == '견학완료'} ? 'visit-completed' : '' "><!--<span class="success">견학신청</span>--></td>
 												
 												<td>												
 							
 												
-												<a th:href="@{'/visitUpdate?visitNo=' + ${visit.visitNo} + '&amp;centerNo=' + ${visit.Center.centerNo}}">수정</a>	
+												<a th:if="${visit.visitStatus != '견학완료'}" 
+													th:href="@{'/visitUpdate?visitNo=' + ${visit.visitNo} + '&amp;centerNo=' + ${visit.Center.centerNo}}">수정</a>	
 												<button type="submit" class="deleteBtn" th:id="'deleteBtn-' + ${visit.visitNo} " >취소</button>	
 												
 											
