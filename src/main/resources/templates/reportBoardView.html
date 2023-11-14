@@ -44,9 +44,11 @@
 														Travel</a>
 												</p>
 													<div style="margin-left: 650px;">
-																<button style="border: none; background: transparent;" onclick="updateReportBoard()">수정</button>
-																<button style="border: none; background: transparent;" onclick="deleteReportBoard()">삭제</button>
-															</div>
+														<button style="border: none; background: transparent;" onclick="updateReportBoardForm(event)"
+														th:if="${session.userNo==reportBoard.userinfo.userNo}">수정</button>
+														<button style="border: none; background: transparent;" onclick="deleteReportBoard(event)"
+														th:if="${session.userNo==reportBoard.userinfo.userNo}">삭제</button>
+													</div>
 											</div>
 											
 											<!--	<div style="margin-left: 650px;">
@@ -311,8 +313,10 @@
 			}
 			
 			
-		function updateReportBoard(){
+		function updateReportBoardForm(e){
 			let boardNo = document.querySelector('.single_blog').id;
+			window.location.href='reportUpdateForm?boardNo='+boardNo;
+			/*
 			let data={
 					boardNo:boardNo
 			}
@@ -332,6 +336,7 @@
 					
 				
 			});
+			*/
 		}	
 		function deleteReportBoard(){
 			$.ajax({
