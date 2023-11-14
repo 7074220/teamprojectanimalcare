@@ -12,6 +12,20 @@ export function user_login_form(responseJsonObject = {}) {
                <div class="row" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
                   <!--login area start-->
                   <div class="col-lg-6 col-md-6">
+                  
+                   <style>
+                                @font-face {
+                                    font-family: 'GmarketSansMedium';
+                                    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+                                    font-weight: normal;
+                                    font-style: normal;
+                                }
+    
+                                .container {
+                                    font-family: 'GmarketSansMedium';
+                                }
+                    </style>
+                            
                      <form name="f" id = "loginForm">
                      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
                      <div class="form-floating" style="margin-bottom:10px;">

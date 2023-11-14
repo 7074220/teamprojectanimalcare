@@ -21,6 +21,20 @@ export function user_write_form(responseJsonObject = {}) {
                 <!--register area start-->
                 <div class="col-lg-6 col-md-6" style="margin-left: 300px;">
                     <div class="account_form register" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                        
+                        <style>
+                                @font-face {
+                                    font-family: 'GmarketSansMedium';
+                                    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+                                    font-weight: normal;
+                                    font-style: normal;
+                                }
+    
+                                .container {
+                                    font-family: 'GmarketSansMedium';
+                                }
+                            </style>
+                        
                         <h2 th:text="Register">회원가입</h2>
                         <form name="f" id="user_write_form" action="#" method="post" >
                             
