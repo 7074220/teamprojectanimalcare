@@ -33,7 +33,6 @@
                     <div class="account_form register" style="display: flex; flex-direction: column; justify-content: center; align-items: center;" >
                         <h2>실종&#47;제보</h2>
                         
-<<<<<<< HEAD
                         <form name="f" id="reportBoard_update_form" action="#" method="post" enctype="multipart/form-data"
                         	th:action="@{'/reportWrite'}">
                         	<label>구분 <span>*</span></label>
@@ -43,11 +42,6 @@
 									<option value="2" >제보</option>
 								</select>
 							</p>
-=======
-                        <form name="f" id="reportBoard_write_form" action="#" method="post" enctype="multipart/form-data"
-                        	th:action="@{'/reportUpdate'}">
-                        	<input type="hidden" id="boardNo" name="boardNo" th:value="${reportBoard.boardNo}"></input>
->>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
                             <p>   
                                 <label>글 제목<span>*</span></label>
                                 <input type="text" id="boardTitle" name="boardTitle" th:value="${reportBoard.boardTitle}">
