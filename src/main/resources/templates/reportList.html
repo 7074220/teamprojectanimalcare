@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="layout/layout(title='실종신고 게시판')">
+      layout:decorate="layout/layout(title='실종/제보 게시판')">
 
 <head>
     <title>Insert title here</title>
@@ -93,7 +93,7 @@ span {
                             </div>
                             
                             <small class="text-body-secondary">
-								<span style="margin-left: 10px;" th:text="${'작성자 :' + reportboard.userinfo.userName}"></span>
+								<!--<span style="margin-left: 10px;" th:text="${'작성자 :' + reportboard.userinfo.userName}"></span>-->
                                 <span style="margin-left: 90px;" th:text=" ${#dates.format(reportboard.boardRegisterDate,  '작성날짜 : yyyy년 MM월 dd일')}">작성 날짜</span>
                             </small>
                         </div>
