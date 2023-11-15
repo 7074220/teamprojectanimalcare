@@ -322,6 +322,7 @@
 													</th>
 													<th class="order_date">주문날짜</th>
 													<th class="order_desc">상품명</th>
+													<th class="order_address">배송지</th>
 													<th class="order_price">총가격</th>
 													<th class="order_volunteer">리뷰</th>
 													<th th:if="${session.userName == '관리자'}" class="order_remove">삭제
@@ -338,6 +339,8 @@
 													</td>
 													<td class="order_desc" th:text="${orders.orderDesc}"><span
 															class="success">상품명</span></td>
+															<td class="order_address" th:text="${orders.orderAddress}"><span
+														class="success">서울</span></td>
 													<td class="order_price"
 														th:text="${#numbers.formatInteger(orders.orderPrice, 3, 'COMMA') + '원'}">
 														총가격</td>
