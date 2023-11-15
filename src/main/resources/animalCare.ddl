@@ -59,7 +59,7 @@ CREATE TABLE ReportBoard(
 		board_no                      		NUMBER(10)		 NULL ,
 		board_title                   		VARCHAR2(100)		 NULL ,
 		board_register_date           		DATE		 NULL ,
-		board_content                 		VARCHAR2(100)		 NULL ,
+		board_content                 		VARCHAR2(4000)		 NULL ,
 		board_find_date               		DATE		 NULL ,
 		board_readCount               		NUMBER(10)		 NULL ,
 		board_find_name               		VARCHAR2(50)		 NULL ,

@@ -214,13 +214,10 @@ INSERT INTO visit (VISIT_NO,VISIT_DATE, VISIT_TIME, VISIT_STATUS, CENTER_NO, USE
 
 -- Reply board
 INSERT INTO replyboard (reply_board_no,reply_board_content,reply_board_depth,reply_board_group_no,reply_board_register_date,reply_board_step,user_no,board_no) 
-VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'내용',0,1,sysdate,0,21,2);
+VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'빨리 찾길빌어요 ㅠㅠ',0,1,sysdate,0,29,1);
 
 INSERT INTO replyboard (reply_board_no,reply_board_content,reply_board_depth,reply_board_group_no,reply_board_register_date,reply_board_step,user_no,board_no) 
-VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'내용1',0,2,sysdate,0,2,2);
-
-INSERT INTO replyboard (reply_board_no,reply_board_content,reply_board_depth,reply_board_group_no,reply_board_register_date,reply_board_step,user_no,board_no) 
-VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'내용2',0,3,sysdate,0,3,3);
+VALUES (ReplyBoard_reply_board_no_SEQ.nextval,'마음 아프다...',0,1,sysdate,0,28,1);
 
 -- orderStatus
 insert into orderstatus(os_no,os_image,os_desc) 
