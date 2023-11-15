@@ -11,7 +11,100 @@ VALUES (userinfo_user_no_seq.nextval,'ccc@naver.com','0707','부산','여','010-
 
 
 insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+<<<<<<< HEAD
+VALUES (userinfo_user_no_seq.nextval,'hj@naver.com','1017','분당','남','010-7777-1111',0,'1111',sysdate, '장희주');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'sj@naver.com','1011','서울','남','010-7111-1111',0,'2222',sysdate, '박서진');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'dy@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '이다영');
+
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'yhj@naver.com','1017','분당','남','010-7777-1111',0,'1111',sysdate, '윤호진');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'jy@naver.com','1011','서울','남','010-7111-1111',0,'2222',sysdate, '최재용');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'sh@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '김숙현');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'ja@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '이지아');
+
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'aaaa@naver.com','1017','분당','남','010-7777-1111',0,'1111',sysdate, '허승범');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'bbbb@naver.com','1011','서울','남','010-7111-1111',0,'2222',sysdate, '이동현');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'cccc@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '고범석');
+
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'jjjjj@naver.com','1017','분당','남','010-7777-1111',0,'1111',sysdate, '이승현');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'kkkkk@naver.com','1011','서울','남','010-7111-1111',0,'2222',sysdate, '이현승');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'dyfdgd@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '김아론');
+
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'yhdgfj@naver.com','1017','분당','남','010-7777-1111',0,'1111',sysdate, '문예린');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'jdfgy@naver.com','1011','서울','남','010-7111-1111',0,'2222',sysdate, '우수미');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'shdfg@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '박근우');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'jdfga@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '권경록');
+
+
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'aaagdf@naver.com','1017','분당','남','010-7777-1111',0,'1111',sysdate, '김수찬');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'bbbgfg@naver.com','1011','서울','남','010-7111-1111',0,'2222',sysdate, '세미');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'ccgffc@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '지우');
+
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'hdfdj@naver.com','1017','분당','남','010-7777-1111',0,'1111',sysdate, '주연');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'sfgj@naver.com','1011','서울','남','010-7111-1111',0,'2222',sysdate, '수인');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'ddgdgy@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '도희');
+
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'yhdsdj@naver.com','1017','분당','남','010-7777-1111',0,'1111',sysdate, '지은');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'jfdsfsy@naver.com','1011','서울','남','010-7111-1111',0,'2222',sysdate, '이종찬');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'ssfdh@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '범준');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'jadfdsf@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '이지수');
+
+
+-- dog product insert
+=======
 VALUES (userinfo_user_no_seq.nextval,'hj@naver.com','1017','분당','남','010-7777-1111',0,'940319-1000000',sysdate, '장희주');
+>>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 
 insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
 VALUES (userinfo_user_no_seq.nextval,'sj@naver.com','1011','서울','남','010-7111-1111',0,'990319-1000000',sysdate, '박서진');
@@ -192,14 +285,290 @@ VALUES (orders_order_no_seq.nextval,'서울특별시','사료외..',sysdate,'222
 
 -- review board
 
+--강아지 별점 5 유저3
 INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
-VALUES (review_board_board_no_seq.nextval, sysdate, '이것은 타이틀1', '이것은 내용1', 5, 1, 1);
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 152, 3);
 
 INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
-VALUES (review_board_board_no_seq.nextval, sysdate, '이것은 타이틀2', '이것은 내용2', 4, 2, 2);
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 150, 3);
 
 INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
-VALUES (review_board_board_no_seq.nextval, sysdate, '이것은 타이틀3', '이것은 내용3', 3, 3, 3);
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 142, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 141, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 140,3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 139, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 138, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 137, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 136, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 135, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 134, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 125, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 124, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 123, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 122, 3);
+
+
+--강아지 별점3 유저2
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 152, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 150, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 142, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 141, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 140,2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 139, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 138, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 137, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 136, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 135, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 134, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 125, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 124, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 123, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 122, 2);
+
+
+
+--강아지 용품 위에서 15개 별점 2 유저 1
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 152, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 150, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 142, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 141, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 140,1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 139, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 138, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 137, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 136, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 135, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 134, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 125, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 124, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 123, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 122, 1);
+
+
+
+--고양이 별점 5 유저3
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 154, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 153, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 149, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 148, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 147,3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 146, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 145, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 144, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 143, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 133, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 132, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 131, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 130, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 129, 3);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '좋아요', '좋아요', 5, 128, 3);
+
+
+--고양이 별점3 유저2
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 154, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 153, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 149, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 148, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 147,2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 146, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 145, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 144, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 143, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 133, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 132, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 131, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 130, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 129, 2);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '평범해요', '평범해요', 3, 128, 2);
+
+
+
+--고양이 용품 위에서 15개 별점 2 유저 1
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 154, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 153, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 149, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 148, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 147,1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 146, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 145, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 144, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 143, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 133, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 132, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 131, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 130, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 129, 1);
+
+INSERT INTO reviewboard (board_no, board_date, board_title, board_content, board_star, product_no, user_no)
+VALUES (review_board_board_no_seq.nextval, sysdate, '그닥 좋지는 않아요', '그닥 좋지는 않아요', 2, 128, 1);
+
 
 -- report board
 

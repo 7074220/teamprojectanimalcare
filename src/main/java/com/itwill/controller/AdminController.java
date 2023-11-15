@@ -529,6 +529,7 @@ public class AdminController {
 			System.out.println(">>>>>>>dto객체"+ordersListDto);
 			
 			model.addAttribute("ordersList",ordersList);
+			model.addAttribute("pageStatus",0);
 			
 			return "admin-orders";
 			
