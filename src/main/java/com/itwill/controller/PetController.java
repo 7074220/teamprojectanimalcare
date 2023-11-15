@@ -88,8 +88,13 @@ CenterService centerService;
 		
 		Page<Pet> petList= petService.petFindAllPage(pageable);
 		
+		/*
 		for (Pet pet : petList) {
-			Adopt petAdopt = adoptRepository.findAdoptByPetNo(pet.getPetNo());
+			List<Adopt> petAdopt = adoptRepository.findAdoptByPetNo(pet.getPetNo());
+			for (Adopt adopt : petAdopt) {
+				
+			}
+			
 				if(petAdopt==null) {
 					petDtoList.add(PetDto.toDto(pet));
 				}else {
@@ -98,7 +103,7 @@ CenterService centerService;
 					}
 				}
 			}
-		
+		*/
 
 		model.addAttribute("petList",petList);
 		model.addAttribute("pagingstatus",1);
@@ -232,6 +237,7 @@ CenterService centerService;
 		
 		List<Pet> petList= petService.findAllByPetTypeByPetLocal(petType,petLocal);
 		
+		/*
 		for (Pet pet : petList) {
 			Adopt petAdopt = adoptRepository.findAdoptByPetNo(pet.getPetNo());
 				if(petAdopt==null) {
@@ -242,7 +248,8 @@ CenterService centerService;
 					}
 				}
 			}
-
+		*/
+		
 		model.addAttribute("petList",petList);
 		model.addAttribute("pagingstatus",0);
 		return "pet-list" ;
