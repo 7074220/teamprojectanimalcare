@@ -25,6 +25,9 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 	@Override
 	public ReplyBoard Create(ReplyBoard replyBoard) {
 		Integer MaxGroupNo = replyBoardRepository.findMaxGroupNo();
+		if(MaxGroupNo==null) {
+			MaxGroupNo = 0;
+		}
 		replyBoard.setReplyBoardGroupNo(MaxGroupNo+1);
 		replyBoard.setReplyBoardStep(1);
 		replyBoard.setReplyBoardDepth(0);
