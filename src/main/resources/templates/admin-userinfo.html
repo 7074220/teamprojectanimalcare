@@ -270,7 +270,7 @@
 												<td th:text="${userinfo.userAddress}"></td>
 												<td th:text="${userinfo.userPhoneNumber}"></td>
 												<td>
-													<a th:if="${session.userName == '관리자'}" th:href="@{/adminUpdateUser?userNo={userNo}(userNo=${userinfo.userNo})}" class="updateBtn">수정</a>
+													<!--<a th:if="${session.userNa<!--me == '관리자'}" th:href="@{/adminUpdateUser?userNo={userNo}(userNo=${userinfo.userNo})}" class="updateBtn">수정</a>-->
 													<button type="button" class="deleteBtn" onclick="userDelete(event)" th:id="${userinfo.userNo}">탈퇴</button>
 												</td>
 											</tr>

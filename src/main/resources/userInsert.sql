@@ -11,7 +11,100 @@ VALUES (userinfo_user_no_seq.nextval,'ccc@naver.com','0707','부산','여','010-
 
 
 insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+<<<<<<< HEAD
+VALUES (userinfo_user_no_seq.nextval,'hj@naver.com','1017','분당','남','010-7777-1111',0,'1111',sysdate, '장희주');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'sj@naver.com','1011','서울','남','010-7111-1111',0,'2222',sysdate, '박서진');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'dy@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '이다영');
+
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'yhj@naver.com','1017','분당','남','010-7777-1111',0,'1111',sysdate, '윤호진');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'jy@naver.com','1011','서울','남','010-7111-1111',0,'2222',sysdate, '최재용');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'sh@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '김숙현');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'ja@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '이지아');
+
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'aaaa@naver.com','1017','분당','남','010-7777-1111',0,'1111',sysdate, '허승범');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'bbbb@naver.com','1011','서울','남','010-7111-1111',0,'2222',sysdate, '이동현');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'cccc@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '고범석');
+
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'jjjjj@naver.com','1017','분당','남','010-7777-1111',0,'1111',sysdate, '이승현');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'kkkkk@naver.com','1011','서울','남','010-7111-1111',0,'2222',sysdate, '이현승');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'dyfdgd@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '김아론');
+
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'yhdgfj@naver.com','1017','분당','남','010-7777-1111',0,'1111',sysdate, '문예린');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'jdfgy@naver.com','1011','서울','남','010-7111-1111',0,'2222',sysdate, '우수미');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'shdfg@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '박근우');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'jdfga@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '권경록');
+
+
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'aaagdf@naver.com','1017','분당','남','010-7777-1111',0,'1111',sysdate, '김수찬');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'bbbgfg@naver.com','1011','서울','남','010-7111-1111',0,'2222',sysdate, '세미');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'ccgffc@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '지우');
+
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'hdfdj@naver.com','1017','분당','남','010-7777-1111',0,'1111',sysdate, '주연');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'sfgj@naver.com','1011','서울','남','010-7111-1111',0,'2222',sysdate, '수인');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'ddgdgy@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '도희');
+
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'yhdsdj@naver.com','1017','분당','남','010-7777-1111',0,'1111',sysdate, '지은');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'jfdsfsy@naver.com','1011','서울','남','010-7111-1111',0,'2222',sysdate, '이종찬');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'ssfdh@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '범준');
+
+insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
+VALUES (userinfo_user_no_seq.nextval,'jadfdsf@naver.com','0707','부산','여','010-1234-1111',0,'3333',sysdate, '이지수');
+
+
+-- dog product insert
+=======
 VALUES (userinfo_user_no_seq.nextval,'hj@naver.com','1017','분당','남','010-7777-1111',0,'940319-1000000',sysdate, '장희주');
+>>>>>>> branch 'master' of https://github.com/2023-05-JAVA-DEVELOPER-143/2023-05-JAVA-DEVELOPER-final-project-team2.git
 
 insert into userinfo (user_no,user_id,user_password,user_address,user_gender,user_phone_number,user_point,user_resident_number,user_register_date, user_name) 
 VALUES (userinfo_user_no_seq.nextval,'sj@naver.com','1011','서울','남','010-7111-1111',0,'990319-1000000',sysdate, '박서진');
