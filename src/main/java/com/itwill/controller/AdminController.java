@@ -496,7 +496,7 @@ public class AdminController {
 			int pag = page.getPageNumber();
 			int size = page.getPageSize();
 			
-			Pageable pageable = PageRequest.of(pag, size, Sort.by(Sort.Order.asc("orderNo")));
+			Pageable pageable = PageRequest.of(pag, size, Sort.by(Sort.Order.desc("orderNo")));
 			
 			Page<Orders> orderList = orderService.findOrders(pageable);
 			System.out.println(">>>>>>"+orderList);
