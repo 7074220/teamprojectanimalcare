@@ -15,6 +15,6 @@ public interface AdoptRepository extends JpaRepository<Adopt, Long>{
     List<Adopt> findAdoptsByUserNo(@Param("user_no") Long userNo);
 	
 	@Query(value = "select * from adopt where pet_no=?1", nativeQuery = true)
-	Adopt findAdoptByPetNo(@Param("pet_no") Long petNo);
+	List<Adopt> findAdoptByPetNo(@Param("pet_no") Long petNo);
 
 }
