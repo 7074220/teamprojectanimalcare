@@ -22,17 +22,17 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 	UserinfoRepository userinfoRepository;
 
 	//댓글 작성
-	@Override
-	public ReplyBoard Create(ReplyBoard replyBoard) {
-		Integer MaxGroupNo = replyBoardRepository.findMaxGroupNo();
-		if(MaxGroupNo==null) {
-			MaxGroupNo = 0;
-		}
-		replyBoard.setReplyBoardGroupNo(MaxGroupNo+1);
-		replyBoard.setReplyBoardStep(1);
-		replyBoard.setReplyBoardDepth(0);
-		return replyBoardRepository.save(replyBoard);
-	}
+	   @Override
+	   public ReplyBoard Create(ReplyBoard replyBoard) {
+	      Integer MaxGroupNo = replyBoardRepository.findMaxGroupNo();
+	      if(MaxGroupNo==null) {
+	         MaxGroupNo = 0;
+	      }
+	      replyBoard.setReplyBoardGroupNo(MaxGroupNo+1);
+	      replyBoard.setReplyBoardStep(1);
+	      replyBoard.setReplyBoardDepth(0);
+	      return replyBoardRepository.save(replyBoard);
+	   }
 
 	//대댓글 작성
 	@Override
@@ -40,6 +40,7 @@ public class ReplyBoardDaoImpl implements ReplyBoardDao{
 		// 해당 그룹의 최대 스텝 수
 		Integer maxStep = replyBoardRepository.findGreatestStepByGroupNo(replyBoard.getReplyBoardGroupNo());
 		ReplyBoard board = ReplyBoard.builder()
+				
 					.replyBoardGroupNo(replyBoard.getReplyBoardGroupNo())
 					.replyBoardDepth(replyBoard.getReplyBoardDepth()+1)
 					.replyBoardStep(maxStep+1)

@@ -517,8 +517,8 @@
 												<td class="productPetCategory">{{productPetCategory}}</td>
 												<td class="productImage" style="word-wrap: break-word;max-width: 200px; overflow: hidden; text-overflow: ellipsis;">{{productImage}}</td>
 												<td>
-													<a data-toggle="modal" data-target="#productUpdateModal" id="{{productNo}}" class="view">수정</a>
-													<a href="#" class="delete-link" id="{{productNo}}">삭제</a>
+													<a href="{{productUpdateForm productNo=product.productNo}})}">수정</a>
+													<a href="#" class="delete-link" id="{{product.productNo}}">삭제</a>
 												</td>
 											</tr>
 										
