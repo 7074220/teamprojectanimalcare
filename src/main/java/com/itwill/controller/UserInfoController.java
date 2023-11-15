@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.itwill.dao.OrderItemDao;
 import com.itwill.dto.AdminUserListDto;
 import com.itwill.dto.PetDto;
+import com.itwill.dto.UserWriteActionDto;
 import com.itwill.entity.MyPet;
 import com.itwill.entity.OrderItem;
 import com.itwill.entity.Orders;
@@ -72,6 +73,21 @@ public class UserInfoController {
 		
 	}
 	
+	@PostMapping("/userUpdate")
+	public String update(Model model, HttpSession session, UserWriteActionDto dto ) throws Exception {
+		Long userNo = (Long) session.getAttribute("userNo");
+		Userinfo userinfo = userInfoService.findUserByNo(userNo);
+		userinfo.setUserName(dto.getUserName());
+		userinfo.setUserPassword(dto.getUserPassword());
+		userinfo.setUserPhoneNumber(dto.getUserPhoneNumber());
+		userinfo.setUserAddress(dto.getUserAddress());
+		userInfoService.update(userinfo);
+		session.setAttribute("userName", dto.getUserName());
+		model.addAttribute("userinfo", userinfo);
+		return "my-account-userinfo";
+	}
+	
+	/*
 	@GetMapping(value = "userUpdate")
 	public String update(Model model , HttpSession session , @RequestParam String userName , @RequestParam String userPassword,
 			@RequestParam String userPhoneNumber,@RequestParam String userAddress) throws Exception{
@@ -87,7 +103,7 @@ public class UserInfoController {
 		
 		return "my-account-userinfo";
 	}
-	
+	*/
 	@GetMapping("userDelete")
 	public String delete(HttpSession session) throws Exception {
 		Long userNo = (Long)session.getAttribute("userNo");
