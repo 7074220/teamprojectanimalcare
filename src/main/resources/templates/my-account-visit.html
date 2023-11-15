@@ -224,7 +224,7 @@
 		let no = id.split('-')[1];
 
 		if (isNaN(no)) {
-			alert('visitNo 가져오기실패')
+		
 			return;
 		}
 
@@ -238,7 +238,7 @@
 			contentType: 'application/json;UTF-8',
 			success: function (response) {
 				if (response && response.visitNo == null) {
-					alert('신청내역이 없습니다.');
+				
 				} else {
 					alert('예약취소가 완료되었습니다.');
 					$row.remove();
