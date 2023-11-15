@@ -266,8 +266,8 @@
 													<label>우편주소<span></span></label>
 													<button type="button" class="btn btn-secondary btn-sm"
 														onclick="execution_daum_address()">주소찾기</button>
-													<input placeholder="우편번호" type="text" id="address"
-														name="address" th:value="${userinfo.userAddress}">
+													<input placeholder="우편번호" type="text" id="userAddress"
+														name="userAddress" th:value="${userinfo.userAddress}">
 
 
 
@@ -352,15 +352,12 @@
 			} else if (userAddress === '') {
 				alert('주소를 입력해주세요.');
 			} else {
-				window.location.href=
-				'userUpdate?userName='+userName+'&userPassword='+userPassword+'&userPhoneNumber='+userPhoneNumber+'&userAddress='+userAddress;
+				document.f.action = 'userUpdate'
+				document.f.method = 'post'
+				document.f.submit();
 			}
 			
 		}
-
-		
-		
-		
 		
 	</script>
 	
@@ -425,20 +422,21 @@ window.onload = function() {
 								extraAddr = ' (' + extraAddr + ')';
 							}
 							// 조합된 참고항목을 해당 필드에 넣는다.
-							document.getElementById("address").value += extraAddr;
+							document.getElementById("userAddress").value += extraAddr;
 
 						} else {
-							document.getElementById("address").value += '';
+							document.getElementById("userAddress").value += '';
 						}
 
 						// 우편번호와 주소 정보를 해당 필드에 넣는다.
-						document.getElementById('address').value += data.zonecode;
-						document.getElementById("address").value += addr;
+						document.getElementById('userAddress').value ="";
+						document.getElementById('userAddress').value += data.zonecode+" ";
+						document.getElementById("userAddress").value += addr;
 						
 					
 						// 커서를 상세주소 필드로 이동한다.
 						
-						document.getElementById("address").focus();
+						document.getElementById("userAddress").focus();
 						
 						
 						
@@ -448,7 +446,7 @@ window.onload = function() {
 				}).open();
 				
 				
-				
+		
 				
 	}
 </script>
