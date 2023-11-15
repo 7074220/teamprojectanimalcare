@@ -23,7 +23,7 @@ CREATE TABLE UserInfo(
 		user_password                 		VARCHAR2(50)		 NULL ,
 		user_point                    		NUMBER(10)		 NULL ,
 		user_gender                   		VARCHAR2(50)		 NULL ,
-		user_address                  		VARCHAR2(50)		 NULL ,
+		user_address                  		VARCHAR2(2000)		 NULL ,
 		user_phone_number             		VARCHAR2(50)		 NULL ,
 		user_id                       		VARCHAR2(50)		 NULL ,
 		user_resident_number          		VARCHAR2(50)		 NULL ,
@@ -72,21 +72,6 @@ CREATE TABLE ReportBoard(
 DROP SEQUENCE ReportBoard_board_no_SEQ;
 
 CREATE SEQUENCE ReportBoard_board_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
-
-
-CREATE TABLE Local(
-		local_no                      		NUMBER(10)		 NULL ,
-		local_city                    		VARCHAR2(50)		 NULL ,
-		local_gu                      		VARCHAR2(50)		 NULL 
-);
-
-DROP SEQUENCE Local_local_no_SEQ;
-
-CREATE SEQUENCE Local_local_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
-
-
 
 CREATE TABLE Center(
 		center_no                     		NUMBER(10)		 NULL ,
@@ -317,7 +302,6 @@ ALTER TABLE ReportBoard ADD CONSTRAINT IDX_ReportBoard_FK0 FOREIGN KEY (user_no)
 ALTER TABLE Local ADD CONSTRAINT IDX_Local_PK PRIMARY KEY (local_no);
 
 ALTER TABLE Center ADD CONSTRAINT IDX_Center_PK PRIMARY KEY (center_no);
-ALTER TABLE Center ADD CONSTRAINT IDX_Center_FK0 FOREIGN KEY (local_no) REFERENCES Local (local_no);
 
 ALTER TABLE Volunteer ADD CONSTRAINT IDX_Volunteer_PK PRIMARY KEY (volunteer_no);
 ALTER TABLE Volunteer ADD CONSTRAINT IDX_Volunteer_FK0 FOREIGN KEY (center_no) REFERENCES Center (center_no);
@@ -329,7 +313,6 @@ ALTER TABLE Visit ADD CONSTRAINT IDX_Visit_FK1 FOREIGN KEY (user_no) REFERENCES 
 
 ALTER TABLE Pet ADD CONSTRAINT IDX_Pet_PK PRIMARY KEY (pet_no);
 ALTER TABLE Pet ADD CONSTRAINT IDX_Pet_FK0 FOREIGN KEY (center_no) REFERENCES Center (center_no);
-ALTER TABLE Pet ADD CONSTRAINT IDX_Pet_FK1 FOREIGN KEY (local_no) REFERENCES Local (local_no);
 
 ALTER TABLE Adopt ADD CONSTRAINT IDX_Adopt_PK PRIMARY KEY (adopt_no);
 ALTER TABLE Adopt ADD CONSTRAINT IDX_Adopt_FK0 FOREIGN KEY (pet_no) REFERENCES Pet (pet_no);
