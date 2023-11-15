@@ -1,9 +1,17 @@
 INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_no, center_no) 
 VALUES(Volunteer_volunteer_no_SEQ.nextval, 09, sysdate, '봉사완료', 1, 1);
 INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_no, center_no) 
+VALUES(Volunteer_volunteer_no_SEQ.nextval, 11, sysdate, '봉사완료', 2, 7);
+INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_no, center_no) 
+VALUES(Volunteer_volunteer_no_SEQ.nextval, 13, sysdate, '봉사완료', 4, 8);
+INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_no, center_no) 
 VALUES(Volunteer_volunteer_no_SEQ.nextval, 10, sysdate, '봉사완료', 2, 2);
 INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_no, center_no) 
 VALUES(Volunteer_volunteer_no_SEQ.nextval, 11, sysdate, '봉사완료', 3, 3);
+INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_no, center_no) 
+VALUES(Volunteer_volunteer_no_SEQ.nextval, 09, sysdate, '봉사완료', 1, 9);
+INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_no, center_no) 
+VALUES(Volunteer_volunteer_no_SEQ.nextval, 10, sysdate, '봉사완료', 2, 10);
 INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_no, center_no) 
 VALUES(Volunteer_volunteer_no_SEQ.nextval, 11, sysdate, '봉사완료', 4, 4);
 INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_no, center_no) 
@@ -15,9 +23,25 @@ VALUES(Volunteer_volunteer_no_SEQ.nextval, 11, sysdate, '봉사완료', 2, 7);
 INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_no, center_no) 
 VALUES(Volunteer_volunteer_no_SEQ.nextval, 13, sysdate, '봉사완료', 4, 8);
 INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_no, center_no) 
-VALUES(Volunteer_volunteer_no_SEQ.nextval, 17, sysdate, '봉사신청중', 6, 9);
+VALUES(Volunteer_volunteer_no_SEQ.nextval, 09, sysdate, '봉사완료', 1, 9);
 INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_no, center_no) 
-VALUES(Volunteer_volunteer_no_SEQ.nextval, 18, sysdate, '봉사신청중', 3, 10);
+VALUES(Volunteer_volunteer_no_SEQ.nextval, 10, sysdate, '봉사완료', 2, 10);
+INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_no, center_no) 
+VALUES(Volunteer_volunteer_no_SEQ.nextval, 11, sysdate, '봉사완료', 3, 11);
+INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_no, center_no) 
+VALUES(Volunteer_volunteer_no_SEQ.nextval, 11, sysdate, '봉사완료', 4, 12);
+INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_no, center_no) 
+VALUES(Volunteer_volunteer_no_SEQ.nextval, 12, sysdate, '봉사완료', 6, 13);
+INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_no, center_no) 
+VALUES(Volunteer_volunteer_no_SEQ.nextval, 15, sysdate, '봉사신청중', 1, 14);
+INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_no, center_no) 
+VALUES(Volunteer_volunteer_no_SEQ.nextval, 15, sysdate, '봉사신청중', 2, 15);
+INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_no, center_no) 
+VALUES(Volunteer_volunteer_no_SEQ.nextval, 16, sysdate, '봉사신청중', 4, 16);
+INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_no, center_no) 
+VALUES(Volunteer_volunteer_no_SEQ.nextval, 17, sysdate, '봉사신청중', 6, 17);
+INSERT INTO volunteer (volunteer_no, volunteer_time, volunteer_date, volunteer_status, user_no, center_no) 
+VALUES(Volunteer_volunteer_no_SEQ.nextval, 18, sysdate, '봉사신청중', 9, 18);
 
 
 
