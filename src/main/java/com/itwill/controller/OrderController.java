@@ -268,7 +268,7 @@ public class OrderController {
 			}
 			
 			model.addAttribute("ordersList",ordersListDto);
-			
+			model.addAttribute("pageStatus",0);
 			return "my-account-orders";
 			
 		}
