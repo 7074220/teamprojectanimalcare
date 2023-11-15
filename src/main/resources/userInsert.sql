@@ -163,29 +163,38 @@ values(Volunteer_volunteer_no_SEQ.nextval, 18, sysdate, '봉사완료',  3, 3);
 
 -- report board
 
-insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_readcount,board_register_date,board_title,user_no,board_image) 
-VALUES (ReportBoard_board_no_SEQ.nextval,'3일째 못찾고 있습니다 꼭 좀 연락부탁드려요 ㅠㅠ',to_date('2023/11/9','YYYY/MM/DD'),'전아현','010-7846-9215',0,sysdate,'[실종]보리를 찾습니다',1,'dog1.jpg');
+insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_find_place,board_readcount,board_register_date,board_title,user_no,board_image) 
+VALUES (ReportBoard_board_no_SEQ.nextval,'3일째 못찾고 있습니다 꼭 좀 연락부탁드려요 ㅠㅠ',to_date('2023/10/20','YYYY/MM/DD'),'전아현','010-7846-9215','야탑동 성당 앞',0,sysdate,'[실종]보리를 찾습니다',1,'dog001.jpg');
 
-insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_readcount,board_register_date,board_title,user_no,board_image) 
-VALUES (ReportBoard_board_no_SEQ.nextval,'사진이 비슷해요 이 강아지 보리같습니다!',to_date('2023/11/10','YYYY/MM/DD'),'장희주','010-4752-2231',0,sysdate,'[제보]보리를 찾은것같습니다',2,'dog1.jpg');
+insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_find_place,board_readcount,board_register_date,board_title,user_no,board_image) 
+VALUES (ReportBoard_board_no_SEQ.nextval,'사진이 비슷해요 이 강아지 보리같습니다!',to_date('2023/10/21','YYYY/MM/DD'),'장희주','010-4752-2231','구서동 라찌호텔 앞',0,sysdate,'[제보]보리를 찾은것같습니다',2,'dog001.jpg');
 
-insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_readcount,board_register_date,board_title,user_no,board_image) 
-VALUES (ReportBoard_board_no_SEQ.nextval,'귀찮으시겠지만 저희 가족이 애타게 찾고있습니다 꼭 좀 많은 관심 부탁드립니다.',to_date('2023/11/11','YYYY/MM/DD'),'박서진','010-1783-2346',0,sysdate,'[실종]해피를 찾고싶어요',3,'dog2.jpg');
+insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_find_place,board_readcount,board_register_date,board_title,user_no,board_image) 
+VALUES (ReportBoard_board_no_SEQ.nextval,'귀찮으시겠지만 저희 가족이 애타게 찾고있습니다 꼭 좀 많은 관심 부탁드립니다.',to_date('2023/10/22','YYYY/MM/DD'),'박서진','010-1783-2346','온천동 농심호텔 앞',0,sysdate,'[실종]해피를 찾고싶어요',3,'dog002.jpg');
 
-insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_readcount,board_register_date,board_title,user_no,board_image) 
-VALUES (ReportBoard_board_no_SEQ.nextval,'이 강아지 루리 아닌가요? 많이 비슷한거같아요',to_date('2023/11/12','YYYY/MM/DD'),'허승범','010-1783-2346',0,sysdate,'[제보]루리를 찾았어요',4,'dog2.jpg');
+insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_find_place,board_readcount,board_register_date,board_title,user_no,board_image) 
+VALUES (ReportBoard_board_no_SEQ.nextval,'이 강아지 루리 아닌가요? 많이 비슷한거같아요',to_date('2023/10/23','YYYY/MM/DD'),'허승범','010-1783-2346','서동 서동미로시장 안',0,sysdate,'[제보]루리를 찾았어요',4,'dog002.jpg');
 
-insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_readcount,board_register_date,board_title,user_no,board_image) 
-VALUES (ReportBoard_board_no_SEQ.nextval,'우리 구피가 문이 열려있는사이에 나가버렸어요ㅠㅠ 보시면 꼭 연락좀 부탁드립니다ㅠㅠ',to_date('2023/11/13','YYYY/MM/DD'),'이다영','010-2987-4287',0,sysdate,'[실종]구피가 없어졌어요ㅠㅠ',5,'dog3.jpg');
+insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_find_place,board_readcount,board_register_date,board_title,user_no,board_image) 
+VALUES (ReportBoard_board_no_SEQ.nextval,'우리 구피가 문이 열려있는사이에 나가버렸어요ㅠㅠ 보시면 꼭 연락좀 부탁드립니다ㅠㅠ',to_date('2023/10/24','YYYY/MM/DD'),'이다영','010-2987-4287','신세계 백화점 지하',0,sysdate,'[실종]구피가 없어졌어요ㅠㅠ',5,'dog003.jpg');
 
-insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_readcount,board_register_date,board_title,user_no,board_image) 
-VALUES (ReportBoard_board_no_SEQ.nextval,'애매하네여 구피인것같은데....맞나여?',to_date('2023/11/14','YYYY/MM/DD'),'김숙현','010-7412-6532',0,sysdate,'[제보]구피인것 같기도...',6,'dog3.jpg');
+insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_find_place,board_readcount,board_register_date,board_title,user_no,board_image) 
+VALUES (ReportBoard_board_no_SEQ.nextval,'애매하네여 구피인것같은데....맞나여?',to_date('2023/10/25','YYYY/MM/DD'),'김숙현','010-7412-6532','정자동 탄천 앞에서 ',0,sysdate,'[제보]구피인것 같기도...',6,'dog003.jpg');
 
-insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_readcount,board_register_date,board_title,user_no,board_image) 
-VALUES (ReportBoard_board_no_SEQ.nextval,'아니 분명히 묶어놨는데 어떻게 나간건지 모르겠어요 발견하면 연락부탁드립니다....',to_date('2023/11/15','YYYY/MM/DD'),'최재용','010-5813-9414',0,sysdate,'[실종]집나간 강아지 찾습니다',7,'dog4.jpg');
+insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_find_place,board_readcount,board_register_date,board_title,user_no,board_image) 
+VALUES (ReportBoard_board_no_SEQ.nextval,'아니 분명히 묶어놨는데 어떻게 나간건지 모르겠어요 발견하면 연락부탁드립니다....',to_date('2023/10/26','YYYY/MM/DD'),'최재용','010-5813-9414','선유도 공원 세븐일레븐 앞에서',0,sysdate,'[실종]집나간 강아지 찾습니다',7,'dog004.jpg');
 
-insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_readcount,board_register_date,board_title,user_no,board_image) 
-VALUES (ReportBoard_board_no_SEQ.nextval,'혹시나 해서 올려봅니다',to_date('2023/11/16','YYYY/MM/DD'),'윤호진','010-6341-9987',0,sysdate,'[제보]유기견같은데...',8,'dog4.jpg');
+insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_find_place,board_readcount,board_register_date,board_title,user_no,board_image) 
+VALUES (ReportBoard_board_no_SEQ.nextval,'혹시나 해서 올려봅니다',to_date('2023/10/27','YYYY/MM/DD'),'윤호진','010-6341-9987','서면 롯데백화점 버스정거장 앞',0,sysdate,'[제보]유기견같은데...',8,'dog004.jpg');
+
+insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_find_place,board_readcount,board_register_date,board_title,user_no,board_image) 
+VALUES (ReportBoard_board_no_SEQ.nextval,'우리애가 갑자기 없어졌어요 ㅠㅠ',to_date('2023/10/28','YYYY/MM/DD'),'김창섭','010-7531-9512','부산대학교 앞',0,sysdate,'[실종]갑자기 없어졌어요',9,'dog005.jpg');
+
+insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_find_place,board_readcount,board_register_date,board_title,user_no,board_image) 
+VALUES (ReportBoard_board_no_SEQ.nextval,'역 앞에서 찾은것 같아요',to_date('2023/10/29','YYYY/MM/DD'),'정찬영','010-8523-4769','부산대학교 역 앞',0,sysdate,'[제보]찾은것 같습니다',10,'dog006.jpg');
+
+insert into reportboard (board_no,board_content,board_find_date,board_find_name,board_find_phone,board_find_place,board_readcount,board_register_date,board_title,user_no,board_image) 
+VALUES (ReportBoard_board_no_SEQ.nextval,'역 앞에서 찾은것 같아요',to_date('2023/10/29','YYYY/MM/DD'),'정찬영','010-8523-4769','부산대학교 역 앞',0,sysdate,'[제보]찾은것 같습니다',11,'dog007.jpg');
 
 -- review board
 

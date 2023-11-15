@@ -862,9 +862,12 @@
 										</div> -->
 									</div>
 									<figcaption class="product_content">
-										<h4 class="product_name"><a href="product-details.html"
-												th:text="${product.productName}">Quisque In Arcu</a></h4>
-										<p><a href="#" th:text="${product.productPetCategory}">Fruits</a></p>
+										<div style="height: 50px;">
+											<h4 class="product_name" style="height: 30px;"><a href="product-details.html"
+													th:text="${product.productName}">Quisque In Arcu</a></h4>
+											<p><a href="#" th:text="${product.productPetCategory}">Fruits</a></p>
+										</div>
+										
 										<div class="price_box">
 											<span class="current_price" th:text="${#numbers.formatInteger(product.productPrice, 3, 'COMMA') + '원'}">$55.00</span>
 											<!-- <span class="old_price">$235.00</span> -->
