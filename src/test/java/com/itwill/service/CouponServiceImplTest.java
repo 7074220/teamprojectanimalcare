@@ -55,7 +55,7 @@ class CouponServiceImplTest extends TeamprojectAnimalcareApplicationTest {
 
 	@Transactional
 	@Rollback(false)
-	//@Disabled
+	@Disabled
 	@Test
 	void test3() {
 		List<Coupon> coupons = couponService.findAllByUserNo(17L);

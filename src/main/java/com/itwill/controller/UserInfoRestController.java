@@ -186,7 +186,7 @@ public class UserInfoRestController {
 	}
 	
 	@Operation(summary="회원정보수정")
-	@PutMapping("/{userNo}")
+	@PutMapping
 	public ResponseEntity<UserWriteActionDto> updateUser(UserWriteActionDto userWriteActionDto,@PathVariable(name="userNo")Long userNo, 
 			HttpSession session) throws Exception{
 		
